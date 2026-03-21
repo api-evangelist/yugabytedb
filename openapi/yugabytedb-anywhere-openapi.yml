@@ -1,0 +1,1224 @@
+openapi: 3.1.0
+info:
+  title: YugabyteDB Anywhere REST API
+  description: >-
+    The YugabyteDB Anywhere REST API enables programmatic management of
+    self-managed YugabyteDB deployments through the YugabyteDB Anywhere (YBA)
+    control plane. It supports creating and managing cloud provider
+    configurations, deploying and managing universes (database clusters),
+    pausing and resuming universes, performing software upgrades, executing
+    backups and restores, and resizing nodes. The API base URL follows the
+    pattern http://<yba_host>/api/v1/ and requires authentication via the
+    X-AUTH-YW-API-TOKEN HTTP header containing the user's API token. This API
+    is intended for teams running YugabyteDB on their own cloud or on-premises
+    infrastructure who need automation beyond what the YBA UI provides.
+  version: 'v1'
+  contact:
+    name: Yugabyte Support
+    url: https://support.yugabyte.com
+  termsOfService: https://www.yugabyte.com/yugabytedb-managed-service-terms/
+externalDocs:
+  description: YugabyteDB Anywhere REST API Documentation
+  url: https://docs.yugabyte.com/stable/yugabyte-platform/anywhere-automation/anywhere-api/
+servers:
+  - url: http://{ybaHost}/api/v1
+    description: YugabyteDB Anywhere Host
+    variables:
+      ybaHost:
+        default: localhost
+        description: Hostname or IP address of the YugabyteDB Anywhere instance.
+tags:
+  - name: Session
+    description: >-
+      Authenticate to the YugabyteDB Anywhere API and retrieve the customer
+      UUID and API token required for subsequent requests.
+  - name: Customers
+    description: >-
+      Retrieve information about YBA customers (tenants). The customer UUID
+      is required to scope all resource management requests.
+  - name: Providers
+    description: >-
+      Manage cloud provider configurations (AWS, GCP, Azure, on-premises)
+      that define the infrastructure YBA uses to deploy universe nodes.
+  - name: Universes
+    description: >-
+      Create, list, retrieve, update, pause, resume, and delete YugabyteDB
+      universes. A universe is a YugabyteDB deployment consisting of one or
+      more nodes across one or more regions.
+  - name: UniverseUpgrades
+    description: >-
+      Perform software upgrades, GFlags (configuration) updates, TLS
+      certificate rotations, and resize operations on universes.
+  - name: Backups
+    description: >-
+      Create and manage backup schedules and trigger on-demand backups for
+      YugabyteDB universes. Supports both YSQL and YCQL table-level and
+      universe-level backups.
+  - name: Restores
+    description: >-
+      Restore universe data from a previously created backup. Supports full
+      and selective restore operations across storage configurations.
+  - name: Nodes
+    description: >-
+      Perform node-level lifecycle operations on universe nodes, including
+      stopping, starting, removing, releasing, and decommissioning nodes.
+security:
+  - apiTokenAuth: []
+paths:
+  /api_login:
+    post:
+      operationId: loginUser
+      summary: Login and get API token
+      description: >-
+        Authenticates a user with email and password and returns the API token
+        and customer UUID required for all subsequent authenticated API calls.
+        The token should be passed in the X-AUTH-YW-API-TOKEN header.
+      tags:
+        - Session
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Login successful, API token returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /customers:
+    get:
+      operationId: listCustomers
+      summary: List customers
+      description: >-
+        Returns all customers (tenants) registered in this YugabyteDB Anywhere
+        instance. In most deployments there is a single customer. The customer
+        UUID is required for all resource-scoped API calls.
+      tags:
+        - Customers
+      responses:
+        '200':
+          description: List of customers returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /customers/{cUUID}:
+    get:
+      operationId: getCustomer
+      summary: Get customer
+      description: >-
+        Returns details for a specific customer, including their UUID, name,
+        and code, which are used to scope all provider, universe, and backup
+        management operations.
+      tags:
+        - Customers
+      parameters:
+        - $ref: '#/components/parameters/cUUID'
+      responses:
+        '200':
+          description: Customer details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /customers/{cUUID}/providers:
+    get:
+      operationId: listProviders
+      summary: List providers
+      description: >-
+        Returns all cloud provider configurations registered for the customer,
+        including AWS, GCP, Azure, and on-premises provider types. Each provider
+        includes its regions, zones, and access key configuration.
+      tags:
+        - Providers
+      parameters:
+        - $ref: '#/components/parameters/cUUID'
+      responses:
+        '200':
+          description: List of providers returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Provider'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createProvider
+      summary: Create provider
+      description: >-
+        Creates a new cloud provider configuration for the customer. The
+        provider definition includes cloud credentials, regions, availability
+        zones, and SSH access configuration for deploying universe nodes.
+      tags:
+        - Providers
+      parameters:
+        - $ref: '#/components/parameters/cUUID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProviderSpec'
+      responses:
+        '200':
+          description: Provider creation initiated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Provider'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /customers/{cUUID}/providers/{pUUID}:
+    get:
+      operationId: getProvider
+      summary: Get provider
+      description: >-
+        Returns detailed configuration for a specific cloud provider, including
+        all configured regions, availability zones, and access credentials.
+      tags:
+        - Providers
+      parameters:
+        - $ref: '#/components/parameters/cUUID'
+        - $ref: '#/components/parameters/pUUID'
+      responses:
+        '200':
+          description: Provider details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Provider'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteProvider
+      summary: Delete provider
+      description: >-
+        Deletes the specified cloud provider configuration. The provider must
+        not be in use by any active universe before it can be deleted.
+      tags:
+        - Providers
+      parameters:
+        - $ref: '#/components/parameters/cUUID'
+        - $ref: '#/components/parameters/pUUID'
+      responses:
+        '200':
+          description: Provider deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /customers/{cUUID}/universes:
+    get:
+      operationId: listUniverses
+      summary: List universes
+      description: >-
+        Returns all YugabyteDB universes for the customer. Each universe
+        entry includes cluster configuration, node topology, software version,
+        current state, and connection endpoints.
+      tags:
+        - Universes
+      parameters:
+        - $ref: '#/components/parameters/cUUID'
+      responses:
+        '200':
+          description: List of universes returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Universe'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createUniverse
+      summary: Create universe
+      description: >-
+        Creates a new YugabyteDB universe using the specified provider,
+        region, node configuration, replication factor, and software version.
+        The universe creation is asynchronous and returns a task UUID for
+        tracking progress.
+      tags:
+        - Universes
+      parameters:
+        - $ref: '#/components/parameters/cUUID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UniverseSpec'
+      responses:
+        '200':
+          description: Universe creation initiated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UniverseTaskResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /customers/{cUUID}/universes/{uniUUID}:
+    get:
+      operationId: getUniverse
+      summary: Get universe
+      description: >-
+        Returns detailed information about a specific universe, including its
+        cluster configuration, current task state, node details, and YSQL/YCQL
+        connection endpoints.
+      tags:
+        - Universes
+      parameters:
+        - $ref: '#/components/parameters/cUUID'
+        - $ref: '#/components/parameters/uniUUID'
+      responses:
+        '200':
+          description: Universe details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Universe'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteUniverse
+      summary: Delete universe
+      description: >-
+        Deletes the specified universe and terminates all associated nodes.
+        Optionally deletes cloud resources such as instances and volumes.
+        This operation is irreversible.
+      tags:
+        - Universes
+      parameters:
+        - $ref: '#/components/parameters/cUUID'
+        - $ref: '#/components/parameters/uniUUID'
+        - name: isForceDelete
+          in: query
+          required: false
+          description: Whether to force delete even if the universe is in a bad state.
+          schema:
+            type: boolean
+            default: false
+        - name: isDeleteBackups
+          in: query
+          required: false
+          description: Whether to also delete all backups associated with the universe.
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: Universe deletion initiated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /customers/{cUUID}/universes/{uniUUID}/pause:
+    post:
+      operationId: pauseUniverse
+      summary: Pause universe
+      description: >-
+        Pauses the specified universe, suspending all database nodes to reduce
+        cloud infrastructure costs. Data is preserved and the universe can be
+        resumed at any time. Only universes in a running state can be paused.
+      tags:
+        - Universes
+      parameters:
+        - $ref: '#/components/parameters/cUUID'
+        - $ref: '#/components/parameters/uniUUID'
+      responses:
+        '200':
+          description: Universe pause initiated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /customers/{cUUID}/universes/{uniUUID}/resume:
+    post:
+      operationId: resumeUniverse
+      summary: Resume universe
+      description: >-
+        Resumes a previously paused universe, restarting all database nodes
+        and restoring the universe to its fully operational state. All data and
+        configuration are preserved from before the pause.
+      tags:
+        - Universes
+      parameters:
+        - $ref: '#/components/parameters/cUUID'
+        - $ref: '#/components/parameters/uniUUID'
+      responses:
+        '200':
+          description: Universe resume initiated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /customers/{cUUID}/universes/{uniUUID}/upgrade/software:
+    post:
+      operationId: upgradeSoftware
+      summary: Upgrade universe software
+      description: >-
+        Performs a rolling software upgrade of the YugabyteDB version running
+        on all nodes of the specified universe. The upgrade is applied node
+        by node to maintain availability during the process.
+      tags:
+        - UniverseUpgrades
+      parameters:
+        - $ref: '#/components/parameters/cUUID'
+        - $ref: '#/components/parameters/uniUUID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SoftwareUpgradeSpec'
+      responses:
+        '200':
+          description: Software upgrade initiated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /customers/{cUUID}/universes/{uniUUID}/upgrade/gflags:
+    post:
+      operationId: upgradeGflags
+      summary: Update universe GFlags
+      description: >-
+        Updates the GFlags (runtime configuration parameters) for master and
+        tserver processes across all nodes in the universe. Changes are applied
+        via a rolling restart to maintain availability.
+      tags:
+        - UniverseUpgrades
+      parameters:
+        - $ref: '#/components/parameters/cUUID'
+        - $ref: '#/components/parameters/uniUUID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GFlagsUpgradeSpec'
+      responses:
+        '200':
+          description: GFlags upgrade initiated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /customers/{cUUID}/universes/{uniUUID}/upgrade/resize_node:
+    post:
+      operationId: resizeNodes
+      summary: Resize universe nodes
+      description: >-
+        Resizes the compute resources (CPU, memory, disk) for nodes in the
+        specified universe without requiring full node replacement. Supports
+        vertical scaling of running universe nodes.
+      tags:
+        - UniverseUpgrades
+      parameters:
+        - $ref: '#/components/parameters/cUUID'
+        - $ref: '#/components/parameters/uniUUID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResizeNodeSpec'
+      responses:
+        '200':
+          description: Node resize initiated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /customers/{cUUID}/universes/{uniUUID}/backups:
+    get:
+      operationId: listBackups
+      summary: List universe backups
+      description: >-
+        Returns all backups for the specified universe, including both
+        scheduled and on-demand backups with their state, storage location,
+        and keyspace coverage.
+      tags:
+        - Backups
+      parameters:
+        - $ref: '#/components/parameters/cUUID'
+        - $ref: '#/components/parameters/uniUUID'
+      responses:
+        '200':
+          description: List of backups returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Backup'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      operationId: createBackup
+      summary: Create backup
+      description: >-
+        Triggers an on-demand backup of the specified universe or selected
+        keyspaces within it. Supports YSQL and YCQL backup types and various
+        cloud storage destinations.
+      tags:
+        - Backups
+      parameters:
+        - $ref: '#/components/parameters/cUUID'
+        - $ref: '#/components/parameters/uniUUID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BackupSpec'
+      responses:
+        '200':
+          description: Backup initiated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /customers/{cUUID}/universes/{uniUUID}/backups/restore:
+    post:
+      operationId: restoreBackup
+      summary: Restore from backup
+      description: >-
+        Restores universe data from a previously created backup into the
+        specified universe or a target keyspace. Supports full universe and
+        selective keyspace restore operations.
+      tags:
+        - Restores
+      parameters:
+        - $ref: '#/components/parameters/cUUID'
+        - $ref: '#/components/parameters/uniUUID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestoreSpec'
+      responses:
+        '200':
+          description: Restore initiated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /customers/{cUUID}/universes/{uniUUID}/nodes/{nodeName}:
+    post:
+      operationId: performNodeAction
+      summary: Perform node action
+      description: >-
+        Performs a lifecycle action on a specific node in the universe, such
+        as stopping, starting, removing, releasing, or decommissioning the
+        node. Actions depend on the current node state.
+      tags:
+        - Nodes
+      parameters:
+        - $ref: '#/components/parameters/cUUID'
+        - $ref: '#/components/parameters/uniUUID'
+        - name: nodeName
+          in: path
+          required: true
+          description: The name of the node on which to perform the action.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NodeActionSpec'
+      responses:
+        '200':
+          description: Node action initiated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    apiTokenAuth:
+      type: apiKey
+      in: header
+      name: X-AUTH-YW-API-TOKEN
+      description: >-
+        API token for the YugabyteDB Anywhere user. Obtain via the YBA UI under
+        User Profile, or by calling the /api_login endpoint. Pass the token in
+        the X-AUTH-YW-API-TOKEN HTTP header.
+  parameters:
+    cUUID:
+      name: cUUID
+      in: path
+      required: true
+      description: The UUID of the YugabyteDB Anywhere customer (tenant).
+      schema:
+        type: string
+        format: uuid
+    pUUID:
+      name: pUUID
+      in: path
+      required: true
+      description: The UUID of the cloud provider configuration.
+      schema:
+        type: string
+        format: uuid
+    uniUUID:
+      name: uniUUID
+      in: path
+      required: true
+      description: The UUID of the YugabyteDB universe.
+      schema:
+        type: string
+        format: uuid
+  responses:
+    BadRequest:
+      description: The request was malformed or contained invalid parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: The API token is missing, invalid, or expired.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    LoginRequest:
+      type: object
+      description: Credentials used to authenticate a YugabyteDB Anywhere user.
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          description: Email address of the YBA user account.
+        password:
+          type: string
+          format: password
+          description: Password for the YBA user account.
+    LoginResponse:
+      type: object
+      description: Authentication response containing the API token and customer UUID.
+      properties:
+        authToken:
+          type: string
+          description: API token to use in the X-AUTH-YW-API-TOKEN header for subsequent requests.
+        customerUUID:
+          type: string
+          format: uuid
+          description: Customer UUID used to scope all resource management API calls.
+        userUUID:
+          type: string
+          format: uuid
+          description: UUID of the authenticated user.
+    Customer:
+      type: object
+      description: A YugabyteDB Anywhere customer (tenant) record.
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          description: Unique identifier for the customer.
+        name:
+          type: string
+          description: Display name of the customer.
+        code:
+          type: string
+          description: Short code identifying the customer, used in some API paths.
+        creationDate:
+          type: string
+          format: date-time
+          description: Timestamp when the customer record was created.
+    Provider:
+      type: object
+      description: A cloud provider configuration for deploying YugabyteDB universe nodes.
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          description: Unique identifier for the provider.
+        name:
+          type: string
+          description: Display name for the provider configuration.
+        code:
+          type: string
+          description: Cloud provider type code.
+          enum:
+            - aws
+            - gcp
+            - azu
+            - onprem
+            - kubernetes
+        regions:
+          type: array
+          description: Regions configured for this provider.
+          items:
+            $ref: '#/components/schemas/Region'
+    ProviderSpec:
+      type: object
+      description: Specification for creating a cloud provider configuration.
+      required:
+        - name
+        - code
+      properties:
+        name:
+          type: string
+          description: Display name for the provider configuration.
+        code:
+          type: string
+          description: Cloud provider type code.
+          enum:
+            - aws
+            - gcp
+            - azu
+            - onprem
+            - kubernetes
+        config:
+          type: object
+          description: >-
+            Provider-specific credential configuration. For AWS this includes
+            access key and secret key; for GCP it includes the service account
+            JSON credentials; for Azure it includes subscription and tenant IDs.
+          additionalProperties: true
+        regions:
+          type: array
+          description: Cloud regions to configure for this provider.
+          items:
+            $ref: '#/components/schemas/Region'
+    Region:
+      type: object
+      description: A cloud region configured within a provider.
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          description: Unique identifier for the region.
+        code:
+          type: string
+          description: Cloud provider region code (e.g., us-east-1 for AWS).
+        name:
+          type: string
+          description: Human-readable name of the region.
+        zones:
+          type: array
+          description: Availability zones within this region.
+          items:
+            $ref: '#/components/schemas/AvailabilityZone'
+    AvailabilityZone:
+      type: object
+      description: An availability zone within a cloud region.
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          description: Unique identifier for the availability zone.
+        code:
+          type: string
+          description: Cloud provider zone code (e.g., us-east-1a for AWS).
+        name:
+          type: string
+          description: Human-readable name of the availability zone.
+        subnet:
+          type: string
+          description: Subnet ID or CIDR associated with this availability zone.
+    Universe:
+      type: object
+      description: A YugabyteDB universe (database cluster) managed by YugabyteDB Anywhere.
+      properties:
+        universeUUID:
+          type: string
+          format: uuid
+          description: Unique identifier for the universe.
+        name:
+          type: string
+          description: Display name of the universe.
+        creationDate:
+          type: string
+          format: date-time
+          description: Timestamp when the universe was created.
+        universeDetails:
+          $ref: '#/components/schemas/UniverseDetails'
+        taskUUID:
+          type: string
+          format: uuid
+          description: UUID of the currently running or most recent task on this universe.
+    UniverseDetails:
+      type: object
+      description: Detailed configuration of a YugabyteDB universe.
+      properties:
+        nodePrefix:
+          type: string
+          description: Prefix used for naming nodes in the universe.
+        clusters:
+          type: array
+          description: Cluster configurations within the universe (primary and read-replica clusters).
+          items:
+            $ref: '#/components/schemas/Cluster'
+        nodeDetailsSet:
+          type: array
+          description: Individual node details for all nodes in the universe.
+          items:
+            $ref: '#/components/schemas/NodeDetails'
+    Cluster:
+      type: object
+      description: A cluster configuration within a YugabyteDB Anywhere universe.
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          description: Unique identifier for the cluster.
+        clusterType:
+          type: string
+          description: Whether this is the primary cluster or an async read-replica cluster.
+          enum:
+            - PRIMARY
+            - ASYNC
+        userIntent:
+          $ref: '#/components/schemas/UserIntent'
+    UserIntent:
+      type: object
+      description: User-specified configuration intent for a cluster within a universe.
+      properties:
+        universeName:
+          type: string
+          description: Name of the universe this cluster belongs to.
+        provider:
+          type: string
+          format: uuid
+          description: UUID of the cloud provider used for this cluster.
+        providerType:
+          type: string
+          description: Cloud provider type code.
+          enum:
+            - aws
+            - gcp
+            - azu
+            - onprem
+            - kubernetes
+        regionList:
+          type: array
+          description: List of region UUIDs where nodes are deployed.
+          items:
+            type: string
+            format: uuid
+        numNodes:
+          type: integer
+          description: Total number of nodes in the cluster.
+          minimum: 1
+        replicationFactor:
+          type: integer
+          description: Replication factor for the cluster (number of copies of each data shard).
+          enum:
+            - 1
+            - 3
+            - 5
+            - 7
+        instanceType:
+          type: string
+          description: Cloud instance type for cluster nodes (e.g., m5.large for AWS).
+        ybSoftwareVersion:
+          type: string
+          description: YugabyteDB software version to deploy on the cluster nodes.
+        enableYSQL:
+          type: boolean
+          description: Whether to enable the YSQL (PostgreSQL-compatible) API on this cluster.
+        enableYCQL:
+          type: boolean
+          description: Whether to enable the YCQL (Cassandra-compatible) API on this cluster.
+        enableNodeToNodeEncrypt:
+          type: boolean
+          description: Whether to enable TLS encryption for node-to-node communication.
+        enableClientToNodeEncrypt:
+          type: boolean
+          description: Whether to enable TLS encryption for client-to-node communication.
+        masterGFlags:
+          type: object
+          description: >-
+            Map of GFlag name to value for YugabyteDB master process configuration.
+          additionalProperties:
+            type: string
+        tserverGFlags:
+          type: object
+          description: >-
+            Map of GFlag name to value for YugabyteDB tserver process configuration.
+          additionalProperties:
+            type: string
+    NodeDetails:
+      type: object
+      description: Details about an individual node within a YugabyteDB Anywhere universe.
+      properties:
+        nodeName:
+          type: string
+          description: Unique name of the node within the universe.
+        nodeUuid:
+          type: string
+          format: uuid
+          description: Unique identifier for the node.
+        state:
+          type: string
+          description: Current lifecycle state of the node.
+          enum:
+            - ToBeAdded
+            - Provisioned
+            - SoftwareInstalled
+            - Live
+            - Stopped
+            - Removed
+            - Decommissioned
+        isMaster:
+          type: boolean
+          description: Whether this node runs a YugabyteDB master process.
+        isTserver:
+          type: boolean
+          description: Whether this node runs a YugabyteDB tserver process.
+        cloudInfo:
+          type: object
+          description: Cloud-specific placement information for the node.
+          properties:
+            cloud:
+              type: string
+              description: Cloud provider code.
+            region:
+              type: string
+              description: Cloud region the node is placed in.
+            az:
+              type: string
+              description: Availability zone the node is placed in.
+            private_ip:
+              type: string
+              description: Private IP address of the node.
+            public_ip:
+              type: string
+              description: Public IP address of the node, if applicable.
+    UniverseSpec:
+      type: object
+      description: Specification used to create a new YugabyteDB Anywhere universe.
+      required:
+        - clusters
+      properties:
+        clusters:
+          type: array
+          description: One or more cluster configurations to create within the universe.
+          items:
+            $ref: '#/components/schemas/Cluster'
+        nodeDetailsSet:
+          type: array
+          description: Optional pre-specified node placement details.
+          items:
+            $ref: '#/components/schemas/NodeDetails'
+    UniverseTaskResponse:
+      type: object
+      description: Response returned when a universe operation is initiated.
+      properties:
+        universeUUID:
+          type: string
+          format: uuid
+          description: UUID of the universe being created or modified.
+        taskUUID:
+          type: string
+          format: uuid
+          description: UUID of the background task tracking the operation.
+    TaskResponse:
+      type: object
+      description: Response returned when an asynchronous task is initiated.
+      properties:
+        taskUUID:
+          type: string
+          format: uuid
+          description: UUID of the background task. Use the task status endpoint to poll for completion.
+    SoftwareUpgradeSpec:
+      type: object
+      description: Specification for a YugabyteDB software version upgrade on a universe.
+      required:
+        - ybSoftwareVersion
+        - upgradeOption
+      properties:
+        ybSoftwareVersion:
+          type: string
+          description: Target YugabyteDB version to upgrade to (e.g., 2.20.1.0-b1).
+        upgradeOption:
+          type: string
+          description: Whether to apply the upgrade as a rolling restart or full restart.
+          enum:
+            - Rolling
+            - Non-Rolling
+            - Non-Restart
+        sleepAfterMasterRestartMillis:
+          type: integer
+          description: Milliseconds to wait between master node restarts during rolling upgrade.
+          default: 180000
+        sleepAfterTServerRestartMillis:
+          type: integer
+          description: Milliseconds to wait between tserver node restarts during rolling upgrade.
+          default: 180000
+    GFlagsUpgradeSpec:
+      type: object
+      description: Specification for updating GFlags (runtime configuration) on a universe.
+      required:
+        - upgradeOption
+      properties:
+        masterGFlags:
+          type: object
+          description: Map of GFlag name to value for master processes.
+          additionalProperties:
+            type: string
+        tserverGFlags:
+          type: object
+          description: Map of GFlag name to value for tserver processes.
+          additionalProperties:
+            type: string
+        upgradeOption:
+          type: string
+          description: Whether to apply changes as a rolling restart or full restart.
+          enum:
+            - Rolling
+            - Non-Rolling
+            - Non-Restart
+    ResizeNodeSpec:
+      type: object
+      description: Specification for resizing compute resources on universe nodes.
+      required:
+        - upgradeOption
+        - clusters
+      properties:
+        upgradeOption:
+          type: string
+          description: How to apply the resize operation across nodes.
+          enum:
+            - Rolling
+            - Non-Rolling
+        clusters:
+          type: array
+          description: Cluster configurations with updated node resource specifications.
+          items:
+            $ref: '#/components/schemas/Cluster'
+    Backup:
+      type: object
+      description: A backup of universe data managed by YugabyteDB Anywhere.
+      properties:
+        backupUUID:
+          type: string
+          format: uuid
+          description: Unique identifier for the backup.
+        universeUUID:
+          type: string
+          format: uuid
+          description: UUID of the universe this backup belongs to.
+        state:
+          type: string
+          description: Current state of the backup operation.
+          enum:
+            - InProgress
+            - Completed
+            - Failed
+            - Deleted
+            - Skipped
+        backupType:
+          type: string
+          description: The API type of data included in this backup.
+          enum:
+            - PGSQL_TABLE_TYPE
+            - YQL_TABLE_TYPE
+            - REDIS_TABLE_TYPE
+        storageConfigUUID:
+          type: string
+          format: uuid
+          description: UUID of the storage configuration used to store this backup.
+        createTime:
+          type: string
+          format: date-time
+          description: Timestamp when the backup was created.
+        completionTime:
+          type: string
+          format: date-time
+          description: Timestamp when the backup completed.
+        expiryTime:
+          type: string
+          format: date-time
+          description: Timestamp when the backup will be automatically deleted.
+    BackupSpec:
+      type: object
+      description: Specification for creating a universe backup.
+      required:
+        - storageConfigUUID
+        - backupType
+      properties:
+        storageConfigUUID:
+          type: string
+          format: uuid
+          description: UUID of the storage configuration to use for storing the backup.
+        backupType:
+          type: string
+          description: API type of tables to include in the backup.
+          enum:
+            - PGSQL_TABLE_TYPE
+            - YQL_TABLE_TYPE
+            - REDIS_TABLE_TYPE
+        keyspaceTableList:
+          type: array
+          description: Optional list of specific keyspaces and tables to back up. Backs up all if omitted.
+          items:
+            type: object
+            properties:
+              keyspace:
+                type: string
+                description: Name of the keyspace or database to back up.
+              tableNameList:
+                type: array
+                description: List of specific table names to back up within the keyspace.
+                items:
+                  type: string
+        timeBeforeDeleteFromPresentInMillis:
+          type: integer
+          description: Retention period in milliseconds before auto-deleting this backup.
+    RestoreSpec:
+      type: object
+      description: Specification for restoring universe data from a backup.
+      required:
+        - storageConfigUUID
+        - backupStorageInfoList
+      properties:
+        storageConfigUUID:
+          type: string
+          format: uuid
+          description: UUID of the storage configuration containing the backup.
+        backupStorageInfoList:
+          type: array
+          description: List of backup locations and target keyspace mappings for restore.
+          items:
+            type: object
+            properties:
+              storageLocation:
+                type: string
+                description: Cloud storage path where the backup data is located.
+              keyspace:
+                type: string
+                description: Target keyspace name to restore data into.
+              backupType:
+                type: string
+                description: API type of the backup data.
+                enum:
+                  - PGSQL_TABLE_TYPE
+                  - YQL_TABLE_TYPE
+    NodeActionSpec:
+      type: object
+      description: Specification for performing a lifecycle action on a universe node.
+      required:
+        - nodeAction
+      properties:
+        nodeAction:
+          type: string
+          description: The lifecycle action to perform on the node.
+          enum:
+            - START
+            - STOP
+            - REMOVE
+            - RELEASE
+            - ADD
+            - DECOMMISSION
+            - REBOOT
+    ErrorResponse:
+      type: object
+      description: Standard error response returned by the API on failure.
+      properties:
+        error:
+          type: string
+          description: Human-readable description of the error.
+        status:
+          type: integer
+          description: HTTP status code.
+        httpMethod:
+          type: string
+          description: HTTP method of the failed request.
+        requestUri:
+          type: string
+          description: URI of the failed request.

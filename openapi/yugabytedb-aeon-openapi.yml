@@ -1,0 +1,1032 @@
+openapi: 3.1.0
+info:
+  title: YugabyteDB Aeon REST API
+  description: >-
+    The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's
+    fully managed cloud database service. Developers and operators can use it
+    to deploy and manage database clusters, configure read replicas, schedule
+    and execute on-demand backups and restores, manage IP allow lists, and set
+    up monitoring and alerts. Authentication is performed using API keys passed
+    as bearer tokens in the Authorization header. All paths are scoped to an
+    account and project, which can be obtained from the YugabyteDB Aeon UI
+    profile page.
+  version: 'v1'
+  contact:
+    name: Yugabyte Support
+    url: https://support.yugabyte.com
+  termsOfService: https://www.yugabyte.com/yugabytedb-managed-service-terms/
+externalDocs:
+  description: YugabyteDB Aeon REST API Documentation
+  url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/
+servers:
+  - url: https://cloud.yugabyte.com/api/public/v1
+    description: YugabyteDB Aeon Production Server
+tags:
+  - name: Accounts
+    description: >-
+      Retrieve account-level information for the authenticated user, including
+      account ID and metadata used to scope all other API requests.
+  - name: Projects
+    description: >-
+      Manage projects within a YugabyteDB Aeon account. Projects provide
+      organizational grouping for clusters, allow lists, and billing.
+  - name: Clusters
+    description: >-
+      Create, list, retrieve, update, pause, resume, and delete YugabyteDB
+      clusters within an account and project. Supports both single-region and
+      multi-region cluster configurations.
+  - name: ReadReplicas
+    description: >-
+      Manage read replicas for a cluster to serve low-latency read requests
+      from remote regions without affecting the primary cluster workload.
+  - name: Backups
+    description: >-
+      Manage backup schedules and trigger on-demand backups for YugabyteDB
+      Aeon clusters. Backups are stored in the same region as the cluster.
+  - name: Restores
+    description: >-
+      Restore a cluster from a previously created backup snapshot, enabling
+      point-in-time recovery of database state.
+  - name: AllowLists
+    description: >-
+      Manage IP allow lists that control which client IP addresses or CIDR
+      ranges are permitted to connect to a cluster.
+  - name: MaintenanceWindows
+    description: >-
+      Configure scheduled maintenance windows for clusters to control when
+      Yugabyte applies software patches and infrastructure updates.
+security:
+  - bearerAuth: []
+paths:
+  /accounts:
+    get:
+      operationId: listAccounts
+      summary: List accounts
+      description: >-
+        Returns a list of YugabyteDB Aeon accounts accessible to the
+        authenticated API key holder. Most users have a single account.
+      tags:
+        - Accounts
+      responses:
+        '200':
+          description: List of accounts returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Account'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /accounts/{accountId}:
+    get:
+      operationId: getAccount
+      summary: Get account
+      description: >-
+        Returns metadata for a specific YugabyteDB Aeon account, including
+        the account ID used to scope project and cluster API calls.
+      tags:
+        - Accounts
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      responses:
+        '200':
+          description: Account details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /accounts/{accountId}/projects:
+    get:
+      operationId: listProjects
+      summary: List projects
+      description: >-
+        Returns all projects within the specified account. Projects group
+        clusters and resources for organizational or billing purposes.
+      tags:
+        - Projects
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      responses:
+        '200':
+          description: List of projects returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Project'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /accounts/{accountId}/projects/{projectId}/clusters:
+    get:
+      operationId: listClusters
+      summary: List clusters
+      description: >-
+        Returns all clusters within the specified account and project. Each
+        cluster entry includes configuration, state, cloud provider, region
+        placement, and endpoint information.
+      tags:
+        - Clusters
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/projectId'
+      responses:
+        '200':
+          description: List of clusters returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Cluster'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createCluster
+      summary: Create cluster
+      description: >-
+        Creates a new YugabyteDB Aeon cluster within the specified account and
+        project. The request body defines the cluster name, cloud provider,
+        region, tier, node configuration, and fault tolerance level.
+      tags:
+        - Clusters
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/projectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClusterSpec'
+      responses:
+        '200':
+          description: Cluster creation initiated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cluster'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /accounts/{accountId}/projects/{projectId}/clusters/{clusterId}:
+    get:
+      operationId: getCluster
+      summary: Get cluster
+      description: >-
+        Returns detailed information about a specific cluster, including its
+        current state, configuration, cloud provider, region, node count, and
+        connection endpoints.
+      tags:
+        - Clusters
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/projectId'
+        - $ref: '#/components/parameters/clusterId'
+      responses:
+        '200':
+          description: Cluster details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cluster'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateCluster
+      summary: Update cluster
+      description: >-
+        Updates the configuration of an existing cluster, such as scaling
+        node count, changing disk size, or modifying fault tolerance settings.
+      tags:
+        - Clusters
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/projectId'
+        - $ref: '#/components/parameters/clusterId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClusterSpec'
+      responses:
+        '200':
+          description: Cluster update initiated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cluster'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteCluster
+      summary: Delete cluster
+      description: >-
+        Permanently deletes the specified cluster and all its data. This
+        operation is irreversible. All backups associated with the cluster
+        are also deleted.
+      tags:
+        - Clusters
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/projectId'
+        - $ref: '#/components/parameters/clusterId'
+      responses:
+        '200':
+          description: Cluster deletion initiated successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /accounts/{accountId}/projects/{projectId}/clusters/{clusterId}/pause:
+    post:
+      operationId: pauseCluster
+      summary: Pause cluster
+      description: >-
+        Pauses a running cluster to suspend compute billing while retaining
+        all data and configuration. The cluster can be resumed at any time.
+        Only clusters in the ACTIVE state can be paused.
+      tags:
+        - Clusters
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/projectId'
+        - $ref: '#/components/parameters/clusterId'
+      responses:
+        '200':
+          description: Cluster pause initiated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cluster'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /accounts/{accountId}/projects/{projectId}/clusters/{clusterId}/resume:
+    post:
+      operationId: resumeCluster
+      summary: Resume cluster
+      description: >-
+        Resumes a previously paused cluster, restoring it to the ACTIVE state
+        and resuming compute billing. The cluster restores all data and
+        configuration from before the pause.
+      tags:
+        - Clusters
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/projectId'
+        - $ref: '#/components/parameters/clusterId'
+      responses:
+        '200':
+          description: Cluster resume initiated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cluster'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /accounts/{accountId}/projects/{projectId}/clusters/{clusterId}/read-replicas:
+    get:
+      operationId: listReadReplicas
+      summary: List read replicas
+      description: >-
+        Returns all read replicas configured for the specified cluster. Read
+        replicas allow routing read traffic to geographically distributed
+        nodes to reduce latency for remote clients.
+      tags:
+        - ReadReplicas
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/projectId'
+        - $ref: '#/components/parameters/clusterId'
+      responses:
+        '200':
+          description: List of read replicas returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ReadReplica'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      operationId: createReadReplica
+      summary: Create read replica
+      description: >-
+        Adds a read replica to the specified cluster in the configured cloud
+        region. Read replicas serve read-only traffic and are asynchronously
+        replicated from the primary cluster.
+      tags:
+        - ReadReplicas
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/projectId'
+        - $ref: '#/components/parameters/clusterId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReadReplicaSpec'
+      responses:
+        '200':
+          description: Read replica creation initiated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadReplica'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteReadReplica
+      summary: Delete read replica
+      description: >-
+        Removes all read replicas from the specified cluster. This operation
+        is irreversible and immediately terminates read replica nodes.
+      tags:
+        - ReadReplicas
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/projectId'
+        - $ref: '#/components/parameters/clusterId'
+      responses:
+        '200':
+          description: Read replica deletion initiated successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /accounts/{accountId}/projects/{projectId}/clusters/{clusterId}/backups:
+    get:
+      operationId: listBackups
+      summary: List backups
+      description: >-
+        Returns all backups for the specified cluster, including both
+        scheduled and on-demand backups. Each entry includes backup state,
+        creation time, expiry time, and size information.
+      tags:
+        - Backups
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/projectId'
+        - $ref: '#/components/parameters/clusterId'
+      responses:
+        '200':
+          description: List of backups returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Backup'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      operationId: createBackup
+      summary: Create on-demand backup
+      description: >-
+        Triggers an immediate on-demand backup of the specified cluster.
+        The backup is a full cluster snapshot stored in the same region as
+        the cluster. Retention period can be specified in days.
+      tags:
+        - Backups
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/projectId'
+        - $ref: '#/components/parameters/clusterId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BackupSpec'
+      responses:
+        '200':
+          description: Backup initiated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Backup'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /accounts/{accountId}/projects/{projectId}/clusters/{clusterId}/backups/{backupId}/restore:
+    post:
+      operationId: restoreBackup
+      summary: Restore from backup
+      description: >-
+        Restores the specified cluster from a previously created backup.
+        The restore operation overwrites the current cluster data with the
+        state captured in the backup snapshot.
+      tags:
+        - Restores
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/projectId'
+        - $ref: '#/components/parameters/clusterId'
+        - $ref: '#/components/parameters/backupId'
+      responses:
+        '200':
+          description: Restore initiated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cluster'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /accounts/{accountId}/projects/{projectId}/allow-lists:
+    get:
+      operationId: listAllowLists
+      summary: List allow lists
+      description: >-
+        Returns all IP allow lists defined within the specified project.
+        Allow lists control which IP addresses or CIDR ranges are permitted
+        to connect to clusters in the project.
+      tags:
+        - AllowLists
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/projectId'
+      responses:
+        '200':
+          description: List of allow lists returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AllowList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createAllowList
+      summary: Create allow list
+      description: >-
+        Creates a new IP allow list with one or more CIDR entries. The allow
+        list can be assigned to one or more clusters to permit inbound
+        connections from the specified IP ranges.
+      tags:
+        - AllowLists
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/projectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AllowListSpec'
+      responses:
+        '200':
+          description: Allow list created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllowList'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /accounts/{accountId}/projects/{projectId}/allow-lists/{allowListId}:
+    get:
+      operationId: getAllowList
+      summary: Get allow list
+      description: >-
+        Returns details for a specific IP allow list, including its name,
+        description, and all CIDR entries it contains.
+      tags:
+        - AllowLists
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/projectId'
+        - $ref: '#/components/parameters/allowListId'
+      responses:
+        '200':
+          description: Allow list returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllowList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteAllowList
+      summary: Delete allow list
+      description: >-
+        Permanently deletes the specified IP allow list. The allow list must
+        not be currently assigned to any cluster before it can be deleted.
+      tags:
+        - AllowLists
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/projectId'
+        - $ref: '#/components/parameters/allowListId'
+      responses:
+        '200':
+          description: Allow list deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /accounts/{accountId}/projects/{projectId}/clusters/{clusterId}/maintenance-windows:
+    get:
+      operationId: getMaintenanceWindow
+      summary: Get maintenance window
+      description: >-
+        Returns the configured maintenance window for the specified cluster,
+        including the scheduled day of week and start hour for Yugabyte to
+        apply patches and infrastructure updates.
+      tags:
+        - MaintenanceWindows
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/projectId'
+        - $ref: '#/components/parameters/clusterId'
+      responses:
+        '200':
+          description: Maintenance window returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MaintenanceWindow'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateMaintenanceWindow
+      summary: Update maintenance window
+      description: >-
+        Updates the maintenance window schedule for the specified cluster.
+        Setting a maintenance window allows operators to control when Yugabyte
+        applies updates to minimize disruption.
+      tags:
+        - MaintenanceWindows
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/projectId'
+        - $ref: '#/components/parameters/clusterId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MaintenanceWindow'
+      responses:
+        '200':
+          description: Maintenance window updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MaintenanceWindow'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        API key obtained from the YugabyteDB Aeon UI under User Profile >
+        API Keys. Pass the key as a Bearer token in the Authorization header.
+  parameters:
+    accountId:
+      name: accountId
+      in: path
+      required: true
+      description: The unique identifier of the YugabyteDB Aeon account.
+      schema:
+        type: string
+        format: uuid
+    projectId:
+      name: projectId
+      in: path
+      required: true
+      description: The unique identifier of the project within the account.
+      schema:
+        type: string
+        format: uuid
+    clusterId:
+      name: clusterId
+      in: path
+      required: true
+      description: The unique identifier of the cluster.
+      schema:
+        type: string
+        format: uuid
+    backupId:
+      name: backupId
+      in: path
+      required: true
+      description: The unique identifier of the backup snapshot.
+      schema:
+        type: string
+        format: uuid
+    allowListId:
+      name: allowListId
+      in: path
+      required: true
+      description: The unique identifier of the IP allow list.
+      schema:
+        type: string
+        format: uuid
+  responses:
+    BadRequest:
+      description: The request was malformed or contained invalid parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: The API key is missing, invalid, or expired.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    Account:
+      type: object
+      description: A YugabyteDB Aeon account record.
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the account.
+        name:
+          type: string
+          description: Display name of the account.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the account was created.
+    Project:
+      type: object
+      description: A project within a YugabyteDB Aeon account that groups clusters and resources.
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the project.
+        name:
+          type: string
+          description: Display name of the project.
+        account_id:
+          type: string
+          format: uuid
+          description: The account this project belongs to.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the project was created.
+    Cluster:
+      type: object
+      description: A YugabyteDB Aeon managed database cluster.
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the cluster.
+        name:
+          type: string
+          description: Display name of the cluster.
+        state:
+          type: string
+          description: Current operational state of the cluster.
+          enum:
+            - ACTIVE
+            - PAUSED
+            - CREATING
+            - DELETING
+            - FAILED
+            - UPDATING
+        cloud_info:
+          $ref: '#/components/schemas/CloudInfo'
+        cluster_info:
+          $ref: '#/components/schemas/ClusterInfo'
+        cluster_endpoints:
+          type: array
+          description: Connection endpoints for the cluster.
+          items:
+            $ref: '#/components/schemas/ClusterEndpoint'
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the cluster was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the cluster was last updated.
+    ClusterSpec:
+      type: object
+      description: >-
+        Specification used to create or update a YugabyteDB Aeon cluster.
+      required:
+        - name
+        - cloud_info
+        - cluster_info
+      properties:
+        name:
+          type: string
+          description: Display name for the cluster.
+          maxLength: 63
+        cloud_info:
+          $ref: '#/components/schemas/CloudInfo'
+        cluster_info:
+          $ref: '#/components/schemas/ClusterInfo'
+    CloudInfo:
+      type: object
+      description: Cloud provider and region configuration for a cluster.
+      properties:
+        code:
+          type: string
+          description: Cloud provider code.
+          enum:
+            - AWS
+            - GCP
+            - AZURE
+        region:
+          type: string
+          description: >-
+            Cloud provider region identifier (e.g., us-east-1 for AWS,
+            us-east1 for GCP, eastus for Azure).
+    ClusterInfo:
+      type: object
+      description: Compute and storage configuration for a cluster.
+      properties:
+        num_nodes:
+          type: integer
+          description: Number of nodes in the cluster. Must be a multiple of the replication factor.
+          minimum: 1
+        fault_tolerance:
+          type: string
+          description: Fault tolerance level determining replication factor and quorum settings.
+          enum:
+            - NONE
+            - NODE
+            - ZONE
+            - REGION
+        cluster_tier:
+          type: string
+          description: Cluster tier controlling available features and node sizes.
+          enum:
+            - FREE
+            - DEDICATED
+        node_info:
+          $ref: '#/components/schemas/NodeInfo'
+        yugabytedb_version:
+          type: string
+          description: YugabyteDB software version to deploy on the cluster.
+    NodeInfo:
+      type: object
+      description: Per-node compute and storage resource allocation.
+      properties:
+        num_cores:
+          type: integer
+          description: Number of vCPU cores per node.
+        memory_mb:
+          type: integer
+          description: Memory in megabytes per node.
+        disk_size_gb:
+          type: integer
+          description: Storage disk size in gigabytes per node.
+    ClusterEndpoint:
+      type: object
+      description: A connection endpoint for a YugabyteDB Aeon cluster.
+      properties:
+        accessibility_type:
+          type: string
+          description: Network accessibility type for the endpoint.
+          enum:
+            - PUBLIC
+            - PRIVATE
+        host:
+          type: string
+          description: Hostname for connecting to the cluster endpoint.
+        region:
+          type: string
+          description: Cloud region this endpoint serves.
+    ReadReplica:
+      type: object
+      description: A read replica configuration attached to a primary cluster.
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the read replica.
+        cloud_info:
+          $ref: '#/components/schemas/CloudInfo'
+        cluster_info:
+          $ref: '#/components/schemas/ClusterInfo'
+        state:
+          type: string
+          description: Current operational state of the read replica.
+          enum:
+            - ACTIVE
+            - CREATING
+            - DELETING
+            - FAILED
+    ReadReplicaSpec:
+      type: object
+      description: Specification for creating a read replica on a cluster.
+      required:
+        - cloud_info
+        - cluster_info
+      properties:
+        cloud_info:
+          $ref: '#/components/schemas/CloudInfo'
+        cluster_info:
+          $ref: '#/components/schemas/ClusterInfo'
+    Backup:
+      type: object
+      description: A backup snapshot of a YugabyteDB Aeon cluster.
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the backup.
+        cluster_id:
+          type: string
+          format: uuid
+          description: The cluster this backup belongs to.
+        state:
+          type: string
+          description: Current state of the backup operation.
+          enum:
+            - SUCCEEDED
+            - IN_PROGRESS
+            - FAILED
+            - DELETED
+        backup_type:
+          type: string
+          description: Whether this backup was scheduled or on-demand.
+          enum:
+            - SCHEDULED
+            - ON_DEMAND
+        retention_period_in_days:
+          type: integer
+          description: Number of days this backup is retained before automatic deletion.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the backup was created.
+        expiry_time:
+          type: string
+          format: date-time
+          description: Timestamp when the backup will be automatically deleted.
+    BackupSpec:
+      type: object
+      description: Specification for creating an on-demand cluster backup.
+      properties:
+        retention_period_in_days:
+          type: integer
+          description: Number of days to retain this backup. Defaults to 8 if not specified.
+          minimum: 1
+          maximum: 365
+    AllowList:
+      type: object
+      description: An IP allow list containing CIDR entries that are permitted to connect to clusters.
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the allow list.
+        name:
+          type: string
+          description: Display name for the allow list.
+        description:
+          type: string
+          description: Human-readable description of the allow list's purpose.
+        allow_list:
+          type: array
+          description: List of CIDR entries permitted to connect.
+          items:
+            type: string
+            description: An IPv4 or IPv6 CIDR range (e.g., 192.168.1.0/24).
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the allow list was created.
+    AllowListSpec:
+      type: object
+      description: Specification for creating an IP allow list.
+      required:
+        - name
+        - allow_list
+      properties:
+        name:
+          type: string
+          description: Display name for the allow list.
+          maxLength: 64
+        description:
+          type: string
+          description: Human-readable description of the allow list's purpose.
+        allow_list:
+          type: array
+          description: List of CIDR entries to include in the allow list.
+          items:
+            type: string
+            description: An IPv4 or IPv6 CIDR range.
+    MaintenanceWindow:
+      type: object
+      description: Scheduled maintenance window configuration for a cluster.
+      properties:
+        day_of_week:
+          type: string
+          description: Day of the week when the maintenance window starts.
+          enum:
+            - MONDAY
+            - TUESDAY
+            - WEDNESDAY
+            - THURSDAY
+            - FRIDAY
+            - SATURDAY
+            - SUNDAY
+        start_time:
+          type: string
+          description: >-
+            UTC start time for the maintenance window in HH:MM format
+            (24-hour clock).
+          pattern: '^([01]\d|2[0-3]):[0-5]\d$'
+        duration_in_hours:
+          type: integer
+          description: Duration of the maintenance window in hours.
+          minimum: 1
+          maximum: 8
+    ErrorResponse:
+      type: object
+      description: Standard error response returned by the API on failure.
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Machine-readable error code.
+            message:
+              type: string
+              description: Human-readable description of the error.
+            status:
+              type: integer
+              description: HTTP status code.

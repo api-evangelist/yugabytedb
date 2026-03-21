@@ -1,0 +1,322 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yugabyte.com/schemas/yugabytedb/cluster.json",
+  "title": "YugabyteDB Cluster",
+  "description": "Represents a YugabyteDB database cluster or universe, covering both Aeon (managed cloud) and Anywhere (self-managed) deployment models. Captures identity, cloud placement, compute configuration, connectivity endpoints, backup settings, and operational state.",
+  "type": "object",
+  "required": ["id", "name", "state"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the cluster or universe."
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable display name of the cluster.",
+      "minLength": 1,
+      "maxLength": 63
+    },
+    "deployment_model": {
+      "type": "string",
+      "description": "Indicates whether this cluster is managed by YugabyteDB Aeon (cloud-managed) or YugabyteDB Anywhere (self-managed).",
+      "enum": ["aeon", "anywhere"]
+    },
+    "state": {
+      "type": "string",
+      "description": "Current operational state of the cluster.",
+      "enum": [
+        "ACTIVE",
+        "PAUSED",
+        "CREATING",
+        "DELETING",
+        "FAILED",
+        "UPDATING",
+        "BOOTSTRAPPING"
+      ]
+    },
+    "yugabytedb_version": {
+      "type": "string",
+      "description": "YugabyteDB software version running on the cluster (e.g., 2.20.1.0-b1).",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+(\\-[a-zA-Z0-9]+)?$"
+    },
+    "cloud_info": {
+      "$ref": "#/$defs/CloudInfo"
+    },
+    "cluster_info": {
+      "$ref": "#/$defs/ClusterInfo"
+    },
+    "endpoints": {
+      "type": "array",
+      "description": "Connection endpoints for accessing the cluster's YSQL and YCQL APIs.",
+      "items": {
+        "$ref": "#/$defs/ClusterEndpoint"
+      }
+    },
+    "backup_config": {
+      "$ref": "#/$defs/BackupConfig"
+    },
+    "maintenance_window": {
+      "$ref": "#/$defs/MaintenanceWindow"
+    },
+    "allow_list_ids": {
+      "type": "array",
+      "description": "List of IP allow list IDs assigned to this cluster to control inbound connections.",
+      "items": {
+        "type": "string",
+        "format": "uuid",
+        "description": "UUID of an IP allow list."
+      }
+    },
+    "read_replicas": {
+      "type": "array",
+      "description": "Read replica configurations attached to this cluster for geographically distributed read traffic.",
+      "items": {
+        "$ref": "#/$defs/ReadReplica"
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the cluster was created."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the cluster configuration was last updated."
+    }
+  },
+  "$defs": {
+    "CloudInfo": {
+      "type": "object",
+      "description": "Cloud provider and region placement for a cluster.",
+      "required": ["code", "region"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Cloud provider code indicating where the cluster is hosted.",
+          "enum": ["AWS", "GCP", "AZURE"]
+        },
+        "region": {
+          "type": "string",
+          "description": "Cloud provider region identifier where the cluster is deployed (e.g., us-east-1 for AWS, us-central1 for GCP, eastus for Azure)."
+        },
+        "multi_region": {
+          "type": "boolean",
+          "description": "Whether this cluster spans multiple cloud regions."
+        },
+        "regions": {
+          "type": "array",
+          "description": "List of cloud regions when this is a multi-region cluster.",
+          "items": {
+            "type": "string",
+            "description": "A cloud region code."
+          }
+        }
+      }
+    },
+    "ClusterInfo": {
+      "type": "object",
+      "description": "Compute, storage, and replication configuration for the cluster.",
+      "properties": {
+        "num_nodes": {
+          "type": "integer",
+          "description": "Total number of nodes in the cluster. Must be a multiple of the replication factor.",
+          "minimum": 1
+        },
+        "replication_factor": {
+          "type": "integer",
+          "description": "Number of data replicas across nodes. Determines fault tolerance.",
+          "enum": [1, 3, 5, 7]
+        },
+        "fault_tolerance": {
+          "type": "string",
+          "description": "Level at which the cluster can tolerate failures without losing availability.",
+          "enum": ["NONE", "NODE", "ZONE", "REGION"]
+        },
+        "cluster_tier": {
+          "type": "string",
+          "description": "Service tier for Aeon clusters controlling available node sizes and features.",
+          "enum": ["FREE", "DEDICATED"]
+        },
+        "node_info": {
+          "$ref": "#/$defs/NodeInfo"
+        },
+        "enable_ysql": {
+          "type": "boolean",
+          "description": "Whether the PostgreSQL-compatible YSQL API is enabled on this cluster."
+        },
+        "enable_ycql": {
+          "type": "boolean",
+          "description": "Whether the Cassandra-compatible YCQL API is enabled on this cluster."
+        },
+        "encryption_in_transit": {
+          "$ref": "#/$defs/EncryptionInTransit"
+        }
+      }
+    },
+    "NodeInfo": {
+      "type": "object",
+      "description": "Per-node compute and storage resource allocation.",
+      "properties": {
+        "num_cores": {
+          "type": "integer",
+          "description": "Number of vCPU cores per node.",
+          "minimum": 1
+        },
+        "memory_mb": {
+          "type": "integer",
+          "description": "Amount of memory in megabytes per node.",
+          "minimum": 1024
+        },
+        "disk_size_gb": {
+          "type": "integer",
+          "description": "Storage disk size in gigabytes per node.",
+          "minimum": 10
+        },
+        "disk_iops": {
+          "type": "integer",
+          "description": "Provisioned IOPS for disk storage per node, where applicable."
+        },
+        "instance_type": {
+          "type": "string",
+          "description": "Cloud provider instance type for each node (e.g., m5.large for AWS)."
+        }
+      }
+    },
+    "ClusterEndpoint": {
+      "type": "object",
+      "description": "A network endpoint for connecting to the cluster.",
+      "properties": {
+        "accessibility_type": {
+          "type": "string",
+          "description": "Whether this endpoint is publicly reachable or only accessible via private networking.",
+          "enum": ["PUBLIC", "PRIVATE"]
+        },
+        "host": {
+          "type": "string",
+          "description": "Hostname for the connection endpoint."
+        },
+        "port": {
+          "type": "integer",
+          "description": "Port number for the connection endpoint. YSQL defaults to 5433, YCQL to 9042.",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "api_type": {
+          "type": "string",
+          "description": "Which database API this endpoint serves.",
+          "enum": ["YSQL", "YCQL"]
+        },
+        "region": {
+          "type": "string",
+          "description": "Cloud region this endpoint is associated with."
+        }
+      }
+    },
+    "BackupConfig": {
+      "type": "object",
+      "description": "Backup schedule and retention policy for the cluster.",
+      "properties": {
+        "schedule_enabled": {
+          "type": "boolean",
+          "description": "Whether automatic scheduled backups are enabled for this cluster."
+        },
+        "frequency_in_hours": {
+          "type": "integer",
+          "description": "How often scheduled backups are taken, in hours. Default is 24.",
+          "minimum": 1,
+          "maximum": 168
+        },
+        "retention_period_in_days": {
+          "type": "integer",
+          "description": "Number of days scheduled backups are retained before automatic deletion. Default is 8.",
+          "minimum": 1,
+          "maximum": 365
+        },
+        "storage_location": {
+          "type": "string",
+          "description": "Cloud storage path or bucket where backups are stored."
+        }
+      }
+    },
+    "MaintenanceWindow": {
+      "type": "object",
+      "description": "Scheduled window during which Yugabyte may apply patches and infrastructure updates.",
+      "properties": {
+        "day_of_week": {
+          "type": "string",
+          "description": "Day of the week when the maintenance window is scheduled.",
+          "enum": [
+            "MONDAY",
+            "TUESDAY",
+            "WEDNESDAY",
+            "THURSDAY",
+            "FRIDAY",
+            "SATURDAY",
+            "SUNDAY"
+          ]
+        },
+        "start_time": {
+          "type": "string",
+          "description": "UTC start time for the maintenance window in HH:MM format (24-hour clock).",
+          "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$"
+        },
+        "duration_in_hours": {
+          "type": "integer",
+          "description": "Duration of the maintenance window in hours.",
+          "minimum": 1,
+          "maximum": 8
+        }
+      }
+    },
+    "ReadReplica": {
+      "type": "object",
+      "description": "An asynchronous read replica attached to a primary cluster for distributing read traffic.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Unique identifier for the read replica."
+        },
+        "cloud_info": {
+          "$ref": "#/$defs/CloudInfo"
+        },
+        "cluster_info": {
+          "$ref": "#/$defs/ClusterInfo"
+        },
+        "state": {
+          "type": "string",
+          "description": "Current operational state of the read replica.",
+          "enum": ["ACTIVE", "CREATING", "DELETING", "FAILED"]
+        },
+        "endpoints": {
+          "type": "array",
+          "description": "Connection endpoints for the read replica.",
+          "items": {
+            "$ref": "#/$defs/ClusterEndpoint"
+          }
+        }
+      }
+    },
+    "EncryptionInTransit": {
+      "type": "object",
+      "description": "TLS encryption settings for cluster communications.",
+      "properties": {
+        "node_to_node": {
+          "type": "boolean",
+          "description": "Whether TLS encryption is enabled for node-to-node communication within the cluster."
+        },
+        "client_to_node": {
+          "type": "boolean",
+          "description": "Whether TLS encryption is enabled for client-to-node communication."
+        },
+        "cert_expiry_time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiry timestamp for the TLS certificate in use on the cluster."
+        }
+      }
+    }
+  }
+}

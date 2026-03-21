@@ -1,0 +1,354 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "yugabytedb": "https://yugabyte.com/vocab/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "hydra": "http://www.w3.org/ns/hydra/core#",
+
+    "Cluster": {
+      "@id": "yugabytedb:Cluster",
+      "@context": {
+        "id": "@id",
+        "name": "schema:name",
+        "deployment_model": {
+          "@id": "yugabytedb:deploymentModel",
+          "@type": "xsd:string"
+        },
+        "state": {
+          "@id": "yugabytedb:clusterState",
+          "@type": "xsd:string"
+        },
+        "yugabytedb_version": {
+          "@id": "yugabytedb:softwareVersion",
+          "@type": "xsd:string"
+        },
+        "cloud_info": {
+          "@id": "yugabytedb:cloudInfo"
+        },
+        "cluster_info": {
+          "@id": "yugabytedb:clusterInfo"
+        },
+        "endpoints": {
+          "@id": "yugabytedb:endpoints",
+          "@container": "@set"
+        },
+        "backup_config": {
+          "@id": "yugabytedb:backupConfig"
+        },
+        "maintenance_window": {
+          "@id": "yugabytedb:maintenanceWindow"
+        },
+        "allow_list_ids": {
+          "@id": "yugabytedb:allowListIds",
+          "@container": "@set"
+        },
+        "read_replicas": {
+          "@id": "yugabytedb:readReplicas",
+          "@container": "@set"
+        },
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updated_at": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Universe": {
+      "@id": "yugabytedb:Universe",
+      "@context": {
+        "universeUUID": "@id",
+        "name": "schema:name",
+        "creationDate": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "universeDetails": {
+          "@id": "yugabytedb:universeDetails"
+        },
+        "taskUUID": {
+          "@id": "yugabytedb:currentTask",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "CloudInfo": {
+      "@id": "yugabytedb:CloudInfo",
+      "@context": {
+        "code": {
+          "@id": "yugabytedb:cloudProvider",
+          "@type": "xsd:string"
+        },
+        "region": {
+          "@id": "yugabytedb:cloudRegion",
+          "@type": "xsd:string"
+        },
+        "multi_region": {
+          "@id": "yugabytedb:isMultiRegion",
+          "@type": "xsd:boolean"
+        },
+        "regions": {
+          "@id": "yugabytedb:regions",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "ClusterInfo": {
+      "@id": "yugabytedb:ClusterInfo",
+      "@context": {
+        "num_nodes": {
+          "@id": "yugabytedb:nodeCount",
+          "@type": "xsd:integer"
+        },
+        "replication_factor": {
+          "@id": "yugabytedb:replicationFactor",
+          "@type": "xsd:integer"
+        },
+        "fault_tolerance": {
+          "@id": "yugabytedb:faultTolerance",
+          "@type": "xsd:string"
+        },
+        "cluster_tier": {
+          "@id": "yugabytedb:clusterTier",
+          "@type": "xsd:string"
+        },
+        "enable_ysql": {
+          "@id": "yugabytedb:enableYSQL",
+          "@type": "xsd:boolean"
+        },
+        "enable_ycql": {
+          "@id": "yugabytedb:enableYCQL",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+
+    "NodeInfo": {
+      "@id": "yugabytedb:NodeInfo",
+      "@context": {
+        "num_cores": {
+          "@id": "yugabytedb:cpuCores",
+          "@type": "xsd:integer"
+        },
+        "memory_mb": {
+          "@id": "yugabytedb:memoryMb",
+          "@type": "xsd:integer"
+        },
+        "disk_size_gb": {
+          "@id": "yugabytedb:diskSizeGb",
+          "@type": "xsd:integer"
+        },
+        "instance_type": {
+          "@id": "yugabytedb:instanceType",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "ClusterEndpoint": {
+      "@id": "yugabytedb:ClusterEndpoint",
+      "@context": {
+        "host": {
+          "@id": "schema:url",
+          "@type": "xsd:string"
+        },
+        "port": {
+          "@id": "schema:Integer",
+          "@type": "xsd:integer"
+        },
+        "api_type": {
+          "@id": "yugabytedb:apiType",
+          "@type": "xsd:string"
+        },
+        "accessibility_type": {
+          "@id": "yugabytedb:accessibilityType",
+          "@type": "xsd:string"
+        },
+        "region": {
+          "@id": "yugabytedb:endpointRegion",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "BackupConfig": {
+      "@id": "yugabytedb:BackupConfig",
+      "@context": {
+        "schedule_enabled": {
+          "@id": "yugabytedb:scheduleEnabled",
+          "@type": "xsd:boolean"
+        },
+        "frequency_in_hours": {
+          "@id": "yugabytedb:backupFrequencyHours",
+          "@type": "xsd:integer"
+        },
+        "retention_period_in_days": {
+          "@id": "yugabytedb:retentionDays",
+          "@type": "xsd:integer"
+        },
+        "storage_location": {
+          "@id": "yugabytedb:storageLocation",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "Backup": {
+      "@id": "yugabytedb:Backup",
+      "@context": {
+        "id": "@id",
+        "state": {
+          "@id": "yugabytedb:backupState",
+          "@type": "xsd:string"
+        },
+        "backup_type": {
+          "@id": "yugabytedb:backupType",
+          "@type": "xsd:string"
+        },
+        "retention_period_in_days": {
+          "@id": "yugabytedb:retentionDays",
+          "@type": "xsd:integer"
+        },
+        "cluster_id": {
+          "@id": "yugabytedb:cluster",
+          "@type": "@id"
+        },
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "expiry_time": {
+          "@id": "yugabytedb:expiresAt",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "MaintenanceWindow": {
+      "@id": "yugabytedb:MaintenanceWindow",
+      "@context": {
+        "day_of_week": {
+          "@id": "schema:dayOfWeek",
+          "@type": "xsd:string"
+        },
+        "start_time": {
+          "@id": "yugabytedb:windowStartTime",
+          "@type": "xsd:string"
+        },
+        "duration_in_hours": {
+          "@id": "yugabytedb:windowDurationHours",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+
+    "AllowList": {
+      "@id": "yugabytedb:AllowList",
+      "@context": {
+        "id": "@id",
+        "name": "schema:name",
+        "description": "schema:description",
+        "allow_list": {
+          "@id": "yugabytedb:cidrEntries",
+          "@container": "@set"
+        },
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Provider": {
+      "@id": "yugabytedb:Provider",
+      "@context": {
+        "uuid": "@id",
+        "name": "schema:name",
+        "code": {
+          "@id": "yugabytedb:providerCode",
+          "@type": "xsd:string"
+        },
+        "regions": {
+          "@id": "yugabytedb:regions",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Region": {
+      "@id": "yugabytedb:Region",
+      "@context": {
+        "uuid": "@id",
+        "name": "schema:name",
+        "code": {
+          "@id": "yugabytedb:regionCode",
+          "@type": "xsd:string"
+        },
+        "zones": {
+          "@id": "yugabytedb:availabilityZones",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "AvailabilityZone": {
+      "@id": "yugabytedb:AvailabilityZone",
+      "@context": {
+        "uuid": "@id",
+        "name": "schema:name",
+        "code": {
+          "@id": "yugabytedb:zoneCode",
+          "@type": "xsd:string"
+        },
+        "subnet": {
+          "@id": "yugabytedb:subnet",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "ReadReplica": {
+      "@id": "yugabytedb:ReadReplica",
+      "@context": {
+        "id": "@id",
+        "state": {
+          "@id": "yugabytedb:replicaState",
+          "@type": "xsd:string"
+        },
+        "cloud_info": {
+          "@id": "yugabytedb:cloudInfo"
+        },
+        "cluster_info": {
+          "@id": "yugabytedb:clusterInfo"
+        },
+        "endpoints": {
+          "@id": "yugabytedb:endpoints",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Customer": {
+      "@id": "yugabytedb:Customer",
+      "@context": {
+        "uuid": "@id",
+        "name": "schema:name",
+        "code": {
+          "@id": "schema:identifier",
+          "@type": "xsd:string"
+        },
+        "creationDate": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    }
+  }
+}
