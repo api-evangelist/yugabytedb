@@ -28,18 +28,31 @@ servers:
         default: localhost
         description: Hostname or IP address of the YugabyteDB Anywhere instance.
 tags:
-  - name: Session
+  - name: Backups
     description: >-
-      Authenticate to the YugabyteDB Anywhere API and retrieve the customer
-      UUID and API token required for subsequent requests.
+      Create and manage backup schedules and trigger on-demand backups for
+      YugabyteDB universes. Supports both YSQL and YCQL table-level and
+      universe-level backups.
   - name: Customers
     description: >-
       Retrieve information about YBA customers (tenants). The customer UUID
       is required to scope all resource management requests.
+  - name: Nodes
+    description: >-
+      Perform node-level lifecycle operations on universe nodes, including
+      stopping, starting, removing, releasing, and decommissioning nodes.
   - name: Providers
     description: >-
       Manage cloud provider configurations (AWS, GCP, Azure, on-premises)
       that define the infrastructure YBA uses to deploy universe nodes.
+  - name: Restores
+    description: >-
+      Restore universe data from a previously created backup. Supports full
+      and selective restore operations across storage configurations.
+  - name: Session
+    description: >-
+      Authenticate to the YugabyteDB Anywhere API and retrieve the customer
+      UUID and API token required for subsequent requests.
   - name: Universes
     description: >-
       Create, list, retrieve, update, pause, resume, and delete YugabyteDB
@@ -49,19 +62,6 @@ tags:
     description: >-
       Perform software upgrades, GFlags (configuration) updates, TLS
       certificate rotations, and resize operations on universes.
-  - name: Backups
-    description: >-
-      Create and manage backup schedules and trigger on-demand backups for
-      YugabyteDB universes. Supports both YSQL and YCQL table-level and
-      universe-level backups.
-  - name: Restores
-    description: >-
-      Restore universe data from a previously created backup. Supports full
-      and selective restore operations across storage configurations.
-  - name: Nodes
-    description: >-
-      Perform node-level lifecycle operations on universe nodes, including
-      stopping, starting, removing, releasing, and decommissioning nodes.
 security:
   - apiTokenAuth: []
 paths:
