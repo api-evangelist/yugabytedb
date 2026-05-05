@@ -1,0 +1,630 @@
+rules:
+
+  # =====================================================================
+  # INFO / METADATA
+  # =====================================================================
+  info-title-format:
+    description: API title should follow the "YugabyteDB ..." naming pattern (e.g. "YugabyteDB Aeon REST API", "YugabyteDB Anywhere v1 — ...")
+    severity: warn
+    given: $.info.title
+    then:
+      function: pattern
+      functionOptions:
+        match: "^YugabyteDB .+$"
+
+  info-description-required:
+    description: API info must have a description
+    severity: error
+    given: $.info
+    then:
+      field: description
+      function: truthy
+
+  info-description-min-length:
+    description: API description should be at least 50 characters
+    severity: warn
+    given: $.info.description
+    then:
+      function: length
+      functionOptions:
+        min: 50
+
+  info-version-required:
+    description: API info must specify a version
+    severity: error
+    given: $.info
+    then:
+      field: version
+      function: truthy
+
+  info-version-format:
+    description: API version should follow the "v{N}" pattern (e.g. v1, v2)
+    severity: warn
+    given: $.info.version
+    then:
+      function: pattern
+      functionOptions:
+        match: "^v[0-9]+$"
+
+  info-contact-required:
+    description: API info should include contact information
+    severity: warn
+    given: $.info
+    then:
+      field: contact
+      function: truthy
+
+  info-contact-name:
+    description: Contact should include a name
+    severity: warn
+    given: $.info.contact
+    then:
+      field: name
+      function: truthy
+
+  info-contact-url:
+    description: Contact should include a documentation or support URL
+    severity: warn
+    given: $.info.contact
+    then:
+      field: url
+      function: truthy
+
+  info-license-required:
+    description: API info should include license information
+    severity: info
+    given: $.info
+    then:
+      field: license
+      function: truthy
+
+  # =====================================================================
+  # OPENAPI VERSION
+  # =====================================================================
+  openapi-version:
+    description: APIs must use OpenAPI 3.0.x or 3.1.x
+    severity: error
+    given: $.openapi
+    then:
+      function: pattern
+      functionOptions:
+        match: "^3\\.[01]\\."
+
+  # =====================================================================
+  # SERVERS
+  # =====================================================================
+  servers-defined:
+    description: At least one server must be defined
+    severity: error
+    given: $
+    then:
+      field: servers
+      function: truthy
+
+  servers-https-preferred:
+    description: Public-facing server URLs should use HTTPS (variables and relative paths allowed for self-hosted Anywhere)
+    severity: warn
+    given: $.servers[?(@.url && @.url.match(/^https?:\/\//))].url
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://"
+
+  servers-description-required:
+    description: Servers should have descriptions
+    severity: warn
+    given: $.servers[*]
+    then:
+      field: description
+      function: truthy
+
+  # =====================================================================
+  # PATHS — NAMING CONVENTIONS
+  # =====================================================================
+  paths-kebab-case:
+    description: Path segments should use kebab-case (YugabyteDB Aeon convention; preferred for new endpoints)
+    severity: warn
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(/([a-z0-9]+(-[a-z0-9]+)*|\\{[a-zA-Z][a-zA-Z0-9]*\\}))+$"
+
+  paths-no-trailing-slash:
+    description: Paths must not have trailing slashes
+    severity: error
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "/.+/$"
+
+  paths-no-query-string:
+    description: Paths must not contain query strings
+    severity: error
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "\\?"
+
+  paths-no-snake-case:
+    description: Path segments should not use snake_case (prefer kebab-case)
+    severity: warn
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "_"
+
+  paths-no-camel-case-segment:
+    description: Path segments should not use camelCase (prefer kebab-case)
+    severity: info
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "/[a-z]+[A-Z][a-zA-Z]*"
+
+  paths-version-prefix-allowed:
+    description: Anywhere v1 paths use /api/v1/ prefix; Aeon paths do not — both are acceptable for this provider
+    severity: info
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(/api/v[0-9]+)?(/[^/]+)+$"
+
+  # =====================================================================
+  # OPERATIONS
+  # =====================================================================
+  operation-summary-required:
+    description: All operations must have a summary
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: summary
+      function: truthy
+
+  operation-summary-yugabytedb-prefix:
+    description: Operation summaries should start with "YugabyteDB Aeon" or "YugabyteDB Anywhere"
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: "^YugabyteDB (Aeon|Anywhere) .+$"
+
+  operation-description-required:
+    description: All operations should have a description
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: description
+      function: truthy
+
+  operation-id-required:
+    description: All operations must have an operationId
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: operationId
+      function: truthy
+
+  operation-id-camel-case:
+    description: operationId should use camelCase (e.g. listClusters, createCluster, deleteAllowList)
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].operationId
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]+$"
+
+  operation-id-verb-prefix:
+    description: operationId should start with a recognized verb (list, get, create, update, delete, restore, pause, resume, attach, detach, upgrade, rollback, restart, finalize, snooze, acknowledge, hide, fetch, run, set, validate, test, precheck, configure)
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].operationId
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(list|get|create|update|delete|restore|pause|resume|attach|detach|upgrade|rollback|restart|finalize|snooze|acknowledge|hide|fetch|run|set|validate|test|precheck|configure|add|remove|map|unmap|invite|enable|disable|reset|rotate|trigger|cancel|approve|deny|export|import|download|upload|register|deregister|stop|start)[A-Z][a-zA-Z0-9]*$"
+
+  operation-tags-required:
+    description: All operations must have at least one tag
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: tags
+      function: truthy
+
+  operation-single-tag:
+    description: Operations should have exactly one tag for clean grouping
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete].tags
+    then:
+      function: length
+      functionOptions:
+        max: 1
+
+  # =====================================================================
+  # TAGS
+  # =====================================================================
+  tags-defined-globally:
+    description: Global tags array should be defined at the root
+    severity: warn
+    given: $
+    then:
+      field: tags
+      function: truthy
+
+  tags-title-case:
+    description: Tags should use Title Case or PascalCase (e.g. "Backup and Restore", "Telemetry Provider", "Clusters", "AllowLists")
+    severity: warn
+    given: $.tags[*].name
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][A-Za-z0-9]*((\\s(of|to|for|and|the|in|on|a|an)|\\s[A-Z0-9][A-Za-z0-9]*))*$"
+
+  tags-description-required:
+    description: All global tags should have descriptions
+    severity: warn
+    given: $.tags[*]
+    then:
+      field: description
+      function: truthy
+
+  # =====================================================================
+  # PARAMETERS
+  # =====================================================================
+  parameter-description-required:
+    description: All parameters should have descriptions
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[*]
+    then:
+      field: description
+      function: truthy
+
+  parameter-schema-required:
+    description: All parameters must define a schema
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].parameters[*]
+    then:
+      field: schema
+      function: truthy
+
+  parameter-snake-case:
+    description: Parameter names should use snake_case (Aeon convention) or camelCase identifiers like cUUID/uniUUID (Anywhere convention)
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in == 'query')].name
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9_]*$"
+
+  parameter-no-api-key-in-query:
+    description: API keys must be passed in headers, never as query parameters
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in == 'query')].name
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "(?i)^(api[_-]?key|access[_-]?token|auth[_-]?token|secret)$"
+
+  parameter-pagination-limit:
+    description: Use "limit" (not "size", "count", or "perPage") for pagination size
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in == 'query')].name
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "^(size|count|perPage|pageSize|page_size|per_page)$"
+
+  parameter-pagination-offset:
+    description: Use "offset" or "page" (consistently within an API) for pagination position
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in == 'query')].name
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "^(skip|from|start|startAt|start_at)$"
+
+  parameter-uuid-format:
+    description: UUID path parameters should declare format "uuid"
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in == 'path' && @.name.match(/UUID|Uuid|_uuid$|^uuid$|Id$|^id$/))].schema
+    then:
+      field: format
+      function: truthy
+
+  # =====================================================================
+  # REQUEST BODIES
+  # =====================================================================
+  request-body-json-content:
+    description: Request bodies must support application/json
+    severity: error
+    given: $.paths[*][post,put,patch].requestBody.content
+    then:
+      field: application/json
+      function: truthy
+
+  request-body-schema-ref:
+    description: Request body schemas should reference a named component (not be inlined)
+    severity: info
+    given: $.paths[*][post,put,patch].requestBody.content.application/json.schema
+    then:
+      field: $ref
+      function: truthy
+
+  # =====================================================================
+  # RESPONSES
+  # =====================================================================
+  response-defined:
+    description: All operations must define at least one response
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          minProperties: 1
+
+  response-description-required:
+    description: All responses must have a description
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].responses[*]
+    then:
+      field: description
+      function: truthy
+
+  response-success-required:
+    description: All operations should define at least one 2xx success response
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          patternProperties:
+            "^2[0-9]{2}$": {}
+          minProperties: 1
+
+  response-401-required:
+    description: All authenticated operations should define a 401 Unauthorized response
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      field: '401'
+      function: truthy
+
+  response-404-required-for-resource-paths:
+    description: GET/PUT/DELETE on resource paths should define a 404 Not Found response
+    severity: warn
+    given: "$.paths[?(@property.match(/\\{[a-zA-Z]+\\}$/))][get,put,delete].responses"
+    then:
+      field: '404'
+      function: truthy
+
+  response-400-for-mutations:
+    description: POST/PUT/PATCH operations should define a 400 Bad Request response
+    severity: info
+    given: $.paths[*][post,put,patch].responses
+    then:
+      field: '400'
+      function: truthy
+
+  response-500-encouraged:
+    description: Operations should document a 500 Server Error response
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      field: '500'
+      function: truthy
+
+  response-success-json-content:
+    description: 2xx responses with content should use application/json
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete].responses[?(@property.match(/^2[0-9]{2}$/))].content"
+    then:
+      field: application/json
+      function: truthy
+
+  response-error-schema-shape:
+    description: Error response schema should include a message or error field
+    severity: info
+    given: $.components.schemas.ErrorResponse.properties
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          anyOf:
+            - required: [message]
+            - required: [error]
+
+  # =====================================================================
+  # SCHEMAS — PROPERTY NAMING
+  # =====================================================================
+  schema-property-snake-case:
+    description: Schema property names should use snake_case (YugabyteDB Aeon convention; preferred for new schemas)
+    severity: warn
+    given: $.components.schemas[*].properties[*]~
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-z0-9_]*$"
+
+  schema-type-defined:
+    description: Top-level schemas should define a type
+    severity: warn
+    given: $.components.schemas[*]
+    then:
+      field: type
+      function: truthy
+
+  schema-description-required:
+    description: Top-level schemas should have a description
+    severity: info
+    given: $.components.schemas[*]
+    then:
+      field: description
+      function: truthy
+
+  schema-id-property-naming:
+    description: Identifier properties should be named "id" or end with "_id" (e.g., account_id, cluster_id, project_id)
+    severity: info
+    given: $.components.schemas[*].properties[?(@property.match(/^[a-zA-Z]*[Ii]dentifier$/))]~
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: ".*"
+
+  schema-timestamp-naming:
+    description: Timestamp properties should follow the created_at/updated_at convention (Aeon) — avoid creation_date, modified_on
+    severity: info
+    given: $.components.schemas[*].properties[?(@property.match(/^(creation|modification|deletion)_(date|time|on)$/i))]~
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: ".*"
+
+  # =====================================================================
+  # SECURITY
+  # =====================================================================
+  security-global-defined:
+    description: Global security requirements should be defined
+    severity: warn
+    given: $
+    then:
+      field: security
+      function: truthy
+
+  security-schemes-defined:
+    description: Security schemes must be defined under components
+    severity: error
+    given: $
+    then:
+      field: components.securitySchemes
+      function: truthy
+
+  security-bearer-or-apikey:
+    description: YugabyteDB APIs should use Bearer auth (Aeon) or API key in the X-AUTH-YW-API-TOKEN header (Anywhere)
+    severity: warn
+    given: $.components.securitySchemes[*]
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          oneOf:
+            - properties:
+                type:
+                  const: http
+                scheme:
+                  const: bearer
+              required: [type, scheme]
+            - properties:
+                type:
+                  const: apiKey
+                in:
+                  const: header
+              required: [type, in]
+
+  security-apikey-header-name:
+    description: Anywhere API key schemes should use the X-AUTH-YW-API-TOKEN header
+    severity: info
+    given: $.components.securitySchemes[?(@.type == 'apiKey' && @.in == 'header')]
+    then:
+      field: name
+      function: pattern
+      functionOptions:
+        match: "^X-AUTH-YW-API-TOKEN$"
+
+  security-scheme-description:
+    description: Security schemes should have a description
+    severity: info
+    given: $.components.securitySchemes[*]
+    then:
+      field: description
+      function: truthy
+
+  # =====================================================================
+  # HTTP METHOD CONVENTIONS
+  # =====================================================================
+  get-no-request-body:
+    description: GET operations must not have a request body
+    severity: error
+    given: $.paths[*].get
+    then:
+      field: requestBody
+      function: falsy
+
+  delete-no-request-body:
+    description: DELETE operations should not have a request body
+    severity: warn
+    given: $.paths[*].delete
+    then:
+      field: requestBody
+      function: falsy
+
+  post-has-request-body:
+    description: POST operations should have a request body
+    severity: warn
+    given: $.paths[*].post
+    then:
+      field: requestBody
+      function: truthy
+
+  put-has-request-body:
+    description: PUT operations should have a request body
+    severity: warn
+    given: $.paths[*].put
+    then:
+      field: requestBody
+      function: truthy
+
+  # =====================================================================
+  # GENERAL QUALITY
+  # =====================================================================
+  no-empty-descriptions:
+    description: Descriptions must not be empty strings
+    severity: error
+    given: $..description
+    then:
+      function: pattern
+      functionOptions:
+        match: ".+"
+
+  schema-properties-have-descriptions:
+    description: Schema properties should have descriptions
+    severity: info
+    given: $.components.schemas[*].properties[*]
+    then:
+      field: description
+      function: truthy
+
+  schema-properties-have-examples:
+    description: Schema properties should include examples
+    severity: info
+    given: "$.components.schemas[*].properties[?(@.type && @.type != 'object' && @.type != 'array')]"
+    then:
+      field: example
+      function: truthy
+
+  deprecation-documented:
+    description: Deprecated operations should explain the deprecation in the description
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete][?(@.deprecated == true)]"
+    then:
+      field: description
+      function: truthy
+
+  external-docs-encouraged:
+    description: APIs should link to external documentation (e.g. docs.yugabyte.com)
+    severity: info
+    given: $
+    then:
+      field: externalDocs
+      function: truthy

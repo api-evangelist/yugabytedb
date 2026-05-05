@@ -1,0 +1,904 @@
+openapi: 3.0.1
+info:
+  contact:
+    name: https://docs.yugabyte.com
+  description: High Availability subset of the YugabyteDB Anywhere v1 REST API, split from the canonical platform-go-client OpenAPI bundle.
+  license:
+    name: Polyform Free Trial License 1.0.0
+    url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
+  termsOfService: TODO(chirag)
+  title: YugabyteDB Anywhere v1 — High Availability
+  version: v1
+  x-source: https://github.com/yugabyte/platform-go-client/blob/master/api/openapi.yaml
+  x-split-from: yugabytedb-anywhere-v1-openapi.yaml
+externalDocs:
+  description: About YugabyteDB Anywhere
+  url: https://docs.yugabyte.com/latest/yugabyte-platform/
+servers:
+- url: /
+tags:
+- name: HA
+- name: Internal HA
+- name: Platform Instance
+- name: Platform Replication
+paths:
+  /api/v1/settings/ha/config:
+    get:
+      operationId: getHAConfig
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HAConfigGetResp'
+              examples:
+                GetHAConfig200Example:
+                  summary: Default getHAConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    cluster_key: cluster_key
+                    instances:
+                    - address: address
+                      config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      instance_state: Awaiting Connection to Replicas
+                      ybaVersion: ybaVersion
+                      state: LEADER
+                      is_local: true
+                      uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      is_leader: true
+                      last_backup: 2022-12-12 13:07:18+00:00
+                    - address: address
+                      config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      instance_state: Awaiting Connection to Replicas
+                      ybaVersion: ybaVersion
+                      state: LEADER
+                      is_local: true
+                      uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      is_leader: true
+                      last_backup: 2022-12-12 13:07:18+00:00
+                    accept_any_certificate: true
+                    global_state: Unknown
+                    last_failover: 2022-12-12 13:07:18+00:00
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get High Availability Config
+      tags:
+      - HA
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      description: Available since YBA version 2.20.0.
+      operationId: createHAConfig
+      parameters:
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HAConfigFormData'
+            examples:
+              CreateHAConfigRequestExample:
+                summary: Default createHAConfig request
+                x-microcks-default: true
+                value:
+                  cluster_key: cluster_key
+                  accept_any_certificate: true
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HighAvailabilityConfig'
+              examples:
+                CreateHAConfig200Example:
+                  summary: Default createHAConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    cluster_key: cluster_key
+                    instances:
+                    - address: address
+                      config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      instance_state: Awaiting Connection to Replicas
+                      ybaVersion: ybaVersion
+                      state: LEADER
+                      is_local: true
+                      uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      is_leader: true
+                      last_backup: 2022-12-12 13:07:18+00:00
+                    - address: address
+                      config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      instance_state: Awaiting Connection to Replicas
+                      ybaVersion: ybaVersion
+                      state: LEADER
+                      is_local: true
+                      uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      is_leader: true
+                      last_backup: 2022-12-12 13:07:18+00:00
+                    accept_any_certificate: true
+                    last_failover: 2022-12-12 13:07:18+00:00
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Create High Availability Config
+      tags:
+      - HA
+      x-codegen-request-body-name: HAConfigFormRequest
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/settings/ha/config/{cUUID}:
+    delete:
+      operationId: deleteHAConfig
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      tags:
+      - HA
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: editHAConfig
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      tags:
+      - HA
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/settings/ha/config/{cUUID}/backup/list:
+    get:
+      description: Available since YBA version 2.20.0.
+      operationId: listBackups
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: leader
+        schema:
+          default: 'null'
+          type: string
+        example: 'null'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+              examples:
+                ListBackups200Example:
+                  summary: Default listBackups 200 response
+                  x-microcks-default: true
+                  value:
+                  - string
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Backups
+      tags:
+      - Platform Replication
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/settings/ha/config/{cUUID}/instance:
+    post:
+      description: Available since YBA version 2.20.0.
+      operationId: createInstance
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlatformInstanceFormData'
+            examples:
+              CreateInstanceRequestExample:
+                summary: Default createInstance request
+                x-microcks-default: true
+                value:
+                  address: address
+                  cleanAddress: cleanAddress
+                  is_local: true
+                  is_leader: true
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformInstance'
+              examples:
+                CreateInstance200Example:
+                  summary: Default createInstance 200 response
+                  x-microcks-default: true
+                  value:
+                    address: address
+                    config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    instance_state: Awaiting Connection to Replicas
+                    ybaVersion: ybaVersion
+                    state: LEADER
+                    is_local: true
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    is_leader: true
+                    last_backup: 2022-12-12 13:07:18+00:00
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Create Platform Instance
+      tags:
+      - Platform Instance
+      x-codegen-request-body-name: PlatformInstanceFormRequest
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/settings/ha/config/{cUUID}/instance/local:
+    get:
+      operationId: getLocal
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      tags:
+      - Platform Instance
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/settings/ha/config/{cUUID}/instance/{iUUID}:
+    delete:
+      operationId: deleteInstance
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: iUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      tags:
+      - Platform Instance
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/settings/ha/config/{cUUID}/instance/{iUUID}/promote:
+    post:
+      description: Available since YBA version 2.20.0.
+      operationId: promoteInstance
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: iUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: curLeader
+        schema:
+          default: 'null'
+          type: string
+        example: 'null'
+      - in: query
+        name: isForcePromote
+        schema:
+          default: true
+          type: boolean
+        example: true
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestorePlatformBackupFormData'
+            examples:
+              PromoteInstanceRequestExample:
+                summary: Default promoteInstance request
+                x-microcks-default: true
+                value:
+                  backup_file: backup_file
+        required: true
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Promote Platform Instance
+      tags:
+      - Platform Instance
+      x-codegen-request-body-name: PlatformBackupRestoreRequest
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/settings/ha/config/{cUUID}/replication_schedule:
+    get:
+      operationId: getBackupInfo
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      tags:
+      - Platform Replication
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/settings/ha/config/{cUUID}/replication_schedule/start:
+    put:
+      description: Available since YBA version 2.20.0.
+      operationId: startPeriodicBackup
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlatformBackupFrequencyFormData'
+            examples:
+              StartPeriodicBackupRequestExample:
+                summary: Default startPeriodicBackup request
+                x-microcks-default: true
+                value:
+                  frequency_milliseconds: 0
+        required: true
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Start Periodic Backup
+      tags:
+      - Platform Replication
+      x-codegen-request-body-name: PlatformBackupFrequencyRequest
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/settings/ha/config/{cUUID}/replication_schedule/stop:
+    put:
+      operationId: stopPeriodicBackup
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      tags:
+      - Platform Replication
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/settings/ha/generate_key:
+    get:
+      description: Available since YBA version 2.20.0.
+      operationId: generateClusterKey
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Generate Cluster Key
+      tags:
+      - HA
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/settings/ha/internal/backups/{backupName}/validate:
+    get:
+      operationId: validateBackup
+      parameters:
+      - in: path
+        name: backupName
+        required: true
+        schema:
+          type: string
+        example: example-backupName
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      tags:
+      - Internal HA
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/settings/ha/internal/config:
+    get:
+      operationId: getHAConfigByClusterKey
+      parameters:
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      tags:
+      - Internal HA
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/settings/ha/internal/config/demote/{timestamp}:
+    put:
+      description: Available since YBA version 2.20.0.
+      operationId: demoteLocalLeader
+      parameters:
+      - in: path
+        name: timestamp
+        required: true
+        schema:
+          format: int64
+          type: integer
+        example: 1000
+      - in: query
+        name: promote
+        schema:
+          default: false
+          type: boolean
+        example: false
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformInstance'
+              examples:
+                DemoteLocalLeader200Example:
+                  summary: Default demoteLocalLeader 200 response
+                  x-microcks-default: true
+                  value:
+                    address: address
+                    config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    instance_state: Awaiting Connection to Replicas
+                    ybaVersion: ybaVersion
+                    state: LEADER
+                    is_local: true
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    is_leader: true
+                    last_backup: 2022-12-12 13:07:18+00:00
+          description: successful operation
+      summary: YugabyteDB Anywhere Demote Local Leader
+      tags:
+      - Internal HA
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/settings/ha/internal/config/sync/{timestamp}:
+    put:
+      operationId: syncInstances
+      parameters:
+      - in: path
+        name: timestamp
+        required: true
+        schema:
+          format: int64
+          type: integer
+        example: 1000
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      tags:
+      - Internal HA
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/settings/ha/internal/upload:
+    post:
+      operationId: syncBackups
+      parameters:
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      tags:
+      - Internal HA
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    apiKeyAuth:
+      description: API token passed as header
+      in: header
+      name: X-AUTH-YW-API-TOKEN
+      type: apiKey
+  schemas:
+    PlatformBackupFrequencyFormData:
+      example:
+        frequency_milliseconds: 0
+      properties:
+        frequency_milliseconds:
+          format: int64
+          type: integer
+          example: 1000
+      required:
+      - frequency_milliseconds
+      type: object
+    HAConfigFormData:
+      example:
+        cluster_key: cluster_key
+        accept_any_certificate: true
+      properties:
+        accept_any_certificate:
+          type: boolean
+          example: true
+        cluster_key:
+          type: string
+          example: example-key
+      required:
+      - accept_any_certificate
+      - cluster_key
+      type: object
+    HAConfigGetResp:
+      description: HA config response
+      example:
+        cluster_key: cluster_key
+        instances:
+        - address: address
+          config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          instance_state: Awaiting Connection to Replicas
+          ybaVersion: ybaVersion
+          state: LEADER
+          is_local: true
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          is_leader: true
+          last_backup: 2022-12-12 13:07:18+00:00
+        - address: address
+          config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          instance_state: Awaiting Connection to Replicas
+          ybaVersion: ybaVersion
+          state: LEADER
+          is_local: true
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          is_leader: true
+          last_backup: 2022-12-12 13:07:18+00:00
+        accept_any_certificate: true
+        global_state: Unknown
+        last_failover: 2022-12-12 13:07:18+00:00
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        accept_any_certificate:
+          description: HA accepts any certificate
+          readOnly: true
+          type: boolean
+          example: true
+        cluster_key:
+          description: HA config cluster key
+          readOnly: true
+          type: string
+          example: example-key
+        global_state:
+          description: HA config global state
+          enum:
+          - Unknown
+          - NoReplicas
+          - AwaitingReplicas
+          - Operational
+          - Error
+          - Warning
+          - StandbyConnected
+          - StandbyDisconnected
+          readOnly: true
+          type: string
+          example: Unknown
+        instances:
+          description: HA config platform instances
+          items:
+            $ref: '#/components/schemas/PlatformInstance'
+          type: array
+          example:
+          - address: address
+            config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            instance_state: Awaiting Connection to Replicas
+            ybaVersion: ybaVersion
+            state: LEADER
+            is_local: true
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            is_leader: true
+            last_backup: '2022-12-12T13:07:18+00:00'
+        last_failover:
+          description: HA last failover
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        uuid:
+          description: HA config UUID
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      type: object
+    PlatformInstance:
+      example:
+        address: address
+        config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        instance_state: Awaiting Connection to Replicas
+        ybaVersion: ybaVersion
+        state: LEADER
+        is_local: true
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        is_leader: true
+        last_backup: 2022-12-12 13:07:18+00:00
+      properties:
+        address:
+          type: string
+          example: example-address
+        config_uuid:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        instance_state:
+          enum:
+          - Awaiting Connection to Replicas
+          - Connected
+          - Disconnected
+          type: string
+          example: Awaiting Connection to Replicas
+        is_leader:
+          type: boolean
+          example: true
+        is_local:
+          type: boolean
+          example: true
+        last_backup:
+          description: Last backup time
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        state:
+          enum:
+          - LEADER
+          - STAND_BY
+          type: string
+          example: LEADER
+        uuid:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        ybaVersion:
+          type: string
+          example: 2.20.0.0
+      required:
+      - address
+      - instance_state
+      - is_leader
+      - state
+      - uuid
+      - ybaVersion
+      type: object
+    RestorePlatformBackupFormData:
+      example:
+        backup_file: backup_file
+      properties:
+        backup_file:
+          type: string
+          example: example-backup_file
+      required:
+      - backup_file
+      type: object
+    HighAvailabilityConfig:
+      example:
+        cluster_key: cluster_key
+        instances:
+        - address: address
+          config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          instance_state: Awaiting Connection to Replicas
+          ybaVersion: ybaVersion
+          state: LEADER
+          is_local: true
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          is_leader: true
+          last_backup: 2022-12-12 13:07:18+00:00
+        - address: address
+          config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          instance_state: Awaiting Connection to Replicas
+          ybaVersion: ybaVersion
+          state: LEADER
+          is_local: true
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          is_leader: true
+          last_backup: 2022-12-12 13:07:18+00:00
+        accept_any_certificate: true
+        last_failover: 2022-12-12 13:07:18+00:00
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        accept_any_certificate:
+          type: boolean
+          example: true
+        cluster_key:
+          type: string
+          example: example-key
+        instances:
+          items:
+            $ref: '#/components/schemas/PlatformInstance'
+          type: array
+          example:
+          - address: address
+            config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            instance_state: Awaiting Connection to Replicas
+            ybaVersion: ybaVersion
+            state: LEADER
+            is_local: true
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            is_leader: true
+            last_backup: '2022-12-12T13:07:18+00:00'
+        last_failover:
+          description: HA last failover
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        uuid:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      required:
+      - instances
+      - uuid
+      type: object
+    PlatformInstanceFormData:
+      example:
+        address: address
+        cleanAddress: cleanAddress
+        is_local: true
+        is_leader: true
+      properties:
+        address:
+          type: string
+          example: example-address
+        cleanAddress:
+          type: string
+          example: example-cleanAddress
+        is_leader:
+          type: boolean
+          example: true
+        is_local:
+          type: boolean
+          example: true
+      required:
+      - address
+      - cleanAddress
+      - is_leader
+      - is_local
+      type: object

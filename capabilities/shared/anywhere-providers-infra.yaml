@@ -1,0 +1,1408 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "YugabyteDB Anywhere v1 Providers and Infrastructure"
+  description: >-
+    Providers and infrastructure subset of the YugabyteDB Anywhere v1 REST
+    API. Covers cloud provider configuration, regions and availability zones,
+    instance types, on-prem nodes, access keys, certificates, custom CAs,
+    KMS configurations, and node agents.
+  tags:
+    - YugabyteDB
+    - Anywhere
+    - Providers
+    - Infrastructure
+    - Regions
+    - Zones
+    - KMS
+    - Certificates
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      YBA_API_TOKEN: YBA_API_TOKEN
+      YBA_HOST: YBA_HOST
+
+capability:
+  consumes:
+    - type: http
+      namespace: anywhere-infra
+      baseUri: "{{YBA_HOST}}"
+      description: "YugabyteDB Anywhere v1 providers and infrastructure API."
+      authentication:
+        type: apikey
+        key: X-AUTH-YW-API-TOKEN
+        value: "{{YBA_API_TOKEN}}"
+        placement: header
+      resources:
+
+        - name: providers
+          path: /api/v1/customers/{cUUID}/providers
+          description: "Cloud provider configurations"
+          operations:
+            - name: list-providers
+              method: GET
+              description: "List configured cloud providers"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-provider
+              method: POST
+              description: "Create a cloud provider configuration"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  code: "{{tools.code}}"
+                  name: "{{tools.name}}"
+                  config: "{{tools.config}}"
+                  regions: "{{tools.regions}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: provider-by-id
+          path: /api/v1/customers/{cUUID}/providers/{pUUID}
+          description: "Individual provider configuration"
+          operations:
+            - name: get-provider
+              method: GET
+              description: "Get a provider"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: pUUID
+                  in: path
+                  type: string
+                  required: true
+                  description: "Provider UUID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-provider
+              method: DELETE
+              description: "Delete a provider"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: pUUID
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: provider-edit
+          path: /api/v1/customers/{cUUID}/providers/{pUUID}/edit
+          description: "Edit a provider"
+          operations:
+            - name: edit-provider
+              method: PUT
+              description: "Edit a provider"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: pUUID
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  config: "{{tools.config}}"
+                  regions: "{{tools.regions}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: provider-regions
+          path: /api/v1/customers/{cUUID}/providers/{pUUID}/regions
+          description: "Provider regions"
+          operations:
+            - name: list-regions
+              method: GET
+              description: "List regions for a provider"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: pUUID
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-region
+              method: POST
+              description: "Create a region for a provider"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: pUUID
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  code: "{{tools.code}}"
+                  name: "{{tools.name}}"
+                  latitude: "{{tools.latitude}}"
+                  longitude: "{{tools.longitude}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: provider-region-by-id
+          path: /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}
+          description: "Individual region"
+          operations:
+            - name: edit-region
+              method: PUT
+              description: "Edit a region"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: pUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: rUUID
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-region
+              method: DELETE
+              description: "Delete a region"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: pUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: rUUID
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: provider-region-zones
+          path: /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones
+          description: "Availability zones for a region"
+          operations:
+            - name: list-zones
+              method: GET
+              description: "List availability zones in a region"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: pUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: rUUID
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-zone
+              method: POST
+              description: "Create an availability zone"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: pUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: rUUID
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  code: "{{tools.code}}"
+                  name: "{{tools.name}}"
+                  subnet: "{{tools.subnet}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: provider-instance-types
+          path: /api/v1/customers/{cUUID}/providers/{pUUID}/instance_types
+          description: "Provider instance types"
+          operations:
+            - name: list-instance-types
+              method: GET
+              description: "List instance types"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: pUUID
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-instance-type
+              method: POST
+              description: "Create an instance type for an on-prem provider"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: pUUID
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  idKey: "{{tools.idKey}}"
+                  numCores: "{{tools.numCores}}"
+                  memSizeGB: "{{tools.memSizeGB}}"
+                  instanceTypeDetails: "{{tools.instanceTypeDetails}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: provider-access-keys
+          path: /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys
+          description: "Provider access keys"
+          operations:
+            - name: list-access-keys
+              method: GET
+              description: "List access keys for a provider"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: pUUID
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-access-key
+              method: POST
+              description: "Create or upload an SSH access key"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: pUUID
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  keyCode: "{{tools.keyCode}}"
+                  keyContent: "{{tools.keyContent}}"
+                  sshUser: "{{tools.sshUser}}"
+                  sshPort: "{{tools.sshPort}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: provider-access-key-rotation
+          path: /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation
+          description: "Access key rotation"
+          operations:
+            - name: rotate-access-key
+              method: POST
+              description: "Rotate the SSH access key for a provider"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: pUUID
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  universeUUIDs: "{{tools.universeUUIDs}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: certificates
+          path: /api/v1/customers/{cUUID}/certificates
+          description: "Customer TLS certificates"
+          operations:
+            - name: list-certificates
+              method: GET
+              description: "List customer certificates"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: upload-certificate
+              method: POST
+              description: "Upload a certificate"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  label: "{{tools.label}}"
+                  certContent: "{{tools.certContent}}"
+                  keyContent: "{{tools.keyContent}}"
+                  certType: "{{tools.certType}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: certificate-self-signed
+          path: /api/v1/customers/{cUUID}/certificates/create_self_signed_cert
+          description: "Create a self-signed certificate"
+          operations:
+            - name: create-self-signed-cert
+              method: POST
+              description: "Create a self-signed certificate"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  label: "{{tools.label}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: certificate-by-id
+          path: /api/v1/customers/{cUUID}/certificates/{rUUID}
+          description: "Individual certificate"
+          operations:
+            - name: delete-certificate
+              method: DELETE
+              description: "Delete a certificate"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: rUUID
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: kms-configs
+          path: /api/v1/customers/{cUUID}/kms_configs
+          description: "KMS configurations for encryption-at-rest"
+          operations:
+            - name: list-kms-configs
+              method: GET
+              description: "List KMS configurations"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: kms-config-create
+          path: /api/v1/customers/{cUUID}/kms_configs/{kmsProvider}
+          description: "Create KMS configuration"
+          operations:
+            - name: create-kms-config
+              method: POST
+              description: "Create a KMS configuration for a provider"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: kmsProvider
+                  in: path
+                  type: string
+                  required: true
+                  description: "KMS provider (AWS, GCP, AZU, HASHICORP, CIPHERTRUST)"
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+                  config: "{{tools.config}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: kms-config-by-id
+          path: /api/v1/customers/{cUUID}/kms_configs/{configUUID}
+          description: "Individual KMS configuration"
+          operations:
+            - name: get-kms-config
+              method: GET
+              description: "Get a KMS configuration"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: configUUID
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-kms-config
+              method: DELETE
+              description: "Delete a KMS configuration"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: configUUID
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: kms-config-refresh
+          path: /api/v1/customers/{cUUID}/kms_configs/{configUUID}/refresh
+          description: "Refresh KMS config"
+          operations:
+            - name: refresh-kms-config
+              method: POST
+              description: "Refresh a KMS configuration's universe key state"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: configUUID
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: node-agents
+          path: /api/v1/customers/{cUUID}/node_agents
+          description: "Node agents"
+          operations:
+            - name: list-node-agents
+              method: GET
+              description: "List node agents"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: nodes
+          path: /api/v1/customers/{cUUID}/nodes
+          description: "On-prem nodes"
+          operations:
+            - name: list-on-prem-nodes
+              method: GET
+              description: "List on-prem nodes for a customer"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: zone-nodes
+          path: /api/v1/customers/{cUUID}/zones/{azUUID}/nodes
+          description: "Add an on-prem node in a zone"
+          operations:
+            - name: create-node-instance
+              method: POST
+              description: "Create an on-prem node instance in a zone"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: azUUID
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  nodes: "{{tools.nodes}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: customCAStore
+          path: /api/v1/customers/{cUUID}/customCAStore
+          description: "Custom CA trust store"
+          operations:
+            - name: add-ca
+              method: POST
+              description: "Add a CA certificate to the trust store"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+                  contents: "{{tools.contents}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8103
+      namespace: anywhere-infra-rest
+      description: "Standalone REST adapter exposing Anywhere providers and infrastructure."
+      resources:
+        - path: /v1/customers/{customerId}/providers
+          name: providers
+          description: "Cloud providers"
+          operations:
+            - method: GET
+              name: list-providers
+              description: "List providers"
+              call: "anywhere-infra.list-providers"
+              with:
+                cUUID: "rest.customerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-provider
+              description: "Create a provider"
+              call: "anywhere-infra.create-provider"
+              with:
+                cUUID: "rest.customerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/providers/{providerId}
+          name: provider-by-id
+          description: "Individual provider"
+          operations:
+            - method: GET
+              name: get-provider
+              description: "Get a provider"
+              call: "anywhere-infra.get-provider"
+              with:
+                cUUID: "rest.customerId"
+                pUUID: "rest.providerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-provider
+              description: "Delete a provider"
+              call: "anywhere-infra.delete-provider"
+              with:
+                cUUID: "rest.customerId"
+                pUUID: "rest.providerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/providers/{providerId}/edit
+          name: provider-edit
+          description: "Edit a provider"
+          operations:
+            - method: PUT
+              name: edit-provider
+              description: "Edit a provider"
+              call: "anywhere-infra.edit-provider"
+              with:
+                cUUID: "rest.customerId"
+                pUUID: "rest.providerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/providers/{providerId}/regions
+          name: provider-regions
+          description: "Provider regions"
+          operations:
+            - method: GET
+              name: list-regions
+              description: "List regions"
+              call: "anywhere-infra.list-regions"
+              with:
+                cUUID: "rest.customerId"
+                pUUID: "rest.providerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-region
+              description: "Create a region"
+              call: "anywhere-infra.create-region"
+              with:
+                cUUID: "rest.customerId"
+                pUUID: "rest.providerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/providers/{providerId}/regions/{regionId}
+          name: provider-region-by-id
+          description: "Individual region"
+          operations:
+            - method: PUT
+              name: edit-region
+              description: "Edit a region"
+              call: "anywhere-infra.edit-region"
+              with:
+                cUUID: "rest.customerId"
+                pUUID: "rest.providerId"
+                rUUID: "rest.regionId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-region
+              description: "Delete a region"
+              call: "anywhere-infra.delete-region"
+              with:
+                cUUID: "rest.customerId"
+                pUUID: "rest.providerId"
+                rUUID: "rest.regionId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/providers/{providerId}/regions/{regionId}/zones
+          name: provider-region-zones
+          description: "Region availability zones"
+          operations:
+            - method: GET
+              name: list-zones
+              description: "List zones"
+              call: "anywhere-infra.list-zones"
+              with:
+                cUUID: "rest.customerId"
+                pUUID: "rest.providerId"
+                rUUID: "rest.regionId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-zone
+              description: "Create a zone"
+              call: "anywhere-infra.create-zone"
+              with:
+                cUUID: "rest.customerId"
+                pUUID: "rest.providerId"
+                rUUID: "rest.regionId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/providers/{providerId}/instance-types
+          name: provider-instance-types
+          description: "Instance types"
+          operations:
+            - method: GET
+              name: list-instance-types
+              description: "List instance types"
+              call: "anywhere-infra.list-instance-types"
+              with:
+                cUUID: "rest.customerId"
+                pUUID: "rest.providerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-instance-type
+              description: "Create an instance type"
+              call: "anywhere-infra.create-instance-type"
+              with:
+                cUUID: "rest.customerId"
+                pUUID: "rest.providerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/providers/{providerId}/access-keys
+          name: provider-access-keys
+          description: "Provider access keys"
+          operations:
+            - method: GET
+              name: list-access-keys
+              description: "List access keys"
+              call: "anywhere-infra.list-access-keys"
+              with:
+                cUUID: "rest.customerId"
+                pUUID: "rest.providerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-access-key
+              description: "Create an access key"
+              call: "anywhere-infra.create-access-key"
+              with:
+                cUUID: "rest.customerId"
+                pUUID: "rest.providerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/providers/{providerId}/access-key-rotation
+          name: access-key-rotation
+          description: "Rotate access keys"
+          operations:
+            - method: POST
+              name: rotate-access-key
+              description: "Rotate access keys"
+              call: "anywhere-infra.rotate-access-key"
+              with:
+                cUUID: "rest.customerId"
+                pUUID: "rest.providerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/certificates
+          name: certificates
+          description: "Certificates"
+          operations:
+            - method: GET
+              name: list-certificates
+              description: "List certificates"
+              call: "anywhere-infra.list-certificates"
+              with:
+                cUUID: "rest.customerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: upload-certificate
+              description: "Upload a certificate"
+              call: "anywhere-infra.upload-certificate"
+              with:
+                cUUID: "rest.customerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/certificates/self-signed
+          name: certificate-self-signed
+          description: "Self-signed cert"
+          operations:
+            - method: POST
+              name: create-self-signed-cert
+              description: "Create a self-signed certificate"
+              call: "anywhere-infra.create-self-signed-cert"
+              with:
+                cUUID: "rest.customerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/certificates/{certId}
+          name: certificate-by-id
+          description: "Individual certificate"
+          operations:
+            - method: DELETE
+              name: delete-certificate
+              description: "Delete a certificate"
+              call: "anywhere-infra.delete-certificate"
+              with:
+                cUUID: "rest.customerId"
+                rUUID: "rest.certId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/kms-configs
+          name: kms-configs
+          description: "KMS configurations"
+          operations:
+            - method: GET
+              name: list-kms-configs
+              description: "List KMS configurations"
+              call: "anywhere-infra.list-kms-configs"
+              with:
+                cUUID: "rest.customerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/kms-configs/{kmsProvider}
+          name: kms-config-create
+          description: "Create KMS config"
+          operations:
+            - method: POST
+              name: create-kms-config
+              description: "Create KMS configuration"
+              call: "anywhere-infra.create-kms-config"
+              with:
+                cUUID: "rest.customerId"
+                kmsProvider: "rest.kmsProvider"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/kms-configs/configs/{configId}
+          name: kms-config-by-id
+          description: "Individual KMS config"
+          operations:
+            - method: GET
+              name: get-kms-config
+              description: "Get KMS configuration"
+              call: "anywhere-infra.get-kms-config"
+              with:
+                cUUID: "rest.customerId"
+                configUUID: "rest.configId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-kms-config
+              description: "Delete KMS configuration"
+              call: "anywhere-infra.delete-kms-config"
+              with:
+                cUUID: "rest.customerId"
+                configUUID: "rest.configId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/kms-configs/configs/{configId}/refresh
+          name: kms-config-refresh
+          description: "Refresh KMS config"
+          operations:
+            - method: POST
+              name: refresh-kms-config
+              description: "Refresh KMS configuration"
+              call: "anywhere-infra.refresh-kms-config"
+              with:
+                cUUID: "rest.customerId"
+                configUUID: "rest.configId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/node-agents
+          name: node-agents
+          description: "Node agents"
+          operations:
+            - method: GET
+              name: list-node-agents
+              description: "List node agents"
+              call: "anywhere-infra.list-node-agents"
+              with:
+                cUUID: "rest.customerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/nodes
+          name: nodes
+          description: "On-prem nodes"
+          operations:
+            - method: GET
+              name: list-nodes
+              description: "List on-prem nodes"
+              call: "anywhere-infra.list-on-prem-nodes"
+              with:
+                cUUID: "rest.customerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/zones/{zoneId}/nodes
+          name: zone-nodes
+          description: "Zone node management"
+          operations:
+            - method: POST
+              name: create-zone-node
+              description: "Add an on-prem node in a zone"
+              call: "anywhere-infra.create-node-instance"
+              with:
+                cUUID: "rest.customerId"
+                azUUID: "rest.zoneId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/custom-ca-store
+          name: custom-ca-store
+          description: "Custom CA trust store"
+          operations:
+            - method: POST
+              name: add-custom-ca
+              description: "Add a custom CA certificate"
+              call: "anywhere-infra.add-ca"
+              with:
+                cUUID: "rest.customerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9103
+      namespace: anywhere-infra-mcp
+      transport: http
+      description: "Standalone MCP adapter for Anywhere providers and infrastructure."
+      tools:
+        - name: list-providers
+          description: "List configured cloud providers"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "anywhere-infra.list-providers"
+          with:
+            cUUID: "tools.cUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-provider
+          description: "Create a cloud provider configuration"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "anywhere-infra.create-provider"
+          with:
+            cUUID: "tools.cUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-provider
+          description: "Get a provider"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "anywhere-infra.get-provider"
+          with:
+            cUUID: "tools.cUUID"
+            pUUID: "tools.pUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-provider
+          description: "Delete a provider"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "anywhere-infra.delete-provider"
+          with:
+            cUUID: "tools.cUUID"
+            pUUID: "tools.pUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: edit-provider
+          description: "Edit a provider configuration"
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "anywhere-infra.edit-provider"
+          with:
+            cUUID: "tools.cUUID"
+            pUUID: "tools.pUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-regions
+          description: "List regions for a provider"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "anywhere-infra.list-regions"
+          with:
+            cUUID: "tools.cUUID"
+            pUUID: "tools.pUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-region
+          description: "Create a region for a provider"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "anywhere-infra.create-region"
+          with:
+            cUUID: "tools.cUUID"
+            pUUID: "tools.pUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: edit-region
+          description: "Edit a region"
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "anywhere-infra.edit-region"
+          with:
+            cUUID: "tools.cUUID"
+            pUUID: "tools.pUUID"
+            rUUID: "tools.rUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-region
+          description: "Delete a region"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "anywhere-infra.delete-region"
+          with:
+            cUUID: "tools.cUUID"
+            pUUID: "tools.pUUID"
+            rUUID: "tools.rUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-zones
+          description: "List availability zones in a region"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "anywhere-infra.list-zones"
+          with:
+            cUUID: "tools.cUUID"
+            pUUID: "tools.pUUID"
+            rUUID: "tools.rUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-zone
+          description: "Create an availability zone"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "anywhere-infra.create-zone"
+          with:
+            cUUID: "tools.cUUID"
+            pUUID: "tools.pUUID"
+            rUUID: "tools.rUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-instance-types
+          description: "List instance types for a provider"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "anywhere-infra.list-instance-types"
+          with:
+            cUUID: "tools.cUUID"
+            pUUID: "tools.pUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-instance-type
+          description: "Create an instance type"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "anywhere-infra.create-instance-type"
+          with:
+            cUUID: "tools.cUUID"
+            pUUID: "tools.pUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-access-keys
+          description: "List provider access keys"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "anywhere-infra.list-access-keys"
+          with:
+            cUUID: "tools.cUUID"
+            pUUID: "tools.pUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-access-key
+          description: "Create or upload an SSH access key"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "anywhere-infra.create-access-key"
+          with:
+            cUUID: "tools.cUUID"
+            pUUID: "tools.pUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: rotate-access-key
+          description: "Rotate the SSH access key for a provider"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "anywhere-infra.rotate-access-key"
+          with:
+            cUUID: "tools.cUUID"
+            pUUID: "tools.pUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-certificates
+          description: "List customer certificates"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "anywhere-infra.list-certificates"
+          with:
+            cUUID: "tools.cUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: upload-certificate
+          description: "Upload a certificate"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "anywhere-infra.upload-certificate"
+          with:
+            cUUID: "tools.cUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-self-signed-cert
+          description: "Create a self-signed certificate"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "anywhere-infra.create-self-signed-cert"
+          with:
+            cUUID: "tools.cUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-certificate
+          description: "Delete a certificate"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "anywhere-infra.delete-certificate"
+          with:
+            cUUID: "tools.cUUID"
+            rUUID: "tools.rUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-kms-configs
+          description: "List KMS configurations"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "anywhere-infra.list-kms-configs"
+          with:
+            cUUID: "tools.cUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-kms-config
+          description: "Create a KMS configuration"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "anywhere-infra.create-kms-config"
+          with:
+            cUUID: "tools.cUUID"
+            kmsProvider: "tools.kmsProvider"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-kms-config
+          description: "Get a KMS configuration"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "anywhere-infra.get-kms-config"
+          with:
+            cUUID: "tools.cUUID"
+            configUUID: "tools.configUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-kms-config
+          description: "Delete a KMS configuration"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "anywhere-infra.delete-kms-config"
+          with:
+            cUUID: "tools.cUUID"
+            configUUID: "tools.configUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: refresh-kms-config
+          description: "Refresh a KMS configuration"
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "anywhere-infra.refresh-kms-config"
+          with:
+            cUUID: "tools.cUUID"
+            configUUID: "tools.configUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-node-agents
+          description: "List node agents"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "anywhere-infra.list-node-agents"
+          with:
+            cUUID: "tools.cUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-on-prem-nodes
+          description: "List on-prem nodes for a customer"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "anywhere-infra.list-on-prem-nodes"
+          with:
+            cUUID: "tools.cUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-node-instance
+          description: "Create an on-prem node instance in a zone"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "anywhere-infra.create-node-instance"
+          with:
+            cUUID: "tools.cUUID"
+            azUUID: "tools.azUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: add-custom-ca
+          description: "Add a custom CA certificate"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "anywhere-infra.add-ca"
+          with:
+            cUUID: "tools.cUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."

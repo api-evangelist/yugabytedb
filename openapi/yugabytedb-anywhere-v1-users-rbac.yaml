@@ -1,0 +1,4815 @@
+openapi: 3.0.1
+info:
+  contact:
+    name: https://docs.yugabyte.com
+  description: Users, Sessions, and RBAC subset of the YugabyteDB Anywhere v1 REST API, split from the canonical platform-go-client OpenAPI bundle.
+  license:
+    name: Polyform Free Trial License 1.0.0
+    url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
+  termsOfService: TODO(chirag)
+  title: YugabyteDB Anywhere v1 — Users, Sessions, and RBAC
+  version: v1
+  x-source: https://github.com/yugabyte/platform-go-client/blob/master/api/openapi.yaml
+  x-split-from: yugabytedb-anywhere-v1-openapi.yaml
+externalDocs:
+  description: About YugabyteDB Anywhere
+  url: https://docs.yugabyte.com/latest/yugabyte-platform/
+servers:
+- url: /
+tags:
+- name: Customer Tasks
+- name: Customer management
+- name: LDAP Role management
+- name: LDAPOIDC Role management
+- name: License management
+- name: RBAC management
+- name: Session management
+- name: User management
+paths:
+  /api/v1/api_login:
+    post:
+      operationId: apiLogin
+      parameters:
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerLoginFormData'
+            examples:
+              ApiLoginRequestExample:
+                summary: Default apiLogin request
+                x-microcks-default: true
+                value:
+                  password: password
+                  email: email
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionInfo'
+              examples:
+                ApiLogin200Example:
+                  summary: Default apiLogin 200 response
+                  x-microcks-default: true
+                  value:
+                    apiToken: apiToken
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    apiTokenVersion: 0
+                    authToken: authToken
+                    userUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      summary: YugabyteDB Anywhere Authenticate User Using Email and Password
+      tags:
+      - Session management
+      x-codegen-request-body-name: CustomerLoginFormData
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/app_version:
+    get:
+      operationId: appVersion
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+              examples:
+                AppVersion200Example:
+                  summary: Default appVersion 200 response
+                  x-microcks-default: true
+                  value: {}
+          description: successful operation
+      summary: YugabyteDB Anywhere AppVersion
+      tags:
+      - Session management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customer_count:
+    get:
+      operationId: customerCount
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerCountResp'
+              examples:
+                CustomerCount200Example:
+                  summary: Default customerCount 200 response
+                  x-microcks-default: true
+                  value:
+                    count: 0
+          description: successful operation
+      summary: YugabyteDB Anywhere CustomerCount
+      tags:
+      - Session management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers:
+    get:
+      operationId: ListOfCustomers
+      parameters:
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Customer'
+                type: array
+              examples:
+                ListOfCustomers200Example:
+                  summary: Default ListOfCustomers 200 response
+                  x-microcks-default: true
+                  value:
+                  - code: admin
+                    customerId: 1
+                    name: sridhar
+                    creationDate: 2022-12-12 13:07:18+00:00
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Customers
+      tags:
+      - Customer management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}:
+    delete:
+      operationId: deleteCustomer
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                DeleteCustomer200Example:
+                  summary: Default deleteCustomer 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Delete a Customer
+      tags:
+      - Customer management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      operationId: CustomerDetail
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerDetailsData'
+              examples:
+                CustomerDetail200Example:
+                  summary: Default CustomerDetail 200 response
+                  x-microcks-default: true
+                  value:
+                    code: admin
+                    alertingData:
+                      alertingEmail: test@example.com
+                      statusUpdateIntervalMs: 1
+                      checkIntervalMs: 6
+                      reportOnlyErrors: true
+                      sendAlertsToYb: true
+                      activeAlertNotificationIntervalMs: 0
+                    callhomeLevel: MEDIUM
+                    customerId: 5
+                    name: Sridhar
+                    smtpData:
+                      smtpServer: smtp.example.com
+                      smtpUsername: testsmtp
+                      smtpPort: 465
+                      smtpPassword: XurenRknsc
+                      emailFrom: test@example.com
+                      useTLS: false
+                      useSSL: true
+                    creationDate: 2022-12-12 13:07:18+00:00
+                    universeUUIDs: '["c3595ca7-68a3-47f0-b1b2-1725886d5ed5", "9e0bb733-556c-4935-83dd-6b742a2c32e6"]'
+                    uuid: uuid
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get a Customer's Details
+      tags:
+      - Customer management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: UpdateCustomer
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerAlertData'
+            examples:
+              UpdateCustomerRequestExample:
+                summary: Default UpdateCustomer request
+                x-microcks-default: true
+                value:
+                  features:
+                    key: '{}'
+                  password: XurenRknsc
+                  code: code
+                  alertingData:
+                    alertingEmail: test@example.com
+                    statusUpdateIntervalMs: 1
+                    checkIntervalMs: 6
+                    reportOnlyErrors: true
+                    sendAlertsToYb: true
+                    activeAlertNotificationIntervalMs: 0
+                  callhomeLevel: callhomeLevel
+                  name: Test alert
+                  confirmPassword: XurenRknsc
+                  smtpData:
+                    smtpServer: smtp.example.com
+                    smtpUsername: testsmtp
+                    smtpPort: 465
+                    smtpPassword: XurenRknsc
+                    emailFrom: test@example.com
+                    useTLS: false
+                    useSSL: true
+                  email: test@example.com
+        description: Customer data to be updated
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+              examples:
+                UpdateCustomer200Example:
+                  summary: Default UpdateCustomer 200 response
+                  x-microcks-default: true
+                  value:
+                    code: admin
+                    customerId: 1
+                    name: sridhar
+                    creationDate: 2022-12-12 13:07:18+00:00
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Update a Customer
+      tags:
+      - Customer management
+      x-codegen-request-body-name: Customer
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/admin_notifications:
+    get:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: getAdminNotifications
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Current admin notification messages'
+          description: successful operation
+      summary: YugabyteDB Anywhere Current List of Notifications for Admin
+      tags:
+      - Session management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/api_token:
+    put:
+      operationId: api_token
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: apiTokenVersion
+        schema:
+          default: -1
+          format: int64
+          type: integer
+        example: -1
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionInfo'
+              examples:
+                Api_token200Example:
+                  summary: Default api_token 200 response
+                  x-microcks-default: true
+                  value:
+                    apiToken: apiToken
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    apiTokenVersion: 0
+                    authToken: authToken
+                    userUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      summary: YugabyteDB Anywhere Regenerate and Fetch API Token
+      tags:
+      - Session management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/host_info:
+    get:
+      operationId: getHostInfo
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  properties: {}
+                  type: object
+                type: object
+              examples:
+                GetHostInfo200Example:
+                  summary: Default getHostInfo 200 response
+                  x-microcks-default: true
+                  value: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get a Customer's Host Info
+      tags:
+      - Customer management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/ldap_mappings:
+    get:
+      deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2024.2.0.0.</b> Please use the v2 /auth/group-mappings GET endpoint instead. Note that this API will not return the custom roles assigned to groups via the new /api/v2/customers/{cUUID}/auth/group-mappings API.
+      operationId: listLdapDnToYbaRoles
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LdapDnToYbaRoleData'
+              examples:
+                ListLdapDnToYbaRoles200Example:
+                  summary: Default listLdapDnToYbaRoles 200 response
+                  x-microcks-default: true
+                  value:
+                    ldapDnToYbaRolePairs:
+                    - ybaRole: ConnectOnly
+                      distinguishedName: distinguishedName
+                    - ybaRole: ConnectOnly
+                      distinguishedName: distinguishedName
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List LDAP Mappings
+      tags:
+      - LDAPOIDC Role management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2024.2.0.0.</b> Please use the v2 /auth/group-mappings PUT endpoint instead
+      operationId: setLdapDnToYbaRoles
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LdapDnToYbaRoleData'
+            examples:
+              SetLdapDnToYbaRolesRequestExample:
+                summary: Default setLdapDnToYbaRoles request
+                x-microcks-default: true
+                value:
+                  ldapDnToYbaRolePairs:
+                  - ybaRole: ConnectOnly
+                    distinguishedName: distinguishedName
+                  - ybaRole: ConnectOnly
+                    distinguishedName: distinguishedName
+        description: New LDAP Mappings to be set
+        required: true
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Set LDAP Mappings
+      tags:
+      - LDAPOIDC Role management
+      x-codegen-request-body-name: ldapMappings
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/licenses:
+    post:
+      operationId: upload_license
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerLicense'
+              examples:
+                Upload_license200Example:
+                  summary: Default upload_license 200 response
+                  x-microcks-default: true
+                  value:
+                    license: license
+                    licenseType: licenseType
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    licenseUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    creationDate: 2022-12-12 13:07:18+00:00
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Uploads the License
+      tags:
+      - License management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/licenses/{lUUID}:
+    delete:
+      operationId: deleteLicense
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: lUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                DeleteLicense200Example:
+                  summary: Default deleteLicense 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Delete a License
+      tags:
+      - License management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/metrics:
+    post:
+      description: YbaApi Internal.
+      operationId: metrics
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetricQueryParams'
+            examples:
+              MetricsRequestExample:
+                summary: Default metrics request
+                x-microcks-default: true
+                value:
+                  streamId: streamId
+                  metricsWithSettings:
+                  - timeAggregation: DEFAULT
+                    metric: metric
+                    aggregatedValueFunction: DEFAULT
+                    splitCount: 6
+                    nodeAggregation: DEFAULT
+                    splitMode: NONE
+                    returnAggregatedValue: true
+                    splitType: NONE
+                  - timeAggregation: DEFAULT
+                    metric: metric
+                    aggregatedValueFunction: DEFAULT
+                    splitCount: 6
+                    nodeAggregation: DEFAULT
+                    splitMode: NONE
+                    returnAggregatedValue: true
+                    splitType: NONE
+                  start: 1
+                  availabilityZones:
+                  - availabilityZones
+                  - availabilityZones
+                  nodePrefix: nodePrefix
+                  xclusterConfigUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  nodeNames:
+                  - nodeNames
+                  - nodeNames
+                  tableName: tableName
+                  regionCodes:
+                  - regionCodes
+                  - regionCodes
+                  serverType: MASTER
+                  clusterUuids:
+                  - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  tableId: tableId
+                  end: 0
+                  recharts: true
+                  metrics:
+                  - metrics
+                  - metrics
+        description: Metrics to be added
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  properties: {}
+                  type: object
+                type: object
+              examples:
+                Metrics200Example:
+                  summary: Default metrics 200 response
+                  x-microcks-default: true
+                  value: {}
+          description: successful operation
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPError'
+              examples:
+                Metrics400Example:
+                  summary: Default metrics 400 response
+                  x-microcks-default: true
+                  value:
+                    success: false
+                    requestUri: /customers/8918921-af3782-633de/universe/8173ab-fd2453/create
+                    error: There was a problem creating the universe
+                    httpMethod: POST
+                    errorJson: '{ "foo" : "bar", "baz" : [1, 2, 3] }'
+                    requestJson: '{ "foo" : "bar", "baz" : [1, 2, 3] }'
+          description: When request fails validations.
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Add Metrics to a Customer
+      tags:
+      - Customer management
+      x-codegen-request-body-name: Metrics
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/oidc_mappings:
+    get:
+      deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2024.2.0.0.</b> Please use the v2 /auth/group-mappings GET endpoint instead. Note that this API will not return the custom roles assigned to groups via the new /api/v2/customers/{cUUID}/auth/group-mappings API.
+      operationId: listOidcGroupToYbaRoles
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OidcGroupToYbaRolesData'
+              examples:
+                ListOidcGroupToYbaRoles200Example:
+                  summary: Default listOidcGroupToYbaRoles 200 response
+                  x-microcks-default: true
+                  value:
+                    oidcGroupToYbaRolesPairs:
+                    - groupName: groupName
+                      roles:
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    - groupName: groupName
+                      roles:
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List OIDC Group Mappings
+      tags:
+      - LDAPOIDC Role management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2024.2.0.0.</b> Please use the v2 /auth/group-mappings PUT endpoint instead
+      operationId: mapOidcGroupToYbaRoles
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OidcGroupToYbaRolesData'
+            examples:
+              MapOidcGroupToYbaRolesRequestExample:
+                summary: Default mapOidcGroupToYbaRoles request
+                x-microcks-default: true
+                value:
+                  oidcGroupToYbaRolesPairs:
+                  - groupName: groupName
+                    roles:
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  - groupName: groupName
+                    roles:
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        description: New OIDC Mappings to be set
+        required: true
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Set OIDC Mappings
+      tags:
+      - LDAPOIDC Role management
+      x-codegen-request-body-name: oidcMappings
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/oidc_mappings/{groupName}:
+    delete:
+      deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2024.2.0.0.</b> Please use the v2 /auth/group-mappings/{groupUUID} DELETE endpoint instead
+      operationId: deleteOidcGroupMapping
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: groupName
+        required: true
+        schema:
+          type: string
+        example: example-groupName
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                DeleteOidcGroupMapping200Example:
+                  summary: Default deleteOidcGroupMapping 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Delete a OIDC Group Mapping
+      tags:
+      - LDAPOIDC Role management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/rbac/permissions:
+    get:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: listPermissions
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - description: Optional resource type to filter permission list
+        in: query
+        name: resourceType
+        schema:
+          default: 'null'
+          type: string
+        example: 'null'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PermissionInfo'
+                type: array
+              examples:
+                ListPermissions200Example:
+                  summary: Default listPermissions 200 response
+                  x-microcks-default: true
+                  value:
+                  - permissionValidOnResource: true
+                    prerequisitePermissions:
+                    - action: CREATE
+                      resourceType: UNIVERSE
+                    - action: CREATE
+                      resourceType: UNIVERSE
+                    name: name
+                    action: CREATE
+                    description: description
+                    resourceType: UNIVERSE
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List All the Permissions Available
+      tags:
+      - RBAC management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/rbac/role:
+    get:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: listRoles
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - description: Optional role type to filter roles list
+        in: query
+        name: roleType
+        schema:
+          default: 'null'
+          type: string
+        example: 'null'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Role'
+                type: array
+              examples:
+                ListRoles200Example:
+                  summary: Default listRoles 200 response
+                  x-microcks-default: true
+                  value:
+                  - customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    permissionDetails:
+                      permissionList:
+                      - action: CREATE
+                        resourceType: UNIVERSE
+                      - action: CREATE
+                        resourceType: UNIVERSE
+                    name: name
+                    description: description
+                    updatedOn: 2022-12-12 13:07:18+00:00
+                    roleType: System
+                    createdOn: 2022-12-12 13:07:18+00:00
+                    roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List All the Roles Available
+      tags:
+      - RBAC management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: createRole
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleFormData'
+            examples:
+              CreateRoleRequestExample:
+                summary: Default createRole request
+                x-microcks-default: true
+                value:
+                  name: name
+                  description: description
+                  permissionList:
+                  - action: CREATE
+                    resourceType: UNIVERSE
+                  - action: CREATE
+                    resourceType: UNIVERSE
+        description: create role form data
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+              examples:
+                CreateRole200Example:
+                  summary: Default createRole 200 response
+                  x-microcks-default: true
+                  value:
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    permissionDetails:
+                      permissionList:
+                      - action: CREATE
+                        resourceType: UNIVERSE
+                      - action: CREATE
+                        resourceType: UNIVERSE
+                    name: name
+                    description: description
+                    updatedOn: 2022-12-12 13:07:18+00:00
+                    roleType: System
+                    createdOn: 2022-12-12 13:07:18+00:00
+                    roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Create a Custom Role
+      tags:
+      - RBAC management
+      x-codegen-request-body-name: RoleFormData
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/rbac/role/{rUUID}:
+    delete:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: deleteRole
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: rUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                DeleteRole200Example:
+                  summary: Default deleteRole 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Delete a Custom Role
+      tags:
+      - RBAC management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: getRole
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: rUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+              examples:
+                GetRole200Example:
+                  summary: Default getRole 200 response
+                  x-microcks-default: true
+                  value:
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    permissionDetails:
+                      permissionList:
+                      - action: CREATE
+                        resourceType: UNIVERSE
+                      - action: CREATE
+                        resourceType: UNIVERSE
+                    name: name
+                    description: description
+                    updatedOn: 2022-12-12 13:07:18+00:00
+                    roleType: System
+                    createdOn: 2022-12-12 13:07:18+00:00
+                    roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get a Role's Information
+      tags:
+      - RBAC management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: editRole
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: rUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleFormData'
+            examples:
+              EditRoleRequestExample:
+                summary: Default editRole request
+                x-microcks-default: true
+                value:
+                  name: name
+                  description: description
+                  permissionList:
+                  - action: CREATE
+                    resourceType: UNIVERSE
+                  - action: CREATE
+                    resourceType: UNIVERSE
+        description: edit role form data
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+              examples:
+                EditRole200Example:
+                  summary: Default editRole 200 response
+                  x-microcks-default: true
+                  value:
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    permissionDetails:
+                      permissionList:
+                      - action: CREATE
+                        resourceType: UNIVERSE
+                      - action: CREATE
+                        resourceType: UNIVERSE
+                    name: name
+                    description: description
+                    updatedOn: 2022-12-12 13:07:18+00:00
+                    roleType: System
+                    createdOn: 2022-12-12 13:07:18+00:00
+                    roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Edit a Custom Role
+      tags:
+      - RBAC management
+      x-codegen-request-body-name: RoleFormData
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/rbac/role_binding:
+    get:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: getRoleBindings
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - description: Optional user UUID to filter role binding map
+        in: query
+        name: userUUID
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  $ref: '#/components/schemas/RoleBinding'
+                type: object
+              examples:
+                GetRoleBindings200Example:
+                  summary: Default getRoleBindings 200 response
+                  x-microcks-default: true
+                  value: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get All the Role Bindings Available
+      tags:
+      - RBAC management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/rbac/role_binding/{userUUID}:
+    post:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: setRoleBinding
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: userUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleBindingFormData'
+            examples:
+              SetRoleBindingRequestExample:
+                summary: Default setRoleBinding request
+                x-microcks-default: true
+                value:
+                  roleResourceDefinitions:
+                  - resourceGroup:
+                      resourceDefinitionSet:
+                      - allowAll: true
+                        resourceUUIDSet:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        resourceType: UNIVERSE
+                      - allowAll: true
+                        resourceUUIDSet:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        resourceType: UNIVERSE
+                    roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  - resourceGroup:
+                      resourceDefinitionSet:
+                      - allowAll: true
+                        resourceUUIDSet:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        resourceType: UNIVERSE
+                      - allowAll: true
+                        resourceUUIDSet:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        resourceType: UNIVERSE
+                    roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        description: set role bindings form data
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RoleBinding'
+                type: array
+              examples:
+                SetRoleBinding200Example:
+                  summary: Default setRoleBinding 200 response
+                  x-microcks-default: true
+                  value:
+                  - principal:
+                      groupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      userUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      type: USER
+                      uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    resourceGroup:
+                      resourceDefinitionSet:
+                      - allowAll: true
+                        resourceUUIDSet:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        resourceType: UNIVERSE
+                      - allowAll: true
+                        resourceUUIDSet:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        resourceType: UNIVERSE
+                    role:
+                      customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      permissionDetails:
+                        permissionList:
+                        - action: CREATE
+                          resourceType: UNIVERSE
+                        - action: CREATE
+                          resourceType: UNIVERSE
+                      name: name
+                      description: description
+                      updatedOn: 2022-12-12 13:07:18+00:00
+                      roleType: System
+                      createdOn: 2022-12-12 13:07:18+00:00
+                      roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    createTime: 2022-12-12 13:07:18+00:00
+                    updateTime: 2022-12-12 13:07:18+00:00
+                    groupInfo:
+                      groupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      identifier: identifier
+                      customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      creationDate: 2022-12-12 13:07:18+00:00
+                      type: LDAP
+                      roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    type: System
+                    user:
+                      ldapSpecifiedRole: true
+                      customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      role: Admin
+                      authTokenIssueDate: 2021-06-17 15:00:05+00:00
+                      timezone: timezone
+                      oidcJwtAuthToken: oidcJwtAuthToken
+                      groupMemberships:
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      userType: local
+                      creationDate: 2022-12-12 13:07:18+00:00
+                      uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      email: username1@example.com
+                      primary: true
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Set the Role Bindings of a User
+      tags:
+      - RBAC management
+      x-codegen-request-body-name: RoleBindingFormData
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/reset_password:
+    put:
+      operationId: resetUserPassword
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPasswordChangeFormData'
+            examples:
+              ResetUserPasswordRequestExample:
+                summary: Default resetUserPassword request
+                x-microcks-default: true
+                value:
+                  newPassword: Test@1234
+                  currentPassword: Test@1234
+        description: User data containing the current, new password
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                ResetUserPassword200Example:
+                  summary: Default resetUserPassword 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Reset the User's Password
+      tags:
+      - User management
+      x-codegen-request-body-name: Users
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/tasks/{tUUID}:
+    get:
+      operationId: taskStatus
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: tUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                TaskStatus200Example:
+                  summary: Default taskStatus 200 response
+                  x-microcks-default: true
+                  value: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get a Task's Status
+      tags:
+      - Customer Tasks
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/tasks/{tUUID}/abort:
+    post:
+      description: Aborts a running task
+      operationId: abortTask
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: tUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                AbortTask200Example:
+                  summary: Default abortTask 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Abort a Task
+      tags:
+      - Customer Tasks
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/tasks/{tUUID}/failed:
+    get:
+      deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2.19.1.0.</b></p>Use /api/v1/customers/{cUUID}/tasks/{tUUID}/failed_subtasks instead.
+      operationId: failedSubtasks
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: tUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  properties: {}
+                  type: object
+                type: object
+              examples:
+                FailedSubtasks200Example:
+                  summary: Default failedSubtasks 200 response
+                  x-microcks-default: true
+                  value: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Fetch Failed Subtasks - Deprecated
+      tags:
+      - Customer Tasks
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/tasks/{tUUID}/failed_subtasks:
+    get:
+      operationId: listFailedSubtasks
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: tUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedSubtasks'
+              examples:
+                ListFailedSubtasks200Example:
+                  summary: Default listFailedSubtasks 200 response
+                  x-microcks-default: true
+                  value:
+                    failedSubTasks:
+                    - errorString: errorString
+                      creationTime: 2022-12-12 13:07:18+00:00
+                      subTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      subTaskType: subTaskType
+                      errorCode: UNKNOWN_ERROR
+                      subTaskGroupType: subTaskGroupType
+                      subTaskState: subTaskState
+                    - errorString: errorString
+                      creationTime: 2022-12-12 13:07:18+00:00
+                      subTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      subTaskType: subTaskType
+                      errorCode: UNKNOWN_ERROR
+                      subTaskGroupType: subTaskGroupType
+                      subTaskState: subTaskState
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get a List of Task's Failed Subtasks
+      tags:
+      - Customer Tasks
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/tasks/{tUUID}/retry:
+    post:
+      description: Retry a Universe or Provider task.
+      operationId: retryTask
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: tUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPTask'
+              examples:
+                RetryTask200Example:
+                  summary: Default retryTask 200 response
+                  x-microcks-default: true
+                  value:
+                    taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Retry a Universe or Provider Task
+      tags:
+      - Customer Tasks
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/tasks/{tUUID}/rollback:
+    post:
+      description: Rollback a Universe or Provider task.
+      operationId: rollbackTask
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: tUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPTask'
+              examples:
+                RollbackTask200Example:
+                  summary: Default rollbackTask 200 response
+                  x-microcks-default: true
+                  value:
+                    taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Rollback a Universe or Provider Task
+      tags:
+      - Customer Tasks
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/tasks_list:
+    get:
+      operationId: tasksList
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: uUUID
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CustomerTaskData'
+                type: array
+              examples:
+                TasksList200Example:
+                  summary: Default tasksList 200 response
+                  x-microcks-default: true
+                  value:
+                  - retryable: true
+                    abortable: true
+                    typeName: Software Upgrade
+                    percentComplete: 100
+                    title: 'Deleted Universe : test-universe'
+                    type: Delete
+                    targetUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    target: Universe
+                    completionTime: 2022-12-12 13:07:18+00:00
+                    createTime: 2022-12-12 13:07:18+00:00
+                    canRollback: true
+                    correlationId: correlationId
+                    userEmail: userEmail
+                    id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    status: Complete
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Task
+      tags:
+      - Customer Tasks
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/tasks_list/page:
+    post:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: listTasksV2
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskPagedApiQuery'
+            examples:
+              ListTasksV2RequestExample:
+                summary: Default listTasksV2 request
+                x-microcks-default: true
+                value:
+                  filter:
+                    targetUUIDList:
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    targetList:
+                    - Universe
+                    - Universe
+                    dateRangeEnd: '2022-12-12T13:07:18+00:00'
+                    typeList:
+                    - Create
+                    - Create
+                    typeNameList:
+                    - typeNameList
+                    - typeNameList
+                    dateRangeStart: '2022-12-12T13:07:18+00:00'
+                    status:
+                    - Created
+                    - Created
+                  offset: 6
+                  needTotalCount: true
+                  limit: 0
+                  sortBy: createTime
+                  direction: ASC
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskPagedApiResponse'
+              examples:
+                ListTasksV2200Example:
+                  summary: Default listTasksV2 200 response
+                  x-microcks-default: true
+                  value:
+                    entities:
+                    - retryable: true
+                      abortable: true
+                      typeName: Software Upgrade
+                      percentComplete: 100
+                      title: 'Deleted Universe : test-universe'
+                      type: Delete
+                      targetUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      target: Universe
+                      completionTime: 2022-12-12 13:07:18+00:00
+                      createTime: 2022-12-12 13:07:18+00:00
+                      canRollback: true
+                      correlationId: correlationId
+                      userEmail: userEmail
+                      id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      status: Complete
+                    - retryable: true
+                      abortable: true
+                      typeName: Software Upgrade
+                      percentComplete: 100
+                      title: 'Deleted Universe : test-universe'
+                      type: Delete
+                      targetUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      target: Universe
+                      completionTime: 2022-12-12 13:07:18+00:00
+                      createTime: 2022-12-12 13:07:18+00:00
+                      canRollback: true
+                      correlationId: correlationId
+                      userEmail: userEmail
+                      id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      status: Complete
+                    hasPrev: true
+                    hasNext: true
+                    totalCount: 0
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Tasks (paginated)
+      tags:
+      - Customer Tasks
+      x-codegen-request-body-name: PageTasksRequest
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/universes/{univUUID}/ldap_roles_sync:
+    post:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: syncLdapUniverse
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: univUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LdapUnivSyncFormData'
+            examples:
+              SyncLdapUniverseRequestExample:
+                summary: Default syncLdapUniverse request
+                x-microcks-default: true
+                value:
+                  ldapServer: ldapServer
+                  createGroups: true
+                  ldapSearchFilter: (objectclass=person)
+                  useLdapTls: true
+                  ldapUserfield: cn, sAMAccountName
+                  dbuserPassword: dbuserPassword
+                  excludeUsers:
+                  - excludeUsers
+                  - excludeUsers
+                  targetApi: ysql
+                  ldapPort: 0
+                  ldapBasedn: dc=example,dc=org
+                  ldapGroupMemberOfAttribute: ldapGroupMemberOfAttribute
+                  groupsToSync:
+                  - groupsToSync
+                  - groupsToSync
+                  ldapBindDn: cn=user,dc=example,dc=com
+                  useLdapSsl: true
+                  ldapTlsProtocol: TLSv1
+                  dbUser: dbUser
+                  ldapBindPassword: ldapBindPassword
+                  ldapGroupfield: cn
+        description: config to sync universe roles with ldap users
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPTask'
+              examples:
+                SyncLdapUniverse200Example:
+                  summary: Default syncLdapUniverse 200 response
+                  x-microcks-default: true
+                  value:
+                    taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Perform an LDAP Users Sync on the Universe
+      tags:
+      - LDAP Role management
+      x-codegen-request-body-name: syncLdapUniverse
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/users:
+    get:
+      operationId: listUsers
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - description: Optional email to filter user list
+        in: query
+        name: email
+        schema:
+          default: 'null'
+          type: string
+        example: 'null'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/UserWithFeatures'
+                type: array
+              examples:
+                ListUsers200Example:
+                  summary: Default listUsers 200 response
+                  x-microcks-default: true
+                  value:
+                  - ldapSpecifiedRole: true
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    role: Admin
+                    authTokenIssueDate: 2021-06-17 15:00:05+00:00
+                    timezone: timezone
+                    oidcJwtAuthToken: oidcJwtAuthToken
+                    groupMemberships:
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    userType: local
+                    creationDate: 2022-12-12 13:07:18+00:00
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    email: username1@example.com
+                    primary: true
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List All Users
+      tags:
+      - User management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createUser
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegistrationData'
+            examples:
+              CreateUserRequestExample:
+                summary: Default createUser request
+                x-microcks-default: true
+                value:
+                  features:
+                    key: '{}'
+                  password: Test@1234
+                  role: Admin
+                  timezone: America/Toronto
+                  confirmPassword: Test@1234
+                  roleResourceDefinitions:
+                  - resourceGroup:
+                      resourceDefinitionSet:
+                      - allowAll: true
+                        resourceUUIDSet:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        resourceType: UNIVERSE
+                      - allowAll: true
+                        resourceUUIDSet:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        resourceType: UNIVERSE
+                    roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  - resourceGroup:
+                      resourceDefinitionSet:
+                      - allowAll: true
+                        resourceUUIDSet:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        resourceType: UNIVERSE
+                      - allowAll: true
+                        resourceUUIDSet:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        resourceType: UNIVERSE
+                    roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  email: test@example.com
+        description: Details of the new user
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserWithFeatures'
+              examples:
+                CreateUser200Example:
+                  summary: Default createUser 200 response
+                  x-microcks-default: true
+                  value:
+                    ldapSpecifiedRole: true
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    role: Admin
+                    authTokenIssueDate: 2021-06-17 15:00:05+00:00
+                    timezone: timezone
+                    oidcJwtAuthToken: oidcJwtAuthToken
+                    groupMemberships:
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    userType: local
+                    creationDate: 2022-12-12 13:07:18+00:00
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    email: username1@example.com
+                    primary: true
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Create a User
+      tags:
+      - User management
+      x-codegen-request-body-name: User
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/users/{uUUID}:
+    delete:
+      description: Deletes the specified user. Note that you can't delete a customer's primary user.
+      operationId: deleteUser
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: uUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                DeleteUser200Example:
+                  summary: Default deleteUser 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Delete a User
+      tags:
+      - User management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      operationId: getUserDetails
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: uUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserWithFeatures'
+              examples:
+                GetUserDetails200Example:
+                  summary: Default getUserDetails 200 response
+                  x-microcks-default: true
+                  value:
+                    ldapSpecifiedRole: true
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    role: Admin
+                    authTokenIssueDate: 2021-06-17 15:00:05+00:00
+                    timezone: timezone
+                    oidcJwtAuthToken: oidcJwtAuthToken
+                    groupMemberships:
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    userType: local
+                    creationDate: 2022-12-12 13:07:18+00:00
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    email: username1@example.com
+                    primary: true
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get a User's Details
+      tags:
+      - User management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      deprecated: true
+      description: 'Deprecated. Use this method instead: setRoleBinding.'
+      operationId: updateUserRole
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: uUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: role
+        schema:
+          type: string
+        example: example-role
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                UpdateUserRole200Example:
+                  summary: Default updateUserRole 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Change a User's Role
+      tags:
+      - User management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/users/{uUUID}/change_password:
+    put:
+      deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2024.1.0.0.</b></p>
+      operationId: changePassword
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: uUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegistrationData'
+            examples:
+              ChangePasswordRequestExample:
+                summary: Default changePassword request
+                x-microcks-default: true
+                value:
+                  features:
+                    key: '{}'
+                  password: Test@1234
+                  role: Admin
+                  timezone: America/Toronto
+                  confirmPassword: Test@1234
+                  roleResourceDefinitions:
+                  - resourceGroup:
+                      resourceDefinitionSet:
+                      - allowAll: true
+                        resourceUUIDSet:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        resourceType: UNIVERSE
+                      - allowAll: true
+                        resourceUUIDSet:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        resourceType: UNIVERSE
+                    roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  - resourceGroup:
+                      resourceDefinitionSet:
+                      - allowAll: true
+                        resourceUUIDSet:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        resourceType: UNIVERSE
+                      - allowAll: true
+                        resourceUUIDSet:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        resourceType: UNIVERSE
+                    roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  email: test@example.com
+        description: User data containing the new password
+        required: true
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Change Password - Deprecated
+      tags:
+      - User management
+      x-codegen-request-body-name: Users
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/users/{uUUID}/oidc_auth_token:
+    get:
+      operationId: retrieveOIDCAuthToken
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: uUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserOIDCAuthToken'
+              examples:
+                RetrieveOIDCAuthToken200Example:
+                  summary: Default retrieveOIDCAuthToken 200 response
+                  x-microcks-default: true
+                  value:
+                    oidcAuthToken: oidcAuthToken
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Retrieve OIDC Auth Token
+      tags:
+      - User management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/users/{uUUID}/update_profile:
+    put:
+      operationId: UpdateUserProfile
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: uUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserProfileData'
+            examples:
+              UpdateUserProfileRequestExample:
+                summary: Default UpdateUserProfile request
+                x-microcks-default: true
+                value:
+                  password: Test@1234
+                  role: Admin
+                  timezone: America/Toronto
+                  confirmPassword: Test@1234
+        description: User data in profile to be updated
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Users'
+              examples:
+                UpdateUserProfile200Example:
+                  summary: Default UpdateUserProfile 200 response
+                  x-microcks-default: true
+                  value:
+                    ldapSpecifiedRole: true
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    role: Admin
+                    authTokenIssueDate: 2021-06-17 15:00:05+00:00
+                    timezone: timezone
+                    oidcJwtAuthToken: oidcJwtAuthToken
+                    groupMemberships:
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    userType: local
+                    creationDate: 2022-12-12 13:07:18+00:00
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    email: username1@example.com
+                    primary: true
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Update a User's Profile
+      tags:
+      - User management
+      x-codegen-request-body-name: Users
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/logs:
+    get:
+      operationId: getFilteredLogs
+      parameters:
+      - in: query
+        name: maxLines
+        schema:
+          default: 10000
+          format: int32
+          type: integer
+        example: 10000
+      - in: query
+        name: universeName
+        schema:
+          default: 'null'
+          type: string
+        example: 'null'
+      - in: query
+        name: queryRegex
+        schema:
+          default: 'null'
+          type: string
+        example: 'null'
+      - in: query
+        name: startDate
+        schema:
+          default: 'null'
+          type: string
+        example: 'null'
+      - in: query
+        name: endDate
+        schema:
+          default: 'null'
+          type: string
+        example: 'null'
+      responses:
+        '200':
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                GetFilteredLogs200Example:
+                  summary: Default getFilteredLogs 200 response
+                  x-microcks-default: true
+                  value: string
+          description: successful operation
+      summary: YugabyteDB Anywhere GetFilteredLogs
+      tags:
+      - Session management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/logs/{maxLines}:
+    get:
+      operationId: getLogs
+      parameters:
+      - in: path
+        name: maxLines
+        required: true
+        schema:
+          format: int32
+          type: integer
+        example: 10
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogData'
+              examples:
+                GetLogs200Example:
+                  summary: Default getLogs 200 response
+                  x-microcks-default: true
+                  value:
+                    lines:
+                    - lines
+                    - lines
+          description: successful operation
+      summary: YugabyteDB Anywhere GetLogs
+      tags:
+      - Session management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/register:
+    post:
+      description: Creates new customer and user
+      operationId: registerCustomer
+      parameters:
+      - in: query
+        name: generateApiToken
+        schema:
+          default: false
+          type: boolean
+        example: false
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRegisterFormData'
+            examples:
+              RegisterCustomerRequestExample:
+                summary: Default registerCustomer request
+                x-microcks-default: true
+                value:
+                  password: password
+                  code: code
+                  name: name
+                  email: email
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionInfo'
+              examples:
+                RegisterCustomer200Example:
+                  summary: Default registerCustomer 200 response
+                  x-microcks-default: true
+                  value:
+                    apiToken: apiToken
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    apiTokenVersion: 0
+                    authToken: authToken
+                    userUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      summary: YugabyteDB Anywhere Register a Customer
+      tags:
+      - Session management
+      x-codegen-request-body-name: CustomerRegisterFormData
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/session_info:
+    get:
+      description: Available since YBA version 2.20.0.
+      operationId: getSessionInfo
+      parameters:
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionInfo'
+              examples:
+                GetSessionInfo200Example:
+                  summary: Default getSessionInfo 200 response
+                  x-microcks-default: true
+                  value:
+                    apiToken: apiToken
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    apiTokenVersion: 0
+                    authToken: authToken
+                    userUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get Current User and Customer Uuid. This Will Not Generate or Return the API Token, Use /api_token API for That.
+      tags:
+      - Session management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    apiKeyAuth:
+      description: API token passed as header
+      in: header
+      name: X-AUTH-YW-API-TOKEN
+      type: apiKey
+  schemas:
+    SmtpData:
+      description: SMTP configuration information
+      example:
+        smtpServer: smtp.example.com
+        smtpUsername: testsmtp
+        smtpPort: 465
+        smtpPassword: XurenRknsc
+        emailFrom: test@example.com
+        useTLS: false
+        useSSL: true
+      properties:
+        emailFrom:
+          description: SMTP email 'from' address
+          example: test@example.com
+          type: string
+        smtpPassword:
+          description: SMTP password
+          example: XurenRknsc
+          type: string
+        smtpPort:
+          description: SMTP port number
+          example: 465
+          format: int32
+          type: integer
+        smtpServer:
+          description: SMTP server
+          example: smtp.example.com
+          type: string
+        smtpUsername:
+          description: SMTP email username
+          example: testsmtp
+          type: string
+        useSSL:
+          description: Connect to SMTP server using SSL
+          example: true
+          type: boolean
+        useTLS:
+          description: Connect to SMTP server using TLS
+          example: false
+          type: boolean
+      type: object
+    LogData:
+      example:
+        lines:
+        - lines
+        - lines
+      properties:
+        lines:
+          items:
+            type: string
+          type: array
+          example:
+          - example-lines
+      required:
+      - lines
+      type: object
+    RoleBindingFormData:
+      description: Role Binding form metadata
+      example:
+        roleResourceDefinitions:
+        - resourceGroup:
+            resourceDefinitionSet:
+            - allowAll: true
+              resourceUUIDSet:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              resourceType: UNIVERSE
+            - allowAll: true
+              resourceUUIDSet:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              resourceType: UNIVERSE
+          roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - resourceGroup:
+            resourceDefinitionSet:
+            - allowAll: true
+              resourceUUIDSet:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              resourceType: UNIVERSE
+            - allowAll: true
+              resourceUUIDSet:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              resourceType: UNIVERSE
+          roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        roleResourceDefinitions:
+          description: List of roles and resource groups defined.
+          items:
+            $ref: '#/components/schemas/RoleResourceDefinition'
+          type: array
+          example:
+          - resourceGroup:
+              resourceDefinitionSet:
+              - allowAll: true
+                resourceUUIDSet:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                resourceType: UNIVERSE
+              - allowAll: true
+                resourceUUIDSet:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                resourceType: UNIVERSE
+            roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      required:
+      - roleResourceDefinitions
+      type: object
+    AlertingData:
+      description: Alerting configuration
+      example:
+        alertingEmail: test@example.com
+        statusUpdateIntervalMs: 1
+        checkIntervalMs: 6
+        reportOnlyErrors: true
+        sendAlertsToYb: true
+        activeAlertNotificationIntervalMs: 0
+      properties:
+        activeAlertNotificationIntervalMs:
+          description: Period, which is used to send active alert notifications
+          format: int64
+          type: integer
+          example: 1000
+        alertingEmail:
+          description: Alert email address
+          example: test@example.com
+          type: string
+        checkIntervalMs:
+          description: Alert interval, in milliseconds
+          format: int64
+          type: integer
+          example: 1000
+        reportOnlyErrors:
+          description: Trigger an alert only for errors
+          type: boolean
+          example: true
+        sendAlertsToYb:
+          description: Send alerts to YB as well as to customer
+          type: boolean
+          example: true
+        statusUpdateIntervalMs:
+          description: Status update of alert interval, in milliseconds
+          format: int64
+          type: integer
+          example: 1000
+      type: object
+    UserOIDCAuthToken:
+      example:
+        oidcAuthToken: oidcAuthToken
+      properties:
+        oidcAuthToken:
+          description: User OIDC Auth token
+          type: string
+          example: REDACTED
+      type: object
+    Principal:
+      example:
+        groupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        userUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        type: USER
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        groupUUID:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        type:
+          enum:
+          - USER
+          - LDAP_GROUP
+          - OIDC_GROUP
+          type: string
+          example: USER
+        userUUID:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        uuid:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      required:
+      - groupUUID
+      - type
+      - userUUID
+      - uuid
+      type: object
+    UserRegistrationData:
+      description: User registration data. The API and UI use this to validate form data.
+      example:
+        features:
+          key: '{}'
+        password: Test@1234
+        role: Admin
+        timezone: America/Toronto
+        confirmPassword: Test@1234
+        roleResourceDefinitions:
+        - resourceGroup:
+            resourceDefinitionSet:
+            - allowAll: true
+              resourceUUIDSet:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              resourceType: UNIVERSE
+            - allowAll: true
+              resourceUUIDSet:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              resourceType: UNIVERSE
+          roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - resourceGroup:
+            resourceDefinitionSet:
+            - allowAll: true
+              resourceUUIDSet:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              resourceType: UNIVERSE
+            - allowAll: true
+              resourceUUIDSet:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              resourceType: UNIVERSE
+          roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        email: test@example.com
+      properties:
+        confirmPassword:
+          description: Password confirmation
+          example: Test@1234
+          type: string
+        email:
+          description: Email address
+          example: test@example.com
+          type: string
+        features:
+          additionalProperties:
+            properties: {}
+            type: object
+          description: User features
+          type: object
+          example: {}
+        password:
+          description: Password
+          example: Test@1234
+          type: string
+        role:
+          description: <b style="color:#ff0000">Deprecated since YBA version 2.19.3.0.</b> Use field roleResourceDefinitions instead.
+          enum:
+          - ConnectOnly
+          - ReadOnly
+          - BackupAdmin
+          - Admin
+          - SuperAdmin
+          example: Admin
+          type: string
+        roleResourceDefinitions:
+          description: List of roles and resource groups defined for user.
+          items:
+            $ref: '#/components/schemas/RoleResourceDefinition'
+          type: array
+          example:
+          - resourceGroup:
+              resourceDefinitionSet:
+              - allowAll: true
+                resourceUUIDSet:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                resourceType: UNIVERSE
+              - allowAll: true
+                resourceUUIDSet:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                resourceType: UNIVERSE
+            roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        timezone:
+          description: User timezone
+          example: America/Toronto
+          type: string
+      required:
+      - email
+      type: object
+    CustomerAlertData:
+      description: Format of an alert, used by the API and UI to validate data against input constraints
+      example:
+        features:
+          key: '{}'
+        password: XurenRknsc
+        code: code
+        alertingData:
+          alertingEmail: test@example.com
+          statusUpdateIntervalMs: 1
+          checkIntervalMs: 6
+          reportOnlyErrors: true
+          sendAlertsToYb: true
+          activeAlertNotificationIntervalMs: 0
+        callhomeLevel: callhomeLevel
+        name: Test alert
+        confirmPassword: XurenRknsc
+        smtpData:
+          smtpServer: smtp.example.com
+          smtpUsername: testsmtp
+          smtpPort: 465
+          smtpPassword: XurenRknsc
+          emailFrom: test@example.com
+          useTLS: false
+          useSSL: true
+        email: test@example.com
+      properties:
+        alertingData:
+          $ref: '#/components/schemas/AlertingData'
+        callhomeLevel:
+          type: string
+          example: example-callhomeLevel
+        code:
+          description: Alert code
+          type: string
+          example: OK
+        confirmPassword:
+          description: Email password confirmation
+          example: XurenRknsc
+          type: string
+        email:
+          description: Alert email address
+          example: test@example.com
+          type: string
+        features:
+          additionalProperties:
+            properties: {}
+            type: object
+          description: Features
+          type: object
+          example: {}
+        name:
+          description: Alert name
+          example: Test alert
+          type: string
+        password:
+          description: Email password
+          example: XurenRknsc
+          type: string
+        smtpData:
+          $ref: '#/components/schemas/SmtpData'
+      required:
+      - alertingData
+      - callhomeLevel
+      - smtpData
+      type: object
+    TaskApiFilter:
+      example:
+        targetUUIDList:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        targetList:
+        - Universe
+        - Universe
+        dateRangeEnd: 2022-12-12 13:07:18+00:00
+        typeList:
+        - Create
+        - Create
+        typeNameList:
+        - typeNameList
+        - typeNameList
+        dateRangeStart: 2022-12-12 13:07:18+00:00
+        status:
+        - Created
+        - Created
+      properties:
+        dateRangeEnd:
+          description: The end date to filter paged query.
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        dateRangeStart:
+          description: The start date to filter paged query.
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        status:
+          items:
+            enum:
+            - Created
+            - Initializing
+            - Running
+            - Success
+            - Failure
+            - Unknown
+            - Abort
+            - Aborted
+            type: string
+          type: array
+          uniqueItems: true
+          example:
+          - Created
+        targetList:
+          items:
+            enum:
+            - Universe
+            - Cluster
+            - Table
+            - Provider
+            - Node
+            - Backup
+            - Schedule
+            - CustomerConfiguration
+            - KMSConfiguration
+            - XClusterConfig
+            - DrConfig
+            - UniverseKey
+            - MasterKey
+            - NodeAgent
+            - Yba
+            - User
+            type: string
+          type: array
+          uniqueItems: true
+          example:
+          - Universe
+        targetUUIDList:
+          items:
+            format: uuid
+            type: string
+          type: array
+          uniqueItems: true
+          example:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        typeList:
+          items:
+            enum:
+            - Create
+            - Pause
+            - Resume
+            - Update
+            - Delete
+            - Stop
+            - Start
+            - Restart
+            - Remove
+            - Add
+            - Release
+            - Reboot
+            - HardReboot
+            - Replace
+            - Edit
+            - Sync
+            - LdapSync
+            - RestartUniverse
+            - SoftwareUpgrade
+            - SoftwareUpgradeYB
+            - FinalizeUpgrade
+            - RollbackUpgrade
+            - GFlagsUpgrade
+            - KubernetesOverridesUpgrade
+            - EditKubernetesUniverse
+            - CertsRotate
+            - TlsToggle
+            - VMImageUpgrade
+            - SystemdUpgrade
+            - RebootUniverse
+            - UpgradeSoftware
+            - UpgradeVMImage
+            - ResizeNode
+            - UpdateCert
+            - UpdateDiskSize
+            - UpgradeGflags
+            - UpdateLoadBalancerConfig
+            - BulkImportData
+            - Backup
+            - Restore
+            - CreatePitrConfig
+            - UpdatePitrConfig
+            - DeletePitrConfig
+            - RestoreSnapshotSchedule
+            - SetEncryptionKey
+            - EnableEncryptionAtRest
+            - SetActiveUniverseKeys
+            - RotateEncryptionKey
+            - DisableEncryptionAtRest
+            - StartMaster
+            - CreateAlertDefinitions
+            - ManageAlertDefinitions
+            - ExternalScript
+            - CreateXClusterConfig
+            - EditXClusterConfig
+            - DeleteXClusterConfig
+            - SyncXClusterConfig
+            - Failover
+            - Switchover
+            - SwitchoverRollback
+            - PrecheckNode
+            - Abort
+            - CreateSupportBundle
+            - CreateTableSpaces
+            - ThirdpartySoftwareUpgrade
+            - ModifyAuditLoggingConfig
+            - ModifyQueryLoggingConfig
+            - ModifyMetricsExportConfig
+            - RotateAccessKey
+            - CreateAndRotateAccessKey
+            - RunApiTriggeredHooks
+            - InstallYbcSoftware
+            - InstallYbcSoftwareOnK8s
+            - UpgradeUniverseYbc
+            - DisableYbc
+            - UpgradeYbcGFlags
+            - UpgradeKubernetesYbcGFlags
+            - UpdateYbcThrottleFlags
+            - UpdateK8sYbcThrottleFlags
+            - ConfigureDBApis
+            - ConfigureDBApisKubernetes
+            - CreateImageBundle
+            - ReprovisionNode
+            - Install
+            - ProvisionUniverseNodes
+            - MasterFailover
+            - UpdateProxyConfig
+            - SyncMasterAddresses
+            - CreateYbaBackup
+            - RestoreYbaBackup
+            - RestoreContinuousBackup
+            - EnableNodeAgent
+            - Decommission
+            - CloneNamespace
+            - UpdateOOMServiceState
+            - SendUserNotification
+            - ImportUniverse
+            - MigrateUniverse
+            - KubernetesToggleImmutableYbc
+            - OperatorImport
+            type: string
+          type: array
+          uniqueItems: true
+          example:
+          - Create
+        typeNameList:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+          example:
+          - example-typeNameList
+      required:
+      - status
+      - targetList
+      - targetUUIDList
+      - typeList
+      - typeNameList
+      type: object
+    OidcGroupToYbaRolesData:
+      example:
+        oidcGroupToYbaRolesPairs:
+        - groupName: groupName
+          roles:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - groupName: groupName
+          roles:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        oidcGroupToYbaRolesPairs:
+          description: ' list of pairs of groupName and roles'
+          items:
+            $ref: '#/components/schemas/OidcGroupToYbaRolesPair'
+          type: array
+          example:
+          - groupName: groupName
+            roles:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      type: object
+    UserProfileData:
+      description: User profile data. The API and UI use this to validate form data.
+      example:
+        password: Test@1234
+        role: Admin
+        timezone: America/Toronto
+        confirmPassword: Test@1234
+      properties:
+        confirmPassword:
+          description: Password confirmation
+          example: Test@1234
+          type: string
+        password:
+          description: Password
+          example: Test@1234
+          type: string
+        role:
+          description: User role
+          enum:
+          - ConnectOnly
+          - ReadOnly
+          - BackupAdmin
+          - Admin
+          - SuperAdmin
+          example: Admin
+          type: string
+        timezone:
+          description: User timezone
+          example: America/Toronto
+          type: string
+      required:
+      - role
+      type: object
+    UserWithFeatures:
+      description: A user with set of features, associated with a customer
+      example:
+        ldapSpecifiedRole: true
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        role: Admin
+        authTokenIssueDate: 2021-06-17 15:00:05+00:00
+        timezone: timezone
+        oidcJwtAuthToken: oidcJwtAuthToken
+        groupMemberships:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        userType: local
+        creationDate: 2022-12-12 13:07:18+00:00
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        email: username1@example.com
+        primary: true
+      properties:
+        authTokenIssueDate:
+          description: UI session token creation date
+          example: 2021-06-17 15:00:05+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        creationDate:
+          description: User creation date
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        customerUUID:
+          description: Customer UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        email:
+          description: User email address
+          example: username1@example.com
+          type: string
+        groupMemberships:
+          items:
+            format: uuid
+            type: string
+          type: array
+          uniqueItems: true
+          example:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        ldapSpecifiedRole:
+          description: LDAP Specified Role
+          type: boolean
+          example: true
+        oidcJwtAuthToken:
+          readOnly: true
+          type: string
+          example: REDACTED
+        primary:
+          type: boolean
+          example: true
+        role:
+          description: <b style="color:#ff0000">Deprecated since YBA version 2.19.3.0.</b> Use  getRoleBindings instead.
+          enum:
+          - ConnectOnly
+          - ReadOnly
+          - BackupAdmin
+          - Admin
+          - SuperAdmin
+          example: Admin
+          type: string
+        timezone:
+          description: User timezone
+          type: string
+          example: us-east-1a
+        userType:
+          description: User Type
+          enum:
+          - local
+          - ldap
+          - oidc
+          type: string
+          example: local
+        uuid:
+          description: User UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      required:
+      - email
+      - groupMemberships
+      - primary
+      type: object
+    MetricSettings:
+      description: Settings, selected for particular metric
+      example:
+        timeAggregation: DEFAULT
+        metric: metric
+        aggregatedValueFunction: DEFAULT
+        splitCount: 6
+        nodeAggregation: DEFAULT
+        splitMode: NONE
+        returnAggregatedValue: true
+        splitType: NONE
+      properties:
+        aggregatedValueFunction:
+          description: YbaApi Internal. Defines the method of metrics aggregation used to obtain additional aggregate time series. The provided aggregator wraps over the final query. Only applicable if `returnAggregatedValue = true`.
+          enum:
+          - DEFAULT
+          - MIN
+          - MAX
+          - AVG
+          - SUM
+          type: string
+          example: DEFAULT
+        metric:
+          description: YbaApi Internal. Metric name
+          type: string
+          example: example-metric
+        nodeAggregation:
+          description: YbaApi Internal. Top level aggregation for each metric line.
+          enum:
+          - DEFAULT
+          - MIN
+          - MAX
+          - AVG
+          - SUM
+          type: string
+          example: DEFAULT
+        returnAggregatedValue:
+          description: YbaApi Internal. Defines if we return additional aggregate time series (ex. avg, min) when we are selecting a subset of time series to return (ex. top K, bottom k).
+          type: boolean
+          example: true
+        splitCount:
+          description: YbaApi Internal. Defines how many node lines we return in case we split by nodes/tables/etc.
+          format: int32
+          type: integer
+          example: 10
+        splitMode:
+          description: YbaApi Internal. Controls if we split nodes, tables, etc. into own lines OR aggregate  and how we select lines in case of split query
+          enum:
+          - NONE
+          - TOP
+          - BOTTOM
+          type: string
+          example: NONE
+        splitType:
+          description: YbaApi Internal. Defines set of labels, which we use for a split query
+          enum:
+          - NONE
+          - NODE
+          - TABLE
+          - NAMESPACE
+          type: string
+          example: NONE
+        timeAggregation:
+          description: YbaApi Internal. Way of metrics aggregation over time
+          enum:
+          - DEFAULT
+          - MIN
+          - MAX
+          - AVG
+          type: string
+          example: DEFAULT
+      required:
+      - metric
+      type: object
+    LdapDnYbaRoleDataPair:
+      example:
+        ybaRole: ConnectOnly
+        distinguishedName: distinguishedName
+      properties:
+        distinguishedName:
+          type: string
+          example: example-distinguishedName
+        ybaRole:
+          enum:
+          - ConnectOnly
+          - ReadOnly
+          - BackupAdmin
+          - Admin
+          - SuperAdmin
+          type: string
+          example: ConnectOnly
+      required:
+      - distinguishedName
+      - ybaRole
+      type: object
+    RoleBinding:
+      example:
+        principal:
+          groupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          userUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          type: USER
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        resourceGroup:
+          resourceDefinitionSet:
+          - allowAll: true
+            resourceUUIDSet:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            resourceType: UNIVERSE
+          - allowAll: true
+            resourceUUIDSet:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            resourceType: UNIVERSE
+        role:
+          customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          permissionDetails:
+            permissionList:
+            - action: CREATE
+              resourceType: UNIVERSE
+            - action: CREATE
+              resourceType: UNIVERSE
+          name: name
+          description: description
+          updatedOn: 2022-12-12 13:07:18+00:00
+          roleType: System
+          createdOn: 2022-12-12 13:07:18+00:00
+          roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        createTime: 2022-12-12 13:07:18+00:00
+        updateTime: 2022-12-12 13:07:18+00:00
+        groupInfo:
+          groupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          identifier: identifier
+          customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          creationDate: 2022-12-12 13:07:18+00:00
+          type: LDAP
+          roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        type: System
+        user:
+          ldapSpecifiedRole: true
+          customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          role: Admin
+          authTokenIssueDate: 2021-06-17 15:00:05+00:00
+          timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
+          groupMemberships:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          userType: local
+          creationDate: 2022-12-12 13:07:18+00:00
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          email: username1@example.com
+          primary: true
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        createTime:
+          description: RoleBinding create time
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        groupInfo:
+          $ref: '#/components/schemas/GroupMappingInfo'
+        principal:
+          $ref: '#/components/schemas/Principal'
+        resourceGroup:
+          $ref: '#/components/schemas/ResourceGroup'
+        role:
+          $ref: '#/components/schemas/Role'
+        type:
+          description: Role binding type
+          enum:
+          - System
+          - Custom
+          type: string
+          example: System
+        updateTime:
+          description: RoleBinding last updated time
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        user:
+          $ref: '#/components/schemas/Users'
+        uuid:
+          description: UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      required:
+      - principal
+      type: object
+    MetricQueryParams:
+      description: Metrics request data
+      example:
+        streamId: streamId
+        metricsWithSettings:
+        - timeAggregation: DEFAULT
+          metric: metric
+          aggregatedValueFunction: DEFAULT
+          splitCount: 6
+          nodeAggregation: DEFAULT
+          splitMode: NONE
+          returnAggregatedValue: true
+          splitType: NONE
+        - timeAggregation: DEFAULT
+          metric: metric
+          aggregatedValueFunction: DEFAULT
+          splitCount: 6
+          nodeAggregation: DEFAULT
+          splitMode: NONE
+          returnAggregatedValue: true
+          splitType: NONE
+        start: 1
+        availabilityZones:
+        - availabilityZones
+        - availabilityZones
+        nodePrefix: nodePrefix
+        xclusterConfigUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        nodeNames:
+        - nodeNames
+        - nodeNames
+        tableName: tableName
+        regionCodes:
+        - regionCodes
+        - regionCodes
+        serverType: MASTER
+        clusterUuids:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        tableId: tableId
+        end: 0
+        recharts: true
+        metrics:
+        - metrics
+        - metrics
+      properties:
+        availabilityZones:
+          description: YbaApi Internal. Availability zone code
+          items:
+            type: string
+          type: array
+          example:
+          - us-east-1a
+        clusterUuids:
+          description: YbaApi Internal. Cluster UUIDs
+          items:
+            format: uuid
+            type: string
+          type: array
+          example:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        end:
+          description: YbaApi Internal. End time
+          format: int64
+          type: integer
+          example: 1000
+        metrics:
+          description: YbaApi Internal. Metrics
+          items:
+            type: string
+          type: array
+          example:
+          - example-metrics
+        metricsWithSettings:
+          description: YbaApi Internal. List of metrics with custom settings
+          items:
+            $ref: '#/components/schemas/MetricSettings'
+          type: array
+          example:
+          - timeAggregation: DEFAULT
+            metric: metric
+            aggregatedValueFunction: DEFAULT
+            splitCount: 6
+            nodeAggregation: DEFAULT
+            splitMode: NONE
+            returnAggregatedValue: true
+            splitType: NONE
+        nodeNames:
+          description: YbaApi Internal. Node names
+          items:
+            type: string
+          type: array
+          example:
+          - example-nodeNames
+        nodePrefix:
+          description: YbaApi Internal. Node prefix
+          type: string
+          example: node-1
+        recharts:
+          type: boolean
+          example: true
+        regionCodes:
+          description: YbaApi Internal. Region code
+          items:
+            type: string
+          type: array
+          example:
+          - us-east-1
+        serverType:
+          description: YbaApi Internal. Server type
+          enum:
+          - MASTER
+          - TSERVER
+          - CONTROLLER
+          - YQLSERVER
+          - YSQLSERVER
+          - REDISSERVER
+          - EITHER
+          type: string
+          example: MASTER
+        start:
+          description: YbaApi Internal. Start time
+          format: int64
+          type: integer
+          example: 1000
+        streamId:
+          description: YbaApi Internal. Stream id
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        tableId:
+          description: YbaApi Internal. Table id
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        tableName:
+          description: YbaApi Internal. Table name
+          type: string
+          example: example-tableName
+        xclusterConfigUuid:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      required:
+      - recharts
+      - start
+      - xclusterConfigUuid
+      type: object
+    Permission:
+      example:
+        action: CREATE
+        resourceType: UNIVERSE
+      properties:
+        action:
+          enum:
+          - CREATE
+          - READ
+          - UPDATE
+          - DELETE
+          - PAUSE_RESUME
+          - BACKUP_RESTORE
+          - UPDATE_ROLE_BINDINGS
+          - UPDATE_PROFILE
+          - SUPER_ADMIN_ACTIONS
+          - XCLUSTER
+          - DEBUG
+          - TROUBLESHOOT
+          type: string
+          example: CREATE
+        resourceType:
+          enum:
+          - UNIVERSE
+          - ROLE
+          - USER
+          - OTHER
+          type: string
+          example: UNIVERSE
+      type: object
+    Role:
+      example:
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        permissionDetails:
+          permissionList:
+          - action: CREATE
+            resourceType: UNIVERSE
+          - action: CREATE
+            resourceType: UNIVERSE
+        name: name
+        description: description
+        updatedOn: 2022-12-12 13:07:18+00:00
+        roleType: System
+        createdOn: 2022-12-12 13:07:18+00:00
+        roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        createdOn:
+          description: Role create time
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        customerUUID:
+          description: Customer UUID
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        description:
+          description: Role description
+          type: string
+          example: Example description
+        name:
+          description: Role name
+          type: string
+          example: example-name
+        permissionDetails:
+          $ref: '#/components/schemas/PermissionDetails'
+        roleType:
+          description: Type of the role
+          enum:
+          - System
+          - Custom
+          type: string
+          example: System
+        roleUUID:
+          description: Role UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        updatedOn:
+          description: Role last updated time
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+      type: object
+    YBPError:
+      description: Generic error response from the YugabyteDB Anywhere API
+      example:
+        success: false
+        requestUri: /customers/8918921-af3782-633de/universe/8173ab-fd2453/create
+        error: There was a problem creating the universe
+        httpMethod: POST
+        errorJson: '{ "foo" : "bar", "baz" : [1, 2, 3] }'
+        requestJson: '{ "foo" : "bar", "baz" : [1, 2, 3] }'
+      properties:
+        error:
+          description: User-visible unstructured error message
+          example: There was a problem creating the universe
+          type: string
+        errorJson:
+          description: User visible structured error message as json object
+          example: '{ "foo" : "bar", "baz" : [1, 2, 3] }'
+          properties: {}
+          type: object
+        httpMethod:
+          description: Method for HTTP call that resulted in this error
+          example: POST
+          type: string
+        requestJson:
+          description: User request JSON object
+          example: '{ "foo" : "bar", "baz" : [1, 2, 3] }'
+          properties: {}
+          type: object
+        requestUri:
+          description: URI for HTTP request that resulted in this error
+          example: /customers/8918921-af3782-633de/universe/8173ab-fd2453/create
+          type: string
+        success:
+          description: Always set to false to indicate failure
+          example: false
+          type: boolean
+      type: object
+    SubtaskData:
+      description: Detailed subtask data
+      example:
+        errorString: errorString
+        creationTime: 2022-12-12 13:07:18+00:00
+        subTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        subTaskType: subTaskType
+        errorCode: UNKNOWN_ERROR
+        subTaskGroupType: subTaskGroupType
+        subTaskState: subTaskState
+      properties:
+        creationTime:
+          description: Creation time (unix timestamp) of the task
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        errorCode:
+          description: 'WARNING: This is a preview API that could change. Subtask error code'
+          enum:
+          - UNKNOWN_ERROR
+          - INTERNAL_ERROR
+          - PLATFORM_SHUTDOWN
+          - PLATFORM_RESTARTED
+          - INSTALLATION_ERROR
+          - SERVICE_START_ERROR
+          - CONNECTION_ERROR
+          - TIMED_OUT
+          type: string
+          example: UNKNOWN_ERROR
+        errorString:
+          description: Failed SubTask Error message
+          type: string
+          example: example-errorString
+        subTaskGroupType:
+          description: Failed SubTask Group Type
+          type: string
+          example: DEFAULT
+        subTaskState:
+          description: Failed SubTask State
+          type: string
+          example: ACTIVE
+        subTaskType:
+          description: Failed SubTask Type
+          type: string
+          example: DEFAULT
+        subTaskUUID:
+          description: Failed SubTask UUID
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      type: object
+    CustomerRegisterFormData:
+      example:
+        password: password
+        code: code
+        name: name
+        email: email
+      properties:
+        code:
+          type: string
+          example: OK
+        email:
+          type: string
+          example: admin@example.com
+        name:
+          type: string
+          example: example-name
+        password:
+          type: string
+          example: REDACTED
+      required:
+      - code
+      - email
+      - name
+      - password
+      type: object
+    UserPasswordChangeFormData:
+      description: User registration data. The API and UI use this to validate form data.
+      example:
+        newPassword: Test@1234
+        currentPassword: Test@1234
+      properties:
+        currentPassword:
+          description: Current Password
+          example: Test@1234
+          type: string
+        newPassword:
+          description: New Password
+          example: Test@1234
+          type: string
+      type: object
+    CustomerDetailsData:
+      description: Customer details, including their universe UUIDs. Only the customer code and name are modifiable.
+      example:
+        code: admin
+        alertingData:
+          alertingEmail: test@example.com
+          statusUpdateIntervalMs: 1
+          checkIntervalMs: 6
+          reportOnlyErrors: true
+          sendAlertsToYb: true
+          activeAlertNotificationIntervalMs: 0
+        callhomeLevel: MEDIUM
+        customerId: 5
+        name: Sridhar
+        smtpData:
+          smtpServer: smtp.example.com
+          smtpUsername: testsmtp
+          smtpPort: 465
+          smtpPassword: XurenRknsc
+          emailFrom: test@example.com
+          useTLS: false
+          useSSL: true
+        creationDate: 2022-12-12 13:07:18+00:00
+        universeUUIDs: '["c3595ca7-68a3-47f0-b1b2-1725886d5ed5", "9e0bb733-556c-4935-83dd-6b742a2c32e6"]'
+        uuid: uuid
+      properties:
+        alertingData:
+          $ref: '#/components/schemas/AlertingData'
+        callhomeLevel:
+          description: Call-home level
+          example: MEDIUM
+          readOnly: true
+          type: string
+        code:
+          description: Customer code
+          example: admin
+          type: string
+        creationDate:
+          description: Creation timestamp
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        customerId:
+          description: Customer ID
+          format: int32
+          readOnly: true
+          type: integer
+          example: 100
+        name:
+          description: Customer name
+          example: Sridhar
+          type: string
+        smtpData:
+          $ref: '#/components/schemas/SmtpData'
+        universeUUIDs:
+          description: Associated universe IDs
+          example: '["c3595ca7-68a3-47f0-b1b2-1725886d5ed5", "9e0bb733-556c-4935-83dd-6b742a2c32e6"]'
+          items:
+            format: uuid
+            type: string
+          readOnly: true
+          type: array
+        uuid:
+          description: User UUID
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      required:
+      - code
+      - name
+      type: object
+    LdapUnivSyncFormData:
+      description: Config to sync universe roles with ldap users
+      example:
+        ldapServer: ldapServer
+        createGroups: true
+        ldapSearchFilter: (objectclass=person)
+        useLdapTls: true
+        ldapUserfield: cn, sAMAccountName
+        dbuserPassword: dbuserPassword
+        excludeUsers:
+        - excludeUsers
+        - excludeUsers
+        targetApi: ysql
+        ldapPort: 0
+        ldapBasedn: dc=example,dc=org
+        ldapGroupMemberOfAttribute: ldapGroupMemberOfAttribute
+        groupsToSync:
+        - groupsToSync
+        - groupsToSync
+        ldapBindDn: cn=user,dc=example,dc=com
+        useLdapSsl: true
+        ldapTlsProtocol: TLSv1
+        dbUser: dbUser
+        ldapBindPassword: ldapBindPassword
+        ldapGroupfield: cn
+      properties:
+        createGroups:
+          description: Allow the API to create the LDAP groups as DB superusers
+          type: boolean
+          example: true
+        dbUser:
+          description: 'Database user to connect: yugabyte for ysql, cassandra for ycql'
+          type: string
+          example: example-dbUser
+        dbuserPassword:
+          type: string
+          example: REDACTED
+        excludeUsers:
+          description: List of users to exclude while revoking and dropping
+          items:
+            type: string
+          type: array
+          example:
+          - example-excludeUsers
+        groupsToSync:
+          description: LDAP groups to sync. In case user belongs to multiple groups & we don't want to sync all of them to DB
+          items:
+            type: string
+          type: array
+          example:
+          - example-groupsToSync
+        ldapBasedn:
+          description: Dn of the search starting point.
+          example: dc=example,dc=org
+          type: string
+        ldapBindDn:
+          description: Dn of the user authenticating to LDAP.
+          example: cn=user,dc=example,dc=com
+          type: string
+        ldapBindPassword:
+          description: Password of the user authenticating to LDAP.
+          type: string
+          example: REDACTED
+        ldapGroupMemberOfAttribute:
+          description: LDAP group dn attribute to which the user belongs
+          type: string
+          example: example-ldapGroupMemberOfAttribute
+        ldapGroupfield:
+          description: LDAP field to get the group information
+          example: cn
+          type: string
+        ldapPort:
+          description: 'Port of the ldap server : 389 or 636(tls)'
+          format: int32
+          type: integer
+          example: 5433
+        ldapSearchFilter:
+          description: LDAP search filter to get the user entries
+          example: (objectclass=person)
+          type: string
+        ldapServer:
+          description: IP address of the LDAP server
+          type: string
+          example: example-ldapServer
+        ldapTlsProtocol:
+          description: 'TLS versions for LDAPS : TLSv1, TLSv1_1, TLSv1_2'
+          enum:
+          - TLSv1
+          - TLSv1_1
+          - TLSv1_2
+          type: string
+          example: TLSv1
+        ldapUserfield:
+          description: Dn/Attribute field to get the user's name from
+          example: cn, sAMAccountName
+          type: string
+        targetApi:
+          enum:
+          - ysql
+          - ycql
+          type: string
+          example: ysql
+        useLdapSsl:
+          description: Use LDAP SSL
+          type: boolean
+          example: true
+        useLdapTls:
+          description: Use LDAP TLS
+          type: boolean
+          example: true
+      required:
+      - dbuserPassword
+      - ldapGroupfield
+      - ldapUserfield
+      - targetApi
+      type: object
+    ResourceGroup:
+      example:
+        resourceDefinitionSet:
+        - allowAll: true
+          resourceUUIDSet:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          resourceType: UNIVERSE
+        - allowAll: true
+          resourceUUIDSet:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          resourceType: UNIVERSE
+      properties:
+        resourceDefinitionSet:
+          items:
+            $ref: '#/components/schemas/ResourceDefinition'
+          type: array
+          uniqueItems: true
+          example:
+          - allowAll: true
+            resourceUUIDSet:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            resourceType: UNIVERSE
+      required:
+      - resourceDefinitionSet
+      type: object
+    RoleResourceDefinition:
+      description: Defines the association of Role to Resource Groups.
+      example:
+        resourceGroup:
+          resourceDefinitionSet:
+          - allowAll: true
+            resourceUUIDSet:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            resourceType: UNIVERSE
+          - allowAll: true
+            resourceUUIDSet:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            resourceType: UNIVERSE
+        roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        resourceGroup:
+          $ref: '#/components/schemas/ResourceGroup'
+        roleUUID:
+          description: UUID of the role to attach resource group to.
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      required:
+      - roleUUID
+      type: object
+    OidcGroupToYbaRolesPair:
+      example:
+        groupName: groupName
+        roles:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        groupName:
+          type: string
+          example: example-groupName
+        roles:
+          items:
+            format: uuid
+            type: string
+          type: array
+          example:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      required:
+      - groupName
+      - roles
+      type: object
+    ResourceDefinition:
+      example:
+        allowAll: true
+        resourceUUIDSet:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        resourceType: UNIVERSE
+      properties:
+        allowAll:
+          description: Select all resources (including future resources)
+          type: boolean
+          example: true
+        resourceType:
+          description: Resource Type
+          enum:
+          - UNIVERSE
+          - ROLE
+          - USER
+          - OTHER
+          type: string
+          example: UNIVERSE
+        resourceUUIDSet:
+          description: Set of resource uuids
+          items:
+            format: uuid
+            type: string
+          type: array
+          uniqueItems: true
+          example:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      type: object
+    RoleFormData:
+      description: Role form metadata
+      example:
+        name: name
+        description: description
+        permissionList:
+        - action: CREATE
+          resourceType: UNIVERSE
+        - action: CREATE
+          resourceType: UNIVERSE
+      properties:
+        description:
+          description: Description of the role to be created
+          type: string
+          example: Example description
+        name:
+          description: Name of the role to be created
+          type: string
+          example: example-name
+        permissionList:
+          description: List of permissions given to the role
+          items:
+            $ref: '#/components/schemas/Permission'
+          type: array
+          uniqueItems: true
+          example:
+          - action: CREATE
+            resourceType: UNIVERSE
+      required:
+      - description
+      - name
+      - permissionList
+      type: object
+    Customer:
+      description: Customer information, including associated universes
+      example:
+        code: admin
+        customerId: 1
+        name: sridhar
+        creationDate: 2022-12-12 13:07:18+00:00
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        code:
+          description: Customer code
+          example: admin
+          type: string
+        creationDate:
+          description: Creation time
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        customerId:
+          description: Customer ID
+          example: 1
+          format: int64
+          readOnly: true
+          type: integer
+        name:
+          description: Name of customer
+          example: sridhar
+          type: string
+        uuid:
+          description: Customer UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      required:
+      - code
+      - name
+      type: object
+    TaskPagedApiResponse:
+      example:
+        entities:
+        - retryable: true
+          abortable: true
+          typeName: Software Upgrade
+          percentComplete: 100
+          title: 'Deleted Universe : test-universe'
+          type: Delete
+          targetUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          target: Universe
+          completionTime: 2022-12-12 13:07:18+00:00
+          createTime: 2022-12-12 13:07:18+00:00
+          canRollback: true
+          correlationId: correlationId
+          userEmail: userEmail
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          status: Complete
+        - retryable: true
+          abortable: true
+          typeName: Software Upgrade
+          percentComplete: 100
+          title: 'Deleted Universe : test-universe'
+          type: Delete
+          targetUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          target: Universe
+          completionTime: 2022-12-12 13:07:18+00:00
+          createTime: 2022-12-12 13:07:18+00:00
+          canRollback: true
+          correlationId: correlationId
+          userEmail: userEmail
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          status: Complete
+        hasPrev: true
+        hasNext: true
+        totalCount: 0
+      properties:
+        entities:
+          items:
+            $ref: '#/components/schemas/CustomerTaskData'
+          type: array
+          example:
+          - retryable: true
+            abortable: true
+            typeName: Software Upgrade
+            percentComplete: 100
+            title: 'Deleted Universe : test-universe'
+            type: Delete
+            targetUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            target: Universe
+            completionTime: '2022-12-12T13:07:18+00:00'
+            createTime: '2022-12-12T13:07:18+00:00'
+            canRollback: true
+            correlationId: correlationId
+            userEmail: userEmail
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            status: Complete
+        hasNext:
+          type: boolean
+          example: true
+        hasPrev:
+          type: boolean
+          example: true
+        totalCount:
+          format: int32
+          type: integer
+          example: 10
+      required:
+      - entities
+      - hasNext
+      - hasPrev
+      - totalCount
+      type: object
+    CustomerTaskData:
+      description: Customer task data
+      example:
+        retryable: true
+        abortable: true
+        typeName: Software Upgrade
+        percentComplete: 100
+        title: 'Deleted Universe : test-universe'
+        type: Delete
+        targetUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        target: Universe
+        completionTime: 2022-12-12 13:07:18+00:00
+        createTime: 2022-12-12 13:07:18+00:00
+        canRollback: true
+        correlationId: correlationId
+        userEmail: userEmail
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        status: Complete
+      properties:
+        abortable:
+          description: Customer task abortable
+          type: boolean
+          example: true
+        canRollback:
+          description: Whether the Customer task can be rolled back
+          type: boolean
+          example: true
+        completionTime:
+          description: Customer task completion time
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        correlationId:
+          description: Correlation id
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        createTime:
+          description: Customer task creation time
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        id:
+          description: Customer task UUID
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        percentComplete:
+          description: Customer task percentage completed
+          example: 100
+          format: int32
+          type: integer
+        retryable:
+          description: Customer task retryable
+          type: boolean
+          example: true
+        status:
+          description: Customer task status
+          example: Complete
+          type: string
+        target:
+          description: Customer task target
+          example: Universe
+          type: string
+        targetUUID:
+          description: Customer task target UUID
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        title:
+          description: Customer task title
+          example: 'Deleted Universe : test-universe'
+          type: string
+        type:
+          description: Customer task type
+          example: Delete
+          type: string
+        typeName:
+          description: Customer task type name
+          example: Software Upgrade
+          type: string
+        userEmail:
+          description: Customer Email
+          readOnly: true
+          type: string
+          example: admin@example.com
+      type: object
+    Users:
+      description: A user associated with a customer
+      example:
+        ldapSpecifiedRole: true
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        role: Admin
+        authTokenIssueDate: 2021-06-17 15:00:05+00:00
+        timezone: timezone
+        oidcJwtAuthToken: oidcJwtAuthToken
+        groupMemberships:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        userType: local
+        creationDate: 2022-12-12 13:07:18+00:00
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        email: username1@example.com
+        primary: true
+      properties:
+        authTokenIssueDate:
+          description: UI session token creation date
+          example: 2021-06-17 15:00:05+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        creationDate:
+          description: User creation date
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        customerUUID:
+          description: Customer UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        email:
+          description: User email address
+          example: username1@example.com
+          type: string
+        groupMemberships:
+          items:
+            format: uuid
+            type: string
+          type: array
+          uniqueItems: true
+          example:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        ldapSpecifiedRole:
+          description: LDAP Specified Role
+          type: boolean
+          example: true
+        oidcJwtAuthToken:
+          readOnly: true
+          type: string
+          example: REDACTED
+        primary:
+          type: boolean
+          example: true
+        role:
+          description: <b style="color:#ff0000">Deprecated since YBA version 2.19.3.0.</b> Use  getRoleBindings instead.
+          enum:
+          - ConnectOnly
+          - ReadOnly
+          - BackupAdmin
+          - Admin
+          - SuperAdmin
+          example: Admin
+          type: string
+        timezone:
+          description: User timezone
+          type: string
+          example: us-east-1a
+        userType:
+          description: User Type
+          enum:
+          - local
+          - ldap
+          - oidc
+          type: string
+          example: local
+        uuid:
+          description: User UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      required:
+      - email
+      - groupMemberships
+      - primary
+      type: object
+    CustomerLicense:
+      description: Customer Licenses. This helps customer to upload licenses for the thirdparrty softwares if required.
+      example:
+        license: license
+        licenseType: licenseType
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        licenseUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        creationDate: 2022-12-12 13:07:18+00:00
+      properties:
+        creationDate:
+          description: Creation date of license
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        customerUUID:
+          description: Customer UUID that owns this license
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        license:
+          description: License File Path
+          type: string
+          example: example-license
+        licenseType:
+          description: Type of the license
+          type: string
+          example: DEFAULT
+        licenseUUID:
+          description: License UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      required:
+      - license
+      - licenseType
+      type: object
+    TaskPagedApiQuery:
+      example:
+        filter:
+          targetUUIDList:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          targetList:
+          - Universe
+          - Universe
+          dateRangeEnd: 2022-12-12 13:07:18+00:00
+          typeList:
+          - Create
+          - Create
+          typeNameList:
+          - typeNameList
+          - typeNameList
+          dateRangeStart: 2022-12-12 13:07:18+00:00
+          status:
+          - Created
+          - Created
+        offset: 6
+        needTotalCount: true
+        limit: 0
+        sortBy: createTime
+        direction: ASC
+      properties:
+        direction:
+          enum:
+          - ASC
+          - DESC
+          type: string
+          example: ASC
+        filter:
+          $ref: '#/components/schemas/TaskApiFilter'
+        limit:
+          format: int32
+          type: integer
+          example: 10
+        needTotalCount:
+          type: boolean
+          example: true
+        offset:
+          format: int32
+          type: integer
+          example: 100
+        sortBy:
+          enum:
+          - createTime
+          type: string
+          example: createTime
+      required:
+      - direction
+      - filter
+      - limit
+      - needTotalCount
+      - offset
+      - sortBy
+      type: object
+    FailedSubtasks:
+      description: Failed Subtasks
+      example:
+        failedSubTasks:
+        - errorString: errorString
+          creationTime: 2022-12-12 13:07:18+00:00
+          subTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          subTaskType: subTaskType
+          errorCode: UNKNOWN_ERROR
+          subTaskGroupType: subTaskGroupType
+          subTaskState: subTaskState
+        - errorString: errorString
+          creationTime: 2022-12-12 13:07:18+00:00
+          subTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          subTaskType: subTaskType
+          errorCode: UNKNOWN_ERROR
+          subTaskGroupType: subTaskGroupType
+          subTaskState: subTaskState
+      properties:
+        failedSubTasks:
+          description: List of failed subtasks
+          items:
+            $ref: '#/components/schemas/SubtaskData'
+          type: array
+          example:
+          - errorString: errorString
+            creationTime: '2022-12-12T13:07:18+00:00'
+            subTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            subTaskType: subTaskType
+            errorCode: UNKNOWN_ERROR
+            subTaskGroupType: subTaskGroupType
+            subTaskState: subTaskState
+      type: object
+    YBPTask:
+      example:
+        taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        resourceUUID:
+          description: UUID of the resource being modified by the task
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        taskUUID:
+          description: Task UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      type: object
+    LdapDnToYbaRoleData:
+      description: A list of LDAP DN, YBA role pairs
+      example:
+        ldapDnToYbaRolePairs:
+        - ybaRole: ConnectOnly
+          distinguishedName: distinguishedName
+        - ybaRole: ConnectOnly
+          distinguishedName: distinguishedName
+      properties:
+        ldapDnToYbaRolePairs:
+          description: ' list of pairs of distinguishedName and ybaRole'
+          items:
+            $ref: '#/components/schemas/LdapDnYbaRoleDataPair'
+          type: array
+          example:
+          - ybaRole: ConnectOnly
+            distinguishedName: distinguishedName
+      type: object
+    PermissionDetails:
+      example:
+        permissionList:
+        - action: CREATE
+          resourceType: UNIVERSE
+        - action: CREATE
+          resourceType: UNIVERSE
+      properties:
+        permissionList:
+          description: Set of permissions
+          items:
+            $ref: '#/components/schemas/Permission'
+          type: array
+          uniqueItems: true
+          example:
+          - action: CREATE
+            resourceType: UNIVERSE
+      type: object
+    SessionInfo:
+      description: Session information
+      example:
+        apiToken: apiToken
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        apiTokenVersion: 0
+        authToken: authToken
+        userUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        apiToken:
+          description: API token
+          type: string
+          example: REDACTED
+        apiTokenVersion:
+          description: API token version
+          format: int64
+          type: integer
+          example: 1000
+        authToken:
+          description: Auth token
+          type: string
+          example: REDACTED
+        customerUUID:
+          description: Customer UUID
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        userUUID:
+          description: User UUID
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      type: object
+    CustomerLoginFormData:
+      example:
+        password: password
+        email: email
+      properties:
+        email:
+          type: string
+          example: admin@example.com
+        password:
+          type: string
+          example: REDACTED
+      required:
+      - email
+      - password
+      type: object
+    CustomerCountResp:
+      example:
+        count: 0
+      properties:
+        count:
+          format: int32
+          type: integer
+          example: 10
+      required:
+      - count
+      type: object
+    YBPSuccess:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+          example: Example message
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+          example: true
+      type: object
+    GroupMappingInfo:
+      example:
+        groupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        identifier: identifier
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        creationDate: 2022-12-12 13:07:18+00:00
+        type: LDAP
+        roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        creationDate:
+          description: Group mapping creation time
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        customerUUID:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        groupUUID:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        identifier:
+          type: string
+          example: example-identifier
+        roleUUID:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        type:
+          enum:
+          - LDAP
+          - OIDC
+          type: string
+          example: LDAP
+      required:
+      - customerUUID
+      - groupUUID
+      - identifier
+      - roleUUID
+      - type
+      type: object
+    PermissionInfo:
+      example:
+        permissionValidOnResource: true
+        prerequisitePermissions:
+        - action: CREATE
+          resourceType: UNIVERSE
+        - action: CREATE
+          resourceType: UNIVERSE
+        name: name
+        action: CREATE
+        description: description
+        resourceType: UNIVERSE
+      properties:
+        action:
+          enum:
+          - CREATE
+          - READ
+          - UPDATE
+          - DELETE
+          - PAUSE_RESUME
+          - BACKUP_RESTORE
+          - UPDATE_ROLE_BINDINGS
+          - UPDATE_PROFILE
+          - SUPER_ADMIN_ACTIONS
+          - XCLUSTER
+          - DEBUG
+          - TROUBLESHOOT
+          type: string
+          example: CREATE
+        description:
+          type: string
+          example: Example description
+        name:
+          type: string
+          example: example-name
+        permissionValidOnResource:
+          type: boolean
+          example: true
+        prerequisitePermissions:
+          items:
+            $ref: '#/components/schemas/Permission'
+          type: array
+          uniqueItems: true
+          example:
+          - action: CREATE
+            resourceType: UNIVERSE
+        resourceType:
+          enum:
+          - UNIVERSE
+          - ROLE
+          - USER
+          - OTHER
+          type: string
+          example: UNIVERSE
+      type: object

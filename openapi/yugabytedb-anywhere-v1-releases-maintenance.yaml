@@ -1,0 +1,4434 @@
+openapi: 3.0.1
+info:
+  contact:
+    name: https://docs.yugabyte.com
+  description: Releases and Maintenance subset of the YugabyteDB Anywhere v1 REST API, split from the canonical platform-go-client OpenAPI bundle.
+  license:
+    name: Polyform Free Trial License 1.0.0
+    url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
+  termsOfService: TODO(chirag)
+  title: YugabyteDB Anywhere v1 — Releases and Maintenance
+  version: v1
+  x-source: https://github.com/yugabyte/platform-go-client/blob/master/api/openapi.yaml
+  x-split-from: yugabytedb-anywhere-v1-openapi.yaml
+externalDocs:
+  description: About YugabyteDB Anywhere
+  url: https://docs.yugabyte.com/latest/yugabyte-platform/
+servers:
+- url: /
+tags:
+- name: Extract metadata from remote tarball
+- name: Maintenance windows
+- name: New Release management
+- name: PackagesController
+- name: Release management
+- name: Runtime configuration
+- name: Support Bundle management
+- name: Upload Release packages
+- name: preview
+paths:
+  /api/v1/customers/{cUUID}/maintenance_windows:
+    post:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: create
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MaintenanceWindow'
+            examples:
+              CreateRequestExample:
+                summary: Default create request
+                x-microcks-default: true
+                value:
+                  alertConfigurationFilter:
+                    severity: SEVERE
+                    template: REPLICATION_LAG
+                    destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    name: name
+                    active: true
+                    destinationType: NO_DESTINATION
+                    targetType: PLATFORM
+                    target:
+                      all: true
+                      uuids:
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    uuids:
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  createTime: '2022-12-12T13:07:18+00:00'
+                  suppressHealthCheckNotificationsConfig:
+                    suppressAllUniverses: true
+                    universeUUIDSet:
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  name: name
+                  description: description
+                  startTime: '2022-12-12T13:07:18+00:00'
+                  endTime: '2022-12-12T13:07:18+00:00'
+                  state: FINISHED
+                  uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MaintenanceWindow'
+              examples:
+                Create200Example:
+                  summary: Default create 200 response
+                  x-microcks-default: true
+                  value:
+                    alertConfigurationFilter:
+                      severity: SEVERE
+                      template: REPLICATION_LAG
+                      destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      name: name
+                      active: true
+                      destinationType: NO_DESTINATION
+                      targetType: PLATFORM
+                      target:
+                        all: true
+                        uuids:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      uuids:
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    createTime: 2022-12-12 13:07:18+00:00
+                    suppressHealthCheckNotificationsConfig:
+                      suppressAllUniverses: true
+                      universeUUIDSet:
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    name: name
+                    description: description
+                    startTime: 2022-12-12 13:07:18+00:00
+                    endTime: 2022-12-12 13:07:18+00:00
+                    state: FINISHED
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Create Maintenance Window
+      tags:
+      - Maintenance windows
+      x-codegen-request-body-name: CreateMaintenanceWindowRequest
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/maintenance_windows/list:
+    post:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: listOfMaintenanceWindows
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MaintenanceWindowApiFilter'
+            examples:
+              ListOfMaintenanceWindowsRequestExample:
+                summary: Default listOfMaintenanceWindows request
+                x-microcks-default: true
+                value:
+                  states:
+                  - FINISHED
+                  - FINISHED
+                  uuids:
+                  - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/MaintenanceWindow'
+                type: array
+              examples:
+                ListOfMaintenanceWindows200Example:
+                  summary: Default listOfMaintenanceWindows 200 response
+                  x-microcks-default: true
+                  value:
+                  - alertConfigurationFilter:
+                      severity: SEVERE
+                      template: REPLICATION_LAG
+                      destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      name: name
+                      active: true
+                      destinationType: NO_DESTINATION
+                      targetType: PLATFORM
+                      target:
+                        all: true
+                        uuids:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      uuids:
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    createTime: 2022-12-12 13:07:18+00:00
+                    suppressHealthCheckNotificationsConfig:
+                      suppressAllUniverses: true
+                      universeUUIDSet:
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    name: name
+                    description: description
+                    startTime: 2022-12-12 13:07:18+00:00
+                    endTime: 2022-12-12 13:07:18+00:00
+                    state: FINISHED
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Maintenance Windows
+      tags:
+      - Maintenance windows
+      x-codegen-request-body-name: ListMaintenanceWindowsRequest
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/maintenance_windows/page:
+    post:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: page
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MaintenanceWindowPagedApiQuery'
+            examples:
+              PageRequestExample:
+                summary: Default page request
+                x-microcks-default: true
+                value:
+                  filter:
+                    states:
+                    - FINISHED
+                    - FINISHED
+                    uuids:
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  offset: 6
+                  needTotalCount: true
+                  limit: 0
+                  sortBy: uuid
+                  direction: ASC
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MaintenanceWindowPagedResponse'
+              examples:
+                Page200Example:
+                  summary: Default page 200 response
+                  x-microcks-default: true
+                  value:
+                    entities:
+                    - alertConfigurationFilter:
+                        severity: SEVERE
+                        template: REPLICATION_LAG
+                        destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        name: name
+                        active: true
+                        destinationType: NO_DESTINATION
+                        targetType: PLATFORM
+                        target:
+                          all: true
+                          uuids:
+                          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        uuids:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      createTime: 2022-12-12 13:07:18+00:00
+                      suppressHealthCheckNotificationsConfig:
+                        suppressAllUniverses: true
+                        universeUUIDSet:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      name: name
+                      description: description
+                      startTime: 2022-12-12 13:07:18+00:00
+                      endTime: 2022-12-12 13:07:18+00:00
+                      state: FINISHED
+                      uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    - alertConfigurationFilter:
+                        severity: SEVERE
+                        template: REPLICATION_LAG
+                        destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        name: name
+                        active: true
+                        destinationType: NO_DESTINATION
+                        targetType: PLATFORM
+                        target:
+                          all: true
+                          uuids:
+                          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        uuids:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      createTime: 2022-12-12 13:07:18+00:00
+                      suppressHealthCheckNotificationsConfig:
+                        suppressAllUniverses: true
+                        universeUUIDSet:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      name: name
+                      description: description
+                      startTime: 2022-12-12 13:07:18+00:00
+                      endTime: 2022-12-12 13:07:18+00:00
+                      state: FINISHED
+                      uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    hasPrev: true
+                    hasNext: true
+                    totalCount: 0
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Maintenance Windows (paginated)
+      tags:
+      - Maintenance windows
+      x-codegen-request-body-name: PageMaintenanceWindowsRequest
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/maintenance_windows/{windowUUID}:
+    delete:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: delete
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: windowUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                Delete200Example:
+                  summary: Default delete 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Delete Maintenance Window
+      tags:
+      - Maintenance windows
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: get
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: windowUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MaintenanceWindow'
+              examples:
+                Get200Example:
+                  summary: Default get 200 response
+                  x-microcks-default: true
+                  value:
+                    alertConfigurationFilter:
+                      severity: SEVERE
+                      template: REPLICATION_LAG
+                      destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      name: name
+                      active: true
+                      destinationType: NO_DESTINATION
+                      targetType: PLATFORM
+                      target:
+                        all: true
+                        uuids:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      uuids:
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    createTime: 2022-12-12 13:07:18+00:00
+                    suppressHealthCheckNotificationsConfig:
+                      suppressAllUniverses: true
+                      universeUUIDSet:
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    name: name
+                    description: description
+                    startTime: 2022-12-12 13:07:18+00:00
+                    endTime: 2022-12-12 13:07:18+00:00
+                    state: FINISHED
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get Details of a Maintenance Window
+      tags:
+      - Maintenance windows
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: update
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: windowUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MaintenanceWindow'
+            examples:
+              UpdateRequestExample:
+                summary: Default update request
+                x-microcks-default: true
+                value:
+                  alertConfigurationFilter:
+                    severity: SEVERE
+                    template: REPLICATION_LAG
+                    destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    name: name
+                    active: true
+                    destinationType: NO_DESTINATION
+                    targetType: PLATFORM
+                    target:
+                      all: true
+                      uuids:
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    uuids:
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  createTime: '2022-12-12T13:07:18+00:00'
+                  suppressHealthCheckNotificationsConfig:
+                    suppressAllUniverses: true
+                    universeUUIDSet:
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  name: name
+                  description: description
+                  startTime: '2022-12-12T13:07:18+00:00'
+                  endTime: '2022-12-12T13:07:18+00:00'
+                  state: FINISHED
+                  uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MaintenanceWindow'
+              examples:
+                Update200Example:
+                  summary: Default update 200 response
+                  x-microcks-default: true
+                  value:
+                    alertConfigurationFilter:
+                      severity: SEVERE
+                      template: REPLICATION_LAG
+                      destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      name: name
+                      active: true
+                      destinationType: NO_DESTINATION
+                      targetType: PLATFORM
+                      target:
+                        all: true
+                        uuids:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      uuids:
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    createTime: 2022-12-12 13:07:18+00:00
+                    suppressHealthCheckNotificationsConfig:
+                      suppressAllUniverses: true
+                      universeUUIDSet:
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    name: name
+                    description: description
+                    startTime: 2022-12-12 13:07:18+00:00
+                    endTime: 2022-12-12 13:07:18+00:00
+                    state: FINISHED
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Update Maintenance Window
+      tags:
+      - Maintenance windows
+      x-codegen-request-body-name: UpdateMaintenanceWindowRequest
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle:
+    get:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: getListOfImageBundles
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: pUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: arch
+        schema:
+          default: 'null'
+          type: string
+        example: 'null'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ImageBundle'
+                type: array
+              examples:
+                GetListOfImageBundles200Example:
+                  summary: Default getListOfImageBundles 200 response
+                  x-microcks-default: true
+                  value:
+                  - metadata:
+                      type: YBA_ACTIVE
+                      version: version
+                    useAsDefault: true
+                    name: name
+                    active: true
+                    details:
+                      sshPort: 5
+                      regions:
+                        key:
+                          sshUserOverride: sshUserOverride
+                          ybImage: ybImage
+                          sshPortOverride: 1
+                      useIMDSv2: true
+                      globalYbImage: globalYbImage
+                      sshUser: sshUser
+                      arch: x86_64
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Image Bundles
+      tags:
+      - preview
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: createImageBundle
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: pUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImageBundle'
+            examples:
+              CreateImageBundleRequestExample:
+                summary: Default createImageBundle request
+                x-microcks-default: true
+                value:
+                  metadata:
+                    type: YBA_ACTIVE
+                    version: version
+                  useAsDefault: true
+                  name: name
+                  active: true
+                  details:
+                    sshPort: 5
+                    regions:
+                      key:
+                        sshUserOverride: sshUserOverride
+                        ybImage: ybImage
+                        sshPortOverride: 1
+                    useIMDSv2: true
+                    globalYbImage: globalYbImage
+                    sshUser: sshUser
+                    arch: x86_64
+                  uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        description: CreateImageBundleRequest
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageBundle'
+              examples:
+                CreateImageBundle200Example:
+                  summary: Default createImageBundle 200 response
+                  x-microcks-default: true
+                  value:
+                    metadata:
+                      type: YBA_ACTIVE
+                      version: version
+                    useAsDefault: true
+                    name: name
+                    active: true
+                    details:
+                      sshPort: 5
+                      regions:
+                        key:
+                          sshUserOverride: sshUserOverride
+                          ybImage: ybImage
+                          sshPortOverride: 1
+                      useIMDSv2: true
+                      globalYbImage: globalYbImage
+                      sshUser: sshUser
+                      arch: x86_64
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Create a Image Bundle
+      tags:
+      - preview
+      x-codegen-request-body-name: body
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID}:
+    delete:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: delete
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: pUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: iBUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                Delete200Example:
+                  summary: Default delete 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Delete a Image Bundle
+      tags:
+      - preview
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: getImageBundle
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: pUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: iBUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageBundle'
+              examples:
+                GetImageBundle200Example:
+                  summary: Default getImageBundle 200 response
+                  x-microcks-default: true
+                  value:
+                    metadata:
+                      type: YBA_ACTIVE
+                      version: version
+                    useAsDefault: true
+                    name: name
+                    active: true
+                    details:
+                      sshPort: 5
+                      regions:
+                        key:
+                          sshUserOverride: sshUserOverride
+                          ybImage: ybImage
+                          sshPortOverride: 1
+                      useIMDSv2: true
+                      globalYbImage: globalYbImage
+                      sshUser: sshUser
+                      arch: x86_64
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get a Image Bundle
+      tags:
+      - preview
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: editImageBundle
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: pUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: iBUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImageBundle'
+            examples:
+              EditImageBundleRequestExample:
+                summary: Default editImageBundle request
+                x-microcks-default: true
+                value:
+                  metadata:
+                    type: YBA_ACTIVE
+                    version: version
+                  useAsDefault: true
+                  name: name
+                  active: true
+                  details:
+                    sshPort: 5
+                    regions:
+                      key:
+                        sshUserOverride: sshUserOverride
+                        ybImage: ybImage
+                        sshPortOverride: 1
+                    useIMDSv2: true
+                    globalYbImage: globalYbImage
+                    sshUser: sshUser
+                    arch: x86_64
+                  uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        description: EditImageBundleRequest
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageBundle'
+              examples:
+                EditImageBundle200Example:
+                  summary: Default editImageBundle 200 response
+                  x-microcks-default: true
+                  value:
+                    metadata:
+                      type: YBA_ACTIVE
+                      version: version
+                    useAsDefault: true
+                    name: name
+                    active: true
+                    details:
+                      sshPort: 5
+                      regions:
+                        key:
+                          sshUserOverride: sshUserOverride
+                          ybImage: ybImage
+                          sshPortOverride: 1
+                      useIMDSv2: true
+                      globalYbImage: globalYbImage
+                      sshUser: sshUser
+                      arch: x86_64
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Update a Image Bundle
+      tags:
+      - preview
+      x-codegen-request-body-name: body
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/providers/{pUUID}/releases:
+    get:
+      deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use /api/v1/customers/{cUUID}/releases/:arch instead
+      operationId: getListOfRegionReleases
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: pUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: includeMetadata
+        schema:
+          default: false
+          type: boolean
+        example: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  properties: {}
+                  type: object
+                type: object
+              examples:
+                GetListOfRegionReleases200Example:
+                  summary: Default getListOfRegionReleases 200 response
+                  x-microcks-default: true
+                  value: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Releases by Provider - Deprecated
+      tags:
+      - Release management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/releases:
+    get:
+      deprecated: true
+      operationId: getListOfReleases
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: includeMetadata
+        schema:
+          default: false
+          type: boolean
+        example: false
+      - in: query
+        name: arch
+        schema:
+          default: 'null'
+          type: string
+        example: 'null'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  properties: {}
+                  type: object
+                type: object
+              examples:
+                GetListOfReleases200Example:
+                  summary: Default getListOfReleases 200 response
+                  x-microcks-default: true
+                  value: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: 'YugabyteDB Anywhere Deprecated: SinceVersion: 2024.1. Use ReleasesController.list Instead. List All Releases'
+      tags:
+      - Release management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      deprecated: true
+      operationId: createRelease
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReleaseFormData'
+            examples:
+              CreateReleaseRequestExample:
+                summary: Default createRelease request
+                x-microcks-default: true
+                value:
+                  s3:
+                    paths:
+                      x86_64: x86_64
+                      helmChart: helmChart
+                      helmChartChecksum: helmChartChecksum
+                      x86_64_checksum: x86_64_checksum
+                  gcs:
+                    paths:
+                      x86_64: x86_64
+                      helmChart: helmChart
+                      helmChartChecksum: helmChartChecksum
+                      x86_64_checksum: x86_64_checksum
+                  http:
+                    paths:
+                      x86_64: x86_64
+                      helmChart: helmChart
+                      helmChartChecksum: helmChartChecksum
+                      x86_64_checksum: x86_64_checksum
+                  version: version
+        description: Release data for remote downloading to be created
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                CreateRelease200Example:
+                  summary: Default createRelease 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: 'YugabyteDB Anywhere Deprecated: SinceVersion 2024.1. Use ReleasesController.create Instead. Create a Release'
+      tags:
+      - Release management
+      x-codegen-request-body-name: Release
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: refresh
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                Refresh200Example:
+                  summary: Default refresh 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Refresh a Release
+      tags:
+      - Release management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/releases/{name}:
+    delete:
+      deprecated: true
+      operationId: deleteRelease
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        example: example-name
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReleaseMetadata'
+              examples:
+                DeleteRelease200Example:
+                  summary: Default deleteRelease 200 response
+                  x-microcks-default: true
+                  value:
+                    s3:
+                      paths:
+                        x86_64: x86_64
+                        helmChart: helmChart
+                        helmChartChecksum: helmChartChecksum
+                        x86_64_checksum: x86_64_checksum
+                    notes:
+                    - notes
+                    - notes
+                    gcs:
+                      paths:
+                        x86_64: x86_64
+                        helmChart: helmChart
+                        helmChartChecksum: helmChartChecksum
+                        x86_64_checksum: x86_64_checksum
+                    filePath: filePath
+                    http:
+                      paths:
+                        x86_64: x86_64
+                        helmChart: helmChart
+                        helmChartChecksum: helmChartChecksum
+                        x86_64_checksum: x86_64_checksum
+                    state: ACTIVE
+                    imageTag: imageTag
+                    packages:
+                    - path: path
+                      arch: x86_64
+                    - path: path
+                      arch: x86_64
+                    chartPath: chartPath
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: 'YugabyteDB Anywhere Deprecated: SinceVersion: 2024.1. Use ReleasesController.delete Instead. Delete a Release'
+      tags:
+      - Release management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      deprecated: true
+      operationId: updateRelease
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        example: example-name
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              UpdateReleaseRequestExample:
+                summary: Default updateRelease request
+                x-microcks-default: true
+                value: {}
+        description: Release data to be updated
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReleaseMetadata'
+              examples:
+                UpdateRelease200Example:
+                  summary: Default updateRelease 200 response
+                  x-microcks-default: true
+                  value:
+                    s3:
+                      paths:
+                        x86_64: x86_64
+                        helmChart: helmChart
+                        helmChartChecksum: helmChartChecksum
+                        x86_64_checksum: x86_64_checksum
+                    notes:
+                    - notes
+                    - notes
+                    gcs:
+                      paths:
+                        x86_64: x86_64
+                        helmChart: helmChart
+                        helmChartChecksum: helmChartChecksum
+                        x86_64_checksum: x86_64_checksum
+                    filePath: filePath
+                    http:
+                      paths:
+                        x86_64: x86_64
+                        helmChart: helmChart
+                        helmChartChecksum: helmChartChecksum
+                        x86_64_checksum: x86_64_checksum
+                    state: ACTIVE
+                    imageTag: imageTag
+                    packages:
+                    - path: path
+                      arch: x86_64
+                    - path: path
+                      arch: x86_64
+                    chartPath: chartPath
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: 'YugabyteDB Anywhere Deprecated: SinceVersion: 2024.1. Use ReleasesController.update Instead. Update a Release'
+      tags:
+      - Release management
+      x-codegen-request-body-name: Release
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/runtime_config/scopes:
+    get:
+      description: Lists all (including empty scopes) runtime config scopes for current customer. List includes the Global scope that spans multiple customers, scope for customer specific overrides for current customer and one scope each for each universe and provider.
+      operationId: listScopes
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuntimeConfigData'
+              examples:
+                ListScopes200Example:
+                  summary: Default listScopes 200 response
+                  x-microcks-default: true
+                  value:
+                    scopedConfigList:
+                    - configEntries:
+                      - inherited: true
+                        value: value
+                        key: key
+                      - inherited: true
+                        value: value
+                        key: key
+                      mutableScope: true
+                      type: GLOBAL
+                      uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    - configEntries:
+                      - inherited: true
+                        value: value
+                        key: key
+                      - inherited: true
+                        value: value
+                        key: key
+                      mutableScope: true
+                      type: GLOBAL
+                      uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Configuration Scopes
+      tags:
+      - Runtime configuration
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/runtime_config/{scope}:
+    get:
+      description: Lists all runtime config entries for a given scope for current customer.
+      operationId: getConfig
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: scope
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: includeInherited
+        schema:
+          default: false
+          type: boolean
+        example: false
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScopedConfig'
+              examples:
+                GetConfig200Example:
+                  summary: Default getConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    configEntries:
+                    - inherited: true
+                      value: value
+                      key: key
+                    - inherited: true
+                      value: value
+                      key: key
+                    mutableScope: true
+                    type: GLOBAL
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Configuration Entries for a Scope
+      tags:
+      - Runtime configuration
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/runtime_config/{scope}/key/{key}:
+    delete:
+      operationId: deleteKey
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: scope
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: key
+        required: true
+        schema:
+          type: string
+        example: example-key
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                DeleteKey200Example:
+                  summary: Default deleteKey 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Delete a Configuration Key
+      tags:
+      - Runtime configuration
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      operationId: getConfigurationKey
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: scope
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: key
+        required: true
+        schema:
+          type: string
+        example: example-key
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                GetConfigurationKey200Example:
+                  summary: Default getConfigurationKey 200 response
+                  x-microcks-default: true
+                  value: string
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get a Configuration Key
+      tags:
+      - Runtime configuration
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: setKey
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: scope
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: key
+        required: true
+        schema:
+          type: string
+        example: example-key
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+            examples:
+              SetKeyRequestExample:
+                summary: Default setKey request
+                x-microcks-default: true
+                value: string
+        description: New value for config key
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                SetKey200Example:
+                  summary: Default setKey 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Update a Configuration Key
+      tags:
+      - Runtime configuration
+      x-codegen-request-body-name: newValue
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/support_bundle/components:
+    get:
+      operationId: listSupportBundleComponents
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  enum:
+                  - UniverseLogs
+                  - OutputFiles
+                  - ErrorFiles
+                  - CoreFiles
+                  - GFlags
+                  - Instance
+                  - ConsensusMeta
+                  - TabletMeta
+                  - YbcLogs
+                  - NodeAgent
+                  - SystemLogs
+                  - TabletReport
+                  - K8sInfo
+                  - YbaMetadata
+                  - PrometheusMetrics
+                  - PerfAdvisor
+                  - ApplicationLogs
+                  type: string
+                type: array
+              examples:
+                ListSupportBundleComponents200Example:
+                  summary: Default listSupportBundleComponents 200 response
+                  x-microcks-default: true
+                  value:
+                  - UniverseLogs
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List All Components Available in Support Bundle
+      tags:
+      - Support Bundle management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle:
+    get:
+      operationId: listSupportBundle
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: uniUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SupportBundle'
+                type: array
+              examples:
+                ListSupportBundle200Example:
+                  summary: Default listSupportBundle 200 response
+                  x-microcks-default: true
+                  value:
+                  - path: path
+                    sizeInBytes: 5
+                    scopeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    bundleDetails:
+                      maxNumRecentCores: 6
+                      components:
+                      - UniverseLogs
+                      - UniverseLogs
+                      paDumpStartDate: 2022-12-12 13:07:18+00:00
+                      promDumpEndDate: 2022-12-12 13:07:18+00:00
+                      promDumpStartDate: 2022-12-12 13:07:18+00:00
+                      promMetricsFormat: PROMQL_JSON
+                      paDumpEndDate: 2022-12-12 13:07:18+00:00
+                      paMetricsFormat: PROMQL_JSON
+                      promMetricsStepSec: 1
+                      prometheusMetricsTypes:
+                      - MASTER_EXPORT
+                      - MASTER_EXPORT
+                      maxCoreFileSize: 0
+                    endDate: 2022-12-12 13:07:18+00:00
+                    bundleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    creationDate: 2022-12-12 13:07:18+00:00
+                    startDate: 2022-12-12 13:07:18+00:00
+                    expirationDate: 2022-12-12 13:07:18+00:00
+                    status: Running
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List All Support Bundles from a Universe
+      tags:
+      - Support Bundle management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createSupportBundle
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: uniUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SupportBundleFormData'
+            examples:
+              CreateSupportBundleRequestExample:
+                summary: Default createSupportBundle request
+                x-microcks-default: true
+                value:
+                  maxNumRecentCores: 1
+                  components:
+                  - UniverseLogs
+                  - UniverseLogs
+                  paDumpStartDate: '2022-12-12T13:07:18+00:00'
+                  promDumpEndDate: '2022-12-12T13:07:18+00:00'
+                  promDumpStartDate: '2022-12-12T13:07:18+00:00'
+                  endDate: '2022-12-12T13:07:18+00:00'
+                  filterPgAuditLogs: true
+                  prometheusMetricsTypes:
+                  - MASTER_EXPORT
+                  - MASTER_EXPORT
+                  promDumpDownSample: true
+                  promQueries:
+                    key: promQueries
+                  stepPromDumpSecs: 5
+                  batchDurationPromDumpMins: 0
+                  promMetricsFormat: PROMQL_JSON
+                  paDumpEndDate: '2022-12-12T13:07:18+00:00'
+                  paMetricsFormat: PROMQL_JSON
+                  startDate: '2022-12-12T13:07:18+00:00'
+                  maxCoreFileSize: 6
+                  promExportType: PROMQL
+        description: post support bundle info
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPTask'
+              examples:
+                CreateSupportBundle200Example:
+                  summary: Default createSupportBundle 200 response
+                  x-microcks-default: true
+                  value:
+                    taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Create Support Bundle for Specific Universe
+      tags:
+      - Support Bundle management
+      x-codegen-request-body-name: supportBundle
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/estimate_size:
+    post:
+      description: YbaApi Internal.
+      operationId: estimateSupportBundleSize
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: uniUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SupportBundleFormData'
+            examples:
+              EstimateSupportBundleSizeRequestExample:
+                summary: Default estimateSupportBundleSize request
+                x-microcks-default: true
+                value:
+                  maxNumRecentCores: 1
+                  components:
+                  - UniverseLogs
+                  - UniverseLogs
+                  paDumpStartDate: '2022-12-12T13:07:18+00:00'
+                  promDumpEndDate: '2022-12-12T13:07:18+00:00'
+                  promDumpStartDate: '2022-12-12T13:07:18+00:00'
+                  endDate: '2022-12-12T13:07:18+00:00'
+                  filterPgAuditLogs: true
+                  prometheusMetricsTypes:
+                  - MASTER_EXPORT
+                  - MASTER_EXPORT
+                  promDumpDownSample: true
+                  promQueries:
+                    key: promQueries
+                  stepPromDumpSecs: 5
+                  batchDurationPromDumpMins: 0
+                  promMetricsFormat: PROMQL_JSON
+                  paDumpEndDate: '2022-12-12T13:07:18+00:00'
+                  paMetricsFormat: PROMQL_JSON
+                  startDate: '2022-12-12T13:07:18+00:00'
+                  maxCoreFileSize: 6
+                  promExportType: PROMQL
+        description: support bundle info
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupportBundleSizeEstimateResponse'
+              examples:
+                EstimateSupportBundleSize200Example:
+                  summary: Default estimateSupportBundleSize 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      key:
+                        key: 0
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Estimate Support Bundle Size for Specific Universe
+      tags:
+      - Support Bundle management
+      x-codegen-request-body-name: supportBundle
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/{sbUUID}:
+    delete:
+      operationId: deleteSupportBundle
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: uniUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: sbUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                DeleteSupportBundle200Example:
+                  summary: Default deleteSupportBundle 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Delete a Support Bundle
+      tags:
+      - Support Bundle management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      operationId: getSupportBundle
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: uniUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: sbUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupportBundle'
+              examples:
+                GetSupportBundle200Example:
+                  summary: Default getSupportBundle 200 response
+                  x-microcks-default: true
+                  value:
+                    path: path
+                    sizeInBytes: 5
+                    scopeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    bundleDetails:
+                      maxNumRecentCores: 6
+                      components:
+                      - UniverseLogs
+                      - UniverseLogs
+                      paDumpStartDate: 2022-12-12 13:07:18+00:00
+                      promDumpEndDate: 2022-12-12 13:07:18+00:00
+                      promDumpStartDate: 2022-12-12 13:07:18+00:00
+                      promMetricsFormat: PROMQL_JSON
+                      paDumpEndDate: 2022-12-12 13:07:18+00:00
+                      paMetricsFormat: PROMQL_JSON
+                      promMetricsStepSec: 1
+                      prometheusMetricsTypes:
+                      - MASTER_EXPORT
+                      - MASTER_EXPORT
+                      maxCoreFileSize: 0
+                    endDate: 2022-12-12 13:07:18+00:00
+                    bundleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    creationDate: 2022-12-12 13:07:18+00:00
+                    startDate: 2022-12-12 13:07:18+00:00
+                    expirationDate: 2022-12-12 13:07:18+00:00
+                    status: Running
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get a Support Bundle from a Universe
+      tags:
+      - Support Bundle management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/{sbUUID}/download:
+    get:
+      operationId: downloadSupportBundle
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: uniUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: sbUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/x-compressed:
+              schema:
+                type: string
+              examples:
+                DownloadSupportBundle200Example:
+                  summary: Default downloadSupportBundle 200 response
+                  x-microcks-default: true
+                  value: string
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Download Support Bundle
+      tags:
+      - Support Bundle management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/ybdb_release:
+    get:
+      description: 'WARNING: This is a preview API that could change: list ybdb releases'
+      operationId: listNewReleases
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: deployment_type
+        schema:
+          default: 'null'
+          type: string
+        example: 'null'
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ResponseRelease'
+                type: array
+              examples:
+                ListNewReleases200Example:
+                  summary: Default listNewReleases 200 response
+                  x-microcks-default: true
+                  value:
+                  - release_notes: release_notes
+                    release_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    universes:
+                    - name: name
+                      creation_date: 2024-07-28 01:02:03+00:00
+                      uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    - name: name
+                      creation_date: 2024-07-28 01:02:03+00:00
+                      uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    release_type: release_type
+                    release_date_msecs: 0
+                    state: state
+                    version: version
+                    release_tag: release_tag
+                    yb_type: yb_type
+                    artifacts:
+                    - package_url: package_url
+                      sha256: sha256
+                      package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      platform: LINUX
+                      architecture: x86_64
+                    - package_url: package_url
+                      sha256: sha256
+                      package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      platform: LINUX
+                      architecture: x86_64
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Releases
+      tags:
+      - New Release management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      description: 'WARNING: This is a preview API that could change: create a ybdb release'
+      operationId: createNewRelease
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRelease'
+            examples:
+              CreateNewReleaseRequestExample:
+                summary: Default createNewRelease request
+                x-microcks-default: true
+                value:
+                  release_notes: release_notes
+                  release_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  release_type: release_type
+                  release_date_msecs: 0
+                  version: version
+                  release_tag: release_tag
+                  yb_type: yb_type
+                  artifacts:
+                  - package_url: package_url
+                    sha256: sha256
+                    package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    platform: LINUX
+                    architecture: x86_64
+                  - package_url: package_url
+                    sha256: sha256
+                    package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    platform: LINUX
+                    architecture: x86_64
+        description: Release data to be created
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPCreateSuccess'
+              examples:
+                CreateNewRelease200Example:
+                  summary: Default createNewRelease 200 response
+                  x-microcks-default: true
+                  value:
+                    resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Create a Release
+      tags:
+      - New Release management
+      x-codegen-request-body-name: Release
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/ybdb_release/extract_metadata:
+    post:
+      description: 'WARNING: This is a preview API that could change: start extracting metadata from a remote tgz url'
+      operationId: extractMetadata
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExtractMetadata'
+            examples:
+              ExtractMetadataRequestExample:
+                summary: Default extractMetadata request
+                x-microcks-default: true
+                value:
+                  uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  url: url
+        description: Release URL to extract metadata from
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPCreateSuccess'
+              examples:
+                ExtractMetadata200Example:
+                  summary: Default extractMetadata 200 response
+                  x-microcks-default: true
+                  value:
+                    resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Helper to Extract Release Metadata from a Remote Tarball
+      tags:
+      - Extract metadata from remote tarball
+      x-codegen-request-body-name: Release URL
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/ybdb_release/extract_metadata/{rUUID}:
+    get:
+      description: 'WARNING: This is a preview API that could change: Get extract metadata and its progress.'
+      operationId: extractMetadata
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: rUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseExtractMetadata'
+              examples:
+                ExtractMetadata200Example:
+                  summary: Default extractMetadata 200 response
+                  x-microcks-default: true
+                  value:
+                    release_notes: release_notes
+                    sha256: sha256
+                    metadata_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    release_type: release_type
+                    release_date_msecs: 0
+                    version: version
+                    platform: LINUX
+                    yb_type: YBDB
+                    architecture: x86_64
+                    status: waiting
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get the Extract Release Metadata from a Remote Tarball
+      tags:
+      - Extract metadata from remote tarball
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/ybdb_release/upload:
+    post:
+      description: 'WARNING: This is a preview API that could change: upload release tgz file'
+      operationId: uploadRelease
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPCreateSuccess'
+              examples:
+                UploadRelease200Example:
+                  summary: Default uploadRelease 200 response
+                  x-microcks-default: true
+                  value:
+                    resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Upload a Release Tgz
+      tags:
+      - Upload Release packages
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/ybdb_release/upload/{rUUID}:
+    get:
+      description: 'WARNING: This is a preview API that could change: get uploaded release metadata'
+      operationId: getUploadRelease
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: rUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseExtractMetadata'
+              examples:
+                GetUploadRelease200Example:
+                  summary: Default getUploadRelease 200 response
+                  x-microcks-default: true
+                  value:
+                    release_notes: release_notes
+                    sha256: sha256
+                    metadata_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    release_type: release_type
+                    release_date_msecs: 0
+                    version: version
+                    platform: LINUX
+                    yb_type: YBDB
+                    architecture: x86_64
+                    status: waiting
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get an Uploaded Release Metadata
+      tags:
+      - Upload Release packages
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/ybdb_release/{rUUID}:
+    delete:
+      description: 'WARNING: This is a preview API that could change: delete a ybdb release'
+      operationId: deleteNewRelease
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: rUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                DeleteNewRelease200Example:
+                  summary: Default deleteNewRelease 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Delete a Release
+      tags:
+      - New Release management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      description: 'WARNING: This is a preview API that could change: get a specific ybdb release'
+      operationId: getNewRelease
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: rUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseRelease'
+              examples:
+                GetNewRelease200Example:
+                  summary: Default getNewRelease 200 response
+                  x-microcks-default: true
+                  value:
+                    release_notes: release_notes
+                    release_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    universes:
+                    - name: name
+                      creation_date: 2024-07-28 01:02:03+00:00
+                      uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    - name: name
+                      creation_date: 2024-07-28 01:02:03+00:00
+                      uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    release_type: release_type
+                    release_date_msecs: 0
+                    state: state
+                    version: version
+                    release_tag: release_tag
+                    yb_type: yb_type
+                    artifacts:
+                    - package_url: package_url
+                      sha256: sha256
+                      package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      platform: LINUX
+                      architecture: x86_64
+                    - package_url: package_url
+                      sha256: sha256
+                      package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      platform: LINUX
+                      architecture: x86_64
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get a Release
+      tags:
+      - New Release management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      description: 'WARNING: This is a preview API that could change: update or edit a ybdb release'
+      operationId: updateNewRelease
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: rUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRelease'
+            examples:
+              UpdateNewReleaseRequestExample:
+                summary: Default updateNewRelease request
+                x-microcks-default: true
+                value:
+                  release_notes: release_notes
+                  release_date: 0
+                  state: state
+                  release_tag: release_tag
+                  artifacts:
+                  - package_url: package_url
+                    sha256: sha256
+                    package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    platform: LINUX
+                    architecture: x86_64
+                  - package_url: package_url
+                    sha256: sha256
+                    package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    platform: LINUX
+                    architecture: x86_64
+        description: Release data to be updated
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                UpdateNewRelease200Example:
+                  summary: Default updateNewRelease 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Update a Release
+      tags:
+      - New Release management
+      x-codegen-request-body-name: Release
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/fetch_package:
+    post:
+      description: YbaApi Internal.
+      operationId: fetchPackage
+      parameters:
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PackagesRequestParams'
+            examples:
+              FetchPackageRequestExample:
+                summary: Default fetchPackage request
+                x-microcks-default: true
+                value:
+                  archiveType: archiveType
+                  architectureType: AARCH64
+                  osType: CENTOS
+                  packageName: packageName
+                  buildNumber: buildNumber
+        description: Package to be imported
+        required: true
+      responses:
+        '200':
+          content:
+            application/gzip:
+              schema:
+                type: string
+              examples:
+                FetchPackage200Example:
+                  summary: Default fetchPackage 200 response
+                  x-microcks-default: true
+                  value: string
+          description: successful operation
+      summary: YugabyteDB Anywhere Fetch a Package
+      tags:
+      - PackagesController
+      x-codegen-request-body-name: Package
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/runtime_config/feature_flags:
+    get:
+      description: YbaApi Internal.
+      operationId: listFeatureFlags
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ConfigEntry'
+                type: array
+              examples:
+                ListFeatureFlags200Example:
+                  summary: Default listFeatureFlags 200 response
+                  x-microcks-default: true
+                  value:
+                  - inherited: true
+                    value: value
+                    key: key
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List All the Feature Flag Runtime Config Keys and Their Values.
+      tags:
+      - Runtime configuration
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/runtime_config/mutable_key_info:
+    get:
+      description: List all the mutable runtime config keys with metadata
+      operationId: listKeyInfo
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ConfKeyInfo'
+                type: array
+              examples:
+                ListKeyInfo200Example:
+                  summary: Default listKeyInfo 200 response
+                  x-microcks-default: true
+                  value:
+                  - displayName: displayName
+                    dataType:
+                      name: name
+                    scope: GLOBAL
+                    helpTxt: helpTxt
+                    key: key
+                    tags:
+                    - PUBLIC
+                    - PUBLIC
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Mutable Keys
+      tags:
+      - Runtime configuration
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/runtime_config/mutable_keys:
+    get:
+      description: List all the mutable runtime config keys
+      operationId: listKeys
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+              examples:
+                ListKeys200Example:
+                  summary: Default listKeys 200 response
+                  x-microcks-default: true
+                  value:
+                  - string
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Mutable Keys
+      tags:
+      - Runtime configuration
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    apiKeyAuth:
+      description: API token passed as header
+      in: header
+      name: X-AUTH-YW-API-TOKEN
+      type: apiKey
+  schemas:
+    CreateRelease:
+      description: Release metadata required to create a new release
+      example:
+        release_notes: release_notes
+        release_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        release_type: release_type
+        release_date_msecs: 0
+        version: version
+        release_tag: release_tag
+        yb_type: yb_type
+        artifacts:
+        - package_url: package_url
+          sha256: sha256
+          package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          platform: LINUX
+          architecture: x86_64
+        - package_url: package_url
+          sha256: sha256
+          package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          platform: LINUX
+          architecture: x86_64
+      properties:
+        artifacts:
+          items:
+            $ref: '#/components/schemas/Artifact'
+          type: array
+          example:
+          - package_url: package_url
+            sha256: sha256
+            package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            platform: LINUX
+            architecture: x86_64
+        release_date_msecs:
+          format: int64
+          type: integer
+          example: 1000
+        release_notes:
+          type: string
+          example: example-release_notes
+        release_tag:
+          type: string
+          example: example-tag
+        release_type:
+          type: string
+          example: DEFAULT
+        release_uuid:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        version:
+          type: string
+          example: 2.20.0.0
+        yb_type:
+          type: string
+          example: DEFAULT
+      required:
+      - artifacts
+      - release_date_msecs
+      - release_notes
+      - release_tag
+      - release_type
+      - release_uuid
+      - version
+      - yb_type
+      type: object
+    ReleaseFormData:
+      description: Specification for release locations
+      example:
+        s3:
+          paths:
+            x86_64: x86_64
+            helmChart: helmChart
+            helmChartChecksum: helmChartChecksum
+            x86_64_checksum: x86_64_checksum
+        gcs:
+          paths:
+            x86_64: x86_64
+            helmChart: helmChart
+            helmChartChecksum: helmChartChecksum
+            x86_64_checksum: x86_64_checksum
+        http:
+          paths:
+            x86_64: x86_64
+            helmChart: helmChart
+            helmChartChecksum: helmChartChecksum
+            x86_64_checksum: x86_64_checksum
+        version: version
+      properties:
+        gcs:
+          $ref: '#/components/schemas/GCSLocation'
+        http:
+          $ref: '#/components/schemas/HttpLocation'
+        s3:
+          $ref: '#/components/schemas/S3Location'
+        version:
+          type: string
+          example: 2.20.0.0
+      required:
+      - gcs
+      - http
+      - s3
+      - version
+      type: object
+    ConfigEntry:
+      description: Configuration entry
+      example:
+        inherited: true
+        value: value
+        key: key
+      properties:
+        inherited:
+          description: Is this configuration inherited?
+          type: boolean
+          example: true
+        key:
+          description: Configuration key
+          type: string
+          example: example-key
+        value:
+          description: Configuration value
+          type: string
+          example: example-value
+      type: object
+    HttpLocation:
+      example:
+        paths:
+          x86_64: x86_64
+          helmChart: helmChart
+          helmChartChecksum: helmChartChecksum
+          x86_64_checksum: x86_64_checksum
+      properties:
+        paths:
+          $ref: '#/components/schemas/PackagePaths'
+      type: object
+    ConfDataTypeObject:
+      example:
+        name: name
+      properties:
+        name:
+          type: string
+          example: example-name
+      required:
+      - name
+      type: object
+    ResponseRelease:
+      example:
+        release_notes: release_notes
+        release_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        universes:
+        - name: name
+          creation_date: 2024-07-28 01:02:03+00:00
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - name: name
+          creation_date: 2024-07-28 01:02:03+00:00
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        release_type: release_type
+        release_date_msecs: 0
+        state: state
+        version: version
+        release_tag: release_tag
+        yb_type: yb_type
+        artifacts:
+        - package_url: package_url
+          sha256: sha256
+          package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          platform: LINUX
+          architecture: x86_64
+        - package_url: package_url
+          sha256: sha256
+          package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          platform: LINUX
+          architecture: x86_64
+      properties:
+        artifacts:
+          items:
+            $ref: '#/components/schemas/Artifact'
+          type: array
+          example:
+          - package_url: package_url
+            sha256: sha256
+            package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            platform: LINUX
+            architecture: x86_64
+        release_date_msecs:
+          format: int64
+          type: integer
+          example: 1000
+        release_notes:
+          type: string
+          example: example-release_notes
+        release_tag:
+          type: string
+          example: example-tag
+        release_type:
+          type: string
+          example: DEFAULT
+        release_uuid:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        state:
+          type: string
+          example: ACTIVE
+        universes:
+          items:
+            $ref: '#/components/schemas/Universe'
+          type: array
+          example:
+          - name: name
+            creation_date: '2024-07-28T01:02:03+00:00'
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        version:
+          type: string
+          example: 2.20.0.0
+        yb_type:
+          type: string
+          example: DEFAULT
+      required:
+      - artifacts
+      - release_date_msecs
+      - release_notes
+      - release_tag
+      - release_type
+      - release_uuid
+      - state
+      - universes
+      - version
+      - yb_type
+      type: object
+    ScopedConfig:
+      description: Scoped configuration
+      example:
+        configEntries:
+        - inherited: true
+          value: value
+          key: key
+        - inherited: true
+          value: value
+          key: key
+        mutableScope: true
+        type: GLOBAL
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        configEntries:
+          description: List of configurations
+          items:
+            $ref: '#/components/schemas/ConfigEntry'
+          type: array
+          example:
+          - inherited: true
+            value: value
+            key: key
+        mutableScope:
+          description: Mutability of the scope. Only super admin users can change global scope; other scopes are customer-mutable.
+          type: boolean
+          example: true
+        type:
+          description: Scope type
+          enum:
+          - GLOBAL
+          - CUSTOMER
+          - UNIVERSE
+          - PROVIDER
+          type: string
+          example: GLOBAL
+        uuid:
+          description: Scope UIID
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      type: object
+    YBPCreateSuccess:
+      example:
+        resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        resourceUUID:
+          description: UUID of the successfully created resource
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      type: object
+    GCSLocation:
+      example:
+        paths:
+          x86_64: x86_64
+          helmChart: helmChart
+          helmChartChecksum: helmChartChecksum
+          x86_64_checksum: x86_64_checksum
+      properties:
+        paths:
+          $ref: '#/components/schemas/PackagePaths'
+      type: object
+    PackagePaths:
+      example:
+        x86_64: x86_64
+        helmChart: helmChart
+        helmChartChecksum: helmChartChecksum
+        x86_64_checksum: x86_64_checksum
+      properties:
+        helmChart:
+          description: Path to the Helm chart package
+          type: string
+          example: example-helmChart
+        helmChartChecksum:
+          description: Checksum for the Helm chart package
+          type: string
+          example: example-helmChartChecksum
+        x86_64:
+          description: Path to x86_64 package
+          type: string
+          example: example-x86_64
+        x86_64_checksum:
+          description: Checksum for x86_64 package
+          type: string
+          example: example-x86_64_checksum
+      type: object
+    S3Location:
+      example:
+        paths:
+          x86_64: x86_64
+          helmChart: helmChart
+          helmChartChecksum: helmChartChecksum
+          x86_64_checksum: x86_64_checksum
+      properties:
+        paths:
+          $ref: '#/components/schemas/PackagePaths'
+      type: object
+    ImageBundle:
+      example:
+        metadata:
+          type: YBA_ACTIVE
+          version: version
+        useAsDefault: true
+        name: name
+        active: true
+        details:
+          sshPort: 5
+          regions:
+            key:
+              sshUserOverride: sshUserOverride
+              ybImage: ybImage
+              sshPortOverride: 1
+          useIMDSv2: true
+          globalYbImage: globalYbImage
+          sshUser: sshUser
+          arch: x86_64
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        active:
+          description: Is the ImageBundle Active
+          type: boolean
+          example: true
+        details:
+          $ref: '#/components/schemas/ImageBundleDetails'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        name:
+          description: Image Bundle Name
+          type: string
+          example: example-name
+        useAsDefault:
+          description: Default Image Bundle. A provider can have two defaults, one per architecture
+          type: boolean
+          example: true
+        uuid:
+          description: Image Bundle UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      type: object
+    ConfKeyInfo:
+      example:
+        displayName: displayName
+        dataType:
+          name: name
+        scope: GLOBAL
+        helpTxt: helpTxt
+        key: key
+        tags:
+        - PUBLIC
+        - PUBLIC
+      properties:
+        dataType:
+          $ref: '#/components/schemas/ConfDataTypeObject'
+        displayName:
+          type: string
+          example: example-displayName
+        helpTxt:
+          type: string
+          example: example-helpTxt
+        key:
+          type: string
+          example: example-key
+        scope:
+          enum:
+          - GLOBAL
+          - CUSTOMER
+          - UNIVERSE
+          - PROVIDER
+          type: string
+          example: GLOBAL
+        tags:
+          items:
+            enum:
+            - PUBLIC
+            - INTERNAL
+            - FEATURE_FLAG
+            type: string
+          type: array
+          example:
+          - PUBLIC
+      required:
+      - dataType
+      - displayName
+      - helpTxt
+      - key
+      - scope
+      - tags
+      type: object
+    MaintenanceWindowPagedResponse:
+      example:
+        entities:
+        - alertConfigurationFilter:
+            severity: SEVERE
+            template: REPLICATION_LAG
+            destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+            active: true
+            destinationType: NO_DESTINATION
+            targetType: PLATFORM
+            target:
+              all: true
+              uuids:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            uuids:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          createTime: 2022-12-12 13:07:18+00:00
+          suppressHealthCheckNotificationsConfig:
+            suppressAllUniverses: true
+            universeUUIDSet:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+          description: description
+          startTime: 2022-12-12 13:07:18+00:00
+          endTime: 2022-12-12 13:07:18+00:00
+          state: FINISHED
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - alertConfigurationFilter:
+            severity: SEVERE
+            template: REPLICATION_LAG
+            destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+            active: true
+            destinationType: NO_DESTINATION
+            targetType: PLATFORM
+            target:
+              all: true
+              uuids:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            uuids:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          createTime: 2022-12-12 13:07:18+00:00
+          suppressHealthCheckNotificationsConfig:
+            suppressAllUniverses: true
+            universeUUIDSet:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+          description: description
+          startTime: 2022-12-12 13:07:18+00:00
+          endTime: 2022-12-12 13:07:18+00:00
+          state: FINISHED
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        hasPrev: true
+        hasNext: true
+        totalCount: 0
+      properties:
+        entities:
+          items:
+            $ref: '#/components/schemas/MaintenanceWindow'
+          type: array
+          example:
+          - alertConfigurationFilter:
+              severity: SEVERE
+              template: REPLICATION_LAG
+              destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              name: name
+              active: true
+              destinationType: NO_DESTINATION
+              targetType: PLATFORM
+              target:
+                all: true
+                uuids:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              uuids:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            createTime: '2022-12-12T13:07:18+00:00'
+            suppressHealthCheckNotificationsConfig:
+              suppressAllUniverses: true
+              universeUUIDSet:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+            description: description
+            startTime: '2022-12-12T13:07:18+00:00'
+            endTime: '2022-12-12T13:07:18+00:00'
+            state: FINISHED
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        hasNext:
+          type: boolean
+          example: true
+        hasPrev:
+          type: boolean
+          example: true
+        totalCount:
+          format: int32
+          type: integer
+          example: 10
+      required:
+      - entities
+      - hasNext
+      - hasPrev
+      - totalCount
+      type: object
+    SupportBundleSizeEstimateResponse:
+      example:
+        data:
+          key:
+            key: 0
+      properties:
+        data:
+          additionalProperties:
+            additionalProperties:
+              format: int64
+              type: integer
+            type: object
+          description: A map of universe node names to component sizes for the given support bundle payload. Global component sizes are mapped to "YBA" node.
+          type: object
+          example: {}
+      type: object
+    AlertConfigurationTarget:
+      description: Alert target. Set to `all`, or specify one or more target UUIDs.
+      example:
+        all: true
+        uuids:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        all:
+          description: Alert applicable to all targets
+          type: boolean
+          example: true
+        uuids:
+          description: Alert target UUIDs
+          items:
+            format: uuid
+            type: string
+          type: array
+          uniqueItems: true
+          example:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      type: object
+    BundleInfo:
+      example:
+        sshUserOverride: sshUserOverride
+        ybImage: ybImage
+        sshPortOverride: 1
+      properties:
+        sshPortOverride:
+          description: sshPortOverride for the bundle. <b style="color:#ff0000">Deprecated since YBA version 2.20.3.0.</b> Use imageBundles.details.sshUser instead.
+          format: int32
+          type: integer
+          example: 5433
+        sshUserOverride:
+          description: sshUserOverride for the bundle. <b style="color:#ff0000">Deprecated since YBA version 2.20.3.0.</b> Use imageBundles.details.sshUser instead.
+          type: string
+          example: example-sshUserOverride
+        ybImage:
+          type: string
+          example: example-ybImage
+      type: object
+    PackagesRequestParams:
+      description: Packages request parameters
+      example:
+        archiveType: archiveType
+        architectureType: AARCH64
+        osType: CENTOS
+        packageName: packageName
+        buildNumber: buildNumber
+      properties:
+        architectureType:
+          description: Architecture Type
+          enum:
+          - AARCH64
+          - X86_64
+          type: string
+          example: AARCH64
+        archiveType:
+          description: Archive Type
+          type: string
+          example: DEFAULT
+        buildNumber:
+          description: Build number
+          type: string
+          example: example-buildNumber
+        osType:
+          description: OS Type
+          enum:
+          - CENTOS
+          - ALMALINUX
+          - DARWIN
+          - LINUX
+          - EL8
+          type: string
+          example: CENTOS
+        packageName:
+          description: Package name
+          type: string
+          example: example-packageName
+      required:
+      - buildNumber
+      type: object
+    SupportBundle:
+      example:
+        path: path
+        sizeInBytes: 5
+        scopeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        bundleDetails:
+          maxNumRecentCores: 6
+          components:
+          - UniverseLogs
+          - UniverseLogs
+          paDumpStartDate: 2022-12-12 13:07:18+00:00
+          promDumpEndDate: 2022-12-12 13:07:18+00:00
+          promDumpStartDate: 2022-12-12 13:07:18+00:00
+          promMetricsFormat: PROMQL_JSON
+          paDumpEndDate: 2022-12-12 13:07:18+00:00
+          paMetricsFormat: PROMQL_JSON
+          promMetricsStepSec: 1
+          prometheusMetricsTypes:
+          - MASTER_EXPORT
+          - MASTER_EXPORT
+          maxCoreFileSize: 0
+        endDate: 2022-12-12 13:07:18+00:00
+        bundleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        creationDate: 2022-12-12 13:07:18+00:00
+        startDate: 2022-12-12 13:07:18+00:00
+        expirationDate: 2022-12-12 13:07:18+00:00
+        status: Running
+      properties:
+        bundleDetails:
+          $ref: '#/components/schemas/BundleDetails'
+        bundleUUID:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        creationDate:
+          description: Support bundle creation date.
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        endDate:
+          description: Support bundle end date.
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        expirationDate:
+          description: Support bundle expiration date.
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        path:
+          type: string
+          example: /var/lib/yugabyte/example
+        scopeUUID:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        sizeInBytes:
+          description: Size in bytes of the support bundle
+          format: int64
+          type: integer
+          example: 10
+        startDate:
+          description: Support bundle start date.
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        status:
+          enum:
+          - Running
+          - Success
+          - Failed
+          - Aborted
+          type: string
+          example: Running
+      required:
+      - bundleDetails
+      - bundleUUID
+      - path
+      - scopeUUID
+      - status
+      type: object
+    Metadata:
+      example:
+        type: YBA_ACTIVE
+        version: version
+      properties:
+        type:
+          enum:
+          - YBA_ACTIVE
+          - YBA_DEPRECATED
+          - CUSTOM
+          type: string
+          example: YBA_ACTIVE
+        version:
+          type: string
+          example: 2.20.0.0
+      required:
+      - type
+      - version
+      type: object
+    SupportBundleFormData:
+      description: Support bundle form metadata
+      example:
+        maxNumRecentCores: 1
+        components:
+        - UniverseLogs
+        - UniverseLogs
+        paDumpStartDate: 2022-12-12 13:07:18+00:00
+        promDumpEndDate: 2022-12-12 13:07:18+00:00
+        promDumpStartDate: 2022-12-12 13:07:18+00:00
+        endDate: 2022-12-12 13:07:18+00:00
+        filterPgAuditLogs: true
+        prometheusMetricsTypes:
+        - MASTER_EXPORT
+        - MASTER_EXPORT
+        promDumpDownSample: true
+        promQueries:
+          key: promQueries
+        stepPromDumpSecs: 5
+        batchDurationPromDumpMins: 0
+        promMetricsFormat: PROMQL_JSON
+        paDumpEndDate: 2022-12-12 13:07:18+00:00
+        paMetricsFormat: PROMQL_JSON
+        startDate: 2022-12-12 13:07:18+00:00
+        maxCoreFileSize: 6
+        promExportType: PROMQL
+      properties:
+        batchDurationPromDumpMins:
+          description: Batch duration for the prometheus dump (in minutes). Overrides global default. Use with stepPromDumpSecs to get longer historical trends while keeping the same number of data points
+          format: int32
+          type: integer
+          example: 60
+        components:
+          description: List of components to be included in the support bundle
+          items:
+            enum:
+            - UniverseLogs
+            - OutputFiles
+            - ErrorFiles
+            - CoreFiles
+            - GFlags
+            - Instance
+            - ConsensusMeta
+            - TabletMeta
+            - YbcLogs
+            - NodeAgent
+            - SystemLogs
+            - TabletReport
+            - K8sInfo
+            - YbaMetadata
+            - PrometheusMetrics
+            - PerfAdvisor
+            - ApplicationLogs
+            type: string
+          type: array
+          example:
+          - UniverseLogs
+        endDate:
+          description: End date to filter logs till
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        filterPgAuditLogs:
+          description: Specifies if Postgres audit logs should be filtered out when collecting universe logs.
+          type: boolean
+          example: true
+        maxCoreFileSize:
+          description: Max size in bytes of the recent collected cores (if any)
+          format: int64
+          type: integer
+          example: 10
+        maxNumRecentCores:
+          description: Max number of the most recent cores to collect (if any)
+          format: int32
+          type: integer
+          example: 10
+        paDumpEndDate:
+          description: End date to filter Perf Advisor data
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        paDumpStartDate:
+          description: Start date to filter Perf Advisor data
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        paMetricsFormat:
+          description: Specifies metrics format.
+          enum:
+          - PROMQL_JSON
+          - PROM_CHUNK
+          type: string
+          example: PROMQL_JSON
+        promDumpDownSample:
+          description: When promExportType is REMOTE_READ, whether to downsample raw data points by yb.support_bundle.step_prom_dump_secs or stepPromDumpSecs. Ignored for PROMQL (always downsampled). Default true.
+          type: boolean
+          example: true
+        promDumpEndDate:
+          description: End date to filter prometheus metrics till
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        promDumpStartDate:
+          description: Start date to filter prometheus metrics from
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        promExportType:
+          description: 'How to export Prometheus metrics: PROMQL (query_range) or REMOTE_READ. Default PROMQL for backward compatibility.'
+          enum:
+          - PROMQL
+          - REMOTE_READ
+          type: string
+          example: PROMQL
+        promMetricsFormat:
+          description: 'When promExportType is REMOTE_READ, format for remote read export: PROMQL_JSON or PROM_CHUNK. Default PROMQL_JSON for backward compatibility.'
+          enum:
+          - PROMQL_JSON
+          - PROM_CHUNK
+          type: string
+          example: PROMQL_JSON
+        promQueries:
+          additionalProperties:
+            type: string
+          description: Map of query names to custom PromQL queries to collect in promdump
+          type: object
+          example: {}
+        prometheusMetricsTypes:
+          description: List of exports to be included in the prometheus dump
+          items:
+            enum:
+            - MASTER_EXPORT
+            - NODE_EXPORT
+            - PLATFORM
+            - PROMETHEUS
+            - TSERVER_EXPORT
+            - CQL_EXPORT
+            - YSQL_EXPORT
+            type: string
+          type: array
+          example:
+          - MASTER_EXPORT
+        startDate:
+          description: Start date to filter logs from
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        stepPromDumpSecs:
+          description: Metrics downsample step (in seconds). Overrides global default. Use with batchDurationPromDumpMins to get longer historical trends while keeping the same number of data points
+          format: int32
+          type: integer
+          example: 100
+      required:
+      - components
+      - endDate
+      - startDate
+      type: object
+    BundleDetails:
+      example:
+        maxNumRecentCores: 6
+        components:
+        - UniverseLogs
+        - UniverseLogs
+        paDumpStartDate: 2022-12-12 13:07:18+00:00
+        promDumpEndDate: 2022-12-12 13:07:18+00:00
+        promDumpStartDate: 2022-12-12 13:07:18+00:00
+        promMetricsFormat: PROMQL_JSON
+        paDumpEndDate: 2022-12-12 13:07:18+00:00
+        paMetricsFormat: PROMQL_JSON
+        promMetricsStepSec: 1
+        prometheusMetricsTypes:
+        - MASTER_EXPORT
+        - MASTER_EXPORT
+        maxCoreFileSize: 0
+      properties:
+        components:
+          items:
+            enum:
+            - UniverseLogs
+            - OutputFiles
+            - ErrorFiles
+            - CoreFiles
+            - GFlags
+            - Instance
+            - ConsensusMeta
+            - TabletMeta
+            - YbcLogs
+            - NodeAgent
+            - SystemLogs
+            - TabletReport
+            - K8sInfo
+            - YbaMetadata
+            - PrometheusMetrics
+            - PerfAdvisor
+            - ApplicationLogs
+            type: string
+          type: array
+          example:
+          - UniverseLogs
+        maxCoreFileSize:
+          description: Max size of the collected cores (if any)
+          format: int64
+          type: integer
+          example: 10
+        maxNumRecentCores:
+          description: Max number of most recent cores to collect (if any)
+          format: int32
+          type: integer
+          example: 10
+        paDumpEndDate:
+          description: End date to filter Perf Advisor data
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        paDumpStartDate:
+          description: Start date to filter Perf Advisor data
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        paMetricsFormat:
+          description: Specifies PA Dump metrics format.
+          enum:
+          - PROMQL_JSON
+          - PROM_CHUNK
+          type: string
+          example: PROMQL_JSON
+        promDumpEndDate:
+          description: End date to filter prometheus metrics till
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        promDumpStartDate:
+          description: Start date to filter prometheus metrics from
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        promMetricsFormat:
+          description: Specifies Prom Dump metrics format.
+          enum:
+          - PROMQL_JSON
+          - PROM_CHUNK
+          type: string
+          example: PROMQL_JSON
+        promMetricsStepSec:
+          description: Specifies Prom Dump metrics step in seconds.
+          format: int32
+          type: integer
+          example: 100
+        prometheusMetricsTypes:
+          description: List of exports to be included in the prometheus dump
+          items:
+            enum:
+            - MASTER_EXPORT
+            - NODE_EXPORT
+            - PLATFORM
+            - PROMETHEUS
+            - TSERVER_EXPORT
+            - CQL_EXPORT
+            - YSQL_EXPORT
+            type: string
+          type: array
+          example:
+          - MASTER_EXPORT
+      required:
+      - components
+      type: object
+    MaintenanceWindowPagedApiQuery:
+      example:
+        filter:
+          states:
+          - FINISHED
+          - FINISHED
+          uuids:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        offset: 6
+        needTotalCount: true
+        limit: 0
+        sortBy: uuid
+        direction: ASC
+      properties:
+        direction:
+          enum:
+          - ASC
+          - DESC
+          type: string
+          example: ASC
+        filter:
+          $ref: '#/components/schemas/MaintenanceWindowApiFilter'
+        limit:
+          format: int32
+          type: integer
+          example: 10
+        needTotalCount:
+          type: boolean
+          example: true
+        offset:
+          format: int32
+          type: integer
+          example: 100
+        sortBy:
+          enum:
+          - uuid
+          - name
+          - createTime
+          - startTime
+          - endTime
+          - state
+          type: string
+          example: uuid
+      required:
+      - direction
+      - filter
+      - limit
+      - needTotalCount
+      - offset
+      - sortBy
+      type: object
+    YBPSuccess:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+          example: Example message
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+          example: true
+      type: object
+    MaintenanceWindowApiFilter:
+      example:
+        states:
+        - FINISHED
+        - FINISHED
+        uuids:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        states:
+          items:
+            enum:
+            - FINISHED
+            - ACTIVE
+            - PENDING
+            type: string
+          type: array
+          uniqueItems: true
+          example:
+          - FINISHED
+        uuids:
+          items:
+            format: uuid
+            type: string
+          type: array
+          uniqueItems: true
+          example:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      required:
+      - states
+      - uuids
+      type: object
+    Artifact:
+      example:
+        package_url: package_url
+        sha256: sha256
+        package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        platform: LINUX
+        architecture: x86_64
+      properties:
+        architecture:
+          enum:
+          - x86_64
+          - aarch64
+          type: string
+          example: x86_64
+        package_file_id:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        package_url:
+          type: string
+          example: https://example.com
+        platform:
+          enum:
+          - LINUX
+          - KUBERNETES
+          type: string
+          example: LINUX
+        sha256:
+          type: string
+          example: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+      required:
+      - architecture
+      - package_file_id
+      - package_url
+      - platform
+      - sha256
+      type: object
+    RuntimeConfigData:
+      description: Runtime configuration data
+      example:
+        scopedConfigList:
+        - configEntries:
+          - inherited: true
+            value: value
+            key: key
+          - inherited: true
+            value: value
+            key: key
+          mutableScope: true
+          type: GLOBAL
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - configEntries:
+          - inherited: true
+            value: value
+            key: key
+          - inherited: true
+            value: value
+            key: key
+          mutableScope: true
+          type: GLOBAL
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        scopedConfigList:
+          description: List of scoped configurations
+          items:
+            $ref: '#/components/schemas/ScopedConfig'
+          type: array
+          example:
+          - configEntries:
+            - inherited: true
+              value: value
+              key: key
+            - inherited: true
+              value: value
+              key: key
+            mutableScope: true
+            type: GLOBAL
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      type: object
+    ReleaseMetadata:
+      description: Yugabyte release metadata
+      example:
+        s3:
+          paths:
+            x86_64: x86_64
+            helmChart: helmChart
+            helmChartChecksum: helmChartChecksum
+            x86_64_checksum: x86_64_checksum
+        notes:
+        - notes
+        - notes
+        gcs:
+          paths:
+            x86_64: x86_64
+            helmChart: helmChart
+            helmChartChecksum: helmChartChecksum
+            x86_64_checksum: x86_64_checksum
+        filePath: filePath
+        http:
+          paths:
+            x86_64: x86_64
+            helmChart: helmChart
+            helmChartChecksum: helmChartChecksum
+            x86_64_checksum: x86_64_checksum
+        state: ACTIVE
+        imageTag: imageTag
+        packages:
+        - path: path
+          arch: x86_64
+        - path: path
+          arch: x86_64
+        chartPath: chartPath
+      properties:
+        chartPath:
+          description: Helm chart path
+          type: string
+          example: /var/lib/yugabyte/example
+        filePath:
+          description: Release file path
+          type: string
+          example: /var/lib/yugabyte/example
+        gcs:
+          $ref: '#/components/schemas/GCSLocation'
+        http:
+          $ref: '#/components/schemas/HttpLocation'
+        imageTag:
+          description: Release image tag
+          type: string
+          example: example-tag
+        notes:
+          description: Release notes
+          items:
+            type: string
+          type: array
+          example:
+          - example-notes
+        packages:
+          description: Release packages
+          items:
+            $ref: '#/components/schemas/Package'
+          type: array
+          example:
+          - path: path
+            arch: x86_64
+        s3:
+          $ref: '#/components/schemas/S3Location'
+        state:
+          description: Release state
+          enum:
+          - ACTIVE
+          - DISABLED
+          - DELETED
+          example: ACTIVE
+          type: string
+      type: object
+    YBPTask:
+      example:
+        taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        resourceUUID:
+          description: UUID of the resource being modified by the task
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        taskUUID:
+          description: Task UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      type: object
+    SuppressHealthCheckNotificationsConfig:
+      example:
+        suppressAllUniverses: true
+        universeUUIDSet:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        suppressAllUniverses:
+          description: Suppress health check notifications on all the universes (including future universes)
+          type: boolean
+          example: true
+        universeUUIDSet:
+          description: Set of universe uuids to suppress health check notifications on
+          items:
+            format: uuid
+            type: string
+          type: array
+          uniqueItems: true
+          example:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      type: object
+    Universe:
+      example:
+        name: name
+        creation_date: 2024-07-28 01:02:03+00:00
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        creation_date:
+          description: Universe creation date
+          example: 2024-07-28 01:02:03+00:00
+          format: date-time
+          type: string
+        name:
+          type: string
+          example: example-name
+        uuid:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      required:
+      - name
+      - uuid
+      type: object
+    ImageBundleDetails:
+      example:
+        sshPort: 5
+        regions:
+          key:
+            sshUserOverride: sshUserOverride
+            ybImage: ybImage
+            sshPortOverride: 1
+        useIMDSv2: true
+        globalYbImage: globalYbImage
+        sshUser: sshUser
+        arch: x86_64
+      properties:
+        arch:
+          description: Architecture type for the image bundle
+          enum:
+          - x86_64
+          - aarch64
+          type: string
+          example: x86_64
+        globalYbImage:
+          description: Global YB image for the bundle
+          type: string
+          example: example-globalYbImage
+        regions:
+          additionalProperties:
+            $ref: '#/components/schemas/BundleInfo'
+          description: Regions override for image bundle
+          type: object
+          example: {}
+        sshPort:
+          format: int32
+          type: integer
+          example: 5433
+        sshUser:
+          type: string
+          example: example-sshUser
+        useIMDSv2:
+          type: boolean
+          example: true
+      type: object
+    Package:
+      example:
+        path: path
+        arch: x86_64
+      properties:
+        arch:
+          enum:
+          - x86_64
+          - aarch64
+          type: string
+          example: x86_64
+        path:
+          type: string
+          example: /var/lib/yugabyte/example
+      type: object
+    ExtractMetadata:
+      description: url to release TGZ to extract metadata from
+      example:
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        url: url
+      properties:
+        url:
+          type: string
+          example: https://example.com
+        uuid:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      required:
+      - url
+      - uuid
+      type: object
+    UpdateRelease:
+      description: Release metadata required to create a new release
+      example:
+        release_notes: release_notes
+        release_date: 0
+        state: state
+        release_tag: release_tag
+        artifacts:
+        - package_url: package_url
+          sha256: sha256
+          package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          platform: LINUX
+          architecture: x86_64
+        - package_url: package_url
+          sha256: sha256
+          package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          platform: LINUX
+          architecture: x86_64
+      properties:
+        artifacts:
+          items:
+            $ref: '#/components/schemas/Artifact'
+          type: array
+          example:
+          - package_url: package_url
+            sha256: sha256
+            package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            platform: LINUX
+            architecture: x86_64
+        release_date:
+          format: int64
+          type: integer
+          example: 1000
+        release_notes:
+          type: string
+          example: example-release_notes
+        release_tag:
+          type: string
+          example: example-tag
+        state:
+          type: string
+          example: ACTIVE
+      required:
+      - artifacts
+      - release_date
+      - release_notes
+      - release_tag
+      - state
+      type: object
+    MaintenanceWindow:
+      description: Maintenance Window
+      example:
+        alertConfigurationFilter:
+          severity: SEVERE
+          template: REPLICATION_LAG
+          destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+          active: true
+          destinationType: NO_DESTINATION
+          targetType: PLATFORM
+          target:
+            all: true
+            uuids:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          uuids:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        createTime: 2022-12-12 13:07:18+00:00
+        suppressHealthCheckNotificationsConfig:
+          suppressAllUniverses: true
+          universeUUIDSet:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name: name
+        description: description
+        startTime: 2022-12-12 13:07:18+00:00
+        endTime: 2022-12-12 13:07:18+00:00
+        state: FINISHED
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        alertConfigurationFilter:
+          $ref: '#/components/schemas/AlertConfigurationApiFilter'
+        createTime:
+          description: Creation time
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        customerUUID:
+          description: Customer UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        description:
+          description: Description
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+          example: Example description
+        endTime:
+          description: End time
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        name:
+          description: Name
+          maxLength: 1000
+          minLength: 1
+          type: string
+          example: example-name
+        startTime:
+          description: Start time
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        state:
+          description: State
+          enum:
+          - FINISHED
+          - ACTIVE
+          - PENDING
+          readOnly: true
+          type: string
+          example: FINISHED
+        suppressHealthCheckNotificationsConfig:
+          $ref: '#/components/schemas/SuppressHealthCheckNotificationsConfig'
+        uuid:
+          description: Maintenance window UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      required:
+      - alertConfigurationFilter
+      - createTime
+      - customerUUID
+      - description
+      - endTime
+      - name
+      - startTime
+      type: object
+    ResponseExtractMetadata:
+      example:
+        release_notes: release_notes
+        sha256: sha256
+        metadata_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        release_type: release_type
+        release_date_msecs: 0
+        version: version
+        platform: LINUX
+        yb_type: YBDB
+        architecture: x86_64
+        status: waiting
+      properties:
+        architecture:
+          enum:
+          - x86_64
+          - aarch64
+          type: string
+          example: x86_64
+        metadata_uuid:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        platform:
+          enum:
+          - LINUX
+          - KUBERNETES
+          type: string
+          example: LINUX
+        release_date_msecs:
+          format: int64
+          type: integer
+          example: 1000
+        release_notes:
+          type: string
+          example: example-release_notes
+        release_type:
+          type: string
+          example: DEFAULT
+        sha256:
+          type: string
+          example: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+        status:
+          enum:
+          - waiting
+          - running
+          - success
+          - failure
+          type: string
+          example: waiting
+        version:
+          type: string
+          example: 2.20.0.0
+        yb_type:
+          enum:
+          - YBDB
+          type: string
+          example: YBDB
+      required:
+      - architecture
+      - metadata_uuid
+      - platform
+      - release_date_msecs
+      - release_notes
+      - release_type
+      - sha256
+      - status
+      - version
+      - yb_type
+      type: object
+    AlertConfigurationApiFilter:
+      example:
+        severity: SEVERE
+        template: REPLICATION_LAG
+        destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name: name
+        active: true
+        destinationType: NO_DESTINATION
+        targetType: PLATFORM
+        target:
+          all: true
+          uuids:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        uuids:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        active:
+          description: Whether the alert configuration is active.
+          type: boolean
+          example: true
+        destinationType:
+          description: 'The destination type of the alert configuration. '
+          enum:
+          - NO_DESTINATION
+          - DEFAULT_DESTINATION
+          - SELECTED_DESTINATION
+          type: string
+          example: NO_DESTINATION
+        destinationUuid:
+          description: 'The destination uuid of the alert configuration. '
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name:
+          description: The name of the alert configuration.
+          type: string
+          example: example-name
+        severity:
+          description: The severity of the alert configuration.
+          enum:
+          - SEVERE
+          - WARNING
+          type: string
+          example: SEVERE
+        target:
+          $ref: '#/components/schemas/AlertConfigurationTarget'
+        targetType:
+          description: The target type of the alert configuration.
+          enum:
+          - PLATFORM
+          - UNIVERSE
+          type: string
+          example: PLATFORM
+        template:
+          description: The template of the alert configuration.
+          enum:
+          - REPLICATION_LAG
+          - CLOCK_SKEW
+          - CLOCK_SYNC_CHECK_FAILED
+          - MEMORY_CONSUMPTION
+          - HEALTH_CHECK_ERROR
+          - HEALTH_CHECK_NOTIFICATION_ERROR
+          - UNIVERSE_METRIC_COLLECTION_FAILURE
+          - BACKUP_FAILURE
+          - BACKUP_DELETION_FAILURE
+          - BACKUP_SCHEDULE_FAILURE
+          - INACTIVE_CRON_NODES
+          - ALERT_QUERY_FAILED
+          - ALERT_CONFIG_WRITING_FAILED
+          - ALERT_NOTIFICATION_ERROR
+          - ALERT_NOTIFICATION_CHANNEL_ERROR
+          - NODE_DOWN
+          - NODE_RESTART
+          - NODE_CPU_USAGE
+          - NODE_DISK_USAGE
+          - NODE_SYSTEM_DISK_USAGE
+          - NODE_FILE_DESCRIPTORS_USAGE
+          - NODE_OOM_KILLS
+          - DB_VERSION_MISMATCH
+          - DB_INSTANCE_DOWN
+          - DB_INSTANCE_RESTART
+          - DB_FATAL_LOGS
+          - DB_ERROR_LOGS
+          - DB_CORE_FILES
+          - DB_YSQL_CONNECTION
+          - DB_YCQL_CONNECTION
+          - DB_REDIS_CONNECTION
+          - DB_MEMORY_OVERLOAD
+          - DB_COMPACTION_OVERLOAD
+          - DB_DRIVE_FAILURE
+          - DB_WRITE_READ_TEST_ERROR
+          - DDL_ATOMICITY_CHECK
+          - NODE_TO_NODE_CA_CERT_EXPIRY
+          - NODE_TO_NODE_CERT_EXPIRY
+          - CLIENT_TO_NODE_CA_CERT_EXPIRY
+          - CLIENT_TO_NODE_CERT_EXPIRY
+          - ENCRYPTION_AT_REST_CONFIG_EXPIRY
+          - UNIVERSE_KMS_KEY_STATUS
+          - UNIVERSE_TSERVER_CONNECTIVITY_ERROR
+          - SSH_KEY_EXPIRY
+          - SSH_KEY_ROTATION_FAILURE
+          - PITR_CONFIG_FAILURE
+          - YSQL_OP_AVG_LATENCY
+          - YCQL_OP_AVG_LATENCY
+          - YSQL_OP_P99_LATENCY
+          - YCQL_OP_P99_LATENCY
+          - HIGH_NUM_YSQL_CONNECTIONS
+          - HIGH_NUM_YCQL_CONNECTIONS
+          - HIGH_NUM_YEDIS_CONNECTIONS
+          - YSQL_THROUGHPUT
+          - YCQL_THROUGHPUT
+          - YCQL_MICROSECOND_TIMESTAMPS_DETECTED
+          - MASTER_LEADER_MISSING
+          - MASTER_UNDER_REPLICATED
+          - LEADERLESS_TABLETS
+          - UNDER_REPLICATED_TABLETS
+          - PRIVATE_ACCESS_KEY_STATUS
+          - UNIVERSE_OS_UPDATE_REQUIRED
+          - DB_YCQL_WEB_SERVER_DOWN
+          - DB_YSQL_WEB_SERVER_DOWN
+          - INCREASED_REMOTE_BOOTSTRAPS
+          - TABLET_SERVER_AVG_READ_LATENCY
+          - TABLET_SERVER_AVG_WRITE_LATENCY
+          - REACTOR_DELAYS
+          - RPC_QUEUE_SIZE
+          - LOG_CACHE_SIZE
+          - CACHE_MISS
+          - HA_STANDBY_SYNC
+          - NODE_AGENT_DOWN
+          - NODE_AGENT_MISSING
+          - UNIVERSE_RELEASE_FILES_STATUS
+          - HA_VERSION_MISMATCH
+          - TABLET_PEERS_GUARDRAIL
+          - XCLUSTER_CONFIG_TABLE_BAD_STATE
+          - NODE_CLOCK_DRIFT
+          - UNIVERSE_UNEXPECTED_MASTERS_RUNNING
+          - UNIVERSE_UNEXPECTED_TSERVERS_RUNNING
+          - SAFETIME_LAG
+          - CONTINUOUS_BACKUPS_STATUS
+          - THP_RSS_ISSUE
+          - THP_INCORRECT_SETTINGS
+          - YNP_VERSION_SKEW
+          - CDCSDK_FLUSH_LAG
+          - CDCSDK_EXPIRY
+          - OTEL_LOG_EXPORT_FAILURE
+          - OTEL_METRIC_EXPORT_FAILURE
+          type: string
+          example: REPLICATION_LAG
+        uuids:
+          description: The uuids of the alert configurations.
+          items:
+            format: uuid
+            type: string
+          type: array
+          uniqueItems: true
+          example:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      type: object

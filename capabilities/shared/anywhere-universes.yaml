@@ -1,0 +1,1372 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "YugabyteDB Anywhere v1 Universe Management"
+  description: >-
+    Universe management subset of the YugabyteDB Anywhere v1 REST API. Covers
+    universe lifecycle (create, list, get, delete), pause and resume,
+    cluster operations (primary and read-only), tables, tablespaces, PITR
+    configurations, software/GFlag/TLS/VM/systemd upgrades, restart and
+    rollback, query monitoring, and YBC management. Authentication uses the
+    X-AUTH-YW-API-TOKEN HTTP header.
+  tags:
+    - YugabyteDB
+    - Anywhere
+    - Universes
+    - Self-Managed
+    - Distributed SQL
+    - Upgrades
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      YBA_API_TOKEN: YBA_API_TOKEN
+      YBA_HOST: YBA_HOST
+
+capability:
+  consumes:
+    - type: http
+      namespace: anywhere-universes
+      baseUri: "{{YBA_HOST}}"
+      description: "YugabyteDB Anywhere v1 universe management API."
+      authentication:
+        type: apikey
+        key: X-AUTH-YW-API-TOKEN
+        value: "{{YBA_API_TOKEN}}"
+        placement: header
+      resources:
+
+        - name: universes
+          path: /api/v1/customers/{cUUID}/universes
+          description: "Universe collection"
+          operations:
+            - name: list-universes
+              method: GET
+              description: "List universes for a customer"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                  description: "Customer UUID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-all-clusters
+              method: POST
+              description: "Create a universe with all clusters"
+              path: /clusters
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  clusters: "{{tools.clusters}}"
+                  nodeDetailsSet: "{{tools.nodeDetailsSet}}"
+                  rootCA: "{{tools.rootCA}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: import-universe
+              method: POST
+              description: "Import an existing universe into Anywhere"
+              path: /import
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  universeUUID: "{{tools.universeUUID}}"
+                  masterAddresses: "{{tools.masterAddresses}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: universe-by-id
+          path: /api/v1/customers/{cUUID}/universes/{uniUUID}
+          description: "Individual universe"
+          operations:
+            - name: get-universe
+              method: GET
+              description: "Get universe details"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: uniUUID
+                  in: path
+                  type: string
+                  required: true
+                  description: "Universe UUID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-universe
+              method: DELETE
+              description: "Delete a universe"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: uniUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: isForceDelete
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "Force delete even if some operations fail"
+                - name: isDeleteBackups
+                  in: query
+                  type: boolean
+                  required: false
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: universe-status
+          path: /api/v1/customers/{cUUID}/universes/{uniUUID}/status
+          description: "Universe status"
+          operations:
+            - name: universe-status
+              method: GET
+              description: "Get current status of a universe"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: uniUUID
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: universe-pause
+          path: /api/v1/customers/{cUUID}/universes/{uniUUID}/pause
+          description: "Pause a universe"
+          operations:
+            - name: pause-universe
+              method: POST
+              description: "Pause a running universe"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: uniUUID
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: universe-resume
+          path: /api/v1/customers/{cUUID}/universes/{uniUUID}/resume
+          description: "Resume a paused universe"
+          operations:
+            - name: resume-universe
+              method: POST
+              description: "Resume a paused universe"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: uniUUID
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: universe-health-check
+          path: /api/v1/customers/{cUUID}/universes/{uniUUID}/health_check
+          description: "Run a health check"
+          operations:
+            - name: health-check-universe
+              method: GET
+              description: "Run a health check on a universe"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: uniUUID
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: trigger-health-check
+              method: GET
+              description: "Trigger an asynchronous health check"
+              path: /trigger_health_check
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: uniUUID
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: universe-clusters-primary
+          path: /api/v1/customers/{cUUID}/universes/{uniUUID}/clusters/primary
+          description: "Primary cluster operations"
+          operations:
+            - name: update-primary-cluster
+              method: PUT
+              description: "Update the primary cluster"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: uniUUID
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  clusters: "{{tools.clusters}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: universe-clusters-read-only
+          path: /api/v1/customers/{cUUID}/universes/{uniUUID}/clusters/read_only
+          description: "Read-only cluster operations"
+          operations:
+            - name: create-read-only-cluster
+              method: POST
+              description: "Add a read-only cluster"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: uniUUID
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  clusters: "{{tools.clusters}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-read-only-cluster
+              method: PUT
+              description: "Update the read-only cluster"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: uniUUID
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  clusters: "{{tools.clusters}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-readonly-cluster
+              method: DELETE
+              description: "Delete a read-only cluster"
+              path: /{clustUUID}
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: uniUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: clustUUID
+                  in: path
+                  type: string
+                  required: true
+                  description: "Cluster UUID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: universe-tables
+          path: /api/v1/customers/{cUUID}/universes/{uniUUID}/tables
+          description: "Tables in a universe"
+          operations:
+            - name: get-all-tables
+              method: GET
+              description: "List all tables in a universe"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: uniUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: includeParentTableInfo
+                  in: query
+                  type: boolean
+                  required: false
+                - name: includeColocatedParentTables
+                  in: query
+                  type: boolean
+                  required: false
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-table
+              method: POST
+              description: "Create a table in a universe"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: uniUUID
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  tableType: "{{tools.tableType}}"
+                  tableName: "{{tools.tableName}}"
+                  keyspace: "{{tools.keyspace}}"
+                  ttlInSeconds: "{{tools.ttlInSeconds}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: universe-pitr-configs
+          path: /api/v1/customers/{cUUID}/universes/{uniUUID}/pitr_config
+          description: "Point-in-time recovery configurations"
+          operations:
+            - name: list-pitr-configs
+              method: GET
+              description: "List PITR configurations for a universe"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: uniUUID
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: universe-pitr-action
+          path: /api/v1/customers/{cUUID}/universes/{uniUUID}/pitr
+          description: "Execute a PITR recovery"
+          operations:
+            - name: perform-pitr
+              method: POST
+              description: "Perform a point-in-time recovery"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: uniUUID
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  pitrConfigUUID: "{{tools.pitrConfigUUID}}"
+                  restoreTimeInMillis: "{{tools.restoreTimeInMillis}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: universe-upgrade-software
+          path: /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/software
+          description: "Software upgrade"
+          operations:
+            - name: upgrade-software
+              method: POST
+              description: "Upgrade YugabyteDB software on a universe"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: uniUUID
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  ybSoftwareVersion: "{{tools.ybSoftwareVersion}}"
+                  upgradeOption: "{{tools.upgradeOption}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: universe-upgrade-gflags
+          path: /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/gflags
+          description: "GFlag upgrade"
+          operations:
+            - name: upgrade-gflags
+              method: POST
+              description: "Upgrade GFlags on a universe"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: uniUUID
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  masterGFlags: "{{tools.masterGFlags}}"
+                  tserverGFlags: "{{tools.tserverGFlags}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: universe-upgrade-restart
+          path: /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/restart
+          description: "Restart upgrade"
+          operations:
+            - name: restart-universe
+              method: POST
+              description: "Rolling restart of a universe"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: uniUUID
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: universe-upgrade-rollback
+          path: /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/rollback
+          description: "Rollback an upgrade"
+          operations:
+            - name: rollback-upgrade
+              method: POST
+              description: "Rollback the most recent software upgrade"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: uniUUID
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: universe-upgrade-finalize
+          path: /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/finalize
+          description: "Finalize a software upgrade"
+          operations:
+            - name: finalize-upgrade
+              method: POST
+              description: "Finalize a software upgrade"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: uniUUID
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: universe-upgrade-tls
+          path: /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/tls
+          description: "TLS upgrade"
+          operations:
+            - name: upgrade-tls
+              method: POST
+              description: "Toggle or upgrade TLS configuration"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: uniUUID
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  enableNodeToNodeEncrypt: "{{tools.enableNodeToNodeEncrypt}}"
+                  enableClientToNodeEncrypt: "{{tools.enableClientToNodeEncrypt}}"
+                  rootCA: "{{tools.rootCA}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: universe-upgrade-resize-node
+          path: /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/resize_node
+          description: "Resize universe nodes"
+          operations:
+            - name: resize-node
+              method: POST
+              description: "Resize the node instances of a universe"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: uniUUID
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  clusters: "{{tools.clusters}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: universe-run-query
+          path: /api/v1/customers/{cUUID}/universes/{uniUUID}/run_query
+          description: "Run a YSQL query"
+          operations:
+            - name: run-ysql-query
+              method: POST
+              description: "Run an arbitrary YSQL query against a universe"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: uniUUID
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  query: "{{tools.query}}"
+                  db_name: "{{tools.db_name}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: universe-live-queries
+          path: /api/v1/customers/{cUUID}/universes/{uniUUID}/live_queries
+          description: "Live query monitoring"
+          operations:
+            - name: get-live-queries
+              method: GET
+              description: "List currently executing queries on the universe"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: uniUUID
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: universe-slow-queries
+          path: /api/v1/customers/{cUUID}/universes/{uniUUID}/slow_queries
+          description: "Slow query monitoring"
+          operations:
+            - name: get-slow-queries
+              method: GET
+              description: "List slow queries on the universe"
+              inputParameters:
+                - name: cUUID
+                  in: path
+                  type: string
+                  required: true
+                - name: uniUUID
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8101
+      namespace: anywhere-universes-rest
+      description: "Standalone REST adapter exposing the Anywhere v1 universe management API."
+      resources:
+        - path: /v1/customers/{customerId}/universes
+          name: universes
+          description: "Universe collection"
+          operations:
+            - method: GET
+              name: list-universes
+              description: "List universes"
+              call: "anywhere-universes.list-universes"
+              with:
+                cUUID: "rest.customerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/universes/clusters
+          name: universe-clusters
+          description: "Create universe with clusters"
+          operations:
+            - method: POST
+              name: create-universe
+              description: "Create a universe"
+              call: "anywhere-universes.create-all-clusters"
+              with:
+                cUUID: "rest.customerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/universes/{universeId}
+          name: universe-by-id
+          description: "Individual universe"
+          operations:
+            - method: GET
+              name: get-universe
+              description: "Get a universe"
+              call: "anywhere-universes.get-universe"
+              with:
+                cUUID: "rest.customerId"
+                uniUUID: "rest.universeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-universe
+              description: "Delete a universe"
+              call: "anywhere-universes.delete-universe"
+              with:
+                cUUID: "rest.customerId"
+                uniUUID: "rest.universeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/universes/{universeId}/status
+          name: universe-status
+          description: "Universe status"
+          operations:
+            - method: GET
+              name: get-universe-status
+              description: "Get universe status"
+              call: "anywhere-universes.universe-status"
+              with:
+                cUUID: "rest.customerId"
+                uniUUID: "rest.universeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/universes/{universeId}/pause
+          name: universe-pause
+          description: "Pause a universe"
+          operations:
+            - method: POST
+              name: pause-universe
+              description: "Pause a universe"
+              call: "anywhere-universes.pause-universe"
+              with:
+                cUUID: "rest.customerId"
+                uniUUID: "rest.universeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/universes/{universeId}/resume
+          name: universe-resume
+          description: "Resume a universe"
+          operations:
+            - method: POST
+              name: resume-universe
+              description: "Resume a universe"
+              call: "anywhere-universes.resume-universe"
+              with:
+                cUUID: "rest.customerId"
+                uniUUID: "rest.universeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/universes/{universeId}/health-check
+          name: universe-health-check
+          description: "Health check"
+          operations:
+            - method: GET
+              name: get-health-check
+              description: "Get health check results"
+              call: "anywhere-universes.health-check-universe"
+              with:
+                cUUID: "rest.customerId"
+                uniUUID: "rest.universeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/universes/{universeId}/clusters/primary
+          name: universe-primary-cluster
+          description: "Primary cluster"
+          operations:
+            - method: PUT
+              name: update-primary-cluster
+              description: "Update the primary cluster"
+              call: "anywhere-universes.update-primary-cluster"
+              with:
+                cUUID: "rest.customerId"
+                uniUUID: "rest.universeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/universes/{universeId}/clusters/read-only
+          name: universe-readonly-cluster
+          description: "Read-only cluster"
+          operations:
+            - method: POST
+              name: create-readonly-cluster
+              description: "Create a read-only cluster"
+              call: "anywhere-universes.create-read-only-cluster"
+              with:
+                cUUID: "rest.customerId"
+                uniUUID: "rest.universeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: update-readonly-cluster
+              description: "Update the read-only cluster"
+              call: "anywhere-universes.update-read-only-cluster"
+              with:
+                cUUID: "rest.customerId"
+                uniUUID: "rest.universeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/universes/{universeId}/tables
+          name: universe-tables
+          description: "Universe tables"
+          operations:
+            - method: GET
+              name: list-tables
+              description: "List tables"
+              call: "anywhere-universes.get-all-tables"
+              with:
+                cUUID: "rest.customerId"
+                uniUUID: "rest.universeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-table
+              description: "Create a table"
+              call: "anywhere-universes.create-table"
+              with:
+                cUUID: "rest.customerId"
+                uniUUID: "rest.universeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/universes/{universeId}/pitr-configs
+          name: universe-pitr-configs
+          description: "PITR configurations"
+          operations:
+            - method: GET
+              name: list-pitr-configs
+              description: "List PITR configurations"
+              call: "anywhere-universes.list-pitr-configs"
+              with:
+                cUUID: "rest.customerId"
+                uniUUID: "rest.universeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/universes/{universeId}/pitr
+          name: universe-pitr
+          description: "Perform PITR"
+          operations:
+            - method: POST
+              name: perform-pitr
+              description: "Perform PITR recovery"
+              call: "anywhere-universes.perform-pitr"
+              with:
+                cUUID: "rest.customerId"
+                uniUUID: "rest.universeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/universes/{universeId}/upgrade-software
+          name: universe-upgrade-software
+          description: "Software upgrade"
+          operations:
+            - method: POST
+              name: upgrade-software
+              description: "Upgrade YugabyteDB software"
+              call: "anywhere-universes.upgrade-software"
+              with:
+                cUUID: "rest.customerId"
+                uniUUID: "rest.universeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/universes/{universeId}/upgrade-gflags
+          name: universe-upgrade-gflags
+          description: "GFlag upgrade"
+          operations:
+            - method: POST
+              name: upgrade-gflags
+              description: "Upgrade GFlags"
+              call: "anywhere-universes.upgrade-gflags"
+              with:
+                cUUID: "rest.customerId"
+                uniUUID: "rest.universeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/universes/{universeId}/restart
+          name: universe-restart
+          description: "Restart universe"
+          operations:
+            - method: POST
+              name: restart-universe
+              description: "Rolling restart"
+              call: "anywhere-universes.restart-universe"
+              with:
+                cUUID: "rest.customerId"
+                uniUUID: "rest.universeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/universes/{universeId}/upgrade-rollback
+          name: universe-upgrade-rollback
+          description: "Rollback upgrade"
+          operations:
+            - method: POST
+              name: rollback-upgrade
+              description: "Rollback an upgrade"
+              call: "anywhere-universes.rollback-upgrade"
+              with:
+                cUUID: "rest.customerId"
+                uniUUID: "rest.universeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/universes/{universeId}/upgrade-finalize
+          name: universe-upgrade-finalize
+          description: "Finalize upgrade"
+          operations:
+            - method: POST
+              name: finalize-upgrade
+              description: "Finalize software upgrade"
+              call: "anywhere-universes.finalize-upgrade"
+              with:
+                cUUID: "rest.customerId"
+                uniUUID: "rest.universeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/universes/{universeId}/upgrade-tls
+          name: universe-upgrade-tls
+          description: "TLS upgrade"
+          operations:
+            - method: POST
+              name: upgrade-tls
+              description: "Upgrade TLS"
+              call: "anywhere-universes.upgrade-tls"
+              with:
+                cUUID: "rest.customerId"
+                uniUUID: "rest.universeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/universes/{universeId}/resize-nodes
+          name: universe-resize-nodes
+          description: "Resize nodes"
+          operations:
+            - method: POST
+              name: resize-nodes
+              description: "Resize universe nodes"
+              call: "anywhere-universes.resize-node"
+              with:
+                cUUID: "rest.customerId"
+                uniUUID: "rest.universeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/universes/{universeId}/run-query
+          name: universe-run-query
+          description: "Run a query"
+          operations:
+            - method: POST
+              name: run-query
+              description: "Run a YSQL query"
+              call: "anywhere-universes.run-ysql-query"
+              with:
+                cUUID: "rest.customerId"
+                uniUUID: "rest.universeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/universes/{universeId}/live-queries
+          name: universe-live-queries
+          description: "Live queries"
+          operations:
+            - method: GET
+              name: list-live-queries
+              description: "List live queries"
+              call: "anywhere-universes.get-live-queries"
+              with:
+                cUUID: "rest.customerId"
+                uniUUID: "rest.universeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}/universes/{universeId}/slow-queries
+          name: universe-slow-queries
+          description: "Slow queries"
+          operations:
+            - method: GET
+              name: list-slow-queries
+              description: "List slow queries"
+              call: "anywhere-universes.get-slow-queries"
+              with:
+                cUUID: "rest.customerId"
+                uniUUID: "rest.universeId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9101
+      namespace: anywhere-universes-mcp
+      transport: http
+      description: "Standalone MCP adapter exposing Anywhere universe management as tools."
+      tools:
+        - name: list-universes
+          description: "List universes for a customer"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "anywhere-universes.list-universes"
+          with:
+            cUUID: "tools.cUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-universe
+          description: "Create a universe with all clusters"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "anywhere-universes.create-all-clusters"
+          with:
+            cUUID: "tools.cUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-universe
+          description: "Get universe details"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "anywhere-universes.get-universe"
+          with:
+            cUUID: "tools.cUUID"
+            uniUUID: "tools.uniUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-universe
+          description: "Delete a universe"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "anywhere-universes.delete-universe"
+          with:
+            cUUID: "tools.cUUID"
+            uniUUID: "tools.uniUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-universe-status
+          description: "Get the current status of a universe"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "anywhere-universes.universe-status"
+          with:
+            cUUID: "tools.cUUID"
+            uniUUID: "tools.uniUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: pause-universe
+          description: "Pause a running universe"
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "anywhere-universes.pause-universe"
+          with:
+            cUUID: "tools.cUUID"
+            uniUUID: "tools.uniUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: resume-universe
+          description: "Resume a paused universe"
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "anywhere-universes.resume-universe"
+          with:
+            cUUID: "tools.cUUID"
+            uniUUID: "tools.uniUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: health-check-universe
+          description: "Run a health check on a universe"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "anywhere-universes.health-check-universe"
+          with:
+            cUUID: "tools.cUUID"
+            uniUUID: "tools.uniUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: trigger-health-check
+          description: "Trigger a fresh asynchronous health check"
+          hints:
+            readOnly: true
+            idempotent: false
+          call: "anywhere-universes.trigger-health-check"
+          with:
+            cUUID: "tools.cUUID"
+            uniUUID: "tools.uniUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-primary-cluster
+          description: "Update the primary cluster of a universe"
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "anywhere-universes.update-primary-cluster"
+          with:
+            cUUID: "tools.cUUID"
+            uniUUID: "tools.uniUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-read-only-cluster
+          description: "Add a read-only cluster to a universe"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "anywhere-universes.create-read-only-cluster"
+          with:
+            cUUID: "tools.cUUID"
+            uniUUID: "tools.uniUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-read-only-cluster
+          description: "Update the read-only cluster"
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "anywhere-universes.update-read-only-cluster"
+          with:
+            cUUID: "tools.cUUID"
+            uniUUID: "tools.uniUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-readonly-cluster
+          description: "Delete a read-only cluster"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "anywhere-universes.delete-readonly-cluster"
+          with:
+            cUUID: "tools.cUUID"
+            uniUUID: "tools.uniUUID"
+            clustUUID: "tools.clustUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-universe-tables
+          description: "List tables in a universe"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "anywhere-universes.get-all-tables"
+          with:
+            cUUID: "tools.cUUID"
+            uniUUID: "tools.uniUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-universe-table
+          description: "Create a table in a universe"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "anywhere-universes.create-table"
+          with:
+            cUUID: "tools.cUUID"
+            uniUUID: "tools.uniUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-pitr-configs
+          description: "List PITR configurations on a universe"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "anywhere-universes.list-pitr-configs"
+          with:
+            cUUID: "tools.cUUID"
+            uniUUID: "tools.uniUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: perform-pitr
+          description: "Perform a point-in-time recovery"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: false
+          call: "anywhere-universes.perform-pitr"
+          with:
+            cUUID: "tools.cUUID"
+            uniUUID: "tools.uniUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: upgrade-software
+          description: "Upgrade YugabyteDB software on a universe"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "anywhere-universes.upgrade-software"
+          with:
+            cUUID: "tools.cUUID"
+            uniUUID: "tools.uniUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: upgrade-gflags
+          description: "Upgrade GFlag values on a universe"
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "anywhere-universes.upgrade-gflags"
+          with:
+            cUUID: "tools.cUUID"
+            uniUUID: "tools.uniUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: restart-universe
+          description: "Rolling restart of a universe"
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "anywhere-universes.restart-universe"
+          with:
+            cUUID: "tools.cUUID"
+            uniUUID: "tools.uniUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: rollback-upgrade
+          description: "Roll back the most recent software upgrade"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "anywhere-universes.rollback-upgrade"
+          with:
+            cUUID: "tools.cUUID"
+            uniUUID: "tools.uniUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: finalize-upgrade
+          description: "Finalize a completed software upgrade"
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "anywhere-universes.finalize-upgrade"
+          with:
+            cUUID: "tools.cUUID"
+            uniUUID: "tools.uniUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: upgrade-tls
+          description: "Toggle or upgrade TLS encryption settings"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "anywhere-universes.upgrade-tls"
+          with:
+            cUUID: "tools.cUUID"
+            uniUUID: "tools.uniUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: resize-node
+          description: "Resize universe node instances"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "anywhere-universes.resize-node"
+          with:
+            cUUID: "tools.cUUID"
+            uniUUID: "tools.uniUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: run-ysql-query
+          description: "Run an arbitrary YSQL query on a universe"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "anywhere-universes.run-ysql-query"
+          with:
+            cUUID: "tools.cUUID"
+            uniUUID: "tools.uniUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-live-queries
+          description: "List currently executing queries"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "anywhere-universes.get-live-queries"
+          with:
+            cUUID: "tools.cUUID"
+            uniUUID: "tools.uniUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-slow-queries
+          description: "List slow queries on a universe"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "anywhere-universes.get-slow-queries"
+          with:
+            cUUID: "tools.cUUID"
+            uniUUID: "tools.uniUUID"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,1080 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "YugabyteDB Aeon REST API"
+  description: >-
+    Programmatic access to the fully managed YugabyteDB Aeon cloud database
+    service. Covers accounts, projects, clusters, read replicas, on-demand
+    backups, restores, IP allow lists, and maintenance windows. All paths are
+    scoped to an account and project. Authentication uses API keys passed as
+    bearer tokens in the Authorization header.
+  tags:
+    - YugabyteDB
+    - Aeon
+    - DBaaS
+    - Distributed SQL
+    - Clusters
+    - Backups
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      YUGABYTEDB_AEON_API_KEY: YUGABYTEDB_AEON_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: aeon
+      baseUri: https://cloud.yugabyte.com/api/public/v1
+      description: "YugabyteDB Aeon REST API for managing managed clusters and projects."
+      authentication:
+        type: bearer
+        token: "{{YUGABYTEDB_AEON_API_KEY}}"
+      resources:
+
+        - name: accounts
+          path: /accounts
+          description: "Aeon accounts accessible to the authenticated key holder"
+          operations:
+            - name: list-accounts
+              method: GET
+              description: "List YugabyteDB Aeon accounts accessible to the authenticated API key holder"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-account
+              method: GET
+              description: "Retrieve a single account by ID"
+              path: /{accountId}
+              inputParameters:
+                - name: accountId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Account ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: projects
+          path: /accounts/{accountId}/projects
+          description: "Projects within a YugabyteDB Aeon account"
+          operations:
+            - name: list-projects
+              method: GET
+              description: "List projects within an account"
+              inputParameters:
+                - name: accountId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Account ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: clusters
+          path: /accounts/{accountId}/projects/{projectId}/clusters
+          description: "Cluster lifecycle management"
+          operations:
+            - name: list-clusters
+              method: GET
+              description: "List clusters in a project"
+              inputParameters:
+                - name: accountId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Account ID"
+                - name: projectId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Project ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-cluster
+              method: POST
+              description: "Create a new YugabyteDB Aeon cluster"
+              inputParameters:
+                - name: accountId
+                  in: path
+                  type: string
+                  required: true
+                - name: projectId
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  cluster_spec: "{{tools.cluster_spec}}"
+                  network_spec: "{{tools.network_spec}}"
+                  software_info: "{{tools.software_info}}"
+                  db_credentials: "{{tools.db_credentials}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-cluster
+              method: GET
+              description: "Get a cluster by ID"
+              path: /{clusterId}
+              inputParameters:
+                - name: accountId
+                  in: path
+                  type: string
+                  required: true
+                - name: projectId
+                  in: path
+                  type: string
+                  required: true
+                - name: clusterId
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-cluster
+              method: PUT
+              description: "Update a cluster's configuration"
+              path: /{clusterId}
+              inputParameters:
+                - name: accountId
+                  in: path
+                  type: string
+                  required: true
+                - name: projectId
+                  in: path
+                  type: string
+                  required: true
+                - name: clusterId
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  cluster_spec: "{{tools.cluster_spec}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-cluster
+              method: DELETE
+              description: "Delete a cluster"
+              path: /{clusterId}
+              inputParameters:
+                - name: accountId
+                  in: path
+                  type: string
+                  required: true
+                - name: projectId
+                  in: path
+                  type: string
+                  required: true
+                - name: clusterId
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: pause-cluster
+              method: POST
+              description: "Pause a running cluster"
+              path: /{clusterId}/pause
+              inputParameters:
+                - name: accountId
+                  in: path
+                  type: string
+                  required: true
+                - name: projectId
+                  in: path
+                  type: string
+                  required: true
+                - name: clusterId
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: resume-cluster
+              method: POST
+              description: "Resume a paused cluster"
+              path: /{clusterId}/resume
+              inputParameters:
+                - name: accountId
+                  in: path
+                  type: string
+                  required: true
+                - name: projectId
+                  in: path
+                  type: string
+                  required: true
+                - name: clusterId
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: read-replicas
+          path: /accounts/{accountId}/projects/{projectId}/clusters/{clusterId}/read-replicas
+          description: "Cross-region read replicas"
+          operations:
+            - name: list-read-replicas
+              method: GET
+              description: "List read replicas for a cluster"
+              inputParameters:
+                - name: accountId
+                  in: path
+                  type: string
+                  required: true
+                - name: projectId
+                  in: path
+                  type: string
+                  required: true
+                - name: clusterId
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-read-replica
+              method: POST
+              description: "Create a read replica"
+              inputParameters:
+                - name: accountId
+                  in: path
+                  type: string
+                  required: true
+                - name: projectId
+                  in: path
+                  type: string
+                  required: true
+                - name: clusterId
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  read_replica_specs: "{{tools.read_replica_specs}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-read-replica
+              method: DELETE
+              description: "Delete a read replica"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: backups
+          path: /accounts/{accountId}/projects/{projectId}/clusters/{clusterId}/backups
+          description: "Cluster backups"
+          operations:
+            - name: list-backups
+              method: GET
+              description: "List backups for a cluster"
+              inputParameters:
+                - name: accountId
+                  in: path
+                  type: string
+                  required: true
+                - name: projectId
+                  in: path
+                  type: string
+                  required: true
+                - name: clusterId
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-backup
+              method: POST
+              description: "Trigger an on-demand backup"
+              inputParameters:
+                - name: accountId
+                  in: path
+                  type: string
+                  required: true
+                - name: projectId
+                  in: path
+                  type: string
+                  required: true
+                - name: clusterId
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  retention_period_in_days: "{{tools.retention_period_in_days}}"
+                  description: "{{tools.description}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: restores
+          path: /accounts/{accountId}/projects/{projectId}/clusters/{clusterId}/backups/{backupId}/restore
+          description: "Backup restore operations"
+          operations:
+            - name: restore-backup
+              method: POST
+              description: "Restore a cluster from a backup snapshot"
+              inputParameters:
+                - name: accountId
+                  in: path
+                  type: string
+                  required: true
+                - name: projectId
+                  in: path
+                  type: string
+                  required: true
+                - name: clusterId
+                  in: path
+                  type: string
+                  required: true
+                - name: backupId
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: allow-lists
+          path: /accounts/{accountId}/projects/{projectId}/allow-lists
+          description: "IP allow lists controlling client connectivity"
+          operations:
+            - name: list-allow-lists
+              method: GET
+              description: "List IP allow lists in a project"
+              inputParameters:
+                - name: accountId
+                  in: path
+                  type: string
+                  required: true
+                - name: projectId
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-allow-list
+              method: POST
+              description: "Create an IP allow list"
+              inputParameters:
+                - name: accountId
+                  in: path
+                  type: string
+                  required: true
+                - name: projectId
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+                  description: "{{tools.description}}"
+                  allow_list: "{{tools.allow_list}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-allow-list
+              method: GET
+              description: "Get an IP allow list by ID"
+              path: /{allowListId}
+              inputParameters:
+                - name: accountId
+                  in: path
+                  type: string
+                  required: true
+                - name: projectId
+                  in: path
+                  type: string
+                  required: true
+                - name: allowListId
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-allow-list
+              method: DELETE
+              description: "Delete an IP allow list"
+              path: /{allowListId}
+              inputParameters:
+                - name: accountId
+                  in: path
+                  type: string
+                  required: true
+                - name: projectId
+                  in: path
+                  type: string
+                  required: true
+                - name: allowListId
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: maintenance-windows
+          path: /accounts/{accountId}/projects/{projectId}/clusters/{clusterId}/maintenance-windows
+          description: "Maintenance windows for software patches and upgrades"
+          operations:
+            - name: get-maintenance-window
+              method: GET
+              description: "Get the maintenance window configured for a cluster"
+              inputParameters:
+                - name: accountId
+                  in: path
+                  type: string
+                  required: true
+                - name: projectId
+                  in: path
+                  type: string
+                  required: true
+                - name: clusterId
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-maintenance-window
+              method: PUT
+              description: "Update the maintenance window for a cluster"
+              inputParameters:
+                - name: accountId
+                  in: path
+                  type: string
+                  required: true
+                - name: projectId
+                  in: path
+                  type: string
+                  required: true
+                - name: clusterId
+                  in: path
+                  type: string
+                  required: true
+              body:
+                type: json
+                data:
+                  start_time: "{{tools.start_time}}"
+                  duration_in_hours: "{{tools.duration_in_hours}}"
+                  schedule: "{{tools.schedule}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: aeon-rest
+      description: "Standalone REST adapter exposing the YugabyteDB Aeon API."
+      resources:
+        - path: /v1/accounts
+          name: accounts
+          description: "Aeon accounts"
+          operations:
+            - method: GET
+              name: list-accounts
+              description: "List Aeon accounts"
+              call: "aeon.list-accounts"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/accounts/{accountId}
+          name: account-by-id
+          description: "Individual account"
+          operations:
+            - method: GET
+              name: get-account
+              description: "Get an account"
+              call: "aeon.get-account"
+              with:
+                accountId: "rest.accountId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/accounts/{accountId}/projects
+          name: projects
+          description: "Projects in an account"
+          operations:
+            - method: GET
+              name: list-projects
+              description: "List projects in an account"
+              call: "aeon.list-projects"
+              with:
+                accountId: "rest.accountId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/accounts/{accountId}/projects/{projectId}/clusters
+          name: clusters
+          description: "Clusters in a project"
+          operations:
+            - method: GET
+              name: list-clusters
+              description: "List clusters"
+              call: "aeon.list-clusters"
+              with:
+                accountId: "rest.accountId"
+                projectId: "rest.projectId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-cluster
+              description: "Create a cluster"
+              call: "aeon.create-cluster"
+              with:
+                accountId: "rest.accountId"
+                projectId: "rest.projectId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/accounts/{accountId}/projects/{projectId}/clusters/{clusterId}
+          name: cluster-by-id
+          description: "Individual cluster"
+          operations:
+            - method: GET
+              name: get-cluster
+              description: "Get a cluster"
+              call: "aeon.get-cluster"
+              with:
+                accountId: "rest.accountId"
+                projectId: "rest.projectId"
+                clusterId: "rest.clusterId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: update-cluster
+              description: "Update a cluster"
+              call: "aeon.update-cluster"
+              with:
+                accountId: "rest.accountId"
+                projectId: "rest.projectId"
+                clusterId: "rest.clusterId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-cluster
+              description: "Delete a cluster"
+              call: "aeon.delete-cluster"
+              with:
+                accountId: "rest.accountId"
+                projectId: "rest.projectId"
+                clusterId: "rest.clusterId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/accounts/{accountId}/projects/{projectId}/clusters/{clusterId}/pause
+          name: cluster-pause
+          description: "Pause a cluster"
+          operations:
+            - method: POST
+              name: pause-cluster
+              description: "Pause a running cluster"
+              call: "aeon.pause-cluster"
+              with:
+                accountId: "rest.accountId"
+                projectId: "rest.projectId"
+                clusterId: "rest.clusterId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/accounts/{accountId}/projects/{projectId}/clusters/{clusterId}/resume
+          name: cluster-resume
+          description: "Resume a cluster"
+          operations:
+            - method: POST
+              name: resume-cluster
+              description: "Resume a paused cluster"
+              call: "aeon.resume-cluster"
+              with:
+                accountId: "rest.accountId"
+                projectId: "rest.projectId"
+                clusterId: "rest.clusterId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/accounts/{accountId}/projects/{projectId}/clusters/{clusterId}/read-replicas
+          name: read-replicas
+          description: "Cluster read replicas"
+          operations:
+            - method: GET
+              name: list-read-replicas
+              description: "List read replicas"
+              call: "aeon.list-read-replicas"
+              with:
+                accountId: "rest.accountId"
+                projectId: "rest.projectId"
+                clusterId: "rest.clusterId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-read-replica
+              description: "Create a read replica"
+              call: "aeon.create-read-replica"
+              with:
+                accountId: "rest.accountId"
+                projectId: "rest.projectId"
+                clusterId: "rest.clusterId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/accounts/{accountId}/projects/{projectId}/clusters/{clusterId}/backups
+          name: backups
+          description: "Cluster backups"
+          operations:
+            - method: GET
+              name: list-backups
+              description: "List backups"
+              call: "aeon.list-backups"
+              with:
+                accountId: "rest.accountId"
+                projectId: "rest.projectId"
+                clusterId: "rest.clusterId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-backup
+              description: "Trigger an on-demand backup"
+              call: "aeon.create-backup"
+              with:
+                accountId: "rest.accountId"
+                projectId: "rest.projectId"
+                clusterId: "rest.clusterId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/accounts/{accountId}/projects/{projectId}/clusters/{clusterId}/backups/{backupId}/restore
+          name: restores
+          description: "Backup restores"
+          operations:
+            - method: POST
+              name: restore-backup
+              description: "Restore a backup"
+              call: "aeon.restore-backup"
+              with:
+                accountId: "rest.accountId"
+                projectId: "rest.projectId"
+                clusterId: "rest.clusterId"
+                backupId: "rest.backupId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/accounts/{accountId}/projects/{projectId}/allow-lists
+          name: allow-lists
+          description: "IP allow lists"
+          operations:
+            - method: GET
+              name: list-allow-lists
+              description: "List allow lists"
+              call: "aeon.list-allow-lists"
+              with:
+                accountId: "rest.accountId"
+                projectId: "rest.projectId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-allow-list
+              description: "Create an allow list"
+              call: "aeon.create-allow-list"
+              with:
+                accountId: "rest.accountId"
+                projectId: "rest.projectId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/accounts/{accountId}/projects/{projectId}/allow-lists/{allowListId}
+          name: allow-list-by-id
+          description: "Individual allow list"
+          operations:
+            - method: GET
+              name: get-allow-list
+              description: "Get an allow list"
+              call: "aeon.get-allow-list"
+              with:
+                accountId: "rest.accountId"
+                projectId: "rest.projectId"
+                allowListId: "rest.allowListId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-allow-list
+              description: "Delete an allow list"
+              call: "aeon.delete-allow-list"
+              with:
+                accountId: "rest.accountId"
+                projectId: "rest.projectId"
+                allowListId: "rest.allowListId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/accounts/{accountId}/projects/{projectId}/clusters/{clusterId}/maintenance-windows
+          name: maintenance-windows
+          description: "Cluster maintenance windows"
+          operations:
+            - method: GET
+              name: get-maintenance-window
+              description: "Get the maintenance window"
+              call: "aeon.get-maintenance-window"
+              with:
+                accountId: "rest.accountId"
+                projectId: "rest.projectId"
+                clusterId: "rest.clusterId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: update-maintenance-window
+              description: "Update the maintenance window"
+              call: "aeon.update-maintenance-window"
+              with:
+                accountId: "rest.accountId"
+                projectId: "rest.projectId"
+                clusterId: "rest.clusterId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: aeon-mcp
+      transport: http
+      description: "Standalone MCP adapter exposing YugabyteDB Aeon as tools."
+      tools:
+        - name: list-accounts
+          description: "List YugabyteDB Aeon accounts"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "aeon.list-accounts"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-account
+          description: "Get an Aeon account by ID"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "aeon.get-account"
+          with:
+            accountId: "tools.accountId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-projects
+          description: "List projects in an account"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "aeon.list-projects"
+          with:
+            accountId: "tools.accountId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-clusters
+          description: "List clusters in a project"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "aeon.list-clusters"
+          with:
+            accountId: "tools.accountId"
+            projectId: "tools.projectId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-cluster
+          description: "Create a YugabyteDB Aeon cluster"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "aeon.create-cluster"
+          with:
+            accountId: "tools.accountId"
+            projectId: "tools.projectId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-cluster
+          description: "Get a cluster by ID"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "aeon.get-cluster"
+          with:
+            accountId: "tools.accountId"
+            projectId: "tools.projectId"
+            clusterId: "tools.clusterId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-cluster
+          description: "Update a cluster's configuration"
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "aeon.update-cluster"
+          with:
+            accountId: "tools.accountId"
+            projectId: "tools.projectId"
+            clusterId: "tools.clusterId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-cluster
+          description: "Delete a cluster"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "aeon.delete-cluster"
+          with:
+            accountId: "tools.accountId"
+            projectId: "tools.projectId"
+            clusterId: "tools.clusterId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: pause-cluster
+          description: "Pause a running cluster"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "aeon.pause-cluster"
+          with:
+            accountId: "tools.accountId"
+            projectId: "tools.projectId"
+            clusterId: "tools.clusterId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: resume-cluster
+          description: "Resume a paused cluster"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "aeon.resume-cluster"
+          with:
+            accountId: "tools.accountId"
+            projectId: "tools.projectId"
+            clusterId: "tools.clusterId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-read-replicas
+          description: "List read replicas for a cluster"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "aeon.list-read-replicas"
+          with:
+            accountId: "tools.accountId"
+            projectId: "tools.projectId"
+            clusterId: "tools.clusterId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-read-replica
+          description: "Create a read replica"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "aeon.create-read-replica"
+          with:
+            accountId: "tools.accountId"
+            projectId: "tools.projectId"
+            clusterId: "tools.clusterId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-backups
+          description: "List backups for a cluster"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "aeon.list-backups"
+          with:
+            accountId: "tools.accountId"
+            projectId: "tools.projectId"
+            clusterId: "tools.clusterId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-backup
+          description: "Trigger an on-demand backup"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "aeon.create-backup"
+          with:
+            accountId: "tools.accountId"
+            projectId: "tools.projectId"
+            clusterId: "tools.clusterId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: restore-backup
+          description: "Restore a cluster from a backup"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: false
+          call: "aeon.restore-backup"
+          with:
+            accountId: "tools.accountId"
+            projectId: "tools.projectId"
+            clusterId: "tools.clusterId"
+            backupId: "tools.backupId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-allow-lists
+          description: "List IP allow lists in a project"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "aeon.list-allow-lists"
+          with:
+            accountId: "tools.accountId"
+            projectId: "tools.projectId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-allow-list
+          description: "Create an IP allow list"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "aeon.create-allow-list"
+          with:
+            accountId: "tools.accountId"
+            projectId: "tools.projectId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-allow-list
+          description: "Get an IP allow list"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "aeon.get-allow-list"
+          with:
+            accountId: "tools.accountId"
+            projectId: "tools.projectId"
+            allowListId: "tools.allowListId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-allow-list
+          description: "Delete an IP allow list"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "aeon.delete-allow-list"
+          with:
+            accountId: "tools.accountId"
+            projectId: "tools.projectId"
+            allowListId: "tools.allowListId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-maintenance-window
+          description: "Get a cluster's maintenance window"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "aeon.get-maintenance-window"
+          with:
+            accountId: "tools.accountId"
+            projectId: "tools.projectId"
+            clusterId: "tools.clusterId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-maintenance-window
+          description: "Update a cluster's maintenance window"
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "aeon.update-maintenance-window"
+          with:
+            accountId: "tools.accountId"
+            projectId: "tools.projectId"
+            clusterId: "tools.clusterId"
+          outputParameters:
+            - type: object
+              mapping: "$."
