@@ -1,0 +1,519 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Backups, Restores, and Replication — Schedule management
+  description: 'YugabyteDB Anywhere v1 — Backups, Restores, and Replication — Schedule management. 9 operations. Lead operation:
+    YugabyteDB Anywhere List Schedules - Deprecated. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Schedule management
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-backups-restore-schedule-management
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Backups, Restores, and Replication — Schedule management business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-schedules
+      path: /api/v1/customers/{cUUID}/schedules
+      operations:
+      - name: listschedules
+        method: GET
+        description: YugabyteDB Anywhere List Schedules - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-schedules-page
+      path: /api/v1/customers/{cUUID}/schedules/page
+      operations:
+      - name: listschedulesv2
+        method: POST
+        description: YugabyteDB Anywhere List Schedules V2
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-schedules-sUUID
+      path: /api/v1/customers/{cUUID}/schedules/{sUUID}
+      operations:
+      - name: deleteschedule
+        method: DELETE
+        description: YugabyteDB Anywhere Delete a Schedule - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: sUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: getschedule
+        method: GET
+        description: YugabyteDB Anywhere Get Schedule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: sUUID
+          in: path
+          type: string
+          required: true
+      - name: editbackupschedulev2
+        method: PUT
+        description: YugabyteDB Anywhere Edit a Backup Schedule V2 - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: sUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-schedules-sUUID-delete
+      path: /api/v1/customers/{cUUID}/schedules/{sUUID}/delete
+      operations:
+      - name: deleteschedulev2
+        method: DELETE
+        description: YugabyteDB Anywhere Delete a Schedule V2 - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: sUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-universes-uniUUID-schedules-sUUID-delete_backup_schedule_
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/schedules/{sUUID}/delete_backup_schedule_async
+      operations:
+      - name: deletebackupscheduleasync
+        method: DELETE
+        description: YugabyteDB Anywhere Delete a Backup Schedule Async
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: sUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-universes-uniUUID-schedules-sUUID-edit_backup_schedule_as
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/schedules/{sUUID}/edit_backup_schedule_async
+      operations:
+      - name: editbackupscheduleasync
+        method: PUT
+        description: YugabyteDB Anywhere Edit a Backup Schedule Async
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: sUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-schedules-sUUID-pause_resume
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/schedules/{sUUID}/pause_resume
+      operations:
+      - name: togglebackupschedule
+        method: PUT
+        description: YugabyteDB Anywhere Toggle a Backup Schedule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: sUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-backups-restore-schedule-management-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Backups, Restores, and Replication — Schedule management. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/schedules
+      name: api-v1-customers-cuuid-schedules
+      description: REST surface for api-v1-customers-cUUID-schedules.
+      operations:
+      - method: GET
+        name: listschedules
+        description: YugabyteDB Anywhere List Schedules - Deprecated
+        call: anywhere-v1-backups-restore-schedule-management.listschedules
+        with:
+          cUUID: rest.cUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/schedules/page
+      name: api-v1-customers-cuuid-schedules-page
+      description: REST surface for api-v1-customers-cUUID-schedules-page.
+      operations:
+      - method: POST
+        name: listschedulesv2
+        description: YugabyteDB Anywhere List Schedules V2
+        call: anywhere-v1-backups-restore-schedule-management.listschedulesv2
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/schedules/{suuid}
+      name: api-v1-customers-cuuid-schedules-suuid
+      description: REST surface for api-v1-customers-cUUID-schedules-sUUID.
+      operations:
+      - method: DELETE
+        name: deleteschedule
+        description: YugabyteDB Anywhere Delete a Schedule - Deprecated
+        call: anywhere-v1-backups-restore-schedule-management.deleteschedule
+        with:
+          cUUID: rest.cUUID
+          sUUID: rest.sUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getschedule
+        description: YugabyteDB Anywhere Get Schedule
+        call: anywhere-v1-backups-restore-schedule-management.getschedule
+        with:
+          cUUID: rest.cUUID
+          sUUID: rest.sUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: editbackupschedulev2
+        description: YugabyteDB Anywhere Edit a Backup Schedule V2 - Deprecated
+        call: anywhere-v1-backups-restore-schedule-management.editbackupschedulev2
+        with:
+          cUUID: rest.cUUID
+          sUUID: rest.sUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/schedules/{suuid}/delete
+      name: api-v1-customers-cuuid-schedules-suuid-delete
+      description: REST surface for api-v1-customers-cUUID-schedules-sUUID-delete.
+      operations:
+      - method: DELETE
+        name: deleteschedulev2
+        description: YugabyteDB Anywhere Delete a Schedule V2 - Deprecated
+        call: anywhere-v1-backups-restore-schedule-management.deleteschedulev2
+        with:
+          cUUID: rest.cUUID
+          sUUID: rest.sUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/schedules/{suuid}/delete-backup-schedule-async
+      name: api-v1-customers-cuuid-universes-uniuuid-schedules-suuid-delete-backup-schedule
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-schedules-sUUID-delete_backup_schedule_.
+      operations:
+      - method: DELETE
+        name: deletebackupscheduleasync
+        description: YugabyteDB Anywhere Delete a Backup Schedule Async
+        call: anywhere-v1-backups-restore-schedule-management.deletebackupscheduleasync
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          sUUID: rest.sUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/schedules/{suuid}/edit-backup-schedule-async
+      name: api-v1-customers-cuuid-universes-uniuuid-schedules-suuid-edit-backup-schedule-as
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-schedules-sUUID-edit_backup_schedule_as.
+      operations:
+      - method: PUT
+        name: editbackupscheduleasync
+        description: YugabyteDB Anywhere Edit a Backup Schedule Async
+        call: anywhere-v1-backups-restore-schedule-management.editbackupscheduleasync
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          sUUID: rest.sUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/schedules/{suuid}/pause-resume
+      name: api-v1-customers-cuuid-universes-uniuuid-schedules-suuid-pause-resume
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-schedules-sUUID-pause_resume.
+      operations:
+      - method: PUT
+        name: togglebackupschedule
+        description: YugabyteDB Anywhere Toggle a Backup Schedule
+        call: anywhere-v1-backups-restore-schedule-management.togglebackupschedule
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          sUUID: rest.sUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-backups-restore-schedule-management-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Backups, Restores, and Replication — Schedule management. One tool
+      per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-list-schedules-deprecated
+      description: YugabyteDB Anywhere List Schedules - Deprecated
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-backups-restore-schedule-management.listschedules
+      with:
+        cUUID: tools.cUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-schedules-v2
+      description: YugabyteDB Anywhere List Schedules V2
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-schedule-management.listschedulesv2
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-schedule-deprecated
+      description: YugabyteDB Anywhere Delete a Schedule - Deprecated
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-backups-restore-schedule-management.deleteschedule
+      with:
+        cUUID: tools.cUUID
+        sUUID: tools.sUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-schedule
+      description: YugabyteDB Anywhere Get Schedule
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-backups-restore-schedule-management.getschedule
+      with:
+        cUUID: tools.cUUID
+        sUUID: tools.sUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-edit-backup-schedule
+      description: YugabyteDB Anywhere Edit a Backup Schedule V2 - Deprecated
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-backups-restore-schedule-management.editbackupschedulev2
+      with:
+        cUUID: tools.cUUID
+        sUUID: tools.sUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-schedule-v2
+      description: YugabyteDB Anywhere Delete a Schedule V2 - Deprecated
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-backups-restore-schedule-management.deleteschedulev2
+      with:
+        cUUID: tools.cUUID
+        sUUID: tools.sUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-backup-schedule
+      description: YugabyteDB Anywhere Delete a Backup Schedule Async
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-backups-restore-schedule-management.deletebackupscheduleasync
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        sUUID: tools.sUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-edit-backup-schedule-2
+      description: YugabyteDB Anywhere Edit a Backup Schedule Async
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-backups-restore-schedule-management.editbackupscheduleasync
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        sUUID: tools.sUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-toggle-backup-schedule
+      description: YugabyteDB Anywhere Toggle a Backup Schedule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-backups-restore-schedule-management.togglebackupschedule
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        sUUID: tools.sUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

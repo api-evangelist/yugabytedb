@@ -1,0 +1,263 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — High Availability — Internal HA
+  description: 'YugabyteDB Anywhere v1 — High Availability — Internal HA. 5 operations. Lead operation: YugabyteDB Anywhere
+    Demote Local Leader. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Internal HA
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-high-availability-internal-ha
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — High Availability — Internal HA business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-settings-ha-internal-backups-backupName-validate
+      path: /api/v1/settings/ha/internal/backups/{backupName}/validate
+      operations:
+      - name: validatebackup
+        method: GET
+        description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: backupName
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-settings-ha-internal-config
+      path: /api/v1/settings/ha/internal/config
+      operations:
+      - name: gethaconfigbyclusterkey
+        method: GET
+        description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-settings-ha-internal-config-demote-timestamp
+      path: /api/v1/settings/ha/internal/config/demote/{timestamp}
+      operations:
+      - name: demotelocalleader
+        method: PUT
+        description: YugabyteDB Anywhere Demote Local Leader
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: timestamp
+          in: path
+          type: integer
+          required: true
+        - name: promote
+          in: query
+          type: boolean
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-settings-ha-internal-config-sync-timestamp
+      path: /api/v1/settings/ha/internal/config/sync/{timestamp}
+      operations:
+      - name: syncinstances
+        method: PUT
+        description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: timestamp
+          in: path
+          type: integer
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-settings-ha-internal-upload
+      path: /api/v1/settings/ha/internal/upload
+      operations:
+      - name: syncbackups
+        method: POST
+        description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: request
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-high-availability-internal-ha-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — High Availability — Internal HA. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/settings/ha/internal/backups/{backupname}/validate
+      name: api-v1-settings-ha-internal-backups-backupname-validate
+      description: REST surface for api-v1-settings-ha-internal-backups-backupName-validate.
+      operations:
+      - method: GET
+        name: validatebackup
+        description: validatebackup
+        call: anywhere-v1-high-availability-internal-ha.validatebackup
+        with:
+          backupName: rest.backupName
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/settings/ha/internal/config
+      name: api-v1-settings-ha-internal-config
+      description: REST surface for api-v1-settings-ha-internal-config.
+      operations:
+      - method: GET
+        name: gethaconfigbyclusterkey
+        description: gethaconfigbyclusterkey
+        call: anywhere-v1-high-availability-internal-ha.gethaconfigbyclusterkey
+        with:
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/settings/ha/internal/config/demote/{timestamp}
+      name: api-v1-settings-ha-internal-config-demote-timestamp
+      description: REST surface for api-v1-settings-ha-internal-config-demote-timestamp.
+      operations:
+      - method: PUT
+        name: demotelocalleader
+        description: YugabyteDB Anywhere Demote Local Leader
+        call: anywhere-v1-high-availability-internal-ha.demotelocalleader
+        with:
+          timestamp: rest.timestamp
+          promote: rest.promote
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/settings/ha/internal/config/sync/{timestamp}
+      name: api-v1-settings-ha-internal-config-sync-timestamp
+      description: REST surface for api-v1-settings-ha-internal-config-sync-timestamp.
+      operations:
+      - method: PUT
+        name: syncinstances
+        description: syncinstances
+        call: anywhere-v1-high-availability-internal-ha.syncinstances
+        with:
+          timestamp: rest.timestamp
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/settings/ha/internal/upload
+      name: api-v1-settings-ha-internal-upload
+      description: REST surface for api-v1-settings-ha-internal-upload.
+      operations:
+      - method: POST
+        name: syncbackups
+        description: syncbackups
+        call: anywhere-v1-high-availability-internal-ha.syncbackups
+        with:
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-high-availability-internal-ha-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — High Availability — Internal HA. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: validatebackup
+      description: validatebackup
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-high-availability-internal-ha.validatebackup
+      with:
+        backupName: tools.backupName
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: gethaconfigbyclusterkey
+      description: gethaconfigbyclusterkey
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-high-availability-internal-ha.gethaconfigbyclusterkey
+      with:
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-demote-local-leader
+      description: YugabyteDB Anywhere Demote Local Leader
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-high-availability-internal-ha.demotelocalleader
+      with:
+        timestamp: tools.timestamp
+        promote: tools.promote
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: syncinstances
+      description: syncinstances
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-high-availability-internal-ha.syncinstances
+      with:
+        timestamp: tools.timestamp
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: syncbackups
+      description: syncbackups
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-high-availability-internal-ha.syncbackups
+      with:
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.

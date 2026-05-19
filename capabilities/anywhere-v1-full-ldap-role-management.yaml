@@ -1,0 +1,99 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere APIs — LDAP Role management
+  description: 'YugabyteDB Anywhere APIs — LDAP Role management. 1 operations. Lead operation: YugabyteDB Anywhere Perform
+    an LDAP Users Sync on the Universe. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - LDAP Role management
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-full-ldap-role-management
+    baseUri: ''
+    description: YugabyteDB Anywhere APIs — LDAP Role management business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-universes-univUUID-ldap_roles_sync
+      path: /api/v1/customers/{cUUID}/universes/{univUUID}/ldap_roles_sync
+      operations:
+      - name: syncldapuniverse
+        method: POST
+        description: YugabyteDB Anywhere Perform an LDAP Users Sync on the Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: univUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-full-ldap-role-management-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere APIs — LDAP Role management. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/universes/{univuuid}/ldap-roles-sync
+      name: api-v1-customers-cuuid-universes-univuuid-ldap-roles-sync
+      description: REST surface for api-v1-customers-cUUID-universes-univUUID-ldap_roles_sync.
+      operations:
+      - method: POST
+        name: syncldapuniverse
+        description: YugabyteDB Anywhere Perform an LDAP Users Sync on the Universe
+        call: anywhere-v1-full-ldap-role-management.syncldapuniverse
+        with:
+          cUUID: rest.cUUID
+          univUUID: rest.univUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-full-ldap-role-management-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere APIs — LDAP Role management. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-perform-ldap-users
+      description: YugabyteDB Anywhere Perform an LDAP Users Sync on the Universe
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-ldap-role-management.syncldapuniverse
+      with:
+        cUUID: tools.cUUID
+        univUUID: tools.univUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

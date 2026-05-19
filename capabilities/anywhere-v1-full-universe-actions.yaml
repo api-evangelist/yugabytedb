@@ -1,0 +1,86 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere APIs — Universe actions
+  description: 'YugabyteDB Anywhere APIs — Universe actions. 1 operations. Lead operation: YugabyteDB Anywhere Import a Universe
+    - Deprecated. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Universe actions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-full-universe-actions
+    baseUri: ''
+    description: YugabyteDB Anywhere APIs — Universe actions business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-universes-import
+      path: /api/v1/customers/{cUUID}/universes/import
+      operations:
+      - name: importuniverse
+        method: POST
+        description: YugabyteDB Anywhere Import a Universe - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-full-universe-actions-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere APIs — Universe actions. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/universes/import
+      name: api-v1-customers-cuuid-universes-import
+      description: REST surface for api-v1-customers-cUUID-universes-import.
+      operations:
+      - method: POST
+        name: importuniverse
+        description: YugabyteDB Anywhere Import a Universe - Deprecated
+        call: anywhere-v1-full-universe-actions.importuniverse
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-full-universe-actions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere APIs — Universe actions. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-import-universe-deprecated
+      description: YugabyteDB Anywhere Import a Universe - Deprecated
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-universe-actions.importuniverse
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.

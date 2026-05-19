@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere V2 APIs — Metrics
+  description: 'YugabyteDB Anywhere V2 APIs — Metrics. 1 operations. Lead operation: YugabyteDB Anywhere Get Prometheus Host
+    Info. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Metrics
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v2-metrics
+    baseUri: ''
+    description: YugabyteDB Anywhere V2 APIs — Metrics business capability. Self-contained, no shared references.
+    resources:
+    - name: host-info
+      path: /host-info
+      operations:
+      - name: getprometheushostinfo
+        method: GET
+        description: YugabyteDB Anywhere Get Prometheus Host Info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v2-metrics-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere V2 APIs — Metrics. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/host-info
+      name: host-info
+      description: REST surface for host-info.
+      operations:
+      - method: GET
+        name: getprometheushostinfo
+        description: YugabyteDB Anywhere Get Prometheus Host Info
+        call: anywhere-v2-metrics.getprometheushostinfo
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v2-metrics-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere V2 APIs — Metrics. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-get-prometheus-host
+      description: YugabyteDB Anywhere Get Prometheus Host Info
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v2-metrics.getprometheushostinfo
+      outputParameters:
+      - type: object
+        mapping: $.

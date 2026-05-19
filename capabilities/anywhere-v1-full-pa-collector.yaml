@@ -1,0 +1,436 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere APIs — PA Collector
+  description: 'YugabyteDB Anywhere APIs — PA Collector. 8 operations. Lead operation: YugabyteDB Anywhere List All PA Collectors.
+    Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - PA Collector
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-full-pa-collector
+    baseUri: ''
+    description: YugabyteDB Anywhere APIs — PA Collector business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-pa_collector
+      path: /api/v1/customers/{cUUID}/pa_collector
+      operations:
+      - name: listallpacollectors
+        method: GET
+        description: YugabyteDB Anywhere List All PA Collectors
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+      - name: createpacollector
+        method: POST
+        description: YugabyteDB Anywhere Create PA Collector
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-pa_collector-paUUID
+      path: /api/v1/customers/{cUUID}/pa_collector/{paUUID}
+      operations:
+      - name: deletepacollector
+        method: DELETE
+        description: YugabyteDB Anywhere Delete PA Collector
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: paUUID
+          in: path
+          type: string
+          required: true
+        - name: force
+          in: query
+          type: boolean
+        - name: request
+          in: query
+          type: string
+      - name: getpacollector
+        method: GET
+        description: YugabyteDB Anywhere Get PA Collector
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: paUUID
+          in: path
+          type: string
+          required: true
+      - name: editpacollector
+        method: PUT
+        description: YugabyteDB Anywhere Edit PA Collector
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: paUUID
+          in: path
+          type: string
+          required: true
+        - name: force
+          in: query
+          type: boolean
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uUUID-pa_collector
+      path: /api/v1/customers/{cUUID}/universes/{uUUID}/pa_collector
+      operations:
+      - name: unregisteruniverse
+        method: DELETE
+        description: YugabyteDB Anywhere Unregister Universe from PA Collector
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: checkregistered
+        method: GET
+        description: YugabyteDB Anywhere Check if Universe is Registered with PA Collector
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uUUID-pa_collector-paUUID
+      path: /api/v1/customers/{cUUID}/universes/{uUUID}/pa_collector/{paUUID}
+      operations:
+      - name: registeruniverse
+        method: PUT
+        description: YugabyteDB Anywhere Register Universe with PA Collector
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uUUID
+          in: path
+          type: string
+          required: true
+        - name: paUUID
+          in: path
+          type: string
+          required: true
+        - name: advancedObservability
+          in: query
+          type: boolean
+        - name: request
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-full-pa-collector-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere APIs — PA Collector. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/pa-collector
+      name: api-v1-customers-cuuid-pa-collector
+      description: REST surface for api-v1-customers-cUUID-pa_collector.
+      operations:
+      - method: GET
+        name: listallpacollectors
+        description: YugabyteDB Anywhere List All PA Collectors
+        call: anywhere-v1-full-pa-collector.listallpacollectors
+        with:
+          cUUID: rest.cUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createpacollector
+        description: YugabyteDB Anywhere Create PA Collector
+        call: anywhere-v1-full-pa-collector.createpacollector
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/pa-collector/{pauuid}
+      name: api-v1-customers-cuuid-pa-collector-pauuid
+      description: REST surface for api-v1-customers-cUUID-pa_collector-paUUID.
+      operations:
+      - method: DELETE
+        name: deletepacollector
+        description: YugabyteDB Anywhere Delete PA Collector
+        call: anywhere-v1-full-pa-collector.deletepacollector
+        with:
+          cUUID: rest.cUUID
+          paUUID: rest.paUUID
+          force: rest.force
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getpacollector
+        description: YugabyteDB Anywhere Get PA Collector
+        call: anywhere-v1-full-pa-collector.getpacollector
+        with:
+          cUUID: rest.cUUID
+          paUUID: rest.paUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: editpacollector
+        description: YugabyteDB Anywhere Edit PA Collector
+        call: anywhere-v1-full-pa-collector.editpacollector
+        with:
+          cUUID: rest.cUUID
+          paUUID: rest.paUUID
+          force: rest.force
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uuuid}/pa-collector
+      name: api-v1-customers-cuuid-universes-uuuid-pa-collector
+      description: REST surface for api-v1-customers-cUUID-universes-uUUID-pa_collector.
+      operations:
+      - method: DELETE
+        name: unregisteruniverse
+        description: YugabyteDB Anywhere Unregister Universe from PA Collector
+        call: anywhere-v1-full-pa-collector.unregisteruniverse
+        with:
+          cUUID: rest.cUUID
+          uUUID: rest.uUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: checkregistered
+        description: YugabyteDB Anywhere Check if Universe is Registered with PA Collector
+        call: anywhere-v1-full-pa-collector.checkregistered
+        with:
+          cUUID: rest.cUUID
+          uUUID: rest.uUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uuuid}/pa-collector/{pauuid}
+      name: api-v1-customers-cuuid-universes-uuuid-pa-collector-pauuid
+      description: REST surface for api-v1-customers-cUUID-universes-uUUID-pa_collector-paUUID.
+      operations:
+      - method: PUT
+        name: registeruniverse
+        description: YugabyteDB Anywhere Register Universe with PA Collector
+        call: anywhere-v1-full-pa-collector.registeruniverse
+        with:
+          cUUID: rest.cUUID
+          uUUID: rest.uUUID
+          paUUID: rest.paUUID
+          advancedObservability: rest.advancedObservability
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-full-pa-collector-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere APIs — PA Collector. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-list-all-pa
+      description: YugabyteDB Anywhere List All PA Collectors
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-pa-collector.listallpacollectors
+      with:
+        cUUID: tools.cUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-pa-collector
+      description: YugabyteDB Anywhere Create PA Collector
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-pa-collector.createpacollector
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-pa-collector
+      description: YugabyteDB Anywhere Delete PA Collector
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-full-pa-collector.deletepacollector
+      with:
+        cUUID: tools.cUUID
+        paUUID: tools.paUUID
+        force: tools.force
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-pa-collector
+      description: YugabyteDB Anywhere Get PA Collector
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-pa-collector.getpacollector
+      with:
+        cUUID: tools.cUUID
+        paUUID: tools.paUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-edit-pa-collector
+      description: YugabyteDB Anywhere Edit PA Collector
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-pa-collector.editpacollector
+      with:
+        cUUID: tools.cUUID
+        paUUID: tools.paUUID
+        force: tools.force
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-unregister-universe-pa
+      description: YugabyteDB Anywhere Unregister Universe from PA Collector
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-full-pa-collector.unregisteruniverse
+      with:
+        cUUID: tools.cUUID
+        uUUID: tools.uUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-check-if-universe
+      description: YugabyteDB Anywhere Check if Universe is Registered with PA Collector
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-pa-collector.checkregistered
+      with:
+        cUUID: tools.cUUID
+        uUUID: tools.uUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-register-universe-pa
+      description: YugabyteDB Anywhere Register Universe with PA Collector
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-pa-collector.registeruniverse
+      with:
+        cUUID: tools.cUUID
+        uUUID: tools.uUUID
+        paUUID: tools.paUUID
+        advancedObservability: tools.advancedObservability
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.

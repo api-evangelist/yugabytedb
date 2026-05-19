@@ -1,0 +1,135 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Alerts and Monitoring — LoggingConfig
+  description: 'YugabyteDB Anywhere v1 — Alerts and Monitoring — LoggingConfig. 2 operations. Lead operation: YugabyteDB Anywhere
+    Set Audit Logging Level. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - LoggingConfig
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-alerts-monitoring-loggingconfig
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Alerts and Monitoring — LoggingConfig business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: api-v1-audit_logging_config
+      path: /api/v1/audit_logging_config
+      operations:
+      - name: setauditloggingsettings
+        method: POST
+        description: YugabyteDB Anywhere Set Audit Logging Level
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-logging_config
+      path: /api/v1/logging_config
+      operations:
+      - name: setloggingsettings
+        method: POST
+        description: YugabyteDB Anywhere Set Logging Level
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-alerts-monitoring-loggingconfig-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Alerts and Monitoring — LoggingConfig. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/audit-logging-config
+      name: api-v1-audit-logging-config
+      description: REST surface for api-v1-audit_logging_config.
+      operations:
+      - method: POST
+        name: setauditloggingsettings
+        description: YugabyteDB Anywhere Set Audit Logging Level
+        call: anywhere-v1-alerts-monitoring-loggingconfig.setauditloggingsettings
+        with:
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/logging-config
+      name: api-v1-logging-config
+      description: REST surface for api-v1-logging_config.
+      operations:
+      - method: POST
+        name: setloggingsettings
+        description: YugabyteDB Anywhere Set Logging Level
+        call: anywhere-v1-alerts-monitoring-loggingconfig.setloggingsettings
+        with:
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-alerts-monitoring-loggingconfig-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Alerts and Monitoring — LoggingConfig. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-set-audit-logging
+      description: YugabyteDB Anywhere Set Audit Logging Level
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-alerts-monitoring-loggingconfig.setauditloggingsettings
+      with:
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-set-logging-level
+      description: YugabyteDB Anywhere Set Logging Level
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-alerts-monitoring-loggingconfig.setloggingsettings
+      with:
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

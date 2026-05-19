@@ -1,0 +1,255 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere APIs — Platform Instance
+  description: 'YugabyteDB Anywhere APIs — Platform Instance. 4 operations. Lead operation: YugabyteDB Anywhere Create Platform
+    Instance. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Platform Instance
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-full-platform-instance
+    baseUri: ''
+    description: YugabyteDB Anywhere APIs — Platform Instance business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-settings-ha-config-cUUID-instance
+      path: /api/v1/settings/ha/config/{cUUID}/instance
+      operations:
+      - name: createinstance
+        method: POST
+        description: YugabyteDB Anywhere Create Platform Instance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-settings-ha-config-cUUID-instance-local
+      path: /api/v1/settings/ha/config/{cUUID}/instance/local
+      operations:
+      - name: getlocal
+        method: GET
+        description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-settings-ha-config-cUUID-instance-iUUID
+      path: /api/v1/settings/ha/config/{cUUID}/instance/{iUUID}
+      operations:
+      - name: deleteinstance
+        method: DELETE
+        description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: iUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-settings-ha-config-cUUID-instance-iUUID-promote
+      path: /api/v1/settings/ha/config/{cUUID}/instance/{iUUID}/promote
+      operations:
+      - name: promoteinstance
+        method: POST
+        description: YugabyteDB Anywhere Promote Platform Instance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: iUUID
+          in: path
+          type: string
+          required: true
+        - name: curLeader
+          in: query
+          type: string
+        - name: isForcePromote
+          in: query
+          type: boolean
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-full-platform-instance-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere APIs — Platform Instance. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/settings/ha/config/{cuuid}/instance
+      name: api-v1-settings-ha-config-cuuid-instance
+      description: REST surface for api-v1-settings-ha-config-cUUID-instance.
+      operations:
+      - method: POST
+        name: createinstance
+        description: YugabyteDB Anywhere Create Platform Instance
+        call: anywhere-v1-full-platform-instance.createinstance
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/settings/ha/config/{cuuid}/instance/local
+      name: api-v1-settings-ha-config-cuuid-instance-local
+      description: REST surface for api-v1-settings-ha-config-cUUID-instance-local.
+      operations:
+      - method: GET
+        name: getlocal
+        description: getlocal
+        call: anywhere-v1-full-platform-instance.getlocal
+        with:
+          cUUID: rest.cUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/settings/ha/config/{cuuid}/instance/{iuuid}
+      name: api-v1-settings-ha-config-cuuid-instance-iuuid
+      description: REST surface for api-v1-settings-ha-config-cUUID-instance-iUUID.
+      operations:
+      - method: DELETE
+        name: deleteinstance
+        description: deleteinstance
+        call: anywhere-v1-full-platform-instance.deleteinstance
+        with:
+          cUUID: rest.cUUID
+          iUUID: rest.iUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/settings/ha/config/{cuuid}/instance/{iuuid}/promote
+      name: api-v1-settings-ha-config-cuuid-instance-iuuid-promote
+      description: REST surface for api-v1-settings-ha-config-cUUID-instance-iUUID-promote.
+      operations:
+      - method: POST
+        name: promoteinstance
+        description: YugabyteDB Anywhere Promote Platform Instance
+        call: anywhere-v1-full-platform-instance.promoteinstance
+        with:
+          cUUID: rest.cUUID
+          iUUID: rest.iUUID
+          curLeader: rest.curLeader
+          isForcePromote: rest.isForcePromote
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-full-platform-instance-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere APIs — Platform Instance. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-create-platform-instance
+      description: YugabyteDB Anywhere Create Platform Instance
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-platform-instance.createinstance
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getlocal
+      description: getlocal
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-platform-instance.getlocal
+      with:
+        cUUID: tools.cUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deleteinstance
+      description: deleteinstance
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-full-platform-instance.deleteinstance
+      with:
+        cUUID: tools.cUUID
+        iUUID: tools.iUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-promote-platform-instance
+      description: YugabyteDB Anywhere Promote Platform Instance
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-platform-instance.promoteinstance
+      with:
+        cUUID: tools.cUUID
+        iUUID: tools.iUUID
+        curLeader: tools.curLeader
+        isForcePromote: tools.isForcePromote
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

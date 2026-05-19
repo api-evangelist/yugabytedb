@@ -1,0 +1,295 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere APIs — Node Agents
+  description: 'YugabyteDB Anywhere APIs — Node Agents. 5 operations. Lead operation: YugabyteDB Anywhere List Node Agents.
+    Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Node Agents
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-full-node-agents
+    baseUri: ''
+    description: YugabyteDB Anywhere APIs — Node Agents business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-node_agents
+      path: /api/v1/customers/{cUUID}/node_agents
+      operations:
+      - name: listnodeagents
+        method: GET
+        description: YugabyteDB Anywhere List Node Agents
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: nodeIp
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-node_agents-page
+      path: /api/v1/customers/{cUUID}/node_agents/page
+      operations:
+      - name: pagelistnodeagents
+        method: POST
+        description: YugabyteDB Anywhere List Node Agents (paginated)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-node_agents-nUUID
+      path: /api/v1/customers/{cUUID}/node_agents/{nUUID}
+      operations:
+      - name: getnodeagent
+        method: GET
+        description: YugabyteDB Anywhere Get Node Agent
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: nUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-node_agents
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/node_agents
+      operations:
+      - name: reinstallnodeagent
+        method: POST
+        description: YugabyteDB Anywhere Reinstall Node Agent
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-node_agents-download
+      path: /api/v1/node_agents/download
+      operations:
+      - name: downloadnodeagentinstaller
+        method: GET
+        description: YugabyteDB Anywhere Download Node Agent Installer or Package
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: downloadType
+          in: query
+          type: string
+        - name: os
+          in: query
+          type: string
+        - name: arch
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-full-node-agents-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere APIs — Node Agents. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/node-agents
+      name: api-v1-customers-cuuid-node-agents
+      description: REST surface for api-v1-customers-cUUID-node_agents.
+      operations:
+      - method: GET
+        name: listnodeagents
+        description: YugabyteDB Anywhere List Node Agents
+        call: anywhere-v1-full-node-agents.listnodeagents
+        with:
+          cUUID: rest.cUUID
+          nodeIp: rest.nodeIp
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/node-agents/page
+      name: api-v1-customers-cuuid-node-agents-page
+      description: REST surface for api-v1-customers-cUUID-node_agents-page.
+      operations:
+      - method: POST
+        name: pagelistnodeagents
+        description: YugabyteDB Anywhere List Node Agents (paginated)
+        call: anywhere-v1-full-node-agents.pagelistnodeagents
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/node-agents/{nuuid}
+      name: api-v1-customers-cuuid-node-agents-nuuid
+      description: REST surface for api-v1-customers-cUUID-node_agents-nUUID.
+      operations:
+      - method: GET
+        name: getnodeagent
+        description: YugabyteDB Anywhere Get Node Agent
+        call: anywhere-v1-full-node-agents.getnodeagent
+        with:
+          cUUID: rest.cUUID
+          nUUID: rest.nUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/node-agents
+      name: api-v1-customers-cuuid-universes-uniuuid-node-agents
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-node_agents.
+      operations:
+      - method: POST
+        name: reinstallnodeagent
+        description: YugabyteDB Anywhere Reinstall Node Agent
+        call: anywhere-v1-full-node-agents.reinstallnodeagent
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/node-agents/download
+      name: api-v1-node-agents-download
+      description: REST surface for api-v1-node_agents-download.
+      operations:
+      - method: GET
+        name: downloadnodeagentinstaller
+        description: YugabyteDB Anywhere Download Node Agent Installer or Package
+        call: anywhere-v1-full-node-agents.downloadnodeagentinstaller
+        with:
+          downloadType: rest.downloadType
+          os: rest.os
+          arch: rest.arch
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-full-node-agents-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere APIs — Node Agents. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-list-node-agents
+      description: YugabyteDB Anywhere List Node Agents
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-node-agents.listnodeagents
+      with:
+        cUUID: tools.cUUID
+        nodeIp: tools.nodeIp
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-node-agents-2
+      description: YugabyteDB Anywhere List Node Agents (paginated)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-node-agents.pagelistnodeagents
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-node-agent
+      description: YugabyteDB Anywhere Get Node Agent
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-node-agents.getnodeagent
+      with:
+        cUUID: tools.cUUID
+        nUUID: tools.nUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-reinstall-node-agent
+      description: YugabyteDB Anywhere Reinstall Node Agent
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-node-agents.reinstallnodeagent
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-download-node-agent
+      description: YugabyteDB Anywhere Download Node Agent Installer or Package
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-node-agents.downloadnodeagentinstaller
+      with:
+        downloadType: tools.downloadType
+        os: tools.os
+        arch: tools.arch
+      outputParameters:
+      - type: object
+        mapping: $.

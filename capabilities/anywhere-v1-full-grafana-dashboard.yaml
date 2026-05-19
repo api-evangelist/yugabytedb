@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere APIs — Grafana Dashboard
+  description: 'YugabyteDB Anywhere APIs — Grafana Dashboard. 1 operations. Lead operation: YugabyteDB Anywhere Get Grafana
+    Dashboard. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Grafana Dashboard
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-full-grafana-dashboard
+    baseUri: ''
+    description: YugabyteDB Anywhere APIs — Grafana Dashboard business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-grafana_dashboard
+      path: /api/v1/grafana_dashboard
+      operations:
+      - name: grafanadashboard
+        method: GET
+        description: YugabyteDB Anywhere Get Grafana Dashboard
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-full-grafana-dashboard-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere APIs — Grafana Dashboard. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/grafana-dashboard
+      name: api-v1-grafana-dashboard
+      description: REST surface for api-v1-grafana_dashboard.
+      operations:
+      - method: GET
+        name: grafanadashboard
+        description: YugabyteDB Anywhere Get Grafana Dashboard
+        call: anywhere-v1-full-grafana-dashboard.grafanadashboard
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-full-grafana-dashboard-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere APIs — Grafana Dashboard. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-get-grafana-dashboard
+      description: YugabyteDB Anywhere Get Grafana Dashboard
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-grafana-dashboard.grafanadashboard
+      outputParameters:
+      - type: object
+        mapping: $.

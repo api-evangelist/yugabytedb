@@ -1,0 +1,436 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere APIs — Customer Tasks
+  description: 'YugabyteDB Anywhere APIs — Customer Tasks. 8 operations. Lead operation: YugabyteDB Anywhere Get a Task''s
+    Status. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Customer Tasks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-full-customer-tasks
+    baseUri: ''
+    description: YugabyteDB Anywhere APIs — Customer Tasks business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-tasks-tUUID
+      path: /api/v1/customers/{cUUID}/tasks/{tUUID}
+      operations:
+      - name: taskstatus
+        method: GET
+        description: YugabyteDB Anywhere Get a Task's Status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: tUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-tasks-tUUID-abort
+      path: /api/v1/customers/{cUUID}/tasks/{tUUID}/abort
+      operations:
+      - name: aborttask
+        method: POST
+        description: YugabyteDB Anywhere Abort a Task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: tUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-tasks-tUUID-failed
+      path: /api/v1/customers/{cUUID}/tasks/{tUUID}/failed
+      operations:
+      - name: failedsubtasks
+        method: GET
+        description: YugabyteDB Anywhere Fetch Failed Subtasks - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: tUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-tasks-tUUID-failed_subtasks
+      path: /api/v1/customers/{cUUID}/tasks/{tUUID}/failed_subtasks
+      operations:
+      - name: listfailedsubtasks
+        method: GET
+        description: YugabyteDB Anywhere Get a List of Task's Failed Subtasks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: tUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-tasks-tUUID-retry
+      path: /api/v1/customers/{cUUID}/tasks/{tUUID}/retry
+      operations:
+      - name: retrytask
+        method: POST
+        description: YugabyteDB Anywhere Retry a Universe or Provider Task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: tUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-tasks-tUUID-rollback
+      path: /api/v1/customers/{cUUID}/tasks/{tUUID}/rollback
+      operations:
+      - name: rollbacktask
+        method: POST
+        description: YugabyteDB Anywhere Rollback a Universe or Provider Task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: tUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-tasks_list
+      path: /api/v1/customers/{cUUID}/tasks_list
+      operations:
+      - name: taskslist
+        method: GET
+        description: YugabyteDB Anywhere List Task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uUUID
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-tasks_list-page
+      path: /api/v1/customers/{cUUID}/tasks_list/page
+      operations:
+      - name: listtasksv2
+        method: POST
+        description: YugabyteDB Anywhere List Tasks (paginated)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-full-customer-tasks-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere APIs — Customer Tasks. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/tasks/{tuuid}
+      name: api-v1-customers-cuuid-tasks-tuuid
+      description: REST surface for api-v1-customers-cUUID-tasks-tUUID.
+      operations:
+      - method: GET
+        name: taskstatus
+        description: YugabyteDB Anywhere Get a Task's Status
+        call: anywhere-v1-full-customer-tasks.taskstatus
+        with:
+          cUUID: rest.cUUID
+          tUUID: rest.tUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/tasks/{tuuid}/abort
+      name: api-v1-customers-cuuid-tasks-tuuid-abort
+      description: REST surface for api-v1-customers-cUUID-tasks-tUUID-abort.
+      operations:
+      - method: POST
+        name: aborttask
+        description: YugabyteDB Anywhere Abort a Task
+        call: anywhere-v1-full-customer-tasks.aborttask
+        with:
+          cUUID: rest.cUUID
+          tUUID: rest.tUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/tasks/{tuuid}/failed
+      name: api-v1-customers-cuuid-tasks-tuuid-failed
+      description: REST surface for api-v1-customers-cUUID-tasks-tUUID-failed.
+      operations:
+      - method: GET
+        name: failedsubtasks
+        description: YugabyteDB Anywhere Fetch Failed Subtasks - Deprecated
+        call: anywhere-v1-full-customer-tasks.failedsubtasks
+        with:
+          cUUID: rest.cUUID
+          tUUID: rest.tUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/tasks/{tuuid}/failed-subtasks
+      name: api-v1-customers-cuuid-tasks-tuuid-failed-subtasks
+      description: REST surface for api-v1-customers-cUUID-tasks-tUUID-failed_subtasks.
+      operations:
+      - method: GET
+        name: listfailedsubtasks
+        description: YugabyteDB Anywhere Get a List of Task's Failed Subtasks
+        call: anywhere-v1-full-customer-tasks.listfailedsubtasks
+        with:
+          cUUID: rest.cUUID
+          tUUID: rest.tUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/tasks/{tuuid}/retry
+      name: api-v1-customers-cuuid-tasks-tuuid-retry
+      description: REST surface for api-v1-customers-cUUID-tasks-tUUID-retry.
+      operations:
+      - method: POST
+        name: retrytask
+        description: YugabyteDB Anywhere Retry a Universe or Provider Task
+        call: anywhere-v1-full-customer-tasks.retrytask
+        with:
+          cUUID: rest.cUUID
+          tUUID: rest.tUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/tasks/{tuuid}/rollback
+      name: api-v1-customers-cuuid-tasks-tuuid-rollback
+      description: REST surface for api-v1-customers-cUUID-tasks-tUUID-rollback.
+      operations:
+      - method: POST
+        name: rollbacktask
+        description: YugabyteDB Anywhere Rollback a Universe or Provider Task
+        call: anywhere-v1-full-customer-tasks.rollbacktask
+        with:
+          cUUID: rest.cUUID
+          tUUID: rest.tUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/tasks-list
+      name: api-v1-customers-cuuid-tasks-list
+      description: REST surface for api-v1-customers-cUUID-tasks_list.
+      operations:
+      - method: GET
+        name: taskslist
+        description: YugabyteDB Anywhere List Task
+        call: anywhere-v1-full-customer-tasks.taskslist
+        with:
+          cUUID: rest.cUUID
+          uUUID: rest.uUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/tasks-list/page
+      name: api-v1-customers-cuuid-tasks-list-page
+      description: REST surface for api-v1-customers-cUUID-tasks_list-page.
+      operations:
+      - method: POST
+        name: listtasksv2
+        description: YugabyteDB Anywhere List Tasks (paginated)
+        call: anywhere-v1-full-customer-tasks.listtasksv2
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-full-customer-tasks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere APIs — Customer Tasks. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-get-task-s-status
+      description: YugabyteDB Anywhere Get a Task's Status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-customer-tasks.taskstatus
+      with:
+        cUUID: tools.cUUID
+        tUUID: tools.tUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-abort-task
+      description: YugabyteDB Anywhere Abort a Task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-customer-tasks.aborttask
+      with:
+        cUUID: tools.cUUID
+        tUUID: tools.tUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-fetch-failed-subtasks
+      description: YugabyteDB Anywhere Fetch Failed Subtasks - Deprecated
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-customer-tasks.failedsubtasks
+      with:
+        cUUID: tools.cUUID
+        tUUID: tools.tUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-list-task-s
+      description: YugabyteDB Anywhere Get a List of Task's Failed Subtasks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-customer-tasks.listfailedsubtasks
+      with:
+        cUUID: tools.cUUID
+        tUUID: tools.tUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-retry-universe-provider
+      description: YugabyteDB Anywhere Retry a Universe or Provider Task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-customer-tasks.retrytask
+      with:
+        cUUID: tools.cUUID
+        tUUID: tools.tUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-rollback-universe-provider
+      description: YugabyteDB Anywhere Rollback a Universe or Provider Task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-customer-tasks.rollbacktask
+      with:
+        cUUID: tools.cUUID
+        tUUID: tools.tUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-task
+      description: YugabyteDB Anywhere List Task
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-customer-tasks.taskslist
+      with:
+        cUUID: tools.cUUID
+        uUUID: tools.uUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-tasks-paginated
+      description: YugabyteDB Anywhere List Tasks (paginated)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-customer-tasks.listtasksv2
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

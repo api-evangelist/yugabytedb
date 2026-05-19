@@ -1,0 +1,95 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Universe Management — KubernetesOverridesController
+  description: 'YugabyteDB Anywhere v1 — Universe Management — KubernetesOverridesController. 1 operations. Lead operation:
+    YugabyteDB Anywhere Validate Kubernetes Overrides.. Self-contained Naftiko capability covering one Yugabytedb business
+    surface.'
+  tags:
+  - Yugabytedb
+  - KubernetesOverridesController
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-universes-kubernetesoverridescontroller
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Universe Management — KubernetesOverridesController business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-validate_kubernetes_overrides
+      path: /api/v1/customers/{cUUID}/validate_kubernetes_overrides
+      operations:
+      - name: validatekubernetesoverrides
+        method: POST
+        description: YugabyteDB Anywhere Validate Kubernetes Overrides.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-universes-kubernetesoverridescontroller-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Universe Management — KubernetesOverridesController. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/validate-kubernetes-overrides
+      name: api-v1-customers-cuuid-validate-kubernetes-overrides
+      description: REST surface for api-v1-customers-cUUID-validate_kubernetes_overrides.
+      operations:
+      - method: POST
+        name: validatekubernetesoverrides
+        description: YugabyteDB Anywhere Validate Kubernetes Overrides.
+        call: anywhere-v1-universes-kubernetesoverridescontroller.validatekubernetesoverrides
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-universes-kubernetesoverridescontroller-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Universe Management — KubernetesOverridesController. One tool per
+      consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-validate-kubernetes-overrides
+      description: YugabyteDB Anywhere Validate Kubernetes Overrides.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-kubernetesoverridescontroller.validatekubernetesoverrides
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

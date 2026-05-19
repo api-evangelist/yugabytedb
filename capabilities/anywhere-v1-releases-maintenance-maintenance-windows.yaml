@@ -1,0 +1,344 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Releases and Maintenance — Maintenance windows
+  description: 'YugabyteDB Anywhere v1 — Releases and Maintenance — Maintenance windows. 6 operations. Lead operation: YugabyteDB
+    Anywhere Create Maintenance Window. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Maintenance windows
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-releases-maintenance-maintenance-windows
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Releases and Maintenance — Maintenance windows business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-maintenance_windows
+      path: /api/v1/customers/{cUUID}/maintenance_windows
+      operations:
+      - name: create
+        method: POST
+        description: YugabyteDB Anywhere Create Maintenance Window
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-maintenance_windows-list
+      path: /api/v1/customers/{cUUID}/maintenance_windows/list
+      operations:
+      - name: listofmaintenancewindows
+        method: POST
+        description: YugabyteDB Anywhere List Maintenance Windows
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-maintenance_windows-page
+      path: /api/v1/customers/{cUUID}/maintenance_windows/page
+      operations:
+      - name: page
+        method: POST
+        description: YugabyteDB Anywhere List Maintenance Windows (paginated)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-maintenance_windows-windowUUID
+      path: /api/v1/customers/{cUUID}/maintenance_windows/{windowUUID}
+      operations:
+      - name: delete
+        method: DELETE
+        description: YugabyteDB Anywhere Delete Maintenance Window
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: windowUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: get
+        method: GET
+        description: YugabyteDB Anywhere Get Details of a Maintenance Window
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: windowUUID
+          in: path
+          type: string
+          required: true
+      - name: update
+        method: PUT
+        description: YugabyteDB Anywhere Update Maintenance Window
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: windowUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-releases-maintenance-maintenance-windows-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Releases and Maintenance — Maintenance windows. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/maintenance-windows
+      name: api-v1-customers-cuuid-maintenance-windows
+      description: REST surface for api-v1-customers-cUUID-maintenance_windows.
+      operations:
+      - method: POST
+        name: create
+        description: YugabyteDB Anywhere Create Maintenance Window
+        call: anywhere-v1-releases-maintenance-maintenance-windows.create
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/maintenance-windows/list
+      name: api-v1-customers-cuuid-maintenance-windows-list
+      description: REST surface for api-v1-customers-cUUID-maintenance_windows-list.
+      operations:
+      - method: POST
+        name: listofmaintenancewindows
+        description: YugabyteDB Anywhere List Maintenance Windows
+        call: anywhere-v1-releases-maintenance-maintenance-windows.listofmaintenancewindows
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/maintenance-windows/page
+      name: api-v1-customers-cuuid-maintenance-windows-page
+      description: REST surface for api-v1-customers-cUUID-maintenance_windows-page.
+      operations:
+      - method: POST
+        name: page
+        description: YugabyteDB Anywhere List Maintenance Windows (paginated)
+        call: anywhere-v1-releases-maintenance-maintenance-windows.page
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/maintenance-windows/{windowuuid}
+      name: api-v1-customers-cuuid-maintenance-windows-windowuuid
+      description: REST surface for api-v1-customers-cUUID-maintenance_windows-windowUUID.
+      operations:
+      - method: DELETE
+        name: delete
+        description: YugabyteDB Anywhere Delete Maintenance Window
+        call: anywhere-v1-releases-maintenance-maintenance-windows.delete
+        with:
+          cUUID: rest.cUUID
+          windowUUID: rest.windowUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: get
+        description: YugabyteDB Anywhere Get Details of a Maintenance Window
+        call: anywhere-v1-releases-maintenance-maintenance-windows.get
+        with:
+          cUUID: rest.cUUID
+          windowUUID: rest.windowUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: update
+        description: YugabyteDB Anywhere Update Maintenance Window
+        call: anywhere-v1-releases-maintenance-maintenance-windows.update
+        with:
+          cUUID: rest.cUUID
+          windowUUID: rest.windowUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-releases-maintenance-maintenance-windows-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Releases and Maintenance — Maintenance windows. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-create-maintenance-window
+      description: YugabyteDB Anywhere Create Maintenance Window
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-releases-maintenance-maintenance-windows.create
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-maintenance-windows
+      description: YugabyteDB Anywhere List Maintenance Windows
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-releases-maintenance-maintenance-windows.listofmaintenancewindows
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-maintenance-windows-2
+      description: YugabyteDB Anywhere List Maintenance Windows (paginated)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-releases-maintenance-maintenance-windows.page
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-maintenance-window
+      description: YugabyteDB Anywhere Delete Maintenance Window
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-releases-maintenance-maintenance-windows.delete
+      with:
+        cUUID: tools.cUUID
+        windowUUID: tools.windowUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-details-maintenance
+      description: YugabyteDB Anywhere Get Details of a Maintenance Window
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-releases-maintenance-maintenance-windows.get
+      with:
+        cUUID: tools.cUUID
+        windowUUID: tools.windowUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-update-maintenance-window
+      description: YugabyteDB Anywhere Update Maintenance Window
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-releases-maintenance-maintenance-windows.update
+      with:
+        cUUID: tools.cUUID
+        windowUUID: tools.windowUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

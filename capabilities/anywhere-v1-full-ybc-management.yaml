@@ -1,0 +1,317 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere APIs — Ybc Management
+  description: 'YugabyteDB Anywhere APIs — Ybc Management. 5 operations. Lead operation: YugabyteDB Anywhere Disable YBC on
+    the Universe Nodes. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Ybc Management
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-full-ybc-management
+    baseUri: ''
+    description: YugabyteDB Anywhere APIs — Ybc Management business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-universes-uniUUID-ybc-disable
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc/disable
+      operations:
+      - name: disableybc
+        method: PUT
+        description: YugabyteDB Anywhere Disable YBC on the Universe Nodes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-universes-uniUUID-ybc-install
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc/install
+      operations:
+      - name: installybc
+        method: PUT
+        description: YugabyteDB Anywhere Install YBC on the Universe Nodes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: ybcVersion
+          in: query
+          type: string
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-universes-uniUUID-ybc-upgrade
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc/upgrade
+      operations:
+      - name: upgradeybc
+        method: PUT
+        description: YugabyteDB Anywhere Upgrade YBC on the Universe Nodes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: ybcVersion
+          in: query
+          type: string
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-universes-uniUUID-ybc-upgrade-gflags
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc/upgrade/gflags
+      operations:
+      - name: upgradeybcgflags
+        method: PUT
+        description: YugabyteDB Anywhere Upgrade YBC Gflags on the Universe Nodes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-universes-uniUUID-ybc_throttle_params_async
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc_throttle_params_async
+      operations:
+      - name: setthrottleparams
+        method: POST
+        description: YugabyteDB Anywhere Set Throttle Params in YB-Controller( Async )
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-full-ybc-management-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere APIs — Ybc Management. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/ybc/disable
+      name: api-v1-customers-cuuid-universes-uniuuid-ybc-disable
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-ybc-disable.
+      operations:
+      - method: PUT
+        name: disableybc
+        description: YugabyteDB Anywhere Disable YBC on the Universe Nodes
+        call: anywhere-v1-full-ybc-management.disableybc
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/ybc/install
+      name: api-v1-customers-cuuid-universes-uniuuid-ybc-install
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-ybc-install.
+      operations:
+      - method: PUT
+        name: installybc
+        description: YugabyteDB Anywhere Install YBC on the Universe Nodes
+        call: anywhere-v1-full-ybc-management.installybc
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          ybcVersion: rest.ybcVersion
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/ybc/upgrade
+      name: api-v1-customers-cuuid-universes-uniuuid-ybc-upgrade
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-ybc-upgrade.
+      operations:
+      - method: PUT
+        name: upgradeybc
+        description: YugabyteDB Anywhere Upgrade YBC on the Universe Nodes
+        call: anywhere-v1-full-ybc-management.upgradeybc
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          ybcVersion: rest.ybcVersion
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/ybc/upgrade/gflags
+      name: api-v1-customers-cuuid-universes-uniuuid-ybc-upgrade-gflags
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-ybc-upgrade-gflags.
+      operations:
+      - method: PUT
+        name: upgradeybcgflags
+        description: YugabyteDB Anywhere Upgrade YBC Gflags on the Universe Nodes
+        call: anywhere-v1-full-ybc-management.upgradeybcgflags
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/ybc-throttle-params-async
+      name: api-v1-customers-cuuid-universes-uniuuid-ybc-throttle-params-async
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-ybc_throttle_params_async.
+      operations:
+      - method: POST
+        name: setthrottleparams
+        description: YugabyteDB Anywhere Set Throttle Params in YB-Controller( Async )
+        call: anywhere-v1-full-ybc-management.setthrottleparams
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-full-ybc-management-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere APIs — Ybc Management. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-disable-ybc-universe
+      description: YugabyteDB Anywhere Disable YBC on the Universe Nodes
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-ybc-management.disableybc
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-install-ybc-universe
+      description: YugabyteDB Anywhere Install YBC on the Universe Nodes
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-ybc-management.installybc
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        ybcVersion: tools.ybcVersion
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-upgrade-ybc-universe
+      description: YugabyteDB Anywhere Upgrade YBC on the Universe Nodes
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-ybc-management.upgradeybc
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        ybcVersion: tools.ybcVersion
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-upgrade-ybc-gflags
+      description: YugabyteDB Anywhere Upgrade YBC Gflags on the Universe Nodes
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-ybc-management.upgradeybcgflags
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-set-throttle-params
+      description: YugabyteDB Anywhere Set Throttle Params in YB-Controller( Async )
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-ybc-management.setthrottleparams
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,538 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere APIs — Asynchronous Replication
+  description: 'YugabyteDB Anywhere APIs — Asynchronous Replication. 9 operations. Lead operation: YugabyteDB Anywhere Whether
+    Tables Need Bootstrap Before Setting Up Cross Cluster Replication. Self-contained Naftiko capability covering one Yugabytedb
+    business surface.'
+  tags:
+  - Yugabytedb
+  - Asynchronous Replication
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-full-asynchronous-replication
+    baseUri: ''
+    description: YugabyteDB Anywhere APIs — Asynchronous Replication business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-universes-uniUUID-need_bootstrap
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/need_bootstrap
+      operations:
+      - name: needbootstraptable
+        method: POST
+        description: YugabyteDB Anywhere Whether Tables Need Bootstrap Before Setting Up Cross Cluster Replication
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: configType
+          in: query
+          type: string
+        - name: includeDetails
+          in: query
+          type: boolean
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-xcluster_configs
+      path: /api/v1/customers/{cUUID}/xcluster_configs
+      operations:
+      - name: createxclusterconfig
+        method: POST
+        description: YugabyteDB Anywhere Create Xcluster Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-xcluster_configs-sync
+      path: /api/v1/customers/{cUUID}/xcluster_configs/sync
+      operations:
+      - name: syncxclusterconfig
+        method: POST
+        description: YugabyteDB Anywhere Sync Xcluster Config - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: targetUniverseUUID
+          in: query
+          type: string
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-xcluster_configs-xccUUID
+      path: /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID}
+      operations:
+      - name: deletexclusterconfig
+        method: DELETE
+        description: YugabyteDB Anywhere Delete Xcluster Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: xccUUID
+          in: path
+          type: string
+          required: true
+        - name: isForceDelete
+          in: query
+          type: boolean
+        - name: request
+          in: query
+          type: string
+      - name: getxclusterconfig
+        method: GET
+        description: YugabyteDB Anywhere Get Xcluster Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: xccUUID
+          in: path
+          type: string
+          required: true
+        - name: syncWithDB
+          in: query
+          type: boolean
+      - name: restartxclusterconfig
+        method: POST
+        description: YugabyteDB Anywhere Restart Xcluster Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: xccUUID
+          in: path
+          type: string
+          required: true
+        - name: isForceDelete
+          in: query
+          type: boolean
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: editxclusterconfig
+        method: PUT
+        description: YugabyteDB Anywhere Edit Xcluster Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: xccUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-xcluster_configs-xccUUID-need_bootstrap
+      path: /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID}/need_bootstrap
+      operations:
+      - name: needbootstrapxclusterconfig
+        method: POST
+        description: YugabyteDB Anywhere Whether Tables in an XCluster Replication Config Have Fallen Far Behind and Need
+          Bootstrap
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: xccUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-xcluster_configs-xccUUID-sync
+      path: /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID}/sync
+      operations:
+      - name: syncxclusterconfigv2
+        method: POST
+        description: YugabyteDB Anywhere Sync Xcluster Config (V2)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: xccUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-full-asynchronous-replication-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere APIs — Asynchronous Replication. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/need-bootstrap
+      name: api-v1-customers-cuuid-universes-uniuuid-need-bootstrap
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-need_bootstrap.
+      operations:
+      - method: POST
+        name: needbootstraptable
+        description: YugabyteDB Anywhere Whether Tables Need Bootstrap Before Setting Up Cross Cluster Replication
+        call: anywhere-v1-full-asynchronous-replication.needbootstraptable
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          configType: rest.configType
+          includeDetails: rest.includeDetails
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/xcluster-configs
+      name: api-v1-customers-cuuid-xcluster-configs
+      description: REST surface for api-v1-customers-cUUID-xcluster_configs.
+      operations:
+      - method: POST
+        name: createxclusterconfig
+        description: YugabyteDB Anywhere Create Xcluster Config
+        call: anywhere-v1-full-asynchronous-replication.createxclusterconfig
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/xcluster-configs/sync
+      name: api-v1-customers-cuuid-xcluster-configs-sync
+      description: REST surface for api-v1-customers-cUUID-xcluster_configs-sync.
+      operations:
+      - method: POST
+        name: syncxclusterconfig
+        description: YugabyteDB Anywhere Sync Xcluster Config - Deprecated
+        call: anywhere-v1-full-asynchronous-replication.syncxclusterconfig
+        with:
+          cUUID: rest.cUUID
+          targetUniverseUUID: rest.targetUniverseUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/xcluster-configs/{xccuuid}
+      name: api-v1-customers-cuuid-xcluster-configs-xccuuid
+      description: REST surface for api-v1-customers-cUUID-xcluster_configs-xccUUID.
+      operations:
+      - method: DELETE
+        name: deletexclusterconfig
+        description: YugabyteDB Anywhere Delete Xcluster Config
+        call: anywhere-v1-full-asynchronous-replication.deletexclusterconfig
+        with:
+          cUUID: rest.cUUID
+          xccUUID: rest.xccUUID
+          isForceDelete: rest.isForceDelete
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getxclusterconfig
+        description: YugabyteDB Anywhere Get Xcluster Config
+        call: anywhere-v1-full-asynchronous-replication.getxclusterconfig
+        with:
+          cUUID: rest.cUUID
+          xccUUID: rest.xccUUID
+          syncWithDB: rest.syncWithDB
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: restartxclusterconfig
+        description: YugabyteDB Anywhere Restart Xcluster Config
+        call: anywhere-v1-full-asynchronous-replication.restartxclusterconfig
+        with:
+          cUUID: rest.cUUID
+          xccUUID: rest.xccUUID
+          isForceDelete: rest.isForceDelete
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: editxclusterconfig
+        description: YugabyteDB Anywhere Edit Xcluster Config
+        call: anywhere-v1-full-asynchronous-replication.editxclusterconfig
+        with:
+          cUUID: rest.cUUID
+          xccUUID: rest.xccUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/xcluster-configs/{xccuuid}/need-bootstrap
+      name: api-v1-customers-cuuid-xcluster-configs-xccuuid-need-bootstrap
+      description: REST surface for api-v1-customers-cUUID-xcluster_configs-xccUUID-need_bootstrap.
+      operations:
+      - method: POST
+        name: needbootstrapxclusterconfig
+        description: YugabyteDB Anywhere Whether Tables in an XCluster Replication Config Have Fallen Far Behind and Need
+          Bootstrap
+        call: anywhere-v1-full-asynchronous-replication.needbootstrapxclusterconfig
+        with:
+          cUUID: rest.cUUID
+          xccUUID: rest.xccUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/xcluster-configs/{xccuuid}/sync
+      name: api-v1-customers-cuuid-xcluster-configs-xccuuid-sync
+      description: REST surface for api-v1-customers-cUUID-xcluster_configs-xccUUID-sync.
+      operations:
+      - method: POST
+        name: syncxclusterconfigv2
+        description: YugabyteDB Anywhere Sync Xcluster Config (V2)
+        call: anywhere-v1-full-asynchronous-replication.syncxclusterconfigv2
+        with:
+          cUUID: rest.cUUID
+          xccUUID: rest.xccUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-full-asynchronous-replication-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere APIs — Asynchronous Replication. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-whether-tables-need
+      description: YugabyteDB Anywhere Whether Tables Need Bootstrap Before Setting Up Cross Cluster Replication
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-asynchronous-replication.needbootstraptable
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        configType: tools.configType
+        includeDetails: tools.includeDetails
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-xcluster-config
+      description: YugabyteDB Anywhere Create Xcluster Config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-asynchronous-replication.createxclusterconfig
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-sync-xcluster-config
+      description: YugabyteDB Anywhere Sync Xcluster Config - Deprecated
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-asynchronous-replication.syncxclusterconfig
+      with:
+        cUUID: tools.cUUID
+        targetUniverseUUID: tools.targetUniverseUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-xcluster-config
+      description: YugabyteDB Anywhere Delete Xcluster Config
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-full-asynchronous-replication.deletexclusterconfig
+      with:
+        cUUID: tools.cUUID
+        xccUUID: tools.xccUUID
+        isForceDelete: tools.isForceDelete
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-xcluster-config
+      description: YugabyteDB Anywhere Get Xcluster Config
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-asynchronous-replication.getxclusterconfig
+      with:
+        cUUID: tools.cUUID
+        xccUUID: tools.xccUUID
+        syncWithDB: tools.syncWithDB
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-restart-xcluster-config
+      description: YugabyteDB Anywhere Restart Xcluster Config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-asynchronous-replication.restartxclusterconfig
+      with:
+        cUUID: tools.cUUID
+        xccUUID: tools.xccUUID
+        isForceDelete: tools.isForceDelete
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-edit-xcluster-config
+      description: YugabyteDB Anywhere Edit Xcluster Config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-asynchronous-replication.editxclusterconfig
+      with:
+        cUUID: tools.cUUID
+        xccUUID: tools.xccUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-whether-tables-xcluster
+      description: YugabyteDB Anywhere Whether Tables in an XCluster Replication Config Have Fallen Far Behind and Need Bootstrap
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-asynchronous-replication.needbootstrapxclusterconfig
+      with:
+        cUUID: tools.cUUID
+        xccUUID: tools.xccUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-sync-xcluster-config-2
+      description: YugabyteDB Anywhere Sync Xcluster Config (V2)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-asynchronous-replication.syncxclusterconfigv2
+      with:
+        cUUID: tools.cUUID
+        xccUUID: tools.xccUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.

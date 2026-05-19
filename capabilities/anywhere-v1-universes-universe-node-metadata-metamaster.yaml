@@ -1,0 +1,318 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Universe Management — Universe node metadata (metamaster)
+  description: 'YugabyteDB Anywhere v1 — Universe Management — Universe node metadata (metamaster). 6 operations. Lead operation:
+    YugabyteDB Anywhere Get the State of Master Load Balancing Ops. Self-contained Naftiko capability covering one Yugabytedb
+    business surface.'
+  tags:
+  - Yugabytedb
+  - Universe node metadata (metamaster)
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-universes-universe-node-metadata-metamaster
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Universe Management — Universe node metadata (metamaster) business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-universes-uniUUID-master_lb_state
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/master_lb_state
+      operations:
+      - name: getmasterlbstate
+        method: GET
+        description: YugabyteDB Anywhere Get the State of Master Load Balancing Ops
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-masters
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/masters
+      operations:
+      - name: getmasteraddresses
+        method: GET
+        description: YugabyteDB Anywhere List a Master Node's Addresses
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-redisservers
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/redisservers
+      operations:
+      - name: getredisserveraddresses
+        method: GET
+        description: YugabyteDB Anywhere List a REDIS Server's Addresses
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-yqlservers
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/yqlservers
+      operations:
+      - name: getyqlserveraddresses
+        method: GET
+        description: YugabyteDB Anywhere List a YQL Server's Addresses
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-ysqlservers
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/ysqlservers
+      operations:
+      - name: getysqlserveraddresses
+        method: GET
+        description: YugabyteDB Anywhere List a YSQL Server's Addresses
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+    - name: metamaster-universe-universeUUID
+      path: /metamaster/universe/{universeUUID}
+      operations:
+      - name: getuniversemasternodes
+        method: GET
+        description: YugabyteDB Anywhere List a Universe's Master Nodes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: universeUUID
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-universes-universe-node-metadata-metamaster-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Universe Management — Universe node metadata (metamaster). One
+      Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/master-lb-state
+      name: api-v1-customers-cuuid-universes-uniuuid-master-lb-state
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-master_lb_state.
+      operations:
+      - method: GET
+        name: getmasterlbstate
+        description: YugabyteDB Anywhere Get the State of Master Load Balancing Ops
+        call: anywhere-v1-universes-universe-node-metadata-metamaster.getmasterlbstate
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/masters
+      name: api-v1-customers-cuuid-universes-uniuuid-masters
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-masters.
+      operations:
+      - method: GET
+        name: getmasteraddresses
+        description: YugabyteDB Anywhere List a Master Node's Addresses
+        call: anywhere-v1-universes-universe-node-metadata-metamaster.getmasteraddresses
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/redisservers
+      name: api-v1-customers-cuuid-universes-uniuuid-redisservers
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-redisservers.
+      operations:
+      - method: GET
+        name: getredisserveraddresses
+        description: YugabyteDB Anywhere List a REDIS Server's Addresses
+        call: anywhere-v1-universes-universe-node-metadata-metamaster.getredisserveraddresses
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/yqlservers
+      name: api-v1-customers-cuuid-universes-uniuuid-yqlservers
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-yqlservers.
+      operations:
+      - method: GET
+        name: getyqlserveraddresses
+        description: YugabyteDB Anywhere List a YQL Server's Addresses
+        call: anywhere-v1-universes-universe-node-metadata-metamaster.getyqlserveraddresses
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/ysqlservers
+      name: api-v1-customers-cuuid-universes-uniuuid-ysqlservers
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-ysqlservers.
+      operations:
+      - method: GET
+        name: getysqlserveraddresses
+        description: YugabyteDB Anywhere List a YSQL Server's Addresses
+        call: anywhere-v1-universes-universe-node-metadata-metamaster.getysqlserveraddresses
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/metamaster/universe/{universeuuid}
+      name: metamaster-universe-universeuuid
+      description: REST surface for metamaster-universe-universeUUID.
+      operations:
+      - method: GET
+        name: getuniversemasternodes
+        description: YugabyteDB Anywhere List a Universe's Master Nodes
+        call: anywhere-v1-universes-universe-node-metadata-metamaster.getuniversemasternodes
+        with:
+          universeUUID: rest.universeUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-universes-universe-node-metadata-metamaster-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Universe Management — Universe node metadata (metamaster). One tool
+      per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-get-state-master
+      description: YugabyteDB Anywhere Get the State of Master Load Balancing Ops
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-universes-universe-node-metadata-metamaster.getmasterlbstate
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-master-node-s
+      description: YugabyteDB Anywhere List a Master Node's Addresses
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-universes-universe-node-metadata-metamaster.getmasteraddresses
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-redis-server-s
+      description: YugabyteDB Anywhere List a REDIS Server's Addresses
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-universes-universe-node-metadata-metamaster.getredisserveraddresses
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-yql-server-s
+      description: YugabyteDB Anywhere List a YQL Server's Addresses
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-universes-universe-node-metadata-metamaster.getyqlserveraddresses
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-ysql-server-s
+      description: YugabyteDB Anywhere List a YSQL Server's Addresses
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-universes-universe-node-metadata-metamaster.getysqlserveraddresses
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-universe-s-master
+      description: YugabyteDB Anywhere List a Universe's Master Nodes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-universes-universe-node-metadata-metamaster.getuniversemasternodes
+      with:
+        universeUUID: tools.universeUUID
+      outputParameters:
+      - type: object
+        mapping: $.

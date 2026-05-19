@@ -1,0 +1,138 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere APIs — License management
+  description: 'YugabyteDB Anywhere APIs — License management. 2 operations. Lead operation: YugabyteDB Anywhere Uploads the
+    License. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - License management
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-full-license-management
+    baseUri: ''
+    description: YugabyteDB Anywhere APIs — License management business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-licenses
+      path: /api/v1/customers/{cUUID}/licenses
+      operations:
+      - name: uploadlicense
+        method: POST
+        description: YugabyteDB Anywhere Uploads the License
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-licenses-lUUID
+      path: /api/v1/customers/{cUUID}/licenses/{lUUID}
+      operations:
+      - name: deletelicense
+        method: DELETE
+        description: YugabyteDB Anywhere Delete a License
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: lUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-full-license-management-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere APIs — License management. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/licenses
+      name: api-v1-customers-cuuid-licenses
+      description: REST surface for api-v1-customers-cUUID-licenses.
+      operations:
+      - method: POST
+        name: uploadlicense
+        description: YugabyteDB Anywhere Uploads the License
+        call: anywhere-v1-full-license-management.uploadlicense
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/licenses/{luuid}
+      name: api-v1-customers-cuuid-licenses-luuid
+      description: REST surface for api-v1-customers-cUUID-licenses-lUUID.
+      operations:
+      - method: DELETE
+        name: deletelicense
+        description: YugabyteDB Anywhere Delete a License
+        call: anywhere-v1-full-license-management.deletelicense
+        with:
+          cUUID: rest.cUUID
+          lUUID: rest.lUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-full-license-management-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere APIs — License management. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-uploads-license
+      description: YugabyteDB Anywhere Uploads the License
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-license-management.uploadlicense
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-license
+      description: YugabyteDB Anywhere Delete a License
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-full-license-management.deletelicense
+      with:
+        cUUID: tools.cUUID
+        lUUID: tools.lUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.

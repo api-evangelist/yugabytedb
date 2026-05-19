@@ -1,0 +1,337 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Universe Management — Universe database management
+  description: 'YugabyteDB Anywhere v1 — Universe Management — Universe database management. 5 operations. Lead operation:
+    YugabyteDB Anywhere Create a Database User for a Universe. Self-contained Naftiko capability covering one Yugabytedb business
+    surface.'
+  tags:
+  - Yugabytedb
+  - Universe database management
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-universes-universe-database-management
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Universe Management — Universe database management business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-universes-uniUUID-create_db_credentials
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/create_db_credentials
+      operations:
+      - name: createuserindb
+        method: POST
+        description: YugabyteDB Anywhere Create a Database User for a Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-run_query
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/run_query
+      operations:
+      - name: runysqlqueryuniverse
+        method: POST
+        description: YugabyteDB Anywhere Run a YSQL Query in a Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-update_db_credentials
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/update_db_credentials
+      operations:
+      - name: setdatabasecredentials
+        method: POST
+        description: YugabyteDB Anywhere Set a Universe's Database Credentials
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-univUUID-configure-ycql
+      path: /api/v1/customers/{cUUID}/universes/{univUUID}/configure/ycql
+      operations:
+      - name: configureycql
+        method: POST
+        description: YugabyteDB Anywhere Configure YCQL
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: univUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-univUUID-configure-ysql
+      path: /api/v1/customers/{cUUID}/universes/{univUUID}/configure/ysql
+      operations:
+      - name: configureysql
+        method: POST
+        description: YugabyteDB Anywhere Configure YSQL
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: univUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-universes-universe-database-management-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Universe Management — Universe database management. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/create-db-credentials
+      name: api-v1-customers-cuuid-universes-uniuuid-create-db-credentials
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-create_db_credentials.
+      operations:
+      - method: POST
+        name: createuserindb
+        description: YugabyteDB Anywhere Create a Database User for a Universe
+        call: anywhere-v1-universes-universe-database-management.createuserindb
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/run-query
+      name: api-v1-customers-cuuid-universes-uniuuid-run-query
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-run_query.
+      operations:
+      - method: POST
+        name: runysqlqueryuniverse
+        description: YugabyteDB Anywhere Run a YSQL Query in a Universe
+        call: anywhere-v1-universes-universe-database-management.runysqlqueryuniverse
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/update-db-credentials
+      name: api-v1-customers-cuuid-universes-uniuuid-update-db-credentials
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-update_db_credentials.
+      operations:
+      - method: POST
+        name: setdatabasecredentials
+        description: YugabyteDB Anywhere Set a Universe's Database Credentials
+        call: anywhere-v1-universes-universe-database-management.setdatabasecredentials
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{univuuid}/configure/ycql
+      name: api-v1-customers-cuuid-universes-univuuid-configure-ycql
+      description: REST surface for api-v1-customers-cUUID-universes-univUUID-configure-ycql.
+      operations:
+      - method: POST
+        name: configureycql
+        description: YugabyteDB Anywhere Configure YCQL
+        call: anywhere-v1-universes-universe-database-management.configureycql
+        with:
+          cUUID: rest.cUUID
+          univUUID: rest.univUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{univuuid}/configure/ysql
+      name: api-v1-customers-cuuid-universes-univuuid-configure-ysql
+      description: REST surface for api-v1-customers-cUUID-universes-univUUID-configure-ysql.
+      operations:
+      - method: POST
+        name: configureysql
+        description: YugabyteDB Anywhere Configure YSQL
+        call: anywhere-v1-universes-universe-database-management.configureysql
+        with:
+          cUUID: rest.cUUID
+          univUUID: rest.univUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-universes-universe-database-management-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Universe Management — Universe database management. One tool per
+      consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-create-database-user
+      description: YugabyteDB Anywhere Create a Database User for a Universe
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-universe-database-management.createuserindb
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-run-ysql-query
+      description: YugabyteDB Anywhere Run a YSQL Query in a Universe
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-universe-database-management.runysqlqueryuniverse
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-set-universe-s-database
+      description: YugabyteDB Anywhere Set a Universe's Database Credentials
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-universe-database-management.setdatabasecredentials
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-configure-ycql
+      description: YugabyteDB Anywhere Configure YCQL
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-universe-database-management.configureycql
+      with:
+        cUUID: tools.cUUID
+        univUUID: tools.univUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-configure-ysql
+      description: YugabyteDB Anywhere Configure YSQL
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-universe-database-management.configureysql
+      with:
+        cUUID: tools.cUUID
+        univUUID: tools.univUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

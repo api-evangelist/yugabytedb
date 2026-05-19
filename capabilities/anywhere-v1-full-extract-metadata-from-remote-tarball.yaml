@@ -1,0 +1,147 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere APIs — Extract metadata from remote tarball
+  description: 'YugabyteDB Anywhere APIs — Extract metadata from remote tarball. 2 operations. Lead operation: YugabyteDB
+    Anywhere Helper to Extract Release Metadata from a Remote Tarball. Self-contained Naftiko capability covering one Yugabytedb
+    business surface.'
+  tags:
+  - Yugabytedb
+  - Extract metadata from remote tarball
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-full-extract-metadata-from-remote-tarball
+    baseUri: ''
+    description: YugabyteDB Anywhere APIs — Extract metadata from remote tarball business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: api-v1-customers-cUUID-ybdb_release-extract_metadata
+      path: /api/v1/customers/{cUUID}/ybdb_release/extract_metadata
+      operations:
+      - name: extractmetadata
+        method: POST
+        description: YugabyteDB Anywhere Helper to Extract Release Metadata from a Remote Tarball
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-ybdb_release-extract_metadata-rUUID
+      path: /api/v1/customers/{cUUID}/ybdb_release/extract_metadata/{rUUID}
+      operations:
+      - name: extractmetadata
+        method: GET
+        description: YugabyteDB Anywhere Get the Extract Release Metadata from a Remote Tarball
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: rUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-full-extract-metadata-from-remote-tarball-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere APIs — Extract metadata from remote tarball. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/ybdb-release/extract-metadata
+      name: api-v1-customers-cuuid-ybdb-release-extract-metadata
+      description: REST surface for api-v1-customers-cUUID-ybdb_release-extract_metadata.
+      operations:
+      - method: POST
+        name: extractmetadata
+        description: YugabyteDB Anywhere Helper to Extract Release Metadata from a Remote Tarball
+        call: anywhere-v1-full-extract-metadata-from-remote-tarball.extractmetadata
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/ybdb-release/extract-metadata/{ruuid}
+      name: api-v1-customers-cuuid-ybdb-release-extract-metadata-ruuid
+      description: REST surface for api-v1-customers-cUUID-ybdb_release-extract_metadata-rUUID.
+      operations:
+      - method: GET
+        name: extractmetadata
+        description: YugabyteDB Anywhere Get the Extract Release Metadata from a Remote Tarball
+        call: anywhere-v1-full-extract-metadata-from-remote-tarball.extractmetadata
+        with:
+          cUUID: rest.cUUID
+          rUUID: rest.rUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-full-extract-metadata-from-remote-tarball-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere APIs — Extract metadata from remote tarball. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-helper-extract-release
+      description: YugabyteDB Anywhere Helper to Extract Release Metadata from a Remote Tarball
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-extract-metadata-from-remote-tarball.extractmetadata
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-extract-release
+      description: YugabyteDB Anywhere Get the Extract Release Metadata from a Remote Tarball
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-extract-metadata-from-remote-tarball.extractmetadata
+      with:
+        cUUID: tools.cUUID
+        rUUID: tools.rUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.

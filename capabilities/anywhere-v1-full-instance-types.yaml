@@ -1,0 +1,349 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere APIs — Instance types
+  description: 'YugabyteDB Anywhere APIs — Instance types. 7 operations. Lead operation: YugabyteDB Anywhere List a Provider''s
+    Instance Types. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Instance types
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-full-instance-types
+    baseUri: ''
+    description: YugabyteDB Anywhere APIs — Instance types business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-providers-pUUID-instance_types
+      path: /api/v1/customers/{cUUID}/providers/{pUUID}/instance_types
+      operations:
+      - name: listofinstancetype
+        method: GET
+        description: YugabyteDB Anywhere List a Provider's Instance Types
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: zone
+          in: query
+          type: array
+        - name: arch
+          in: query
+          type: string
+      - name: createinstancetype
+        method: POST
+        description: YugabyteDB Anywhere Create an Instance Type
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-providers-pUUID-instance_types-code
+      path: /api/v1/customers/{cUUID}/providers/{pUUID}/instance_types/{code}
+      operations:
+      - name: deleteinstancetype
+        method: DELETE
+        description: YugabyteDB Anywhere Delete an Instance Type
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: code
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: instancetypedetail
+        method: GET
+        description: YugabyteDB Anywhere Get Details of an Instance Type
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: code
+          in: path
+          type: string
+          required: true
+    - name: api-v1-metadata-azu_types
+      path: /api/v1/metadata/azu_types
+      operations:
+      - name: getazutypes
+        method: GET
+        description: YugabyteDB Anywhere List Supported Azure Disk Types
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-v1-metadata-ebs_types
+      path: /api/v1/metadata/ebs_types
+      operations:
+      - name: getebstypes
+        method: GET
+        description: YugabyteDB Anywhere List Supported EBS Volume Types
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-v1-metadata-gcp_types
+      path: /api/v1/metadata/gcp_types
+      operations:
+      - name: getgcptypes
+        method: GET
+        description: YugabyteDB Anywhere List Supported GCP Disk Types
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-full-instance-types-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere APIs — Instance types. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/providers/{puuid}/instance-types
+      name: api-v1-customers-cuuid-providers-puuid-instance-types
+      description: REST surface for api-v1-customers-cUUID-providers-pUUID-instance_types.
+      operations:
+      - method: GET
+        name: listofinstancetype
+        description: YugabyteDB Anywhere List a Provider's Instance Types
+        call: anywhere-v1-full-instance-types.listofinstancetype
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          zone: rest.zone
+          arch: rest.arch
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createinstancetype
+        description: YugabyteDB Anywhere Create an Instance Type
+        call: anywhere-v1-full-instance-types.createinstancetype
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/providers/{puuid}/instance-types/{code}
+      name: api-v1-customers-cuuid-providers-puuid-instance-types-code
+      description: REST surface for api-v1-customers-cUUID-providers-pUUID-instance_types-code.
+      operations:
+      - method: DELETE
+        name: deleteinstancetype
+        description: YugabyteDB Anywhere Delete an Instance Type
+        call: anywhere-v1-full-instance-types.deleteinstancetype
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          code: rest.code
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: instancetypedetail
+        description: YugabyteDB Anywhere Get Details of an Instance Type
+        call: anywhere-v1-full-instance-types.instancetypedetail
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          code: rest.code
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/metadata/azu-types
+      name: api-v1-metadata-azu-types
+      description: REST surface for api-v1-metadata-azu_types.
+      operations:
+      - method: GET
+        name: getazutypes
+        description: YugabyteDB Anywhere List Supported Azure Disk Types
+        call: anywhere-v1-full-instance-types.getazutypes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/metadata/ebs-types
+      name: api-v1-metadata-ebs-types
+      description: REST surface for api-v1-metadata-ebs_types.
+      operations:
+      - method: GET
+        name: getebstypes
+        description: YugabyteDB Anywhere List Supported EBS Volume Types
+        call: anywhere-v1-full-instance-types.getebstypes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/metadata/gcp-types
+      name: api-v1-metadata-gcp-types
+      description: REST surface for api-v1-metadata-gcp_types.
+      operations:
+      - method: GET
+        name: getgcptypes
+        description: YugabyteDB Anywhere List Supported GCP Disk Types
+        call: anywhere-v1-full-instance-types.getgcptypes
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-full-instance-types-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere APIs — Instance types. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-list-provider-s-instance
+      description: YugabyteDB Anywhere List a Provider's Instance Types
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-instance-types.listofinstancetype
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        zone: tools.zone
+        arch: tools.arch
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-instance-type
+      description: YugabyteDB Anywhere Create an Instance Type
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-instance-types.createinstancetype
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-instance-type
+      description: YugabyteDB Anywhere Delete an Instance Type
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-full-instance-types.deleteinstancetype
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        code: tools.code
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-details-instance
+      description: YugabyteDB Anywhere Get Details of an Instance Type
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-instance-types.instancetypedetail
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        code: tools.code
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-supported-azure
+      description: YugabyteDB Anywhere List Supported Azure Disk Types
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-instance-types.getazutypes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-supported-ebs
+      description: YugabyteDB Anywhere List Supported EBS Volume Types
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-instance-types.getebstypes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-supported-gcp
+      description: YugabyteDB Anywhere List Supported GCP Disk Types
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-instance-types.getgcptypes
+      outputParameters:
+      - type: object
+        mapping: $.

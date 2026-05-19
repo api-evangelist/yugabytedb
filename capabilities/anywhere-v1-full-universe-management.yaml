@@ -1,0 +1,621 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere APIs — Universe management
+  description: 'YugabyteDB Anywhere APIs — Universe management. 11 operations. Lead operation: YugabyteDB Anywhere List Universes.
+    Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Universe management
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-full-universe-management
+    baseUri: ''
+    description: YugabyteDB Anywhere APIs — Universe management business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-universes
+      path: /api/v1/customers/{cUUID}/universes
+      operations:
+      - name: listuniverses
+        method: GET
+        description: YugabyteDB Anywhere List Universes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: name
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-universes-uniUUID
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}
+      operations:
+      - name: deleteuniverse
+        method: DELETE
+        description: YugabyteDB Anywhere Delete a Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: isForceDelete
+          in: query
+          type: boolean
+        - name: isDeleteBackups
+          in: query
+          type: boolean
+        - name: isDeleteAssociatedCerts
+          in: query
+          type: boolean
+        - name: request
+          in: query
+          type: string
+      - name: getuniverse
+        method: GET
+        description: YugabyteDB Anywhere Get a Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-config_alerts
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/config_alerts
+      operations:
+      - name: configureuniversealerts
+        method: POST
+        description: YugabyteDB Anywhere Configure Alerts for a Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-universes-uniUUID-mark_helm3_compatible
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/mark_helm3_compatible
+      operations:
+      - name: setuniversehelm3compatible
+        method: PUT
+        description: YugabyteDB Anywhere Flag a Universe as Helm 3-compatible - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-universes-uniUUID-pause
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/pause
+      operations:
+      - name: pauseuniverse
+        method: POST
+        description: YugabyteDB Anywhere Pause a Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-universes-uniUUID-resume
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/resume
+      operations:
+      - name: resumeuniverse
+        method: POST
+        description: YugabyteDB Anywhere Resume a Paused Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-universes-uniUUID-set_key
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/set_key
+      operations:
+      - name: setuniversekey
+        method: POST
+        description: YugabyteDB Anywhere Set a Universe's Key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-setup_universe_2dc
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/setup_universe_2dc
+      operations:
+      - name: resetuniverseversion
+        method: PUT
+        description: YugabyteDB Anywhere Reset Universe Version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-universes-uniUUID-update_backup_state
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/update_backup_state
+      operations:
+      - name: setuniversebackupflag
+        method: PUT
+        description: YugabyteDB Anywhere Set a Universe's Backup Flag
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: markActive
+          in: query
+          type: boolean
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-universes-uniUUID-update_lb_config
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/update_lb_config
+      operations:
+      - name: updateloadbalancerconfig
+        method: PUT
+        description: YugabyteDB Anywhere Update Load Balancer Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-full-universe-management-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere APIs — Universe management. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/universes
+      name: api-v1-customers-cuuid-universes
+      description: REST surface for api-v1-customers-cUUID-universes.
+      operations:
+      - method: GET
+        name: listuniverses
+        description: YugabyteDB Anywhere List Universes
+        call: anywhere-v1-full-universe-management.listuniverses
+        with:
+          cUUID: rest.cUUID
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}
+      name: api-v1-customers-cuuid-universes-uniuuid
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID.
+      operations:
+      - method: DELETE
+        name: deleteuniverse
+        description: YugabyteDB Anywhere Delete a Universe
+        call: anywhere-v1-full-universe-management.deleteuniverse
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          isForceDelete: rest.isForceDelete
+          isDeleteBackups: rest.isDeleteBackups
+          isDeleteAssociatedCerts: rest.isDeleteAssociatedCerts
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getuniverse
+        description: YugabyteDB Anywhere Get a Universe
+        call: anywhere-v1-full-universe-management.getuniverse
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/config-alerts
+      name: api-v1-customers-cuuid-universes-uniuuid-config-alerts
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-config_alerts.
+      operations:
+      - method: POST
+        name: configureuniversealerts
+        description: YugabyteDB Anywhere Configure Alerts for a Universe
+        call: anywhere-v1-full-universe-management.configureuniversealerts
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/mark-helm3-compatible
+      name: api-v1-customers-cuuid-universes-uniuuid-mark-helm3-compatible
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-mark_helm3_compatible.
+      operations:
+      - method: PUT
+        name: setuniversehelm3compatible
+        description: YugabyteDB Anywhere Flag a Universe as Helm 3-compatible - Deprecated
+        call: anywhere-v1-full-universe-management.setuniversehelm3compatible
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/pause
+      name: api-v1-customers-cuuid-universes-uniuuid-pause
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-pause.
+      operations:
+      - method: POST
+        name: pauseuniverse
+        description: YugabyteDB Anywhere Pause a Universe
+        call: anywhere-v1-full-universe-management.pauseuniverse
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/resume
+      name: api-v1-customers-cuuid-universes-uniuuid-resume
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-resume.
+      operations:
+      - method: POST
+        name: resumeuniverse
+        description: YugabyteDB Anywhere Resume a Paused Universe
+        call: anywhere-v1-full-universe-management.resumeuniverse
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/set-key
+      name: api-v1-customers-cuuid-universes-uniuuid-set-key
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-set_key.
+      operations:
+      - method: POST
+        name: setuniversekey
+        description: YugabyteDB Anywhere Set a Universe's Key
+        call: anywhere-v1-full-universe-management.setuniversekey
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/setup-universe-2dc
+      name: api-v1-customers-cuuid-universes-uniuuid-setup-universe-2dc
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-setup_universe_2dc.
+      operations:
+      - method: PUT
+        name: resetuniverseversion
+        description: YugabyteDB Anywhere Reset Universe Version
+        call: anywhere-v1-full-universe-management.resetuniverseversion
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/update-backup-state
+      name: api-v1-customers-cuuid-universes-uniuuid-update-backup-state
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-update_backup_state.
+      operations:
+      - method: PUT
+        name: setuniversebackupflag
+        description: YugabyteDB Anywhere Set a Universe's Backup Flag
+        call: anywhere-v1-full-universe-management.setuniversebackupflag
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          markActive: rest.markActive
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/update-lb-config
+      name: api-v1-customers-cuuid-universes-uniuuid-update-lb-config
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-update_lb_config.
+      operations:
+      - method: PUT
+        name: updateloadbalancerconfig
+        description: YugabyteDB Anywhere Update Load Balancer Config
+        call: anywhere-v1-full-universe-management.updateloadbalancerconfig
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-full-universe-management-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere APIs — Universe management. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-list-universes
+      description: YugabyteDB Anywhere List Universes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-universe-management.listuniverses
+      with:
+        cUUID: tools.cUUID
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-universe
+      description: YugabyteDB Anywhere Delete a Universe
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-full-universe-management.deleteuniverse
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        isForceDelete: tools.isForceDelete
+        isDeleteBackups: tools.isDeleteBackups
+        isDeleteAssociatedCerts: tools.isDeleteAssociatedCerts
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-universe
+      description: YugabyteDB Anywhere Get a Universe
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-universe-management.getuniverse
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-configure-alerts-universe
+      description: YugabyteDB Anywhere Configure Alerts for a Universe
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-universe-management.configureuniversealerts
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-flag-universe-helm
+      description: YugabyteDB Anywhere Flag a Universe as Helm 3-compatible - Deprecated
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-universe-management.setuniversehelm3compatible
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-pause-universe
+      description: YugabyteDB Anywhere Pause a Universe
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-universe-management.pauseuniverse
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-resume-paused-universe
+      description: YugabyteDB Anywhere Resume a Paused Universe
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-universe-management.resumeuniverse
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-set-universe-s-key
+      description: YugabyteDB Anywhere Set a Universe's Key
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-universe-management.setuniversekey
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-reset-universe-version
+      description: YugabyteDB Anywhere Reset Universe Version
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-universe-management.resetuniverseversion
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-set-universe-s-backup
+      description: YugabyteDB Anywhere Set a Universe's Backup Flag
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-universe-management.setuniversebackupflag
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        markActive: tools.markActive
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-update-load-balancer
+      description: YugabyteDB Anywhere Update Load Balancer Config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-universe-management.updateloadbalancerconfig
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.

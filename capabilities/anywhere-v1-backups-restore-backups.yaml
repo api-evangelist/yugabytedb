@@ -1,0 +1,1296 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Backups, Restores, and Replication — Backups
+  description: 'YugabyteDB Anywhere v1 — Backups, Restores, and Replication — Backups. 24 operations. Lead operation: YugabyteDB
+    Anywhere Delete Backups - Deprecated. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Backups
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-backups-restore-backups
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Backups, Restores, and Replication — Backups business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-backups
+      path: /api/v1/customers/{cUUID}/backups
+      operations:
+      - name: deletebackups
+        method: DELETE
+        description: YugabyteDB Anywhere Delete Backups - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: createbackup
+        method: POST
+        description: YugabyteDB Anywhere Create a Backup V2
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-backups-delete
+      path: /api/v1/customers/{cUUID}/backups/delete
+      operations:
+      - name: deletebackupsv2
+        method: POST
+        description: YugabyteDB Anywhere Delete Backups V2
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-backups-page
+      path: /api/v1/customers/{cUUID}/backups/page
+      operations:
+      - name: listbackupsv2
+        method: POST
+        description: YugabyteDB Anywhere List Backups (paginated) V2
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-backups-backupUUID
+      path: /api/v1/customers/{cUUID}/backups/{backupUUID}
+      operations:
+      - name: getbackupv2
+        method: GET
+        description: YugabyteDB Anywhere Get Backup V2
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: backupUUID
+          in: path
+          type: string
+          required: true
+      - name: editbackupv2
+        method: PUT
+        description: YugabyteDB Anywhere Edit a Backup V2
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: backupUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-backups-backupUUID-list_increments
+      path: /api/v1/customers/{cUUID}/backups/{backupUUID}/list_increments
+      operations:
+      - name: listincrementalbackups
+        method: GET
+        description: YugabyteDB Anywhere List Incremental Backups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: backupUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-backups-backupUUID-stop
+      path: /api/v1/customers/{cUUID}/backups/{backupUUID}/stop
+      operations:
+      - name: stopbackup
+        method: POST
+        description: YugabyteDB Anywhere Stop a Backup
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: backupUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-backups-baseBackupUUID-restorable_keyspace_tables
+      path: /api/v1/customers/{cUUID}/backups/{baseBackupUUID}/restorable_keyspace_tables
+      operations:
+      - name: listrestorablekeyspacetables
+        method: GET
+        description: YugabyteDB Anywhere List of All Restorable Entities in the Incremental Backup Chain
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: baseBackupUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-create_backup_schedule
+      path: /api/v1/customers/{cUUID}/create_backup_schedule
+      operations:
+      - name: createbackupschedule
+        method: POST
+        description: YugabyteDB Anywhere Create Backup Schedule - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-create_backup_schedule_async
+      path: /api/v1/customers/{cUUID}/create_backup_schedule_async
+      operations:
+      - name: createbackupscheduleasync
+        method: POST
+        description: YugabyteDB Anywhere Create Backup Schedule Async
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-restore
+      path: /api/v1/customers/{cUUID}/restore
+      operations:
+      - name: restorebackupv2
+        method: POST
+        description: YugabyteDB Anywhere Restore from a Backup V2
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-restore-advanced_restore_preflight
+      path: /api/v1/customers/{cUUID}/restore/advanced_restore_preflight
+      operations:
+      - name: advancedrestorepreflight
+        method: POST
+        description: YugabyteDB Anywhere Advanced Restore Preflight Checks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-restore-page
+      path: /api/v1/customers/{cUUID}/restore/page
+      operations:
+      - name: listbackuprestoresv2
+        method: POST
+        description: YugabyteDB Anywhere List Backup Restores (paginated)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-restore-preflight
+      path: /api/v1/customers/{cUUID}/restore/preflight
+      operations:
+      - name: restorepreflight
+        method: POST
+        description: YugabyteDB Anywhere Restore Preflight Checks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-restore-validate_restorable_keyspace_tables
+      path: /api/v1/customers/{cUUID}/restore/validate_restorable_keyspace_tables
+      operations:
+      - name: validatekeyspacetablestorestore
+        method: POST
+        description: YugabyteDB Anywhere Validate Keyspace and Tables to Restore Against Backup
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-backups
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/backups
+      operations:
+      - name: listofbackups
+        method: GET
+        description: YugabyteDB Anywhere List a Customer's Backups - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-backups-restore
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/backups/restore
+      operations:
+      - name: restore
+        method: POST
+        description: YugabyteDB Anywhere Restore from a Backup - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-backups-tasks-tUUID
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/backups/tasks/{tUUID}
+      operations:
+      - name: fetchbackupsbytaskuuid
+        method: GET
+        description: YugabyteDB Anywhere List Backups Associated with a Task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: tUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-multi_table_backup
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/multi_table_backup
+      operations:
+      - name: createmultitablebackup
+        method: PUT
+        description: YugabyteDB Anywhere Create a Multi-table Backup - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-tables-tableUUID-create_backup
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID}/create_backup
+      operations:
+      - name: createsingletablebackup
+        method: PUT
+        description: YugabyteDB Anywhere Create a Single-table Backup - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: tableUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-ybc_throttle_params
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc_throttle_params
+      operations:
+      - name: getthrottleparams
+        method: GET
+        description: YugabyteDB Anywhere Get Throttle Params from YB-Controller
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+      - name: setthrottleparams
+        method: POST
+        description: YugabyteDB Anywhere Set Throttle Params in YB-Controller - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-customerUUID-universes-universeUUID-universe_backup
+      path: /api/v1/customers/{customerUUID}/universes/{universeUUID}/universe_backup
+      operations:
+      - name: universebackup
+        method: POST
+        description: YugabyteDB Anywhere Create a Universe Backup
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: customerUUID
+          in: path
+          type: string
+          required: true
+        - name: universeUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-backups-restore-backups-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Backups, Restores, and Replication — Backups. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/backups
+      name: api-v1-customers-cuuid-backups
+      description: REST surface for api-v1-customers-cUUID-backups.
+      operations:
+      - method: DELETE
+        name: deletebackups
+        description: YugabyteDB Anywhere Delete Backups - Deprecated
+        call: anywhere-v1-backups-restore-backups.deletebackups
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createbackup
+        description: YugabyteDB Anywhere Create a Backup V2
+        call: anywhere-v1-backups-restore-backups.createbackup
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/backups/delete
+      name: api-v1-customers-cuuid-backups-delete
+      description: REST surface for api-v1-customers-cUUID-backups-delete.
+      operations:
+      - method: POST
+        name: deletebackupsv2
+        description: YugabyteDB Anywhere Delete Backups V2
+        call: anywhere-v1-backups-restore-backups.deletebackupsv2
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/backups/page
+      name: api-v1-customers-cuuid-backups-page
+      description: REST surface for api-v1-customers-cUUID-backups-page.
+      operations:
+      - method: POST
+        name: listbackupsv2
+        description: YugabyteDB Anywhere List Backups (paginated) V2
+        call: anywhere-v1-backups-restore-backups.listbackupsv2
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/backups/{backupuuid}
+      name: api-v1-customers-cuuid-backups-backupuuid
+      description: REST surface for api-v1-customers-cUUID-backups-backupUUID.
+      operations:
+      - method: GET
+        name: getbackupv2
+        description: YugabyteDB Anywhere Get Backup V2
+        call: anywhere-v1-backups-restore-backups.getbackupv2
+        with:
+          cUUID: rest.cUUID
+          backupUUID: rest.backupUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: editbackupv2
+        description: YugabyteDB Anywhere Edit a Backup V2
+        call: anywhere-v1-backups-restore-backups.editbackupv2
+        with:
+          cUUID: rest.cUUID
+          backupUUID: rest.backupUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/backups/{backupuuid}/list-increments
+      name: api-v1-customers-cuuid-backups-backupuuid-list-increments
+      description: REST surface for api-v1-customers-cUUID-backups-backupUUID-list_increments.
+      operations:
+      - method: GET
+        name: listincrementalbackups
+        description: YugabyteDB Anywhere List Incremental Backups
+        call: anywhere-v1-backups-restore-backups.listincrementalbackups
+        with:
+          cUUID: rest.cUUID
+          backupUUID: rest.backupUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/backups/{backupuuid}/stop
+      name: api-v1-customers-cuuid-backups-backupuuid-stop
+      description: REST surface for api-v1-customers-cUUID-backups-backupUUID-stop.
+      operations:
+      - method: POST
+        name: stopbackup
+        description: YugabyteDB Anywhere Stop a Backup
+        call: anywhere-v1-backups-restore-backups.stopbackup
+        with:
+          cUUID: rest.cUUID
+          backupUUID: rest.backupUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/backups/{basebackupuuid}/restorable-keyspace-tables
+      name: api-v1-customers-cuuid-backups-basebackupuuid-restorable-keyspace-tables
+      description: REST surface for api-v1-customers-cUUID-backups-baseBackupUUID-restorable_keyspace_tables.
+      operations:
+      - method: GET
+        name: listrestorablekeyspacetables
+        description: YugabyteDB Anywhere List of All Restorable Entities in the Incremental Backup Chain
+        call: anywhere-v1-backups-restore-backups.listrestorablekeyspacetables
+        with:
+          cUUID: rest.cUUID
+          baseBackupUUID: rest.baseBackupUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/create-backup-schedule
+      name: api-v1-customers-cuuid-create-backup-schedule
+      description: REST surface for api-v1-customers-cUUID-create_backup_schedule.
+      operations:
+      - method: POST
+        name: createbackupschedule
+        description: YugabyteDB Anywhere Create Backup Schedule - Deprecated
+        call: anywhere-v1-backups-restore-backups.createbackupschedule
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/create-backup-schedule-async
+      name: api-v1-customers-cuuid-create-backup-schedule-async
+      description: REST surface for api-v1-customers-cUUID-create_backup_schedule_async.
+      operations:
+      - method: POST
+        name: createbackupscheduleasync
+        description: YugabyteDB Anywhere Create Backup Schedule Async
+        call: anywhere-v1-backups-restore-backups.createbackupscheduleasync
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/restore
+      name: api-v1-customers-cuuid-restore
+      description: REST surface for api-v1-customers-cUUID-restore.
+      operations:
+      - method: POST
+        name: restorebackupv2
+        description: YugabyteDB Anywhere Restore from a Backup V2
+        call: anywhere-v1-backups-restore-backups.restorebackupv2
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/restore/advanced-restore-preflight
+      name: api-v1-customers-cuuid-restore-advanced-restore-preflight
+      description: REST surface for api-v1-customers-cUUID-restore-advanced_restore_preflight.
+      operations:
+      - method: POST
+        name: advancedrestorepreflight
+        description: YugabyteDB Anywhere Advanced Restore Preflight Checks
+        call: anywhere-v1-backups-restore-backups.advancedrestorepreflight
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/restore/page
+      name: api-v1-customers-cuuid-restore-page
+      description: REST surface for api-v1-customers-cUUID-restore-page.
+      operations:
+      - method: POST
+        name: listbackuprestoresv2
+        description: YugabyteDB Anywhere List Backup Restores (paginated)
+        call: anywhere-v1-backups-restore-backups.listbackuprestoresv2
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/restore/preflight
+      name: api-v1-customers-cuuid-restore-preflight
+      description: REST surface for api-v1-customers-cUUID-restore-preflight.
+      operations:
+      - method: POST
+        name: restorepreflight
+        description: YugabyteDB Anywhere Restore Preflight Checks
+        call: anywhere-v1-backups-restore-backups.restorepreflight
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/restore/validate-restorable-keyspace-tables
+      name: api-v1-customers-cuuid-restore-validate-restorable-keyspace-tables
+      description: REST surface for api-v1-customers-cUUID-restore-validate_restorable_keyspace_tables.
+      operations:
+      - method: POST
+        name: validatekeyspacetablestorestore
+        description: YugabyteDB Anywhere Validate Keyspace and Tables to Restore Against Backup
+        call: anywhere-v1-backups-restore-backups.validatekeyspacetablestorestore
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/backups
+      name: api-v1-customers-cuuid-universes-uniuuid-backups
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-backups.
+      operations:
+      - method: GET
+        name: listofbackups
+        description: YugabyteDB Anywhere List a Customer's Backups - Deprecated
+        call: anywhere-v1-backups-restore-backups.listofbackups
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/backups/restore
+      name: api-v1-customers-cuuid-universes-uniuuid-backups-restore
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-backups-restore.
+      operations:
+      - method: POST
+        name: restore
+        description: YugabyteDB Anywhere Restore from a Backup - Deprecated
+        call: anywhere-v1-backups-restore-backups.restore
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/backups/tasks/{tuuid}
+      name: api-v1-customers-cuuid-universes-uniuuid-backups-tasks-tuuid
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-backups-tasks-tUUID.
+      operations:
+      - method: GET
+        name: fetchbackupsbytaskuuid
+        description: YugabyteDB Anywhere List Backups Associated with a Task
+        call: anywhere-v1-backups-restore-backups.fetchbackupsbytaskuuid
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          tUUID: rest.tUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/multi-table-backup
+      name: api-v1-customers-cuuid-universes-uniuuid-multi-table-backup
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-multi_table_backup.
+      operations:
+      - method: PUT
+        name: createmultitablebackup
+        description: YugabyteDB Anywhere Create a Multi-table Backup - Deprecated
+        call: anywhere-v1-backups-restore-backups.createmultitablebackup
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/tables/{tableuuid}/create-backup
+      name: api-v1-customers-cuuid-universes-uniuuid-tables-tableuuid-create-backup
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-tables-tableUUID-create_backup.
+      operations:
+      - method: PUT
+        name: createsingletablebackup
+        description: YugabyteDB Anywhere Create a Single-table Backup - Deprecated
+        call: anywhere-v1-backups-restore-backups.createsingletablebackup
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          tableUUID: rest.tableUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/ybc-throttle-params
+      name: api-v1-customers-cuuid-universes-uniuuid-ybc-throttle-params
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-ybc_throttle_params.
+      operations:
+      - method: GET
+        name: getthrottleparams
+        description: YugabyteDB Anywhere Get Throttle Params from YB-Controller
+        call: anywhere-v1-backups-restore-backups.getthrottleparams
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: setthrottleparams
+        description: YugabyteDB Anywhere Set Throttle Params in YB-Controller - Deprecated
+        call: anywhere-v1-backups-restore-backups.setthrottleparams
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{customeruuid}/universes/{universeuuid}/universe-backup
+      name: api-v1-customers-customeruuid-universes-universeuuid-universe-backup
+      description: REST surface for api-v1-customers-customerUUID-universes-universeUUID-universe_backup.
+      operations:
+      - method: POST
+        name: universebackup
+        description: YugabyteDB Anywhere Create a Universe Backup
+        call: anywhere-v1-backups-restore-backups.universebackup
+        with:
+          customerUUID: rest.customerUUID
+          universeUUID: rest.universeUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-backups-restore-backups-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Backups, Restores, and Replication — Backups. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-delete-backups-deprecated
+      description: YugabyteDB Anywhere Delete Backups - Deprecated
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-backups-restore-backups.deletebackups
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-backup-v2
+      description: YugabyteDB Anywhere Create a Backup V2
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-backups.createbackup
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-backups-v2
+      description: YugabyteDB Anywhere Delete Backups V2
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-backups.deletebackupsv2
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-backups-paginated
+      description: YugabyteDB Anywhere List Backups (paginated) V2
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-backups.listbackupsv2
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-backup-v2
+      description: YugabyteDB Anywhere Get Backup V2
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-backups-restore-backups.getbackupv2
+      with:
+        cUUID: tools.cUUID
+        backupUUID: tools.backupUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-edit-backup-v2
+      description: YugabyteDB Anywhere Edit a Backup V2
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-backups-restore-backups.editbackupv2
+      with:
+        cUUID: tools.cUUID
+        backupUUID: tools.backupUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-incremental-backups
+      description: YugabyteDB Anywhere List Incremental Backups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-backups-restore-backups.listincrementalbackups
+      with:
+        cUUID: tools.cUUID
+        backupUUID: tools.backupUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-stop-backup
+      description: YugabyteDB Anywhere Stop a Backup
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-backups.stopbackup
+      with:
+        cUUID: tools.cUUID
+        backupUUID: tools.backupUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-all-restorable
+      description: YugabyteDB Anywhere List of All Restorable Entities in the Incremental Backup Chain
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-backups-restore-backups.listrestorablekeyspacetables
+      with:
+        cUUID: tools.cUUID
+        baseBackupUUID: tools.baseBackupUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-backup-schedule
+      description: YugabyteDB Anywhere Create Backup Schedule - Deprecated
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-backups.createbackupschedule
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-backup-schedule-2
+      description: YugabyteDB Anywhere Create Backup Schedule Async
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-backups.createbackupscheduleasync
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-restore-backup-v2
+      description: YugabyteDB Anywhere Restore from a Backup V2
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-backups.restorebackupv2
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-advanced-restore-preflight
+      description: YugabyteDB Anywhere Advanced Restore Preflight Checks
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-backups.advancedrestorepreflight
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-backup-restores
+      description: YugabyteDB Anywhere List Backup Restores (paginated)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-backups.listbackuprestoresv2
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-restore-preflight-checks
+      description: YugabyteDB Anywhere Restore Preflight Checks
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-backups.restorepreflight
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-validate-keyspace-and
+      description: YugabyteDB Anywhere Validate Keyspace and Tables to Restore Against Backup
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-backups.validatekeyspacetablestorestore
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-customer-s-backups
+      description: YugabyteDB Anywhere List a Customer's Backups - Deprecated
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-backups-restore-backups.listofbackups
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-restore-backup-deprecated
+      description: YugabyteDB Anywhere Restore from a Backup - Deprecated
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-backups.restore
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-backups-associated
+      description: YugabyteDB Anywhere List Backups Associated with a Task
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-backups-restore-backups.fetchbackupsbytaskuuid
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        tUUID: tools.tUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-multi-table
+      description: YugabyteDB Anywhere Create a Multi-table Backup - Deprecated
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-backups-restore-backups.createmultitablebackup
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-single-table
+      description: YugabyteDB Anywhere Create a Single-table Backup - Deprecated
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-backups-restore-backups.createsingletablebackup
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        tableUUID: tools.tableUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-throttle-params
+      description: YugabyteDB Anywhere Get Throttle Params from YB-Controller
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-backups-restore-backups.getthrottleparams
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-set-throttle-params
+      description: YugabyteDB Anywhere Set Throttle Params in YB-Controller - Deprecated
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-backups.setthrottleparams
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-universe-backup
+      description: YugabyteDB Anywhere Create a Universe Backup
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-backups.universebackup
+      with:
+        customerUUID: tools.customerUUID
+        universeUUID: tools.universeUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

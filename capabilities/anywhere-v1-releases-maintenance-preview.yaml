@@ -1,0 +1,307 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Releases and Maintenance — preview
+  description: 'YugabyteDB Anywhere v1 — Releases and Maintenance — preview. 5 operations. Lead operation: YugabyteDB Anywhere
+    List Image Bundles. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - preview
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-releases-maintenance-preview
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Releases and Maintenance — preview business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: api-v1-customers-cUUID-providers-pUUID-image_bundle
+      path: /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle
+      operations:
+      - name: getlistofimagebundles
+        method: GET
+        description: YugabyteDB Anywhere List Image Bundles
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: arch
+          in: query
+          type: string
+      - name: createimagebundle
+        method: POST
+        description: YugabyteDB Anywhere Create a Image Bundle
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-providers-pUUID-image_bundle-iBUUID
+      path: /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID}
+      operations:
+      - name: delete
+        method: DELETE
+        description: YugabyteDB Anywhere Delete a Image Bundle
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: iBUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: getimagebundle
+        method: GET
+        description: YugabyteDB Anywhere Get a Image Bundle
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: iBUUID
+          in: path
+          type: string
+          required: true
+      - name: editimagebundle
+        method: PUT
+        description: YugabyteDB Anywhere Update a Image Bundle
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: iBUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-releases-maintenance-preview-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Releases and Maintenance — preview. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/providers/{puuid}/image-bundle
+      name: api-v1-customers-cuuid-providers-puuid-image-bundle
+      description: REST surface for api-v1-customers-cUUID-providers-pUUID-image_bundle.
+      operations:
+      - method: GET
+        name: getlistofimagebundles
+        description: YugabyteDB Anywhere List Image Bundles
+        call: anywhere-v1-releases-maintenance-preview.getlistofimagebundles
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          arch: rest.arch
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createimagebundle
+        description: YugabyteDB Anywhere Create a Image Bundle
+        call: anywhere-v1-releases-maintenance-preview.createimagebundle
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/providers/{puuid}/image-bundle/{ibuuid}
+      name: api-v1-customers-cuuid-providers-puuid-image-bundle-ibuuid
+      description: REST surface for api-v1-customers-cUUID-providers-pUUID-image_bundle-iBUUID.
+      operations:
+      - method: DELETE
+        name: delete
+        description: YugabyteDB Anywhere Delete a Image Bundle
+        call: anywhere-v1-releases-maintenance-preview.delete
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          iBUUID: rest.iBUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getimagebundle
+        description: YugabyteDB Anywhere Get a Image Bundle
+        call: anywhere-v1-releases-maintenance-preview.getimagebundle
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          iBUUID: rest.iBUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: editimagebundle
+        description: YugabyteDB Anywhere Update a Image Bundle
+        call: anywhere-v1-releases-maintenance-preview.editimagebundle
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          iBUUID: rest.iBUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-releases-maintenance-preview-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Releases and Maintenance — preview. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-list-image-bundles
+      description: YugabyteDB Anywhere List Image Bundles
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-releases-maintenance-preview.getlistofimagebundles
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        arch: tools.arch
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-image-bundle
+      description: YugabyteDB Anywhere Create a Image Bundle
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-releases-maintenance-preview.createimagebundle
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-image-bundle
+      description: YugabyteDB Anywhere Delete a Image Bundle
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-releases-maintenance-preview.delete
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        iBUUID: tools.iBUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-image-bundle
+      description: YugabyteDB Anywhere Get a Image Bundle
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-releases-maintenance-preview.getimagebundle
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        iBUUID: tools.iBUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-update-image-bundle
+      description: YugabyteDB Anywhere Update a Image Bundle
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-releases-maintenance-preview.editimagebundle
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        iBUUID: tools.iBUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,97 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Universe Management — Backups
+  description: 'YugabyteDB Anywhere v1 — Universe Management — Backups. 1 operations. Lead operation: YugabyteDB Anywhere
+    Set a Universe''s Backup Flag. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Backups
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-universes-backups
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Universe Management — Backups business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-universes-uniUUID-update_backup_state
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/update_backup_state
+      operations:
+      - name: setuniversebackupflag
+        method: PUT
+        description: YugabyteDB Anywhere Set a Universe's Backup Flag
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: markActive
+          in: query
+          type: boolean
+        - name: request
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-universes-backups-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Universe Management — Backups. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/update-backup-state
+      name: api-v1-customers-cuuid-universes-uniuuid-update-backup-state
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-update_backup_state.
+      operations:
+      - method: PUT
+        name: setuniversebackupflag
+        description: YugabyteDB Anywhere Set a Universe's Backup Flag
+        call: anywhere-v1-universes-backups.setuniversebackupflag
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          markActive: rest.markActive
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-universes-backups-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Universe Management — Backups. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-set-universe-s-backup
+      description: YugabyteDB Anywhere Set a Universe's Backup Flag
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-universes-backups.setuniversebackupflag
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        markActive: tools.markActive
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.

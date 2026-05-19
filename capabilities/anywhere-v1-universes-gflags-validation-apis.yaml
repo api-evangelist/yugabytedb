@@ -1,0 +1,206 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Universe Management — GFlags Validation APIs
+  description: 'YugabyteDB Anywhere v1 — Universe Management — GFlags Validation APIs. 3 operations. Lead operation: YugabyteDB
+    Anywhere Get Gflag Metadata. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - GFlags Validation APIs
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-universes-gflags-validation-apis
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Universe Management — GFlags Validation APIs business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: api-v1-metadata-version-version-gflag
+      path: /api/v1/metadata/version/{version}/gflag
+      operations:
+      - name: getgflagmetadata
+        method: GET
+        description: YugabyteDB Anywhere Get Gflag Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: version
+          in: path
+          type: string
+          required: true
+        - name: name
+          in: query
+          type: string
+        - name: server
+          in: query
+          type: string
+    - name: api-v1-metadata-version-version-list_gflags
+      path: /api/v1/metadata/version/{version}/list_gflags
+      operations:
+      - name: listgflags
+        method: GET
+        description: YugabyteDB Anywhere List All Gflags for a Release
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: version
+          in: path
+          type: string
+          required: true
+        - name: name
+          in: query
+          type: string
+        - name: server
+          in: query
+          type: string
+        - name: mostUsedGFlags
+          in: query
+          type: boolean
+        - name: showExperimental
+          in: query
+          type: boolean
+    - name: api-v1-metadata-version-version-validate_gflags
+      path: /api/v1/metadata/version/{version}/validate_gflags
+      operations:
+      - name: validategflags
+        method: POST
+        description: YugabyteDB Anywhere Validate Gflags
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: version
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-universes-gflags-validation-apis-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Universe Management — GFlags Validation APIs. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/metadata/version/{version}/gflag
+      name: api-v1-metadata-version-version-gflag
+      description: REST surface for api-v1-metadata-version-version-gflag.
+      operations:
+      - method: GET
+        name: getgflagmetadata
+        description: YugabyteDB Anywhere Get Gflag Metadata
+        call: anywhere-v1-universes-gflags-validation-apis.getgflagmetadata
+        with:
+          version: rest.version
+          name: rest.name
+          server: rest.server
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/metadata/version/{version}/list-gflags
+      name: api-v1-metadata-version-version-list-gflags
+      description: REST surface for api-v1-metadata-version-version-list_gflags.
+      operations:
+      - method: GET
+        name: listgflags
+        description: YugabyteDB Anywhere List All Gflags for a Release
+        call: anywhere-v1-universes-gflags-validation-apis.listgflags
+        with:
+          version: rest.version
+          name: rest.name
+          server: rest.server
+          mostUsedGFlags: rest.mostUsedGFlags
+          showExperimental: rest.showExperimental
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/metadata/version/{version}/validate-gflags
+      name: api-v1-metadata-version-version-validate-gflags
+      description: REST surface for api-v1-metadata-version-version-validate_gflags.
+      operations:
+      - method: POST
+        name: validategflags
+        description: YugabyteDB Anywhere Validate Gflags
+        call: anywhere-v1-universes-gflags-validation-apis.validategflags
+        with:
+          version: rest.version
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-universes-gflags-validation-apis-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Universe Management — GFlags Validation APIs. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-get-gflag-metadata
+      description: YugabyteDB Anywhere Get Gflag Metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-universes-gflags-validation-apis.getgflagmetadata
+      with:
+        version: tools.version
+        name: tools.name
+        server: tools.server
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-all-gflags
+      description: YugabyteDB Anywhere List All Gflags for a Release
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-universes-gflags-validation-apis.listgflags
+      with:
+        version: tools.version
+        name: tools.name
+        server: tools.server
+        mostUsedGFlags: tools.mostUsedGFlags
+        showExperimental: tools.showExperimental
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-validate-gflags
+      description: YugabyteDB Anywhere Validate Gflags
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-gflags-validation-apis.validategflags
+      with:
+        version: tools.version
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

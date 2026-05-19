@@ -1,0 +1,183 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Universe Management — Universe performance suggestions
+  description: 'YugabyteDB Anywhere v1 — Universe Management — Universe performance suggestions. 3 operations. Lead operation:
+    YugabyteDB Anywhere Get Query Distribution Improvement Suggestion for a Universe. Self-contained Naftiko capability covering
+    one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Universe performance suggestions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-universes-universe-performance-suggestions
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Universe Management — Universe performance suggestions business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-universes-uniUUID-query_distribution_suggestions
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/query_distribution_suggestions
+      operations:
+      - name: getquerydistributionsuggestions
+        method: GET
+        description: YugabyteDB Anywhere Get Query Distribution Improvement Suggestion for a Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-range_hash
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/range_hash
+      operations:
+      - name: getrangehash
+        method: GET
+        description: YugabyteDB Anywhere Return List of Hash Indexes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-unused_indexes
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/unused_indexes
+      operations:
+      - name: getunusedindexes
+        method: GET
+        description: YugabyteDB Anywhere Return List of Each Unused Index Across the Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-universes-universe-performance-suggestions-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Universe Management — Universe performance suggestions. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/query-distribution-suggestions
+      name: api-v1-customers-cuuid-universes-uniuuid-query-distribution-suggestions
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-query_distribution_suggestions.
+      operations:
+      - method: GET
+        name: getquerydistributionsuggestions
+        description: YugabyteDB Anywhere Get Query Distribution Improvement Suggestion for a Universe
+        call: anywhere-v1-universes-universe-performance-suggestions.getquerydistributionsuggestions
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/range-hash
+      name: api-v1-customers-cuuid-universes-uniuuid-range-hash
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-range_hash.
+      operations:
+      - method: GET
+        name: getrangehash
+        description: YugabyteDB Anywhere Return List of Hash Indexes
+        call: anywhere-v1-universes-universe-performance-suggestions.getrangehash
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/unused-indexes
+      name: api-v1-customers-cuuid-universes-uniuuid-unused-indexes
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-unused_indexes.
+      operations:
+      - method: GET
+        name: getunusedindexes
+        description: YugabyteDB Anywhere Return List of Each Unused Index Across the Universe
+        call: anywhere-v1-universes-universe-performance-suggestions.getunusedindexes
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-universes-universe-performance-suggestions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Universe Management — Universe performance suggestions. One tool
+      per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-get-query-distribution
+      description: YugabyteDB Anywhere Get Query Distribution Improvement Suggestion for a Universe
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-universes-universe-performance-suggestions.getquerydistributionsuggestions
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-return-list-hash
+      description: YugabyteDB Anywhere Return List of Hash Indexes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-universes-universe-performance-suggestions.getrangehash
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-return-list-each
+      description: YugabyteDB Anywhere Return List of Each Unused Index Across the Universe
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-universes-universe-performance-suggestions.getunusedindexes
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.

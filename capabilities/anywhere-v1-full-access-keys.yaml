@@ -1,0 +1,342 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere APIs — Access Keys
+  description: 'YugabyteDB Anywhere APIs — Access Keys. 6 operations. Lead operation: YugabyteDB Anywhere List Access Keys
+    for All Providers of a Customer. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Access Keys
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-full-access-keys
+    baseUri: ''
+    description: YugabyteDB Anywhere APIs — Access Keys business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-access_keys
+      path: /api/v1/customers/{cUUID}/access_keys
+      operations:
+      - name: listallforcustomer
+        method: GET
+        description: YugabyteDB Anywhere List Access Keys for All Providers of a Customer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-providers-pUUID-access_keys
+      path: /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys
+      operations:
+      - name: list
+        method: GET
+        description: YugabyteDB Anywhere List Access Keys for a Specific Provider
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+      - name: createaccesskey
+        method: POST
+        description: YugabyteDB Anywhere Create/Upload Access Key for Onprem Provider Region - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-providers-pUUID-access_keys-keyCode
+      path: /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys/{keyCode}
+      operations:
+      - name: deleteaccesskey
+        method: DELETE
+        description: YugabyteDB Anywhere Delete an Access Key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: keyCode
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: index
+        method: GET
+        description: YugabyteDB Anywhere Get an Access Key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: keyCode
+          in: path
+          type: string
+          required: true
+      - name: editaccesskey
+        method: PUT
+        description: YugabyteDB Anywhere Modify the Existing Access Key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: keyCode
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-full-access-keys-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere APIs — Access Keys. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/access-keys
+      name: api-v1-customers-cuuid-access-keys
+      description: REST surface for api-v1-customers-cUUID-access_keys.
+      operations:
+      - method: GET
+        name: listallforcustomer
+        description: YugabyteDB Anywhere List Access Keys for All Providers of a Customer
+        call: anywhere-v1-full-access-keys.listallforcustomer
+        with:
+          cUUID: rest.cUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/providers/{puuid}/access-keys
+      name: api-v1-customers-cuuid-providers-puuid-access-keys
+      description: REST surface for api-v1-customers-cUUID-providers-pUUID-access_keys.
+      operations:
+      - method: GET
+        name: list
+        description: YugabyteDB Anywhere List Access Keys for a Specific Provider
+        call: anywhere-v1-full-access-keys.list
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createaccesskey
+        description: YugabyteDB Anywhere Create/Upload Access Key for Onprem Provider Region - Deprecated
+        call: anywhere-v1-full-access-keys.createaccesskey
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/providers/{puuid}/access-keys/{keycode}
+      name: api-v1-customers-cuuid-providers-puuid-access-keys-keycode
+      description: REST surface for api-v1-customers-cUUID-providers-pUUID-access_keys-keyCode.
+      operations:
+      - method: DELETE
+        name: deleteaccesskey
+        description: YugabyteDB Anywhere Delete an Access Key
+        call: anywhere-v1-full-access-keys.deleteaccesskey
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          keyCode: rest.keyCode
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: index
+        description: YugabyteDB Anywhere Get an Access Key
+        call: anywhere-v1-full-access-keys.index
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          keyCode: rest.keyCode
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: editaccesskey
+        description: YugabyteDB Anywhere Modify the Existing Access Key
+        call: anywhere-v1-full-access-keys.editaccesskey
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          keyCode: rest.keyCode
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-full-access-keys-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere APIs — Access Keys. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-list-access-keys
+      description: YugabyteDB Anywhere List Access Keys for All Providers of a Customer
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-access-keys.listallforcustomer
+      with:
+        cUUID: tools.cUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-access-keys-2
+      description: YugabyteDB Anywhere List Access Keys for a Specific Provider
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-access-keys.list
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-upload-access
+      description: YugabyteDB Anywhere Create/Upload Access Key for Onprem Provider Region - Deprecated
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-access-keys.createaccesskey
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-access-key
+      description: YugabyteDB Anywhere Delete an Access Key
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-full-access-keys.deleteaccesskey
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        keyCode: tools.keyCode
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-access-key
+      description: YugabyteDB Anywhere Get an Access Key
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-access-keys.index
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        keyCode: tools.keyCode
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-modify-existing-access
+      description: YugabyteDB Anywhere Modify the Existing Access Key
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-access-keys.editaccesskey
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        keyCode: tools.keyCode
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

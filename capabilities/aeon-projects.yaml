@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Aeon REST API — Projects
+  description: 'YugabyteDB Aeon REST API — Projects. 1 operations. Lead operation: YugabyteDB Aeon List Projects. Self-contained
+    Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Projects
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: aeon-projects
+    baseUri: https://cloud.yugabyte.com/api/public/v1
+    description: YugabyteDB Aeon REST API — Projects business capability. Self-contained, no shared references.
+    resources:
+    - name: accounts-accountId-projects
+      path: /accounts/{accountId}/projects
+      operations:
+      - name: listprojects
+        method: GET
+        description: YugabyteDB Aeon List Projects
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.YUGABYTEDB_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: aeon-projects-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Aeon REST API — Projects. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/accounts/{accountid}/projects
+      name: accounts-accountid-projects
+      description: REST surface for accounts-accountId-projects.
+      operations:
+      - method: GET
+        name: listprojects
+        description: YugabyteDB Aeon List Projects
+        call: aeon-projects.listprojects
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: aeon-projects-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Aeon REST API — Projects. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: yugabytedb-aeon-list-projects
+      description: YugabyteDB Aeon List Projects
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aeon-projects.listprojects
+      outputParameters:
+      - type: object
+        mapping: $.

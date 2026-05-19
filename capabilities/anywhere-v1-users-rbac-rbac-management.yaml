@@ -1,0 +1,431 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Users, Sessions, and RBAC — RBAC management
+  description: 'YugabyteDB Anywhere v1 — Users, Sessions, and RBAC — RBAC management. 8 operations. Lead operation: YugabyteDB
+    Anywhere List All the Permissions Available. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - RBAC management
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-users-rbac-rbac-management
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Users, Sessions, and RBAC — RBAC management business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-rbac-permissions
+      path: /api/v1/customers/{cUUID}/rbac/permissions
+      operations:
+      - name: listpermissions
+        method: GET
+        description: YugabyteDB Anywhere List All the Permissions Available
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: resourceType
+          in: query
+          type: string
+          description: Optional resource type to filter permission list
+    - name: api-v1-customers-cUUID-rbac-role
+      path: /api/v1/customers/{cUUID}/rbac/role
+      operations:
+      - name: listroles
+        method: GET
+        description: YugabyteDB Anywhere List All the Roles Available
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: roleType
+          in: query
+          type: string
+          description: Optional role type to filter roles list
+      - name: createrole
+        method: POST
+        description: YugabyteDB Anywhere Create a Custom Role
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-rbac-role-rUUID
+      path: /api/v1/customers/{cUUID}/rbac/role/{rUUID}
+      operations:
+      - name: deleterole
+        method: DELETE
+        description: YugabyteDB Anywhere Delete a Custom Role
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: rUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: getrole
+        method: GET
+        description: YugabyteDB Anywhere Get a Role's Information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: rUUID
+          in: path
+          type: string
+          required: true
+      - name: editrole
+        method: PUT
+        description: YugabyteDB Anywhere Edit a Custom Role
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: rUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-rbac-role_binding
+      path: /api/v1/customers/{cUUID}/rbac/role_binding
+      operations:
+      - name: getrolebindings
+        method: GET
+        description: YugabyteDB Anywhere Get All the Role Bindings Available
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: userUUID
+          in: query
+          type: string
+          description: Optional user UUID to filter role binding map
+    - name: api-v1-customers-cUUID-rbac-role_binding-userUUID
+      path: /api/v1/customers/{cUUID}/rbac/role_binding/{userUUID}
+      operations:
+      - name: setrolebinding
+        method: POST
+        description: YugabyteDB Anywhere Set the Role Bindings of a User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: userUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-users-rbac-rbac-management-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Users, Sessions, and RBAC — RBAC management. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/rbac/permissions
+      name: api-v1-customers-cuuid-rbac-permissions
+      description: REST surface for api-v1-customers-cUUID-rbac-permissions.
+      operations:
+      - method: GET
+        name: listpermissions
+        description: YugabyteDB Anywhere List All the Permissions Available
+        call: anywhere-v1-users-rbac-rbac-management.listpermissions
+        with:
+          cUUID: rest.cUUID
+          resourceType: rest.resourceType
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/rbac/role
+      name: api-v1-customers-cuuid-rbac-role
+      description: REST surface for api-v1-customers-cUUID-rbac-role.
+      operations:
+      - method: GET
+        name: listroles
+        description: YugabyteDB Anywhere List All the Roles Available
+        call: anywhere-v1-users-rbac-rbac-management.listroles
+        with:
+          cUUID: rest.cUUID
+          roleType: rest.roleType
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createrole
+        description: YugabyteDB Anywhere Create a Custom Role
+        call: anywhere-v1-users-rbac-rbac-management.createrole
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/rbac/role/{ruuid}
+      name: api-v1-customers-cuuid-rbac-role-ruuid
+      description: REST surface for api-v1-customers-cUUID-rbac-role-rUUID.
+      operations:
+      - method: DELETE
+        name: deleterole
+        description: YugabyteDB Anywhere Delete a Custom Role
+        call: anywhere-v1-users-rbac-rbac-management.deleterole
+        with:
+          cUUID: rest.cUUID
+          rUUID: rest.rUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getrole
+        description: YugabyteDB Anywhere Get a Role's Information
+        call: anywhere-v1-users-rbac-rbac-management.getrole
+        with:
+          cUUID: rest.cUUID
+          rUUID: rest.rUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: editrole
+        description: YugabyteDB Anywhere Edit a Custom Role
+        call: anywhere-v1-users-rbac-rbac-management.editrole
+        with:
+          cUUID: rest.cUUID
+          rUUID: rest.rUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/rbac/role-binding
+      name: api-v1-customers-cuuid-rbac-role-binding
+      description: REST surface for api-v1-customers-cUUID-rbac-role_binding.
+      operations:
+      - method: GET
+        name: getrolebindings
+        description: YugabyteDB Anywhere Get All the Role Bindings Available
+        call: anywhere-v1-users-rbac-rbac-management.getrolebindings
+        with:
+          cUUID: rest.cUUID
+          userUUID: rest.userUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/rbac/role-binding/{useruuid}
+      name: api-v1-customers-cuuid-rbac-role-binding-useruuid
+      description: REST surface for api-v1-customers-cUUID-rbac-role_binding-userUUID.
+      operations:
+      - method: POST
+        name: setrolebinding
+        description: YugabyteDB Anywhere Set the Role Bindings of a User
+        call: anywhere-v1-users-rbac-rbac-management.setrolebinding
+        with:
+          cUUID: rest.cUUID
+          userUUID: rest.userUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-users-rbac-rbac-management-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Users, Sessions, and RBAC — RBAC management. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-list-all-permissions
+      description: YugabyteDB Anywhere List All the Permissions Available
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-users-rbac-rbac-management.listpermissions
+      with:
+        cUUID: tools.cUUID
+        resourceType: tools.resourceType
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-all-roles
+      description: YugabyteDB Anywhere List All the Roles Available
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-users-rbac-rbac-management.listroles
+      with:
+        cUUID: tools.cUUID
+        roleType: tools.roleType
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-custom-role
+      description: YugabyteDB Anywhere Create a Custom Role
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-users-rbac-rbac-management.createrole
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-custom-role
+      description: YugabyteDB Anywhere Delete a Custom Role
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-users-rbac-rbac-management.deleterole
+      with:
+        cUUID: tools.cUUID
+        rUUID: tools.rUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-role-s-information
+      description: YugabyteDB Anywhere Get a Role's Information
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-users-rbac-rbac-management.getrole
+      with:
+        cUUID: tools.cUUID
+        rUUID: tools.rUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-edit-custom-role
+      description: YugabyteDB Anywhere Edit a Custom Role
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-users-rbac-rbac-management.editrole
+      with:
+        cUUID: tools.cUUID
+        rUUID: tools.rUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-all-role
+      description: YugabyteDB Anywhere Get All the Role Bindings Available
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-users-rbac-rbac-management.getrolebindings
+      with:
+        cUUID: tools.cUUID
+        userUUID: tools.userUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-set-role-bindings
+      description: YugabyteDB Anywhere Set the Role Bindings of a User
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-users-rbac-rbac-management.setrolebinding
+      with:
+        cUUID: tools.cUUID
+        userUUID: tools.userUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

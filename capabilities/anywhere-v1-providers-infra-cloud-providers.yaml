@@ -1,0 +1,622 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Providers and Infrastructure — Cloud providers
+  description: 'YugabyteDB Anywhere v1 — Providers and Infrastructure — Cloud providers. 11 operations. Lead operation: YugabyteDB
+    Anywhere List Cloud Providers. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Cloud providers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-providers-infra-cloud-providers
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Providers and Infrastructure — Cloud providers business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-providers
+      path: /api/v1/customers/{cUUID}/providers
+      operations:
+      - name: getlistofproviders
+        method: GET
+        description: YugabyteDB Anywhere List Cloud Providers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: name
+          in: query
+          type: string
+        - name: providerCode
+          in: query
+          type: string
+      - name: createproviders
+        method: POST
+        description: YugabyteDB Anywhere Create a Provider
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: validate
+          in: query
+          type: boolean
+        - name: ignoreValidationErrors
+          in: query
+          type: boolean
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-providers-region_metadata-code
+      path: /api/v1/customers/{cUUID}/providers/region_metadata/{code}
+      operations:
+      - name: getregionmetadata
+        method: GET
+        description: YugabyteDB Anywhere Retrieves the Region Metadata for the Cloud Providers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: code
+          in: path
+          type: string
+          required: true
+        - name: subType
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-providers-pUUID
+      path: /api/v1/customers/{cUUID}/providers/{pUUID}
+      operations:
+      - name: delete
+        method: DELETE
+        description: YugabyteDB Anywhere Delete a Cloud Provider
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: getprovider
+        method: GET
+        description: YugabyteDB Anywhere Get a Cloud Provider
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-providers-pUUID-access_key_rotation
+      path: /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation
+      operations:
+      - name: accesskeyrotation
+        method: POST
+        description: YugabyteDB Anywhere Rotate Access Key for a Provider
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-providers-pUUID-access_key_rotation-schedule
+      path: /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule
+      operations:
+      - name: listschedules
+        method: GET
+        description: YugabyteDB Anywhere List All Schedules for a Provider's Access Key Rotation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+      - name: scheduledaccesskeyrotation
+        method: POST
+        description: YugabyteDB Anywhere Rotate Access Key for a Provider - Scheduled
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-providers-pUUID-access_key_rotation-schedule-sUUID
+      path: /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule/{sUUID}
+      operations:
+      - name: editaccesskeyrotationschedule
+        method: PUT
+        description: YugabyteDB Anywhere Edit a Access Key Rotation Schedule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: sUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-providers-pUUID-edit
+      path: /api/v1/customers/{cUUID}/providers/{pUUID}/edit
+      operations:
+      - name: editprovider
+        method: PUT
+        description: YugabyteDB Anywhere Update a Provider
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: validate
+          in: query
+          type: boolean
+        - name: ignoreValidationErrors
+          in: query
+          type: boolean
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-providers-pUUID-refresh_pricing
+      path: /api/v1/customers/{cUUID}/providers/{pUUID}/refresh_pricing
+      operations:
+      - name: refreshpricing
+        method: PUT
+        description: YugabyteDB Anywhere Refresh Provider Pricing Info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-providers-infra-cloud-providers-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Providers and Infrastructure — Cloud providers. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/providers
+      name: api-v1-customers-cuuid-providers
+      description: REST surface for api-v1-customers-cUUID-providers.
+      operations:
+      - method: GET
+        name: getlistofproviders
+        description: YugabyteDB Anywhere List Cloud Providers
+        call: anywhere-v1-providers-infra-cloud-providers.getlistofproviders
+        with:
+          cUUID: rest.cUUID
+          name: rest.name
+          providerCode: rest.providerCode
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createproviders
+        description: YugabyteDB Anywhere Create a Provider
+        call: anywhere-v1-providers-infra-cloud-providers.createproviders
+        with:
+          cUUID: rest.cUUID
+          validate: rest.validate
+          ignoreValidationErrors: rest.ignoreValidationErrors
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/providers/region-metadata/{code}
+      name: api-v1-customers-cuuid-providers-region-metadata-code
+      description: REST surface for api-v1-customers-cUUID-providers-region_metadata-code.
+      operations:
+      - method: GET
+        name: getregionmetadata
+        description: YugabyteDB Anywhere Retrieves the Region Metadata for the Cloud Providers
+        call: anywhere-v1-providers-infra-cloud-providers.getregionmetadata
+        with:
+          cUUID: rest.cUUID
+          code: rest.code
+          subType: rest.subType
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/providers/{puuid}
+      name: api-v1-customers-cuuid-providers-puuid
+      description: REST surface for api-v1-customers-cUUID-providers-pUUID.
+      operations:
+      - method: DELETE
+        name: delete
+        description: YugabyteDB Anywhere Delete a Cloud Provider
+        call: anywhere-v1-providers-infra-cloud-providers.delete
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getprovider
+        description: YugabyteDB Anywhere Get a Cloud Provider
+        call: anywhere-v1-providers-infra-cloud-providers.getprovider
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/providers/{puuid}/access-key-rotation
+      name: api-v1-customers-cuuid-providers-puuid-access-key-rotation
+      description: REST surface for api-v1-customers-cUUID-providers-pUUID-access_key_rotation.
+      operations:
+      - method: POST
+        name: accesskeyrotation
+        description: YugabyteDB Anywhere Rotate Access Key for a Provider
+        call: anywhere-v1-providers-infra-cloud-providers.accesskeyrotation
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/providers/{puuid}/access-key-rotation/schedule
+      name: api-v1-customers-cuuid-providers-puuid-access-key-rotation-schedule
+      description: REST surface for api-v1-customers-cUUID-providers-pUUID-access_key_rotation-schedule.
+      operations:
+      - method: GET
+        name: listschedules
+        description: YugabyteDB Anywhere List All Schedules for a Provider's Access Key Rotation
+        call: anywhere-v1-providers-infra-cloud-providers.listschedules
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: scheduledaccesskeyrotation
+        description: YugabyteDB Anywhere Rotate Access Key for a Provider - Scheduled
+        call: anywhere-v1-providers-infra-cloud-providers.scheduledaccesskeyrotation
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/providers/{puuid}/access-key-rotation/schedule/{suuid}
+      name: api-v1-customers-cuuid-providers-puuid-access-key-rotation-schedule-suuid
+      description: REST surface for api-v1-customers-cUUID-providers-pUUID-access_key_rotation-schedule-sUUID.
+      operations:
+      - method: PUT
+        name: editaccesskeyrotationschedule
+        description: YugabyteDB Anywhere Edit a Access Key Rotation Schedule
+        call: anywhere-v1-providers-infra-cloud-providers.editaccesskeyrotationschedule
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          sUUID: rest.sUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/providers/{puuid}/edit
+      name: api-v1-customers-cuuid-providers-puuid-edit
+      description: REST surface for api-v1-customers-cUUID-providers-pUUID-edit.
+      operations:
+      - method: PUT
+        name: editprovider
+        description: YugabyteDB Anywhere Update a Provider
+        call: anywhere-v1-providers-infra-cloud-providers.editprovider
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          validate: rest.validate
+          ignoreValidationErrors: rest.ignoreValidationErrors
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/providers/{puuid}/refresh-pricing
+      name: api-v1-customers-cuuid-providers-puuid-refresh-pricing
+      description: REST surface for api-v1-customers-cUUID-providers-pUUID-refresh_pricing.
+      operations:
+      - method: PUT
+        name: refreshpricing
+        description: YugabyteDB Anywhere Refresh Provider Pricing Info
+        call: anywhere-v1-providers-infra-cloud-providers.refreshpricing
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-providers-infra-cloud-providers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Providers and Infrastructure — Cloud providers. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-list-cloud-providers
+      description: YugabyteDB Anywhere List Cloud Providers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-providers-infra-cloud-providers.getlistofproviders
+      with:
+        cUUID: tools.cUUID
+        name: tools.name
+        providerCode: tools.providerCode
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-provider
+      description: YugabyteDB Anywhere Create a Provider
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-providers-infra-cloud-providers.createproviders
+      with:
+        cUUID: tools.cUUID
+        validate: tools.validate
+        ignoreValidationErrors: tools.ignoreValidationErrors
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-retrieves-region-metadata
+      description: YugabyteDB Anywhere Retrieves the Region Metadata for the Cloud Providers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-providers-infra-cloud-providers.getregionmetadata
+      with:
+        cUUID: tools.cUUID
+        code: tools.code
+        subType: tools.subType
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-cloud-provider
+      description: YugabyteDB Anywhere Delete a Cloud Provider
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-providers-infra-cloud-providers.delete
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-cloud-provider
+      description: YugabyteDB Anywhere Get a Cloud Provider
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-providers-infra-cloud-providers.getprovider
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-rotate-access-key
+      description: YugabyteDB Anywhere Rotate Access Key for a Provider
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-providers-infra-cloud-providers.accesskeyrotation
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-all-schedules
+      description: YugabyteDB Anywhere List All Schedules for a Provider's Access Key Rotation
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-providers-infra-cloud-providers.listschedules
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-rotate-access-key-2
+      description: YugabyteDB Anywhere Rotate Access Key for a Provider - Scheduled
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-providers-infra-cloud-providers.scheduledaccesskeyrotation
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-edit-access-key
+      description: YugabyteDB Anywhere Edit a Access Key Rotation Schedule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-providers-infra-cloud-providers.editaccesskeyrotationschedule
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        sUUID: tools.sUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-update-provider
+      description: YugabyteDB Anywhere Update a Provider
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-providers-infra-cloud-providers.editprovider
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        validate: tools.validate
+        ignoreValidationErrors: tools.ignoreValidationErrors
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-refresh-provider-pricing
+      description: YugabyteDB Anywhere Refresh Provider Pricing Info
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-providers-infra-cloud-providers.refreshpricing
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,528 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Providers and Infrastructure — Encryption at rest
+  description: 'YugabyteDB Anywhere v1 — Providers and Infrastructure — Encryption at rest. 10 operations. Lead operation:
+    YugabyteDB Anywhere List KMS Configurations. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Encryption at rest
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-providers-infra-encryption-at-rest
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Providers and Infrastructure — Encryption at rest business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-kms_configs
+      path: /api/v1/customers/{cUUID}/kms_configs
+      operations:
+      - name: listkmsconfigs
+        method: GET
+        description: YugabyteDB Anywhere List KMS Configurations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-kms_configs-configUUID
+      path: /api/v1/customers/{cUUID}/kms_configs/{configUUID}
+      operations:
+      - name: deletekmsconfig
+        method: DELETE
+        description: YugabyteDB Anywhere Delete a KMS Configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: configUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: getkmsconfig
+        method: GET
+        description: YugabyteDB Anywhere Get Details of a KMS Configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: configUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-kms_configs-configUUID-edit
+      path: /api/v1/customers/{cUUID}/kms_configs/{configUUID}/edit
+      operations:
+      - name: editkmsconfig
+        method: POST
+        description: YugabyteDB Anywhere Edit a KMS Configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: configUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-kms_configs-configUUID-refresh
+      path: /api/v1/customers/{cUUID}/kms_configs/{configUUID}/refresh
+      operations:
+      - name: refreshkmsconfig
+        method: PUT
+        description: YugabyteDB Anywhere Refresh KMS Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: configUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-kms_configs-kmsProvider
+      path: /api/v1/customers/{cUUID}/kms_configs/{kmsProvider}
+      operations:
+      - name: createkmsconfig
+        method: POST
+        description: YugabyteDB Anywhere Create a KMS Configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: kmsProvider
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-kms
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/kms
+      operations:
+      - name: removekeyrefhistory
+        method: DELETE
+        description: YugabyteDB Anywhere This API Removes a Universe's Key Reference History - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: getkeyrefhistory
+        method: GET
+        description: YugabyteDB Anywhere Get a Universe's Key Reference History
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+      - name: retrievekey
+        method: POST
+        description: YugabyteDB Anywhere Retrive a Universe's KMS Key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-universes-uniUUID-kms-key_ref
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/kms/key_ref
+      operations:
+      - name: getcurrentkeyref
+        method: GET
+        description: YugabyteDB Anywhere Get a Universe's Key Reference
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-providers-infra-encryption-at-rest-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Providers and Infrastructure — Encryption at rest. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/kms-configs
+      name: api-v1-customers-cuuid-kms-configs
+      description: REST surface for api-v1-customers-cUUID-kms_configs.
+      operations:
+      - method: GET
+        name: listkmsconfigs
+        description: YugabyteDB Anywhere List KMS Configurations
+        call: anywhere-v1-providers-infra-encryption-at-rest.listkmsconfigs
+        with:
+          cUUID: rest.cUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/kms-configs/{configuuid}
+      name: api-v1-customers-cuuid-kms-configs-configuuid
+      description: REST surface for api-v1-customers-cUUID-kms_configs-configUUID.
+      operations:
+      - method: DELETE
+        name: deletekmsconfig
+        description: YugabyteDB Anywhere Delete a KMS Configuration
+        call: anywhere-v1-providers-infra-encryption-at-rest.deletekmsconfig
+        with:
+          cUUID: rest.cUUID
+          configUUID: rest.configUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getkmsconfig
+        description: YugabyteDB Anywhere Get Details of a KMS Configuration
+        call: anywhere-v1-providers-infra-encryption-at-rest.getkmsconfig
+        with:
+          cUUID: rest.cUUID
+          configUUID: rest.configUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/kms-configs/{configuuid}/edit
+      name: api-v1-customers-cuuid-kms-configs-configuuid-edit
+      description: REST surface for api-v1-customers-cUUID-kms_configs-configUUID-edit.
+      operations:
+      - method: POST
+        name: editkmsconfig
+        description: YugabyteDB Anywhere Edit a KMS Configuration
+        call: anywhere-v1-providers-infra-encryption-at-rest.editkmsconfig
+        with:
+          cUUID: rest.cUUID
+          configUUID: rest.configUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/kms-configs/{configuuid}/refresh
+      name: api-v1-customers-cuuid-kms-configs-configuuid-refresh
+      description: REST surface for api-v1-customers-cUUID-kms_configs-configUUID-refresh.
+      operations:
+      - method: PUT
+        name: refreshkmsconfig
+        description: YugabyteDB Anywhere Refresh KMS Config
+        call: anywhere-v1-providers-infra-encryption-at-rest.refreshkmsconfig
+        with:
+          cUUID: rest.cUUID
+          configUUID: rest.configUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/kms-configs/{kmsprovider}
+      name: api-v1-customers-cuuid-kms-configs-kmsprovider
+      description: REST surface for api-v1-customers-cUUID-kms_configs-kmsProvider.
+      operations:
+      - method: POST
+        name: createkmsconfig
+        description: YugabyteDB Anywhere Create a KMS Configuration
+        call: anywhere-v1-providers-infra-encryption-at-rest.createkmsconfig
+        with:
+          cUUID: rest.cUUID
+          kmsProvider: rest.kmsProvider
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/kms
+      name: api-v1-customers-cuuid-universes-uniuuid-kms
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-kms.
+      operations:
+      - method: DELETE
+        name: removekeyrefhistory
+        description: YugabyteDB Anywhere This API Removes a Universe's Key Reference History - Deprecated
+        call: anywhere-v1-providers-infra-encryption-at-rest.removekeyrefhistory
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getkeyrefhistory
+        description: YugabyteDB Anywhere Get a Universe's Key Reference History
+        call: anywhere-v1-providers-infra-encryption-at-rest.getkeyrefhistory
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: retrievekey
+        description: YugabyteDB Anywhere Retrive a Universe's KMS Key
+        call: anywhere-v1-providers-infra-encryption-at-rest.retrievekey
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/kms/key-ref
+      name: api-v1-customers-cuuid-universes-uniuuid-kms-key-ref
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-kms-key_ref.
+      operations:
+      - method: GET
+        name: getcurrentkeyref
+        description: YugabyteDB Anywhere Get a Universe's Key Reference
+        call: anywhere-v1-providers-infra-encryption-at-rest.getcurrentkeyref
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-providers-infra-encryption-at-rest-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Providers and Infrastructure — Encryption at rest. One tool per
+      consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-list-kms-configurations
+      description: YugabyteDB Anywhere List KMS Configurations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-providers-infra-encryption-at-rest.listkmsconfigs
+      with:
+        cUUID: tools.cUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-kms-configuration
+      description: YugabyteDB Anywhere Delete a KMS Configuration
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-providers-infra-encryption-at-rest.deletekmsconfig
+      with:
+        cUUID: tools.cUUID
+        configUUID: tools.configUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-details-kms
+      description: YugabyteDB Anywhere Get Details of a KMS Configuration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-providers-infra-encryption-at-rest.getkmsconfig
+      with:
+        cUUID: tools.cUUID
+        configUUID: tools.configUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-edit-kms-configuration
+      description: YugabyteDB Anywhere Edit a KMS Configuration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-providers-infra-encryption-at-rest.editkmsconfig
+      with:
+        cUUID: tools.cUUID
+        configUUID: tools.configUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-refresh-kms-config
+      description: YugabyteDB Anywhere Refresh KMS Config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-providers-infra-encryption-at-rest.refreshkmsconfig
+      with:
+        cUUID: tools.cUUID
+        configUUID: tools.configUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-kms-configuration
+      description: YugabyteDB Anywhere Create a KMS Configuration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-providers-infra-encryption-at-rest.createkmsconfig
+      with:
+        cUUID: tools.cUUID
+        kmsProvider: tools.kmsProvider
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-this-api-removes
+      description: YugabyteDB Anywhere This API Removes a Universe's Key Reference History - Deprecated
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-providers-infra-encryption-at-rest.removekeyrefhistory
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-universe-s-key
+      description: YugabyteDB Anywhere Get a Universe's Key Reference History
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-providers-infra-encryption-at-rest.getkeyrefhistory
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-retrive-universe-s-kms
+      description: YugabyteDB Anywhere Retrive a Universe's KMS Key
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-providers-infra-encryption-at-rest.retrievekey
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-universe-s-key-2
+      description: YugabyteDB Anywhere Get a Universe's Key Reference
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-providers-infra-encryption-at-rest.getcurrentkeyref
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.

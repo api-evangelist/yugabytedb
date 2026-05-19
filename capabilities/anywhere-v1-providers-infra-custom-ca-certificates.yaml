@@ -1,0 +1,292 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Providers and Infrastructure — Custom CA Certificates
+  description: 'YugabyteDB Anywhere v1 — Providers and Infrastructure — Custom CA Certificates. 5 operations. Lead operation:
+    YugabyteDB Anywhere Add a Named Custom CA Certificate. Self-contained Naftiko capability covering one Yugabytedb business
+    surface.'
+  tags:
+  - Yugabytedb
+  - Custom CA Certificates
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-providers-infra-custom-ca-certificates
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Providers and Infrastructure — Custom CA Certificates business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-customCAStore
+      path: /api/v1/customers/{cUUID}/customCAStore
+      operations:
+      - name: addca
+        method: POST
+        description: YugabyteDB Anywhere Add a Named Custom CA Certificate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-customCAStore-certUUID
+      path: /api/v1/customers/{cUUID}/customCAStore/{certUUID}
+      operations:
+      - name: updateca
+        method: POST
+        description: YugabyteDB Anywhere Update a Named Custom CA Certificate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: certUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-customCAStoreCertificates
+      path: /api/v1/customers/{cUUID}/customCAStoreCertificates
+      operations:
+      - name: listallcustomcacertificates
+        method: GET
+        description: YugabyteDB Anywhere List All Custom CA Certificates of a Customer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-customCAStoreCertificates-certUUID
+      path: /api/v1/customers/{cUUID}/customCAStoreCertificates/{certUUID}
+      operations:
+      - name: deletecustomcacertificate
+        method: DELETE
+        description: YugabyteDB Anywhere Delete a Named Custom CA Certificate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: certUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: getallcustomcacertificates
+        method: GET
+        description: YugabyteDB Anywhere Download a Custom CA Certificates of a Customer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: certUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-providers-infra-custom-ca-certificates-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Providers and Infrastructure — Custom CA Certificates. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/customcastore
+      name: api-v1-customers-cuuid-customcastore
+      description: REST surface for api-v1-customers-cUUID-customCAStore.
+      operations:
+      - method: POST
+        name: addca
+        description: YugabyteDB Anywhere Add a Named Custom CA Certificate
+        call: anywhere-v1-providers-infra-custom-ca-certificates.addca
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/customcastore/{certuuid}
+      name: api-v1-customers-cuuid-customcastore-certuuid
+      description: REST surface for api-v1-customers-cUUID-customCAStore-certUUID.
+      operations:
+      - method: POST
+        name: updateca
+        description: YugabyteDB Anywhere Update a Named Custom CA Certificate
+        call: anywhere-v1-providers-infra-custom-ca-certificates.updateca
+        with:
+          cUUID: rest.cUUID
+          certUUID: rest.certUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/customcastorecertificates
+      name: api-v1-customers-cuuid-customcastorecertificates
+      description: REST surface for api-v1-customers-cUUID-customCAStoreCertificates.
+      operations:
+      - method: GET
+        name: listallcustomcacertificates
+        description: YugabyteDB Anywhere List All Custom CA Certificates of a Customer
+        call: anywhere-v1-providers-infra-custom-ca-certificates.listallcustomcacertificates
+        with:
+          cUUID: rest.cUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/customcastorecertificates/{certuuid}
+      name: api-v1-customers-cuuid-customcastorecertificates-certuuid
+      description: REST surface for api-v1-customers-cUUID-customCAStoreCertificates-certUUID.
+      operations:
+      - method: DELETE
+        name: deletecustomcacertificate
+        description: YugabyteDB Anywhere Delete a Named Custom CA Certificate
+        call: anywhere-v1-providers-infra-custom-ca-certificates.deletecustomcacertificate
+        with:
+          cUUID: rest.cUUID
+          certUUID: rest.certUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getallcustomcacertificates
+        description: YugabyteDB Anywhere Download a Custom CA Certificates of a Customer
+        call: anywhere-v1-providers-infra-custom-ca-certificates.getallcustomcacertificates
+        with:
+          cUUID: rest.cUUID
+          certUUID: rest.certUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-providers-infra-custom-ca-certificates-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Providers and Infrastructure — Custom CA Certificates. One tool
+      per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-add-named-custom
+      description: YugabyteDB Anywhere Add a Named Custom CA Certificate
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-providers-infra-custom-ca-certificates.addca
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-update-named-custom
+      description: YugabyteDB Anywhere Update a Named Custom CA Certificate
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-providers-infra-custom-ca-certificates.updateca
+      with:
+        cUUID: tools.cUUID
+        certUUID: tools.certUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-all-custom
+      description: YugabyteDB Anywhere List All Custom CA Certificates of a Customer
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-providers-infra-custom-ca-certificates.listallcustomcacertificates
+      with:
+        cUUID: tools.cUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-named-custom
+      description: YugabyteDB Anywhere Delete a Named Custom CA Certificate
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-providers-infra-custom-ca-certificates.deletecustomcacertificate
+      with:
+        cUUID: tools.cUUID
+        certUUID: tools.certUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-download-custom-ca
+      description: YugabyteDB Anywhere Download a Custom CA Certificates of a Customer
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-providers-infra-custom-ca-certificates.getallcustomcacertificates
+      with:
+        cUUID: tools.cUUID
+        certUUID: tools.certUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.

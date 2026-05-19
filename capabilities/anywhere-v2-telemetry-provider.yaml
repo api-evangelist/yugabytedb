@@ -1,0 +1,88 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere V2 APIs — Telemetry Provider
+  description: 'YugabyteDB Anywhere V2 APIs — Telemetry Provider. 1 operations. Lead operation: YugabyteDB Anywhere List Available
+    Telemetry Provider Types. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Telemetry Provider
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v2-telemetry-provider
+    baseUri: ''
+    description: YugabyteDB Anywhere V2 APIs — Telemetry Provider business capability. Self-contained, no shared references.
+    resources:
+    - name: customers-cUUID-telemetry-provider-types
+      path: /customers/{cUUID}/telemetry-provider/types
+      operations:
+      - name: listtelemetryprovidertypes
+        method: GET
+        description: YugabyteDB Anywhere List Available Telemetry Provider Types
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: exportType
+          in: query
+          type: string
+          description: Filter by export type (logs or metrics)
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v2-telemetry-provider-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere V2 APIs — Telemetry Provider. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/customers/{cuuid}/telemetry-provider/types
+      name: customers-cuuid-telemetry-provider-types
+      description: REST surface for customers-cUUID-telemetry-provider-types.
+      operations:
+      - method: GET
+        name: listtelemetryprovidertypes
+        description: YugabyteDB Anywhere List Available Telemetry Provider Types
+        call: anywhere-v2-telemetry-provider.listtelemetryprovidertypes
+        with:
+          cUUID: rest.cUUID
+          exportType: rest.exportType
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v2-telemetry-provider-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere V2 APIs — Telemetry Provider. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-list-available-telemetry
+      description: YugabyteDB Anywhere List Available Telemetry Provider Types
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v2-telemetry-provider.listtelemetryprovidertypes
+      with:
+        cUUID: tools.cUUID
+        exportType: tools.exportType
+      outputParameters:
+      - type: object
+        mapping: $.

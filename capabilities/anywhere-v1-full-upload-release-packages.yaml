@@ -1,0 +1,138 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere APIs — Upload Release packages
+  description: 'YugabyteDB Anywhere APIs — Upload Release packages. 2 operations. Lead operation: YugabyteDB Anywhere Upload
+    a Release Tgz. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Upload Release packages
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-full-upload-release-packages
+    baseUri: ''
+    description: YugabyteDB Anywhere APIs — Upload Release packages business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-ybdb_release-upload
+      path: /api/v1/customers/{cUUID}/ybdb_release/upload
+      operations:
+      - name: uploadrelease
+        method: POST
+        description: YugabyteDB Anywhere Upload a Release Tgz
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-ybdb_release-upload-rUUID
+      path: /api/v1/customers/{cUUID}/ybdb_release/upload/{rUUID}
+      operations:
+      - name: getuploadrelease
+        method: GET
+        description: YugabyteDB Anywhere Get an Uploaded Release Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: rUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-full-upload-release-packages-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere APIs — Upload Release packages. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/ybdb-release/upload
+      name: api-v1-customers-cuuid-ybdb-release-upload
+      description: REST surface for api-v1-customers-cUUID-ybdb_release-upload.
+      operations:
+      - method: POST
+        name: uploadrelease
+        description: YugabyteDB Anywhere Upload a Release Tgz
+        call: anywhere-v1-full-upload-release-packages.uploadrelease
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/ybdb-release/upload/{ruuid}
+      name: api-v1-customers-cuuid-ybdb-release-upload-ruuid
+      description: REST surface for api-v1-customers-cUUID-ybdb_release-upload-rUUID.
+      operations:
+      - method: GET
+        name: getuploadrelease
+        description: YugabyteDB Anywhere Get an Uploaded Release Metadata
+        call: anywhere-v1-full-upload-release-packages.getuploadrelease
+        with:
+          cUUID: rest.cUUID
+          rUUID: rest.rUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-full-upload-release-packages-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere APIs — Upload Release packages. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-upload-release-tgz
+      description: YugabyteDB Anywhere Upload a Release Tgz
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-upload-release-packages.uploadrelease
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-uploaded-release
+      description: YugabyteDB Anywhere Get an Uploaded Release Metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-upload-release-packages.getuploadrelease
+      with:
+        cUUID: tools.cUUID
+        rUUID: tools.rUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.

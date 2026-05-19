@@ -1,0 +1,420 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere APIs — Region management
+  description: 'YugabyteDB Anywhere APIs — Region management. 7 operations. Lead operation: YugabyteDB Anywhere Create a New
+    Region. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Region management
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-full-region-management
+    baseUri: ''
+    description: YugabyteDB Anywhere APIs — Region management business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-providers-pUUID-provider_regions
+      path: /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions
+      operations:
+      - name: createproviderregion
+        method: POST
+        description: YugabyteDB Anywhere Create a New Region
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-providers-pUUID-provider_regions-rUUID
+      path: /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID}
+      operations:
+      - name: editproviderregion
+        method: PUT
+        description: YugabyteDB Anywhere Modify a Region
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: rUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-providers-pUUID-regions
+      path: /api/v1/customers/{cUUID}/providers/{pUUID}/regions
+      operations:
+      - name: getregion
+        method: GET
+        description: YugabyteDB Anywhere List a Provider's Regions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+      - name: createregion
+        method: POST
+        description: YugabyteDB Anywhere Create Region - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-providers-pUUID-regions-rUUID
+      path: /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}
+      operations:
+      - name: deleteregion
+        method: DELETE
+        description: YugabyteDB Anywhere Delete a Region
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: rUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: editregion
+        method: PUT
+        description: YugabyteDB Anywhere Edit Regions - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: rUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-regions
+      path: /api/v1/customers/{cUUID}/regions
+      operations:
+      - name: listallregions
+        method: GET
+        description: YugabyteDB Anywhere List Regions for All Providers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-full-region-management-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere APIs — Region management. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/providers/{puuid}/provider-regions
+      name: api-v1-customers-cuuid-providers-puuid-provider-regions
+      description: REST surface for api-v1-customers-cUUID-providers-pUUID-provider_regions.
+      operations:
+      - method: POST
+        name: createproviderregion
+        description: YugabyteDB Anywhere Create a New Region
+        call: anywhere-v1-full-region-management.createproviderregion
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/providers/{puuid}/provider-regions/{ruuid}
+      name: api-v1-customers-cuuid-providers-puuid-provider-regions-ruuid
+      description: REST surface for api-v1-customers-cUUID-providers-pUUID-provider_regions-rUUID.
+      operations:
+      - method: PUT
+        name: editproviderregion
+        description: YugabyteDB Anywhere Modify a Region
+        call: anywhere-v1-full-region-management.editproviderregion
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          rUUID: rest.rUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/providers/{puuid}/regions
+      name: api-v1-customers-cuuid-providers-puuid-regions
+      description: REST surface for api-v1-customers-cUUID-providers-pUUID-regions.
+      operations:
+      - method: GET
+        name: getregion
+        description: YugabyteDB Anywhere List a Provider's Regions
+        call: anywhere-v1-full-region-management.getregion
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createregion
+        description: YugabyteDB Anywhere Create Region - Deprecated
+        call: anywhere-v1-full-region-management.createregion
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/providers/{puuid}/regions/{ruuid}
+      name: api-v1-customers-cuuid-providers-puuid-regions-ruuid
+      description: REST surface for api-v1-customers-cUUID-providers-pUUID-regions-rUUID.
+      operations:
+      - method: DELETE
+        name: deleteregion
+        description: YugabyteDB Anywhere Delete a Region
+        call: anywhere-v1-full-region-management.deleteregion
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          rUUID: rest.rUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: editregion
+        description: YugabyteDB Anywhere Edit Regions - Deprecated
+        call: anywhere-v1-full-region-management.editregion
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          rUUID: rest.rUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/regions
+      name: api-v1-customers-cuuid-regions
+      description: REST surface for api-v1-customers-cUUID-regions.
+      operations:
+      - method: GET
+        name: listallregions
+        description: YugabyteDB Anywhere List Regions for All Providers
+        call: anywhere-v1-full-region-management.listallregions
+        with:
+          cUUID: rest.cUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-full-region-management-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere APIs — Region management. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-create-new-region
+      description: YugabyteDB Anywhere Create a New Region
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-region-management.createproviderregion
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-modify-region
+      description: YugabyteDB Anywhere Modify a Region
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-region-management.editproviderregion
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        rUUID: tools.rUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-provider-s-regions
+      description: YugabyteDB Anywhere List a Provider's Regions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-region-management.getregion
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-region-deprecated
+      description: YugabyteDB Anywhere Create Region - Deprecated
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-region-management.createregion
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-region
+      description: YugabyteDB Anywhere Delete a Region
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-full-region-management.deleteregion
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        rUUID: tools.rUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-edit-regions-deprecated
+      description: YugabyteDB Anywhere Edit Regions - Deprecated
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-region-management.editregion
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        rUUID: tools.rUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-regions-all
+      description: YugabyteDB Anywhere List Regions for All Providers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-region-management.listallregions
+      with:
+        cUUID: tools.cUUID
+      outputParameters:
+      - type: object
+        mapping: $.

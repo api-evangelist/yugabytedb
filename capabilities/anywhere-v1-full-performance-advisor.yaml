@@ -1,0 +1,556 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere APIs — Performance Advisor
+  description: 'YugabyteDB Anywhere APIs — Performance Advisor. 10 operations. Lead operation: YugabyteDB Anywhere List Performance
+    Recommendations State Change Audit Events (paginated). Self-contained Naftiko capability covering one Yugabytedb business
+    surface.'
+  tags:
+  - Yugabytedb
+  - Performance Advisor
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-full-performance-advisor
+    baseUri: ''
+    description: YugabyteDB Anywhere APIs — Performance Advisor business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-performance_recommendation_state_change-page
+      path: /api/v1/customers/{cUUID}/performance_recommendation_state_change/page
+      operations:
+      - name: pageauditinfo
+        method: POST
+        description: YugabyteDB Anywhere List Performance Recommendations State Change Audit Events (paginated)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-performance_recommendations
+      path: /api/v1/customers/{cUUID}/performance_recommendations
+      operations:
+      - name: delete
+        method: DELETE
+        description: YugabyteDB Anywhere Delete Performance Recommendations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-performance_recommendations-hide
+      path: /api/v1/customers/{cUUID}/performance_recommendations/hide
+      operations:
+      - name: hide
+        method: POST
+        description: YugabyteDB Anywhere Hide Performance Recommendations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-performance_recommendations-page
+      path: /api/v1/customers/{cUUID}/performance_recommendations/page
+      operations:
+      - name: page
+        method: POST
+        description: YugabyteDB Anywhere List Performance Recommendations (paginated)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-performance_recommendations-resolve
+      path: /api/v1/customers/{cUUID}/performance_recommendations/resolve
+      operations:
+      - name: resolve
+        method: POST
+        description: YugabyteDB Anywhere Resolve Performance Recommendations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-performance_recommendations-rUUID
+      path: /api/v1/customers/{cUUID}/performance_recommendations/{rUUID}
+      operations:
+      - name: get
+        method: GET
+        description: YugabyteDB Anywhere Get Performance Recommendation Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: rUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-last_run
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/last_run
+      operations:
+      - name: getlatestrun
+        method: GET
+        description: YugabyteDB Anywhere Get Last Performance Advisor Run Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-perf_advisor_settings
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/perf_advisor_settings
+      operations:
+      - name: getsettings
+        method: GET
+        description: YugabyteDB Anywhere Get Universe Performance Advisor Settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: updatesettings
+        method: POST
+        description: YugabyteDB Anywhere Update Universe Performance Advisor Settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-start_manually
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/start_manually
+      operations:
+      - name: runperfadvisor
+        method: POST
+        description: YugabyteDB Anywhere Start Performance Advisor Run for Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-full-performance-advisor-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere APIs — Performance Advisor. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/performance-recommendation-state-change/page
+      name: api-v1-customers-cuuid-performance-recommendation-state-change-page
+      description: REST surface for api-v1-customers-cUUID-performance_recommendation_state_change-page.
+      operations:
+      - method: POST
+        name: pageauditinfo
+        description: YugabyteDB Anywhere List Performance Recommendations State Change Audit Events (paginated)
+        call: anywhere-v1-full-performance-advisor.pageauditinfo
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/performance-recommendations
+      name: api-v1-customers-cuuid-performance-recommendations
+      description: REST surface for api-v1-customers-cUUID-performance_recommendations.
+      operations:
+      - method: DELETE
+        name: delete
+        description: YugabyteDB Anywhere Delete Performance Recommendations
+        call: anywhere-v1-full-performance-advisor.delete
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/performance-recommendations/hide
+      name: api-v1-customers-cuuid-performance-recommendations-hide
+      description: REST surface for api-v1-customers-cUUID-performance_recommendations-hide.
+      operations:
+      - method: POST
+        name: hide
+        description: YugabyteDB Anywhere Hide Performance Recommendations
+        call: anywhere-v1-full-performance-advisor.hide
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/performance-recommendations/page
+      name: api-v1-customers-cuuid-performance-recommendations-page
+      description: REST surface for api-v1-customers-cUUID-performance_recommendations-page.
+      operations:
+      - method: POST
+        name: page
+        description: YugabyteDB Anywhere List Performance Recommendations (paginated)
+        call: anywhere-v1-full-performance-advisor.page
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/performance-recommendations/resolve
+      name: api-v1-customers-cuuid-performance-recommendations-resolve
+      description: REST surface for api-v1-customers-cUUID-performance_recommendations-resolve.
+      operations:
+      - method: POST
+        name: resolve
+        description: YugabyteDB Anywhere Resolve Performance Recommendations
+        call: anywhere-v1-full-performance-advisor.resolve
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/performance-recommendations/{ruuid}
+      name: api-v1-customers-cuuid-performance-recommendations-ruuid
+      description: REST surface for api-v1-customers-cUUID-performance_recommendations-rUUID.
+      operations:
+      - method: GET
+        name: get
+        description: YugabyteDB Anywhere Get Performance Recommendation Details
+        call: anywhere-v1-full-performance-advisor.get
+        with:
+          cUUID: rest.cUUID
+          rUUID: rest.rUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/last-run
+      name: api-v1-customers-cuuid-universes-uniuuid-last-run
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-last_run.
+      operations:
+      - method: GET
+        name: getlatestrun
+        description: YugabyteDB Anywhere Get Last Performance Advisor Run Details
+        call: anywhere-v1-full-performance-advisor.getlatestrun
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/perf-advisor-settings
+      name: api-v1-customers-cuuid-universes-uniuuid-perf-advisor-settings
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-perf_advisor_settings.
+      operations:
+      - method: GET
+        name: getsettings
+        description: YugabyteDB Anywhere Get Universe Performance Advisor Settings
+        call: anywhere-v1-full-performance-advisor.getsettings
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updatesettings
+        description: YugabyteDB Anywhere Update Universe Performance Advisor Settings
+        call: anywhere-v1-full-performance-advisor.updatesettings
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/start-manually
+      name: api-v1-customers-cuuid-universes-uniuuid-start-manually
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-start_manually.
+      operations:
+      - method: POST
+        name: runperfadvisor
+        description: YugabyteDB Anywhere Start Performance Advisor Run for Universe
+        call: anywhere-v1-full-performance-advisor.runperfadvisor
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-full-performance-advisor-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere APIs — Performance Advisor. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-list-performance-recommendations
+      description: YugabyteDB Anywhere List Performance Recommendations State Change Audit Events (paginated)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-performance-advisor.pageauditinfo
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-performance-recommendations
+      description: YugabyteDB Anywhere Delete Performance Recommendations
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-full-performance-advisor.delete
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-hide-performance-recommendations
+      description: YugabyteDB Anywhere Hide Performance Recommendations
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-performance-advisor.hide
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-performance-recommendations-2
+      description: YugabyteDB Anywhere List Performance Recommendations (paginated)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-performance-advisor.page
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-resolve-performance-recommendations
+      description: YugabyteDB Anywhere Resolve Performance Recommendations
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-performance-advisor.resolve
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-performance-recommendation
+      description: YugabyteDB Anywhere Get Performance Recommendation Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-performance-advisor.get
+      with:
+        cUUID: tools.cUUID
+        rUUID: tools.rUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-last-performance
+      description: YugabyteDB Anywhere Get Last Performance Advisor Run Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-performance-advisor.getlatestrun
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-universe-performance
+      description: YugabyteDB Anywhere Get Universe Performance Advisor Settings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-performance-advisor.getsettings
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-update-universe-performance
+      description: YugabyteDB Anywhere Update Universe Performance Advisor Settings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-performance-advisor.updatesettings
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-start-performance-advisor
+      description: YugabyteDB Anywhere Start Performance Advisor Run for Universe
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-performance-advisor.runperfadvisor
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.

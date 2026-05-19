@@ -1,0 +1,499 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Users, Sessions, and RBAC — User management
+  description: 'YugabyteDB Anywhere v1 — Users, Sessions, and RBAC — User management. 9 operations. Lead operation: YugabyteDB
+    Anywhere Reset the User''s Password. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - User management
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-users-rbac-user-management
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Users, Sessions, and RBAC — User management business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-reset_password
+      path: /api/v1/customers/{cUUID}/reset_password
+      operations:
+      - name: resetuserpassword
+        method: PUT
+        description: YugabyteDB Anywhere Reset the User's Password
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-users
+      path: /api/v1/customers/{cUUID}/users
+      operations:
+      - name: listusers
+        method: GET
+        description: YugabyteDB Anywhere List All Users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: email
+          in: query
+          type: string
+          description: Optional email to filter user list
+      - name: createuser
+        method: POST
+        description: YugabyteDB Anywhere Create a User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-users-uUUID
+      path: /api/v1/customers/{cUUID}/users/{uUUID}
+      operations:
+      - name: deleteuser
+        method: DELETE
+        description: YugabyteDB Anywhere Delete a User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: getuserdetails
+        method: GET
+        description: YugabyteDB Anywhere Get a User's Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uUUID
+          in: path
+          type: string
+          required: true
+      - name: updateuserrole
+        method: PUT
+        description: YugabyteDB Anywhere Change a User's Role
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uUUID
+          in: path
+          type: string
+          required: true
+        - name: role
+          in: query
+          type: string
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-users-uUUID-change_password
+      path: /api/v1/customers/{cUUID}/users/{uUUID}/change_password
+      operations:
+      - name: changepassword
+        method: PUT
+        description: YugabyteDB Anywhere Change Password - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-users-uUUID-oidc_auth_token
+      path: /api/v1/customers/{cUUID}/users/{uUUID}/oidc_auth_token
+      operations:
+      - name: retrieveoidcauthtoken
+        method: GET
+        description: YugabyteDB Anywhere Retrieve OIDC Auth Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-users-uUUID-update_profile
+      path: /api/v1/customers/{cUUID}/users/{uUUID}/update_profile
+      operations:
+      - name: updateuserprofile
+        method: PUT
+        description: YugabyteDB Anywhere Update a User's Profile
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-users-rbac-user-management-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Users, Sessions, and RBAC — User management. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/reset-password
+      name: api-v1-customers-cuuid-reset-password
+      description: REST surface for api-v1-customers-cUUID-reset_password.
+      operations:
+      - method: PUT
+        name: resetuserpassword
+        description: YugabyteDB Anywhere Reset the User's Password
+        call: anywhere-v1-users-rbac-user-management.resetuserpassword
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/users
+      name: api-v1-customers-cuuid-users
+      description: REST surface for api-v1-customers-cUUID-users.
+      operations:
+      - method: GET
+        name: listusers
+        description: YugabyteDB Anywhere List All Users
+        call: anywhere-v1-users-rbac-user-management.listusers
+        with:
+          cUUID: rest.cUUID
+          email: rest.email
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createuser
+        description: YugabyteDB Anywhere Create a User
+        call: anywhere-v1-users-rbac-user-management.createuser
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/users/{uuuid}
+      name: api-v1-customers-cuuid-users-uuuid
+      description: REST surface for api-v1-customers-cUUID-users-uUUID.
+      operations:
+      - method: DELETE
+        name: deleteuser
+        description: YugabyteDB Anywhere Delete a User
+        call: anywhere-v1-users-rbac-user-management.deleteuser
+        with:
+          cUUID: rest.cUUID
+          uUUID: rest.uUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getuserdetails
+        description: YugabyteDB Anywhere Get a User's Details
+        call: anywhere-v1-users-rbac-user-management.getuserdetails
+        with:
+          cUUID: rest.cUUID
+          uUUID: rest.uUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateuserrole
+        description: YugabyteDB Anywhere Change a User's Role
+        call: anywhere-v1-users-rbac-user-management.updateuserrole
+        with:
+          cUUID: rest.cUUID
+          uUUID: rest.uUUID
+          role: rest.role
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/users/{uuuid}/change-password
+      name: api-v1-customers-cuuid-users-uuuid-change-password
+      description: REST surface for api-v1-customers-cUUID-users-uUUID-change_password.
+      operations:
+      - method: PUT
+        name: changepassword
+        description: YugabyteDB Anywhere Change Password - Deprecated
+        call: anywhere-v1-users-rbac-user-management.changepassword
+        with:
+          cUUID: rest.cUUID
+          uUUID: rest.uUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/users/{uuuid}/oidc-auth-token
+      name: api-v1-customers-cuuid-users-uuuid-oidc-auth-token
+      description: REST surface for api-v1-customers-cUUID-users-uUUID-oidc_auth_token.
+      operations:
+      - method: GET
+        name: retrieveoidcauthtoken
+        description: YugabyteDB Anywhere Retrieve OIDC Auth Token
+        call: anywhere-v1-users-rbac-user-management.retrieveoidcauthtoken
+        with:
+          cUUID: rest.cUUID
+          uUUID: rest.uUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/users/{uuuid}/update-profile
+      name: api-v1-customers-cuuid-users-uuuid-update-profile
+      description: REST surface for api-v1-customers-cUUID-users-uUUID-update_profile.
+      operations:
+      - method: PUT
+        name: updateuserprofile
+        description: YugabyteDB Anywhere Update a User's Profile
+        call: anywhere-v1-users-rbac-user-management.updateuserprofile
+        with:
+          cUUID: rest.cUUID
+          uUUID: rest.uUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-users-rbac-user-management-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Users, Sessions, and RBAC — User management. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-reset-user-s-password
+      description: YugabyteDB Anywhere Reset the User's Password
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-users-rbac-user-management.resetuserpassword
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-all-users
+      description: YugabyteDB Anywhere List All Users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-users-rbac-user-management.listusers
+      with:
+        cUUID: tools.cUUID
+        email: tools.email
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-user
+      description: YugabyteDB Anywhere Create a User
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-users-rbac-user-management.createuser
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-user
+      description: YugabyteDB Anywhere Delete a User
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-users-rbac-user-management.deleteuser
+      with:
+        cUUID: tools.cUUID
+        uUUID: tools.uUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-user-s-details
+      description: YugabyteDB Anywhere Get a User's Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-users-rbac-user-management.getuserdetails
+      with:
+        cUUID: tools.cUUID
+        uUUID: tools.uUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-change-user-s-role
+      description: YugabyteDB Anywhere Change a User's Role
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-users-rbac-user-management.updateuserrole
+      with:
+        cUUID: tools.cUUID
+        uUUID: tools.uUUID
+        role: tools.role
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-change-password-deprecated
+      description: YugabyteDB Anywhere Change Password - Deprecated
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-users-rbac-user-management.changepassword
+      with:
+        cUUID: tools.cUUID
+        uUUID: tools.uUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-retrieve-oidc-auth
+      description: YugabyteDB Anywhere Retrieve OIDC Auth Token
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-users-rbac-user-management.retrieveoidcauthtoken
+      with:
+        cUUID: tools.cUUID
+        uUUID: tools.uUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-update-user-s-profile
+      description: YugabyteDB Anywhere Update a User's Profile
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-users-rbac-user-management.updateuserprofile
+      with:
+        cUUID: tools.cUUID
+        uUUID: tools.uUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

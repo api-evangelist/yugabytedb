@@ -1,0 +1,181 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere APIs — Audit
+  description: 'YugabyteDB Anywhere APIs — Audit. 3 operations. Lead operation: YugabyteDB Anywhere Get Audit Info for a Task.
+    Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Audit
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-full-audit
+    baseUri: ''
+    description: YugabyteDB Anywhere APIs — Audit business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-tasks-tUUID-audit_info
+      path: /api/v1/customers/{cUUID}/tasks/{tUUID}/audit_info
+      operations:
+      - name: gettaskaudit
+        method: GET
+        description: YugabyteDB Anywhere Get Audit Info for a Task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: tUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-tasks-tUUID-audit_user
+      path: /api/v1/customers/{cUUID}/tasks/{tUUID}/audit_user
+      operations:
+      - name: getuserfromtask
+        method: GET
+        description: YugabyteDB Anywhere Get the User Associated with a Task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: tUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-users-uUUID-audit_trail
+      path: /api/v1/customers/{cUUID}/users/{uUUID}/audit_trail
+      operations:
+      - name: listofaudit
+        method: GET
+        description: YugabyteDB Anywhere List a User's Audit Entries
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uUUID
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-full-audit-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere APIs — Audit. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/tasks/{tuuid}/audit-info
+      name: api-v1-customers-cuuid-tasks-tuuid-audit-info
+      description: REST surface for api-v1-customers-cUUID-tasks-tUUID-audit_info.
+      operations:
+      - method: GET
+        name: gettaskaudit
+        description: YugabyteDB Anywhere Get Audit Info for a Task
+        call: anywhere-v1-full-audit.gettaskaudit
+        with:
+          cUUID: rest.cUUID
+          tUUID: rest.tUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/tasks/{tuuid}/audit-user
+      name: api-v1-customers-cuuid-tasks-tuuid-audit-user
+      description: REST surface for api-v1-customers-cUUID-tasks-tUUID-audit_user.
+      operations:
+      - method: GET
+        name: getuserfromtask
+        description: YugabyteDB Anywhere Get the User Associated with a Task
+        call: anywhere-v1-full-audit.getuserfromtask
+        with:
+          cUUID: rest.cUUID
+          tUUID: rest.tUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/users/{uuuid}/audit-trail
+      name: api-v1-customers-cuuid-users-uuuid-audit-trail
+      description: REST surface for api-v1-customers-cUUID-users-uUUID-audit_trail.
+      operations:
+      - method: GET
+        name: listofaudit
+        description: YugabyteDB Anywhere List a User's Audit Entries
+        call: anywhere-v1-full-audit.listofaudit
+        with:
+          cUUID: rest.cUUID
+          uUUID: rest.uUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-full-audit-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere APIs — Audit. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-get-audit-info
+      description: YugabyteDB Anywhere Get Audit Info for a Task
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-audit.gettaskaudit
+      with:
+        cUUID: tools.cUUID
+        tUUID: tools.tUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-user-associated
+      description: YugabyteDB Anywhere Get the User Associated with a Task
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-audit.getuserfromtask
+      with:
+        cUUID: tools.cUUID
+        tUUID: tools.tUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-user-s-audit
+      description: YugabyteDB Anywhere List a User's Audit Entries
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-audit.listofaudit
+      with:
+        cUUID: tools.cUUID
+        uUUID: tools.uUUID
+      outputParameters:
+      - type: object
+        mapping: $.

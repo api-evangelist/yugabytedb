@@ -1,0 +1,173 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere V2 APIs — Authentication
+  description: 'YugabyteDB Anywhere V2 APIs — Authentication. 3 operations. Lead operation: YugabyteDB Anywhere List Group
+    Mappings. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Authentication
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v2-authentication
+    baseUri: ''
+    description: YugabyteDB Anywhere V2 APIs — Authentication business capability. Self-contained, no shared references.
+    resources:
+    - name: customers-cUUID-auth-group-mappings
+      path: /customers/{cUUID}/auth/group-mappings
+      operations:
+      - name: listmappings
+        method: GET
+        description: YugabyteDB Anywhere List Group Mappings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+      - name: updategroupmappings
+        method: PUT
+        description: YugabyteDB Anywhere Create Group Mappings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-auth-group-mappings-gUUID
+      path: /customers/{cUUID}/auth/group-mappings/{gUUID}
+      operations:
+      - name: deletegroupmappings
+        method: DELETE
+        description: YugabyteDB Anywhere Delete Group Mappings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: gUUID
+          in: path
+          type: string
+          description: Group UUID
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v2-authentication-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere V2 APIs — Authentication. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/customers/{cuuid}/auth/group-mappings
+      name: customers-cuuid-auth-group-mappings
+      description: REST surface for customers-cUUID-auth-group-mappings.
+      operations:
+      - method: GET
+        name: listmappings
+        description: YugabyteDB Anywhere List Group Mappings
+        call: anywhere-v2-authentication.listmappings
+        with:
+          cUUID: rest.cUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updategroupmappings
+        description: YugabyteDB Anywhere Create Group Mappings
+        call: anywhere-v2-authentication.updategroupmappings
+        with:
+          cUUID: rest.cUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/auth/group-mappings/{guuid}
+      name: customers-cuuid-auth-group-mappings-guuid
+      description: REST surface for customers-cUUID-auth-group-mappings-gUUID.
+      operations:
+      - method: DELETE
+        name: deletegroupmappings
+        description: YugabyteDB Anywhere Delete Group Mappings
+        call: anywhere-v2-authentication.deletegroupmappings
+        with:
+          cUUID: rest.cUUID
+          gUUID: rest.gUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v2-authentication-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere V2 APIs — Authentication. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-list-group-mappings
+      description: YugabyteDB Anywhere List Group Mappings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v2-authentication.listmappings
+      with:
+        cUUID: tools.cUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-group-mappings
+      description: YugabyteDB Anywhere Create Group Mappings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v2-authentication.updategroupmappings
+      with:
+        cUUID: tools.cUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-group-mappings
+      description: YugabyteDB Anywhere Delete Group Mappings
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v2-authentication.deletegroupmappings
+      with:
+        cUUID: tools.cUUID
+        gUUID: tools.gUUID
+      outputParameters:
+      - type: object
+        mapping: $.

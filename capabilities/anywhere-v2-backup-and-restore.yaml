@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere V2 APIs — Backup and Restore
+  description: 'YugabyteDB Anywhere V2 APIs — Backup and Restore. 1 operations. Lead operation: YugabyteDB Anywhere List YBC
+    Gflags Metadata. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Backup and Restore
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v2-backup-and-restore
+    baseUri: ''
+    description: YugabyteDB Anywhere V2 APIs — Backup and Restore business capability. Self-contained, no shared references.
+    resources:
+    - name: ybc-gflags-metadata
+      path: /ybc/gflags-metadata
+      operations:
+      - name: listybcgflagsmetadata
+        method: GET
+        description: YugabyteDB Anywhere List YBC Gflags Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v2-backup-and-restore-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere V2 APIs — Backup and Restore. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/ybc/gflags-metadata
+      name: ybc-gflags-metadata
+      description: REST surface for ybc-gflags-metadata.
+      operations:
+      - method: GET
+        name: listybcgflagsmetadata
+        description: YugabyteDB Anywhere List YBC Gflags Metadata
+        call: anywhere-v2-backup-and-restore.listybcgflagsmetadata
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v2-backup-and-restore-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere V2 APIs — Backup and Restore. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-list-ybc-gflags
+      description: YugabyteDB Anywhere List YBC Gflags Metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v2-backup-and-restore.listybcgflagsmetadata
+      outputParameters:
+      - type: object
+        mapping: $.

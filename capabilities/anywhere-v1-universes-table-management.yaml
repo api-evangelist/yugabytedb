@@ -1,0 +1,564 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Universe Management — Table management
+  description: 'YugabyteDB Anywhere v1 — Universe Management — Table management. 10 operations. Lead operation: YugabyteDB
+    Anywhere Get a List of All Namespaces in the Specified Universe.. Self-contained Naftiko capability covering one Yugabytedb
+    business surface.'
+  tags:
+  - Yugabytedb
+  - Table management
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-universes-table-management
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Universe Management — Table management business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: api-v1-customers-cUUID-universes-uniUUID-namespaces
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/namespaces
+      operations:
+      - name: getallnamespaces
+        method: GET
+        description: YugabyteDB Anywhere Get a List of All Namespaces in the Specified Universe.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: includeSystemNamespaces
+          in: query
+          type: boolean
+    - name: api-v1-customers-cUUID-universes-uniUUID-tables
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/tables
+      operations:
+      - name: getalltables
+        method: GET
+        description: YugabyteDB Anywhere Get a List of All Tables in the Specified Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: includeParentTableInfo
+          in: query
+          type: boolean
+        - name: excludeColocatedTables
+          in: query
+          type: boolean
+        - name: includeColocatedParentTables
+          in: query
+          type: boolean
+        - name: xClusterSupportedOnly
+          in: query
+          type: boolean
+      - name: createtable
+        method: POST
+        description: YugabyteDB Anywhere Create a YugabyteDB Table
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-tables-tableUUID
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID}
+      operations:
+      - name: droptable
+        method: DELETE
+        description: YugabyteDB Anywhere Drop a YugabyteDB Table
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: tableUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: describetable
+        method: GET
+        description: YugabyteDB Anywhere Describe a Table
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: tableUUID
+          in: path
+          type: string
+          required: true
+      - name: altertable
+        method: PUT
+        description: YugabyteDB Anywhere Alter a YugabyteDB Table
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: tableUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-universes-uniUUID-tables-tableUUID-bulk_import
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID}/bulk_import
+      operations:
+      - name: bulkimportdata
+        method: PUT
+        description: YugabyteDB Anywhere Bulk Import Data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: tableUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-tablespaces
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/tablespaces
+      operations:
+      - name: getalltablespaces
+        method: GET
+        description: YugabyteDB Anywhere Get a List of All Tablespaces of a Given Universe.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+      - name: createtablespaces
+        method: POST
+        description: YugabyteDB Anywhere Create TableSpaces
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-metadata-yql_data_types
+      path: /api/v1/metadata/yql_data_types
+      operations:
+      - name: getyqldatatypes
+        method: GET
+        description: YugabyteDB Anywhere List Column Types
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-universes-table-management-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Universe Management — Table management. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/namespaces
+      name: api-v1-customers-cuuid-universes-uniuuid-namespaces
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-namespaces.
+      operations:
+      - method: GET
+        name: getallnamespaces
+        description: YugabyteDB Anywhere Get a List of All Namespaces in the Specified Universe.
+        call: anywhere-v1-universes-table-management.getallnamespaces
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          includeSystemNamespaces: rest.includeSystemNamespaces
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/tables
+      name: api-v1-customers-cuuid-universes-uniuuid-tables
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-tables.
+      operations:
+      - method: GET
+        name: getalltables
+        description: YugabyteDB Anywhere Get a List of All Tables in the Specified Universe
+        call: anywhere-v1-universes-table-management.getalltables
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          includeParentTableInfo: rest.includeParentTableInfo
+          excludeColocatedTables: rest.excludeColocatedTables
+          includeColocatedParentTables: rest.includeColocatedParentTables
+          xClusterSupportedOnly: rest.xClusterSupportedOnly
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createtable
+        description: YugabyteDB Anywhere Create a YugabyteDB Table
+        call: anywhere-v1-universes-table-management.createtable
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/tables/{tableuuid}
+      name: api-v1-customers-cuuid-universes-uniuuid-tables-tableuuid
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-tables-tableUUID.
+      operations:
+      - method: DELETE
+        name: droptable
+        description: YugabyteDB Anywhere Drop a YugabyteDB Table
+        call: anywhere-v1-universes-table-management.droptable
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          tableUUID: rest.tableUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: describetable
+        description: YugabyteDB Anywhere Describe a Table
+        call: anywhere-v1-universes-table-management.describetable
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          tableUUID: rest.tableUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: altertable
+        description: YugabyteDB Anywhere Alter a YugabyteDB Table
+        call: anywhere-v1-universes-table-management.altertable
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          tableUUID: rest.tableUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/tables/{tableuuid}/bulk-import
+      name: api-v1-customers-cuuid-universes-uniuuid-tables-tableuuid-bulk-import
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-tables-tableUUID-bulk_import.
+      operations:
+      - method: PUT
+        name: bulkimportdata
+        description: YugabyteDB Anywhere Bulk Import Data
+        call: anywhere-v1-universes-table-management.bulkimportdata
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          tableUUID: rest.tableUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/tablespaces
+      name: api-v1-customers-cuuid-universes-uniuuid-tablespaces
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-tablespaces.
+      operations:
+      - method: GET
+        name: getalltablespaces
+        description: YugabyteDB Anywhere Get a List of All Tablespaces of a Given Universe.
+        call: anywhere-v1-universes-table-management.getalltablespaces
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createtablespaces
+        description: YugabyteDB Anywhere Create TableSpaces
+        call: anywhere-v1-universes-table-management.createtablespaces
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/metadata/yql-data-types
+      name: api-v1-metadata-yql-data-types
+      description: REST surface for api-v1-metadata-yql_data_types.
+      operations:
+      - method: GET
+        name: getyqldatatypes
+        description: YugabyteDB Anywhere List Column Types
+        call: anywhere-v1-universes-table-management.getyqldatatypes
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-universes-table-management-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Universe Management — Table management. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-get-list-all
+      description: YugabyteDB Anywhere Get a List of All Namespaces in the Specified Universe.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-universes-table-management.getallnamespaces
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        includeSystemNamespaces: tools.includeSystemNamespaces
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-list-all-2
+      description: YugabyteDB Anywhere Get a List of All Tables in the Specified Universe
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-universes-table-management.getalltables
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        includeParentTableInfo: tools.includeParentTableInfo
+        excludeColocatedTables: tools.excludeColocatedTables
+        includeColocatedParentTables: tools.includeColocatedParentTables
+        xClusterSupportedOnly: tools.xClusterSupportedOnly
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-yugabytedb-table
+      description: YugabyteDB Anywhere Create a YugabyteDB Table
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-table-management.createtable
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-drop-yugabytedb-table
+      description: YugabyteDB Anywhere Drop a YugabyteDB Table
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-universes-table-management.droptable
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        tableUUID: tools.tableUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-describe-table
+      description: YugabyteDB Anywhere Describe a Table
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-universes-table-management.describetable
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        tableUUID: tools.tableUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-alter-yugabytedb-table
+      description: YugabyteDB Anywhere Alter a YugabyteDB Table
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-universes-table-management.altertable
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        tableUUID: tools.tableUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-bulk-import-data
+      description: YugabyteDB Anywhere Bulk Import Data
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-universes-table-management.bulkimportdata
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        tableUUID: tools.tableUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-list-all-3
+      description: YugabyteDB Anywhere Get a List of All Tablespaces of a Given Universe.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-universes-table-management.getalltablespaces
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-tablespaces
+      description: YugabyteDB Anywhere Create TableSpaces
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-table-management.createtablespaces
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-column-types
+      description: YugabyteDB Anywhere List Column Types
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-universes-table-management.getyqldatatypes
+      outputParameters:
+      - type: object
+        mapping: $.

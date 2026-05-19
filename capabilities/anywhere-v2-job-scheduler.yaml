@@ -1,0 +1,341 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere V2 APIs — Job Scheduler
+  description: 'YugabyteDB Anywhere V2 APIs — Job Scheduler. 6 operations. Lead operation: YugabyteDB Anywhere List Job Schedules
+    (paginated). Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Job Scheduler
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v2-job-scheduler
+    baseUri: ''
+    description: YugabyteDB Anywhere V2 APIs — Job Scheduler business capability. Self-contained, no shared references.
+    resources:
+    - name: customers-cUUID-job-schedules-page
+      path: /customers/{cUUID}/job-schedules/page
+      operations:
+      - name: pagelistjobschedules
+        method: POST
+        description: YugabyteDB Anywhere List Job Schedules (paginated)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-job-schedules-jUUID
+      path: /customers/{cUUID}/job-schedules/{jUUID}
+      operations:
+      - name: deletejobschedule
+        method: DELETE
+        description: YugabyteDB Anywhere Delete Job Schedule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: jUUID
+          in: path
+          type: string
+          description: Job Schedule UUID
+          required: true
+      - name: getjobschedule
+        method: GET
+        description: YugabyteDB Anywhere Get Job Schedule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: jUUID
+          in: path
+          type: string
+          description: Job Schedule UUID
+          required: true
+      - name: updatejobschedule
+        method: PUT
+        description: YugabyteDB Anywhere Update Job Schedule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: jUUID
+          in: path
+          type: string
+          description: Job Schedule UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-job-schedules-jUUID-job-instances-page
+      path: /customers/{cUUID}/job-schedules/{jUUID}/job-instances/page
+      operations:
+      - name: pagelistjobinstances
+        method: POST
+        description: YugabyteDB Anywhere List Job Instances (paginated)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: jUUID
+          in: path
+          type: string
+          description: Job Schedule UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-job-schedules-jUUID-snooze
+      path: /customers/{cUUID}/job-schedules/{jUUID}/snooze
+      operations:
+      - name: snoozejobschedule
+        method: POST
+        description: YugabyteDB Anywhere Snooze Job Schedule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: jUUID
+          in: path
+          type: string
+          description: Job Schedule UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v2-job-scheduler-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere V2 APIs — Job Scheduler. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/customers/{cuuid}/job-schedules/page
+      name: customers-cuuid-job-schedules-page
+      description: REST surface for customers-cUUID-job-schedules-page.
+      operations:
+      - method: POST
+        name: pagelistjobschedules
+        description: YugabyteDB Anywhere List Job Schedules (paginated)
+        call: anywhere-v2-job-scheduler.pagelistjobschedules
+        with:
+          cUUID: rest.cUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/job-schedules/{juuid}
+      name: customers-cuuid-job-schedules-juuid
+      description: REST surface for customers-cUUID-job-schedules-jUUID.
+      operations:
+      - method: DELETE
+        name: deletejobschedule
+        description: YugabyteDB Anywhere Delete Job Schedule
+        call: anywhere-v2-job-scheduler.deletejobschedule
+        with:
+          cUUID: rest.cUUID
+          jUUID: rest.jUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getjobschedule
+        description: YugabyteDB Anywhere Get Job Schedule
+        call: anywhere-v2-job-scheduler.getjobschedule
+        with:
+          cUUID: rest.cUUID
+          jUUID: rest.jUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatejobschedule
+        description: YugabyteDB Anywhere Update Job Schedule
+        call: anywhere-v2-job-scheduler.updatejobschedule
+        with:
+          cUUID: rest.cUUID
+          jUUID: rest.jUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/job-schedules/{juuid}/job-instances/page
+      name: customers-cuuid-job-schedules-juuid-job-instances-page
+      description: REST surface for customers-cUUID-job-schedules-jUUID-job-instances-page.
+      operations:
+      - method: POST
+        name: pagelistjobinstances
+        description: YugabyteDB Anywhere List Job Instances (paginated)
+        call: anywhere-v2-job-scheduler.pagelistjobinstances
+        with:
+          cUUID: rest.cUUID
+          jUUID: rest.jUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/job-schedules/{juuid}/snooze
+      name: customers-cuuid-job-schedules-juuid-snooze
+      description: REST surface for customers-cUUID-job-schedules-jUUID-snooze.
+      operations:
+      - method: POST
+        name: snoozejobschedule
+        description: YugabyteDB Anywhere Snooze Job Schedule
+        call: anywhere-v2-job-scheduler.snoozejobschedule
+        with:
+          cUUID: rest.cUUID
+          jUUID: rest.jUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v2-job-scheduler-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere V2 APIs — Job Scheduler. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-list-job-schedules
+      description: YugabyteDB Anywhere List Job Schedules (paginated)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-job-scheduler.pagelistjobschedules
+      with:
+        cUUID: tools.cUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-job-schedule
+      description: YugabyteDB Anywhere Delete Job Schedule
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v2-job-scheduler.deletejobschedule
+      with:
+        cUUID: tools.cUUID
+        jUUID: tools.jUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-job-schedule
+      description: YugabyteDB Anywhere Get Job Schedule
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v2-job-scheduler.getjobschedule
+      with:
+        cUUID: tools.cUUID
+        jUUID: tools.jUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-update-job-schedule
+      description: YugabyteDB Anywhere Update Job Schedule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v2-job-scheduler.updatejobschedule
+      with:
+        cUUID: tools.cUUID
+        jUUID: tools.jUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-job-instances
+      description: YugabyteDB Anywhere List Job Instances (paginated)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-job-scheduler.pagelistjobinstances
+      with:
+        cUUID: tools.cUUID
+        jUUID: tools.jUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-snooze-job-schedule
+      description: YugabyteDB Anywhere Snooze Job Schedule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-job-scheduler.snoozejobschedule
+      with:
+        cUUID: tools.cUUID
+        jUUID: tools.jUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

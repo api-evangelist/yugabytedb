@@ -1,0 +1,494 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere APIs — Certificate Info
+  description: 'YugabyteDB Anywhere APIs — Certificate Info. 9 operations. Lead operation: YugabyteDB Anywhere List a Customer''s
+    Certificates. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Certificate Info
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-full-certificate-info
+    baseUri: ''
+    description: YugabyteDB Anywhere APIs — Certificate Info business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-certificates
+      path: /api/v1/customers/{cUUID}/certificates
+      operations:
+      - name: getlistofcertificate
+        method: GET
+        description: YugabyteDB Anywhere List a Customer's Certificates
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+      - name: upload
+        method: POST
+        description: YugabyteDB Anywhere Restore a Certificate from Backup
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-certificates-create_self_signed_cert
+      path: /api/v1/customers/{cUUID}/certificates/create_self_signed_cert
+      operations:
+      - name: createselfsignedcert
+        method: POST
+        description: YugabyteDB Anywhere Create a Self Signed Certificate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-certificates-name
+      path: /api/v1/customers/{cUUID}/certificates/{name}
+      operations:
+      - name: getcertificate
+        method: GET
+        description: YugabyteDB Anywhere Get a Certificate's UUID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: name
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-certificates-rUUID
+      path: /api/v1/customers/{cUUID}/certificates/{rUUID}
+      operations:
+      - name: deletecertificate
+        method: DELETE
+        description: YugabyteDB Anywhere Delete a Certificate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: rUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: getclientcert
+        method: POST
+        description: YugabyteDB Anywhere Add a Client Certificate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: rUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-certificates-rUUID-download
+      path: /api/v1/customers/{cUUID}/certificates/{rUUID}/download
+      operations:
+      - name: getrootcert
+        method: GET
+        description: YugabyteDB Anywhere Get a Customer's Root Certificate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: rUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-certificates-rUUID-edit
+      path: /api/v1/customers/{cUUID}/certificates/{rUUID}/edit
+      operations:
+      - name: editcertificate
+        method: POST
+        description: YugabyteDB Anywhere Edit TLS Certificate Config Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: rUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-certificates-rUUID-update_empty_cert
+      path: /api/v1/customers/{cUUID}/certificates/{rUUID}/update_empty_cert
+      operations:
+      - name: updateemptycustomcert
+        method: POST
+        description: YugabyteDB Anywhere Update an Empty Certificate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: rUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-full-certificate-info-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere APIs — Certificate Info. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/certificates
+      name: api-v1-customers-cuuid-certificates
+      description: REST surface for api-v1-customers-cUUID-certificates.
+      operations:
+      - method: GET
+        name: getlistofcertificate
+        description: YugabyteDB Anywhere List a Customer's Certificates
+        call: anywhere-v1-full-certificate-info.getlistofcertificate
+        with:
+          cUUID: rest.cUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: upload
+        description: YugabyteDB Anywhere Restore a Certificate from Backup
+        call: anywhere-v1-full-certificate-info.upload
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/certificates/create-self-signed-cert
+      name: api-v1-customers-cuuid-certificates-create-self-signed-cert
+      description: REST surface for api-v1-customers-cUUID-certificates-create_self_signed_cert.
+      operations:
+      - method: POST
+        name: createselfsignedcert
+        description: YugabyteDB Anywhere Create a Self Signed Certificate
+        call: anywhere-v1-full-certificate-info.createselfsignedcert
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/certificates/{name}
+      name: api-v1-customers-cuuid-certificates-name
+      description: REST surface for api-v1-customers-cUUID-certificates-name.
+      operations:
+      - method: GET
+        name: getcertificate
+        description: YugabyteDB Anywhere Get a Certificate's UUID
+        call: anywhere-v1-full-certificate-info.getcertificate
+        with:
+          cUUID: rest.cUUID
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/certificates/{ruuid}
+      name: api-v1-customers-cuuid-certificates-ruuid
+      description: REST surface for api-v1-customers-cUUID-certificates-rUUID.
+      operations:
+      - method: DELETE
+        name: deletecertificate
+        description: YugabyteDB Anywhere Delete a Certificate
+        call: anywhere-v1-full-certificate-info.deletecertificate
+        with:
+          cUUID: rest.cUUID
+          rUUID: rest.rUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: getclientcert
+        description: YugabyteDB Anywhere Add a Client Certificate
+        call: anywhere-v1-full-certificate-info.getclientcert
+        with:
+          cUUID: rest.cUUID
+          rUUID: rest.rUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/certificates/{ruuid}/download
+      name: api-v1-customers-cuuid-certificates-ruuid-download
+      description: REST surface for api-v1-customers-cUUID-certificates-rUUID-download.
+      operations:
+      - method: GET
+        name: getrootcert
+        description: YugabyteDB Anywhere Get a Customer's Root Certificate
+        call: anywhere-v1-full-certificate-info.getrootcert
+        with:
+          cUUID: rest.cUUID
+          rUUID: rest.rUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/certificates/{ruuid}/edit
+      name: api-v1-customers-cuuid-certificates-ruuid-edit
+      description: REST surface for api-v1-customers-cUUID-certificates-rUUID-edit.
+      operations:
+      - method: POST
+        name: editcertificate
+        description: YugabyteDB Anywhere Edit TLS Certificate Config Details
+        call: anywhere-v1-full-certificate-info.editcertificate
+        with:
+          cUUID: rest.cUUID
+          rUUID: rest.rUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/certificates/{ruuid}/update-empty-cert
+      name: api-v1-customers-cuuid-certificates-ruuid-update-empty-cert
+      description: REST surface for api-v1-customers-cUUID-certificates-rUUID-update_empty_cert.
+      operations:
+      - method: POST
+        name: updateemptycustomcert
+        description: YugabyteDB Anywhere Update an Empty Certificate
+        call: anywhere-v1-full-certificate-info.updateemptycustomcert
+        with:
+          cUUID: rest.cUUID
+          rUUID: rest.rUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-full-certificate-info-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere APIs — Certificate Info. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-list-customer-s-certificates
+      description: YugabyteDB Anywhere List a Customer's Certificates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-certificate-info.getlistofcertificate
+      with:
+        cUUID: tools.cUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-restore-certificate-backup
+      description: YugabyteDB Anywhere Restore a Certificate from Backup
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-certificate-info.upload
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-self-signed
+      description: YugabyteDB Anywhere Create a Self Signed Certificate
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-certificate-info.createselfsignedcert
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-certificate-s-uuid
+      description: YugabyteDB Anywhere Get a Certificate's UUID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-certificate-info.getcertificate
+      with:
+        cUUID: tools.cUUID
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-certificate
+      description: YugabyteDB Anywhere Delete a Certificate
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-full-certificate-info.deletecertificate
+      with:
+        cUUID: tools.cUUID
+        rUUID: tools.rUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-add-client-certificate
+      description: YugabyteDB Anywhere Add a Client Certificate
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-certificate-info.getclientcert
+      with:
+        cUUID: tools.cUUID
+        rUUID: tools.rUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-customer-s-root
+      description: YugabyteDB Anywhere Get a Customer's Root Certificate
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-certificate-info.getrootcert
+      with:
+        cUUID: tools.cUUID
+        rUUID: tools.rUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-edit-tls-certificate
+      description: YugabyteDB Anywhere Edit TLS Certificate Config Details
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-certificate-info.editcertificate
+      with:
+        cUUID: tools.cUUID
+        rUUID: tools.rUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-update-empty-certificate
+      description: YugabyteDB Anywhere Update an Empty Certificate
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-certificate-info.updateemptycustomcert
+      with:
+        cUUID: tools.cUUID
+        rUUID: tools.rUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,271 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere V2 APIs — Continuous Backup
+  description: 'YugabyteDB Anywhere V2 APIs — Continuous Backup. 5 operations. Lead operation: YugabyteDB Anywhere Get Continuous
+    Backup. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Continuous Backup
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v2-continuous-backup
+    baseUri: ''
+    description: YugabyteDB Anywhere V2 APIs — Continuous Backup business capability. Self-contained, no shared references.
+    resources:
+    - name: customers-cUUID-auto-yba-backups
+      path: /customers/{cUUID}/auto-yba-backups
+      operations:
+      - name: getcontinuousbackup
+        method: GET
+        description: YugabyteDB Anywhere Get Continuous Backup
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+      - name: createcontinuousbackup
+        method: POST
+        description: YugabyteDB Anywhere Create Continous Backup
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-auto-yba-backups-restore
+      path: /customers/{cUUID}/auto-yba-backups/restore
+      operations:
+      - name: restorecontinuousbackup
+        method: POST
+        description: YugabyteDB Anywhere Restore Continuous Backup
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-auto-yba-backups-bUUID
+      path: /customers/{cUUID}/auto-yba-backups/{bUUID}
+      operations:
+      - name: deletecontinuousbackup
+        method: DELETE
+        description: YugabyteDB Anywhere Delete Continuous Backup Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: bUUID
+          in: path
+          type: string
+          description: Continuous Backup UUID
+          required: true
+      - name: editcontinuousbackup
+        method: PUT
+        description: YugabyteDB Anywhere Edit Continuous Backup Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: bUUID
+          in: path
+          type: string
+          description: Continuous Backup UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v2-continuous-backup-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere V2 APIs — Continuous Backup. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/customers/{cuuid}/auto-yba-backups
+      name: customers-cuuid-auto-yba-backups
+      description: REST surface for customers-cUUID-auto-yba-backups.
+      operations:
+      - method: GET
+        name: getcontinuousbackup
+        description: YugabyteDB Anywhere Get Continuous Backup
+        call: anywhere-v2-continuous-backup.getcontinuousbackup
+        with:
+          cUUID: rest.cUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createcontinuousbackup
+        description: YugabyteDB Anywhere Create Continous Backup
+        call: anywhere-v2-continuous-backup.createcontinuousbackup
+        with:
+          cUUID: rest.cUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/auto-yba-backups/restore
+      name: customers-cuuid-auto-yba-backups-restore
+      description: REST surface for customers-cUUID-auto-yba-backups-restore.
+      operations:
+      - method: POST
+        name: restorecontinuousbackup
+        description: YugabyteDB Anywhere Restore Continuous Backup
+        call: anywhere-v2-continuous-backup.restorecontinuousbackup
+        with:
+          cUUID: rest.cUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/auto-yba-backups/{buuid}
+      name: customers-cuuid-auto-yba-backups-buuid
+      description: REST surface for customers-cUUID-auto-yba-backups-bUUID.
+      operations:
+      - method: DELETE
+        name: deletecontinuousbackup
+        description: YugabyteDB Anywhere Delete Continuous Backup Config
+        call: anywhere-v2-continuous-backup.deletecontinuousbackup
+        with:
+          cUUID: rest.cUUID
+          bUUID: rest.bUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: editcontinuousbackup
+        description: YugabyteDB Anywhere Edit Continuous Backup Config
+        call: anywhere-v2-continuous-backup.editcontinuousbackup
+        with:
+          cUUID: rest.cUUID
+          bUUID: rest.bUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v2-continuous-backup-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere V2 APIs — Continuous Backup. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-get-continuous-backup
+      description: YugabyteDB Anywhere Get Continuous Backup
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v2-continuous-backup.getcontinuousbackup
+      with:
+        cUUID: tools.cUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-continous-backup
+      description: YugabyteDB Anywhere Create Continous Backup
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-continuous-backup.createcontinuousbackup
+      with:
+        cUUID: tools.cUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-restore-continuous-backup
+      description: YugabyteDB Anywhere Restore Continuous Backup
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-continuous-backup.restorecontinuousbackup
+      with:
+        cUUID: tools.cUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-continuous-backup
+      description: YugabyteDB Anywhere Delete Continuous Backup Config
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v2-continuous-backup.deletecontinuousbackup
+      with:
+        cUUID: tools.cUUID
+        bUUID: tools.bUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-edit-continuous-backup
+      description: YugabyteDB Anywhere Edit Continuous Backup Config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v2-continuous-backup.editcontinuousbackup
+      with:
+        cUUID: tools.cUUID
+        bUUID: tools.bUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

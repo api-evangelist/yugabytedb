@@ -1,0 +1,102 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Aeon REST API — Accounts
+  description: 'YugabyteDB Aeon REST API — Accounts. 2 operations. Lead operation: YugabyteDB Aeon List Accounts. Self-contained
+    Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Accounts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: aeon-accounts
+    baseUri: https://cloud.yugabyte.com/api/public/v1
+    description: YugabyteDB Aeon REST API — Accounts business capability. Self-contained, no shared references.
+    resources:
+    - name: accounts
+      path: /accounts
+      operations:
+      - name: listaccounts
+        method: GET
+        description: YugabyteDB Aeon List Accounts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: accounts-accountId
+      path: /accounts/{accountId}
+      operations:
+      - name: getaccount
+        method: GET
+        description: YugabyteDB Aeon Get Account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.YUGABYTEDB_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: aeon-accounts-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Aeon REST API — Accounts. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/accounts
+      name: accounts
+      description: REST surface for accounts.
+      operations:
+      - method: GET
+        name: listaccounts
+        description: YugabyteDB Aeon List Accounts
+        call: aeon-accounts.listaccounts
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts/{accountid}
+      name: accounts-accountid
+      description: REST surface for accounts-accountId.
+      operations:
+      - method: GET
+        name: getaccount
+        description: YugabyteDB Aeon Get Account
+        call: aeon-accounts.getaccount
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: aeon-accounts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Aeon REST API — Accounts. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: yugabytedb-aeon-list-accounts
+      description: YugabyteDB Aeon List Accounts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aeon-accounts.listaccounts
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-aeon-get-account
+      description: YugabyteDB Aeon Get Account
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aeon-accounts.getaccount
+      outputParameters:
+      - type: object
+        mapping: $.

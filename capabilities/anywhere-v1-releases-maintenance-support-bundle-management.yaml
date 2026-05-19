@@ -1,0 +1,398 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Releases and Maintenance — Support Bundle management
+  description: 'YugabyteDB Anywhere v1 — Releases and Maintenance — Support Bundle management. 7 operations. Lead operation:
+    YugabyteDB Anywhere List All Components Available in Support Bundle. Self-contained Naftiko capability covering one Yugabytedb
+    business surface.'
+  tags:
+  - Yugabytedb
+  - Support Bundle management
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-releases-maintenance-support-bundle-management
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Releases and Maintenance — Support Bundle management business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-support_bundle-components
+      path: /api/v1/customers/{cUUID}/support_bundle/components
+      operations:
+      - name: listsupportbundlecomponents
+        method: GET
+        description: YugabyteDB Anywhere List All Components Available in Support Bundle
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-support_bundle
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle
+      operations:
+      - name: listsupportbundle
+        method: GET
+        description: YugabyteDB Anywhere List All Support Bundles from a Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+      - name: createsupportbundle
+        method: POST
+        description: YugabyteDB Anywhere Create Support Bundle for Specific Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-support_bundle-estimate_size
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/estimate_size
+      operations:
+      - name: estimatesupportbundlesize
+        method: POST
+        description: YugabyteDB Anywhere Estimate Support Bundle Size for Specific Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-support_bundle-sbUUID
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/{sbUUID}
+      operations:
+      - name: deletesupportbundle
+        method: DELETE
+        description: YugabyteDB Anywhere Delete a Support Bundle
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: sbUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: getsupportbundle
+        method: GET
+        description: YugabyteDB Anywhere Get a Support Bundle from a Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: sbUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-support_bundle-sbUUID-download
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/{sbUUID}/download
+      operations:
+      - name: downloadsupportbundle
+        method: GET
+        description: YugabyteDB Anywhere Download Support Bundle
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: sbUUID
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-releases-maintenance-support-bundle-management-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Releases and Maintenance — Support Bundle management. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/support-bundle/components
+      name: api-v1-customers-cuuid-support-bundle-components
+      description: REST surface for api-v1-customers-cUUID-support_bundle-components.
+      operations:
+      - method: GET
+        name: listsupportbundlecomponents
+        description: YugabyteDB Anywhere List All Components Available in Support Bundle
+        call: anywhere-v1-releases-maintenance-support-bundle-management.listsupportbundlecomponents
+        with:
+          cUUID: rest.cUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/support-bundle
+      name: api-v1-customers-cuuid-universes-uniuuid-support-bundle
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-support_bundle.
+      operations:
+      - method: GET
+        name: listsupportbundle
+        description: YugabyteDB Anywhere List All Support Bundles from a Universe
+        call: anywhere-v1-releases-maintenance-support-bundle-management.listsupportbundle
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createsupportbundle
+        description: YugabyteDB Anywhere Create Support Bundle for Specific Universe
+        call: anywhere-v1-releases-maintenance-support-bundle-management.createsupportbundle
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/support-bundle/estimate-size
+      name: api-v1-customers-cuuid-universes-uniuuid-support-bundle-estimate-size
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-support_bundle-estimate_size.
+      operations:
+      - method: POST
+        name: estimatesupportbundlesize
+        description: YugabyteDB Anywhere Estimate Support Bundle Size for Specific Universe
+        call: anywhere-v1-releases-maintenance-support-bundle-management.estimatesupportbundlesize
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/support-bundle/{sbuuid}
+      name: api-v1-customers-cuuid-universes-uniuuid-support-bundle-sbuuid
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-support_bundle-sbUUID.
+      operations:
+      - method: DELETE
+        name: deletesupportbundle
+        description: YugabyteDB Anywhere Delete a Support Bundle
+        call: anywhere-v1-releases-maintenance-support-bundle-management.deletesupportbundle
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          sbUUID: rest.sbUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getsupportbundle
+        description: YugabyteDB Anywhere Get a Support Bundle from a Universe
+        call: anywhere-v1-releases-maintenance-support-bundle-management.getsupportbundle
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          sbUUID: rest.sbUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/support-bundle/{sbuuid}/download
+      name: api-v1-customers-cuuid-universes-uniuuid-support-bundle-sbuuid-download
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-support_bundle-sbUUID-download.
+      operations:
+      - method: GET
+        name: downloadsupportbundle
+        description: YugabyteDB Anywhere Download Support Bundle
+        call: anywhere-v1-releases-maintenance-support-bundle-management.downloadsupportbundle
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          sbUUID: rest.sbUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-releases-maintenance-support-bundle-management-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Releases and Maintenance — Support Bundle management. One tool per
+      consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-list-all-components
+      description: YugabyteDB Anywhere List All Components Available in Support Bundle
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-releases-maintenance-support-bundle-management.listsupportbundlecomponents
+      with:
+        cUUID: tools.cUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-all-support
+      description: YugabyteDB Anywhere List All Support Bundles from a Universe
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-releases-maintenance-support-bundle-management.listsupportbundle
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-support-bundle
+      description: YugabyteDB Anywhere Create Support Bundle for Specific Universe
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-releases-maintenance-support-bundle-management.createsupportbundle
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-estimate-support-bundle
+      description: YugabyteDB Anywhere Estimate Support Bundle Size for Specific Universe
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-releases-maintenance-support-bundle-management.estimatesupportbundlesize
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-support-bundle
+      description: YugabyteDB Anywhere Delete a Support Bundle
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-releases-maintenance-support-bundle-management.deletesupportbundle
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        sbUUID: tools.sbUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-support-bundle
+      description: YugabyteDB Anywhere Get a Support Bundle from a Universe
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-releases-maintenance-support-bundle-management.getsupportbundle
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        sbUUID: tools.sbUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-download-support-bundle
+      description: YugabyteDB Anywhere Download Support Bundle
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-releases-maintenance-support-bundle-management.downloadsupportbundle
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        sbUUID: tools.sbUUID
+      outputParameters:
+      - type: object
+        mapping: $.

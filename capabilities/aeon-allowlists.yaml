@@ -1,0 +1,162 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Aeon REST API — AllowLists
+  description: 'YugabyteDB Aeon REST API — AllowLists. 4 operations. Lead operation: YugabyteDB Aeon List Allow Lists. Self-contained
+    Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - AllowLists
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: aeon-allowlists
+    baseUri: https://cloud.yugabyte.com/api/public/v1
+    description: YugabyteDB Aeon REST API — AllowLists business capability. Self-contained, no shared references.
+    resources:
+    - name: accounts-accountId-projects-projectId-allow-lists
+      path: /accounts/{accountId}/projects/{projectId}/allow-lists
+      operations:
+      - name: listallowlists
+        method: GET
+        description: YugabyteDB Aeon List Allow Lists
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createallowlist
+        method: POST
+        description: YugabyteDB Aeon Create Allow List
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: accounts-accountId-projects-projectId-allow-lists-allowListId
+      path: /accounts/{accountId}/projects/{projectId}/allow-lists/{allowListId}
+      operations:
+      - name: getallowlist
+        method: GET
+        description: YugabyteDB Aeon Get Allow List
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteallowlist
+        method: DELETE
+        description: YugabyteDB Aeon Delete Allow List
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.YUGABYTEDB_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: aeon-allowlists-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Aeon REST API — AllowLists. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/accounts/{accountid}/projects/{projectid}/allow-lists
+      name: accounts-accountid-projects-projectid-allow-lists
+      description: REST surface for accounts-accountId-projects-projectId-allow-lists.
+      operations:
+      - method: GET
+        name: listallowlists
+        description: YugabyteDB Aeon List Allow Lists
+        call: aeon-allowlists.listallowlists
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createallowlist
+        description: YugabyteDB Aeon Create Allow List
+        call: aeon-allowlists.createallowlist
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts/{accountid}/projects/{projectid}/allow-lists/{allowlistid}
+      name: accounts-accountid-projects-projectid-allow-lists-allowlistid
+      description: REST surface for accounts-accountId-projects-projectId-allow-lists-allowListId.
+      operations:
+      - method: GET
+        name: getallowlist
+        description: YugabyteDB Aeon Get Allow List
+        call: aeon-allowlists.getallowlist
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteallowlist
+        description: YugabyteDB Aeon Delete Allow List
+        call: aeon-allowlists.deleteallowlist
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: aeon-allowlists-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Aeon REST API — AllowLists. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: yugabytedb-aeon-list-allow-lists
+      description: YugabyteDB Aeon List Allow Lists
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aeon-allowlists.listallowlists
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-aeon-create-allow-list
+      description: YugabyteDB Aeon Create Allow List
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: aeon-allowlists.createallowlist
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-aeon-get-allow-list
+      description: YugabyteDB Aeon Get Allow List
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aeon-allowlists.getallowlist
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-aeon-delete-allow-list
+      description: YugabyteDB Aeon Delete Allow List
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: aeon-allowlists.deleteallowlist
+      outputParameters:
+      - type: object
+        mapping: $.

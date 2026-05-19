@@ -1,0 +1,105 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Aeon REST API — Backups
+  description: 'YugabyteDB Aeon REST API — Backups. 2 operations. Lead operation: YugabyteDB Aeon List Backups. Self-contained
+    Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Backups
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: aeon-backups
+    baseUri: https://cloud.yugabyte.com/api/public/v1
+    description: YugabyteDB Aeon REST API — Backups business capability. Self-contained, no shared references.
+    resources:
+    - name: accounts-accountId-projects-projectId-clusters-clusterId-backups
+      path: /accounts/{accountId}/projects/{projectId}/clusters/{clusterId}/backups
+      operations:
+      - name: listbackups
+        method: GET
+        description: YugabyteDB Aeon List Backups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createbackup
+        method: POST
+        description: YugabyteDB Aeon Create On-demand Backup
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.YUGABYTEDB_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: aeon-backups-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Aeon REST API — Backups. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/accounts/{accountid}/projects/{projectid}/clusters/{clusterid}/backups
+      name: accounts-accountid-projects-projectid-clusters-clusterid-backups
+      description: REST surface for accounts-accountId-projects-projectId-clusters-clusterId-backups.
+      operations:
+      - method: GET
+        name: listbackups
+        description: YugabyteDB Aeon List Backups
+        call: aeon-backups.listbackups
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createbackup
+        description: YugabyteDB Aeon Create On-demand Backup
+        call: aeon-backups.createbackup
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: aeon-backups-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Aeon REST API — Backups. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: yugabytedb-aeon-list-backups
+      description: YugabyteDB Aeon List Backups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aeon-backups.listbackups
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-aeon-create-demand-backup
+      description: YugabyteDB Aeon Create On-demand Backup
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: aeon-backups.createbackup
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

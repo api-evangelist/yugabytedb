@@ -1,0 +1,343 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Releases and Maintenance — Release management
+  description: 'YugabyteDB Anywhere v1 — Releases and Maintenance — Release management. 6 operations. Lead operation: YugabyteDB
+    Anywhere List Releases by Provider - Deprecated. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Release management
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-releases-maintenance-release-management
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Releases and Maintenance — Release management business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-providers-pUUID-releases
+      path: /api/v1/customers/{cUUID}/providers/{pUUID}/releases
+      operations:
+      - name: getlistofregionreleases
+        method: GET
+        description: YugabyteDB Anywhere List Releases by Provider - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: includeMetadata
+          in: query
+          type: boolean
+    - name: api-v1-customers-cUUID-releases
+      path: /api/v1/customers/{cUUID}/releases
+      operations:
+      - name: getlistofreleases
+        method: GET
+        description: 'YugabyteDB Anywhere Deprecated: SinceVersion: 2024.1. Use ReleasesController.list Instead. List All
+          Releases'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: includeMetadata
+          in: query
+          type: boolean
+        - name: arch
+          in: query
+          type: string
+      - name: createrelease
+        method: POST
+        description: 'YugabyteDB Anywhere Deprecated: SinceVersion 2024.1. Use ReleasesController.create Instead. Create a
+          Release'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: refresh
+        method: PUT
+        description: YugabyteDB Anywhere Refresh a Release
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-releases-name
+      path: /api/v1/customers/{cUUID}/releases/{name}
+      operations:
+      - name: deleterelease
+        method: DELETE
+        description: 'YugabyteDB Anywhere Deprecated: SinceVersion: 2024.1. Use ReleasesController.delete Instead. Delete
+          a Release'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: updaterelease
+        method: PUT
+        description: 'YugabyteDB Anywhere Deprecated: SinceVersion: 2024.1. Use ReleasesController.update Instead. Update
+          a Release'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-releases-maintenance-release-management-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Releases and Maintenance — Release management. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/providers/{puuid}/releases
+      name: api-v1-customers-cuuid-providers-puuid-releases
+      description: REST surface for api-v1-customers-cUUID-providers-pUUID-releases.
+      operations:
+      - method: GET
+        name: getlistofregionreleases
+        description: YugabyteDB Anywhere List Releases by Provider - Deprecated
+        call: anywhere-v1-releases-maintenance-release-management.getlistofregionreleases
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          includeMetadata: rest.includeMetadata
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/releases
+      name: api-v1-customers-cuuid-releases
+      description: REST surface for api-v1-customers-cUUID-releases.
+      operations:
+      - method: GET
+        name: getlistofreleases
+        description: 'YugabyteDB Anywhere Deprecated: SinceVersion: 2024.1. Use ReleasesController.list Instead. List All
+          Releases'
+        call: anywhere-v1-releases-maintenance-release-management.getlistofreleases
+        with:
+          cUUID: rest.cUUID
+          includeMetadata: rest.includeMetadata
+          arch: rest.arch
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createrelease
+        description: 'YugabyteDB Anywhere Deprecated: SinceVersion 2024.1. Use ReleasesController.create Instead. Create a
+          Release'
+        call: anywhere-v1-releases-maintenance-release-management.createrelease
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: refresh
+        description: YugabyteDB Anywhere Refresh a Release
+        call: anywhere-v1-releases-maintenance-release-management.refresh
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/releases/{name}
+      name: api-v1-customers-cuuid-releases-name
+      description: REST surface for api-v1-customers-cUUID-releases-name.
+      operations:
+      - method: DELETE
+        name: deleterelease
+        description: 'YugabyteDB Anywhere Deprecated: SinceVersion: 2024.1. Use ReleasesController.delete Instead. Delete
+          a Release'
+        call: anywhere-v1-releases-maintenance-release-management.deleterelease
+        with:
+          cUUID: rest.cUUID
+          name: rest.name
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updaterelease
+        description: 'YugabyteDB Anywhere Deprecated: SinceVersion: 2024.1. Use ReleasesController.update Instead. Update
+          a Release'
+        call: anywhere-v1-releases-maintenance-release-management.updaterelease
+        with:
+          cUUID: rest.cUUID
+          name: rest.name
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-releases-maintenance-release-management-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Releases and Maintenance — Release management. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-list-releases-provider
+      description: YugabyteDB Anywhere List Releases by Provider - Deprecated
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-releases-maintenance-release-management.getlistofregionreleases
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        includeMetadata: tools.includeMetadata
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-deprecated-sinceversion-2024-1
+      description: 'YugabyteDB Anywhere Deprecated: SinceVersion: 2024.1. Use ReleasesController.list Instead. List All Releases'
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-releases-maintenance-release-management.getlistofreleases
+      with:
+        cUUID: tools.cUUID
+        includeMetadata: tools.includeMetadata
+        arch: tools.arch
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-deprecated-sinceversion-2024-1-2
+      description: 'YugabyteDB Anywhere Deprecated: SinceVersion 2024.1. Use ReleasesController.create Instead. Create a Release'
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-releases-maintenance-release-management.createrelease
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-refresh-release
+      description: YugabyteDB Anywhere Refresh a Release
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-releases-maintenance-release-management.refresh
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-deprecated-sinceversion-2024-1-3
+      description: 'YugabyteDB Anywhere Deprecated: SinceVersion: 2024.1. Use ReleasesController.delete Instead. Delete a
+        Release'
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-releases-maintenance-release-management.deleterelease
+      with:
+        cUUID: tools.cUUID
+        name: tools.name
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-deprecated-sinceversion-2024-1-4
+      description: 'YugabyteDB Anywhere Deprecated: SinceVersion: 2024.1. Use ReleasesController.update Instead. Update a
+        Release'
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-releases-maintenance-release-management.updaterelease
+      with:
+        cUUID: tools.cUUID
+        name: tools.name
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

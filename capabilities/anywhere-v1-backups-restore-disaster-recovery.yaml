@@ -1,0 +1,922 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Backups, Restores, and Replication — Disaster Recovery
+  description: 'YugabyteDB Anywhere v1 — Backups, Restores, and Replication — Disaster Recovery. 16 operations. Lead operation:
+    YugabyteDB Anywhere Create Disaster Recovery Config. Self-contained Naftiko capability covering one Yugabytedb business
+    surface.'
+  tags:
+  - Yugabytedb
+  - Disaster Recovery
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-backups-restore-disaster-recovery
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Backups, Restores, and Replication — Disaster Recovery business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-dr_configs
+      path: /api/v1/customers/{cUUID}/dr_configs
+      operations:
+      - name: createdrconfig
+        method: POST
+        description: YugabyteDB Anywhere Create Disaster Recovery Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-dr_configs-drUUID
+      path: /api/v1/customers/{cUUID}/dr_configs/{drUUID}
+      operations:
+      - name: deletexclusterconfig
+        method: DELETE
+        description: YugabyteDB Anywhere Delete Xcluster Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: drUUID
+          in: path
+          type: string
+          required: true
+        - name: isForceDelete
+          in: query
+          type: boolean
+        - name: request
+          in: query
+          type: string
+      - name: getdrconfig
+        method: GET
+        description: YugabyteDB Anywhere Get Disaster Recovery Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: drUUID
+          in: path
+          type: string
+          required: true
+        - name: syncWithDB
+          in: query
+          type: boolean
+    - name: api-v1-customers-cUUID-dr_configs-drUUID-edit
+      path: /api/v1/customers/{cUUID}/dr_configs/{drUUID}/edit
+      operations:
+      - name: editdrconfig
+        method: POST
+        description: YugabyteDB Anywhere Edit Disaster Recovery Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: drUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-dr_configs-drUUID-failover
+      path: /api/v1/customers/{cUUID}/dr_configs/{drUUID}/failover
+      operations:
+      - name: failoverdrconfig
+        method: POST
+        description: YugabyteDB Anywhere Failover a Disaster Recovery Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: drUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-dr_configs-drUUID-pause
+      path: /api/v1/customers/{cUUID}/dr_configs/{drUUID}/pause
+      operations:
+      - name: pausedrconfig
+        method: POST
+        description: YugabyteDB Anywhere Pause DR Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: drUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-dr_configs-drUUID-pause_universes
+      path: /api/v1/customers/{cUUID}/dr_configs/{drUUID}/pause_universes
+      operations:
+      - name: pausedruniverses
+        method: POST
+        description: YugabyteDB Anywhere Pause DR Config and Universes Associated with DR
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: drUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-dr_configs-drUUID-replace_replica
+      path: /api/v1/customers/{cUUID}/dr_configs/{drUUID}/replace_replica
+      operations:
+      - name: replacereplicadrconfig
+        method: POST
+        description: YugabyteDB Anywhere Replace Replica in a Disaster Recovery Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: drUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-dr_configs-drUUID-restart
+      path: /api/v1/customers/{cUUID}/dr_configs/{drUUID}/restart
+      operations:
+      - name: restartdrconfig
+        method: POST
+        description: YugabyteDB Anywhere Restart Disaster Recovery Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: drUUID
+          in: path
+          type: string
+          required: true
+        - name: isForceDelete
+          in: query
+          type: boolean
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-dr_configs-drUUID-resume
+      path: /api/v1/customers/{cUUID}/dr_configs/{drUUID}/resume
+      operations:
+      - name: resumedrconfig
+        method: POST
+        description: YugabyteDB Anywhere Resume DR Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: drUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-dr_configs-drUUID-resume_universes
+      path: /api/v1/customers/{cUUID}/dr_configs/{drUUID}/resume_universes
+      operations:
+      - name: resumedruniverses
+        method: POST
+        description: YugabyteDB Anywhere Resume DR Config and Universes Associated with DR
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: drUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-dr_configs-drUUID-safetime
+      path: /api/v1/customers/{cUUID}/dr_configs/{drUUID}/safetime
+      operations:
+      - name: getdrconfigsafetime
+        method: GET
+        description: YugabyteDB Anywhere Get Disaster Recovery Config Safetime
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: drUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-dr_configs-drUUID-set_dbs
+      path: /api/v1/customers/{cUUID}/dr_configs/{drUUID}/set_dbs
+      operations:
+      - name: setdatabasesdrconfig
+        method: PUT
+        description: YugabyteDB Anywhere Set Databases in Disaster Recovery Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: drUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-dr_configs-drUUID-set_tables
+      path: /api/v1/customers/{cUUID}/dr_configs/{drUUID}/set_tables
+      operations:
+      - name: settablesdrconfig
+        method: POST
+        description: YugabyteDB Anywhere Set Tables in Disaster Recovery Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: drUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-dr_configs-drUUID-switchover
+      path: /api/v1/customers/{cUUID}/dr_configs/{drUUID}/switchover
+      operations:
+      - name: switchoverdrconfig
+        method: POST
+        description: YugabyteDB Anywhere Switchover a Disaster Recovery Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: drUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-dr_configs-drUUID-sync
+      path: /api/v1/customers/{cUUID}/dr_configs/{drUUID}/sync
+      operations:
+      - name: syncdrconfig
+        method: POST
+        description: YugabyteDB Anywhere Sync Disaster Recovery Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: drUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-backups-restore-disaster-recovery-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Backups, Restores, and Replication — Disaster Recovery. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/dr-configs
+      name: api-v1-customers-cuuid-dr-configs
+      description: REST surface for api-v1-customers-cUUID-dr_configs.
+      operations:
+      - method: POST
+        name: createdrconfig
+        description: YugabyteDB Anywhere Create Disaster Recovery Config
+        call: anywhere-v1-backups-restore-disaster-recovery.createdrconfig
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/dr-configs/{druuid}
+      name: api-v1-customers-cuuid-dr-configs-druuid
+      description: REST surface for api-v1-customers-cUUID-dr_configs-drUUID.
+      operations:
+      - method: DELETE
+        name: deletexclusterconfig
+        description: YugabyteDB Anywhere Delete Xcluster Config
+        call: anywhere-v1-backups-restore-disaster-recovery.deletexclusterconfig
+        with:
+          cUUID: rest.cUUID
+          drUUID: rest.drUUID
+          isForceDelete: rest.isForceDelete
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getdrconfig
+        description: YugabyteDB Anywhere Get Disaster Recovery Config
+        call: anywhere-v1-backups-restore-disaster-recovery.getdrconfig
+        with:
+          cUUID: rest.cUUID
+          drUUID: rest.drUUID
+          syncWithDB: rest.syncWithDB
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/dr-configs/{druuid}/edit
+      name: api-v1-customers-cuuid-dr-configs-druuid-edit
+      description: REST surface for api-v1-customers-cUUID-dr_configs-drUUID-edit.
+      operations:
+      - method: POST
+        name: editdrconfig
+        description: YugabyteDB Anywhere Edit Disaster Recovery Config
+        call: anywhere-v1-backups-restore-disaster-recovery.editdrconfig
+        with:
+          cUUID: rest.cUUID
+          drUUID: rest.drUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/dr-configs/{druuid}/failover
+      name: api-v1-customers-cuuid-dr-configs-druuid-failover
+      description: REST surface for api-v1-customers-cUUID-dr_configs-drUUID-failover.
+      operations:
+      - method: POST
+        name: failoverdrconfig
+        description: YugabyteDB Anywhere Failover a Disaster Recovery Config
+        call: anywhere-v1-backups-restore-disaster-recovery.failoverdrconfig
+        with:
+          cUUID: rest.cUUID
+          drUUID: rest.drUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/dr-configs/{druuid}/pause
+      name: api-v1-customers-cuuid-dr-configs-druuid-pause
+      description: REST surface for api-v1-customers-cUUID-dr_configs-drUUID-pause.
+      operations:
+      - method: POST
+        name: pausedrconfig
+        description: YugabyteDB Anywhere Pause DR Config
+        call: anywhere-v1-backups-restore-disaster-recovery.pausedrconfig
+        with:
+          cUUID: rest.cUUID
+          drUUID: rest.drUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/dr-configs/{druuid}/pause-universes
+      name: api-v1-customers-cuuid-dr-configs-druuid-pause-universes
+      description: REST surface for api-v1-customers-cUUID-dr_configs-drUUID-pause_universes.
+      operations:
+      - method: POST
+        name: pausedruniverses
+        description: YugabyteDB Anywhere Pause DR Config and Universes Associated with DR
+        call: anywhere-v1-backups-restore-disaster-recovery.pausedruniverses
+        with:
+          cUUID: rest.cUUID
+          drUUID: rest.drUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/dr-configs/{druuid}/replace-replica
+      name: api-v1-customers-cuuid-dr-configs-druuid-replace-replica
+      description: REST surface for api-v1-customers-cUUID-dr_configs-drUUID-replace_replica.
+      operations:
+      - method: POST
+        name: replacereplicadrconfig
+        description: YugabyteDB Anywhere Replace Replica in a Disaster Recovery Config
+        call: anywhere-v1-backups-restore-disaster-recovery.replacereplicadrconfig
+        with:
+          cUUID: rest.cUUID
+          drUUID: rest.drUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/dr-configs/{druuid}/restart
+      name: api-v1-customers-cuuid-dr-configs-druuid-restart
+      description: REST surface for api-v1-customers-cUUID-dr_configs-drUUID-restart.
+      operations:
+      - method: POST
+        name: restartdrconfig
+        description: YugabyteDB Anywhere Restart Disaster Recovery Config
+        call: anywhere-v1-backups-restore-disaster-recovery.restartdrconfig
+        with:
+          cUUID: rest.cUUID
+          drUUID: rest.drUUID
+          isForceDelete: rest.isForceDelete
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/dr-configs/{druuid}/resume
+      name: api-v1-customers-cuuid-dr-configs-druuid-resume
+      description: REST surface for api-v1-customers-cUUID-dr_configs-drUUID-resume.
+      operations:
+      - method: POST
+        name: resumedrconfig
+        description: YugabyteDB Anywhere Resume DR Config
+        call: anywhere-v1-backups-restore-disaster-recovery.resumedrconfig
+        with:
+          cUUID: rest.cUUID
+          drUUID: rest.drUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/dr-configs/{druuid}/resume-universes
+      name: api-v1-customers-cuuid-dr-configs-druuid-resume-universes
+      description: REST surface for api-v1-customers-cUUID-dr_configs-drUUID-resume_universes.
+      operations:
+      - method: POST
+        name: resumedruniverses
+        description: YugabyteDB Anywhere Resume DR Config and Universes Associated with DR
+        call: anywhere-v1-backups-restore-disaster-recovery.resumedruniverses
+        with:
+          cUUID: rest.cUUID
+          drUUID: rest.drUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/dr-configs/{druuid}/safetime
+      name: api-v1-customers-cuuid-dr-configs-druuid-safetime
+      description: REST surface for api-v1-customers-cUUID-dr_configs-drUUID-safetime.
+      operations:
+      - method: GET
+        name: getdrconfigsafetime
+        description: YugabyteDB Anywhere Get Disaster Recovery Config Safetime
+        call: anywhere-v1-backups-restore-disaster-recovery.getdrconfigsafetime
+        with:
+          cUUID: rest.cUUID
+          drUUID: rest.drUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/dr-configs/{druuid}/set-dbs
+      name: api-v1-customers-cuuid-dr-configs-druuid-set-dbs
+      description: REST surface for api-v1-customers-cUUID-dr_configs-drUUID-set_dbs.
+      operations:
+      - method: PUT
+        name: setdatabasesdrconfig
+        description: YugabyteDB Anywhere Set Databases in Disaster Recovery Config
+        call: anywhere-v1-backups-restore-disaster-recovery.setdatabasesdrconfig
+        with:
+          cUUID: rest.cUUID
+          drUUID: rest.drUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/dr-configs/{druuid}/set-tables
+      name: api-v1-customers-cuuid-dr-configs-druuid-set-tables
+      description: REST surface for api-v1-customers-cUUID-dr_configs-drUUID-set_tables.
+      operations:
+      - method: POST
+        name: settablesdrconfig
+        description: YugabyteDB Anywhere Set Tables in Disaster Recovery Config
+        call: anywhere-v1-backups-restore-disaster-recovery.settablesdrconfig
+        with:
+          cUUID: rest.cUUID
+          drUUID: rest.drUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/dr-configs/{druuid}/switchover
+      name: api-v1-customers-cuuid-dr-configs-druuid-switchover
+      description: REST surface for api-v1-customers-cUUID-dr_configs-drUUID-switchover.
+      operations:
+      - method: POST
+        name: switchoverdrconfig
+        description: YugabyteDB Anywhere Switchover a Disaster Recovery Config
+        call: anywhere-v1-backups-restore-disaster-recovery.switchoverdrconfig
+        with:
+          cUUID: rest.cUUID
+          drUUID: rest.drUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/dr-configs/{druuid}/sync
+      name: api-v1-customers-cuuid-dr-configs-druuid-sync
+      description: REST surface for api-v1-customers-cUUID-dr_configs-drUUID-sync.
+      operations:
+      - method: POST
+        name: syncdrconfig
+        description: YugabyteDB Anywhere Sync Disaster Recovery Config
+        call: anywhere-v1-backups-restore-disaster-recovery.syncdrconfig
+        with:
+          cUUID: rest.cUUID
+          drUUID: rest.drUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-backups-restore-disaster-recovery-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Backups, Restores, and Replication — Disaster Recovery. One tool
+      per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-create-disaster-recovery
+      description: YugabyteDB Anywhere Create Disaster Recovery Config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-disaster-recovery.createdrconfig
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-xcluster-config
+      description: YugabyteDB Anywhere Delete Xcluster Config
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-backups-restore-disaster-recovery.deletexclusterconfig
+      with:
+        cUUID: tools.cUUID
+        drUUID: tools.drUUID
+        isForceDelete: tools.isForceDelete
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-disaster-recovery
+      description: YugabyteDB Anywhere Get Disaster Recovery Config
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-backups-restore-disaster-recovery.getdrconfig
+      with:
+        cUUID: tools.cUUID
+        drUUID: tools.drUUID
+        syncWithDB: tools.syncWithDB
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-edit-disaster-recovery
+      description: YugabyteDB Anywhere Edit Disaster Recovery Config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-disaster-recovery.editdrconfig
+      with:
+        cUUID: tools.cUUID
+        drUUID: tools.drUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-failover-disaster-recovery
+      description: YugabyteDB Anywhere Failover a Disaster Recovery Config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-disaster-recovery.failoverdrconfig
+      with:
+        cUUID: tools.cUUID
+        drUUID: tools.drUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-pause-dr-config
+      description: YugabyteDB Anywhere Pause DR Config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-disaster-recovery.pausedrconfig
+      with:
+        cUUID: tools.cUUID
+        drUUID: tools.drUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-pause-dr-config-2
+      description: YugabyteDB Anywhere Pause DR Config and Universes Associated with DR
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-disaster-recovery.pausedruniverses
+      with:
+        cUUID: tools.cUUID
+        drUUID: tools.drUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-replace-replica-disaster
+      description: YugabyteDB Anywhere Replace Replica in a Disaster Recovery Config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-disaster-recovery.replacereplicadrconfig
+      with:
+        cUUID: tools.cUUID
+        drUUID: tools.drUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-restart-disaster-recovery
+      description: YugabyteDB Anywhere Restart Disaster Recovery Config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-disaster-recovery.restartdrconfig
+      with:
+        cUUID: tools.cUUID
+        drUUID: tools.drUUID
+        isForceDelete: tools.isForceDelete
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-resume-dr-config
+      description: YugabyteDB Anywhere Resume DR Config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-disaster-recovery.resumedrconfig
+      with:
+        cUUID: tools.cUUID
+        drUUID: tools.drUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-resume-dr-config-2
+      description: YugabyteDB Anywhere Resume DR Config and Universes Associated with DR
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-disaster-recovery.resumedruniverses
+      with:
+        cUUID: tools.cUUID
+        drUUID: tools.drUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-disaster-recovery-2
+      description: YugabyteDB Anywhere Get Disaster Recovery Config Safetime
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-backups-restore-disaster-recovery.getdrconfigsafetime
+      with:
+        cUUID: tools.cUUID
+        drUUID: tools.drUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-set-databases-disaster
+      description: YugabyteDB Anywhere Set Databases in Disaster Recovery Config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-backups-restore-disaster-recovery.setdatabasesdrconfig
+      with:
+        cUUID: tools.cUUID
+        drUUID: tools.drUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-set-tables-disaster
+      description: YugabyteDB Anywhere Set Tables in Disaster Recovery Config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-disaster-recovery.settablesdrconfig
+      with:
+        cUUID: tools.cUUID
+        drUUID: tools.drUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-switchover-disaster-recovery
+      description: YugabyteDB Anywhere Switchover a Disaster Recovery Config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-disaster-recovery.switchoverdrconfig
+      with:
+        cUUID: tools.cUUID
+        drUUID: tools.drUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-sync-disaster-recovery
+      description: YugabyteDB Anywhere Sync Disaster Recovery Config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-disaster-recovery.syncdrconfig
+      with:
+        cUUID: tools.cUUID
+        drUUID: tools.drUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.

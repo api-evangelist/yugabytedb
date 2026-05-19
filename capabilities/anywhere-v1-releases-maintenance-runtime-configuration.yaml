@@ -1,0 +1,407 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Releases and Maintenance — Runtime configuration
+  description: 'YugabyteDB Anywhere v1 — Releases and Maintenance — Runtime configuration. 8 operations. Lead operation: YugabyteDB
+    Anywhere List Configuration Scopes. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Runtime configuration
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-releases-maintenance-runtime-configuration
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Releases and Maintenance — Runtime configuration business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-runtime_config-scopes
+      path: /api/v1/customers/{cUUID}/runtime_config/scopes
+      operations:
+      - name: listscopes
+        method: GET
+        description: YugabyteDB Anywhere List Configuration Scopes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-runtime_config-scope
+      path: /api/v1/customers/{cUUID}/runtime_config/{scope}
+      operations:
+      - name: getconfig
+        method: GET
+        description: YugabyteDB Anywhere List Configuration Entries for a Scope
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: scope
+          in: path
+          type: string
+          required: true
+        - name: includeInherited
+          in: query
+          type: boolean
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-runtime_config-scope-key-key
+      path: /api/v1/customers/{cUUID}/runtime_config/{scope}/key/{key}
+      operations:
+      - name: deletekey
+        method: DELETE
+        description: YugabyteDB Anywhere Delete a Configuration Key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: scope
+          in: path
+          type: string
+          required: true
+        - name: key
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: getconfigurationkey
+        method: GET
+        description: YugabyteDB Anywhere Get a Configuration Key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: scope
+          in: path
+          type: string
+          required: true
+        - name: key
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: setkey
+        method: PUT
+        description: YugabyteDB Anywhere Update a Configuration Key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: scope
+          in: path
+          type: string
+          required: true
+        - name: key
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-runtime_config-feature_flags
+      path: /api/v1/runtime_config/feature_flags
+      operations:
+      - name: listfeatureflags
+        method: GET
+        description: YugabyteDB Anywhere List All the Feature Flag Runtime Config Keys and Their Values.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-v1-runtime_config-mutable_key_info
+      path: /api/v1/runtime_config/mutable_key_info
+      operations:
+      - name: listkeyinfo
+        method: GET
+        description: YugabyteDB Anywhere List Mutable Keys
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-v1-runtime_config-mutable_keys
+      path: /api/v1/runtime_config/mutable_keys
+      operations:
+      - name: listkeys
+        method: GET
+        description: YugabyteDB Anywhere List Mutable Keys
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-releases-maintenance-runtime-configuration-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Releases and Maintenance — Runtime configuration. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/runtime-config/scopes
+      name: api-v1-customers-cuuid-runtime-config-scopes
+      description: REST surface for api-v1-customers-cUUID-runtime_config-scopes.
+      operations:
+      - method: GET
+        name: listscopes
+        description: YugabyteDB Anywhere List Configuration Scopes
+        call: anywhere-v1-releases-maintenance-runtime-configuration.listscopes
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/runtime-config/{scope}
+      name: api-v1-customers-cuuid-runtime-config-scope
+      description: REST surface for api-v1-customers-cUUID-runtime_config-scope.
+      operations:
+      - method: GET
+        name: getconfig
+        description: YugabyteDB Anywhere List Configuration Entries for a Scope
+        call: anywhere-v1-releases-maintenance-runtime-configuration.getconfig
+        with:
+          cUUID: rest.cUUID
+          scope: rest.scope
+          includeInherited: rest.includeInherited
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/runtime-config/{scope}/key/{key}
+      name: api-v1-customers-cuuid-runtime-config-scope-key-key
+      description: REST surface for api-v1-customers-cUUID-runtime_config-scope-key-key.
+      operations:
+      - method: DELETE
+        name: deletekey
+        description: YugabyteDB Anywhere Delete a Configuration Key
+        call: anywhere-v1-releases-maintenance-runtime-configuration.deletekey
+        with:
+          cUUID: rest.cUUID
+          scope: rest.scope
+          key: rest.key
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getconfigurationkey
+        description: YugabyteDB Anywhere Get a Configuration Key
+        call: anywhere-v1-releases-maintenance-runtime-configuration.getconfigurationkey
+        with:
+          cUUID: rest.cUUID
+          scope: rest.scope
+          key: rest.key
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: setkey
+        description: YugabyteDB Anywhere Update a Configuration Key
+        call: anywhere-v1-releases-maintenance-runtime-configuration.setkey
+        with:
+          cUUID: rest.cUUID
+          scope: rest.scope
+          key: rest.key
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/runtime-config/feature-flags
+      name: api-v1-runtime-config-feature-flags
+      description: REST surface for api-v1-runtime_config-feature_flags.
+      operations:
+      - method: GET
+        name: listfeatureflags
+        description: YugabyteDB Anywhere List All the Feature Flag Runtime Config Keys and Their Values.
+        call: anywhere-v1-releases-maintenance-runtime-configuration.listfeatureflags
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/runtime-config/mutable-key-info
+      name: api-v1-runtime-config-mutable-key-info
+      description: REST surface for api-v1-runtime_config-mutable_key_info.
+      operations:
+      - method: GET
+        name: listkeyinfo
+        description: YugabyteDB Anywhere List Mutable Keys
+        call: anywhere-v1-releases-maintenance-runtime-configuration.listkeyinfo
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/runtime-config/mutable-keys
+      name: api-v1-runtime-config-mutable-keys
+      description: REST surface for api-v1-runtime_config-mutable_keys.
+      operations:
+      - method: GET
+        name: listkeys
+        description: YugabyteDB Anywhere List Mutable Keys
+        call: anywhere-v1-releases-maintenance-runtime-configuration.listkeys
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-releases-maintenance-runtime-configuration-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Releases and Maintenance — Runtime configuration. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-list-configuration-scopes
+      description: YugabyteDB Anywhere List Configuration Scopes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-releases-maintenance-runtime-configuration.listscopes
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-configuration-entries
+      description: YugabyteDB Anywhere List Configuration Entries for a Scope
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-releases-maintenance-runtime-configuration.getconfig
+      with:
+        cUUID: tools.cUUID
+        scope: tools.scope
+        includeInherited: tools.includeInherited
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-configuration-key
+      description: YugabyteDB Anywhere Delete a Configuration Key
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-releases-maintenance-runtime-configuration.deletekey
+      with:
+        cUUID: tools.cUUID
+        scope: tools.scope
+        key: tools.key
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-configuration-key
+      description: YugabyteDB Anywhere Get a Configuration Key
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-releases-maintenance-runtime-configuration.getconfigurationkey
+      with:
+        cUUID: tools.cUUID
+        scope: tools.scope
+        key: tools.key
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-update-configuration-key
+      description: YugabyteDB Anywhere Update a Configuration Key
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-releases-maintenance-runtime-configuration.setkey
+      with:
+        cUUID: tools.cUUID
+        scope: tools.scope
+        key: tools.key
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-all-feature
+      description: YugabyteDB Anywhere List All the Feature Flag Runtime Config Keys and Their Values.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-releases-maintenance-runtime-configuration.listfeatureflags
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-mutable-keys
+      description: YugabyteDB Anywhere List Mutable Keys
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-releases-maintenance-runtime-configuration.listkeyinfo
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-mutable-keys-2
+      description: YugabyteDB Anywhere List Mutable Keys
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-releases-maintenance-runtime-configuration.listkeys
+      outputParameters:
+      - type: object
+        mapping: $.

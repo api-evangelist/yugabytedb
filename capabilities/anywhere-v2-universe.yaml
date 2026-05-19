@@ -1,0 +1,1953 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere V2 APIs — Universe
+  description: 'YugabyteDB Anywhere V2 APIs — Universe. 35 operations. Lead operation: YugabyteDB Anywhere Get Resource Utilisation
+    of a YugabyteDB Universe. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Universe
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v2-universe
+    baseUri: ''
+    description: YugabyteDB Anywhere V2 APIs — Universe business capability. Self-contained, no shared references.
+    resources:
+    - name: customers-cUUID-fetch-universe-resources
+      path: /customers/{cUUID}/fetch-universe-resources
+      operations:
+      - name: getuniverseresources
+        method: POST
+        description: YugabyteDB Anywhere Get Resource Utilisation of a YugabyteDB Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-universes
+      path: /customers/{cUUID}/universes
+      operations:
+      - name: createuniverse
+        method: POST
+        description: YugabyteDB Anywhere Create a YugabyteDB Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-universes-page
+      path: /customers/{cUUID}/universes/page
+      operations:
+      - name: pagelistuniverses
+        method: POST
+        description: YugabyteDB Anywhere List Universes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-universes-uniUUID
+      path: /customers/{cUUID}/universes/{uniUUID}
+      operations:
+      - name: deleteuniverse
+        method: DELETE
+        description: YugabyteDB Anywhere Delete a Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: getuniverse
+        method: GET
+        description: YugabyteDB Anywhere Get a YugabyteDB Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+      - name: edituniverse
+        method: PUT
+        description: YugabyteDB Anywhere Edit a YugabyteDB Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-universes-uniUUID-attach
+      path: /customers/{cUUID}/universes/{uniUUID}/attach
+      operations:
+      - name: attachuniverse
+        method: POST
+        description: YugabyteDB Anywhere Attach Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-universes-uniUUID-attach-detach-metadata
+      path: /customers/{cUUID}/universes/{uniUUID}/attach-detach-metadata
+      operations:
+      - name: deleteattachdetachmetadata
+        method: DELETE
+        description: YugabyteDB Anywhere Delete Attach/detach Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+    - name: customers-cUUID-universes-uniUUID-clusters
+      path: /customers/{cUUID}/universes/{uniUUID}/clusters
+      operations:
+      - name: addcluster
+        method: POST
+        description: YugabyteDB Anywhere Add a Cluster to a YugabyteDB Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-universes-uniUUID-clusters-clsUUID
+      path: /customers/{cUUID}/universes/{uniUUID}/clusters/{clsUUID}
+      operations:
+      - name: deletecluster
+        method: DELETE
+        description: YugabyteDB Anywhere Delete an Additional Cluster(s) of a YugabyteDB Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: clsUUID
+          in: path
+          type: string
+          description: Cluster UUID
+          required: true
+        - name: isForceDelete
+          in: query
+          type: boolean
+          description: Whether to force delete the cluster
+    - name: customers-cUUID-universes-uniUUID-detach
+      path: /customers/{cUUID}/universes/{uniUUID}/detach
+      operations:
+      - name: rollbackdetachuniverse
+        method: DELETE
+        description: YugabyteDB Anywhere Rollback Detach Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: isForceRollback
+          in: query
+          type: boolean
+          description: Force rollback without checking current owner or detached state.
+      - name: detachuniverse
+        method: POST
+        description: YugabyteDB Anywhere Detach Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-universes-uniUUID-encryption-in-transit
+      path: /customers/{cUUID}/universes/{uniUUID}/encryption/in-transit
+      operations:
+      - name: encryptionintransittoggle
+        method: POST
+        description: YugabyteDB Anywhere Enable or Disable Encryption in Transit
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-universes-uniUUID-encryption-in-transit-rotate
+      path: /customers/{cUUID}/universes/{uniUUID}/encryption/in-transit/rotate
+      operations:
+      - name: encryptionintransitcertrotate
+        method: POST
+        description: YugabyteDB Anywhere Rotate TLS Certs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-universes-uniUUID-export-telemetry-configs
+      path: /customers/{cUUID}/universes/{uniUUID}/export-telemetry-configs
+      operations:
+      - name: configureexporttelemetryconfig
+        method: POST
+        description: YugabyteDB Anywhere Configure Export Telemetry Configs (unified API)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-universes-uniUUID-file-collections
+      path: /customers/{cUUID}/universes/{uniUUID}/file-collections
+      operations:
+      - name: createfilecollection
+        method: POST
+        description: YugabyteDB Anywhere Collect Files from Database Nodes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-universes-uniUUID-file-collections-collectionUUID
+      path: /customers/{cUUID}/universes/{uniUUID}/file-collections/{collectionUUID}
+      operations:
+      - name: deletefilecollection
+        method: DELETE
+        description: YugabyteDB Anywhere Delete Collected Files from Database Nodes And/or YBA
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: collectionUUID
+          in: path
+          type: string
+          description: Collection UUID returned by create file collection API
+          required: true
+        - name: delete_from_db_nodes
+          in: query
+          type: boolean
+          description: Whether to delete tar files from database nodes
+        - name: delete_from_yba
+          in: query
+          type: boolean
+          description: Whether to delete downloaded files from YBA local storage
+    - name: customers-cUUID-universes-uniUUID-file-collections-collectionUUID-download
+      path: /customers/{cUUID}/universes/{uniUUID}/file-collections/{collectionUUID}/download
+      operations:
+      - name: downloadfilecollection
+        method: GET
+        description: YugabyteDB Anywhere Download Collected Files
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: collectionUUID
+          in: path
+          type: string
+          description: Collection UUID returned by create file collection API
+          required: true
+        - name: cleanup_db_nodes_after
+          in: query
+          type: boolean
+          description: If true, automatically delete the collected files from DB nodes after successful download.
+    - name: customers-cUUID-universes-uniUUID-gflags
+      path: /customers/{cUUID}/universes/{uniUUID}/gflags
+      operations:
+      - name: editgflags
+        method: POST
+        description: YugabyteDB Anywhere Edit GFlags
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-universes-uniUUID-kubernetes-overrides
+      path: /customers/{cUUID}/universes/{uniUUID}/kubernetes-overrides
+      operations:
+      - name: editkubernetesoverrides
+        method: POST
+        description: YugabyteDB Anywhere Edit Kubernetes Helm Overrides
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-universes-uniUUID-metrics-export-config
+      path: /customers/{cUUID}/universes/{uniUUID}/metrics-export-config
+      operations:
+      - name: configuremetricsexport
+        method: POST
+        description: YugabyteDB Anywhere Configure Metrics Export
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-universes-uniUUID-operator-import
+      path: /customers/{cUUID}/universes/{uniUUID}/operator-import
+      operations:
+      - name: operatorimportuniverse
+        method: POST
+        description: YugabyteDB Anywhere Import Universe to Operator
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-universes-uniUUID-operator-import-precheck
+      path: /customers/{cUUID}/universes/{uniUUID}/operator-import/precheck
+      operations:
+      - name: operatorimportuniverseprecheck
+        method: POST
+        description: YugabyteDB Anywhere Precheck Universe Import to Operator
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-universes-uniUUID-query-log-config
+      path: /customers/{cUUID}/universes/{uniUUID}/query-log-config
+      operations:
+      - name: configurequerylogging
+        method: POST
+        description: YugabyteDB Anywhere Configure Query Log for YugabyteDB Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-universes-uniUUID-resize-nodes
+      path: /customers/{cUUID}/universes/{uniUUID}/resize-nodes
+      operations:
+      - name: resizenodes
+        method: POST
+        description: YugabyteDB Anywhere Resize Nodes in YBDB Universe.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-universes-uniUUID-restart
+      path: /customers/{cUUID}/universes/{uniUUID}/restart
+      operations:
+      - name: restartuniverse
+        method: POST
+        description: YugabyteDB Anywhere Restart a YugabyteDB Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-universes-uniUUID-run-script
+      path: /customers/{cUUID}/universes/{uniUUID}/run-script
+      operations:
+      - name: runscript
+        method: POST
+        description: YugabyteDB Anywhere Run a Script on Database Nodes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-universes-uniUUID-systemd
+      path: /customers/{cUUID}/universes/{uniUUID}/systemd
+      operations:
+      - name: systemdenable
+        method: POST
+        description: YugabyteDB Anywhere Migrate to Systemd Controlled Services
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-universes-uniUUID-upgrade-software
+      path: /customers/{cUUID}/universes/{uniUUID}/upgrade/software
+      operations:
+      - name: startsoftwareupgrade
+        method: POST
+        description: YugabyteDB Anywhere Upgrade YugabyteDB Version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-universes-uniUUID-upgrade-software-finalize
+      path: /customers/{cUUID}/universes/{uniUUID}/upgrade/software/finalize
+      operations:
+      - name: getfinalizesoftwareupgradeinfo
+        method: GET
+        description: YugabyteDB Anywhere Get Finalize Information on the YugabyteDB Upgrade
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+      - name: finalizesoftwareupgrade
+        method: POST
+        description: YugabyteDB Anywhere Finalize the Upgrade YugabyteDB
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-universes-uniUUID-upgrade-software-precheck
+      path: /customers/{cUUID}/universes/{uniUUID}/upgrade/software/precheck
+      operations:
+      - name: prechecksoftwareupgrade
+        method: POST
+        description: YugabyteDB Anywhere Precheck YugabyteDB Version Upgrade
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-universes-uniUUID-upgrade-software-resume-canary
+      path: /customers/{cUUID}/universes/{uniUUID}/upgrade/software/resume-canary
+      operations:
+      - name: resumecanarysoftwareupgrade
+        method: POST
+        description: YugabyteDB Anywhere Resume Canary Software Upgrade
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-universes-uniUUID-upgrade-software-rollback
+      path: /customers/{cUUID}/universes/{uniUUID}/upgrade/software/rollback
+      operations:
+      - name: rollbacksoftwareupgrade
+        method: POST
+        description: YugabyteDB Anywhere Rollback YugabyteDB Version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: customers-cUUID-universes-uniUUID-upgrade-third-party-software
+      path: /customers/{cUUID}/universes/{uniUUID}/upgrade/third-party-software
+      operations:
+      - name: startthirdpartysoftwareupgrade
+        method: POST
+        description: YugabyteDB Anywhere Upgrade Third Party Software
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          description: Customer UUID
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          description: Universe UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v2-universe-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere V2 APIs — Universe. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/customers/{cuuid}/fetch-universe-resources
+      name: customers-cuuid-fetch-universe-resources
+      description: REST surface for customers-cUUID-fetch-universe-resources.
+      operations:
+      - method: POST
+        name: getuniverseresources
+        description: YugabyteDB Anywhere Get Resource Utilisation of a YugabyteDB Universe
+        call: anywhere-v2-universe.getuniverseresources
+        with:
+          cUUID: rest.cUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes
+      name: customers-cuuid-universes
+      description: REST surface for customers-cUUID-universes.
+      operations:
+      - method: POST
+        name: createuniverse
+        description: YugabyteDB Anywhere Create a YugabyteDB Universe
+        call: anywhere-v2-universe.createuniverse
+        with:
+          cUUID: rest.cUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/page
+      name: customers-cuuid-universes-page
+      description: REST surface for customers-cUUID-universes-page.
+      operations:
+      - method: POST
+        name: pagelistuniverses
+        description: YugabyteDB Anywhere List Universes
+        call: anywhere-v2-universe.pagelistuniverses
+        with:
+          cUUID: rest.cUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}
+      name: customers-cuuid-universes-uniuuid
+      description: REST surface for customers-cUUID-universes-uniUUID.
+      operations:
+      - method: DELETE
+        name: deleteuniverse
+        description: YugabyteDB Anywhere Delete a Universe
+        call: anywhere-v2-universe.deleteuniverse
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getuniverse
+        description: YugabyteDB Anywhere Get a YugabyteDB Universe
+        call: anywhere-v2-universe.getuniverse
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: edituniverse
+        description: YugabyteDB Anywhere Edit a YugabyteDB Universe
+        call: anywhere-v2-universe.edituniverse
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}/attach
+      name: customers-cuuid-universes-uniuuid-attach
+      description: REST surface for customers-cUUID-universes-uniUUID-attach.
+      operations:
+      - method: POST
+        name: attachuniverse
+        description: YugabyteDB Anywhere Attach Universe
+        call: anywhere-v2-universe.attachuniverse
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}/attach-detach-metadata
+      name: customers-cuuid-universes-uniuuid-attach-detach-metadata
+      description: REST surface for customers-cUUID-universes-uniUUID-attach-detach-metadata.
+      operations:
+      - method: DELETE
+        name: deleteattachdetachmetadata
+        description: YugabyteDB Anywhere Delete Attach/detach Metadata
+        call: anywhere-v2-universe.deleteattachdetachmetadata
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}/clusters
+      name: customers-cuuid-universes-uniuuid-clusters
+      description: REST surface for customers-cUUID-universes-uniUUID-clusters.
+      operations:
+      - method: POST
+        name: addcluster
+        description: YugabyteDB Anywhere Add a Cluster to a YugabyteDB Universe
+        call: anywhere-v2-universe.addcluster
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}/clusters/{clsuuid}
+      name: customers-cuuid-universes-uniuuid-clusters-clsuuid
+      description: REST surface for customers-cUUID-universes-uniUUID-clusters-clsUUID.
+      operations:
+      - method: DELETE
+        name: deletecluster
+        description: YugabyteDB Anywhere Delete an Additional Cluster(s) of a YugabyteDB Universe
+        call: anywhere-v2-universe.deletecluster
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          clsUUID: rest.clsUUID
+          isForceDelete: rest.isForceDelete
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}/detach
+      name: customers-cuuid-universes-uniuuid-detach
+      description: REST surface for customers-cUUID-universes-uniUUID-detach.
+      operations:
+      - method: DELETE
+        name: rollbackdetachuniverse
+        description: YugabyteDB Anywhere Rollback Detach Universe
+        call: anywhere-v2-universe.rollbackdetachuniverse
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          isForceRollback: rest.isForceRollback
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: detachuniverse
+        description: YugabyteDB Anywhere Detach Universe
+        call: anywhere-v2-universe.detachuniverse
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}/encryption/in-transit
+      name: customers-cuuid-universes-uniuuid-encryption-in-transit
+      description: REST surface for customers-cUUID-universes-uniUUID-encryption-in-transit.
+      operations:
+      - method: POST
+        name: encryptionintransittoggle
+        description: YugabyteDB Anywhere Enable or Disable Encryption in Transit
+        call: anywhere-v2-universe.encryptionintransittoggle
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}/encryption/in-transit/rotate
+      name: customers-cuuid-universes-uniuuid-encryption-in-transit-rotate
+      description: REST surface for customers-cUUID-universes-uniUUID-encryption-in-transit-rotate.
+      operations:
+      - method: POST
+        name: encryptionintransitcertrotate
+        description: YugabyteDB Anywhere Rotate TLS Certs
+        call: anywhere-v2-universe.encryptionintransitcertrotate
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}/export-telemetry-configs
+      name: customers-cuuid-universes-uniuuid-export-telemetry-configs
+      description: REST surface for customers-cUUID-universes-uniUUID-export-telemetry-configs.
+      operations:
+      - method: POST
+        name: configureexporttelemetryconfig
+        description: YugabyteDB Anywhere Configure Export Telemetry Configs (unified API)
+        call: anywhere-v2-universe.configureexporttelemetryconfig
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}/file-collections
+      name: customers-cuuid-universes-uniuuid-file-collections
+      description: REST surface for customers-cUUID-universes-uniUUID-file-collections.
+      operations:
+      - method: POST
+        name: createfilecollection
+        description: YugabyteDB Anywhere Collect Files from Database Nodes
+        call: anywhere-v2-universe.createfilecollection
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}/file-collections/{collectionuuid}
+      name: customers-cuuid-universes-uniuuid-file-collections-collectionuuid
+      description: REST surface for customers-cUUID-universes-uniUUID-file-collections-collectionUUID.
+      operations:
+      - method: DELETE
+        name: deletefilecollection
+        description: YugabyteDB Anywhere Delete Collected Files from Database Nodes And/or YBA
+        call: anywhere-v2-universe.deletefilecollection
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          collectionUUID: rest.collectionUUID
+          delete_from_db_nodes: rest.delete_from_db_nodes
+          delete_from_yba: rest.delete_from_yba
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}/file-collections/{collectionuuid}/download
+      name: customers-cuuid-universes-uniuuid-file-collections-collectionuuid-download
+      description: REST surface for customers-cUUID-universes-uniUUID-file-collections-collectionUUID-download.
+      operations:
+      - method: GET
+        name: downloadfilecollection
+        description: YugabyteDB Anywhere Download Collected Files
+        call: anywhere-v2-universe.downloadfilecollection
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          collectionUUID: rest.collectionUUID
+          cleanup_db_nodes_after: rest.cleanup_db_nodes_after
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}/gflags
+      name: customers-cuuid-universes-uniuuid-gflags
+      description: REST surface for customers-cUUID-universes-uniUUID-gflags.
+      operations:
+      - method: POST
+        name: editgflags
+        description: YugabyteDB Anywhere Edit GFlags
+        call: anywhere-v2-universe.editgflags
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}/kubernetes-overrides
+      name: customers-cuuid-universes-uniuuid-kubernetes-overrides
+      description: REST surface for customers-cUUID-universes-uniUUID-kubernetes-overrides.
+      operations:
+      - method: POST
+        name: editkubernetesoverrides
+        description: YugabyteDB Anywhere Edit Kubernetes Helm Overrides
+        call: anywhere-v2-universe.editkubernetesoverrides
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}/metrics-export-config
+      name: customers-cuuid-universes-uniuuid-metrics-export-config
+      description: REST surface for customers-cUUID-universes-uniUUID-metrics-export-config.
+      operations:
+      - method: POST
+        name: configuremetricsexport
+        description: YugabyteDB Anywhere Configure Metrics Export
+        call: anywhere-v2-universe.configuremetricsexport
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}/operator-import
+      name: customers-cuuid-universes-uniuuid-operator-import
+      description: REST surface for customers-cUUID-universes-uniUUID-operator-import.
+      operations:
+      - method: POST
+        name: operatorimportuniverse
+        description: YugabyteDB Anywhere Import Universe to Operator
+        call: anywhere-v2-universe.operatorimportuniverse
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}/operator-import/precheck
+      name: customers-cuuid-universes-uniuuid-operator-import-precheck
+      description: REST surface for customers-cUUID-universes-uniUUID-operator-import-precheck.
+      operations:
+      - method: POST
+        name: operatorimportuniverseprecheck
+        description: YugabyteDB Anywhere Precheck Universe Import to Operator
+        call: anywhere-v2-universe.operatorimportuniverseprecheck
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}/query-log-config
+      name: customers-cuuid-universes-uniuuid-query-log-config
+      description: REST surface for customers-cUUID-universes-uniUUID-query-log-config.
+      operations:
+      - method: POST
+        name: configurequerylogging
+        description: YugabyteDB Anywhere Configure Query Log for YugabyteDB Universe
+        call: anywhere-v2-universe.configurequerylogging
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}/resize-nodes
+      name: customers-cuuid-universes-uniuuid-resize-nodes
+      description: REST surface for customers-cUUID-universes-uniUUID-resize-nodes.
+      operations:
+      - method: POST
+        name: resizenodes
+        description: YugabyteDB Anywhere Resize Nodes in YBDB Universe.
+        call: anywhere-v2-universe.resizenodes
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}/restart
+      name: customers-cuuid-universes-uniuuid-restart
+      description: REST surface for customers-cUUID-universes-uniUUID-restart.
+      operations:
+      - method: POST
+        name: restartuniverse
+        description: YugabyteDB Anywhere Restart a YugabyteDB Universe
+        call: anywhere-v2-universe.restartuniverse
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}/run-script
+      name: customers-cuuid-universes-uniuuid-run-script
+      description: REST surface for customers-cUUID-universes-uniUUID-run-script.
+      operations:
+      - method: POST
+        name: runscript
+        description: YugabyteDB Anywhere Run a Script on Database Nodes
+        call: anywhere-v2-universe.runscript
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}/systemd
+      name: customers-cuuid-universes-uniuuid-systemd
+      description: REST surface for customers-cUUID-universes-uniUUID-systemd.
+      operations:
+      - method: POST
+        name: systemdenable
+        description: YugabyteDB Anywhere Migrate to Systemd Controlled Services
+        call: anywhere-v2-universe.systemdenable
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}/upgrade/software
+      name: customers-cuuid-universes-uniuuid-upgrade-software
+      description: REST surface for customers-cUUID-universes-uniUUID-upgrade-software.
+      operations:
+      - method: POST
+        name: startsoftwareupgrade
+        description: YugabyteDB Anywhere Upgrade YugabyteDB Version
+        call: anywhere-v2-universe.startsoftwareupgrade
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}/upgrade/software/finalize
+      name: customers-cuuid-universes-uniuuid-upgrade-software-finalize
+      description: REST surface for customers-cUUID-universes-uniUUID-upgrade-software-finalize.
+      operations:
+      - method: GET
+        name: getfinalizesoftwareupgradeinfo
+        description: YugabyteDB Anywhere Get Finalize Information on the YugabyteDB Upgrade
+        call: anywhere-v2-universe.getfinalizesoftwareupgradeinfo
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: finalizesoftwareupgrade
+        description: YugabyteDB Anywhere Finalize the Upgrade YugabyteDB
+        call: anywhere-v2-universe.finalizesoftwareupgrade
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}/upgrade/software/precheck
+      name: customers-cuuid-universes-uniuuid-upgrade-software-precheck
+      description: REST surface for customers-cUUID-universes-uniUUID-upgrade-software-precheck.
+      operations:
+      - method: POST
+        name: prechecksoftwareupgrade
+        description: YugabyteDB Anywhere Precheck YugabyteDB Version Upgrade
+        call: anywhere-v2-universe.prechecksoftwareupgrade
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}/upgrade/software/resume-canary
+      name: customers-cuuid-universes-uniuuid-upgrade-software-resume-canary
+      description: REST surface for customers-cUUID-universes-uniUUID-upgrade-software-resume-canary.
+      operations:
+      - method: POST
+        name: resumecanarysoftwareupgrade
+        description: YugabyteDB Anywhere Resume Canary Software Upgrade
+        call: anywhere-v2-universe.resumecanarysoftwareupgrade
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}/upgrade/software/rollback
+      name: customers-cuuid-universes-uniuuid-upgrade-software-rollback
+      description: REST surface for customers-cUUID-universes-uniUUID-upgrade-software-rollback.
+      operations:
+      - method: POST
+        name: rollbacksoftwareupgrade
+        description: YugabyteDB Anywhere Rollback YugabyteDB Version
+        call: anywhere-v2-universe.rollbacksoftwareupgrade
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{cuuid}/universes/{uniuuid}/upgrade/third-party-software
+      name: customers-cuuid-universes-uniuuid-upgrade-third-party-software
+      description: REST surface for customers-cUUID-universes-uniUUID-upgrade-third-party-software.
+      operations:
+      - method: POST
+        name: startthirdpartysoftwareupgrade
+        description: YugabyteDB Anywhere Upgrade Third Party Software
+        call: anywhere-v2-universe.startthirdpartysoftwareupgrade
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v2-universe-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere V2 APIs — Universe. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-get-resource-utilisation
+      description: YugabyteDB Anywhere Get Resource Utilisation of a YugabyteDB Universe
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-universe.getuniverseresources
+      with:
+        cUUID: tools.cUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-yugabytedb-universe
+      description: YugabyteDB Anywhere Create a YugabyteDB Universe
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-universe.createuniverse
+      with:
+        cUUID: tools.cUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-universes
+      description: YugabyteDB Anywhere List Universes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-universe.pagelistuniverses
+      with:
+        cUUID: tools.cUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-universe
+      description: YugabyteDB Anywhere Delete a Universe
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v2-universe.deleteuniverse
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-yugabytedb-universe
+      description: YugabyteDB Anywhere Get a YugabyteDB Universe
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v2-universe.getuniverse
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-edit-yugabytedb-universe
+      description: YugabyteDB Anywhere Edit a YugabyteDB Universe
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v2-universe.edituniverse
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-attach-universe
+      description: YugabyteDB Anywhere Attach Universe
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-universe.attachuniverse
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-attach-detach
+      description: YugabyteDB Anywhere Delete Attach/detach Metadata
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v2-universe.deleteattachdetachmetadata
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-add-cluster-yugabytedb
+      description: YugabyteDB Anywhere Add a Cluster to a YugabyteDB Universe
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-universe.addcluster
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-additional-cluster-s
+      description: YugabyteDB Anywhere Delete an Additional Cluster(s) of a YugabyteDB Universe
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v2-universe.deletecluster
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        clsUUID: tools.clsUUID
+        isForceDelete: tools.isForceDelete
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-rollback-detach-universe
+      description: YugabyteDB Anywhere Rollback Detach Universe
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v2-universe.rollbackdetachuniverse
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        isForceRollback: tools.isForceRollback
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-detach-universe
+      description: YugabyteDB Anywhere Detach Universe
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-universe.detachuniverse
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-enable-disable-encryption
+      description: YugabyteDB Anywhere Enable or Disable Encryption in Transit
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-universe.encryptionintransittoggle
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-rotate-tls-certs
+      description: YugabyteDB Anywhere Rotate TLS Certs
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-universe.encryptionintransitcertrotate
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-configure-export-telemetry
+      description: YugabyteDB Anywhere Configure Export Telemetry Configs (unified API)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-universe.configureexporttelemetryconfig
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-collect-files-database
+      description: YugabyteDB Anywhere Collect Files from Database Nodes
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-universe.createfilecollection
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-collected-files
+      description: YugabyteDB Anywhere Delete Collected Files from Database Nodes And/or YBA
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v2-universe.deletefilecollection
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        collectionUUID: tools.collectionUUID
+        delete_from_db_nodes: tools.delete_from_db_nodes
+        delete_from_yba: tools.delete_from_yba
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-download-collected-files
+      description: YugabyteDB Anywhere Download Collected Files
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v2-universe.downloadfilecollection
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        collectionUUID: tools.collectionUUID
+        cleanup_db_nodes_after: tools.cleanup_db_nodes_after
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-edit-gflags
+      description: YugabyteDB Anywhere Edit GFlags
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-universe.editgflags
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-edit-kubernetes-helm
+      description: YugabyteDB Anywhere Edit Kubernetes Helm Overrides
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-universe.editkubernetesoverrides
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-configure-metrics-export
+      description: YugabyteDB Anywhere Configure Metrics Export
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-universe.configuremetricsexport
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-import-universe-operator
+      description: YugabyteDB Anywhere Import Universe to Operator
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-universe.operatorimportuniverse
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-precheck-universe-import
+      description: YugabyteDB Anywhere Precheck Universe Import to Operator
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-universe.operatorimportuniverseprecheck
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-configure-query-log
+      description: YugabyteDB Anywhere Configure Query Log for YugabyteDB Universe
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-universe.configurequerylogging
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-resize-nodes-ybdb
+      description: YugabyteDB Anywhere Resize Nodes in YBDB Universe.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-universe.resizenodes
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-restart-yugabytedb-universe
+      description: YugabyteDB Anywhere Restart a YugabyteDB Universe
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-universe.restartuniverse
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-run-script-database
+      description: YugabyteDB Anywhere Run a Script on Database Nodes
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-universe.runscript
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-migrate-systemd-controlled
+      description: YugabyteDB Anywhere Migrate to Systemd Controlled Services
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-universe.systemdenable
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-upgrade-yugabytedb-version
+      description: YugabyteDB Anywhere Upgrade YugabyteDB Version
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-universe.startsoftwareupgrade
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-finalize-information
+      description: YugabyteDB Anywhere Get Finalize Information on the YugabyteDB Upgrade
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v2-universe.getfinalizesoftwareupgradeinfo
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-finalize-upgrade-yugabytedb
+      description: YugabyteDB Anywhere Finalize the Upgrade YugabyteDB
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-universe.finalizesoftwareupgrade
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-precheck-yugabytedb-version
+      description: YugabyteDB Anywhere Precheck YugabyteDB Version Upgrade
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-universe.prechecksoftwareupgrade
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-resume-canary-software
+      description: YugabyteDB Anywhere Resume Canary Software Upgrade
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-universe.resumecanarysoftwareupgrade
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-rollback-yugabytedb-version
+      description: YugabyteDB Anywhere Rollback YugabyteDB Version
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-universe.rollbacksoftwareupgrade
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-upgrade-third-party
+      description: YugabyteDB Anywhere Upgrade Third Party Software
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v2-universe.startthirdpartysoftwareupgrade
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,229 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — High Availability — HA
+  description: 'YugabyteDB Anywhere v1 — High Availability — HA. 5 operations. Lead operation: YugabyteDB Anywhere Get High
+    Availability Config. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - HA
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-high-availability-ha
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — High Availability — HA business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-settings-ha-config
+      path: /api/v1/settings/ha/config
+      operations:
+      - name: gethaconfig
+        method: GET
+        description: YugabyteDB Anywhere Get High Availability Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createhaconfig
+        method: POST
+        description: YugabyteDB Anywhere Create High Availability Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-settings-ha-config-cUUID
+      path: /api/v1/settings/ha/config/{cUUID}
+      operations:
+      - name: deletehaconfig
+        method: DELETE
+        description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: edithaconfig
+        method: PUT
+        description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-settings-ha-generate_key
+      path: /api/v1/settings/ha/generate_key
+      operations:
+      - name: generateclusterkey
+        method: GET
+        description: YugabyteDB Anywhere Generate Cluster Key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-high-availability-ha-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — High Availability — HA. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/settings/ha/config
+      name: api-v1-settings-ha-config
+      description: REST surface for api-v1-settings-ha-config.
+      operations:
+      - method: GET
+        name: gethaconfig
+        description: YugabyteDB Anywhere Get High Availability Config
+        call: anywhere-v1-high-availability-ha.gethaconfig
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createhaconfig
+        description: YugabyteDB Anywhere Create High Availability Config
+        call: anywhere-v1-high-availability-ha.createhaconfig
+        with:
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/settings/ha/config/{cuuid}
+      name: api-v1-settings-ha-config-cuuid
+      description: REST surface for api-v1-settings-ha-config-cUUID.
+      operations:
+      - method: DELETE
+        name: deletehaconfig
+        description: deletehaconfig
+        call: anywhere-v1-high-availability-ha.deletehaconfig
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: edithaconfig
+        description: edithaconfig
+        call: anywhere-v1-high-availability-ha.edithaconfig
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/settings/ha/generate-key
+      name: api-v1-settings-ha-generate-key
+      description: REST surface for api-v1-settings-ha-generate_key.
+      operations:
+      - method: GET
+        name: generateclusterkey
+        description: YugabyteDB Anywhere Generate Cluster Key
+        call: anywhere-v1-high-availability-ha.generateclusterkey
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-high-availability-ha-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — High Availability — HA. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-get-high-availability
+      description: YugabyteDB Anywhere Get High Availability Config
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-high-availability-ha.gethaconfig
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-high-availability
+      description: YugabyteDB Anywhere Create High Availability Config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-high-availability-ha.createhaconfig
+      with:
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deletehaconfig
+      description: deletehaconfig
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-high-availability-ha.deletehaconfig
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: edithaconfig
+      description: edithaconfig
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-high-availability-ha.edithaconfig
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-generate-cluster-key
+      description: YugabyteDB Anywhere Generate Cluster Key
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-high-availability-ha.generateclusterkey
+      outputParameters:
+      - type: object
+        mapping: $.

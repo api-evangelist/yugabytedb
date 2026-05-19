@@ -1,0 +1,1761 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Alerts and Monitoring — Alerts
+  description: 'YugabyteDB Anywhere v1 — Alerts and Monitoring — Alerts. 36 operations. Lead operation: YugabyteDB Anywhere
+    List All Alert Channel Templates. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Alerts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-alerts-monitoring-alerts
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Alerts and Monitoring — Alerts business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-alert_channel_templates
+      path: /api/v1/customers/{cUUID}/alert_channel_templates
+      operations:
+      - name: listalertchanneltemplates
+        method: GET
+        description: YugabyteDB Anywhere List All Alert Channel Templates
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-alert_channel_templates-acType
+      path: /api/v1/customers/{cUUID}/alert_channel_templates/{acType}
+      operations:
+      - name: deletealertchanneltemplates
+        method: DELETE
+        description: YugabyteDB Anywhere Delete Alert Channel Templates
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: acType
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: getalertchanneltemplates
+        method: GET
+        description: YugabyteDB Anywhere Get Alert Channel Templates
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: acType
+          in: path
+          type: string
+          required: true
+      - name: setalertchanneltemplates
+        method: POST
+        description: YugabyteDB Anywhere Set Alert Channel Templates
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: acType
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-alert_channels
+      path: /api/v1/customers/{cUUID}/alert_channels
+      operations:
+      - name: listalertchannels
+        method: GET
+        description: YugabyteDB Anywhere List All Alert Channels
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+      - name: createalertchannel
+        method: POST
+        description: YugabyteDB Anywhere Create an Alert Channel
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-alert_channels-acUUID
+      path: /api/v1/customers/{cUUID}/alert_channels/{acUUID}
+      operations:
+      - name: deletealertchannel
+        method: DELETE
+        description: YugabyteDB Anywhere Delete an Alert Channel
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: acUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: getalertchannel
+        method: GET
+        description: YugabyteDB Anywhere Get an Alert Channel
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: acUUID
+          in: path
+          type: string
+          required: true
+      - name: updatealertchannel
+        method: PUT
+        description: YugabyteDB Anywhere Update an Alert Channel
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: acUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-alert_configurations
+      path: /api/v1/customers/{cUUID}/alert_configurations
+      operations:
+      - name: createalertconfiguration
+        method: POST
+        description: YugabyteDB Anywhere Create an Alert Configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-alert_configurations-list
+      path: /api/v1/customers/{cUUID}/alert_configurations/list
+      operations:
+      - name: listalertconfigurations
+        method: POST
+        description: YugabyteDB Anywhere Get Filtered List of Alert Configurations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-alert_configurations-page
+      path: /api/v1/customers/{cUUID}/alert_configurations/page
+      operations:
+      - name: pagealertconfigurations
+        method: POST
+        description: YugabyteDB Anywhere List All Alert Configurations (paginated)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-alert_configurations-configurationUUID
+      path: /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID}
+      operations:
+      - name: deletealertconfiguration
+        method: DELETE
+        description: YugabyteDB Anywhere Delete an Alert Configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: configurationUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: getalertconfiguration
+        method: GET
+        description: YugabyteDB Anywhere Get an Alert Configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: configurationUUID
+          in: path
+          type: string
+          required: true
+      - name: updatealertconfiguration
+        method: PUT
+        description: YugabyteDB Anywhere Update an Alert Configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: configurationUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-alert_configurations-configurationUUID-test_alert
+      path: /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID}/test_alert
+      operations:
+      - name: sendtestalert
+        method: POST
+        description: YugabyteDB Anywhere Send Test Alert for Alert Configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: configurationUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-alert_destinations
+      path: /api/v1/customers/{cUUID}/alert_destinations
+      operations:
+      - name: listalertdestinations
+        method: GET
+        description: YugabyteDB Anywhere List Alert Destinations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+      - name: createalertdestination
+        method: POST
+        description: YugabyteDB Anywhere Create an Alert Destination
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-alert_destinations-adUUID
+      path: /api/v1/customers/{cUUID}/alert_destinations/{adUUID}
+      operations:
+      - name: deletealertdestination
+        method: DELETE
+        description: YugabyteDB Anywhere Delete an Alert Destination
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: adUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: getalertdestination
+        method: GET
+        description: YugabyteDB Anywhere Get an Alert Destination
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: adUUID
+          in: path
+          type: string
+          required: true
+      - name: updatealertdestination
+        method: PUT
+        description: YugabyteDB Anywhere Update an Alert Destination
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: adUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-alert_notification_preview
+      path: /api/v1/customers/{cUUID}/alert_notification_preview
+      operations:
+      - name: alertnotificationpreview
+        method: POST
+        description: YugabyteDB Anywhere Prepare Alert Notification Preview
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-alert_template_settings
+      path: /api/v1/customers/{cUUID}/alert_template_settings
+      operations:
+      - name: listalerttemplatesettings
+        method: GET
+        description: YugabyteDB Anywhere Get Alert Template Settings - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+      - name: editalerttemplatesettings
+        method: PUT
+        description: YugabyteDB Anywhere Create or Update Alert Template Settings List - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-alert_template_settings-settingsUUID
+      path: /api/v1/customers/{cUUID}/alert_template_settings/{settingsUUID}
+      operations:
+      - name: deletealerttemplatesettings
+        method: DELETE
+        description: YugabyteDB Anywhere Delete an Alert Template Settings - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: settingsUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-alert_template_variables
+      path: /api/v1/customers/{cUUID}/alert_template_variables
+      operations:
+      - name: listalerttemplatevariables
+        method: GET
+        description: YugabyteDB Anywhere List Alert Template Variables
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+      - name: editalerttemplatevariables
+        method: PUT
+        description: YugabyteDB Anywhere Create or Update Alert Template Variables
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-alert_template_variables-variableUUID
+      path: /api/v1/customers/{cUUID}/alert_template_variables/{variableUUID}
+      operations:
+      - name: deletealerttemplatevariables
+        method: DELETE
+        description: YugabyteDB Anywhere Delete an Alert Template Variables
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: variableUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-alert_templates
+      path: /api/v1/customers/{cUUID}/alert_templates
+      operations:
+      - name: listalerttemplates
+        method: POST
+        description: YugabyteDB Anywhere Get Filtered List of Alert Configuration Templates
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-alerts
+      path: /api/v1/customers/{cUUID}/alerts
+      operations:
+      - name: listofalerts
+        method: GET
+        description: YugabyteDB Anywhere List All Alerts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-alerts-acknowledge
+      path: /api/v1/customers/{cUUID}/alerts/acknowledge
+      operations:
+      - name: acknowledgebyfilter
+        method: POST
+        description: YugabyteDB Anywhere Acknowledge All Alerts - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-alerts-active
+      path: /api/v1/customers/{cUUID}/alerts/active
+      operations:
+      - name: listactive
+        method: GET
+        description: YugabyteDB Anywhere List Active Alerts - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-alerts-count
+      path: /api/v1/customers/{cUUID}/alerts/count
+      operations:
+      - name: countalerts
+        method: POST
+        description: YugabyteDB Anywhere Count Alerts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-alerts-page
+      path: /api/v1/customers/{cUUID}/alerts/page
+      operations:
+      - name: pagealerts
+        method: POST
+        description: YugabyteDB Anywhere List Alerts (paginated)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-alerts-alertUUID
+      path: /api/v1/customers/{cUUID}/alerts/{alertUUID}
+      operations:
+      - name: get
+        method: GET
+        description: YugabyteDB Anywhere Get Details of an Alert
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: alertUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-alerts-alertUUID-acknowledge
+      path: /api/v1/customers/{cUUID}/alerts/{alertUUID}/acknowledge
+      operations:
+      - name: acknowledge
+        method: POST
+        description: YugabyteDB Anywhere Acknowledge an Alert
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: alertUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-alerts-monitoring-alerts-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Alerts and Monitoring — Alerts. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/alert-channel-templates
+      name: api-v1-customers-cuuid-alert-channel-templates
+      description: REST surface for api-v1-customers-cUUID-alert_channel_templates.
+      operations:
+      - method: GET
+        name: listalertchanneltemplates
+        description: YugabyteDB Anywhere List All Alert Channel Templates
+        call: anywhere-v1-alerts-monitoring-alerts.listalertchanneltemplates
+        with:
+          cUUID: rest.cUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/alert-channel-templates/{actype}
+      name: api-v1-customers-cuuid-alert-channel-templates-actype
+      description: REST surface for api-v1-customers-cUUID-alert_channel_templates-acType.
+      operations:
+      - method: DELETE
+        name: deletealertchanneltemplates
+        description: YugabyteDB Anywhere Delete Alert Channel Templates
+        call: anywhere-v1-alerts-monitoring-alerts.deletealertchanneltemplates
+        with:
+          cUUID: rest.cUUID
+          acType: rest.acType
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getalertchanneltemplates
+        description: YugabyteDB Anywhere Get Alert Channel Templates
+        call: anywhere-v1-alerts-monitoring-alerts.getalertchanneltemplates
+        with:
+          cUUID: rest.cUUID
+          acType: rest.acType
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: setalertchanneltemplates
+        description: YugabyteDB Anywhere Set Alert Channel Templates
+        call: anywhere-v1-alerts-monitoring-alerts.setalertchanneltemplates
+        with:
+          cUUID: rest.cUUID
+          acType: rest.acType
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/alert-channels
+      name: api-v1-customers-cuuid-alert-channels
+      description: REST surface for api-v1-customers-cUUID-alert_channels.
+      operations:
+      - method: GET
+        name: listalertchannels
+        description: YugabyteDB Anywhere List All Alert Channels
+        call: anywhere-v1-alerts-monitoring-alerts.listalertchannels
+        with:
+          cUUID: rest.cUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createalertchannel
+        description: YugabyteDB Anywhere Create an Alert Channel
+        call: anywhere-v1-alerts-monitoring-alerts.createalertchannel
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/alert-channels/{acuuid}
+      name: api-v1-customers-cuuid-alert-channels-acuuid
+      description: REST surface for api-v1-customers-cUUID-alert_channels-acUUID.
+      operations:
+      - method: DELETE
+        name: deletealertchannel
+        description: YugabyteDB Anywhere Delete an Alert Channel
+        call: anywhere-v1-alerts-monitoring-alerts.deletealertchannel
+        with:
+          cUUID: rest.cUUID
+          acUUID: rest.acUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getalertchannel
+        description: YugabyteDB Anywhere Get an Alert Channel
+        call: anywhere-v1-alerts-monitoring-alerts.getalertchannel
+        with:
+          cUUID: rest.cUUID
+          acUUID: rest.acUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatealertchannel
+        description: YugabyteDB Anywhere Update an Alert Channel
+        call: anywhere-v1-alerts-monitoring-alerts.updatealertchannel
+        with:
+          cUUID: rest.cUUID
+          acUUID: rest.acUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/alert-configurations
+      name: api-v1-customers-cuuid-alert-configurations
+      description: REST surface for api-v1-customers-cUUID-alert_configurations.
+      operations:
+      - method: POST
+        name: createalertconfiguration
+        description: YugabyteDB Anywhere Create an Alert Configuration
+        call: anywhere-v1-alerts-monitoring-alerts.createalertconfiguration
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/alert-configurations/list
+      name: api-v1-customers-cuuid-alert-configurations-list
+      description: REST surface for api-v1-customers-cUUID-alert_configurations-list.
+      operations:
+      - method: POST
+        name: listalertconfigurations
+        description: YugabyteDB Anywhere Get Filtered List of Alert Configurations
+        call: anywhere-v1-alerts-monitoring-alerts.listalertconfigurations
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/alert-configurations/page
+      name: api-v1-customers-cuuid-alert-configurations-page
+      description: REST surface for api-v1-customers-cUUID-alert_configurations-page.
+      operations:
+      - method: POST
+        name: pagealertconfigurations
+        description: YugabyteDB Anywhere List All Alert Configurations (paginated)
+        call: anywhere-v1-alerts-monitoring-alerts.pagealertconfigurations
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/alert-configurations/{configurationuuid}
+      name: api-v1-customers-cuuid-alert-configurations-configurationuuid
+      description: REST surface for api-v1-customers-cUUID-alert_configurations-configurationUUID.
+      operations:
+      - method: DELETE
+        name: deletealertconfiguration
+        description: YugabyteDB Anywhere Delete an Alert Configuration
+        call: anywhere-v1-alerts-monitoring-alerts.deletealertconfiguration
+        with:
+          cUUID: rest.cUUID
+          configurationUUID: rest.configurationUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getalertconfiguration
+        description: YugabyteDB Anywhere Get an Alert Configuration
+        call: anywhere-v1-alerts-monitoring-alerts.getalertconfiguration
+        with:
+          cUUID: rest.cUUID
+          configurationUUID: rest.configurationUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatealertconfiguration
+        description: YugabyteDB Anywhere Update an Alert Configuration
+        call: anywhere-v1-alerts-monitoring-alerts.updatealertconfiguration
+        with:
+          cUUID: rest.cUUID
+          configurationUUID: rest.configurationUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/alert-configurations/{configurationuuid}/test-alert
+      name: api-v1-customers-cuuid-alert-configurations-configurationuuid-test-alert
+      description: REST surface for api-v1-customers-cUUID-alert_configurations-configurationUUID-test_alert.
+      operations:
+      - method: POST
+        name: sendtestalert
+        description: YugabyteDB Anywhere Send Test Alert for Alert Configuration
+        call: anywhere-v1-alerts-monitoring-alerts.sendtestalert
+        with:
+          cUUID: rest.cUUID
+          configurationUUID: rest.configurationUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/alert-destinations
+      name: api-v1-customers-cuuid-alert-destinations
+      description: REST surface for api-v1-customers-cUUID-alert_destinations.
+      operations:
+      - method: GET
+        name: listalertdestinations
+        description: YugabyteDB Anywhere List Alert Destinations
+        call: anywhere-v1-alerts-monitoring-alerts.listalertdestinations
+        with:
+          cUUID: rest.cUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createalertdestination
+        description: YugabyteDB Anywhere Create an Alert Destination
+        call: anywhere-v1-alerts-monitoring-alerts.createalertdestination
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/alert-destinations/{aduuid}
+      name: api-v1-customers-cuuid-alert-destinations-aduuid
+      description: REST surface for api-v1-customers-cUUID-alert_destinations-adUUID.
+      operations:
+      - method: DELETE
+        name: deletealertdestination
+        description: YugabyteDB Anywhere Delete an Alert Destination
+        call: anywhere-v1-alerts-monitoring-alerts.deletealertdestination
+        with:
+          cUUID: rest.cUUID
+          adUUID: rest.adUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getalertdestination
+        description: YugabyteDB Anywhere Get an Alert Destination
+        call: anywhere-v1-alerts-monitoring-alerts.getalertdestination
+        with:
+          cUUID: rest.cUUID
+          adUUID: rest.adUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatealertdestination
+        description: YugabyteDB Anywhere Update an Alert Destination
+        call: anywhere-v1-alerts-monitoring-alerts.updatealertdestination
+        with:
+          cUUID: rest.cUUID
+          adUUID: rest.adUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/alert-notification-preview
+      name: api-v1-customers-cuuid-alert-notification-preview
+      description: REST surface for api-v1-customers-cUUID-alert_notification_preview.
+      operations:
+      - method: POST
+        name: alertnotificationpreview
+        description: YugabyteDB Anywhere Prepare Alert Notification Preview
+        call: anywhere-v1-alerts-monitoring-alerts.alertnotificationpreview
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/alert-template-settings
+      name: api-v1-customers-cuuid-alert-template-settings
+      description: REST surface for api-v1-customers-cUUID-alert_template_settings.
+      operations:
+      - method: GET
+        name: listalerttemplatesettings
+        description: YugabyteDB Anywhere Get Alert Template Settings - Deprecated
+        call: anywhere-v1-alerts-monitoring-alerts.listalerttemplatesettings
+        with:
+          cUUID: rest.cUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: editalerttemplatesettings
+        description: YugabyteDB Anywhere Create or Update Alert Template Settings List - Deprecated
+        call: anywhere-v1-alerts-monitoring-alerts.editalerttemplatesettings
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/alert-template-settings/{settingsuuid}
+      name: api-v1-customers-cuuid-alert-template-settings-settingsuuid
+      description: REST surface for api-v1-customers-cUUID-alert_template_settings-settingsUUID.
+      operations:
+      - method: DELETE
+        name: deletealerttemplatesettings
+        description: YugabyteDB Anywhere Delete an Alert Template Settings - Deprecated
+        call: anywhere-v1-alerts-monitoring-alerts.deletealerttemplatesettings
+        with:
+          cUUID: rest.cUUID
+          settingsUUID: rest.settingsUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/alert-template-variables
+      name: api-v1-customers-cuuid-alert-template-variables
+      description: REST surface for api-v1-customers-cUUID-alert_template_variables.
+      operations:
+      - method: GET
+        name: listalerttemplatevariables
+        description: YugabyteDB Anywhere List Alert Template Variables
+        call: anywhere-v1-alerts-monitoring-alerts.listalerttemplatevariables
+        with:
+          cUUID: rest.cUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: editalerttemplatevariables
+        description: YugabyteDB Anywhere Create or Update Alert Template Variables
+        call: anywhere-v1-alerts-monitoring-alerts.editalerttemplatevariables
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/alert-template-variables/{variableuuid}
+      name: api-v1-customers-cuuid-alert-template-variables-variableuuid
+      description: REST surface for api-v1-customers-cUUID-alert_template_variables-variableUUID.
+      operations:
+      - method: DELETE
+        name: deletealerttemplatevariables
+        description: YugabyteDB Anywhere Delete an Alert Template Variables
+        call: anywhere-v1-alerts-monitoring-alerts.deletealerttemplatevariables
+        with:
+          cUUID: rest.cUUID
+          variableUUID: rest.variableUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/alert-templates
+      name: api-v1-customers-cuuid-alert-templates
+      description: REST surface for api-v1-customers-cUUID-alert_templates.
+      operations:
+      - method: POST
+        name: listalerttemplates
+        description: YugabyteDB Anywhere Get Filtered List of Alert Configuration Templates
+        call: anywhere-v1-alerts-monitoring-alerts.listalerttemplates
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/alerts
+      name: api-v1-customers-cuuid-alerts
+      description: REST surface for api-v1-customers-cUUID-alerts.
+      operations:
+      - method: GET
+        name: listofalerts
+        description: YugabyteDB Anywhere List All Alerts
+        call: anywhere-v1-alerts-monitoring-alerts.listofalerts
+        with:
+          cUUID: rest.cUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/alerts/acknowledge
+      name: api-v1-customers-cuuid-alerts-acknowledge
+      description: REST surface for api-v1-customers-cUUID-alerts-acknowledge.
+      operations:
+      - method: POST
+        name: acknowledgebyfilter
+        description: YugabyteDB Anywhere Acknowledge All Alerts - Deprecated
+        call: anywhere-v1-alerts-monitoring-alerts.acknowledgebyfilter
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/alerts/active
+      name: api-v1-customers-cuuid-alerts-active
+      description: REST surface for api-v1-customers-cUUID-alerts-active.
+      operations:
+      - method: GET
+        name: listactive
+        description: YugabyteDB Anywhere List Active Alerts - Deprecated
+        call: anywhere-v1-alerts-monitoring-alerts.listactive
+        with:
+          cUUID: rest.cUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/alerts/count
+      name: api-v1-customers-cuuid-alerts-count
+      description: REST surface for api-v1-customers-cUUID-alerts-count.
+      operations:
+      - method: POST
+        name: countalerts
+        description: YugabyteDB Anywhere Count Alerts
+        call: anywhere-v1-alerts-monitoring-alerts.countalerts
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/alerts/page
+      name: api-v1-customers-cuuid-alerts-page
+      description: REST surface for api-v1-customers-cUUID-alerts-page.
+      operations:
+      - method: POST
+        name: pagealerts
+        description: YugabyteDB Anywhere List Alerts (paginated)
+        call: anywhere-v1-alerts-monitoring-alerts.pagealerts
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/alerts/{alertuuid}
+      name: api-v1-customers-cuuid-alerts-alertuuid
+      description: REST surface for api-v1-customers-cUUID-alerts-alertUUID.
+      operations:
+      - method: GET
+        name: get
+        description: YugabyteDB Anywhere Get Details of an Alert
+        call: anywhere-v1-alerts-monitoring-alerts.get
+        with:
+          cUUID: rest.cUUID
+          alertUUID: rest.alertUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/alerts/{alertuuid}/acknowledge
+      name: api-v1-customers-cuuid-alerts-alertuuid-acknowledge
+      description: REST surface for api-v1-customers-cUUID-alerts-alertUUID-acknowledge.
+      operations:
+      - method: POST
+        name: acknowledge
+        description: YugabyteDB Anywhere Acknowledge an Alert
+        call: anywhere-v1-alerts-monitoring-alerts.acknowledge
+        with:
+          cUUID: rest.cUUID
+          alertUUID: rest.alertUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-alerts-monitoring-alerts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Alerts and Monitoring — Alerts. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-list-all-alert
+      description: YugabyteDB Anywhere List All Alert Channel Templates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-alerts-monitoring-alerts.listalertchanneltemplates
+      with:
+        cUUID: tools.cUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-alert-channel
+      description: YugabyteDB Anywhere Delete Alert Channel Templates
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-alerts-monitoring-alerts.deletealertchanneltemplates
+      with:
+        cUUID: tools.cUUID
+        acType: tools.acType
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-alert-channel
+      description: YugabyteDB Anywhere Get Alert Channel Templates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-alerts-monitoring-alerts.getalertchanneltemplates
+      with:
+        cUUID: tools.cUUID
+        acType: tools.acType
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-set-alert-channel
+      description: YugabyteDB Anywhere Set Alert Channel Templates
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-alerts-monitoring-alerts.setalertchanneltemplates
+      with:
+        cUUID: tools.cUUID
+        acType: tools.acType
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-all-alert-2
+      description: YugabyteDB Anywhere List All Alert Channels
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-alerts-monitoring-alerts.listalertchannels
+      with:
+        cUUID: tools.cUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-alert-channel
+      description: YugabyteDB Anywhere Create an Alert Channel
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-alerts-monitoring-alerts.createalertchannel
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-alert-channel-2
+      description: YugabyteDB Anywhere Delete an Alert Channel
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-alerts-monitoring-alerts.deletealertchannel
+      with:
+        cUUID: tools.cUUID
+        acUUID: tools.acUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-alert-channel-2
+      description: YugabyteDB Anywhere Get an Alert Channel
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-alerts-monitoring-alerts.getalertchannel
+      with:
+        cUUID: tools.cUUID
+        acUUID: tools.acUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-update-alert-channel
+      description: YugabyteDB Anywhere Update an Alert Channel
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-alerts-monitoring-alerts.updatealertchannel
+      with:
+        cUUID: tools.cUUID
+        acUUID: tools.acUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-alert-configuration
+      description: YugabyteDB Anywhere Create an Alert Configuration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-alerts-monitoring-alerts.createalertconfiguration
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-filtered-list
+      description: YugabyteDB Anywhere Get Filtered List of Alert Configurations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-alerts-monitoring-alerts.listalertconfigurations
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-all-alert-3
+      description: YugabyteDB Anywhere List All Alert Configurations (paginated)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-alerts-monitoring-alerts.pagealertconfigurations
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-alert-configuration
+      description: YugabyteDB Anywhere Delete an Alert Configuration
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-alerts-monitoring-alerts.deletealertconfiguration
+      with:
+        cUUID: tools.cUUID
+        configurationUUID: tools.configurationUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-alert-configuration
+      description: YugabyteDB Anywhere Get an Alert Configuration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-alerts-monitoring-alerts.getalertconfiguration
+      with:
+        cUUID: tools.cUUID
+        configurationUUID: tools.configurationUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-update-alert-configuration
+      description: YugabyteDB Anywhere Update an Alert Configuration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-alerts-monitoring-alerts.updatealertconfiguration
+      with:
+        cUUID: tools.cUUID
+        configurationUUID: tools.configurationUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-send-test-alert
+      description: YugabyteDB Anywhere Send Test Alert for Alert Configuration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-alerts-monitoring-alerts.sendtestalert
+      with:
+        cUUID: tools.cUUID
+        configurationUUID: tools.configurationUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-alert-destinations
+      description: YugabyteDB Anywhere List Alert Destinations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-alerts-monitoring-alerts.listalertdestinations
+      with:
+        cUUID: tools.cUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-alert-destination
+      description: YugabyteDB Anywhere Create an Alert Destination
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-alerts-monitoring-alerts.createalertdestination
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-alert-destination
+      description: YugabyteDB Anywhere Delete an Alert Destination
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-alerts-monitoring-alerts.deletealertdestination
+      with:
+        cUUID: tools.cUUID
+        adUUID: tools.adUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-alert-destination
+      description: YugabyteDB Anywhere Get an Alert Destination
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-alerts-monitoring-alerts.getalertdestination
+      with:
+        cUUID: tools.cUUID
+        adUUID: tools.adUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-update-alert-destination
+      description: YugabyteDB Anywhere Update an Alert Destination
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-alerts-monitoring-alerts.updatealertdestination
+      with:
+        cUUID: tools.cUUID
+        adUUID: tools.adUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-prepare-alert-notification
+      description: YugabyteDB Anywhere Prepare Alert Notification Preview
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-alerts-monitoring-alerts.alertnotificationpreview
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-alert-template
+      description: YugabyteDB Anywhere Get Alert Template Settings - Deprecated
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-alerts-monitoring-alerts.listalerttemplatesettings
+      with:
+        cUUID: tools.cUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-update-alert
+      description: YugabyteDB Anywhere Create or Update Alert Template Settings List - Deprecated
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-alerts-monitoring-alerts.editalerttemplatesettings
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-alert-template
+      description: YugabyteDB Anywhere Delete an Alert Template Settings - Deprecated
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-alerts-monitoring-alerts.deletealerttemplatesettings
+      with:
+        cUUID: tools.cUUID
+        settingsUUID: tools.settingsUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-alert-template
+      description: YugabyteDB Anywhere List Alert Template Variables
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-alerts-monitoring-alerts.listalerttemplatevariables
+      with:
+        cUUID: tools.cUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-update-alert-2
+      description: YugabyteDB Anywhere Create or Update Alert Template Variables
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-alerts-monitoring-alerts.editalerttemplatevariables
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-alert-template-2
+      description: YugabyteDB Anywhere Delete an Alert Template Variables
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-alerts-monitoring-alerts.deletealerttemplatevariables
+      with:
+        cUUID: tools.cUUID
+        variableUUID: tools.variableUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-filtered-list-2
+      description: YugabyteDB Anywhere Get Filtered List of Alert Configuration Templates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-alerts-monitoring-alerts.listalerttemplates
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-all-alerts
+      description: YugabyteDB Anywhere List All Alerts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-alerts-monitoring-alerts.listofalerts
+      with:
+        cUUID: tools.cUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-acknowledge-all-alerts
+      description: YugabyteDB Anywhere Acknowledge All Alerts - Deprecated
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-alerts-monitoring-alerts.acknowledgebyfilter
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-active-alerts
+      description: YugabyteDB Anywhere List Active Alerts - Deprecated
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-alerts-monitoring-alerts.listactive
+      with:
+        cUUID: tools.cUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-count-alerts
+      description: YugabyteDB Anywhere Count Alerts
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-alerts-monitoring-alerts.countalerts
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-alerts-paginated
+      description: YugabyteDB Anywhere List Alerts (paginated)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-alerts-monitoring-alerts.pagealerts
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-details-alert
+      description: YugabyteDB Anywhere Get Details of an Alert
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-alerts-monitoring-alerts.get
+      with:
+        cUUID: tools.cUUID
+        alertUUID: tools.alertUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-acknowledge-alert
+      description: YugabyteDB Anywhere Acknowledge an Alert
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-alerts-monitoring-alerts.acknowledge
+      with:
+        cUUID: tools.cUUID
+        alertUUID: tools.alertUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,393 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Universe Management — PITR management
+  description: 'YugabyteDB Anywhere v1 — Universe Management — PITR management. 6 operations. Lead operation: YugabyteDB Anywhere
+    Clone Namespace via PITR on a Universe. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - PITR management
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-universes-pitr-management
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Universe Management — PITR management business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: api-v1-customers-cUUID-universes-uniUUID-clone
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/clone
+      operations:
+      - name: clonenamespace
+        method: POST
+        description: YugabyteDB Anywhere Clone Namespace via PITR on a Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-keyspaces-tableType-keyspaceName-pitr_c
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/keyspaces/{tableType}/{keyspaceName}/pitr_config
+      operations:
+      - name: createpitrconfig
+        method: POST
+        description: YugabyteDB Anywhere Create Pitr Config for a Keyspace in a Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: tableType
+          in: path
+          type: string
+          required: true
+        - name: keyspaceName
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-pitr
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/pitr
+      operations:
+      - name: performpitr
+        method: POST
+        description: YugabyteDB Anywhere Perform PITR on a Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-pitr_config
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/pitr_config
+      operations:
+      - name: listofpitrconfigs
+        method: GET
+        description: YugabyteDB Anywhere List the PITR Configs of a Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-pitr_config-pUUID
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/pitr_config/{pUUID}
+      operations:
+      - name: deletepitrconfig
+        method: DELETE
+        description: YugabyteDB Anywhere Delete Pitr Config on a Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: updatepitrconfig
+        method: PUT
+        description: YugabyteDB Anywhere Update Pitr Config for a Keyspace in a Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-universes-pitr-management-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Universe Management — PITR management. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/clone
+      name: api-v1-customers-cuuid-universes-uniuuid-clone
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-clone.
+      operations:
+      - method: POST
+        name: clonenamespace
+        description: YugabyteDB Anywhere Clone Namespace via PITR on a Universe
+        call: anywhere-v1-universes-pitr-management.clonenamespace
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/keyspaces/{tabletype}/{keyspacename}/pitr-config
+      name: api-v1-customers-cuuid-universes-uniuuid-keyspaces-tabletype-keyspacename-pitr-c
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-keyspaces-tableType-keyspaceName-pitr_c.
+      operations:
+      - method: POST
+        name: createpitrconfig
+        description: YugabyteDB Anywhere Create Pitr Config for a Keyspace in a Universe
+        call: anywhere-v1-universes-pitr-management.createpitrconfig
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          tableType: rest.tableType
+          keyspaceName: rest.keyspaceName
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/pitr
+      name: api-v1-customers-cuuid-universes-uniuuid-pitr
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-pitr.
+      operations:
+      - method: POST
+        name: performpitr
+        description: YugabyteDB Anywhere Perform PITR on a Universe
+        call: anywhere-v1-universes-pitr-management.performpitr
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/pitr-config
+      name: api-v1-customers-cuuid-universes-uniuuid-pitr-config
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-pitr_config.
+      operations:
+      - method: GET
+        name: listofpitrconfigs
+        description: YugabyteDB Anywhere List the PITR Configs of a Universe
+        call: anywhere-v1-universes-pitr-management.listofpitrconfigs
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/pitr-config/{puuid}
+      name: api-v1-customers-cuuid-universes-uniuuid-pitr-config-puuid
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-pitr_config-pUUID.
+      operations:
+      - method: DELETE
+        name: deletepitrconfig
+        description: YugabyteDB Anywhere Delete Pitr Config on a Universe
+        call: anywhere-v1-universes-pitr-management.deletepitrconfig
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          pUUID: rest.pUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatepitrconfig
+        description: YugabyteDB Anywhere Update Pitr Config for a Keyspace in a Universe
+        call: anywhere-v1-universes-pitr-management.updatepitrconfig
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          pUUID: rest.pUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-universes-pitr-management-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Universe Management — PITR management. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-clone-namespace-pitr
+      description: YugabyteDB Anywhere Clone Namespace via PITR on a Universe
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-pitr-management.clonenamespace
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-pitr-config
+      description: YugabyteDB Anywhere Create Pitr Config for a Keyspace in a Universe
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-pitr-management.createpitrconfig
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        tableType: tools.tableType
+        keyspaceName: tools.keyspaceName
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-perform-pitr-universe
+      description: YugabyteDB Anywhere Perform PITR on a Universe
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-pitr-management.performpitr
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-pitr-configs
+      description: YugabyteDB Anywhere List the PITR Configs of a Universe
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-universes-pitr-management.listofpitrconfigs
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-pitr-config
+      description: YugabyteDB Anywhere Delete Pitr Config on a Universe
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-universes-pitr-management.deletepitrconfig
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        pUUID: tools.pUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-update-pitr-config
+      description: YugabyteDB Anywhere Update Pitr Config for a Keyspace in a Universe
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-universes-pitr-management.updatepitrconfig
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        pUUID: tools.pUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

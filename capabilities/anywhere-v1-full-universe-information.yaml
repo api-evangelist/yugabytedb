@@ -1,0 +1,602 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere APIs — Universe information
+  description: 'YugabyteDB Anywhere APIs — Universe information. 12 operations. Lead operation: YugabyteDB Anywhere Get a
+    Cost Estimate for All Universes. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Universe information
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-full-universe-information
+    baseUri: ''
+    description: YugabyteDB Anywhere APIs — Universe information business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-cost
+      path: /api/v1/customers/{cUUID}/cost
+      operations:
+      - name: getuniversecostforall
+        method: GET
+        description: YugabyteDB Anywhere Get a Cost Estimate for All Universes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-cost
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/cost
+      operations:
+      - name: getuniversecost
+        method: GET
+        description: YugabyteDB Anywhere Get a Cost Estimate for a Universe - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-health_check
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/health_check
+      operations:
+      - name: healthcheckuniverse
+        method: GET
+        description: YugabyteDB Anywhere Return Results for the Last Health Check
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-leader
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/leader
+      operations:
+      - name: getmasterleaderip
+        method: GET
+        description: YugabyteDB Anywhere Get IP Address of a Universe's Master Leader
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-live_queries
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/live_queries
+      operations:
+      - name: getlivequeries
+        method: GET
+        description: YugabyteDB Anywhere Get Live Queries for a Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-master_infos
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/master_infos
+      operations:
+      - name: getmasterinfos
+        method: GET
+        description: YugabyteDB Anywhere Get Master Information List
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-slow_queries
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/slow_queries
+      operations:
+      - name: resetslowqueries
+        method: DELETE
+        description: YugabyteDB Anywhere Reset Slow Queries for a Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: getslowqueries
+        method: GET
+        description: YugabyteDB Anywhere Get Slow Queries for a Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-status
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/status
+      operations:
+      - name: universestatus
+        method: GET
+        description: YugabyteDB Anywhere Get a Universe's Status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-trigger_health_check
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/trigger_health_check
+      operations:
+      - name: triggerhealthcheck
+        method: GET
+        description: YugabyteDB Anywhere Trigger a Universe Health Check
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-universe_resources
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/universe_resources
+      operations:
+      - name: getuniverseresources
+        method: GET
+        description: YugabyteDB Anywhere Get a Resource Usage Estimate for a Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-nodeName-download_logs
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/{nodeName}/download_logs
+      operations:
+      - name: downloadnodelogs
+        method: GET
+        description: YugabyteDB Anywhere Download a Node's Logs - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: nodeName
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-full-universe-information-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere APIs — Universe information. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/cost
+      name: api-v1-customers-cuuid-cost
+      description: REST surface for api-v1-customers-cUUID-cost.
+      operations:
+      - method: GET
+        name: getuniversecostforall
+        description: YugabyteDB Anywhere Get a Cost Estimate for All Universes
+        call: anywhere-v1-full-universe-information.getuniversecostforall
+        with:
+          cUUID: rest.cUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/cost
+      name: api-v1-customers-cuuid-universes-uniuuid-cost
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-cost.
+      operations:
+      - method: GET
+        name: getuniversecost
+        description: YugabyteDB Anywhere Get a Cost Estimate for a Universe - Deprecated
+        call: anywhere-v1-full-universe-information.getuniversecost
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/health-check
+      name: api-v1-customers-cuuid-universes-uniuuid-health-check
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-health_check.
+      operations:
+      - method: GET
+        name: healthcheckuniverse
+        description: YugabyteDB Anywhere Return Results for the Last Health Check
+        call: anywhere-v1-full-universe-information.healthcheckuniverse
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/leader
+      name: api-v1-customers-cuuid-universes-uniuuid-leader
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-leader.
+      operations:
+      - method: GET
+        name: getmasterleaderip
+        description: YugabyteDB Anywhere Get IP Address of a Universe's Master Leader
+        call: anywhere-v1-full-universe-information.getmasterleaderip
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/live-queries
+      name: api-v1-customers-cuuid-universes-uniuuid-live-queries
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-live_queries.
+      operations:
+      - method: GET
+        name: getlivequeries
+        description: YugabyteDB Anywhere Get Live Queries for a Universe
+        call: anywhere-v1-full-universe-information.getlivequeries
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/master-infos
+      name: api-v1-customers-cuuid-universes-uniuuid-master-infos
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-master_infos.
+      operations:
+      - method: GET
+        name: getmasterinfos
+        description: YugabyteDB Anywhere Get Master Information List
+        call: anywhere-v1-full-universe-information.getmasterinfos
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/slow-queries
+      name: api-v1-customers-cuuid-universes-uniuuid-slow-queries
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-slow_queries.
+      operations:
+      - method: DELETE
+        name: resetslowqueries
+        description: YugabyteDB Anywhere Reset Slow Queries for a Universe
+        call: anywhere-v1-full-universe-information.resetslowqueries
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getslowqueries
+        description: YugabyteDB Anywhere Get Slow Queries for a Universe
+        call: anywhere-v1-full-universe-information.getslowqueries
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/status
+      name: api-v1-customers-cuuid-universes-uniuuid-status
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-status.
+      operations:
+      - method: GET
+        name: universestatus
+        description: YugabyteDB Anywhere Get a Universe's Status
+        call: anywhere-v1-full-universe-information.universestatus
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/trigger-health-check
+      name: api-v1-customers-cuuid-universes-uniuuid-trigger-health-check
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-trigger_health_check.
+      operations:
+      - method: GET
+        name: triggerhealthcheck
+        description: YugabyteDB Anywhere Trigger a Universe Health Check
+        call: anywhere-v1-full-universe-information.triggerhealthcheck
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/universe-resources
+      name: api-v1-customers-cuuid-universes-uniuuid-universe-resources
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-universe_resources.
+      operations:
+      - method: GET
+        name: getuniverseresources
+        description: YugabyteDB Anywhere Get a Resource Usage Estimate for a Universe
+        call: anywhere-v1-full-universe-information.getuniverseresources
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/{nodename}/download-logs
+      name: api-v1-customers-cuuid-universes-uniuuid-nodename-download-logs
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-nodeName-download_logs.
+      operations:
+      - method: GET
+        name: downloadnodelogs
+        description: YugabyteDB Anywhere Download a Node's Logs - Deprecated
+        call: anywhere-v1-full-universe-information.downloadnodelogs
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          nodeName: rest.nodeName
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-full-universe-information-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere APIs — Universe information. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-get-cost-estimate
+      description: YugabyteDB Anywhere Get a Cost Estimate for All Universes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-universe-information.getuniversecostforall
+      with:
+        cUUID: tools.cUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-cost-estimate-2
+      description: YugabyteDB Anywhere Get a Cost Estimate for a Universe - Deprecated
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-universe-information.getuniversecost
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-return-results-last
+      description: YugabyteDB Anywhere Return Results for the Last Health Check
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-universe-information.healthcheckuniverse
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-ip-address
+      description: YugabyteDB Anywhere Get IP Address of a Universe's Master Leader
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-universe-information.getmasterleaderip
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-live-queries
+      description: YugabyteDB Anywhere Get Live Queries for a Universe
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-universe-information.getlivequeries
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-master-information
+      description: YugabyteDB Anywhere Get Master Information List
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-universe-information.getmasterinfos
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-reset-slow-queries
+      description: YugabyteDB Anywhere Reset Slow Queries for a Universe
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-full-universe-information.resetslowqueries
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-slow-queries
+      description: YugabyteDB Anywhere Get Slow Queries for a Universe
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-universe-information.getslowqueries
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-universe-s-status
+      description: YugabyteDB Anywhere Get a Universe's Status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-universe-information.universestatus
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-trigger-universe-health
+      description: YugabyteDB Anywhere Trigger a Universe Health Check
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-universe-information.triggerhealthcheck
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-resource-usage
+      description: YugabyteDB Anywhere Get a Resource Usage Estimate for a Universe
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-universe-information.getuniverseresources
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-download-node-s-logs
+      description: YugabyteDB Anywhere Download a Node's Logs - Deprecated
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-universe-information.downloadnodelogs
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        nodeName: tools.nodeName
+      outputParameters:
+      - type: object
+        mapping: $.

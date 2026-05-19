@@ -1,0 +1,130 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Aeon REST API — ReadReplicas
+  description: 'YugabyteDB Aeon REST API — ReadReplicas. 3 operations. Lead operation: YugabyteDB Aeon List Read Replicas.
+    Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - ReadReplicas
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: aeon-readreplicas
+    baseUri: https://cloud.yugabyte.com/api/public/v1
+    description: YugabyteDB Aeon REST API — ReadReplicas business capability. Self-contained, no shared references.
+    resources:
+    - name: accounts-accountId-projects-projectId-clusters-clusterId-read-replicas
+      path: /accounts/{accountId}/projects/{projectId}/clusters/{clusterId}/read-replicas
+      operations:
+      - name: listreadreplicas
+        method: GET
+        description: YugabyteDB Aeon List Read Replicas
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createreadreplica
+        method: POST
+        description: YugabyteDB Aeon Create Read Replica
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletereadreplica
+        method: DELETE
+        description: YugabyteDB Aeon Delete Read Replica
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.YUGABYTEDB_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: aeon-readreplicas-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Aeon REST API — ReadReplicas. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/accounts/{accountid}/projects/{projectid}/clusters/{clusterid}/read-replicas
+      name: accounts-accountid-projects-projectid-clusters-clusterid-read-replicas
+      description: REST surface for accounts-accountId-projects-projectId-clusters-clusterId-read-replicas.
+      operations:
+      - method: GET
+        name: listreadreplicas
+        description: YugabyteDB Aeon List Read Replicas
+        call: aeon-readreplicas.listreadreplicas
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createreadreplica
+        description: YugabyteDB Aeon Create Read Replica
+        call: aeon-readreplicas.createreadreplica
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletereadreplica
+        description: YugabyteDB Aeon Delete Read Replica
+        call: aeon-readreplicas.deletereadreplica
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: aeon-readreplicas-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Aeon REST API — ReadReplicas. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: yugabytedb-aeon-list-read-replicas
+      description: YugabyteDB Aeon List Read Replicas
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aeon-readreplicas.listreadreplicas
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-aeon-create-read-replica
+      description: YugabyteDB Aeon Create Read Replica
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: aeon-readreplicas.createreadreplica
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-aeon-delete-read-replica
+      description: YugabyteDB Aeon Delete Read Replica
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: aeon-readreplicas.deletereadreplica
+      outputParameters:
+      - type: object
+        mapping: $.

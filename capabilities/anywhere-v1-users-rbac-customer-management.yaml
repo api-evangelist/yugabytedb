@@ -1,0 +1,301 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Users, Sessions, and RBAC — Customer management
+  description: 'YugabyteDB Anywhere v1 — Users, Sessions, and RBAC — Customer management. 6 operations. Lead operation: YugabyteDB
+    Anywhere List Customers. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Customer management
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-users-rbac-customer-management
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Users, Sessions, and RBAC — Customer management business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: api-v1-customers
+      path: /api/v1/customers
+      operations:
+      - name: listofcustomers
+        method: GET
+        description: YugabyteDB Anywhere List Customers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID
+      path: /api/v1/customers/{cUUID}
+      operations:
+      - name: deletecustomer
+        method: DELETE
+        description: YugabyteDB Anywhere Delete a Customer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: customerdetail
+        method: GET
+        description: YugabyteDB Anywhere Get a Customer's Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+      - name: updatecustomer
+        method: PUT
+        description: YugabyteDB Anywhere Update a Customer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-host_info
+      path: /api/v1/customers/{cUUID}/host_info
+      operations:
+      - name: gethostinfo
+        method: GET
+        description: YugabyteDB Anywhere Get a Customer's Host Info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-metrics
+      path: /api/v1/customers/{cUUID}/metrics
+      operations:
+      - name: metrics
+        method: POST
+        description: YugabyteDB Anywhere Add Metrics to a Customer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-users-rbac-customer-management-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Users, Sessions, and RBAC — Customer management. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers
+      name: api-v1-customers
+      description: REST surface for api-v1-customers.
+      operations:
+      - method: GET
+        name: listofcustomers
+        description: YugabyteDB Anywhere List Customers
+        call: anywhere-v1-users-rbac-customer-management.listofcustomers
+        with:
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}
+      name: api-v1-customers-cuuid
+      description: REST surface for api-v1-customers-cUUID.
+      operations:
+      - method: DELETE
+        name: deletecustomer
+        description: YugabyteDB Anywhere Delete a Customer
+        call: anywhere-v1-users-rbac-customer-management.deletecustomer
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: customerdetail
+        description: YugabyteDB Anywhere Get a Customer's Details
+        call: anywhere-v1-users-rbac-customer-management.customerdetail
+        with:
+          cUUID: rest.cUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatecustomer
+        description: YugabyteDB Anywhere Update a Customer
+        call: anywhere-v1-users-rbac-customer-management.updatecustomer
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/host-info
+      name: api-v1-customers-cuuid-host-info
+      description: REST surface for api-v1-customers-cUUID-host_info.
+      operations:
+      - method: GET
+        name: gethostinfo
+        description: YugabyteDB Anywhere Get a Customer's Host Info
+        call: anywhere-v1-users-rbac-customer-management.gethostinfo
+        with:
+          cUUID: rest.cUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/metrics
+      name: api-v1-customers-cuuid-metrics
+      description: REST surface for api-v1-customers-cUUID-metrics.
+      operations:
+      - method: POST
+        name: metrics
+        description: YugabyteDB Anywhere Add Metrics to a Customer
+        call: anywhere-v1-users-rbac-customer-management.metrics
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-users-rbac-customer-management-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Users, Sessions, and RBAC — Customer management. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-list-customers
+      description: YugabyteDB Anywhere List Customers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-users-rbac-customer-management.listofcustomers
+      with:
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-customer
+      description: YugabyteDB Anywhere Delete a Customer
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-users-rbac-customer-management.deletecustomer
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-customer-s-details
+      description: YugabyteDB Anywhere Get a Customer's Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-users-rbac-customer-management.customerdetail
+      with:
+        cUUID: tools.cUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-update-customer
+      description: YugabyteDB Anywhere Update a Customer
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-users-rbac-customer-management.updatecustomer
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-customer-s-host
+      description: YugabyteDB Anywhere Get a Customer's Host Info
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-users-rbac-customer-management.gethostinfo
+      with:
+        cUUID: tools.cUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-add-metrics-customer
+      description: YugabyteDB Anywhere Add Metrics to a Customer
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-users-rbac-customer-management.metrics
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

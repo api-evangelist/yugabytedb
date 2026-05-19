@@ -1,0 +1,261 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Aeon REST API — Clusters
+  description: 'YugabyteDB Aeon REST API — Clusters. 7 operations. Lead operation: YugabyteDB Aeon List Clusters. Self-contained
+    Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Clusters
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: aeon-clusters
+    baseUri: https://cloud.yugabyte.com/api/public/v1
+    description: YugabyteDB Aeon REST API — Clusters business capability. Self-contained, no shared references.
+    resources:
+    - name: accounts-accountId-projects-projectId-clusters
+      path: /accounts/{accountId}/projects/{projectId}/clusters
+      operations:
+      - name: listclusters
+        method: GET
+        description: YugabyteDB Aeon List Clusters
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createcluster
+        method: POST
+        description: YugabyteDB Aeon Create Cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: accounts-accountId-projects-projectId-clusters-clusterId
+      path: /accounts/{accountId}/projects/{projectId}/clusters/{clusterId}
+      operations:
+      - name: getcluster
+        method: GET
+        description: YugabyteDB Aeon Get Cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatecluster
+        method: PUT
+        description: YugabyteDB Aeon Update Cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletecluster
+        method: DELETE
+        description: YugabyteDB Aeon Delete Cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: accounts-accountId-projects-projectId-clusters-clusterId-pause
+      path: /accounts/{accountId}/projects/{projectId}/clusters/{clusterId}/pause
+      operations:
+      - name: pausecluster
+        method: POST
+        description: YugabyteDB Aeon Pause Cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: accounts-accountId-projects-projectId-clusters-clusterId-resume
+      path: /accounts/{accountId}/projects/{projectId}/clusters/{clusterId}/resume
+      operations:
+      - name: resumecluster
+        method: POST
+        description: YugabyteDB Aeon Resume Cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.YUGABYTEDB_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: aeon-clusters-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Aeon REST API — Clusters. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/accounts/{accountid}/projects/{projectid}/clusters
+      name: accounts-accountid-projects-projectid-clusters
+      description: REST surface for accounts-accountId-projects-projectId-clusters.
+      operations:
+      - method: GET
+        name: listclusters
+        description: YugabyteDB Aeon List Clusters
+        call: aeon-clusters.listclusters
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createcluster
+        description: YugabyteDB Aeon Create Cluster
+        call: aeon-clusters.createcluster
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts/{accountid}/projects/{projectid}/clusters/{clusterid}
+      name: accounts-accountid-projects-projectid-clusters-clusterid
+      description: REST surface for accounts-accountId-projects-projectId-clusters-clusterId.
+      operations:
+      - method: GET
+        name: getcluster
+        description: YugabyteDB Aeon Get Cluster
+        call: aeon-clusters.getcluster
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatecluster
+        description: YugabyteDB Aeon Update Cluster
+        call: aeon-clusters.updatecluster
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletecluster
+        description: YugabyteDB Aeon Delete Cluster
+        call: aeon-clusters.deletecluster
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts/{accountid}/projects/{projectid}/clusters/{clusterid}/pause
+      name: accounts-accountid-projects-projectid-clusters-clusterid-pause
+      description: REST surface for accounts-accountId-projects-projectId-clusters-clusterId-pause.
+      operations:
+      - method: POST
+        name: pausecluster
+        description: YugabyteDB Aeon Pause Cluster
+        call: aeon-clusters.pausecluster
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts/{accountid}/projects/{projectid}/clusters/{clusterid}/resume
+      name: accounts-accountid-projects-projectid-clusters-clusterid-resume
+      description: REST surface for accounts-accountId-projects-projectId-clusters-clusterId-resume.
+      operations:
+      - method: POST
+        name: resumecluster
+        description: YugabyteDB Aeon Resume Cluster
+        call: aeon-clusters.resumecluster
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: aeon-clusters-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Aeon REST API — Clusters. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: yugabytedb-aeon-list-clusters
+      description: YugabyteDB Aeon List Clusters
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aeon-clusters.listclusters
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-aeon-create-cluster
+      description: YugabyteDB Aeon Create Cluster
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: aeon-clusters.createcluster
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-aeon-get-cluster
+      description: YugabyteDB Aeon Get Cluster
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aeon-clusters.getcluster
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-aeon-update-cluster
+      description: YugabyteDB Aeon Update Cluster
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: aeon-clusters.updatecluster
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-aeon-delete-cluster
+      description: YugabyteDB Aeon Delete Cluster
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: aeon-clusters.deletecluster
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-aeon-pause-cluster
+      description: YugabyteDB Aeon Pause Cluster
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: aeon-clusters.pausecluster
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-aeon-resume-cluster
+      description: YugabyteDB Aeon Resume Cluster
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: aeon-clusters.resumecluster
+      outputParameters:
+      - type: object
+        mapping: $.

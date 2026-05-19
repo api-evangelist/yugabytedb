@@ -1,0 +1,227 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — High Availability — Platform Replication
+  description: 'YugabyteDB Anywhere v1 — High Availability — Platform Replication. 4 operations. Lead operation: YugabyteDB
+    Anywhere List Backups. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Platform Replication
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-high-availability-platform-replication
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — High Availability — Platform Replication business capability. Self-contained, no
+      shared references.
+    resources:
+    - name: api-v1-settings-ha-config-cUUID-backup-list
+      path: /api/v1/settings/ha/config/{cUUID}/backup/list
+      operations:
+      - name: listbackups
+        method: GET
+        description: YugabyteDB Anywhere List Backups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: leader
+          in: query
+          type: string
+    - name: api-v1-settings-ha-config-cUUID-replication_schedule
+      path: /api/v1/settings/ha/config/{cUUID}/replication_schedule
+      operations:
+      - name: getbackupinfo
+        method: GET
+        description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-settings-ha-config-cUUID-replication_schedule-start
+      path: /api/v1/settings/ha/config/{cUUID}/replication_schedule/start
+      operations:
+      - name: startperiodicbackup
+        method: PUT
+        description: YugabyteDB Anywhere Start Periodic Backup
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-settings-ha-config-cUUID-replication_schedule-stop
+      path: /api/v1/settings/ha/config/{cUUID}/replication_schedule/stop
+      operations:
+      - name: stopperiodicbackup
+        method: PUT
+        description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-high-availability-platform-replication-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — High Availability — Platform Replication. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/settings/ha/config/{cuuid}/backup/list
+      name: api-v1-settings-ha-config-cuuid-backup-list
+      description: REST surface for api-v1-settings-ha-config-cUUID-backup-list.
+      operations:
+      - method: GET
+        name: listbackups
+        description: YugabyteDB Anywhere List Backups
+        call: anywhere-v1-high-availability-platform-replication.listbackups
+        with:
+          cUUID: rest.cUUID
+          leader: rest.leader
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/settings/ha/config/{cuuid}/replication-schedule
+      name: api-v1-settings-ha-config-cuuid-replication-schedule
+      description: REST surface for api-v1-settings-ha-config-cUUID-replication_schedule.
+      operations:
+      - method: GET
+        name: getbackupinfo
+        description: getbackupinfo
+        call: anywhere-v1-high-availability-platform-replication.getbackupinfo
+        with:
+          cUUID: rest.cUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/settings/ha/config/{cuuid}/replication-schedule/start
+      name: api-v1-settings-ha-config-cuuid-replication-schedule-start
+      description: REST surface for api-v1-settings-ha-config-cUUID-replication_schedule-start.
+      operations:
+      - method: PUT
+        name: startperiodicbackup
+        description: YugabyteDB Anywhere Start Periodic Backup
+        call: anywhere-v1-high-availability-platform-replication.startperiodicbackup
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/settings/ha/config/{cuuid}/replication-schedule/stop
+      name: api-v1-settings-ha-config-cuuid-replication-schedule-stop
+      description: REST surface for api-v1-settings-ha-config-cUUID-replication_schedule-stop.
+      operations:
+      - method: PUT
+        name: stopperiodicbackup
+        description: stopperiodicbackup
+        call: anywhere-v1-high-availability-platform-replication.stopperiodicbackup
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-high-availability-platform-replication-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — High Availability — Platform Replication. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-list-backups
+      description: YugabyteDB Anywhere List Backups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-high-availability-platform-replication.listbackups
+      with:
+        cUUID: tools.cUUID
+        leader: tools.leader
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getbackupinfo
+      description: getbackupinfo
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-high-availability-platform-replication.getbackupinfo
+      with:
+        cUUID: tools.cUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-start-periodic-backup
+      description: YugabyteDB Anywhere Start Periodic Backup
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-high-availability-platform-replication.startperiodicbackup
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: stopperiodicbackup
+      description: stopperiodicbackup
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-high-availability-platform-replication.stopperiodicbackup
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,637 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere APIs — Node instances
+  description: 'YugabyteDB Anywhere APIs — Node instances. 11 operations. Lead operation: YugabyteDB Anywhere List All Node
+    Instances of a Customer. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Node instances
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-full-node-instances
+    baseUri: ''
+    description: YugabyteDB Anywhere APIs — Node instances business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-nodes
+      path: /api/v1/customers/{cUUID}/nodes
+      operations:
+      - name: list
+        method: GET
+        description: YugabyteDB Anywhere List All Node Instances of a Customer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: nodeIp
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-nodes-nodeUUID-list
+      path: /api/v1/customers/{cUUID}/nodes/{nodeUUID}/list
+      operations:
+      - name: getnodeinstance
+        method: GET
+        description: YugabyteDB Anywhere Get a Node Instance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: nodeUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-providers-pUUID-instances-instanceIP
+      path: /api/v1/customers/{cUUID}/providers/{pUUID}/instances/{instanceIP}
+      operations:
+      - name: deleteinstance
+        method: DELETE
+        description: YugabyteDB Anywhere Delete a Node Instance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: instanceIP
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: detachednodeaction
+        method: POST
+        description: YugabyteDB Anywhere Detached Node Action
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: instanceIP
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-providers-pUUID-instances-instanceIP-state
+      path: /api/v1/customers/{cUUID}/providers/{pUUID}/instances/{instanceIP}/state
+      operations:
+      - name: updatestate
+        method: PUT
+        description: YugabyteDB Anywhere Update Node Instance State
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: instanceIP
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-providers-pUUID-nodes-list
+      path: /api/v1/customers/{cUUID}/providers/{pUUID}/nodes/list
+      operations:
+      - name: listbyprovider
+        method: GET
+        description: YugabyteDB Anywhere List All of a Provider's Node Instances
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-universeUUID-nodes-nodeName
+      path: /api/v1/customers/{cUUID}/universes/{universeUUID}/nodes/{nodeName}
+      operations:
+      - name: nodeaction
+        method: PUT
+        description: YugabyteDB Anywhere Perform the Specified Action on the Universe Node
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: universeUUID
+          in: path
+          type: string
+          required: true
+        - name: nodeName
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-universeUUID-nodes-nodeName-details
+      path: /api/v1/customers/{cUUID}/universes/{universeUUID}/nodes/{nodeName}/details
+      operations:
+      - name: getnodedetails
+        method: GET
+        description: YugabyteDB Anywhere Get Node Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: universeUUID
+          in: path
+          type: string
+          required: true
+        - name: nodeName
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-zones-azUUID-nodes
+      path: /api/v1/customers/{cUUID}/zones/{azUUID}/nodes
+      operations:
+      - name: createnodeinstance
+        method: POST
+        description: YugabyteDB Anywhere Create a Node Instance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: azUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-zones-azUUID-nodes-list
+      path: /api/v1/customers/{cUUID}/zones/{azUUID}/nodes/list
+      operations:
+      - name: listbyzone
+        method: GET
+        description: YugabyteDB Anywhere List All of a Zone's Node Instances
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: azUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-zones-azUUID-nodes-validate
+      path: /api/v1/customers/{cUUID}/zones/{azUUID}/nodes/validate
+      operations:
+      - name: validatenodeinstance
+        method: POST
+        description: YugabyteDB Anywhere Validate a Node Instance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: azUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-full-node-instances-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere APIs — Node instances. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/nodes
+      name: api-v1-customers-cuuid-nodes
+      description: REST surface for api-v1-customers-cUUID-nodes.
+      operations:
+      - method: GET
+        name: list
+        description: YugabyteDB Anywhere List All Node Instances of a Customer
+        call: anywhere-v1-full-node-instances.list
+        with:
+          cUUID: rest.cUUID
+          nodeIp: rest.nodeIp
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/nodes/{nodeuuid}/list
+      name: api-v1-customers-cuuid-nodes-nodeuuid-list
+      description: REST surface for api-v1-customers-cUUID-nodes-nodeUUID-list.
+      operations:
+      - method: GET
+        name: getnodeinstance
+        description: YugabyteDB Anywhere Get a Node Instance
+        call: anywhere-v1-full-node-instances.getnodeinstance
+        with:
+          cUUID: rest.cUUID
+          nodeUUID: rest.nodeUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/providers/{puuid}/instances/{instanceip}
+      name: api-v1-customers-cuuid-providers-puuid-instances-instanceip
+      description: REST surface for api-v1-customers-cUUID-providers-pUUID-instances-instanceIP.
+      operations:
+      - method: DELETE
+        name: deleteinstance
+        description: YugabyteDB Anywhere Delete a Node Instance
+        call: anywhere-v1-full-node-instances.deleteinstance
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          instanceIP: rest.instanceIP
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: detachednodeaction
+        description: YugabyteDB Anywhere Detached Node Action
+        call: anywhere-v1-full-node-instances.detachednodeaction
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          instanceIP: rest.instanceIP
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/providers/{puuid}/instances/{instanceip}/state
+      name: api-v1-customers-cuuid-providers-puuid-instances-instanceip-state
+      description: REST surface for api-v1-customers-cUUID-providers-pUUID-instances-instanceIP-state.
+      operations:
+      - method: PUT
+        name: updatestate
+        description: YugabyteDB Anywhere Update Node Instance State
+        call: anywhere-v1-full-node-instances.updatestate
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          instanceIP: rest.instanceIP
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/providers/{puuid}/nodes/list
+      name: api-v1-customers-cuuid-providers-puuid-nodes-list
+      description: REST surface for api-v1-customers-cUUID-providers-pUUID-nodes-list.
+      operations:
+      - method: GET
+        name: listbyprovider
+        description: YugabyteDB Anywhere List All of a Provider's Node Instances
+        call: anywhere-v1-full-node-instances.listbyprovider
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{universeuuid}/nodes/{nodename}
+      name: api-v1-customers-cuuid-universes-universeuuid-nodes-nodename
+      description: REST surface for api-v1-customers-cUUID-universes-universeUUID-nodes-nodeName.
+      operations:
+      - method: PUT
+        name: nodeaction
+        description: YugabyteDB Anywhere Perform the Specified Action on the Universe Node
+        call: anywhere-v1-full-node-instances.nodeaction
+        with:
+          cUUID: rest.cUUID
+          universeUUID: rest.universeUUID
+          nodeName: rest.nodeName
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{universeuuid}/nodes/{nodename}/details
+      name: api-v1-customers-cuuid-universes-universeuuid-nodes-nodename-details
+      description: REST surface for api-v1-customers-cUUID-universes-universeUUID-nodes-nodeName-details.
+      operations:
+      - method: GET
+        name: getnodedetails
+        description: YugabyteDB Anywhere Get Node Details
+        call: anywhere-v1-full-node-instances.getnodedetails
+        with:
+          cUUID: rest.cUUID
+          universeUUID: rest.universeUUID
+          nodeName: rest.nodeName
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/zones/{azuuid}/nodes
+      name: api-v1-customers-cuuid-zones-azuuid-nodes
+      description: REST surface for api-v1-customers-cUUID-zones-azUUID-nodes.
+      operations:
+      - method: POST
+        name: createnodeinstance
+        description: YugabyteDB Anywhere Create a Node Instance
+        call: anywhere-v1-full-node-instances.createnodeinstance
+        with:
+          cUUID: rest.cUUID
+          azUUID: rest.azUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/zones/{azuuid}/nodes/list
+      name: api-v1-customers-cuuid-zones-azuuid-nodes-list
+      description: REST surface for api-v1-customers-cUUID-zones-azUUID-nodes-list.
+      operations:
+      - method: GET
+        name: listbyzone
+        description: YugabyteDB Anywhere List All of a Zone's Node Instances
+        call: anywhere-v1-full-node-instances.listbyzone
+        with:
+          cUUID: rest.cUUID
+          azUUID: rest.azUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/zones/{azuuid}/nodes/validate
+      name: api-v1-customers-cuuid-zones-azuuid-nodes-validate
+      description: REST surface for api-v1-customers-cUUID-zones-azUUID-nodes-validate.
+      operations:
+      - method: POST
+        name: validatenodeinstance
+        description: YugabyteDB Anywhere Validate a Node Instance
+        call: anywhere-v1-full-node-instances.validatenodeinstance
+        with:
+          cUUID: rest.cUUID
+          azUUID: rest.azUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-full-node-instances-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere APIs — Node instances. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-list-all-node
+      description: YugabyteDB Anywhere List All Node Instances of a Customer
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-node-instances.list
+      with:
+        cUUID: tools.cUUID
+        nodeIp: tools.nodeIp
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-node-instance
+      description: YugabyteDB Anywhere Get a Node Instance
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-node-instances.getnodeinstance
+      with:
+        cUUID: tools.cUUID
+        nodeUUID: tools.nodeUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-node-instance
+      description: YugabyteDB Anywhere Delete a Node Instance
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-full-node-instances.deleteinstance
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        instanceIP: tools.instanceIP
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-detached-node-action
+      description: YugabyteDB Anywhere Detached Node Action
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-node-instances.detachednodeaction
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        instanceIP: tools.instanceIP
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-update-node-instance
+      description: YugabyteDB Anywhere Update Node Instance State
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-node-instances.updatestate
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        instanceIP: tools.instanceIP
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-all-provider-s
+      description: YugabyteDB Anywhere List All of a Provider's Node Instances
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-node-instances.listbyprovider
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-perform-specified-action
+      description: YugabyteDB Anywhere Perform the Specified Action on the Universe Node
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-node-instances.nodeaction
+      with:
+        cUUID: tools.cUUID
+        universeUUID: tools.universeUUID
+        nodeName: tools.nodeName
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-node-details
+      description: YugabyteDB Anywhere Get Node Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-node-instances.getnodedetails
+      with:
+        cUUID: tools.cUUID
+        universeUUID: tools.universeUUID
+        nodeName: tools.nodeName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-node-instance
+      description: YugabyteDB Anywhere Create a Node Instance
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-node-instances.createnodeinstance
+      with:
+        cUUID: tools.cUUID
+        azUUID: tools.azUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-all-zone-s
+      description: YugabyteDB Anywhere List All of a Zone's Node Instances
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-node-instances.listbyzone
+      with:
+        cUUID: tools.cUUID
+        azUUID: tools.azUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-validate-node-instance
+      description: YugabyteDB Anywhere Validate a Node Instance
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-node-instances.validatenodeinstance
+      with:
+        cUUID: tools.cUUID
+        azUUID: tools.azUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.

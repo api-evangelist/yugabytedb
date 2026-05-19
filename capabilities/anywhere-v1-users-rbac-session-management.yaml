@@ -1,0 +1,441 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Users, Sessions, and RBAC — Session management
+  description: 'YugabyteDB Anywhere v1 — Users, Sessions, and RBAC — Session management. 9 operations. Lead operation: YugabyteDB
+    Anywhere Authenticate User Using Email and Password. Self-contained Naftiko capability covering one Yugabytedb business
+    surface.'
+  tags:
+  - Yugabytedb
+  - Session management
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-users-rbac-session-management
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Users, Sessions, and RBAC — Session management business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: api-v1-api_login
+      path: /api/v1/api_login
+      operations:
+      - name: apilogin
+        method: POST
+        description: YugabyteDB Anywhere Authenticate User Using Email and Password
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-app_version
+      path: /api/v1/app_version
+      operations:
+      - name: appversion
+        method: GET
+        description: YugabyteDB Anywhere AppVersion
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-v1-customer_count
+      path: /api/v1/customer_count
+      operations:
+      - name: customercount
+        method: GET
+        description: YugabyteDB Anywhere CustomerCount
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-v1-customers-cUUID-admin_notifications
+      path: /api/v1/customers/{cUUID}/admin_notifications
+      operations:
+      - name: getadminnotifications
+        method: GET
+        description: YugabyteDB Anywhere Current List of Notifications for Admin
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-api_token
+      path: /api/v1/customers/{cUUID}/api_token
+      operations:
+      - name: apitoken
+        method: PUT
+        description: YugabyteDB Anywhere Regenerate and Fetch API Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: apiTokenVersion
+          in: query
+          type: integer
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-logs
+      path: /api/v1/logs
+      operations:
+      - name: getfilteredlogs
+        method: GET
+        description: YugabyteDB Anywhere GetFilteredLogs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: maxLines
+          in: query
+          type: integer
+        - name: universeName
+          in: query
+          type: string
+        - name: queryRegex
+          in: query
+          type: string
+        - name: startDate
+          in: query
+          type: string
+        - name: endDate
+          in: query
+          type: string
+    - name: api-v1-logs-maxLines
+      path: /api/v1/logs/{maxLines}
+      operations:
+      - name: getlogs
+        method: GET
+        description: YugabyteDB Anywhere GetLogs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: maxLines
+          in: path
+          type: integer
+          required: true
+    - name: api-v1-register
+      path: /api/v1/register
+      operations:
+      - name: registercustomer
+        method: POST
+        description: YugabyteDB Anywhere Register a Customer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: generateApiToken
+          in: query
+          type: boolean
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-session_info
+      path: /api/v1/session_info
+      operations:
+      - name: getsessioninfo
+        method: GET
+        description: YugabyteDB Anywhere Get Current User and Customer Uuid. This Will Not Generate or Return the API Token,
+          Use /api_token API for That.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: request
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-users-rbac-session-management-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Users, Sessions, and RBAC — Session management. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/api-login
+      name: api-v1-api-login
+      description: REST surface for api-v1-api_login.
+      operations:
+      - method: POST
+        name: apilogin
+        description: YugabyteDB Anywhere Authenticate User Using Email and Password
+        call: anywhere-v1-users-rbac-session-management.apilogin
+        with:
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/app-version
+      name: api-v1-app-version
+      description: REST surface for api-v1-app_version.
+      operations:
+      - method: GET
+        name: appversion
+        description: YugabyteDB Anywhere AppVersion
+        call: anywhere-v1-users-rbac-session-management.appversion
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customer-count
+      name: api-v1-customer-count
+      description: REST surface for api-v1-customer_count.
+      operations:
+      - method: GET
+        name: customercount
+        description: YugabyteDB Anywhere CustomerCount
+        call: anywhere-v1-users-rbac-session-management.customercount
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/admin-notifications
+      name: api-v1-customers-cuuid-admin-notifications
+      description: REST surface for api-v1-customers-cUUID-admin_notifications.
+      operations:
+      - method: GET
+        name: getadminnotifications
+        description: YugabyteDB Anywhere Current List of Notifications for Admin
+        call: anywhere-v1-users-rbac-session-management.getadminnotifications
+        with:
+          cUUID: rest.cUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/api-token
+      name: api-v1-customers-cuuid-api-token
+      description: REST surface for api-v1-customers-cUUID-api_token.
+      operations:
+      - method: PUT
+        name: apitoken
+        description: YugabyteDB Anywhere Regenerate and Fetch API Token
+        call: anywhere-v1-users-rbac-session-management.apitoken
+        with:
+          cUUID: rest.cUUID
+          apiTokenVersion: rest.apiTokenVersion
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/logs
+      name: api-v1-logs
+      description: REST surface for api-v1-logs.
+      operations:
+      - method: GET
+        name: getfilteredlogs
+        description: YugabyteDB Anywhere GetFilteredLogs
+        call: anywhere-v1-users-rbac-session-management.getfilteredlogs
+        with:
+          maxLines: rest.maxLines
+          universeName: rest.universeName
+          queryRegex: rest.queryRegex
+          startDate: rest.startDate
+          endDate: rest.endDate
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/logs/{maxlines}
+      name: api-v1-logs-maxlines
+      description: REST surface for api-v1-logs-maxLines.
+      operations:
+      - method: GET
+        name: getlogs
+        description: YugabyteDB Anywhere GetLogs
+        call: anywhere-v1-users-rbac-session-management.getlogs
+        with:
+          maxLines: rest.maxLines
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/register
+      name: api-v1-register
+      description: REST surface for api-v1-register.
+      operations:
+      - method: POST
+        name: registercustomer
+        description: YugabyteDB Anywhere Register a Customer
+        call: anywhere-v1-users-rbac-session-management.registercustomer
+        with:
+          generateApiToken: rest.generateApiToken
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/session-info
+      name: api-v1-session-info
+      description: REST surface for api-v1-session_info.
+      operations:
+      - method: GET
+        name: getsessioninfo
+        description: YugabyteDB Anywhere Get Current User and Customer Uuid. This Will Not Generate or Return the API Token,
+          Use /api_token API for That.
+        call: anywhere-v1-users-rbac-session-management.getsessioninfo
+        with:
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-users-rbac-session-management-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Users, Sessions, and RBAC — Session management. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-authenticate-user-using
+      description: YugabyteDB Anywhere Authenticate User Using Email and Password
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-users-rbac-session-management.apilogin
+      with:
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-appversion
+      description: YugabyteDB Anywhere AppVersion
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-users-rbac-session-management.appversion
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-customercount
+      description: YugabyteDB Anywhere CustomerCount
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-users-rbac-session-management.customercount
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-current-list-notifications
+      description: YugabyteDB Anywhere Current List of Notifications for Admin
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-users-rbac-session-management.getadminnotifications
+      with:
+        cUUID: tools.cUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-regenerate-and-fetch
+      description: YugabyteDB Anywhere Regenerate and Fetch API Token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-users-rbac-session-management.apitoken
+      with:
+        cUUID: tools.cUUID
+        apiTokenVersion: tools.apiTokenVersion
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-getfilteredlogs
+      description: YugabyteDB Anywhere GetFilteredLogs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-users-rbac-session-management.getfilteredlogs
+      with:
+        maxLines: tools.maxLines
+        universeName: tools.universeName
+        queryRegex: tools.queryRegex
+        startDate: tools.startDate
+        endDate: tools.endDate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-getlogs
+      description: YugabyteDB Anywhere GetLogs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-users-rbac-session-management.getlogs
+      with:
+        maxLines: tools.maxLines
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-register-customer
+      description: YugabyteDB Anywhere Register a Customer
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-users-rbac-session-management.registercustomer
+      with:
+        generateApiToken: tools.generateApiToken
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-current-user
+      description: YugabyteDB Anywhere Get Current User and Customer Uuid. This Will Not Generate or Return the API Token,
+        Use /api_token API for That.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-users-rbac-session-management.getsessioninfo
+      with:
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,219 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere APIs — Telemetry Provider
+  description: 'YugabyteDB Anywhere APIs — Telemetry Provider. 4 operations. Lead operation: YugabyteDB Anywhere List All
+    Telemetry Providers. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Telemetry Provider
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-full-telemetry-provider
+    baseUri: ''
+    description: YugabyteDB Anywhere APIs — Telemetry Provider business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-telemetry_provider
+      path: /api/v1/customers/{cUUID}/telemetry_provider
+      operations:
+      - name: listalltelemetryproviders
+        method: GET
+        description: YugabyteDB Anywhere List All Telemetry Providers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+      - name: createtelemetry
+        method: POST
+        description: YugabyteDB Anywhere Create Telemetry Provider
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-telemetry_provider-intUUID
+      path: /api/v1/customers/{cUUID}/telemetry_provider/{intUUID}
+      operations:
+      - name: deletetelemetryprovider
+        method: DELETE
+        description: YugabyteDB Anywhere Delete a Telemetry Provider
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: intUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: gettelemetryprovider
+        method: GET
+        description: YugabyteDB Anywhere Get Telemetry Provider
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: intUUID
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-full-telemetry-provider-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere APIs — Telemetry Provider. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/telemetry-provider
+      name: api-v1-customers-cuuid-telemetry-provider
+      description: REST surface for api-v1-customers-cUUID-telemetry_provider.
+      operations:
+      - method: GET
+        name: listalltelemetryproviders
+        description: YugabyteDB Anywhere List All Telemetry Providers
+        call: anywhere-v1-full-telemetry-provider.listalltelemetryproviders
+        with:
+          cUUID: rest.cUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createtelemetry
+        description: YugabyteDB Anywhere Create Telemetry Provider
+        call: anywhere-v1-full-telemetry-provider.createtelemetry
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/telemetry-provider/{intuuid}
+      name: api-v1-customers-cuuid-telemetry-provider-intuuid
+      description: REST surface for api-v1-customers-cUUID-telemetry_provider-intUUID.
+      operations:
+      - method: DELETE
+        name: deletetelemetryprovider
+        description: YugabyteDB Anywhere Delete a Telemetry Provider
+        call: anywhere-v1-full-telemetry-provider.deletetelemetryprovider
+        with:
+          cUUID: rest.cUUID
+          intUUID: rest.intUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: gettelemetryprovider
+        description: YugabyteDB Anywhere Get Telemetry Provider
+        call: anywhere-v1-full-telemetry-provider.gettelemetryprovider
+        with:
+          cUUID: rest.cUUID
+          intUUID: rest.intUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-full-telemetry-provider-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere APIs — Telemetry Provider. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-list-all-telemetry
+      description: YugabyteDB Anywhere List All Telemetry Providers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-telemetry-provider.listalltelemetryproviders
+      with:
+        cUUID: tools.cUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-telemetry-provider
+      description: YugabyteDB Anywhere Create Telemetry Provider
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-telemetry-provider.createtelemetry
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-telemetry-provider
+      description: YugabyteDB Anywhere Delete a Telemetry Provider
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-full-telemetry-provider.deletetelemetryprovider
+      with:
+        cUUID: tools.cUUID
+        intUUID: tools.intUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-get-telemetry-provider
+      description: YugabyteDB Anywhere Get Telemetry Provider
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-telemetry-provider.gettelemetryprovider
+      with:
+        cUUID: tools.cUUID
+        intUUID: tools.intUUID
+      outputParameters:
+      - type: object
+        mapping: $.

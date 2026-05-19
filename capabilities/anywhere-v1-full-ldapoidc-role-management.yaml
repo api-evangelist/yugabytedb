@@ -1,0 +1,266 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere APIs — LDAPOIDC Role management
+  description: 'YugabyteDB Anywhere APIs — LDAPOIDC Role management. 5 operations. Lead operation: YugabyteDB Anywhere List
+    LDAP Mappings. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - LDAPOIDC Role management
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-full-ldapoidc-role-management
+    baseUri: ''
+    description: YugabyteDB Anywhere APIs — LDAPOIDC Role management business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-ldap_mappings
+      path: /api/v1/customers/{cUUID}/ldap_mappings
+      operations:
+      - name: listldapdntoybaroles
+        method: GET
+        description: YugabyteDB Anywhere List LDAP Mappings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+      - name: setldapdntoybaroles
+        method: PUT
+        description: YugabyteDB Anywhere Set LDAP Mappings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-oidc_mappings
+      path: /api/v1/customers/{cUUID}/oidc_mappings
+      operations:
+      - name: listoidcgrouptoybaroles
+        method: GET
+        description: YugabyteDB Anywhere List OIDC Group Mappings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+      - name: mapoidcgrouptoybaroles
+        method: PUT
+        description: YugabyteDB Anywhere Set OIDC Mappings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-oidc_mappings-groupName
+      path: /api/v1/customers/{cUUID}/oidc_mappings/{groupName}
+      operations:
+      - name: deleteoidcgroupmapping
+        method: DELETE
+        description: YugabyteDB Anywhere Delete a OIDC Group Mapping
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: groupName
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-full-ldapoidc-role-management-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere APIs — LDAPOIDC Role management. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/ldap-mappings
+      name: api-v1-customers-cuuid-ldap-mappings
+      description: REST surface for api-v1-customers-cUUID-ldap_mappings.
+      operations:
+      - method: GET
+        name: listldapdntoybaroles
+        description: YugabyteDB Anywhere List LDAP Mappings
+        call: anywhere-v1-full-ldapoidc-role-management.listldapdntoybaroles
+        with:
+          cUUID: rest.cUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: setldapdntoybaroles
+        description: YugabyteDB Anywhere Set LDAP Mappings
+        call: anywhere-v1-full-ldapoidc-role-management.setldapdntoybaroles
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/oidc-mappings
+      name: api-v1-customers-cuuid-oidc-mappings
+      description: REST surface for api-v1-customers-cUUID-oidc_mappings.
+      operations:
+      - method: GET
+        name: listoidcgrouptoybaroles
+        description: YugabyteDB Anywhere List OIDC Group Mappings
+        call: anywhere-v1-full-ldapoidc-role-management.listoidcgrouptoybaroles
+        with:
+          cUUID: rest.cUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: mapoidcgrouptoybaroles
+        description: YugabyteDB Anywhere Set OIDC Mappings
+        call: anywhere-v1-full-ldapoidc-role-management.mapoidcgrouptoybaroles
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/oidc-mappings/{groupname}
+      name: api-v1-customers-cuuid-oidc-mappings-groupname
+      description: REST surface for api-v1-customers-cUUID-oidc_mappings-groupName.
+      operations:
+      - method: DELETE
+        name: deleteoidcgroupmapping
+        description: YugabyteDB Anywhere Delete a OIDC Group Mapping
+        call: anywhere-v1-full-ldapoidc-role-management.deleteoidcgroupmapping
+        with:
+          cUUID: rest.cUUID
+          groupName: rest.groupName
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-full-ldapoidc-role-management-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere APIs — LDAPOIDC Role management. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-list-ldap-mappings
+      description: YugabyteDB Anywhere List LDAP Mappings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-ldapoidc-role-management.listldapdntoybaroles
+      with:
+        cUUID: tools.cUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-set-ldap-mappings
+      description: YugabyteDB Anywhere Set LDAP Mappings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-ldapoidc-role-management.setldapdntoybaroles
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-oidc-group
+      description: YugabyteDB Anywhere List OIDC Group Mappings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-ldapoidc-role-management.listoidcgrouptoybaroles
+      with:
+        cUUID: tools.cUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-set-oidc-mappings
+      description: YugabyteDB Anywhere Set OIDC Mappings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-ldapoidc-role-management.mapoidcgrouptoybaroles
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-oidc-group
+      description: YugabyteDB Anywhere Delete a OIDC Group Mapping
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-full-ldapoidc-role-management.deleteoidcgroupmapping
+      with:
+        cUUID: tools.cUUID
+        groupName: tools.groupName
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.

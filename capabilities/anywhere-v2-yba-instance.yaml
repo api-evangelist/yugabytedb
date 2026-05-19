@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere V2 APIs — YBA Instance
+  description: 'YugabyteDB Anywhere V2 APIs — YBA Instance. 1 operations. Lead operation: YugabyteDB Anywhere Get YBAInstance
+    Info. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - YBA Instance
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v2-yba-instance
+    baseUri: ''
+    description: YugabyteDB Anywhere V2 APIs — YBA Instance business capability. Self-contained, no shared references.
+    resources:
+    - name: yba-info
+      path: /yba-info
+      operations:
+      - name: getybainstanceinfo
+        method: GET
+        description: YugabyteDB Anywhere Get YBAInstance Info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v2-yba-instance-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere V2 APIs — YBA Instance. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/yba-info
+      name: yba-info
+      description: REST surface for yba-info.
+      operations:
+      - method: GET
+        name: getybainstanceinfo
+        description: YugabyteDB Anywhere Get YBAInstance Info
+        call: anywhere-v2-yba-instance.getybainstanceinfo
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v2-yba-instance-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere V2 APIs — YBA Instance. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-get-ybainstance-info
+      description: YugabyteDB Anywhere Get YBAInstance Info
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v2-yba-instance.getybainstanceinfo
+      outputParameters:
+      - type: object
+        mapping: $.

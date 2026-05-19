@@ -1,0 +1,460 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Backups, Restores, and Replication — Customer Configuration
+  description: 'YugabyteDB Anywhere v1 — Backups, Restores, and Replication — Customer Configuration. 8 operations. Lead operation:
+    YugabyteDB Anywhere List Buckets with Provided Credentials. Self-contained Naftiko capability covering one Yugabytedb
+    business surface.'
+  tags:
+  - Yugabytedb
+  - Customer Configuration
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-backups-restore-customer-configuration
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Backups, Restores, and Replication — Customer Configuration business capability.
+      Self-contained, no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-cloud-cloud-buckets
+      path: /api/v1/customers/{cUUID}/cloud/{cloud}/buckets
+      operations:
+      - name: listbuckets
+        method: POST
+        description: YugabyteDB Anywhere List Buckets with Provided Credentials
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: cloud
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-configs
+      path: /api/v1/customers/{cUUID}/configs
+      operations:
+      - name: getlistofcustomerconfig
+        method: GET
+        description: YugabyteDB Anywhere List All Customer Configurations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+      - name: createcustomerconfig
+        method: POST
+        description: YugabyteDB Anywhere Create a Customer Configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-configs-configUUID
+      path: /api/v1/customers/{cUUID}/configs/{configUUID}
+      operations:
+      - name: deletecustomerconfig
+        method: DELETE
+        description: YugabyteDB Anywhere Delete a Customer Configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: configUUID
+          in: path
+          type: string
+          required: true
+        - name: isDeleteBackups
+          in: query
+          type: boolean
+        - name: request
+          in: query
+          type: string
+      - name: editcustomerconfig
+        method: PUT
+        description: YugabyteDB Anywhere Update a Customer Configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: configUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-configs-configUUID-backup_dirs
+      path: /api/v1/customers/{cUUID}/configs/{configUUID}/backup_dirs
+      operations:
+      - name: getlistofybabackupdirscustomerconfig
+        method: GET
+        description: YugabyteDB Anywhere List All Backup Dirs Within a Customer Configurations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: configUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-configs-configUUID-delete
+      path: /api/v1/customers/{cUUID}/configs/{configUUID}/delete
+      operations:
+      - name: deletecustomerconfigv2
+        method: DELETE
+        description: YugabyteDB Anywhere Delete a Customer Configuration V2
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: configUUID
+          in: path
+          type: string
+          required: true
+        - name: isDeleteBackups
+          in: query
+          type: boolean
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-configs-configUUID-edit
+      path: /api/v1/customers/{cUUID}/configs/{configUUID}/edit
+      operations:
+      - name: editcustomerconfig
+        method: PUT
+        description: YugabyteDB Anywhere Update a Customer Configuration V2
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: configUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-backups-restore-customer-configuration-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Backups, Restores, and Replication — Customer Configuration. One
+      Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/cloud/{cloud}/buckets
+      name: api-v1-customers-cuuid-cloud-cloud-buckets
+      description: REST surface for api-v1-customers-cUUID-cloud-cloud-buckets.
+      operations:
+      - method: POST
+        name: listbuckets
+        description: YugabyteDB Anywhere List Buckets with Provided Credentials
+        call: anywhere-v1-backups-restore-customer-configuration.listbuckets
+        with:
+          cUUID: rest.cUUID
+          cloud: rest.cloud
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/configs
+      name: api-v1-customers-cuuid-configs
+      description: REST surface for api-v1-customers-cUUID-configs.
+      operations:
+      - method: GET
+        name: getlistofcustomerconfig
+        description: YugabyteDB Anywhere List All Customer Configurations
+        call: anywhere-v1-backups-restore-customer-configuration.getlistofcustomerconfig
+        with:
+          cUUID: rest.cUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createcustomerconfig
+        description: YugabyteDB Anywhere Create a Customer Configuration
+        call: anywhere-v1-backups-restore-customer-configuration.createcustomerconfig
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/configs/{configuuid}
+      name: api-v1-customers-cuuid-configs-configuuid
+      description: REST surface for api-v1-customers-cUUID-configs-configUUID.
+      operations:
+      - method: DELETE
+        name: deletecustomerconfig
+        description: YugabyteDB Anywhere Delete a Customer Configuration
+        call: anywhere-v1-backups-restore-customer-configuration.deletecustomerconfig
+        with:
+          cUUID: rest.cUUID
+          configUUID: rest.configUUID
+          isDeleteBackups: rest.isDeleteBackups
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: editcustomerconfig
+        description: YugabyteDB Anywhere Update a Customer Configuration
+        call: anywhere-v1-backups-restore-customer-configuration.editcustomerconfig
+        with:
+          cUUID: rest.cUUID
+          configUUID: rest.configUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/configs/{configuuid}/backup-dirs
+      name: api-v1-customers-cuuid-configs-configuuid-backup-dirs
+      description: REST surface for api-v1-customers-cUUID-configs-configUUID-backup_dirs.
+      operations:
+      - method: GET
+        name: getlistofybabackupdirscustomerconfig
+        description: YugabyteDB Anywhere List All Backup Dirs Within a Customer Configurations
+        call: anywhere-v1-backups-restore-customer-configuration.getlistofybabackupdirscustomerconfig
+        with:
+          cUUID: rest.cUUID
+          configUUID: rest.configUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/configs/{configuuid}/delete
+      name: api-v1-customers-cuuid-configs-configuuid-delete
+      description: REST surface for api-v1-customers-cUUID-configs-configUUID-delete.
+      operations:
+      - method: DELETE
+        name: deletecustomerconfigv2
+        description: YugabyteDB Anywhere Delete a Customer Configuration V2
+        call: anywhere-v1-backups-restore-customer-configuration.deletecustomerconfigv2
+        with:
+          cUUID: rest.cUUID
+          configUUID: rest.configUUID
+          isDeleteBackups: rest.isDeleteBackups
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/configs/{configuuid}/edit
+      name: api-v1-customers-cuuid-configs-configuuid-edit
+      description: REST surface for api-v1-customers-cUUID-configs-configUUID-edit.
+      operations:
+      - method: PUT
+        name: editcustomerconfig
+        description: YugabyteDB Anywhere Update a Customer Configuration V2
+        call: anywhere-v1-backups-restore-customer-configuration.editcustomerconfig
+        with:
+          cUUID: rest.cUUID
+          configUUID: rest.configUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-backups-restore-customer-configuration-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Backups, Restores, and Replication — Customer Configuration. One
+      tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-list-buckets-provided
+      description: YugabyteDB Anywhere List Buckets with Provided Credentials
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-customer-configuration.listbuckets
+      with:
+        cUUID: tools.cUUID
+        cloud: tools.cloud
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-all-customer
+      description: YugabyteDB Anywhere List All Customer Configurations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-backups-restore-customer-configuration.getlistofcustomerconfig
+      with:
+        cUUID: tools.cUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-customer-configuration
+      description: YugabyteDB Anywhere Create a Customer Configuration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-backups-restore-customer-configuration.createcustomerconfig
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-customer-configuration
+      description: YugabyteDB Anywhere Delete a Customer Configuration
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-backups-restore-customer-configuration.deletecustomerconfig
+      with:
+        cUUID: tools.cUUID
+        configUUID: tools.configUUID
+        isDeleteBackups: tools.isDeleteBackups
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-update-customer-configuration
+      description: YugabyteDB Anywhere Update a Customer Configuration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-backups-restore-customer-configuration.editcustomerconfig
+      with:
+        cUUID: tools.cUUID
+        configUUID: tools.configUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-all-backup
+      description: YugabyteDB Anywhere List All Backup Dirs Within a Customer Configurations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-backups-restore-customer-configuration.getlistofybabackupdirscustomerconfig
+      with:
+        cUUID: tools.cUUID
+        configUUID: tools.configUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-customer-configuration-2
+      description: YugabyteDB Anywhere Delete a Customer Configuration V2
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-backups-restore-customer-configuration.deletecustomerconfigv2
+      with:
+        cUUID: tools.cUUID
+        configUUID: tools.configUUID
+        isDeleteBackups: tools.isDeleteBackups
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-update-customer-configuration-2
+      description: YugabyteDB Anywhere Update a Customer Configuration V2
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-backups-restore-customer-configuration.editcustomerconfig
+      with:
+        cUUID: tools.cUUID
+        configUUID: tools.configUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

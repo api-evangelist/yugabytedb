@@ -1,0 +1,88 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Releases and Maintenance — PackagesController
+  description: 'YugabyteDB Anywhere v1 — Releases and Maintenance — PackagesController. 1 operations. Lead operation: YugabyteDB
+    Anywhere Fetch a Package. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - PackagesController
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-releases-maintenance-packagescontroller
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Releases and Maintenance — PackagesController business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: api-v1-fetch_package
+      path: /api/v1/fetch_package
+      operations:
+      - name: fetchpackage
+        method: POST
+        description: YugabyteDB Anywhere Fetch a Package
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-releases-maintenance-packagescontroller-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Releases and Maintenance — PackagesController. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/fetch-package
+      name: api-v1-fetch-package
+      description: REST surface for api-v1-fetch_package.
+      operations:
+      - method: POST
+        name: fetchpackage
+        description: YugabyteDB Anywhere Fetch a Package
+        call: anywhere-v1-releases-maintenance-packagescontroller.fetchpackage
+        with:
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-releases-maintenance-packagescontroller-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Releases and Maintenance — PackagesController. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-fetch-package
+      description: YugabyteDB Anywhere Fetch a Package
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-releases-maintenance-packagescontroller.fetchpackage
+      with:
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

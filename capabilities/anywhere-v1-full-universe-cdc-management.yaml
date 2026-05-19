@@ -1,0 +1,232 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere APIs — Universe CDC Management
+  description: 'YugabyteDB Anywhere APIs — Universe CDC Management. 4 operations. Lead operation: YugabyteDB Anywhere List
+    CDC Replication Slot for a Cluster. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Universe CDC Management
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-full-universe-cdc-management
+    baseUri: ''
+    description: YugabyteDB Anywhere APIs — Universe CDC Management business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-universes-uniUUID-cdc_replication_slots
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/cdc_replication_slots
+      operations:
+      - name: listreplicationslot
+        method: GET
+        description: YugabyteDB Anywhere List CDC Replication Slot for a Cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-cdc_streams
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/cdc_streams
+      operations:
+      - name: listcdcstreams
+        method: GET
+        description: YugabyteDB Anywhere List CDC Streams for a Cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+      - name: createcdcstream
+        method: POST
+        description: YugabyteDB Anywhere Create CDC Stream for a Cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+    - name: api-v1-customers-cUUID-universes-uniUUID-cdc_streams-streamId
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/cdc_streams/{streamId}
+      operations:
+      - name: deletecdcstream
+        method: DELETE
+        description: YugabyteDB Anywhere Delete a CDC Stream for a Cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: streamId
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-full-universe-cdc-management-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere APIs — Universe CDC Management. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/cdc-replication-slots
+      name: api-v1-customers-cuuid-universes-uniuuid-cdc-replication-slots
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-cdc_replication_slots.
+      operations:
+      - method: GET
+        name: listreplicationslot
+        description: YugabyteDB Anywhere List CDC Replication Slot for a Cluster
+        call: anywhere-v1-full-universe-cdc-management.listreplicationslot
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/cdc-streams
+      name: api-v1-customers-cuuid-universes-uniuuid-cdc-streams
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-cdc_streams.
+      operations:
+      - method: GET
+        name: listcdcstreams
+        description: YugabyteDB Anywhere List CDC Streams for a Cluster
+        call: anywhere-v1-full-universe-cdc-management.listcdcstreams
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createcdcstream
+        description: YugabyteDB Anywhere Create CDC Stream for a Cluster
+        call: anywhere-v1-full-universe-cdc-management.createcdcstream
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/cdc-streams/{streamid}
+      name: api-v1-customers-cuuid-universes-uniuuid-cdc-streams-streamid
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-cdc_streams-streamId.
+      operations:
+      - method: DELETE
+        name: deletecdcstream
+        description: YugabyteDB Anywhere Delete a CDC Stream for a Cluster
+        call: anywhere-v1-full-universe-cdc-management.deletecdcstream
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          streamId: rest.streamId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-full-universe-cdc-management-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere APIs — Universe CDC Management. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-list-cdc-replication
+      description: YugabyteDB Anywhere List CDC Replication Slot for a Cluster
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-universe-cdc-management.listreplicationslot
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-cdc-streams
+      description: YugabyteDB Anywhere List CDC Streams for a Cluster
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-universe-cdc-management.listcdcstreams
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-cdc-stream
+      description: YugabyteDB Anywhere Create CDC Stream for a Cluster
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-universe-cdc-management.createcdcstream
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-cdc-stream
+      description: YugabyteDB Anywhere Delete a CDC Stream for a Cluster
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-full-universe-cdc-management.deletecdcstream
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        streamId: tools.streamId
+      outputParameters:
+      - type: object
+        mapping: $.

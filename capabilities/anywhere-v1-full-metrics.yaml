@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere APIs — Metrics
+  description: 'YugabyteDB Anywhere APIs — Metrics. 1 operations. Lead operation: YugabyteDB Anywhere Get Prometheus Metrics.
+    Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Metrics
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-full-metrics
+    baseUri: ''
+    description: YugabyteDB Anywhere APIs — Metrics business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-prometheus_metrics
+      path: /api/v1/prometheus_metrics
+      operations:
+      - name: metricsdetail
+        method: GET
+        description: YugabyteDB Anywhere Get Prometheus Metrics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: request
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-full-metrics-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere APIs — Metrics. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/prometheus-metrics
+      name: api-v1-prometheus-metrics
+      description: REST surface for api-v1-prometheus_metrics.
+      operations:
+      - method: GET
+        name: metricsdetail
+        description: YugabyteDB Anywhere Get Prometheus Metrics
+        call: anywhere-v1-full-metrics.metricsdetail
+        with:
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-full-metrics-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere APIs — Metrics. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-get-prometheus-metrics
+      description: YugabyteDB Anywhere Get Prometheus Metrics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-metrics.metricsdetail
+      with:
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.

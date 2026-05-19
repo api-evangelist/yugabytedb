@@ -1,0 +1,105 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Aeon REST API — MaintenanceWindows
+  description: 'YugabyteDB Aeon REST API — MaintenanceWindows. 2 operations. Lead operation: YugabyteDB Aeon Get Maintenance
+    Window. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - MaintenanceWindows
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: aeon-maintenancewindows
+    baseUri: https://cloud.yugabyte.com/api/public/v1
+    description: YugabyteDB Aeon REST API — MaintenanceWindows business capability. Self-contained, no shared references.
+    resources:
+    - name: accounts-accountId-projects-projectId-clusters-clusterId-maintenance-windows
+      path: /accounts/{accountId}/projects/{projectId}/clusters/{clusterId}/maintenance-windows
+      operations:
+      - name: getmaintenancewindow
+        method: GET
+        description: YugabyteDB Aeon Get Maintenance Window
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatemaintenancewindow
+        method: PUT
+        description: YugabyteDB Aeon Update Maintenance Window
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.YUGABYTEDB_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: aeon-maintenancewindows-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Aeon REST API — MaintenanceWindows. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/accounts/{accountid}/projects/{projectid}/clusters/{clusterid}/maintenance-windows
+      name: accounts-accountid-projects-projectid-clusters-clusterid-maintenance-windows
+      description: REST surface for accounts-accountId-projects-projectId-clusters-clusterId-maintenance-windows.
+      operations:
+      - method: GET
+        name: getmaintenancewindow
+        description: YugabyteDB Aeon Get Maintenance Window
+        call: aeon-maintenancewindows.getmaintenancewindow
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatemaintenancewindow
+        description: YugabyteDB Aeon Update Maintenance Window
+        call: aeon-maintenancewindows.updatemaintenancewindow
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: aeon-maintenancewindows-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Aeon REST API — MaintenanceWindows. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: yugabytedb-aeon-get-maintenance-window
+      description: YugabyteDB Aeon Get Maintenance Window
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: aeon-maintenancewindows.getmaintenancewindow
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-aeon-update-maintenance-window
+      description: YugabyteDB Aeon Update Maintenance Window
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: aeon-maintenancewindows.updatemaintenancewindow
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

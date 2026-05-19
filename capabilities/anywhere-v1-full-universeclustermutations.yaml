@@ -1,0 +1,326 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere APIs — UniverseClusterMutations
+  description: 'YugabyteDB Anywhere APIs — UniverseClusterMutations. 5 operations. Lead operation: YugabyteDB Anywhere Create
+    Universe Clusters. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - UniverseClusterMutations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-full-universeclustermutations
+    baseUri: ''
+    description: YugabyteDB Anywhere APIs — UniverseClusterMutations business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-universes-clusters
+      path: /api/v1/customers/{cUUID}/universes/clusters
+      operations:
+      - name: createallclusters
+        method: POST
+        description: YugabyteDB Anywhere Create Universe Clusters
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-clusters-primary
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/clusters/primary
+      operations:
+      - name: updateprimarycluster
+        method: PUT
+        description: YugabyteDB Anywhere Update Primary Cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-clusters-read_only
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/clusters/read_only
+      operations:
+      - name: createreadonlycluster
+        method: POST
+        description: YugabyteDB Anywhere Create ReadOnly Cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: updatereadonlycluster
+        method: PUT
+        description: YugabyteDB Anywhere Update Readonly Cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-clusters-read_only-clustUUID
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/clusters/read_only/{clustUUID}
+      operations:
+      - name: deletereadonlycluster
+        method: DELETE
+        description: YugabyteDB Anywhere Delete Readonly Cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: clustUUID
+          in: path
+          type: string
+          required: true
+        - name: isForceDelete
+          in: query
+          type: boolean
+        - name: request
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-full-universeclustermutations-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere APIs — UniverseClusterMutations. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/universes/clusters
+      name: api-v1-customers-cuuid-universes-clusters
+      description: REST surface for api-v1-customers-cUUID-universes-clusters.
+      operations:
+      - method: POST
+        name: createallclusters
+        description: YugabyteDB Anywhere Create Universe Clusters
+        call: anywhere-v1-full-universeclustermutations.createallclusters
+        with:
+          cUUID: rest.cUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/clusters/primary
+      name: api-v1-customers-cuuid-universes-uniuuid-clusters-primary
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-clusters-primary.
+      operations:
+      - method: PUT
+        name: updateprimarycluster
+        description: YugabyteDB Anywhere Update Primary Cluster
+        call: anywhere-v1-full-universeclustermutations.updateprimarycluster
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/clusters/read-only
+      name: api-v1-customers-cuuid-universes-uniuuid-clusters-read-only
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-clusters-read_only.
+      operations:
+      - method: POST
+        name: createreadonlycluster
+        description: YugabyteDB Anywhere Create ReadOnly Cluster
+        call: anywhere-v1-full-universeclustermutations.createreadonlycluster
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatereadonlycluster
+        description: YugabyteDB Anywhere Update Readonly Cluster
+        call: anywhere-v1-full-universeclustermutations.updatereadonlycluster
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/clusters/read-only/{clustuuid}
+      name: api-v1-customers-cuuid-universes-uniuuid-clusters-read-only-clustuuid
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-clusters-read_only-clustUUID.
+      operations:
+      - method: DELETE
+        name: deletereadonlycluster
+        description: YugabyteDB Anywhere Delete Readonly Cluster
+        call: anywhere-v1-full-universeclustermutations.deletereadonlycluster
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          clustUUID: rest.clustUUID
+          isForceDelete: rest.isForceDelete
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-full-universeclustermutations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere APIs — UniverseClusterMutations. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-create-universe-clusters
+      description: YugabyteDB Anywhere Create Universe Clusters
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-universeclustermutations.createallclusters
+      with:
+        cUUID: tools.cUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-update-primary-cluster
+      description: YugabyteDB Anywhere Update Primary Cluster
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-universeclustermutations.updateprimarycluster
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-readonly-cluster
+      description: YugabyteDB Anywhere Create ReadOnly Cluster
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-universeclustermutations.createreadonlycluster
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-update-readonly-cluster
+      description: YugabyteDB Anywhere Update Readonly Cluster
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-universeclustermutations.updatereadonlycluster
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-readonly-cluster
+      description: YugabyteDB Anywhere Delete Readonly Cluster
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-full-universeclustermutations.deletereadonlycluster
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        clustUUID: tools.clustUUID
+        isForceDelete: tools.isForceDelete
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.

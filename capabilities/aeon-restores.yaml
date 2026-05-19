@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Aeon REST API — Restores
+  description: 'YugabyteDB Aeon REST API — Restores. 1 operations. Lead operation: YugabyteDB Aeon Restore from Backup. Self-contained
+    Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Restores
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: aeon-restores
+    baseUri: https://cloud.yugabyte.com/api/public/v1
+    description: YugabyteDB Aeon REST API — Restores business capability. Self-contained, no shared references.
+    resources:
+    - name: accounts-accountId-projects-projectId-clusters-clusterId-backups-backupId-restor
+      path: /accounts/{accountId}/projects/{projectId}/clusters/{clusterId}/backups/{backupId}/restore
+      operations:
+      - name: restorebackup
+        method: POST
+        description: YugabyteDB Aeon Restore from Backup
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.YUGABYTEDB_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: aeon-restores-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Aeon REST API — Restores. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/accounts/{accountid}/projects/{projectid}/clusters/{clusterid}/backups/{backupid}/restore
+      name: accounts-accountid-projects-projectid-clusters-clusterid-backups-backupid-restor
+      description: REST surface for accounts-accountId-projects-projectId-clusters-clusterId-backups-backupId-restor.
+      operations:
+      - method: POST
+        name: restorebackup
+        description: YugabyteDB Aeon Restore from Backup
+        call: aeon-restores.restorebackup
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: aeon-restores-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Aeon REST API — Restores. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: yugabytedb-aeon-restore-backup
+      description: YugabyteDB Aeon Restore from Backup
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: aeon-restores.restorebackup
+      outputParameters:
+      - type: object
+        mapping: $.

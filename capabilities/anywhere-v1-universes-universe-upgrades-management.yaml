@@ -1,0 +1,1210 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere v1 — Universe Management — Universe Upgrades Management
+  description: 'YugabyteDB Anywhere v1 — Universe Management — Universe Upgrades Management. 20 operations. Lead operation:
+    YugabyteDB Anywhere Modify Audit Logging Configuration. Self-contained Naftiko capability covering one Yugabytedb business
+    surface.'
+  tags:
+  - Yugabytedb
+  - Universe Upgrades Management
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-universes-universe-upgrades-management
+    baseUri: ''
+    description: YugabyteDB Anywhere v1 — Universe Management — Universe Upgrades Management business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-universes-uniUUID-audit_log_config
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/audit_log_config
+      operations:
+      - name: modifyauditlogging
+        method: POST
+        description: YugabyteDB Anywhere Modify Audit Logging Configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-upgrade-certs
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/certs
+      operations:
+      - name: upgradecerts
+        method: POST
+        description: YugabyteDB Anywhere Upgrade Certs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-upgrade-db_version
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/db_version
+      operations:
+      - name: upgradedbversion
+        method: POST
+        description: YugabyteDB Anywhere Upgrade DB Version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-upgrade-finalize
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/finalize
+      operations:
+      - name: finalizeupgrade
+        method: POST
+        description: YugabyteDB Anywhere Finalize Upgrade
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-upgrade-finalize-info
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/finalize/info
+      operations:
+      - name: prefinalizesoftwareupgradeinfo
+        method: GET
+        description: YugabyteDB Anywhere Finalize Software Upgrade Info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-upgrade-gflags
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/gflags
+      operations:
+      - name: upgradegflags
+        method: POST
+        description: YugabyteDB Anywhere Upgrade GFlags
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-upgrade-k8s_immutable_ybc
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/k8s_immutable_ybc
+      operations:
+      - name: kubernetestoggleimmutableybc
+        method: POST
+        description: YugabyteDB Anywhere Upgrade Kubernetes Universe to Toggle Immutable YBC
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-upgrade-kubernetes_overrides
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/kubernetes_overrides
+      operations:
+      - name: upgradekubernetesoverrides
+        method: POST
+        description: YugabyteDB Anywhere Upgrade KubernetesOverrides
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-upgrade-provision_nodes
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/provision_nodes
+      operations:
+      - name: provisionuniversenodes
+        method: POST
+        description: YugabyteDB Anywhere Provision Universe Nodes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-upgrade-proxy_config
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/proxy_config
+      operations:
+      - name: updateproxyconfig
+        method: POST
+        description: YugabyteDB Anywhere Update Proxy Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-upgrade-reboot
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/reboot
+      operations:
+      - name: rebootuniverse
+        method: POST
+        description: YugabyteDB Anywhere Reboot Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-upgrade-resize_node
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/resize_node
+      operations:
+      - name: resizenode
+        method: POST
+        description: YugabyteDB Anywhere Resize Node
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-upgrade-restart
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/restart
+      operations:
+      - name: restartuniverse
+        method: POST
+        description: YugabyteDB Anywhere Restart Universe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-upgrade-rollback
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/rollback
+      operations:
+      - name: rollbackupgrade
+        method: POST
+        description: YugabyteDB Anywhere Rollback Upgrade
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-upgrade-software
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/software
+      operations:
+      - name: upgradesoftware
+        method: POST
+        description: YugabyteDB Anywhere Upgrade Software
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-upgrade-software-precheck
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/software/precheck
+      operations:
+      - name: softwareupgradeprecheck
+        method: POST
+        description: YugabyteDB Anywhere Software Upgrade Universe Pre-check
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-upgrade-systemd
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/systemd
+      operations:
+      - name: upgradesystemd
+        method: POST
+        description: YugabyteDB Anywhere Upgrade Systemd
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-upgrade-thirdparty_software
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/thirdparty_software
+      operations:
+      - name: upgradethirdpartysoftware
+        method: POST
+        description: YugabyteDB Anywhere Upgrade Third-party Software
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-upgrade-tls
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/tls
+      operations:
+      - name: upgradetls
+        method: POST
+        description: YugabyteDB Anywhere Upgrade TLS
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-universes-uniUUID-upgrade-vm
+      path: /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/vm
+      operations:
+      - name: upgradevmimage
+        method: POST
+        description: YugabyteDB Anywhere Upgrade VM Image
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: uniUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-universes-universe-upgrades-management-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere v1 — Universe Management — Universe Upgrades Management. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/audit-log-config
+      name: api-v1-customers-cuuid-universes-uniuuid-audit-log-config
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-audit_log_config.
+      operations:
+      - method: POST
+        name: modifyauditlogging
+        description: YugabyteDB Anywhere Modify Audit Logging Configuration
+        call: anywhere-v1-universes-universe-upgrades-management.modifyauditlogging
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/upgrade/certs
+      name: api-v1-customers-cuuid-universes-uniuuid-upgrade-certs
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-upgrade-certs.
+      operations:
+      - method: POST
+        name: upgradecerts
+        description: YugabyteDB Anywhere Upgrade Certs
+        call: anywhere-v1-universes-universe-upgrades-management.upgradecerts
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/upgrade/db-version
+      name: api-v1-customers-cuuid-universes-uniuuid-upgrade-db-version
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-upgrade-db_version.
+      operations:
+      - method: POST
+        name: upgradedbversion
+        description: YugabyteDB Anywhere Upgrade DB Version
+        call: anywhere-v1-universes-universe-upgrades-management.upgradedbversion
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/upgrade/finalize
+      name: api-v1-customers-cuuid-universes-uniuuid-upgrade-finalize
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-upgrade-finalize.
+      operations:
+      - method: POST
+        name: finalizeupgrade
+        description: YugabyteDB Anywhere Finalize Upgrade
+        call: anywhere-v1-universes-universe-upgrades-management.finalizeupgrade
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/upgrade/finalize/info
+      name: api-v1-customers-cuuid-universes-uniuuid-upgrade-finalize-info
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-upgrade-finalize-info.
+      operations:
+      - method: GET
+        name: prefinalizesoftwareupgradeinfo
+        description: YugabyteDB Anywhere Finalize Software Upgrade Info
+        call: anywhere-v1-universes-universe-upgrades-management.prefinalizesoftwareupgradeinfo
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/upgrade/gflags
+      name: api-v1-customers-cuuid-universes-uniuuid-upgrade-gflags
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-upgrade-gflags.
+      operations:
+      - method: POST
+        name: upgradegflags
+        description: YugabyteDB Anywhere Upgrade GFlags
+        call: anywhere-v1-universes-universe-upgrades-management.upgradegflags
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/upgrade/k8s-immutable-ybc
+      name: api-v1-customers-cuuid-universes-uniuuid-upgrade-k8s-immutable-ybc
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-upgrade-k8s_immutable_ybc.
+      operations:
+      - method: POST
+        name: kubernetestoggleimmutableybc
+        description: YugabyteDB Anywhere Upgrade Kubernetes Universe to Toggle Immutable YBC
+        call: anywhere-v1-universes-universe-upgrades-management.kubernetestoggleimmutableybc
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/upgrade/kubernetes-overrides
+      name: api-v1-customers-cuuid-universes-uniuuid-upgrade-kubernetes-overrides
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-upgrade-kubernetes_overrides.
+      operations:
+      - method: POST
+        name: upgradekubernetesoverrides
+        description: YugabyteDB Anywhere Upgrade KubernetesOverrides
+        call: anywhere-v1-universes-universe-upgrades-management.upgradekubernetesoverrides
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/upgrade/provision-nodes
+      name: api-v1-customers-cuuid-universes-uniuuid-upgrade-provision-nodes
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-upgrade-provision_nodes.
+      operations:
+      - method: POST
+        name: provisionuniversenodes
+        description: YugabyteDB Anywhere Provision Universe Nodes
+        call: anywhere-v1-universes-universe-upgrades-management.provisionuniversenodes
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/upgrade/proxy-config
+      name: api-v1-customers-cuuid-universes-uniuuid-upgrade-proxy-config
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-upgrade-proxy_config.
+      operations:
+      - method: POST
+        name: updateproxyconfig
+        description: YugabyteDB Anywhere Update Proxy Config
+        call: anywhere-v1-universes-universe-upgrades-management.updateproxyconfig
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/upgrade/reboot
+      name: api-v1-customers-cuuid-universes-uniuuid-upgrade-reboot
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-upgrade-reboot.
+      operations:
+      - method: POST
+        name: rebootuniverse
+        description: YugabyteDB Anywhere Reboot Universe
+        call: anywhere-v1-universes-universe-upgrades-management.rebootuniverse
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/upgrade/resize-node
+      name: api-v1-customers-cuuid-universes-uniuuid-upgrade-resize-node
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-upgrade-resize_node.
+      operations:
+      - method: POST
+        name: resizenode
+        description: YugabyteDB Anywhere Resize Node
+        call: anywhere-v1-universes-universe-upgrades-management.resizenode
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/upgrade/restart
+      name: api-v1-customers-cuuid-universes-uniuuid-upgrade-restart
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-upgrade-restart.
+      operations:
+      - method: POST
+        name: restartuniverse
+        description: YugabyteDB Anywhere Restart Universe
+        call: anywhere-v1-universes-universe-upgrades-management.restartuniverse
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/upgrade/rollback
+      name: api-v1-customers-cuuid-universes-uniuuid-upgrade-rollback
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-upgrade-rollback.
+      operations:
+      - method: POST
+        name: rollbackupgrade
+        description: YugabyteDB Anywhere Rollback Upgrade
+        call: anywhere-v1-universes-universe-upgrades-management.rollbackupgrade
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/upgrade/software
+      name: api-v1-customers-cuuid-universes-uniuuid-upgrade-software
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-upgrade-software.
+      operations:
+      - method: POST
+        name: upgradesoftware
+        description: YugabyteDB Anywhere Upgrade Software
+        call: anywhere-v1-universes-universe-upgrades-management.upgradesoftware
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/upgrade/software/precheck
+      name: api-v1-customers-cuuid-universes-uniuuid-upgrade-software-precheck
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-upgrade-software-precheck.
+      operations:
+      - method: POST
+        name: softwareupgradeprecheck
+        description: YugabyteDB Anywhere Software Upgrade Universe Pre-check
+        call: anywhere-v1-universes-universe-upgrades-management.softwareupgradeprecheck
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/upgrade/systemd
+      name: api-v1-customers-cuuid-universes-uniuuid-upgrade-systemd
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-upgrade-systemd.
+      operations:
+      - method: POST
+        name: upgradesystemd
+        description: YugabyteDB Anywhere Upgrade Systemd
+        call: anywhere-v1-universes-universe-upgrades-management.upgradesystemd
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/upgrade/thirdparty-software
+      name: api-v1-customers-cuuid-universes-uniuuid-upgrade-thirdparty-software
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-upgrade-thirdparty_software.
+      operations:
+      - method: POST
+        name: upgradethirdpartysoftware
+        description: YugabyteDB Anywhere Upgrade Third-party Software
+        call: anywhere-v1-universes-universe-upgrades-management.upgradethirdpartysoftware
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/upgrade/tls
+      name: api-v1-customers-cuuid-universes-uniuuid-upgrade-tls
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-upgrade-tls.
+      operations:
+      - method: POST
+        name: upgradetls
+        description: YugabyteDB Anywhere Upgrade TLS
+        call: anywhere-v1-universes-universe-upgrades-management.upgradetls
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/universes/{uniuuid}/upgrade/vm
+      name: api-v1-customers-cuuid-universes-uniuuid-upgrade-vm
+      description: REST surface for api-v1-customers-cUUID-universes-uniUUID-upgrade-vm.
+      operations:
+      - method: POST
+        name: upgradevmimage
+        description: YugabyteDB Anywhere Upgrade VM Image
+        call: anywhere-v1-universes-universe-upgrades-management.upgradevmimage
+        with:
+          cUUID: rest.cUUID
+          uniUUID: rest.uniUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-universes-universe-upgrades-management-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere v1 — Universe Management — Universe Upgrades Management. One tool per
+      consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-modify-audit-logging
+      description: YugabyteDB Anywhere Modify Audit Logging Configuration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-universe-upgrades-management.modifyauditlogging
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-upgrade-certs
+      description: YugabyteDB Anywhere Upgrade Certs
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-universe-upgrades-management.upgradecerts
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-upgrade-db-version
+      description: YugabyteDB Anywhere Upgrade DB Version
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-universe-upgrades-management.upgradedbversion
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-finalize-upgrade
+      description: YugabyteDB Anywhere Finalize Upgrade
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-universe-upgrades-management.finalizeupgrade
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-finalize-software-upgrade
+      description: YugabyteDB Anywhere Finalize Software Upgrade Info
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-universes-universe-upgrades-management.prefinalizesoftwareupgradeinfo
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-upgrade-gflags
+      description: YugabyteDB Anywhere Upgrade GFlags
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-universe-upgrades-management.upgradegflags
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-upgrade-kubernetes-universe
+      description: YugabyteDB Anywhere Upgrade Kubernetes Universe to Toggle Immutable YBC
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-universe-upgrades-management.kubernetestoggleimmutableybc
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-upgrade-kubernetesoverrides
+      description: YugabyteDB Anywhere Upgrade KubernetesOverrides
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-universe-upgrades-management.upgradekubernetesoverrides
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-provision-universe-nodes
+      description: YugabyteDB Anywhere Provision Universe Nodes
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-universe-upgrades-management.provisionuniversenodes
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-update-proxy-config
+      description: YugabyteDB Anywhere Update Proxy Config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-universe-upgrades-management.updateproxyconfig
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-reboot-universe
+      description: YugabyteDB Anywhere Reboot Universe
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-universe-upgrades-management.rebootuniverse
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-resize-node
+      description: YugabyteDB Anywhere Resize Node
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-universe-upgrades-management.resizenode
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-restart-universe
+      description: YugabyteDB Anywhere Restart Universe
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-universe-upgrades-management.restartuniverse
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-rollback-upgrade
+      description: YugabyteDB Anywhere Rollback Upgrade
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-universe-upgrades-management.rollbackupgrade
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-upgrade-software
+      description: YugabyteDB Anywhere Upgrade Software
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-universe-upgrades-management.upgradesoftware
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-software-upgrade-universe
+      description: YugabyteDB Anywhere Software Upgrade Universe Pre-check
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-universe-upgrades-management.softwareupgradeprecheck
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-upgrade-systemd
+      description: YugabyteDB Anywhere Upgrade Systemd
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-universe-upgrades-management.upgradesystemd
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-upgrade-third-party
+      description: YugabyteDB Anywhere Upgrade Third-party Software
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-universe-upgrades-management.upgradethirdpartysoftware
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-upgrade-tls
+      description: YugabyteDB Anywhere Upgrade TLS
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-universe-upgrades-management.upgradetls
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-upgrade-vm-image
+      description: YugabyteDB Anywhere Upgrade VM Image
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-universes-universe-upgrades-management.upgradevmimage
+      with:
+        cUUID: tools.cUUID
+        uniUUID: tools.uniUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

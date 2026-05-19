@@ -1,0 +1,415 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YugabyteDB Anywhere APIs — Availability Zones
+  description: 'YugabyteDB Anywhere APIs — Availability Zones. 6 operations. Lead operation: YugabyteDB Anywhere Create an
+    Availability Zone. Self-contained Naftiko capability covering one Yugabytedb business surface.'
+  tags:
+  - Yugabytedb
+  - Availability Zones
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YUGABYTEDB_API_KEY: YUGABYTEDB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: anywhere-v1-full-availability-zones
+    baseUri: ''
+    description: YugabyteDB Anywhere APIs — Availability Zones business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-customers-cUUID-providers-pUUID-provider_regions-rUUID-region_zones
+      path: /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID}/region_zones
+      operations:
+      - name: createzone
+        method: POST
+        description: YugabyteDB Anywhere Create an Availability Zone
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: rUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-providers-pUUID-provider_regions-rUUID-region_zones-azUUI
+      path: /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID}/region_zones/{azUUID}
+      operations:
+      - name: editzone
+        method: PUT
+        description: YugabyteDB Anywhere Modify an Availability Zone
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: rUUID
+          in: path
+          type: string
+          required: true
+        - name: azUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-providers-pUUID-regions-rUUID-zones
+      path: /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones
+      operations:
+      - name: listofaz
+        method: GET
+        description: YugabyteDB Anywhere List Availability Zones
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: rUUID
+          in: path
+          type: string
+          required: true
+      - name: createaz
+        method: POST
+        description: YugabyteDB Anywhere Create an Availability Zone - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: rUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-customers-cUUID-providers-pUUID-regions-rUUID-zones-azUUID
+      path: /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones/{azUUID}
+      operations:
+      - name: deleteaz
+        method: DELETE
+        description: YugabyteDB Anywhere Delete an Availability Zone
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: rUUID
+          in: path
+          type: string
+          required: true
+        - name: azUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+      - name: editaz
+        method: PUT
+        description: YugabyteDB Anywhere Edit an Availabilty Zone - Deprecated
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cUUID
+          in: path
+          type: string
+          required: true
+        - name: pUUID
+          in: path
+          type: string
+          required: true
+        - name: rUUID
+          in: path
+          type: string
+          required: true
+        - name: azUUID
+          in: path
+          type: string
+          required: true
+        - name: request
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-YW-API-TOKEN
+      value: '{{env.YUGABYTEDB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: anywhere-v1-full-availability-zones-rest
+    port: 8080
+    description: REST adapter for YugabyteDB Anywhere APIs — Availability Zones. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/customers/{cuuid}/providers/{puuid}/provider-regions/{ruuid}/region-zones
+      name: api-v1-customers-cuuid-providers-puuid-provider-regions-ruuid-region-zones
+      description: REST surface for api-v1-customers-cUUID-providers-pUUID-provider_regions-rUUID-region_zones.
+      operations:
+      - method: POST
+        name: createzone
+        description: YugabyteDB Anywhere Create an Availability Zone
+        call: anywhere-v1-full-availability-zones.createzone
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          rUUID: rest.rUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/providers/{puuid}/provider-regions/{ruuid}/region-zones/{azuuid}
+      name: api-v1-customers-cuuid-providers-puuid-provider-regions-ruuid-region-zones-azuui
+      description: REST surface for api-v1-customers-cUUID-providers-pUUID-provider_regions-rUUID-region_zones-azUUI.
+      operations:
+      - method: PUT
+        name: editzone
+        description: YugabyteDB Anywhere Modify an Availability Zone
+        call: anywhere-v1-full-availability-zones.editzone
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          rUUID: rest.rUUID
+          azUUID: rest.azUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/providers/{puuid}/regions/{ruuid}/zones
+      name: api-v1-customers-cuuid-providers-puuid-regions-ruuid-zones
+      description: REST surface for api-v1-customers-cUUID-providers-pUUID-regions-rUUID-zones.
+      operations:
+      - method: GET
+        name: listofaz
+        description: YugabyteDB Anywhere List Availability Zones
+        call: anywhere-v1-full-availability-zones.listofaz
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          rUUID: rest.rUUID
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createaz
+        description: YugabyteDB Anywhere Create an Availability Zone - Deprecated
+        call: anywhere-v1-full-availability-zones.createaz
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          rUUID: rest.rUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/customers/{cuuid}/providers/{puuid}/regions/{ruuid}/zones/{azuuid}
+      name: api-v1-customers-cuuid-providers-puuid-regions-ruuid-zones-azuuid
+      description: REST surface for api-v1-customers-cUUID-providers-pUUID-regions-rUUID-zones-azUUID.
+      operations:
+      - method: DELETE
+        name: deleteaz
+        description: YugabyteDB Anywhere Delete an Availability Zone
+        call: anywhere-v1-full-availability-zones.deleteaz
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          rUUID: rest.rUUID
+          azUUID: rest.azUUID
+          request: rest.request
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: editaz
+        description: YugabyteDB Anywhere Edit an Availabilty Zone - Deprecated
+        call: anywhere-v1-full-availability-zones.editaz
+        with:
+          cUUID: rest.cUUID
+          pUUID: rest.pUUID
+          rUUID: rest.rUUID
+          azUUID: rest.azUUID
+          request: rest.request
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: anywhere-v1-full-availability-zones-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YugabyteDB Anywhere APIs — Availability Zones. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: yugabytedb-anywhere-create-availability-zone
+      description: YugabyteDB Anywhere Create an Availability Zone
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-availability-zones.createzone
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        rUUID: tools.rUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-modify-availability-zone
+      description: YugabyteDB Anywhere Modify an Availability Zone
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-availability-zones.editzone
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        rUUID: tools.rUUID
+        azUUID: tools.azUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-list-availability-zones
+      description: YugabyteDB Anywhere List Availability Zones
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-availability-zones.listofaz
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        rUUID: tools.rUUID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-create-availability-zone-2
+      description: YugabyteDB Anywhere Create an Availability Zone - Deprecated
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: anywhere-v1-full-availability-zones.createaz
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        rUUID: tools.rUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-delete-availability-zone
+      description: YugabyteDB Anywhere Delete an Availability Zone
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: anywhere-v1-full-availability-zones.deleteaz
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        rUUID: tools.rUUID
+        azUUID: tools.azUUID
+        request: tools.request
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: yugabytedb-anywhere-edit-availabilty-zone
+      description: YugabyteDB Anywhere Edit an Availabilty Zone - Deprecated
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: anywhere-v1-full-availability-zones.editaz
+      with:
+        cUUID: tools.cUUID
+        pUUID: tools.pUUID
+        rUUID: tools.rUUID
+        azUUID: tools.azUUID
+        request: tools.request
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
