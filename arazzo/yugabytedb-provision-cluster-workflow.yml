@@ -1,0 +1,130 @@
+arazzo: 1.0.1
+info:
+  title: YugabyteDB Aeon Provision Cluster
+  summary: Create a cluster, poll until it becomes ACTIVE, then read its connection endpoints.
+  description: >-
+    The canonical day-one flow for YugabyteDB Aeon. The workflow resolves the
+    account and project context, submits a cluster specification to create a new
+    managed cluster, polls the cluster until its provisioning state settles into
+    ACTIVE, and finally reads the connection endpoints clients use to reach the
+    database. Every step spells out its request inline so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: aeonApi
+  url: ../openapi/yugabytedb-aeon-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provision-cluster
+  summary: Provision a YugabyteDB Aeon cluster and wait for it to come online.
+  description: >-
+    Creates a cluster within the supplied account and project, waits for the
+    asynchronous provisioning to complete by polling the cluster state, and
+    returns the cluster identifier and its connection endpoints once ACTIVE.
+  inputs:
+    type: object
+    required:
+    - accountId
+    - projectId
+    - name
+    - cloudInfo
+    - clusterInfo
+    properties:
+      accountId:
+        type: string
+        description: The unique identifier of the YugabyteDB Aeon account.
+      projectId:
+        type: string
+        description: The unique identifier of the project within the account.
+      name:
+        type: string
+        description: The name to assign to the new cluster.
+      cloudInfo:
+        type: object
+        description: Cloud provider and region placement (code and region).
+      clusterInfo:
+        type: object
+        description: Node count, fault tolerance, tier, node sizing, and version.
+  steps:
+  - stepId: createCluster
+    description: >-
+      Submit the cluster specification to create a new managed cluster within
+      the account and project. Creation is asynchronous; the cluster starts in
+      the CREATING state.
+    operationId: createCluster
+    parameters:
+    - name: accountId
+      in: path
+      value: $inputs.accountId
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.name
+        cloud_info: $inputs.cloudInfo
+        cluster_info: $inputs.clusterInfo
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      clusterId: $response.body#/id
+      initialState: $response.body#/state
+  - stepId: pollClusterState
+    description: >-
+      Poll the cluster until provisioning settles into the ACTIVE state. The
+      cluster transitions through CREATING before reaching ACTIVE.
+    operationId: getCluster
+    parameters:
+    - name: accountId
+      in: path
+      value: $inputs.accountId
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: clusterId
+      in: path
+      value: $steps.createCluster.outputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      state: $response.body#/state
+    onSuccess:
+    - name: clusterReady
+      type: goto
+      stepId: readEndpoints
+      criteria:
+      - context: $response.body
+        condition: $.state == "ACTIVE"
+        type: jsonpath
+    - name: stillProvisioning
+      type: goto
+      stepId: pollClusterState
+      criteria:
+      - context: $response.body
+        condition: $.state == "CREATING"
+        type: jsonpath
+  - stepId: readEndpoints
+    description: >-
+      Read the active cluster to obtain the connection endpoints clients use to
+      reach the database, including host and accessibility type per region.
+    operationId: getCluster
+    parameters:
+    - name: accountId
+      in: path
+      value: $inputs.accountId
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: clusterId
+      in: path
+      value: $steps.createCluster.outputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      state: $response.body#/state
+      endpoints: $response.body#/cluster_endpoints
+  outputs:
+    clusterId: $steps.createCluster.outputs.clusterId
+    state: $steps.readEndpoints.outputs.state
+    endpoints: $steps.readEndpoints.outputs.endpoints

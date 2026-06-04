@@ -423,6 +423,33 @@ apis:
     - type: NaftikoCapability
       url: capabilities/anywhere-v1-universes-ybc-management.yaml
 common:
+  - type: ArazzoWorkflows
+    url: arazzo/
+    workflows:
+    - url: arazzo/yugabytedb-add-read-replica-workflow.yml
+      name: YugabyteDB Aeon Add Read Replica
+      summary: Add a read replica to a cluster and confirm it becomes ACTIVE.
+    - url: arazzo/yugabytedb-backup-and-restore-workflow.yml
+      name: YugabyteDB Aeon Backup and Restore
+      summary: Take an on-demand backup, poll until it succeeds, then restore the cluster from it.
+    - url: arazzo/yugabytedb-configure-allow-list-workflow.yml
+      name: YugabyteDB Aeon Configure IP Allow List
+      summary: Create an IP allow list in a project and confirm its CIDR entries.
+    - url: arazzo/yugabytedb-configure-maintenance-window-workflow.yml
+      name: YugabyteDB Aeon Configure Maintenance Window
+      summary: Read the current maintenance window for a cluster, then update its schedule.
+    - url: arazzo/yugabytedb-discover-account-clusters-workflow.yml
+      name: YugabyteDB Aeon Discover Account Clusters
+      summary: Resolve the active account and project, then enumerate the clusters within it.
+    - url: arazzo/yugabytedb-pause-resume-cluster-workflow.yml
+      name: YugabyteDB Aeon Pause or Resume Cluster
+      summary: Pause or resume a cluster to control compute billing, then confirm the new state.
+    - url: arazzo/yugabytedb-provision-cluster-workflow.yml
+      name: YugabyteDB Aeon Provision Cluster
+      summary: Create a cluster, poll until it becomes ACTIVE, then read its connection endpoints.
+    - url: arazzo/yugabytedb-scale-cluster-workflow.yml
+      name: YugabyteDB Aeon Scale Cluster
+      summary: Read a cluster, submit an updated specification, and poll until it returns to ACTIVE.
   - type: LinkedIn
     url: https://www.linkedin.com/company/yugabyte
   - url: https://www.yugabyte.com/

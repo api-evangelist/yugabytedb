@@ -1,0 +1,94 @@
+arazzo: 1.0.1
+info:
+  title: YugabyteDB Aeon Configure IP Allow List
+  summary: Create an IP allow list in a project and confirm its CIDR entries.
+  description: >-
+    Network access for YugabyteDB Aeon clusters is governed by project-scoped IP
+    allow lists. This workflow creates a new allow list with one or more CIDR
+    entries and then reads it back to confirm the entries were registered exactly
+    as supplied. Every step spells out its request inline so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: aeonApi
+  url: ../openapi/yugabytedb-aeon-openapi.yml
+  type: openapi
+workflows:
+- workflowId: configure-allow-list
+  summary: Create an IP allow list and verify its CIDR entries.
+  description: >-
+    Creates an IP allow list within the supplied account and project, then reads
+    it back by its identifier to confirm the name, description, and CIDR entries
+    were stored correctly.
+  inputs:
+    type: object
+    required:
+    - accountId
+    - projectId
+    - name
+    - allowList
+    properties:
+      accountId:
+        type: string
+        description: The unique identifier of the YugabyteDB Aeon account.
+      projectId:
+        type: string
+        description: The unique identifier of the project within the account.
+      name:
+        type: string
+        description: The name to assign to the new IP allow list.
+      description:
+        type: string
+        description: An optional human-readable description for the allow list.
+      allowList:
+        type: array
+        description: The list of CIDR ranges permitted to connect to clusters.
+        items:
+          type: string
+  steps:
+  - stepId: createAllowList
+    description: >-
+      Create a new IP allow list with the supplied CIDR entries within the
+      project. The allow list can later be assigned to one or more clusters.
+    operationId: createAllowList
+    parameters:
+    - name: accountId
+      in: path
+      value: $inputs.accountId
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.name
+        description: $inputs.description
+        allow_list: $inputs.allowList
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      allowListId: $response.body#/id
+      name: $response.body#/name
+  - stepId: confirmAllowList
+    description: >-
+      Read the allow list back by its identifier to confirm the name,
+      description, and CIDR entries were stored exactly as supplied.
+    operationId: getAllowList
+    parameters:
+    - name: accountId
+      in: path
+      value: $inputs.accountId
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: allowListId
+      in: path
+      value: $steps.createAllowList.outputs.allowListId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      allowListId: $response.body#/id
+      entries: $response.body#/allow_list
+  outputs:
+    allowListId: $steps.confirmAllowList.outputs.allowListId
+    entries: $steps.confirmAllowList.outputs.entries

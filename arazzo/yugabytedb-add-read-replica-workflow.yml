@@ -1,0 +1,109 @@
+arazzo: 1.0.1
+info:
+  title: YugabyteDB Aeon Add Read Replica
+  summary: Add a read replica to a cluster and confirm it becomes ACTIVE.
+  description: >-
+    Read replicas let YugabyteDB Aeon serve read-only traffic from
+    geographically distributed nodes to reduce latency for remote clients. This
+    workflow adds a read replica to an existing cluster in a chosen cloud region,
+    then lists the cluster read replicas and polls until the new replica reaches
+    the ACTIVE state. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: aeonApi
+  url: ../openapi/yugabytedb-aeon-openapi.yml
+  type: openapi
+workflows:
+- workflowId: add-read-replica
+  summary: Add a read replica to a cluster and wait for it to become ACTIVE.
+  description: >-
+    Creates a read replica for the supplied cluster, then polls the cluster's
+    read replica list until the replica settles into the ACTIVE state, returning
+    the replica identifier and state.
+  inputs:
+    type: object
+    required:
+    - accountId
+    - projectId
+    - clusterId
+    - cloudInfo
+    - clusterInfo
+    properties:
+      accountId:
+        type: string
+        description: The unique identifier of the YugabyteDB Aeon account.
+      projectId:
+        type: string
+        description: The unique identifier of the project within the account.
+      clusterId:
+        type: string
+        description: The unique identifier of the primary cluster.
+      cloudInfo:
+        type: object
+        description: Cloud provider and region placement for the read replica.
+      clusterInfo:
+        type: object
+        description: Node count, fault tolerance, tier, node sizing, and version.
+  steps:
+  - stepId: createReadReplica
+    description: >-
+      Add a read replica to the cluster in the configured cloud region. The
+      replica is asynchronously replicated from the primary cluster.
+    operationId: createReadReplica
+    parameters:
+    - name: accountId
+      in: path
+      value: $inputs.accountId
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: clusterId
+      in: path
+      value: $inputs.clusterId
+    requestBody:
+      contentType: application/json
+      payload:
+        cloud_info: $inputs.cloudInfo
+        cluster_info: $inputs.clusterInfo
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      readReplicaId: $response.body#/id
+      initialState: $response.body#/state
+  - stepId: pollReadReplicas
+    description: >-
+      List the cluster read replicas and poll until the first replica reaches
+      the ACTIVE state, indicating replication has come online.
+    operationId: listReadReplicas
+    parameters:
+    - name: accountId
+      in: path
+      value: $inputs.accountId
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: clusterId
+      in: path
+      value: $inputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstReplicaState: $response.body#/data/0/state
+    onSuccess:
+    - name: replicaReady
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.data[0].state == "ACTIVE"
+        type: jsonpath
+    - name: replicaProvisioning
+      type: goto
+      stepId: pollReadReplicas
+      criteria:
+      - context: $response.body
+        condition: $.data[0].state != "ACTIVE"
+        type: jsonpath
+  outputs:
+    readReplicaId: $steps.createReadReplica.outputs.readReplicaId
+    replicaState: $steps.pollReadReplicas.outputs.firstReplicaState

@@ -1,0 +1,129 @@
+arazzo: 1.0.1
+info:
+  title: YugabyteDB Aeon Backup and Restore
+  summary: Take an on-demand backup, poll until it succeeds, then restore the cluster from it.
+  description: >-
+    A disaster-recovery and snapshot-validation flow for YugabyteDB Aeon. The
+    workflow triggers an immediate on-demand backup of a cluster, polls the
+    backup until it reaches the SUCCEEDED state, and then restores the cluster
+    from that backup snapshot. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: aeonApi
+  url: ../openapi/yugabytedb-aeon-openapi.yml
+  type: openapi
+workflows:
+- workflowId: backup-and-restore
+  summary: Create an on-demand backup and restore the cluster from it once complete.
+  description: >-
+    Triggers an on-demand backup of the cluster, waits for the snapshot to
+    finish by polling its state, and then restores the cluster from the
+    completed backup, returning the restored cluster state.
+  inputs:
+    type: object
+    required:
+    - accountId
+    - projectId
+    - clusterId
+    - retentionPeriodInDays
+    properties:
+      accountId:
+        type: string
+        description: The unique identifier of the YugabyteDB Aeon account.
+      projectId:
+        type: string
+        description: The unique identifier of the project within the account.
+      clusterId:
+        type: string
+        description: The unique identifier of the cluster to back up and restore.
+      retentionPeriodInDays:
+        type: integer
+        description: Number of days to retain the on-demand backup snapshot.
+  steps:
+  - stepId: createBackup
+    description: >-
+      Trigger an immediate on-demand backup of the cluster. The backup is a
+      full cluster snapshot and begins in the IN_PROGRESS state.
+    operationId: createBackup
+    parameters:
+    - name: accountId
+      in: path
+      value: $inputs.accountId
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: clusterId
+      in: path
+      value: $inputs.clusterId
+    requestBody:
+      contentType: application/json
+      payload:
+        retention_period_in_days: $inputs.retentionPeriodInDays
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      backupId: $response.body#/id
+      initialState: $response.body#/state
+  - stepId: pollBackupState
+    description: >-
+      Poll the cluster backups until the newly created snapshot reaches the
+      SUCCEEDED state. The backup transitions through IN_PROGRESS first.
+    operationId: listBackups
+    parameters:
+    - name: accountId
+      in: path
+      value: $inputs.accountId
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: clusterId
+      in: path
+      value: $inputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstBackupState: $response.body#/data/0/state
+    onSuccess:
+    - name: backupComplete
+      type: goto
+      stepId: restoreBackup
+      criteria:
+      - context: $response.body
+        condition: $.data[0].state == "SUCCEEDED"
+        type: jsonpath
+    - name: backupRunning
+      type: goto
+      stepId: pollBackupState
+      criteria:
+      - context: $response.body
+        condition: $.data[0].state == "IN_PROGRESS"
+        type: jsonpath
+  - stepId: restoreBackup
+    description: >-
+      Restore the cluster from the completed backup snapshot. This overwrites
+      the current cluster data with the state captured in the snapshot.
+    operationId: restoreBackup
+    parameters:
+    - name: accountId
+      in: path
+      value: $inputs.accountId
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: clusterId
+      in: path
+      value: $inputs.clusterId
+    - name: backupId
+      in: path
+      value: $steps.createBackup.outputs.backupId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      clusterId: $response.body#/id
+      state: $response.body#/state
+  outputs:
+    backupId: $steps.createBackup.outputs.backupId
+    restoredClusterId: $steps.restoreBackup.outputs.clusterId
+    restoredState: $steps.restoreBackup.outputs.state

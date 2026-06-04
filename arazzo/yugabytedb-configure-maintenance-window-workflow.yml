@@ -1,0 +1,103 @@
+arazzo: 1.0.1
+info:
+  title: YugabyteDB Aeon Configure Maintenance Window
+  summary: Read the current maintenance window for a cluster, then update its schedule.
+  description: >-
+    Maintenance windows control when YugabyteDB Aeon applies patches and
+    infrastructure updates to a cluster. This workflow reads the cluster's
+    current maintenance window for reference, then updates it with a new day of
+    week, start time, and duration so operators can minimize disruption. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: aeonApi
+  url: ../openapi/yugabytedb-aeon-openapi.yml
+  type: openapi
+workflows:
+- workflowId: configure-maintenance-window
+  summary: Read and then update a cluster's maintenance window schedule.
+  description: >-
+    Reads the existing maintenance window for the cluster, then submits a new
+    schedule (day of week, start time, and duration) and returns the updated
+    window.
+  inputs:
+    type: object
+    required:
+    - accountId
+    - projectId
+    - clusterId
+    - dayOfWeek
+    - startTime
+    - durationInHours
+    properties:
+      accountId:
+        type: string
+        description: The unique identifier of the YugabyteDB Aeon account.
+      projectId:
+        type: string
+        description: The unique identifier of the project within the account.
+      clusterId:
+        type: string
+        description: The unique identifier of the cluster.
+      dayOfWeek:
+        type: string
+        description: The day of week on which maintenance may be applied.
+      startTime:
+        type: string
+        description: The start time for the maintenance window.
+      durationInHours:
+        type: integer
+        description: The length of the maintenance window in hours.
+  steps:
+  - stepId: readMaintenanceWindow
+    description: >-
+      Read the cluster's current maintenance window to capture the existing
+      schedule before changing it.
+    operationId: getMaintenanceWindow
+    parameters:
+    - name: accountId
+      in: path
+      value: $inputs.accountId
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: clusterId
+      in: path
+      value: $inputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      currentDayOfWeek: $response.body#/day_of_week
+      currentStartTime: $response.body#/start_time
+  - stepId: updateMaintenanceWindow
+    description: >-
+      Submit the new maintenance window schedule for the cluster so updates are
+      applied at the desired time.
+    operationId: updateMaintenanceWindow
+    parameters:
+    - name: accountId
+      in: path
+      value: $inputs.accountId
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: clusterId
+      in: path
+      value: $inputs.clusterId
+    requestBody:
+      contentType: application/json
+      payload:
+        day_of_week: $inputs.dayOfWeek
+        start_time: $inputs.startTime
+        duration_in_hours: $inputs.durationInHours
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      dayOfWeek: $response.body#/day_of_week
+      startTime: $response.body#/start_time
+      durationInHours: $response.body#/duration_in_hours
+  outputs:
+    dayOfWeek: $steps.updateMaintenanceWindow.outputs.dayOfWeek
+    startTime: $steps.updateMaintenanceWindow.outputs.startTime
+    durationInHours: $steps.updateMaintenanceWindow.outputs.durationInHours

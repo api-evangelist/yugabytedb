@@ -1,0 +1,73 @@
+arazzo: 1.0.1
+info:
+  title: YugabyteDB Aeon Discover Account Clusters
+  summary: Resolve the active account and project, then enumerate the clusters within it.
+  description: >-
+    The standard bootstrap flow for any YugabyteDB Aeon automation. Starting from
+    only an API key, the workflow lists the accounts the key can access, selects
+    the first account, lists its projects, selects the first project, and then
+    enumerates every cluster in that project to build an inventory. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: aeonApi
+  url: ../openapi/yugabytedb-aeon-openapi.yml
+  type: openapi
+workflows:
+- workflowId: discover-account-clusters
+  summary: Walk account to project to clusters to build a cluster inventory.
+  description: >-
+    Lists accessible accounts, resolves the first project under the first
+    account, and lists all clusters in that project, returning the resolved
+    account and project identifiers together with the cluster inventory.
+  inputs:
+    type: object
+    properties:
+      accountId:
+        type: string
+        description: Optional account override; when omitted the first account is used.
+  steps:
+  - stepId: listAccounts
+    description: >-
+      List the accounts the API key can access and select the first account as
+      the working context.
+    operationId: listAccounts
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      accountId: $response.body#/data/0/id
+  - stepId: listProjects
+    description: >-
+      List the projects within the resolved account and select the first project
+      as the working context.
+    operationId: listProjects
+    parameters:
+    - name: accountId
+      in: path
+      value: $steps.listAccounts.outputs.accountId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      projectId: $response.body#/data/0/id
+  - stepId: listClusters
+    description: >-
+      Enumerate every cluster within the resolved account and project to build
+      the cluster inventory.
+    operationId: listClusters
+    parameters:
+    - name: accountId
+      in: path
+      value: $steps.listAccounts.outputs.accountId
+    - name: projectId
+      in: path
+      value: $steps.listProjects.outputs.projectId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      clusters: $response.body#/data
+      firstClusterId: $response.body#/data/0/id
+  outputs:
+    accountId: $steps.listAccounts.outputs.accountId
+    projectId: $steps.listProjects.outputs.projectId
+    clusters: $steps.listClusters.outputs.clusters

@@ -1,0 +1,133 @@
+arazzo: 1.0.1
+info:
+  title: YugabyteDB Aeon Scale Cluster
+  summary: Read a cluster, submit an updated specification, and poll until it returns to ACTIVE.
+  description: >-
+    Vertical and horizontal scaling of a YugabyteDB Aeon cluster is performed by
+    submitting an updated cluster specification. This workflow reads the current
+    cluster for context, applies the new configuration (such as node count, disk
+    size, or fault tolerance), and then polls the cluster until the asynchronous
+    update completes and it returns to the ACTIVE state. Every step spells out
+    its request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: aeonApi
+  url: ../openapi/yugabytedb-aeon-openapi.yml
+  type: openapi
+workflows:
+- workflowId: scale-cluster
+  summary: Apply an updated cluster specification and wait for the cluster to settle.
+  description: >-
+    Reads the current cluster, submits an updated specification to scale it, and
+    polls the cluster until the update finishes and the cluster is ACTIVE again.
+  inputs:
+    type: object
+    required:
+    - accountId
+    - projectId
+    - clusterId
+    - name
+    - cloudInfo
+    - clusterInfo
+    properties:
+      accountId:
+        type: string
+        description: The unique identifier of the YugabyteDB Aeon account.
+      projectId:
+        type: string
+        description: The unique identifier of the project within the account.
+      clusterId:
+        type: string
+        description: The unique identifier of the cluster to scale.
+      name:
+        type: string
+        description: The cluster name (carried through in the updated spec).
+      cloudInfo:
+        type: object
+        description: Cloud provider and region placement (code and region).
+      clusterInfo:
+        type: object
+        description: The updated node count, fault tolerance, tier, sizing, and version.
+  steps:
+  - stepId: readCluster
+    description: >-
+      Read the current cluster to capture its existing state before applying the
+      scaling change.
+    operationId: getCluster
+    parameters:
+    - name: accountId
+      in: path
+      value: $inputs.accountId
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: clusterId
+      in: path
+      value: $inputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      currentState: $response.body#/state
+  - stepId: updateCluster
+    description: >-
+      Submit the updated cluster specification to scale node count, disk size,
+      or fault tolerance. The cluster transitions into the UPDATING state.
+    operationId: updateCluster
+    parameters:
+    - name: accountId
+      in: path
+      value: $inputs.accountId
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: clusterId
+      in: path
+      value: $inputs.clusterId
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.name
+        cloud_info: $inputs.cloudInfo
+        cluster_info: $inputs.clusterInfo
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      state: $response.body#/state
+  - stepId: pollClusterState
+    description: >-
+      Poll the cluster until the update completes and it returns to the ACTIVE
+      state. The cluster passes through UPDATING before settling.
+    operationId: getCluster
+    parameters:
+    - name: accountId
+      in: path
+      value: $inputs.accountId
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: clusterId
+      in: path
+      value: $inputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      state: $response.body#/state
+      clusterInfo: $response.body#/cluster_info
+    onSuccess:
+    - name: scaled
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.state == "ACTIVE"
+        type: jsonpath
+    - name: stillUpdating
+      type: goto
+      stepId: pollClusterState
+      criteria:
+      - context: $response.body
+        condition: $.state == "UPDATING"
+        type: jsonpath
+  outputs:
+    clusterState: $steps.pollClusterState.outputs.state
+    clusterInfo: $steps.pollClusterState.outputs.clusterInfo

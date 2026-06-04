@@ -1,0 +1,191 @@
+arazzo: 1.0.1
+info:
+  title: YugabyteDB Aeon Pause or Resume Cluster
+  summary: Pause or resume a cluster to control compute billing, then confirm the new state.
+  description: >-
+    YugabyteDB Aeon clusters can be paused to suspend compute billing while
+    retaining all data, then resumed on demand. This workflow branches on the
+    requested action: it either pauses an ACTIVE cluster and polls until it
+    reaches PAUSED, or resumes a PAUSED cluster and polls until it returns to
+    ACTIVE. Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: aeonApi
+  url: ../openapi/yugabytedb-aeon-openapi.yml
+  type: openapi
+workflows:
+- workflowId: pause-resume-cluster
+  summary: Pause or resume a cluster based on the requested action and confirm the state.
+  description: >-
+    Reads the current cluster state, then branches on the requested action to
+    either pause or resume the cluster, polling the cluster until it reaches the
+    expected terminal state.
+  inputs:
+    type: object
+    required:
+    - accountId
+    - projectId
+    - clusterId
+    - action
+    properties:
+      accountId:
+        type: string
+        description: The unique identifier of the YugabyteDB Aeon account.
+      projectId:
+        type: string
+        description: The unique identifier of the project within the account.
+      clusterId:
+        type: string
+        description: The unique identifier of the cluster to pause or resume.
+      action:
+        type: string
+        description: The action to perform on the cluster.
+        enum:
+        - pause
+        - resume
+  steps:
+  - stepId: getCurrentState
+    description: >-
+      Read the cluster to determine its current state and branch on the
+      requested action.
+    operationId: getCluster
+    parameters:
+    - name: accountId
+      in: path
+      value: $inputs.accountId
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: clusterId
+      in: path
+      value: $inputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      state: $response.body#/state
+    onSuccess:
+    - name: doPause
+      type: goto
+      stepId: pauseCluster
+      criteria:
+      - condition: $inputs.action == "pause"
+    - name: doResume
+      type: goto
+      stepId: resumeCluster
+      criteria:
+      - condition: $inputs.action == "resume"
+  - stepId: pauseCluster
+    description: >-
+      Pause the cluster to suspend compute billing while retaining all data and
+      configuration. Only clusters in the ACTIVE state can be paused.
+    operationId: pauseCluster
+    parameters:
+    - name: accountId
+      in: path
+      value: $inputs.accountId
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: clusterId
+      in: path
+      value: $inputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      state: $response.body#/state
+    onSuccess:
+    - name: pollPaused
+      type: goto
+      stepId: confirmPaused
+  - stepId: confirmPaused
+    description: >-
+      Poll the cluster until it reaches the PAUSED state, confirming the pause
+      has fully taken effect.
+    operationId: getCluster
+    parameters:
+    - name: accountId
+      in: path
+      value: $inputs.accountId
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: clusterId
+      in: path
+      value: $inputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      state: $response.body#/state
+    onSuccess:
+    - name: paused
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.state == "PAUSED"
+        type: jsonpath
+    - name: stillPausing
+      type: goto
+      stepId: confirmPaused
+      criteria:
+      - context: $response.body
+        condition: $.state != "PAUSED"
+        type: jsonpath
+  - stepId: resumeCluster
+    description: >-
+      Resume a previously paused cluster, restoring it to the ACTIVE state and
+      resuming compute billing.
+    operationId: resumeCluster
+    parameters:
+    - name: accountId
+      in: path
+      value: $inputs.accountId
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: clusterId
+      in: path
+      value: $inputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      state: $response.body#/state
+    onSuccess:
+    - name: pollActive
+      type: goto
+      stepId: confirmActive
+  - stepId: confirmActive
+    description: >-
+      Poll the cluster until it returns to the ACTIVE state, confirming the
+      resume has fully taken effect.
+    operationId: getCluster
+    parameters:
+    - name: accountId
+      in: path
+      value: $inputs.accountId
+    - name: projectId
+      in: path
+      value: $inputs.projectId
+    - name: clusterId
+      in: path
+      value: $inputs.clusterId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      state: $response.body#/state
+    onSuccess:
+    - name: active
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.state == "ACTIVE"
+        type: jsonpath
+    - name: stillResuming
+      type: goto
+      stepId: confirmActive
+      criteria:
+      - context: $response.body
+        condition: $.state != "ACTIVE"
+        type: jsonpath
+  outputs:
+    finalState: $steps.getCurrentState.outputs.state
