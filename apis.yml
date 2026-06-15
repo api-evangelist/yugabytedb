@@ -1,9 +1,10 @@
 aid: yugabytedb
 name: YugabyteDB
-description: YugabyteDB is a distributed PostgreSQL-compatible SQL database for cloud-native and mission-critical applications.
-  It is delivered as open-source YugabyteDB Core, the fully managed YugabyteDB Aeon DBaaS, and the self-managed YugabyteDB
-  Anywhere control plane, with REST APIs for programmatic management of accounts, projects, clusters, universes, backups,
-  restores, read replicas, allow lists, and maintenance windows.
+description: >-
+  YugabyteDB is a distributed PostgreSQL-compatible SQL database for cloud-native and mission-critical applications. It
+  is delivered as open-source YugabyteDB Core, the fully managed YugabyteDB Aeon DBaaS, and the self-managed YugabyteDB
+  Anywhere control plane, with REST APIs for programmatic management of accounts, projects, clusters, universes,
+  backups, restores, read replicas, allow lists, and maintenance windows.
 type: Index
 position: Consumer
 access: 3rd-Party
@@ -21,435 +22,176 @@ specificationVersion: '0.19'
 apis:
   - aid: yugabytedb:aeon
     name: YugabyteDB Aeon REST API
-    description: The YugabyteDB Aeon REST API provides programmatic access to the fully managed YugabyteDB cloud database service.
-      It is used to deploy and manage clusters and read replicas, schedule and run on-demand backups and restores, manage IP
-      allow lists, configure maintenance windows, and set up monitoring and alerts. All paths are scoped to an account and project,
-      and authentication uses API keys passed as bearer tokens in the Authorization header.
+    description: >-
+      The YugabyteDB Aeon REST API provides programmatic access to the fully managed YugabyteDB cloud database service.
+      It is used to deploy and manage clusters and read replicas, schedule and run on-demand backups and restores,
+      manage IP allow lists, configure maintenance windows, and set up monitoring and alerts. All paths are scoped to an
+      account and project, and authentication uses API keys passed as bearer tokens in the Authorization header.
     humanURL: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/
     baseURL: https://cloud.yugabyte.com/api/public/v1
     tags:
-    - Aeon
-    - Backups
-    - Clusters
-    - DBaaS
-    - Distributed SQL
-    - Read Replicas
+      - Aeon
+      - Backups
+      - Clusters
+      - DBaaS
+      - Distributed SQL
+      - Read Replicas
     properties:
-    - type: OpenAPI
-      url: https://raw.githubusercontent.com/api-evangelist/yugabytedb/refs/heads/main/openapi/yugabytedb-aeon-openapi.yml
-    - type: Documentation
-      url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/
-    - type: APIReference
-      url: https://api-docs.yugabyte.com/docs/managed-apis/
-    - type: Quickstart
-      url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/managed-apikeys/
-    - type: Authentication
-      url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/managed-apikeys/
-    - type: CLI
-      url: https://github.com/yugabyte/ybm-cli
-      title: YugabyteDB Aeon CLI (ybm)
-    - type: Integrations
-      url: https://github.com/yugabyte/terraform-provider-ybm
-      title: Terraform Provider for YugabyteDB Aeon
-    - type: TermsOfService
-      url: https://www.yugabyte.com/yugabytedb-managed-service-terms/
-    - type: NaftikoCapability
-      url: capabilities/aeon-accounts.yaml
-    - type: NaftikoCapability
-      url: capabilities/aeon-allowlists.yaml
-    - type: NaftikoCapability
-      url: capabilities/aeon-backups.yaml
-    - type: NaftikoCapability
-      url: capabilities/aeon-clusters.yaml
-    - type: NaftikoCapability
-      url: capabilities/aeon-maintenancewindows.yaml
-    - type: NaftikoCapability
-      url: capabilities/aeon-projects.yaml
-    - type: NaftikoCapability
-      url: capabilities/aeon-readreplicas.yaml
-    - type: NaftikoCapability
-      url: capabilities/aeon-restores.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-alerts-monitoring-alerts.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-alerts-monitoring-audit.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-alerts-monitoring-grafana-dashboard.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-alerts-monitoring-loggingconfig.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-alerts-monitoring-metrics.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-alerts-monitoring-pa-collector.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-alerts-monitoring-performance-advisor.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-alerts-monitoring-telemetry-provider.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-backups-restore-asynchronous-replication.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-backups-restore-backups.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-backups-restore-customer-configuration.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-backups-restore-disaster-recovery.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-backups-restore-schedule-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-access-keys.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-alerts.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-asynchronous-replication.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-audit.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-availability-zones.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-backups.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-certificate-info.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-cloud-providers.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-custom-ca-certificates.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-customer-configuration.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-customer-tasks.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-customer-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-disaster-recovery.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-encryption-at-rest.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-extract-metadata-from-remote-tarball.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-gflags-validation-apis.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-grafana-dashboard.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-ha.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-instance-types.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-internal-ha.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-kubernetesoverridescontroller.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-ldap-role-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-ldapoidc-role-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-license-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-loggingconfig.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-maintenance-windows.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-metrics.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-new-release-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-node-agents.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-node-instances.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-pa-collector.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-pitr-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-packagescontroller.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-performance-advisor.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-platform-instance.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-platform-replication.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-rbac-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-region-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-release-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-runtime-configuration.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-schedule-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-session-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-support-bundle-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-table-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-tablet-server-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-telemetry-provider.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-universe-cdc-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-universe-upgrades-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-universe-actions.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-universe-database-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-universe-information.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-universe-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-universe-node-metadata-metamaster.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-universe-performance-suggestions.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-universeclustermutations.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-upload-release-packages.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-user-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-ybc-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-full-preview.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-high-availability-ha.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-high-availability-internal-ha.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-high-availability-platform-instance.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-high-availability-platform-replication.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-providers-infra-access-keys.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-providers-infra-availability-zones.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-providers-infra-certificate-info.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-providers-infra-cloud-providers.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-providers-infra-custom-ca-certificates.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-providers-infra-encryption-at-rest.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-providers-infra-instance-types.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-providers-infra-node-agents.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-providers-infra-node-instances.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-providers-infra-region-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-releases-maintenance-extract-metadata-from-remote-tarball.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-releases-maintenance-maintenance-windows.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-releases-maintenance-new-release-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-releases-maintenance-packagescontroller.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-releases-maintenance-release-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-releases-maintenance-runtime-configuration.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-releases-maintenance-support-bundle-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-releases-maintenance-upload-release-packages.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-releases-maintenance-preview.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-users-rbac-customer-tasks.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-users-rbac-customer-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-users-rbac-ldap-role-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-users-rbac-ldapoidc-role-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-users-rbac-license-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-users-rbac-rbac-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-users-rbac-session-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-users-rbac-user-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v2-authentication.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v2-backup-and-restore.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v2-continuous-backup.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v2-isolated-backup.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v2-job-scheduler.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v2-metrics.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v2-telemetry-provider.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v2-universe.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v2-yba-instance.yaml
+      - type: OpenAPI
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/yugabytedb/refs/heads/main/openapi/yugabytedb-aeon-openapi.yml
+      - type: Documentation
+        url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/
+      - type: APIReference
+        url: https://api-docs.yugabyte.com/docs/managed-apis/
+      - type: Quickstart
+        url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/managed-apikeys/
+      - type: Authentication
+        url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/managed-apikeys/
+      - type: CLI
+        url: https://github.com/yugabyte/ybm-cli
+        title: YugabyteDB Aeon CLI (ybm)
+      - type: Integrations
+        url: https://github.com/yugabyte/terraform-provider-ybm
+        title: Terraform Provider for YugabyteDB Aeon
+      - type: TermsOfService
+        url: https://www.yugabyte.com/yugabytedb-managed-service-terms/
   - aid: yugabytedb:anywhere
     name: YugabyteDB Anywhere REST API
-    description: The YugabyteDB Anywhere REST API enables programmatic management of self-managed YugabyteDB deployments through
-      the YugabyteDB Anywhere (YBA) control plane. It supports creating and managing cloud provider configurations, deploying
-      and managing universes (database clusters), pausing and resuming universes, performing software upgrades, executing backups
-      and restores, and resizing nodes. Authentication is performed via the X-AUTH-YW-API-TOKEN HTTP header.
+    description: >-
+      The YugabyteDB Anywhere REST API enables programmatic management of self-managed YugabyteDB deployments through
+      the YugabyteDB Anywhere (YBA) control plane. It supports creating and managing cloud provider configurations,
+      deploying and managing universes (database clusters), pausing and resuming universes, performing software
+      upgrades, executing backups and restores, and resizing nodes. Authentication is performed via the
+      X-AUTH-YW-API-TOKEN HTTP header.
     humanURL: https://docs.yugabyte.com/stable/yugabyte-platform/anywhere-automation/anywhere-api/
     baseURL: http://{ybaHost}/api/v1
     tags:
-    - Anywhere
-    - Backups
-    - Distributed SQL
-    - Self-Managed
-    - Universes
+      - Anywhere
+      - Backups
+      - Distributed SQL
+      - Self-Managed
+      - Universes
     properties:
-    - type: OpenAPI
-      url: https://raw.githubusercontent.com/api-evangelist/yugabytedb/refs/heads/main/openapi/yugabytedb-anywhere-v1-universes.yaml
-      title: Anywhere v1 — Universe Management
-    - type: OpenAPI
-      url: https://raw.githubusercontent.com/api-evangelist/yugabytedb/refs/heads/main/openapi/yugabytedb-anywhere-v1-backups-restore.yaml
-      title: Anywhere v1 — Backups, Restores, and Replication
-    - type: OpenAPI
-      url: https://raw.githubusercontent.com/api-evangelist/yugabytedb/refs/heads/main/openapi/yugabytedb-anywhere-v1-providers-infra.yaml
-      title: Anywhere v1 — Providers and Infrastructure
-    - type: OpenAPI
-      url: https://raw.githubusercontent.com/api-evangelist/yugabytedb/refs/heads/main/openapi/yugabytedb-anywhere-v1-alerts-monitoring.yaml
-      title: Anywhere v1 — Alerts and Monitoring
-    - type: OpenAPI
-      url: https://raw.githubusercontent.com/api-evangelist/yugabytedb/refs/heads/main/openapi/yugabytedb-anywhere-v1-users-rbac.yaml
-      title: Anywhere v1 — Users, Sessions, and RBAC
-    - type: OpenAPI
-      url: https://raw.githubusercontent.com/api-evangelist/yugabytedb/refs/heads/main/openapi/yugabytedb-anywhere-v1-releases-maintenance.yaml
-      title: Anywhere v1 — Releases and Maintenance
-    - type: OpenAPI
-      url: https://raw.githubusercontent.com/api-evangelist/yugabytedb/refs/heads/main/openapi/yugabytedb-anywhere-v1-high-availability.yaml
-      title: Anywhere v1 — High Availability
-    - type: OpenAPI
-      url: https://raw.githubusercontent.com/api-evangelist/yugabytedb/refs/heads/main/openapi/yugabytedb-anywhere-v2-openapi.yaml
-      title: Anywhere v2 — Improved API
-    - type: OpenAPI
-      url: https://raw.githubusercontent.com/api-evangelist/yugabytedb/refs/heads/main/openapi/yugabytedb-anywhere-v1-full.yaml
-      title: Anywhere v1 — Full Monolithic Spec (reference)
-    - type: Documentation
-      url: https://docs.yugabyte.com/stable/yugabyte-platform/anywhere-automation/anywhere-api/
-    - type: APIReference
-      url: https://api-docs.yugabyte.com/docs/yugabyte-platform/
-    - type: Quickstart
-      url: https://docs.yugabyte.com/stable/yugabyte-platform/anywhere-automation/anywhere-api/
-    - type: Authentication
-      url: https://docs.yugabyte.com/stable/yugabyte-platform/anywhere-automation/anywhere-api/
-    - type: SDK
-      url: https://github.com/yugabyte/platform-go-client
-      title: YugabyteDB Anywhere Go API Client
-    - type: Integrations
-      url: https://github.com/yugabyte/terraform-provider-yba
-      title: Terraform Provider for YugabyteDB Anywhere
-    - type: Integrations
-      url: https://github.com/yugabyte/yugabyte-k8s-operator
-      title: YugabyteDB Kubernetes Operator
-    - type: KubernetesCRD
-      url: crd/yugabytedb-ybuniverse.yaml
-      title: YBUniverse CRD
-    - type: KubernetesCRD
-      url: crd/yugabytedb-backup.yaml
-      title: Backup CRD
-    - type: KubernetesCRD
-      url: crd/yugabytedb-backup-schedule.yaml
-      title: BackupSchedule CRD
-    - type: KubernetesCRD
-      url: crd/yugabytedb-restore-job.yaml
-      title: RestoreJob CRD
-    - type: KubernetesCRD
-      url: crd/yugabytedb-storage-config.yaml
-      title: StorageConfig CRD
-    - type: KubernetesCRD
-      url: crd/yugabytedb-dr-config.yaml
-      title: DrConfig CRD
-    - type: KubernetesCRD
-      url: crd/yugabytedb-pitr-config.yaml
-      title: PitrConfig CRD
-    - type: KubernetesCRD
-      url: crd/yugabytedb-release.yaml
-      title: Release CRD
-    - type: KubernetesCRD
-      url: crd/yugabytedb-support-bundle.yaml
-      title: SupportBundle CRD
-    - type: KubernetesCRD
-      url: crd/yugabytedb-ybcertificate.yaml
-      title: YBCertificate CRD
-    - type: KubernetesCRD
-      url: crd/yugabytedb-ybprovider.yaml
-      title: YBProvider CRD
-    - type: KubernetesCRD
-      url: crd/yugabytedb-ybplatform.yaml
-      title: YBPlatform CRD
-    - type: TermsOfService
-      url: https://www.yugabyte.com/yugabytedb-managed-service-terms/
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-universes-backups.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-universes-gflags-validation-apis.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-universes-kubernetesoverridescontroller.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-universes-pitr-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-universes-table-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-universes-tablet-server-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-universes-universe-cdc-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-universes-universe-upgrades-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-universes-universe-actions.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-universes-universe-database-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-universes-universe-information.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-universes-universe-management.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-universes-universe-node-metadata-metamaster.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-universes-universe-performance-suggestions.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-universes-universeclustermutations.yaml
-    - type: NaftikoCapability
-      url: capabilities/anywhere-v1-universes-ybc-management.yaml
+      - type: OpenAPI
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/yugabytedb/refs/heads/main/openapi/yugabytedb-anywhere-v1-universes.yaml
+        title: Anywhere v1 — Universe Management
+      - type: OpenAPI
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/yugabytedb/refs/heads/main/openapi/yugabytedb-anywhere-v1-backups-restore.yaml
+        title: Anywhere v1 — Backups, Restores, and Replication
+      - type: OpenAPI
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/yugabytedb/refs/heads/main/openapi/yugabytedb-anywhere-v1-providers-infra.yaml
+        title: Anywhere v1 — Providers and Infrastructure
+      - type: OpenAPI
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/yugabytedb/refs/heads/main/openapi/yugabytedb-anywhere-v1-alerts-monitoring.yaml
+        title: Anywhere v1 — Alerts and Monitoring
+      - type: OpenAPI
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/yugabytedb/refs/heads/main/openapi/yugabytedb-anywhere-v1-users-rbac.yaml
+        title: Anywhere v1 — Users, Sessions, and RBAC
+      - type: OpenAPI
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/yugabytedb/refs/heads/main/openapi/yugabytedb-anywhere-v1-releases-maintenance.yaml
+        title: Anywhere v1 — Releases and Maintenance
+      - type: OpenAPI
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/yugabytedb/refs/heads/main/openapi/yugabytedb-anywhere-v1-high-availability.yaml
+        title: Anywhere v1 — High Availability
+      - type: OpenAPI
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/yugabytedb/refs/heads/main/openapi/yugabytedb-anywhere-v2-openapi.yaml
+        title: Anywhere v2 — Improved API
+      - type: OpenAPI
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/yugabytedb/refs/heads/main/openapi/yugabytedb-anywhere-v1-full.yaml
+        title: Anywhere v1 — Full Monolithic Spec (reference)
+      - type: Documentation
+        url: https://docs.yugabyte.com/stable/yugabyte-platform/anywhere-automation/anywhere-api/
+      - type: APIReference
+        url: https://api-docs.yugabyte.com/docs/yugabyte-platform/
+      - type: Quickstart
+        url: https://docs.yugabyte.com/stable/yugabyte-platform/anywhere-automation/anywhere-api/
+      - type: Authentication
+        url: https://docs.yugabyte.com/stable/yugabyte-platform/anywhere-automation/anywhere-api/
+      - type: SDK
+        url: https://github.com/yugabyte/platform-go-client
+        title: YugabyteDB Anywhere Go API Client
+      - type: Integrations
+        url: https://github.com/yugabyte/terraform-provider-yba
+        title: Terraform Provider for YugabyteDB Anywhere
+      - type: Integrations
+        url: https://github.com/yugabyte/yugabyte-k8s-operator
+        title: YugabyteDB Kubernetes Operator
+      - type: KubernetesCRD
+        url: crd/yugabytedb-ybuniverse.yaml
+        title: YBUniverse CRD
+      - type: KubernetesCRD
+        url: crd/yugabytedb-backup.yaml
+        title: Backup CRD
+      - type: KubernetesCRD
+        url: crd/yugabytedb-backup-schedule.yaml
+        title: BackupSchedule CRD
+      - type: KubernetesCRD
+        url: crd/yugabytedb-restore-job.yaml
+        title: RestoreJob CRD
+      - type: KubernetesCRD
+        url: crd/yugabytedb-storage-config.yaml
+        title: StorageConfig CRD
+      - type: KubernetesCRD
+        url: crd/yugabytedb-dr-config.yaml
+        title: DrConfig CRD
+      - type: KubernetesCRD
+        url: crd/yugabytedb-pitr-config.yaml
+        title: PitrConfig CRD
+      - type: KubernetesCRD
+        url: crd/yugabytedb-release.yaml
+        title: Release CRD
+      - type: KubernetesCRD
+        url: crd/yugabytedb-support-bundle.yaml
+        title: SupportBundle CRD
+      - type: KubernetesCRD
+        url: crd/yugabytedb-ybcertificate.yaml
+        title: YBCertificate CRD
+      - type: KubernetesCRD
+        url: crd/yugabytedb-ybprovider.yaml
+        title: YBProvider CRD
+      - type: KubernetesCRD
+        url: crd/yugabytedb-ybplatform.yaml
+        title: YBPlatform CRD
+      - type: TermsOfService
+        url: https://www.yugabyte.com/yugabytedb-managed-service-terms/
 common:
   - type: ArazzoWorkflows
     url: arazzo/
     workflows:
-    - url: arazzo/yugabytedb-add-read-replica-workflow.yml
-      name: YugabyteDB Aeon Add Read Replica
-      summary: Add a read replica to a cluster and confirm it becomes ACTIVE.
-    - url: arazzo/yugabytedb-backup-and-restore-workflow.yml
-      name: YugabyteDB Aeon Backup and Restore
-      summary: Take an on-demand backup, poll until it succeeds, then restore the cluster from it.
-    - url: arazzo/yugabytedb-configure-allow-list-workflow.yml
-      name: YugabyteDB Aeon Configure IP Allow List
-      summary: Create an IP allow list in a project and confirm its CIDR entries.
-    - url: arazzo/yugabytedb-configure-maintenance-window-workflow.yml
-      name: YugabyteDB Aeon Configure Maintenance Window
-      summary: Read the current maintenance window for a cluster, then update its schedule.
-    - url: arazzo/yugabytedb-discover-account-clusters-workflow.yml
-      name: YugabyteDB Aeon Discover Account Clusters
-      summary: Resolve the active account and project, then enumerate the clusters within it.
-    - url: arazzo/yugabytedb-pause-resume-cluster-workflow.yml
-      name: YugabyteDB Aeon Pause or Resume Cluster
-      summary: Pause or resume a cluster to control compute billing, then confirm the new state.
-    - url: arazzo/yugabytedb-provision-cluster-workflow.yml
-      name: YugabyteDB Aeon Provision Cluster
-      summary: Create a cluster, poll until it becomes ACTIVE, then read its connection endpoints.
-    - url: arazzo/yugabytedb-scale-cluster-workflow.yml
-      name: YugabyteDB Aeon Scale Cluster
-      summary: Read a cluster, submit an updated specification, and poll until it returns to ACTIVE.
+      - url: arazzo/yugabytedb-add-read-replica-workflow.yml
+        name: YugabyteDB Aeon Add Read Replica
+        summary: Add a read replica to a cluster and confirm it becomes ACTIVE.
+      - url: arazzo/yugabytedb-backup-and-restore-workflow.yml
+        name: YugabyteDB Aeon Backup and Restore
+        summary: Take an on-demand backup, poll until it succeeds, then restore the cluster from it.
+      - url: arazzo/yugabytedb-configure-allow-list-workflow.yml
+        name: YugabyteDB Aeon Configure IP Allow List
+        summary: Create an IP allow list in a project and confirm its CIDR entries.
+      - url: arazzo/yugabytedb-configure-maintenance-window-workflow.yml
+        name: YugabyteDB Aeon Configure Maintenance Window
+        summary: Read the current maintenance window for a cluster, then update its schedule.
+      - url: arazzo/yugabytedb-discover-account-clusters-workflow.yml
+        name: YugabyteDB Aeon Discover Account Clusters
+        summary: Resolve the active account and project, then enumerate the clusters within it.
+      - url: arazzo/yugabytedb-pause-resume-cluster-workflow.yml
+        name: YugabyteDB Aeon Pause or Resume Cluster
+        summary: Pause or resume a cluster to control compute billing, then confirm the new state.
+      - url: arazzo/yugabytedb-provision-cluster-workflow.yml
+        name: YugabyteDB Aeon Provision Cluster
+        summary: Create a cluster, poll until it becomes ACTIVE, then read its connection endpoints.
+      - url: arazzo/yugabytedb-scale-cluster-workflow.yml
+        name: YugabyteDB Aeon Scale Cluster
+        summary: Read a cluster, submit an updated specification, and poll until it returns to ACTIVE.
   - type: LinkedIn
     url: https://www.linkedin.com/company/yugabyte
   - url: https://www.yugabyte.com/
@@ -518,7 +260,8 @@ common:
   - url: https://www.youtube.com/c/yugabyte
     name: YugabyteDB YouTube
     type: YouTube
-  - url: https://raw.githubusercontent.com/api-evangelist/yugabytedb/refs/heads/main/json-schema/yugabytedb-cluster-schema.json
+  - url: >-
+      https://raw.githubusercontent.com/api-evangelist/yugabytedb/refs/heads/main/json-schema/yugabytedb-cluster-schema.json
     name: YugabyteDB Cluster JSON Schema
     type: JSONSchema
   - url: https://raw.githubusercontent.com/api-evangelist/yugabytedb/refs/heads/main/json-ld/yugabytedb-context.jsonld
@@ -721,71 +464,73 @@ common:
     name: Cloud Resource Cleanup Tool
     type: GitHubRepository
   - data:
-    - name: PostgreSQL Compatibility
-      description: Wire-compatible YSQL API supporting PostgreSQL drivers, ORMs, stored procedures, triggers, and extensions.
-    - name: Distributed SQL
-      description: ACID transactions, automatic sharding, and horizontal scaling across nodes, zones, and regions.
-    - name: Multi-Region Deployments
-      description: Geo-distributed clusters with synchronous and asynchronous replication for disaster recovery and data residency.
-    - name: Cloud Database as a Service
-      description: Fully managed YugabyteDB Aeon clusters across AWS, Azure, and Google Cloud regions.
-    - name: Self-Managed Control Plane
-      description: YugabyteDB Anywhere for deploying and operating universes on customer infrastructure and Kubernetes.
-    - name: Backups and Restores
-      description: On-demand and scheduled backups, point-in-time recovery, and cross-region restore.
-    - name: Read Replicas
-      description: Asynchronous read replicas for low-latency reads in additional regions.
-    - name: Vector Indexing
-      description: Vector search capabilities for retrieval-augmented generation (RAG) and GenAI workloads.
-    - name: YCQL API
-      description: Cassandra-compatible API for wide-column workloads alongside the PostgreSQL-compatible YSQL API.
-    - name: Connection Management
-      description: Built-in connection pooling and load balancing for distributed workloads.
+      - name: PostgreSQL Compatibility
+        description: Wire-compatible YSQL API supporting PostgreSQL drivers, ORMs, stored procedures, triggers, and extensions.
+      - name: Distributed SQL
+        description: ACID transactions, automatic sharding, and horizontal scaling across nodes, zones, and regions.
+      - name: Multi-Region Deployments
+        description: >-
+          Geo-distributed clusters with synchronous and asynchronous replication for disaster recovery and data
+          residency.
+      - name: Cloud Database as a Service
+        description: Fully managed YugabyteDB Aeon clusters across AWS, Azure, and Google Cloud regions.
+      - name: Self-Managed Control Plane
+        description: YugabyteDB Anywhere for deploying and operating universes on customer infrastructure and Kubernetes.
+      - name: Backups and Restores
+        description: On-demand and scheduled backups, point-in-time recovery, and cross-region restore.
+      - name: Read Replicas
+        description: Asynchronous read replicas for low-latency reads in additional regions.
+      - name: Vector Indexing
+        description: Vector search capabilities for retrieval-augmented generation (RAG) and GenAI workloads.
+      - name: YCQL API
+        description: Cassandra-compatible API for wide-column workloads alongside the PostgreSQL-compatible YSQL API.
+      - name: Connection Management
+        description: Built-in connection pooling and load balancing for distributed workloads.
     name: Features
     type: Features
   - data:
-    - name: Database Modernization
-      description: Replace legacy monolithic RDBMS systems with a horizontally scalable, PostgreSQL-compatible alternative.
-    - name: Cloud-Native Applications
-      description: Power Kubernetes-deployed and microservices applications with a resilient distributed SQL backend.
-    - name: Multi-Region SaaS
-      description: Operate global SaaS platforms with low-latency reads and disaster-recovery-ready writes.
-    - name: Financial Services
-      description: Run mission-critical transaction systems requiring strong consistency and high availability.
-    - name: Retail and eCommerce
-      description: Handle high-throughput product catalogs, inventory, and orders across regions.
-    - name: Telecommunications
-      description: Support subscriber, billing, and session data at carrier scale.
-    - name: GenAI and RAG
-      description: Store embeddings and metadata for retrieval-augmented generation pipelines.
-    - name: Edge and Streaming
-      description: Provide a durable distributed SQL store for edge and streaming application data.
+      - name: Database Modernization
+        description: Replace legacy monolithic RDBMS systems with a horizontally scalable, PostgreSQL-compatible alternative.
+      - name: Cloud-Native Applications
+        description: Power Kubernetes-deployed and microservices applications with a resilient distributed SQL backend.
+      - name: Multi-Region SaaS
+        description: Operate global SaaS platforms with low-latency reads and disaster-recovery-ready writes.
+      - name: Financial Services
+        description: Run mission-critical transaction systems requiring strong consistency and high availability.
+      - name: Retail and eCommerce
+        description: Handle high-throughput product catalogs, inventory, and orders across regions.
+      - name: Telecommunications
+        description: Support subscriber, billing, and session data at carrier scale.
+      - name: GenAI and RAG
+        description: Store embeddings and metadata for retrieval-augmented generation pipelines.
+      - name: Edge and Streaming
+        description: Provide a durable distributed SQL store for edge and streaming application data.
     name: UseCases
     type: UseCases
   - data:
-    - name: Kubernetes
-      description: Helm charts and a Kubernetes Operator for deploying YugabyteDB on Kubernetes clusters.
-    - name: Terraform
-      description: Terraform Provider for YugabyteDB Anywhere for infrastructure-as-code management of universes.
-    - name: YugabyteDB Voyager
-      description: Open-source migration tool for moving schema and data from PostgreSQL, Oracle, and MySQL to YugabyteDB.
-    - name: AWS, Azure, and Google Cloud
-      description: Native deployment targets for YugabyteDB Aeon and Anywhere across major public clouds.
-    - name: PostgreSQL Drivers and ORMs
-      description: Compatibility with standard PostgreSQL drivers, ORMs, and tooling via the YSQL API.
-    - name: REST API
-      description: Bearer-token authenticated REST APIs for both Aeon and Anywhere control planes.
+      - name: Kubernetes
+        description: Helm charts and a Kubernetes Operator for deploying YugabyteDB on Kubernetes clusters.
+      - name: Terraform
+        description: Terraform Provider for YugabyteDB Anywhere for infrastructure-as-code management of universes.
+      - name: YugabyteDB Voyager
+        description: Open-source migration tool for moving schema and data from PostgreSQL, Oracle, and MySQL to YugabyteDB.
+      - name: AWS, Azure, and Google Cloud
+        description: Native deployment targets for YugabyteDB Aeon and Anywhere across major public clouds.
+      - name: PostgreSQL Drivers and ORMs
+        description: Compatibility with standard PostgreSQL drivers, ORMs, and tooling via the YSQL API.
+      - name: REST API
+        description: Bearer-token authenticated REST APIs for both Aeon and Anywhere control planes.
     name: Integrations
     type: Integrations
   - data:
-    - name: YugabyteDB Core
-      description: Open-source distributed SQL database available under the Apache 2.0 license.
-    - name: YugabyteDB Aeon
-      description: Fully managed cloud database service operated by Yugabyte.
-    - name: YugabyteDB Anywhere
-      description: Self-managed control plane for operating YugabyteDB universes on customer infrastructure.
-    - name: YugabyteDB Voyager
-      description: Database migration service and tooling for moving to YugabyteDB.
+      - name: YugabyteDB Core
+        description: Open-source distributed SQL database available under the Apache 2.0 license.
+      - name: YugabyteDB Aeon
+        description: Fully managed cloud database service operated by Yugabyte.
+      - name: YugabyteDB Anywhere
+        description: Self-managed control plane for operating YugabyteDB universes on customer infrastructure.
+      - name: YugabyteDB Voyager
+        description: Database migration service and tooling for moving to YugabyteDB.
     name: Solutions
     type: Solutions
   - name: MCP Server
