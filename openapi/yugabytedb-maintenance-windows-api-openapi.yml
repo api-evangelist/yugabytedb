@@ -1,0 +1,1781 @@
+openapi: 3.1.0
+info:
+  title: YugabyteDB Aeon REST Access Keys Maintenance windows API
+  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.
+  version: v1
+  contact:
+    name: Yugabyte Support
+    url: https://support.yugabyte.com
+  termsOfService: https://www.yugabyte.com/yugabytedb-managed-service-terms/
+  x-generated-from: documentation
+  x-source-url: https://api-docs.yugabyte.com/docs/managed-apis/
+  x-last-validated: '2026-05-03'
+servers:
+- url: https://cloud.yugabyte.com/api/public/v1
+  description: YugabyteDB Aeon Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Maintenance windows
+paths:
+  /api/v1/customers/{cUUID}/maintenance_windows:
+    post:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: create
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MaintenanceWindow'
+            examples:
+              CreateRequestExample:
+                summary: Default create request
+                x-microcks-default: true
+                value:
+                  alertConfigurationFilter:
+                    severity: SEVERE
+                    template: REPLICATION_LAG
+                    destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    name: name
+                    active: true
+                    destinationType: NO_DESTINATION
+                    targetType: PLATFORM
+                    target:
+                      all: true
+                      uuids:
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    uuids:
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  createTime: '2022-12-12T13:07:18+00:00'
+                  suppressHealthCheckNotificationsConfig:
+                    suppressAllUniverses: true
+                    universeUUIDSet:
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  name: name
+                  description: description
+                  startTime: '2022-12-12T13:07:18+00:00'
+                  endTime: '2022-12-12T13:07:18+00:00'
+                  state: FINISHED
+                  uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MaintenanceWindow'
+              examples:
+                Create200Example:
+                  summary: Default create 200 response
+                  x-microcks-default: true
+                  value:
+                    alertConfigurationFilter:
+                      severity: SEVERE
+                      template: REPLICATION_LAG
+                      destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      name: name
+                      active: true
+                      destinationType: NO_DESTINATION
+                      targetType: PLATFORM
+                      target:
+                        all: true
+                        uuids:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      uuids:
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    createTime: 2022-12-12 13:07:18+00:00
+                    suppressHealthCheckNotificationsConfig:
+                      suppressAllUniverses: true
+                      universeUUIDSet:
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    name: name
+                    description: description
+                    startTime: 2022-12-12 13:07:18+00:00
+                    endTime: 2022-12-12 13:07:18+00:00
+                    state: FINISHED
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Create Maintenance Window
+      tags:
+      - Maintenance windows
+      x-codegen-request-body-name: CreateMaintenanceWindowRequest
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/maintenance_windows/list:
+    post:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: listOfMaintenanceWindows
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MaintenanceWindowApiFilter'
+            examples:
+              ListOfMaintenanceWindowsRequestExample:
+                summary: Default listOfMaintenanceWindows request
+                x-microcks-default: true
+                value:
+                  states:
+                  - FINISHED
+                  - FINISHED
+                  uuids:
+                  - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/MaintenanceWindow'
+                type: array
+              examples:
+                ListOfMaintenanceWindows200Example:
+                  summary: Default listOfMaintenanceWindows 200 response
+                  x-microcks-default: true
+                  value:
+                  - alertConfigurationFilter:
+                      severity: SEVERE
+                      template: REPLICATION_LAG
+                      destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      name: name
+                      active: true
+                      destinationType: NO_DESTINATION
+                      targetType: PLATFORM
+                      target:
+                        all: true
+                        uuids:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      uuids:
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    createTime: 2022-12-12 13:07:18+00:00
+                    suppressHealthCheckNotificationsConfig:
+                      suppressAllUniverses: true
+                      universeUUIDSet:
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    name: name
+                    description: description
+                    startTime: 2022-12-12 13:07:18+00:00
+                    endTime: 2022-12-12 13:07:18+00:00
+                    state: FINISHED
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Maintenance Windows
+      tags:
+      - Maintenance windows
+      x-codegen-request-body-name: ListMaintenanceWindowsRequest
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/maintenance_windows/page:
+    post:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: page
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MaintenanceWindowPagedApiQuery'
+            examples:
+              PageRequestExample:
+                summary: Default page request
+                x-microcks-default: true
+                value:
+                  filter:
+                    states:
+                    - FINISHED
+                    - FINISHED
+                    uuids:
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  offset: 6
+                  needTotalCount: true
+                  limit: 0
+                  sortBy: uuid
+                  direction: ASC
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MaintenanceWindowPagedResponse'
+              examples:
+                Page200Example:
+                  summary: Default page 200 response
+                  x-microcks-default: true
+                  value:
+                    entities:
+                    - alertConfigurationFilter:
+                        severity: SEVERE
+                        template: REPLICATION_LAG
+                        destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        name: name
+                        active: true
+                        destinationType: NO_DESTINATION
+                        targetType: PLATFORM
+                        target:
+                          all: true
+                          uuids:
+                          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        uuids:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      createTime: 2022-12-12 13:07:18+00:00
+                      suppressHealthCheckNotificationsConfig:
+                        suppressAllUniverses: true
+                        universeUUIDSet:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      name: name
+                      description: description
+                      startTime: 2022-12-12 13:07:18+00:00
+                      endTime: 2022-12-12 13:07:18+00:00
+                      state: FINISHED
+                      uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    - alertConfigurationFilter:
+                        severity: SEVERE
+                        template: REPLICATION_LAG
+                        destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        name: name
+                        active: true
+                        destinationType: NO_DESTINATION
+                        targetType: PLATFORM
+                        target:
+                          all: true
+                          uuids:
+                          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        uuids:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      createTime: 2022-12-12 13:07:18+00:00
+                      suppressHealthCheckNotificationsConfig:
+                        suppressAllUniverses: true
+                        universeUUIDSet:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      name: name
+                      description: description
+                      startTime: 2022-12-12 13:07:18+00:00
+                      endTime: 2022-12-12 13:07:18+00:00
+                      state: FINISHED
+                      uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    hasPrev: true
+                    hasNext: true
+                    totalCount: 0
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Maintenance Windows (paginated)
+      tags:
+      - Maintenance windows
+      x-codegen-request-body-name: PageMaintenanceWindowsRequest
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/maintenance_windows/{windowUUID}:
+    delete:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: delete
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: windowUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                Delete200Example:
+                  summary: Default delete 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Delete Maintenance Window
+      tags:
+      - Maintenance windows
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: get
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: windowUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MaintenanceWindow'
+              examples:
+                Get200Example:
+                  summary: Default get 200 response
+                  x-microcks-default: true
+                  value:
+                    alertConfigurationFilter:
+                      severity: SEVERE
+                      template: REPLICATION_LAG
+                      destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      name: name
+                      active: true
+                      destinationType: NO_DESTINATION
+                      targetType: PLATFORM
+                      target:
+                        all: true
+                        uuids:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      uuids:
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    createTime: 2022-12-12 13:07:18+00:00
+                    suppressHealthCheckNotificationsConfig:
+                      suppressAllUniverses: true
+                      universeUUIDSet:
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    name: name
+                    description: description
+                    startTime: 2022-12-12 13:07:18+00:00
+                    endTime: 2022-12-12 13:07:18+00:00
+                    state: FINISHED
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get Details of a Maintenance Window
+      tags:
+      - Maintenance windows
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: update
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: windowUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MaintenanceWindow'
+            examples:
+              UpdateRequestExample:
+                summary: Default update request
+                x-microcks-default: true
+                value:
+                  alertConfigurationFilter:
+                    severity: SEVERE
+                    template: REPLICATION_LAG
+                    destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    name: name
+                    active: true
+                    destinationType: NO_DESTINATION
+                    targetType: PLATFORM
+                    target:
+                      all: true
+                      uuids:
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    uuids:
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  createTime: '2022-12-12T13:07:18+00:00'
+                  suppressHealthCheckNotificationsConfig:
+                    suppressAllUniverses: true
+                    universeUUIDSet:
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  name: name
+                  description: description
+                  startTime: '2022-12-12T13:07:18+00:00'
+                  endTime: '2022-12-12T13:07:18+00:00'
+                  state: FINISHED
+                  uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MaintenanceWindow'
+              examples:
+                Update200Example:
+                  summary: Default update 200 response
+                  x-microcks-default: true
+                  value:
+                    alertConfigurationFilter:
+                      severity: SEVERE
+                      template: REPLICATION_LAG
+                      destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      name: name
+                      active: true
+                      destinationType: NO_DESTINATION
+                      targetType: PLATFORM
+                      target:
+                        all: true
+                        uuids:
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      uuids:
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    createTime: 2022-12-12 13:07:18+00:00
+                    suppressHealthCheckNotificationsConfig:
+                      suppressAllUniverses: true
+                      universeUUIDSet:
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    name: name
+                    description: description
+                    startTime: 2022-12-12 13:07:18+00:00
+                    endTime: 2022-12-12 13:07:18+00:00
+                    state: FINISHED
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Update Maintenance Window
+      tags:
+      - Maintenance windows
+      x-codegen-request-body-name: UpdateMaintenanceWindowRequest
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    MaintenanceWindowApiFilter:
+      example:
+        states:
+        - FINISHED
+        - FINISHED
+        uuids:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        states:
+          items:
+            enum:
+            - FINISHED
+            - ACTIVE
+            - PENDING
+            type: string
+          type: array
+          uniqueItems: true
+          example:
+          - FINISHED
+        uuids:
+          items:
+            format: uuid
+            type: string
+          type: array
+          uniqueItems: true
+          example:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      required:
+      - states
+      - uuids
+      type: object
+    AlertConfigurationApiFilter:
+      example:
+        severity: SEVERE
+        template: REPLICATION_LAG
+        destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name: name
+        active: true
+        destinationType: NO_DESTINATION
+        targetType: PLATFORM
+        target:
+          all: true
+          uuids:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        uuids:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        active:
+          description: Whether the alert configuration is active.
+          type: boolean
+          example: true
+        destinationType:
+          description: 'The destination type of the alert configuration. '
+          enum:
+          - NO_DESTINATION
+          - DEFAULT_DESTINATION
+          - SELECTED_DESTINATION
+          type: string
+          example: NO_DESTINATION
+        destinationUuid:
+          description: 'The destination uuid of the alert configuration. '
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name:
+          description: The name of the alert configuration.
+          type: string
+          example: example-name
+        severity:
+          description: The severity of the alert configuration.
+          enum:
+          - SEVERE
+          - WARNING
+          type: string
+          example: SEVERE
+        target:
+          $ref: '#/components/schemas/AlertConfigurationTarget'
+        targetType:
+          description: The target type of the alert configuration.
+          enum:
+          - PLATFORM
+          - UNIVERSE
+          type: string
+          example: PLATFORM
+        template:
+          description: The template of the alert configuration.
+          enum:
+          - REPLICATION_LAG
+          - CLOCK_SKEW
+          - CLOCK_SYNC_CHECK_FAILED
+          - MEMORY_CONSUMPTION
+          - HEALTH_CHECK_ERROR
+          - HEALTH_CHECK_NOTIFICATION_ERROR
+          - UNIVERSE_METRIC_COLLECTION_FAILURE
+          - BACKUP_FAILURE
+          - BACKUP_DELETION_FAILURE
+          - BACKUP_SCHEDULE_FAILURE
+          - INACTIVE_CRON_NODES
+          - ALERT_QUERY_FAILED
+          - ALERT_CONFIG_WRITING_FAILED
+          - ALERT_NOTIFICATION_ERROR
+          - ALERT_NOTIFICATION_CHANNEL_ERROR
+          - NODE_DOWN
+          - NODE_RESTART
+          - NODE_CPU_USAGE
+          - NODE_DISK_USAGE
+          - NODE_SYSTEM_DISK_USAGE
+          - NODE_FILE_DESCRIPTORS_USAGE
+          - NODE_OOM_KILLS
+          - DB_VERSION_MISMATCH
+          - DB_INSTANCE_DOWN
+          - DB_INSTANCE_RESTART
+          - DB_FATAL_LOGS
+          - DB_ERROR_LOGS
+          - DB_CORE_FILES
+          - DB_YSQL_CONNECTION
+          - DB_YCQL_CONNECTION
+          - DB_REDIS_CONNECTION
+          - DB_MEMORY_OVERLOAD
+          - DB_COMPACTION_OVERLOAD
+          - DB_DRIVE_FAILURE
+          - DB_WRITE_READ_TEST_ERROR
+          - DDL_ATOMICITY_CHECK
+          - NODE_TO_NODE_CA_CERT_EXPIRY
+          - NODE_TO_NODE_CERT_EXPIRY
+          - CLIENT_TO_NODE_CA_CERT_EXPIRY
+          - CLIENT_TO_NODE_CERT_EXPIRY
+          - ENCRYPTION_AT_REST_CONFIG_EXPIRY
+          - UNIVERSE_KMS_KEY_STATUS
+          - UNIVERSE_TSERVER_CONNECTIVITY_ERROR
+          - SSH_KEY_EXPIRY
+          - SSH_KEY_ROTATION_FAILURE
+          - PITR_CONFIG_FAILURE
+          - YSQL_OP_AVG_LATENCY
+          - YCQL_OP_AVG_LATENCY
+          - YSQL_OP_P99_LATENCY
+          - YCQL_OP_P99_LATENCY
+          - HIGH_NUM_YSQL_CONNECTIONS
+          - HIGH_NUM_YCQL_CONNECTIONS
+          - HIGH_NUM_YEDIS_CONNECTIONS
+          - YSQL_THROUGHPUT
+          - YCQL_THROUGHPUT
+          - YCQL_MICROSECOND_TIMESTAMPS_DETECTED
+          - MASTER_LEADER_MISSING
+          - MASTER_UNDER_REPLICATED
+          - LEADERLESS_TABLETS
+          - UNDER_REPLICATED_TABLETS
+          - PRIVATE_ACCESS_KEY_STATUS
+          - UNIVERSE_OS_UPDATE_REQUIRED
+          - DB_YCQL_WEB_SERVER_DOWN
+          - DB_YSQL_WEB_SERVER_DOWN
+          - INCREASED_REMOTE_BOOTSTRAPS
+          - TABLET_SERVER_AVG_READ_LATENCY
+          - TABLET_SERVER_AVG_WRITE_LATENCY
+          - REACTOR_DELAYS
+          - RPC_QUEUE_SIZE
+          - LOG_CACHE_SIZE
+          - CACHE_MISS
+          - HA_STANDBY_SYNC
+          - NODE_AGENT_DOWN
+          - NODE_AGENT_MISSING
+          - UNIVERSE_RELEASE_FILES_STATUS
+          - HA_VERSION_MISMATCH
+          - TABLET_PEERS_GUARDRAIL
+          - XCLUSTER_CONFIG_TABLE_BAD_STATE
+          - NODE_CLOCK_DRIFT
+          - UNIVERSE_UNEXPECTED_MASTERS_RUNNING
+          - UNIVERSE_UNEXPECTED_TSERVERS_RUNNING
+          - SAFETIME_LAG
+          - CONTINUOUS_BACKUPS_STATUS
+          - THP_RSS_ISSUE
+          - THP_INCORRECT_SETTINGS
+          - YNP_VERSION_SKEW
+          - CDCSDK_FLUSH_LAG
+          - CDCSDK_EXPIRY
+          - OTEL_LOG_EXPORT_FAILURE
+          - OTEL_METRIC_EXPORT_FAILURE
+          type: string
+          example: REPLICATION_LAG
+        uuids:
+          description: The uuids of the alert configurations.
+          items:
+            format: uuid
+            type: string
+          type: array
+          uniqueItems: true
+          example:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      type: object
+    AlertConfigurationTarget:
+      description: Alert target. Set to `all`, or specify one or more target UUIDs.
+      example:
+        all: true
+        uuids:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        all:
+          description: Alert applicable to all targets
+          type: boolean
+          example: true
+        uuids:
+          description: Alert target UUIDs
+          items:
+            format: uuid
+            type: string
+          type: array
+          uniqueItems: true
+          example:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      type: object
+    MaintenanceWindowPagedResponse:
+      example:
+        entities:
+        - alertConfigurationFilter:
+            severity: SEVERE
+            template: REPLICATION_LAG
+            destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+            active: true
+            destinationType: NO_DESTINATION
+            targetType: PLATFORM
+            target:
+              all: true
+              uuids:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            uuids:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          createTime: 2022-12-12 13:07:18+00:00
+          suppressHealthCheckNotificationsConfig:
+            suppressAllUniverses: true
+            universeUUIDSet:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+          description: description
+          startTime: 2022-12-12 13:07:18+00:00
+          endTime: 2022-12-12 13:07:18+00:00
+          state: FINISHED
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - alertConfigurationFilter:
+            severity: SEVERE
+            template: REPLICATION_LAG
+            destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+            active: true
+            destinationType: NO_DESTINATION
+            targetType: PLATFORM
+            target:
+              all: true
+              uuids:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            uuids:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          createTime: 2022-12-12 13:07:18+00:00
+          suppressHealthCheckNotificationsConfig:
+            suppressAllUniverses: true
+            universeUUIDSet:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+          description: description
+          startTime: 2022-12-12 13:07:18+00:00
+          endTime: 2022-12-12 13:07:18+00:00
+          state: FINISHED
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        hasPrev: true
+        hasNext: true
+        totalCount: 0
+      properties:
+        entities:
+          items:
+            $ref: '#/components/schemas/MaintenanceWindow'
+          type: array
+          example:
+          - alertConfigurationFilter:
+              severity: SEVERE
+              template: REPLICATION_LAG
+              destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              name: name
+              active: true
+              destinationType: NO_DESTINATION
+              targetType: PLATFORM
+              target:
+                all: true
+                uuids:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              uuids:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            createTime: '2022-12-12T13:07:18+00:00'
+            suppressHealthCheckNotificationsConfig:
+              suppressAllUniverses: true
+              universeUUIDSet:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+            description: description
+            startTime: '2022-12-12T13:07:18+00:00'
+            endTime: '2022-12-12T13:07:18+00:00'
+            state: FINISHED
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        hasNext:
+          type: boolean
+          example: true
+        hasPrev:
+          type: boolean
+          example: true
+        totalCount:
+          format: int32
+          type: integer
+          example: 10
+      required:
+      - entities
+      - hasNext
+      - hasPrev
+      - totalCount
+      type: object
+    MaintenanceWindow:
+      description: Maintenance Window
+      example:
+        alertConfigurationFilter:
+          severity: SEVERE
+          template: REPLICATION_LAG
+          destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+          active: true
+          destinationType: NO_DESTINATION
+          targetType: PLATFORM
+          target:
+            all: true
+            uuids:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          uuids:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        createTime: 2022-12-12 13:07:18+00:00
+        suppressHealthCheckNotificationsConfig:
+          suppressAllUniverses: true
+          universeUUIDSet:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name: name
+        description: description
+        startTime: 2022-12-12 13:07:18+00:00
+        endTime: 2022-12-12 13:07:18+00:00
+        state: FINISHED
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        alertConfigurationFilter:
+          $ref: '#/components/schemas/AlertConfigurationApiFilter'
+        createTime:
+          description: Creation time
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        customerUUID:
+          description: Customer UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        description:
+          description: Description
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+          example: Example description
+        endTime:
+          description: End time
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        name:
+          description: Name
+          maxLength: 1000
+          minLength: 1
+          type: string
+          example: example-name
+        startTime:
+          description: Start time
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        state:
+          description: State
+          enum:
+          - FINISHED
+          - ACTIVE
+          - PENDING
+          readOnly: true
+          type: string
+          example: FINISHED
+        suppressHealthCheckNotificationsConfig:
+          $ref: '#/components/schemas/SuppressHealthCheckNotificationsConfig'
+        uuid:
+          description: Maintenance window UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      required:
+      - alertConfigurationFilter
+      - createTime
+      - customerUUID
+      - description
+      - endTime
+      - name
+      - startTime
+      type: object
+    MaintenanceWindowPagedApiQuery:
+      example:
+        filter:
+          states:
+          - FINISHED
+          - FINISHED
+          uuids:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        offset: 6
+        needTotalCount: true
+        limit: 0
+        sortBy: uuid
+        direction: ASC
+      properties:
+        direction:
+          enum:
+          - ASC
+          - DESC
+          type: string
+          example: ASC
+        filter:
+          $ref: '#/components/schemas/MaintenanceWindowApiFilter'
+        limit:
+          format: int32
+          type: integer
+          example: 10
+        needTotalCount:
+          type: boolean
+          example: true
+        offset:
+          format: int32
+          type: integer
+          example: 100
+        sortBy:
+          enum:
+          - uuid
+          - name
+          - createTime
+          - startTime
+          - endTime
+          - state
+          type: string
+          example: uuid
+      required:
+      - direction
+      - filter
+      - limit
+      - needTotalCount
+      - offset
+      - sortBy
+      type: object
+    YBPSuccess:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+          example: Example message
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+          example: true
+      type: object
+    SuppressHealthCheckNotificationsConfig:
+      example:
+        suppressAllUniverses: true
+        universeUUIDSet:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        suppressAllUniverses:
+          description: Suppress health check notifications on all the universes (including future universes)
+          type: boolean
+          example: true
+        universeUUIDSet:
+          description: Set of universe uuids to suppress health check notifications on
+          items:
+            format: uuid
+            type: string
+          type: array
+          uniqueItems: true
+          example:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      type: object
+    MaintenanceWindowApiFilter_2:
+      example:
+        states:
+        - FINISHED
+        - FINISHED
+        uuids:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        states:
+          items:
+            enum:
+            - FINISHED
+            - ACTIVE
+            - PENDING
+            type: string
+          type: array
+          uniqueItems: true
+        uuids:
+          items:
+            format: uuid
+            type: string
+          type: array
+          uniqueItems: true
+      required:
+      - states
+      - uuids
+      type: object
+    AlertConfigurationApiFilter_2:
+      example:
+        severity: SEVERE
+        template: REPLICATION_LAG
+        destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name: name
+        active: true
+        destinationType: NO_DESTINATION
+        targetType: PLATFORM
+        target:
+          all: true
+          uuids:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        uuids:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        active:
+          description: Whether the alert configuration is active.
+          type: boolean
+        destinationType:
+          description: 'The destination type of the alert configuration. '
+          enum:
+          - NO_DESTINATION
+          - DEFAULT_DESTINATION
+          - SELECTED_DESTINATION
+          type: string
+        destinationUuid:
+          description: 'The destination uuid of the alert configuration. '
+          format: uuid
+          type: string
+        name:
+          description: The name of the alert configuration.
+          type: string
+        severity:
+          description: The severity of the alert configuration.
+          enum:
+          - SEVERE
+          - WARNING
+          type: string
+        target:
+          $ref: '#/components/schemas/AlertConfigurationTarget_2'
+        targetType:
+          description: The target type of the alert configuration.
+          enum:
+          - PLATFORM
+          - UNIVERSE
+          type: string
+        template:
+          description: The template of the alert configuration.
+          enum:
+          - REPLICATION_LAG
+          - CLOCK_SKEW
+          - CLOCK_SYNC_CHECK_FAILED
+          - MEMORY_CONSUMPTION
+          - HEALTH_CHECK_ERROR
+          - HEALTH_CHECK_NOTIFICATION_ERROR
+          - UNIVERSE_METRIC_COLLECTION_FAILURE
+          - BACKUP_FAILURE
+          - BACKUP_DELETION_FAILURE
+          - BACKUP_SCHEDULE_FAILURE
+          - INACTIVE_CRON_NODES
+          - ALERT_QUERY_FAILED
+          - ALERT_CONFIG_WRITING_FAILED
+          - ALERT_NOTIFICATION_ERROR
+          - ALERT_NOTIFICATION_CHANNEL_ERROR
+          - NODE_DOWN
+          - NODE_RESTART
+          - NODE_CPU_USAGE
+          - NODE_DISK_USAGE
+          - NODE_SYSTEM_DISK_USAGE
+          - NODE_FILE_DESCRIPTORS_USAGE
+          - NODE_OOM_KILLS
+          - DB_VERSION_MISMATCH
+          - DB_INSTANCE_DOWN
+          - DB_INSTANCE_RESTART
+          - DB_FATAL_LOGS
+          - DB_ERROR_LOGS
+          - DB_CORE_FILES
+          - DB_YSQL_CONNECTION
+          - DB_YCQL_CONNECTION
+          - DB_REDIS_CONNECTION
+          - DB_MEMORY_OVERLOAD
+          - DB_COMPACTION_OVERLOAD
+          - DB_DRIVE_FAILURE
+          - DB_WRITE_READ_TEST_ERROR
+          - DDL_ATOMICITY_CHECK
+          - NODE_TO_NODE_CA_CERT_EXPIRY
+          - NODE_TO_NODE_CERT_EXPIRY
+          - CLIENT_TO_NODE_CA_CERT_EXPIRY
+          - CLIENT_TO_NODE_CERT_EXPIRY
+          - ENCRYPTION_AT_REST_CONFIG_EXPIRY
+          - UNIVERSE_KMS_KEY_STATUS
+          - UNIVERSE_TSERVER_CONNECTIVITY_ERROR
+          - SSH_KEY_EXPIRY
+          - SSH_KEY_ROTATION_FAILURE
+          - PITR_CONFIG_FAILURE
+          - YSQL_OP_AVG_LATENCY
+          - YCQL_OP_AVG_LATENCY
+          - YSQL_OP_P99_LATENCY
+          - YCQL_OP_P99_LATENCY
+          - HIGH_NUM_YSQL_CONNECTIONS
+          - HIGH_NUM_YCQL_CONNECTIONS
+          - HIGH_NUM_YEDIS_CONNECTIONS
+          - YSQL_THROUGHPUT
+          - YCQL_THROUGHPUT
+          - YCQL_MICROSECOND_TIMESTAMPS_DETECTED
+          - MASTER_LEADER_MISSING
+          - MASTER_UNDER_REPLICATED
+          - LEADERLESS_TABLETS
+          - UNDER_REPLICATED_TABLETS
+          - PRIVATE_ACCESS_KEY_STATUS
+          - UNIVERSE_OS_UPDATE_REQUIRED
+          - DB_YCQL_WEB_SERVER_DOWN
+          - DB_YSQL_WEB_SERVER_DOWN
+          - INCREASED_REMOTE_BOOTSTRAPS
+          - TABLET_SERVER_AVG_READ_LATENCY
+          - TABLET_SERVER_AVG_WRITE_LATENCY
+          - REACTOR_DELAYS
+          - RPC_QUEUE_SIZE
+          - LOG_CACHE_SIZE
+          - CACHE_MISS
+          - HA_STANDBY_SYNC
+          - NODE_AGENT_DOWN
+          - NODE_AGENT_MISSING
+          - UNIVERSE_RELEASE_FILES_STATUS
+          - HA_VERSION_MISMATCH
+          - TABLET_PEERS_GUARDRAIL
+          - XCLUSTER_CONFIG_TABLE_BAD_STATE
+          - NODE_CLOCK_DRIFT
+          - UNIVERSE_UNEXPECTED_MASTERS_RUNNING
+          - UNIVERSE_UNEXPECTED_TSERVERS_RUNNING
+          - SAFETIME_LAG
+          - CONTINUOUS_BACKUPS_STATUS
+          - THP_RSS_ISSUE
+          - THP_INCORRECT_SETTINGS
+          - YNP_VERSION_SKEW
+          - CDCSDK_FLUSH_LAG
+          - CDCSDK_EXPIRY
+          - OTEL_LOG_EXPORT_FAILURE
+          - OTEL_METRIC_EXPORT_FAILURE
+          type: string
+        uuids:
+          description: The uuids of the alert configurations.
+          items:
+            format: uuid
+            type: string
+          type: array
+          uniqueItems: true
+      type: object
+    AlertConfigurationTarget_2:
+      description: Alert target. Set to `all`, or specify one or more target UUIDs.
+      example:
+        all: true
+        uuids:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        all:
+          description: Alert applicable to all targets
+          type: boolean
+        uuids:
+          description: Alert target UUIDs
+          items:
+            format: uuid
+            type: string
+          type: array
+          uniqueItems: true
+      type: object
+    MaintenanceWindowPagedResponse_2:
+      example:
+        entities:
+        - alertConfigurationFilter:
+            severity: SEVERE
+            template: REPLICATION_LAG
+            destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+            active: true
+            destinationType: NO_DESTINATION
+            targetType: PLATFORM
+            target:
+              all: true
+              uuids:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            uuids:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          createTime: 2022-12-12 13:07:18+00:00
+          suppressHealthCheckNotificationsConfig:
+            suppressAllUniverses: true
+            universeUUIDSet:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+          description: description
+          startTime: 2022-12-12 13:07:18+00:00
+          endTime: 2022-12-12 13:07:18+00:00
+          state: FINISHED
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - alertConfigurationFilter:
+            severity: SEVERE
+            template: REPLICATION_LAG
+            destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+            active: true
+            destinationType: NO_DESTINATION
+            targetType: PLATFORM
+            target:
+              all: true
+              uuids:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            uuids:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          createTime: 2022-12-12 13:07:18+00:00
+          suppressHealthCheckNotificationsConfig:
+            suppressAllUniverses: true
+            universeUUIDSet:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+          description: description
+          startTime: 2022-12-12 13:07:18+00:00
+          endTime: 2022-12-12 13:07:18+00:00
+          state: FINISHED
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        hasPrev: true
+        hasNext: true
+        totalCount: 0
+      properties:
+        entities:
+          items:
+            $ref: '#/components/schemas/MaintenanceWindow_2'
+          type: array
+        hasNext:
+          type: boolean
+        hasPrev:
+          type: boolean
+        totalCount:
+          format: int32
+          type: integer
+      required:
+      - entities
+      - hasNext
+      - hasPrev
+      - totalCount
+      type: object
+    MaintenanceWindow_2:
+      description: Maintenance Window
+      example:
+        alertConfigurationFilter:
+          severity: SEVERE
+          template: REPLICATION_LAG
+          destinationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+          active: true
+          destinationType: NO_DESTINATION
+          targetType: PLATFORM
+          target:
+            all: true
+            uuids:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          uuids:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        createTime: 2022-12-12 13:07:18+00:00
+        suppressHealthCheckNotificationsConfig:
+          suppressAllUniverses: true
+          universeUUIDSet:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name: name
+        description: description
+        startTime: 2022-12-12 13:07:18+00:00
+        endTime: 2022-12-12 13:07:18+00:00
+        state: FINISHED
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        alertConfigurationFilter:
+          $ref: '#/components/schemas/AlertConfigurationApiFilter_2'
+        createTime:
+          description: Creation time
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        customerUUID:
+          description: Customer UUID
+          format: uuid
+          readOnly: true
+          type: string
+        description:
+          description: Description
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+        endTime:
+          description: End time
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        name:
+          description: Name
+          maxLength: 1000
+          minLength: 1
+          type: string
+        startTime:
+          description: Start time
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        state:
+          description: State
+          enum:
+          - FINISHED
+          - ACTIVE
+          - PENDING
+          readOnly: true
+          type: string
+        suppressHealthCheckNotificationsConfig:
+          $ref: '#/components/schemas/SuppressHealthCheckNotificationsConfig_2'
+        uuid:
+          description: Maintenance window UUID
+          format: uuid
+          readOnly: true
+          type: string
+      required:
+      - alertConfigurationFilter
+      - createTime
+      - customerUUID
+      - description
+      - endTime
+      - name
+      - startTime
+      type: object
+    MaintenanceWindowPagedApiQuery_2:
+      example:
+        filter:
+          states:
+          - FINISHED
+          - FINISHED
+          uuids:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        offset: 6
+        needTotalCount: true
+        limit: 0
+        sortBy: uuid
+        direction: ASC
+      properties:
+        direction:
+          enum:
+          - ASC
+          - DESC
+          type: string
+        filter:
+          $ref: '#/components/schemas/MaintenanceWindowApiFilter_2'
+        limit:
+          format: int32
+          type: integer
+        needTotalCount:
+          type: boolean
+        offset:
+          format: int32
+          type: integer
+        sortBy:
+          enum:
+          - uuid
+          - name
+          - createTime
+          - startTime
+          - endTime
+          - state
+          type: string
+      required:
+      - direction
+      - filter
+      - limit
+      - needTotalCount
+      - offset
+      - sortBy
+      type: object
+    YBPSuccess_2:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+      type: object
+    SuppressHealthCheckNotificationsConfig_2:
+      example:
+        suppressAllUniverses: true
+        universeUUIDSet:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        suppressAllUniverses:
+          description: Suppress health check notifications on all the universes (including future universes)
+          type: boolean
+        universeUUIDSet:
+          description: Set of universe uuids to suppress health check notifications on
+          items:
+            format: uuid
+            type: string
+          type: array
+          uniqueItems: true
+      type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key obtained from the YugabyteDB Aeon UI under User Profile > API Keys. Pass the key as a Bearer token in the Authorization header.
+definitions:
+  MaintenanceWindowApiFilter:
+    properties:
+      states:
+        items:
+          enum:
+          - FINISHED
+          - ACTIVE
+          - PENDING
+          type: string
+        type: array
+        uniqueItems: true
+      uuids:
+        items:
+          format: uuid
+          type: string
+        type: array
+        uniqueItems: true
+    required:
+    - states
+    - uuids
+    type: object
+  MaintenanceWindowPagedResponse:
+    properties:
+      entities:
+        items:
+          $ref: '#/definitions/MaintenanceWindow'
+        type: array
+      hasNext:
+        type: boolean
+      hasPrev:
+        type: boolean
+      totalCount:
+        format: int32
+        type: integer
+    required:
+    - entities
+    - hasNext
+    - hasPrev
+    - totalCount
+    type: object
+  MaintenanceWindowPagedApiQuery:
+    properties:
+      direction:
+        enum:
+        - ASC
+        - DESC
+        type: string
+      filter:
+        $ref: '#/definitions/MaintenanceWindowApiFilter'
+      limit:
+        format: int32
+        type: integer
+      needTotalCount:
+        type: boolean
+      offset:
+        format: int32
+        type: integer
+      sortBy:
+        enum:
+        - uuid
+        - name
+        - createTime
+        - startTime
+        - endTime
+        - state
+        type: string
+    required:
+    - direction
+    - filter
+    - limit
+    - needTotalCount
+    - offset
+    - sortBy
+    type: object
+  YBPSuccess:
+    properties:
+      message:
+        description: API response message.
+        readOnly: true
+        type: string
+      success:
+        description: API operation status. A value of true indicates the operation was successful.
+        readOnly: true
+        type: boolean
+    type: object
+  AlertConfigurationApiFilter:
+    properties:
+      active:
+        type: boolean
+      destinationType:
+        enum:
+        - NO_DESTINATION
+        - DEFAULT_DESTINATION
+        - SELECTED_DESTINATION
+        type: string
+      destinationUuid:
+        format: uuid
+        type: string
+      name:
+        type: string
+      severity:
+        enum:
+        - SEVERE
+        - WARNING
+        type: string
+      target:
+        $ref: '#/definitions/AlertConfigurationTarget'
+      targetType:
+        enum:
+        - PLATFORM
+        - UNIVERSE
+        type: string
+      template:
+        enum:
+        - REPLICATION_LAG
+        - CLOCK_SKEW
+        - MEMORY_CONSUMPTION
+        - HEALTH_CHECK_ERROR
+        - HEALTH_CHECK_NOTIFICATION_ERROR
+        - BACKUP_FAILURE
+        - BACKUP_SCHEDULE_FAILURE
+        - INACTIVE_CRON_NODES
+        - ALERT_QUERY_FAILED
+        - ALERT_CONFIG_WRITING_FAILED
+        - ALERT_NOTIFICATION_ERROR
+        - ALERT_NOTIFICATION_CHANNEL_ERROR
+        - NODE_DOWN
+        - NODE_RESTART
+        - NODE_CPU_USAGE
+        - NODE_DISK_USAGE
+        - NODE_FILE_DESCRIPTORS_USAGE
+        - NODE_OOM_KILLS
+        - DB_VERSION_MISMATCH
+        - DB_INSTANCE_DOWN
+        - DB_INSTANCE_RESTART
+        - DB_FATAL_LOGS
+        - DB_ERROR_LOGS
+        - DB_CORE_FILES
+        - DB_YSQL_CONNECTION
+        - DB_YCQL_CONNECTION
+        - DB_REDIS_CONNECTION
+        - DB_MEMORY_OVERLOAD
+        - DB_COMPACTION_OVERLOAD
+        - DB_QUEUES_OVERFLOW
+        - DB_WRITE_READ_TEST_ERROR
+        - NODE_TO_NODE_CA_CERT_EXPIRY
+        - NODE_TO_NODE_CERT_EXPIRY
+        - CLIENT_TO_NODE_CA_CERT_EXPIRY
+        - CLIENT_TO_NODE_CERT_EXPIRY
+        - ENCRYPTION_AT_REST_CONFIG_EXPIRY
+        - YSQL_OP_AVG_LATENCY
+        - YCQL_OP_AVG_LATENCY
+        - YSQL_OP_P99_LATENCY
+        - YCQL_OP_P99_LATENCY
+        - HIGH_NUM_YSQL_CONNECTIONS
+        - HIGH_NUM_YCQL_CONNECTIONS
+        - HIGH_NUM_YEDIS_CONNECTIONS
+        - YSQL_THROUGHPUT
+        - YCQL_THROUGHPUT
+        - MASTER_LEADER_MISSING
+        - MASTER_UNDER_REPLICATED
+        - LEADERLESS_TABLETS
+        - UNDER_REPLICATED_TABLETS
+        type: string
+      uuids:
+        items:
+          format: uuid
+          type: string
+        type: array
+        uniqueItems: true
+    required:
+    - active
+    - destinationType
+    - destinationUuid
+    - name
+    - severity
+    - target
+    - targetType
+    - template
+    - uuids
+    type: object
+  AlertConfigurationTarget:
+    description: Alert target. Set to `all`, or specify one or more target UUIDs.
+    properties:
+      all:
+        description: Alert applicable to all targets
+        type: boolean
+      uuids:
+        description: Alert target UUIDs
+        items:
+          format: uuid
+          type: string
+        type: array
+        uniqueItems: true
+    type: object
+  MaintenanceWindow:
+    description: Maintenance Window
+    properties:
+      alertConfigurationFilter:
+        $ref: '#/definitions/AlertConfigurationApiFilter'
+        description: Alert configuration filter
+      createTime:
+        description: Creation time
+        format: date-time
+        readOnly: true
+        type: string
+      customerUUID:
+        description: Customer UUID
+        format: uuid
+        readOnly: true
+        type: string
+      description:
+        description: Description
+        maxLength: 2147483647
+        minLength: 1
+        type: string
+      endTime:
+        description: End time
+        format: date-time
+        type: string
+      name:
+        description: Name
+        maxLength: 1000
+        minLength: 1
+        type: string
+      startTime:
+        description: Start time
+        format: date-time
+        type: string
+      state:
+        description: State
+        enum:
+        - FINISHED
+        - ACTIVE
+        - PENDING
+        readOnly: true
+        type: string
+      uuid:
+        description: Maintenance window UUID
+        format: uuid
+        readOnly: true
+        type: string
+    required:
+    - alertConfigurationFilter
+    - createTime
+    - customerUUID
+    - description
+    - endTime
+    - name
+    - startTime
+    type: object
+externalDocs:
+  description: YugabyteDB Aeon REST API Documentation
+  url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/

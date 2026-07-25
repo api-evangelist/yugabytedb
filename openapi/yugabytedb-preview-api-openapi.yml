@@ -1,0 +1,660 @@
+openapi: 3.1.0
+info:
+  title: YugabyteDB Aeon REST Access Keys preview API
+  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.
+  version: v1
+  contact:
+    name: Yugabyte Support
+    url: https://support.yugabyte.com
+  termsOfService: https://www.yugabyte.com/yugabytedb-managed-service-terms/
+  x-generated-from: documentation
+  x-source-url: https://api-docs.yugabyte.com/docs/managed-apis/
+  x-last-validated: '2026-05-03'
+servers:
+- url: https://cloud.yugabyte.com/api/public/v1
+  description: YugabyteDB Aeon Production Server
+security:
+- bearerAuth: []
+tags:
+- name: preview
+paths:
+  /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle:
+    get:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: getListOfImageBundles
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: pUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: arch
+        schema:
+          default: 'null'
+          type: string
+        example: 'null'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ImageBundle'
+                type: array
+              examples:
+                GetListOfImageBundles200Example:
+                  summary: Default getListOfImageBundles 200 response
+                  x-microcks-default: true
+                  value:
+                  - metadata:
+                      type: YBA_ACTIVE
+                      version: version
+                    useAsDefault: true
+                    name: name
+                    active: true
+                    details:
+                      sshPort: 5
+                      regions:
+                        key:
+                          sshUserOverride: sshUserOverride
+                          ybImage: ybImage
+                          sshPortOverride: 1
+                      useIMDSv2: true
+                      globalYbImage: globalYbImage
+                      sshUser: sshUser
+                      arch: x86_64
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Image Bundles
+      tags:
+      - preview
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: createImageBundle
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: pUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImageBundle'
+            examples:
+              CreateImageBundleRequestExample:
+                summary: Default createImageBundle request
+                x-microcks-default: true
+                value:
+                  metadata:
+                    type: YBA_ACTIVE
+                    version: version
+                  useAsDefault: true
+                  name: name
+                  active: true
+                  details:
+                    sshPort: 5
+                    regions:
+                      key:
+                        sshUserOverride: sshUserOverride
+                        ybImage: ybImage
+                        sshPortOverride: 1
+                    useIMDSv2: true
+                    globalYbImage: globalYbImage
+                    sshUser: sshUser
+                    arch: x86_64
+                  uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        description: CreateImageBundleRequest
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageBundle'
+              examples:
+                CreateImageBundle200Example:
+                  summary: Default createImageBundle 200 response
+                  x-microcks-default: true
+                  value:
+                    metadata:
+                      type: YBA_ACTIVE
+                      version: version
+                    useAsDefault: true
+                    name: name
+                    active: true
+                    details:
+                      sshPort: 5
+                      regions:
+                        key:
+                          sshUserOverride: sshUserOverride
+                          ybImage: ybImage
+                          sshPortOverride: 1
+                      useIMDSv2: true
+                      globalYbImage: globalYbImage
+                      sshUser: sshUser
+                      arch: x86_64
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Create a Image Bundle
+      tags:
+      - preview
+      x-codegen-request-body-name: body
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID}:
+    delete:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: delete
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: pUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: iBUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                Delete200Example:
+                  summary: Default delete 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Delete a Image Bundle
+      tags:
+      - preview
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: getImageBundle
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: pUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: iBUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageBundle'
+              examples:
+                GetImageBundle200Example:
+                  summary: Default getImageBundle 200 response
+                  x-microcks-default: true
+                  value:
+                    metadata:
+                      type: YBA_ACTIVE
+                      version: version
+                    useAsDefault: true
+                    name: name
+                    active: true
+                    details:
+                      sshPort: 5
+                      regions:
+                        key:
+                          sshUserOverride: sshUserOverride
+                          ybImage: ybImage
+                          sshPortOverride: 1
+                      useIMDSv2: true
+                      globalYbImage: globalYbImage
+                      sshUser: sshUser
+                      arch: x86_64
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get a Image Bundle
+      tags:
+      - preview
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: editImageBundle
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: pUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: iBUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImageBundle'
+            examples:
+              EditImageBundleRequestExample:
+                summary: Default editImageBundle request
+                x-microcks-default: true
+                value:
+                  metadata:
+                    type: YBA_ACTIVE
+                    version: version
+                  useAsDefault: true
+                  name: name
+                  active: true
+                  details:
+                    sshPort: 5
+                    regions:
+                      key:
+                        sshUserOverride: sshUserOverride
+                        ybImage: ybImage
+                        sshPortOverride: 1
+                    useIMDSv2: true
+                    globalYbImage: globalYbImage
+                    sshUser: sshUser
+                    arch: x86_64
+                  uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        description: EditImageBundleRequest
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageBundle'
+              examples:
+                EditImageBundle200Example:
+                  summary: Default editImageBundle 200 response
+                  x-microcks-default: true
+                  value:
+                    metadata:
+                      type: YBA_ACTIVE
+                      version: version
+                    useAsDefault: true
+                    name: name
+                    active: true
+                    details:
+                      sshPort: 5
+                      regions:
+                        key:
+                          sshUserOverride: sshUserOverride
+                          ybImage: ybImage
+                          sshPortOverride: 1
+                      useIMDSv2: true
+                      globalYbImage: globalYbImage
+                      sshUser: sshUser
+                      arch: x86_64
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Update a Image Bundle
+      tags:
+      - preview
+      x-codegen-request-body-name: body
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ImageBundle:
+      example:
+        metadata:
+          type: YBA_ACTIVE
+          version: version
+        useAsDefault: true
+        name: name
+        active: true
+        details:
+          sshPort: 5
+          regions:
+            key:
+              sshUserOverride: sshUserOverride
+              ybImage: ybImage
+              sshPortOverride: 1
+          useIMDSv2: true
+          globalYbImage: globalYbImage
+          sshUser: sshUser
+          arch: x86_64
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        active:
+          description: Is the ImageBundle Active
+          type: boolean
+          example: true
+        details:
+          $ref: '#/components/schemas/ImageBundleDetails'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        name:
+          description: Image Bundle Name
+          type: string
+          example: example-name
+        useAsDefault:
+          description: Default Image Bundle. A provider can have two defaults, one per architecture
+          type: boolean
+          example: true
+        uuid:
+          description: Image Bundle UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      type: object
+    ImageBundleDetails:
+      example:
+        sshPort: 5
+        regions:
+          key:
+            sshUserOverride: sshUserOverride
+            ybImage: ybImage
+            sshPortOverride: 1
+        useIMDSv2: true
+        globalYbImage: globalYbImage
+        sshUser: sshUser
+        arch: x86_64
+      properties:
+        arch:
+          description: Architecture type for the image bundle
+          enum:
+          - x86_64
+          - aarch64
+          type: string
+          example: x86_64
+        globalYbImage:
+          description: Global YB image for the bundle
+          type: string
+          example: example-globalYbImage
+        regions:
+          additionalProperties:
+            $ref: '#/components/schemas/BundleInfo'
+          description: Regions override for image bundle
+          type: object
+          example: {}
+        sshPort:
+          format: int32
+          type: integer
+          example: 5433
+        sshUser:
+          type: string
+          example: example-sshUser
+        useIMDSv2:
+          type: boolean
+          example: true
+      type: object
+    YBPSuccess:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+          example: Example message
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+          example: true
+      type: object
+    BundleInfo:
+      example:
+        sshUserOverride: sshUserOverride
+        ybImage: ybImage
+        sshPortOverride: 1
+      properties:
+        sshPortOverride:
+          description: sshPortOverride for the bundle. <b style="color:#ff0000">Deprecated since YBA version 2.20.3.0.</b> Use imageBundles.details.sshUser instead.
+          format: int32
+          type: integer
+          example: 5433
+        sshUserOverride:
+          description: sshUserOverride for the bundle. <b style="color:#ff0000">Deprecated since YBA version 2.20.3.0.</b> Use imageBundles.details.sshUser instead.
+          type: string
+          example: example-sshUserOverride
+        ybImage:
+          type: string
+          example: example-ybImage
+      type: object
+    Metadata:
+      example:
+        type: YBA_ACTIVE
+        version: version
+      properties:
+        type:
+          enum:
+          - YBA_ACTIVE
+          - YBA_DEPRECATED
+          - CUSTOM
+          type: string
+          example: YBA_ACTIVE
+        version:
+          type: string
+          example: 2.20.0.0
+      required:
+      - type
+      - version
+      type: object
+    ImageBundle_2:
+      example:
+        metadata:
+          type: YBA_ACTIVE
+          version: version
+        useAsDefault: true
+        name: name
+        active: true
+        details:
+          sshPort: 5
+          regions:
+            key:
+              sshUserOverride: sshUserOverride
+              ybImage: ybImage
+              sshPortOverride: 1
+          useIMDSv2: true
+          globalYbImage: globalYbImage
+          sshUser: sshUser
+          arch: x86_64
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        active:
+          description: Is the ImageBundle Active
+          type: boolean
+        details:
+          $ref: '#/components/schemas/ImageBundleDetails_2'
+        metadata:
+          $ref: '#/components/schemas/Metadata_2'
+        name:
+          description: Image Bundle Name
+          type: string
+        useAsDefault:
+          description: Default Image Bundle. A provider can have two defaults, one per architecture
+          type: boolean
+        uuid:
+          description: Image Bundle UUID
+          format: uuid
+          readOnly: true
+          type: string
+      type: object
+    ImageBundleDetails_2:
+      example:
+        sshPort: 5
+        regions:
+          key:
+            sshUserOverride: sshUserOverride
+            ybImage: ybImage
+            sshPortOverride: 1
+        useIMDSv2: true
+        globalYbImage: globalYbImage
+        sshUser: sshUser
+        arch: x86_64
+      properties:
+        arch:
+          description: Architecture type for the image bundle
+          enum:
+          - x86_64
+          - aarch64
+          type: string
+        globalYbImage:
+          description: Global YB image for the bundle
+          type: string
+        regions:
+          additionalProperties:
+            $ref: '#/components/schemas/BundleInfo_2'
+          description: Regions override for image bundle
+          type: object
+        sshPort:
+          format: int32
+          type: integer
+        sshUser:
+          type: string
+        useIMDSv2:
+          type: boolean
+      type: object
+    YBPSuccess_2:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+      type: object
+    BundleInfo_2:
+      example:
+        sshUserOverride: sshUserOverride
+        ybImage: ybImage
+        sshPortOverride: 1
+      properties:
+        sshPortOverride:
+          description: sshPortOverride for the bundle. <b style="color:#ff0000">Deprecated since YBA version 2.20.3.0.</b> Use imageBundles.details.sshUser instead.
+          format: int32
+          type: integer
+        sshUserOverride:
+          description: sshUserOverride for the bundle. <b style="color:#ff0000">Deprecated since YBA version 2.20.3.0.</b> Use imageBundles.details.sshUser instead.
+          type: string
+        ybImage:
+          type: string
+      type: object
+    Metadata_2:
+      example:
+        type: YBA_ACTIVE
+        version: version
+      properties:
+        type:
+          enum:
+          - YBA_ACTIVE
+          - YBA_DEPRECATED
+          - CUSTOM
+          type: string
+        version:
+          type: string
+      required:
+      - type
+      - version
+      type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key obtained from the YugabyteDB Aeon UI under User Profile > API Keys. Pass the key as a Bearer token in the Authorization header.
+externalDocs:
+  description: YugabyteDB Aeon REST API Documentation
+  url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/

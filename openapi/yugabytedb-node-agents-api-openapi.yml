@@ -1,0 +1,1382 @@
+openapi: 3.1.0
+info:
+  title: YugabyteDB Aeon REST Access Keys Node Agents API
+  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.
+  version: v1
+  contact:
+    name: Yugabyte Support
+    url: https://support.yugabyte.com
+  termsOfService: https://www.yugabyte.com/yugabytedb-managed-service-terms/
+  x-generated-from: documentation
+  x-source-url: https://api-docs.yugabyte.com/docs/managed-apis/
+  x-last-validated: '2026-05-03'
+servers:
+- url: https://cloud.yugabyte.com/api/public/v1
+  description: YugabyteDB Aeon Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Node Agents
+paths:
+  /api/v1/customers/{cUUID}/node_agents:
+    get:
+      operationId: ListNodeAgents
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: nodeIp
+        schema:
+          type: string
+        example: node-1
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/NodeAgentResp'
+                type: array
+              examples:
+                ListNodeAgents200Example:
+                  summary: Default ListNodeAgents 200 response
+                  x-microcks-default: true
+                  value:
+                  - lastError:
+                      code: UNKNOWN_ERROR
+                      originMessage: originMessage
+                      message: message
+                    versionMatched: true
+                    ip: ip
+                    providerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    version: version
+                    reachable: true
+                    home: home
+                    universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    customerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    port: 0
+                    name: name
+                    osType: DARWIN
+                    archType: ARM64
+                    state: REGISTERING
+                    config:
+                      certPath: certPath
+                      serverCert: serverCert
+                      offloadable: true
+                      serverKey: serverKey
+                      compressor: compressor
+                    providerName: providerName
+                    universeName: universeName
+                    updatedAt: 2022-12-21 13:07:18+00:00
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Node Agents
+      tags:
+      - Node Agents
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/node_agents/page:
+    post:
+      operationId: PageListNodeAgents
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NodeAgentPagedApiQuery'
+            examples:
+              PageListNodeAgentsRequestExample:
+                summary: Default PageListNodeAgents request
+                x-microcks-default: true
+                value:
+                  filter:
+                    universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    regionUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    cloudType: unknown
+                    zoneUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    providerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    nodeIps:
+                    - nodeIps
+                    - nodeIps
+                  offset: 6
+                  needTotalCount: true
+                  limit: 0
+                  sortBy: uuid
+                  direction: ASC
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeAgentPagedApiResponse'
+              examples:
+                PageListNodeAgents200Example:
+                  summary: Default PageListNodeAgents 200 response
+                  x-microcks-default: true
+                  value:
+                    entities:
+                    - lastError:
+                        code: UNKNOWN_ERROR
+                        originMessage: originMessage
+                        message: message
+                      versionMatched: true
+                      ip: ip
+                      providerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      version: version
+                      reachable: true
+                      home: home
+                      universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      customerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      port: 0
+                      name: name
+                      osType: DARWIN
+                      archType: ARM64
+                      state: REGISTERING
+                      config:
+                        certPath: certPath
+                        serverCert: serverCert
+                        offloadable: true
+                        serverKey: serverKey
+                        compressor: compressor
+                      providerName: providerName
+                      universeName: universeName
+                      updatedAt: 2022-12-21 13:07:18+00:00
+                    - lastError:
+                        code: UNKNOWN_ERROR
+                        originMessage: originMessage
+                        message: message
+                      versionMatched: true
+                      ip: ip
+                      providerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      version: version
+                      reachable: true
+                      home: home
+                      universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      customerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      port: 0
+                      name: name
+                      osType: DARWIN
+                      archType: ARM64
+                      state: REGISTERING
+                      config:
+                        certPath: certPath
+                        serverCert: serverCert
+                        offloadable: true
+                        serverKey: serverKey
+                        compressor: compressor
+                      providerName: providerName
+                      universeName: universeName
+                      updatedAt: 2022-12-21 13:07:18+00:00
+                    hasPrev: true
+                    hasNext: true
+                    totalCount: 0
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Node Agents (paginated)
+      tags:
+      - Node Agents
+      x-codegen-request-body-name: PageNodeAgentRequest
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/node_agents/{nUUID}:
+    get:
+      operationId: GetNodeAgent
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: nUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeAgentResp'
+              examples:
+                GetNodeAgent200Example:
+                  summary: Default GetNodeAgent 200 response
+                  x-microcks-default: true
+                  value:
+                    lastError:
+                      code: UNKNOWN_ERROR
+                      originMessage: originMessage
+                      message: message
+                    versionMatched: true
+                    ip: ip
+                    providerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    version: version
+                    reachable: true
+                    home: home
+                    universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    customerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    port: 0
+                    name: name
+                    osType: DARWIN
+                    archType: ARM64
+                    state: REGISTERING
+                    config:
+                      certPath: certPath
+                      serverCert: serverCert
+                      offloadable: true
+                      serverKey: serverKey
+                      compressor: compressor
+                    providerName: providerName
+                    universeName: universeName
+                    updatedAt: 2022-12-21 13:07:18+00:00
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get Node Agent
+      tags:
+      - Node Agents
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/universes/{uniUUID}/node_agents:
+    post:
+      operationId: ReinstallNodeAgent
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: uniUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReinstallNodeAgentForm'
+            examples:
+              ReinstallNodeAgentRequestExample:
+                summary: Default ReinstallNodeAgent request
+                x-microcks-default: true
+                value:
+                  nodeNames:
+                  - nodeNames
+                  - nodeNames
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeAgent'
+              examples:
+                ReinstallNodeAgent200Example:
+                  summary: Default ReinstallNodeAgent 200 response
+                  x-microcks-default: true
+                  value:
+                    lastError:
+                      code: UNKNOWN_ERROR
+                      originMessage: originMessage
+                      message: message
+                    ip: ip
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    version: version
+                    home: home
+                    customerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    port: 0
+                    name: name
+                    osType: DARWIN
+                    archType: ARM64
+                    state: REGISTERING
+                    config:
+                      certPath: certPath
+                      serverCert: serverCert
+                      offloadable: true
+                      serverKey: serverKey
+                      compressor: compressor
+                    updatedAt: 2022-12-21 13:07:18+00:00
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Reinstall Node Agent
+      tags:
+      - Node Agents
+      x-codegen-request-body-name: ReinstallNodeAgentForm
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/node_agents/download:
+    get:
+      operationId: DownloadNodeAgentInstaller
+      parameters:
+      - in: query
+        name: downloadType
+        schema:
+          default: INSTALLER
+          type: string
+        example: INSTALLER
+      - in: query
+        name: os
+        schema:
+          type: string
+        example: example-os
+      - in: query
+        name: arch
+        schema:
+          type: string
+        example: example-arch
+      responses:
+        '200':
+          content:
+            application/gzip:
+              schema:
+                type: string
+              examples:
+                DownloadNodeAgentInstaller200Example:
+                  summary: Default DownloadNodeAgentInstaller 200 response
+                  x-microcks-default: true
+                  value: string
+            application/x-sh:
+              schema:
+                type: string
+              examples:
+                DownloadNodeAgentInstaller200Example:
+                  summary: Default DownloadNodeAgentInstaller 200 response
+                  x-microcks-default: true
+                  value: string
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Download Node Agent Installer or Package
+      tags:
+      - Node Agents
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    NodeAgentPagedApiQuery:
+      example:
+        filter:
+          universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          regionUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          cloudType: unknown
+          zoneUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          providerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          nodeIps:
+          - nodeIps
+          - nodeIps
+        offset: 6
+        needTotalCount: true
+        limit: 0
+        sortBy: uuid
+        direction: ASC
+      properties:
+        direction:
+          enum:
+          - ASC
+          - DESC
+          type: string
+          example: ASC
+        filter:
+          $ref: '#/components/schemas/NodeAgentApiFilter'
+        limit:
+          format: int32
+          type: integer
+          example: 10
+        needTotalCount:
+          type: boolean
+          example: true
+        offset:
+          format: int32
+          type: integer
+          example: 100
+        sortBy:
+          enum:
+          - uuid
+          - ip
+          - name
+          - state
+          - updatedAt
+          - version
+          type: string
+          example: uuid
+      required:
+      - direction
+      - filter
+      - limit
+      - needTotalCount
+      - offset
+      - sortBy
+      type: object
+    NodeAgentApiFilter:
+      example:
+        universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        regionUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        cloudType: unknown
+        zoneUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        providerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        nodeIps:
+        - nodeIps
+        - nodeIps
+      properties:
+        cloudType:
+          enum:
+          - unknown
+          - aws
+          - gcp
+          - azu
+          - docker
+          - onprem
+          - kubernetes
+          - local
+          - other
+          type: string
+          example: unknown
+        nodeIps:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+          example:
+          - node-1
+        providerUuid:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        regionUuid:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        universeUuid:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        zoneUuid:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      required:
+      - cloudType
+      - nodeIps
+      - providerUuid
+      - regionUuid
+      - universeUuid
+      - zoneUuid
+      type: object
+    Config:
+      example:
+        certPath: certPath
+        serverCert: serverCert
+        offloadable: true
+        serverKey: serverKey
+        compressor: compressor
+      properties:
+        certPath:
+          type: string
+          example: /var/lib/yugabyte/example
+        compressor:
+          type: string
+          example: example-compressor
+        offloadable:
+          type: boolean
+          example: true
+        serverCert:
+          type: string
+          example: example-serverCert
+        serverKey:
+          type: string
+          example: example-key
+      required:
+      - certPath
+      - compressor
+      - offloadable
+      - serverCert
+      - serverKey
+      type: object
+    YBAError:
+      example:
+        code: UNKNOWN_ERROR
+        originMessage: originMessage
+        message: message
+      properties:
+        code:
+          description: Error code
+          enum:
+          - UNKNOWN_ERROR
+          - INTERNAL_ERROR
+          - PLATFORM_SHUTDOWN
+          - PLATFORM_RESTARTED
+          - INSTALLATION_ERROR
+          - SERVICE_START_ERROR
+          - CONNECTION_ERROR
+          - TIMED_OUT
+          readOnly: true
+          type: string
+          example: UNKNOWN_ERROR
+        message:
+          description: Error message
+          readOnly: true
+          type: string
+          example: Example message
+        originMessage:
+          description: Origin error message
+          readOnly: true
+          type: string
+          example: Example originMessage
+      type: object
+    NodeAgent:
+      description: Node agent details
+      example:
+        lastError:
+          code: UNKNOWN_ERROR
+          originMessage: originMessage
+          message: message
+        ip: ip
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        version: version
+        home: home
+        customerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        port: 0
+        name: name
+        osType: DARWIN
+        archType: ARM64
+        state: REGISTERING
+        config:
+          certPath: certPath
+          serverCert: serverCert
+          offloadable: true
+          serverKey: serverKey
+          compressor: compressor
+        updatedAt: 2022-12-21 13:07:18+00:00
+      properties:
+        archType:
+          description: Node agent host machine arch
+          enum:
+          - ARM64
+          - AMD64
+          readOnly: true
+          type: string
+          example: ARM64
+        config:
+          $ref: '#/components/schemas/Config'
+        customerUuid:
+          description: Customer UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        home:
+          description: Node agent installation directory
+          readOnly: true
+          type: string
+          example: example-home
+        ip:
+          description: Node agent server IP
+          readOnly: true
+          type: string
+          example: 10.0.0.1
+        lastError:
+          $ref: '#/components/schemas/YBAError'
+        name:
+          description: Node agent name
+          readOnly: true
+          type: string
+          example: example-name
+        osType:
+          description: Node agent host OS
+          enum:
+          - DARWIN
+          - LINUX
+          readOnly: true
+          type: string
+          example: DARWIN
+        port:
+          description: Node agent server port
+          format: int32
+          readOnly: true
+          type: integer
+          example: 5433
+        state:
+          description: Node agent state
+          enum:
+          - REGISTERING
+          - REGISTERED
+          - UPGRADE
+          - UPGRADED
+          - READY
+          readOnly: true
+          type: string
+          example: REGISTERING
+        updatedAt:
+          description: Updated time
+          example: 2022-12-21 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        uuid:
+          description: Node agent UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        version:
+          description: Node agent installed version
+          readOnly: true
+          type: string
+          example: 2.20.0.0
+      type: object
+    ReinstallNodeAgentForm:
+      example:
+        nodeNames:
+        - nodeNames
+        - nodeNames
+      properties:
+        nodeNames:
+          description: Node names
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+          example:
+          - example-nodeNames
+      type: object
+    NodeAgentResp:
+      description: Node agent details
+      example:
+        lastError:
+          code: UNKNOWN_ERROR
+          originMessage: originMessage
+          message: message
+        versionMatched: true
+        ip: ip
+        providerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        version: version
+        reachable: true
+        home: home
+        universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        customerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        port: 0
+        name: name
+        osType: DARWIN
+        archType: ARM64
+        state: REGISTERING
+        config:
+          certPath: certPath
+          serverCert: serverCert
+          offloadable: true
+          serverKey: serverKey
+          compressor: compressor
+        providerName: providerName
+        universeName: universeName
+        updatedAt: 2022-12-21 13:07:18+00:00
+      properties:
+        archType:
+          description: Node agent host machine arch
+          enum:
+          - ARM64
+          - AMD64
+          readOnly: true
+          type: string
+          example: ARM64
+        config:
+          $ref: '#/components/schemas/Config'
+        customerUuid:
+          description: Customer UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        home:
+          description: Node agent installation directory
+          readOnly: true
+          type: string
+          example: example-home
+        ip:
+          description: Node agent server IP
+          readOnly: true
+          type: string
+          example: 10.0.0.1
+        lastError:
+          $ref: '#/components/schemas/YBAError'
+        name:
+          description: Node agent name
+          readOnly: true
+          type: string
+          example: example-name
+        osType:
+          description: Node agent host OS
+          enum:
+          - DARWIN
+          - LINUX
+          readOnly: true
+          type: string
+          example: DARWIN
+        port:
+          description: Node agent server port
+          format: int32
+          readOnly: true
+          type: integer
+          example: 5433
+        providerName:
+          readOnly: true
+          type: string
+          example: example-providerName
+        providerUuid:
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        reachable:
+          readOnly: true
+          type: boolean
+          example: true
+        state:
+          description: Node agent state
+          enum:
+          - REGISTERING
+          - REGISTERED
+          - UPGRADE
+          - UPGRADED
+          - READY
+          readOnly: true
+          type: string
+          example: REGISTERING
+        universeName:
+          readOnly: true
+          type: string
+          example: example-universeName
+        universeUuid:
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        updatedAt:
+          description: Updated time
+          example: 2022-12-21 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        uuid:
+          description: Node agent UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        version:
+          description: Node agent installed version
+          readOnly: true
+          type: string
+          example: 2.20.0.0
+        versionMatched:
+          readOnly: true
+          type: boolean
+          example: true
+      type: object
+    NodeAgentPagedApiResponse:
+      example:
+        entities:
+        - lastError:
+            code: UNKNOWN_ERROR
+            originMessage: originMessage
+            message: message
+          versionMatched: true
+          ip: ip
+          providerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          version: version
+          reachable: true
+          home: home
+          universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          customerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          port: 0
+          name: name
+          osType: DARWIN
+          archType: ARM64
+          state: REGISTERING
+          config:
+            certPath: certPath
+            serverCert: serverCert
+            offloadable: true
+            serverKey: serverKey
+            compressor: compressor
+          providerName: providerName
+          universeName: universeName
+          updatedAt: 2022-12-21 13:07:18+00:00
+        - lastError:
+            code: UNKNOWN_ERROR
+            originMessage: originMessage
+            message: message
+          versionMatched: true
+          ip: ip
+          providerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          version: version
+          reachable: true
+          home: home
+          universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          customerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          port: 0
+          name: name
+          osType: DARWIN
+          archType: ARM64
+          state: REGISTERING
+          config:
+            certPath: certPath
+            serverCert: serverCert
+            offloadable: true
+            serverKey: serverKey
+            compressor: compressor
+          providerName: providerName
+          universeName: universeName
+          updatedAt: 2022-12-21 13:07:18+00:00
+        hasPrev: true
+        hasNext: true
+        totalCount: 0
+      properties:
+        entities:
+          items:
+            $ref: '#/components/schemas/NodeAgentResp'
+          type: array
+          example:
+          - lastError:
+              code: UNKNOWN_ERROR
+              originMessage: originMessage
+              message: message
+            versionMatched: true
+            ip: ip
+            providerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            version: version
+            reachable: true
+            home: home
+            universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            customerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            port: 0
+            name: name
+            osType: DARWIN
+            archType: ARM64
+            state: REGISTERING
+            config:
+              certPath: certPath
+              serverCert: serverCert
+              offloadable: true
+              serverKey: serverKey
+              compressor: compressor
+            providerName: providerName
+            universeName: universeName
+            updatedAt: '2022-12-21T13:07:18+00:00'
+        hasNext:
+          type: boolean
+          example: true
+        hasPrev:
+          type: boolean
+          example: true
+        totalCount:
+          format: int32
+          type: integer
+          example: 10
+      required:
+      - entities
+      - hasNext
+      - hasPrev
+      - totalCount
+      type: object
+    NodeAgentPagedApiQuery_2:
+      example:
+        filter:
+          universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          regionUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          cloudType: unknown
+          zoneUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          providerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          nodeIps:
+          - nodeIps
+          - nodeIps
+        offset: 6
+        needTotalCount: true
+        limit: 0
+        sortBy: uuid
+        direction: ASC
+      properties:
+        direction:
+          enum:
+          - ASC
+          - DESC
+          type: string
+        filter:
+          $ref: '#/components/schemas/NodeAgentApiFilter_2'
+        limit:
+          format: int32
+          type: integer
+        needTotalCount:
+          type: boolean
+        offset:
+          format: int32
+          type: integer
+        sortBy:
+          enum:
+          - uuid
+          - ip
+          - name
+          - state
+          - updatedAt
+          - version
+          type: string
+      required:
+      - direction
+      - filter
+      - limit
+      - needTotalCount
+      - offset
+      - sortBy
+      type: object
+    NodeAgentApiFilter_2:
+      example:
+        universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        regionUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        cloudType: unknown
+        zoneUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        providerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        nodeIps:
+        - nodeIps
+        - nodeIps
+      properties:
+        cloudType:
+          enum:
+          - unknown
+          - aws
+          - gcp
+          - azu
+          - docker
+          - onprem
+          - kubernetes
+          - local
+          - other
+          type: string
+        nodeIps:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        providerUuid:
+          format: uuid
+          type: string
+        regionUuid:
+          format: uuid
+          type: string
+        universeUuid:
+          format: uuid
+          type: string
+        zoneUuid:
+          format: uuid
+          type: string
+      required:
+      - cloudType
+      - nodeIps
+      - providerUuid
+      - regionUuid
+      - universeUuid
+      - zoneUuid
+      type: object
+    Config_2:
+      example:
+        certPath: certPath
+        serverCert: serverCert
+        offloadable: true
+        serverKey: serverKey
+        compressor: compressor
+      properties:
+        certPath:
+          type: string
+        compressor:
+          type: string
+        offloadable:
+          type: boolean
+        serverCert:
+          type: string
+        serverKey:
+          type: string
+      required:
+      - certPath
+      - compressor
+      - offloadable
+      - serverCert
+      - serverKey
+      type: object
+    YBAError_2:
+      example:
+        code: UNKNOWN_ERROR
+        originMessage: originMessage
+        message: message
+      properties:
+        code:
+          description: Error code
+          enum:
+          - UNKNOWN_ERROR
+          - INTERNAL_ERROR
+          - PLATFORM_SHUTDOWN
+          - PLATFORM_RESTARTED
+          - INSTALLATION_ERROR
+          - SERVICE_START_ERROR
+          - CONNECTION_ERROR
+          - TIMED_OUT
+          readOnly: true
+          type: string
+        message:
+          description: Error message
+          readOnly: true
+          type: string
+        originMessage:
+          description: Origin error message
+          readOnly: true
+          type: string
+      type: object
+    NodeAgent_2:
+      description: Node agent details
+      example:
+        lastError:
+          code: UNKNOWN_ERROR
+          originMessage: originMessage
+          message: message
+        ip: ip
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        version: version
+        home: home
+        customerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        port: 0
+        name: name
+        osType: DARWIN
+        archType: ARM64
+        state: REGISTERING
+        config:
+          certPath: certPath
+          serverCert: serverCert
+          offloadable: true
+          serverKey: serverKey
+          compressor: compressor
+        updatedAt: 2022-12-21 13:07:18+00:00
+      properties:
+        archType:
+          description: Node agent host machine arch
+          enum:
+          - ARM64
+          - AMD64
+          readOnly: true
+          type: string
+        config:
+          $ref: '#/components/schemas/Config_2'
+        customerUuid:
+          description: Customer UUID
+          format: uuid
+          readOnly: true
+          type: string
+        home:
+          description: Node agent installation directory
+          readOnly: true
+          type: string
+        ip:
+          description: Node agent server IP
+          readOnly: true
+          type: string
+        lastError:
+          $ref: '#/components/schemas/YBAError_2'
+        name:
+          description: Node agent name
+          readOnly: true
+          type: string
+        osType:
+          description: Node agent host OS
+          enum:
+          - DARWIN
+          - LINUX
+          readOnly: true
+          type: string
+        port:
+          description: Node agent server port
+          format: int32
+          readOnly: true
+          type: integer
+        state:
+          description: Node agent state
+          enum:
+          - REGISTERING
+          - REGISTERED
+          - UPGRADE
+          - UPGRADED
+          - READY
+          readOnly: true
+          type: string
+        updatedAt:
+          description: Updated time
+          example: 2022-12-21 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        uuid:
+          description: Node agent UUID
+          format: uuid
+          readOnly: true
+          type: string
+        version:
+          description: Node agent installed version
+          readOnly: true
+          type: string
+      type: object
+    ReinstallNodeAgentForm_2:
+      example:
+        nodeNames:
+        - nodeNames
+        - nodeNames
+      properties:
+        nodeNames:
+          description: Node names
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+      type: object
+    NodeAgentResp_2:
+      description: Node agent details
+      example:
+        lastError:
+          code: UNKNOWN_ERROR
+          originMessage: originMessage
+          message: message
+        versionMatched: true
+        ip: ip
+        providerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        version: version
+        reachable: true
+        home: home
+        universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        customerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        port: 0
+        name: name
+        osType: DARWIN
+        archType: ARM64
+        state: REGISTERING
+        config:
+          certPath: certPath
+          serverCert: serverCert
+          offloadable: true
+          serverKey: serverKey
+          compressor: compressor
+        providerName: providerName
+        universeName: universeName
+        updatedAt: 2022-12-21 13:07:18+00:00
+      properties:
+        archType:
+          description: Node agent host machine arch
+          enum:
+          - ARM64
+          - AMD64
+          readOnly: true
+          type: string
+        config:
+          $ref: '#/components/schemas/Config_2'
+        customerUuid:
+          description: Customer UUID
+          format: uuid
+          readOnly: true
+          type: string
+        home:
+          description: Node agent installation directory
+          readOnly: true
+          type: string
+        ip:
+          description: Node agent server IP
+          readOnly: true
+          type: string
+        lastError:
+          $ref: '#/components/schemas/YBAError_2'
+        name:
+          description: Node agent name
+          readOnly: true
+          type: string
+        osType:
+          description: Node agent host OS
+          enum:
+          - DARWIN
+          - LINUX
+          readOnly: true
+          type: string
+        port:
+          description: Node agent server port
+          format: int32
+          readOnly: true
+          type: integer
+        providerName:
+          readOnly: true
+          type: string
+        providerUuid:
+          format: uuid
+          readOnly: true
+          type: string
+        reachable:
+          readOnly: true
+          type: boolean
+        state:
+          description: Node agent state
+          enum:
+          - REGISTERING
+          - REGISTERED
+          - UPGRADE
+          - UPGRADED
+          - READY
+          readOnly: true
+          type: string
+        universeName:
+          readOnly: true
+          type: string
+        universeUuid:
+          format: uuid
+          readOnly: true
+          type: string
+        updatedAt:
+          description: Updated time
+          example: 2022-12-21 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        uuid:
+          description: Node agent UUID
+          format: uuid
+          readOnly: true
+          type: string
+        version:
+          description: Node agent installed version
+          readOnly: true
+          type: string
+        versionMatched:
+          readOnly: true
+          type: boolean
+      type: object
+    NodeAgentPagedApiResponse_2:
+      example:
+        entities:
+        - lastError:
+            code: UNKNOWN_ERROR
+            originMessage: originMessage
+            message: message
+          versionMatched: true
+          ip: ip
+          providerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          version: version
+          reachable: true
+          home: home
+          universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          customerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          port: 0
+          name: name
+          osType: DARWIN
+          archType: ARM64
+          state: REGISTERING
+          config:
+            certPath: certPath
+            serverCert: serverCert
+            offloadable: true
+            serverKey: serverKey
+            compressor: compressor
+          providerName: providerName
+          universeName: universeName
+          updatedAt: 2022-12-21 13:07:18+00:00
+        - lastError:
+            code: UNKNOWN_ERROR
+            originMessage: originMessage
+            message: message
+          versionMatched: true
+          ip: ip
+          providerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          version: version
+          reachable: true
+          home: home
+          universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          customerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          port: 0
+          name: name
+          osType: DARWIN
+          archType: ARM64
+          state: REGISTERING
+          config:
+            certPath: certPath
+            serverCert: serverCert
+            offloadable: true
+            serverKey: serverKey
+            compressor: compressor
+          providerName: providerName
+          universeName: universeName
+          updatedAt: 2022-12-21 13:07:18+00:00
+        hasPrev: true
+        hasNext: true
+        totalCount: 0
+      properties:
+        entities:
+          items:
+            $ref: '#/components/schemas/NodeAgentResp_2'
+          type: array
+        hasNext:
+          type: boolean
+        hasPrev:
+          type: boolean
+        totalCount:
+          format: int32
+          type: integer
+      required:
+      - entities
+      - hasNext
+      - hasPrev
+      - totalCount
+      type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key obtained from the YugabyteDB Aeon UI under User Profile > API Keys. Pass the key as a Bearer token in the Authorization header.
+externalDocs:
+  description: YugabyteDB Aeon REST API Documentation
+  url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/

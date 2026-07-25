@@ -1,0 +1,672 @@
+openapi: 3.1.0
+info:
+  title: YugabyteDB Aeon REST Access Keys Session management API
+  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.
+  version: v1
+  contact:
+    name: Yugabyte Support
+    url: https://support.yugabyte.com
+  termsOfService: https://www.yugabyte.com/yugabytedb-managed-service-terms/
+  x-generated-from: documentation
+  x-source-url: https://api-docs.yugabyte.com/docs/managed-apis/
+  x-last-validated: '2026-05-03'
+servers:
+- url: https://cloud.yugabyte.com/api/public/v1
+  description: YugabyteDB Aeon Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Session management
+paths:
+  /api/v1/api_login:
+    post:
+      operationId: apiLogin
+      parameters:
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerLoginFormData'
+            examples:
+              ApiLoginRequestExample:
+                summary: Default apiLogin request
+                x-microcks-default: true
+                value:
+                  password: password
+                  email: email
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionInfo'
+              examples:
+                ApiLogin200Example:
+                  summary: Default apiLogin 200 response
+                  x-microcks-default: true
+                  value:
+                    apiToken: apiToken
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    apiTokenVersion: 0
+                    authToken: authToken
+                    userUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      summary: YugabyteDB Anywhere Authenticate User Using Email and Password
+      tags:
+      - Session management
+      x-codegen-request-body-name: CustomerLoginFormData
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/app_version:
+    get:
+      operationId: appVersion
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+              examples:
+                AppVersion200Example:
+                  summary: Default appVersion 200 response
+                  x-microcks-default: true
+                  value: {}
+          description: successful operation
+      summary: YugabyteDB Anywhere AppVersion
+      tags:
+      - Session management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customer_count:
+    get:
+      operationId: customerCount
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerCountResp'
+              examples:
+                CustomerCount200Example:
+                  summary: Default customerCount 200 response
+                  x-microcks-default: true
+                  value:
+                    count: 0
+          description: successful operation
+      summary: YugabyteDB Anywhere CustomerCount
+      tags:
+      - Session management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/admin_notifications:
+    get:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: getAdminNotifications
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Current admin notification messages'
+              examples:
+                GetAdminNotifications200Example:
+                  summary: Default getAdminNotifications 200 response
+                  x-microcks-default: true
+                  value:
+                    messages:
+                    - code: code
+                      htmlMessage: htmlMessage
+                    - code: code
+                      htmlMessage: htmlMessage
+          description: successful operation
+      summary: YugabyteDB Anywhere Current List of Notifications for Admin
+      tags:
+      - Session management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/api_token:
+    put:
+      operationId: api_token
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: apiTokenVersion
+        schema:
+          default: -1
+          format: int64
+          type: integer
+        example: -1
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionInfo'
+              examples:
+                Api_token200Example:
+                  summary: Default api_token 200 response
+                  x-microcks-default: true
+                  value:
+                    apiToken: apiToken
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    apiTokenVersion: 0
+                    authToken: authToken
+                    userUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      summary: YugabyteDB Anywhere Regenerate and Fetch API Token
+      tags:
+      - Session management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/logs:
+    get:
+      operationId: getFilteredLogs
+      parameters:
+      - in: query
+        name: maxLines
+        schema:
+          default: 10000
+          format: int32
+          type: integer
+        example: 10000
+      - in: query
+        name: universeName
+        schema:
+          default: 'null'
+          type: string
+        example: 'null'
+      - in: query
+        name: queryRegex
+        schema:
+          default: 'null'
+          type: string
+        example: 'null'
+      - in: query
+        name: startDate
+        schema:
+          default: 'null'
+          type: string
+        example: 'null'
+      - in: query
+        name: endDate
+        schema:
+          default: 'null'
+          type: string
+        example: 'null'
+      responses:
+        '200':
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                GetFilteredLogs200Example:
+                  summary: Default getFilteredLogs 200 response
+                  x-microcks-default: true
+                  value: string
+          description: successful operation
+      summary: YugabyteDB Anywhere GetFilteredLogs
+      tags:
+      - Session management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/logs/{maxLines}:
+    get:
+      operationId: getLogs
+      parameters:
+      - in: path
+        name: maxLines
+        required: true
+        schema:
+          format: int32
+          type: integer
+        example: 10
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogData'
+              examples:
+                GetLogs200Example:
+                  summary: Default getLogs 200 response
+                  x-microcks-default: true
+                  value:
+                    lines:
+                    - lines
+                    - lines
+          description: successful operation
+      summary: YugabyteDB Anywhere GetLogs
+      tags:
+      - Session management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/register:
+    post:
+      description: Creates new customer and user
+      operationId: registerCustomer
+      parameters:
+      - in: query
+        name: generateApiToken
+        schema:
+          default: false
+          type: boolean
+        example: false
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRegisterFormData'
+            examples:
+              RegisterCustomerRequestExample:
+                summary: Default registerCustomer request
+                x-microcks-default: true
+                value:
+                  password: password
+                  code: code
+                  name: name
+                  email: email
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionInfo'
+              examples:
+                RegisterCustomer200Example:
+                  summary: Default registerCustomer 200 response
+                  x-microcks-default: true
+                  value:
+                    apiToken: apiToken
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    apiTokenVersion: 0
+                    authToken: authToken
+                    userUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      summary: YugabyteDB Anywhere Register a Customer
+      tags:
+      - Session management
+      x-codegen-request-body-name: CustomerRegisterFormData
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/session_info:
+    get:
+      description: Available since YBA version 2.20.0.
+      operationId: getSessionInfo
+      parameters:
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionInfo'
+              examples:
+                GetSessionInfo200Example:
+                  summary: Default getSessionInfo 200 response
+                  x-microcks-default: true
+                  value:
+                    apiToken: apiToken
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    apiTokenVersion: 0
+                    authToken: authToken
+                    userUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get Current User and Customer Uuid. This Will Not Generate or Return the API Token, Use /api_token API for That.
+      tags:
+      - Session management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    CustomerLoginFormData:
+      example:
+        password: password
+        email: email
+      properties:
+        email:
+          type: string
+          example: admin@example.com
+        password:
+          type: string
+          example: REDACTED
+      required:
+      - email
+      - password
+      type: object
+    SessionInfo:
+      description: Session information
+      example:
+        apiToken: apiToken
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        apiTokenVersion: 0
+        authToken: authToken
+        userUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        apiToken:
+          description: API token
+          type: string
+          example: REDACTED
+        apiTokenVersion:
+          description: API token version
+          format: int64
+          type: integer
+          example: 1000
+        authToken:
+          description: Auth token
+          type: string
+          example: REDACTED
+        customerUUID:
+          description: Customer UUID
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        userUUID:
+          description: User UUID
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      type: object
+    CustomerRegisterFormData:
+      example:
+        password: password
+        code: code
+        name: name
+        email: email
+      properties:
+        code:
+          type: string
+          example: OK
+        email:
+          type: string
+          example: admin@example.com
+        name:
+          type: string
+          example: example-name
+        password:
+          type: string
+          example: REDACTED
+      required:
+      - code
+      - email
+      - name
+      - password
+      type: object
+    Admin notification:
+      example:
+        code: code
+        htmlMessage: htmlMessage
+      properties:
+        code:
+          description: Notification code
+          readOnly: true
+          type: string
+          example: OK
+        htmlMessage:
+          description: Notification message with HTML markup
+          readOnly: true
+          type: string
+          example: Example htmlMessage
+      type: object
+    Current admin notification messages:
+      example:
+        messages:
+        - code: code
+          htmlMessage: htmlMessage
+        - code: code
+          htmlMessage: htmlMessage
+      properties:
+        messages:
+          description: Messages
+          items:
+            $ref: '#/components/schemas/Admin notification'
+          readOnly: true
+          type: array
+          example:
+          - code: code
+            htmlMessage: htmlMessage
+      type: object
+    CustomerCountResp:
+      example:
+        count: 0
+      properties:
+        count:
+          format: int32
+          type: integer
+          example: 10
+      required:
+      - count
+      type: object
+    LogData:
+      example:
+        lines:
+        - lines
+        - lines
+      properties:
+        lines:
+          items:
+            type: string
+          type: array
+          example:
+          - example-lines
+      required:
+      - lines
+      type: object
+    CustomerLoginFormData_2:
+      example:
+        password: password
+        email: email
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      required:
+      - email
+      - password
+      type: object
+    SessionInfo_2:
+      description: Session information
+      example:
+        apiToken: apiToken
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        apiTokenVersion: 0
+        authToken: authToken
+        userUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        apiToken:
+          description: API token
+          type: string
+        apiTokenVersion:
+          description: API token version
+          format: int64
+          type: integer
+        authToken:
+          description: Auth token
+          type: string
+        customerUUID:
+          description: Customer UUID
+          format: uuid
+          type: string
+        userUUID:
+          description: User UUID
+          format: uuid
+          type: string
+      type: object
+    CustomerRegisterFormData_2:
+      example:
+        password: password
+        code: code
+        name: name
+        email: email
+      properties:
+        code:
+          type: string
+        email:
+          type: string
+        name:
+          type: string
+        password:
+          type: string
+      required:
+      - code
+      - email
+      - name
+      - password
+      type: object
+    Admin notification_2:
+      example:
+        code: code
+        htmlMessage: htmlMessage
+      properties:
+        code:
+          description: Notification code
+          readOnly: true
+          type: string
+        htmlMessage:
+          description: Notification message with HTML markup
+          readOnly: true
+          type: string
+      type: object
+    Current admin notification messages_2:
+      example:
+        messages:
+        - code: code
+          htmlMessage: htmlMessage
+        - code: code
+          htmlMessage: htmlMessage
+      properties:
+        messages:
+          description: Messages
+          items:
+            $ref: '#/components/schemas/Admin notification_2'
+          readOnly: true
+          type: array
+      type: object
+    CustomerCountResp_2:
+      example:
+        count: 0
+      properties:
+        count:
+          format: int32
+          type: integer
+      required:
+      - count
+      type: object
+    LogData_2:
+      example:
+        lines:
+        - lines
+        - lines
+      properties:
+        lines:
+          items:
+            type: string
+          type: array
+      required:
+      - lines
+      type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key obtained from the YugabyteDB Aeon UI under User Profile > API Keys. Pass the key as a Bearer token in the Authorization header.
+definitions:
+  SessionInfo:
+    description: Session information
+    properties:
+      apiToken:
+        description: API token
+        type: string
+      authToken:
+        description: Auth token
+        type: string
+      customerUUID:
+        description: Customer UUID
+        format: uuid
+        type: string
+      userUUID:
+        description: User UUID
+        format: uuid
+        type: string
+    type: object
+  LogData:
+    properties:
+      lines:
+        items:
+          type: string
+        type: array
+    required:
+    - lines
+    type: object
+  CustomerRegisterFormData:
+    properties:
+      code:
+        type: string
+      email:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+    required:
+    - code
+    - email
+    - name
+    - password
+    type: object
+  CustomerCountResp:
+    properties:
+      count:
+        format: int32
+        type: integer
+    required:
+    - count
+    type: object
+externalDocs:
+  description: YugabyteDB Aeon REST API Documentation
+  url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/

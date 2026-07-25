@@ -1,0 +1,509 @@
+openapi: 3.1.0
+info:
+  title: YugabyteDB Aeon REST Access Keys Telemetry Provider API
+  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.
+  version: v1
+  contact:
+    name: Yugabyte Support
+    url: https://support.yugabyte.com
+  termsOfService: https://www.yugabyte.com/yugabytedb-managed-service-terms/
+  x-generated-from: documentation
+  x-source-url: https://api-docs.yugabyte.com/docs/managed-apis/
+  x-last-validated: '2026-05-03'
+servers:
+- url: https://cloud.yugabyte.com/api/public/v1
+  description: YugabyteDB Aeon Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Telemetry Provider
+paths:
+  /api/v1/customers/{cUUID}/telemetry_provider:
+    get:
+      description: 'WARNING: This is a preview API that could change. List All Telemetry Providers'
+      operationId: listAllTelemetryProviders
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TelemetryProvider'
+                type: array
+              examples:
+                ListAllTelemetryProviders200Example:
+                  summary: Default listAllTelemetryProviders 200 response
+                  x-microcks-default: true
+                  value:
+                  - customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    createTime: 2022-12-12 13:07:18+00:00
+                    name: name
+                    updateTime: 2022-12-12 13:07:18+00:00
+                    config:
+                      type: DATA_DOG
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    tags:
+                      key: tags
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List All Telemetry Providers
+      tags:
+      - Telemetry Provider
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      description: 'WARNING: This is a preview API that could change. Create Telemetry Provider'
+      operationId: createTelemetry
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TelemetryProvider'
+            examples:
+              CreateTelemetryRequestExample:
+                summary: Default createTelemetry request
+                x-microcks-default: true
+                value:
+                  customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  createTime: '2022-12-12T13:07:18+00:00'
+                  name: name
+                  updateTime: '2022-12-12T13:07:18+00:00'
+                  config:
+                    type: DATA_DOG
+                  uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  tags:
+                    key: tags
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TelemetryProvider'
+              examples:
+                CreateTelemetry200Example:
+                  summary: Default createTelemetry 200 response
+                  x-microcks-default: true
+                  value:
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    createTime: 2022-12-12 13:07:18+00:00
+                    name: name
+                    updateTime: 2022-12-12 13:07:18+00:00
+                    config:
+                      type: DATA_DOG
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    tags:
+                      key: tags
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Create Telemetry Provider
+      tags:
+      - Telemetry Provider
+      x-codegen-request-body-name: providerData
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/telemetry_provider/{intUUID}:
+    delete:
+      description: 'WARNING: This is a preview API that could change. Delete a Telemetry Provider'
+      operationId: deleteTelemetryProvider
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: intUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                DeleteTelemetryProvider200Example:
+                  summary: Default deleteTelemetryProvider 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Delete a Telemetry Provider
+      tags:
+      - Telemetry Provider
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      description: 'WARNING: This is a preview API that could change. Get Telemetry Provider'
+      operationId: getTelemetryProvider
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: intUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TelemetryProvider'
+              examples:
+                GetTelemetryProvider200Example:
+                  summary: Default getTelemetryProvider 200 response
+                  x-microcks-default: true
+                  value:
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    createTime: 2022-12-12 13:07:18+00:00
+                    name: name
+                    updateTime: 2022-12-12 13:07:18+00:00
+                    config:
+                      type: DATA_DOG
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    tags:
+                      key: tags
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get Telemetry Provider
+      tags:
+      - Telemetry Provider
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/{cUUID}/telemetry-provider/types:
+    get:
+      description: Get list of all available telemetry provider types with their capabilities
+      operationId: listTelemetryProviderTypes
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - description: Filter by export type (logs or metrics)
+        explode: true
+        in: query
+        name: exportType
+        required: false
+        schema:
+          enum:
+          - logs
+          - metrics
+          type: string
+        style: form
+        example: logs
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TelemetryProviderTypeInfo'
+                type: array
+              examples:
+                ListTelemetryProviderTypes200Example:
+                  summary: Default listTelemetryProviderTypes 200 response
+                  x-microcks-default: true
+                  value:
+                  - provider_type: DATA_DOG
+                    is_allowed_for_logs: true
+                    is_allowed_for_metrics: true
+          description: successful operation
+        '400':
+          description: Invalid input
+        '500':
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Available Telemetry Provider Types
+      tags:
+      - Telemetry Provider
+      x-yba-api-audit:
+        noAudit: true
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: other
+          action: read
+        resourceLocation:
+          path: customers
+          sourceType: endpoint
+      x-yba-api-since: 2025.2.0.0
+      x-yba-api-visibility: preview
+      x-accepts:
+      - application/json
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    TelemetryProviderTypeInfo:
+      description: Telemetry Provider Type Information
+      example:
+        provider_type: DATA_DOG
+        is_allowed_for_logs: true
+        is_allowed_for_metrics: true
+      properties:
+        provider_type:
+          description: Provider type name
+          enum:
+          - DATA_DOG
+          - SPLUNK
+          - AWS_CLOUDWATCH
+          - GCP_CLOUD_MONITORING
+          - LOKI
+          - DYNATRACE
+          - S3
+          - OTLP
+          example: DATA_DOG
+          type: string
+        is_allowed_for_logs:
+          description: Whether this provider supports logs export
+          example: true
+          type: boolean
+        is_allowed_for_metrics:
+          description: Whether this provider supports metrics export
+          example: true
+          type: boolean
+      type: object
+      x-yba-api-since: 2025.2.0.0
+      x-yba-api-visibility: preview
+    TelemetryProvider:
+      description: Telemetry Provider Model
+      example:
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        createTime: 2022-12-12 13:07:18+00:00
+        name: name
+        updateTime: 2022-12-12 13:07:18+00:00
+        config:
+          type: DATA_DOG
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        tags:
+          key: tags
+      properties:
+        config:
+          $ref: '#/components/schemas/TelemetryProviderConfig'
+        createTime:
+          description: Creation timestamp
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        customerUUID:
+          description: Customer UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name:
+          description: Name
+          type: string
+          example: example-name
+        tags:
+          additionalProperties:
+            type: string
+          description: Extra Tags
+          type: object
+          example: {}
+        updateTime:
+          description: Updation timestamp
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        uuid:
+          description: Telemetry Provider UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      required:
+      - config
+      - customerUUID
+      - name
+      - tags
+      - uuid
+      type: object
+    TelemetryProviderConfig:
+      description: Telemetry Provider Configuration
+      discriminator:
+        propertyName: type
+      example:
+        type: DATA_DOG
+      properties:
+        type:
+          description: Telemetry Provider Type
+          enum:
+          - DATA_DOG
+          - SPLUNK
+          - AWS_CLOUDWATCH
+          - GCP_CLOUD_MONITORING
+          - LOKI
+          - DYNATRACE
+          - S3
+          - OTLP
+          type: string
+          example: DATA_DOG
+      type: object
+    YBPSuccess:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+          example: Example message
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+          example: true
+      type: object
+    TelemetryProvider_2:
+      description: Telemetry Provider Model
+      example:
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        createTime: 2022-12-12 13:07:18+00:00
+        name: name
+        updateTime: 2022-12-12 13:07:18+00:00
+        config:
+          type: DATA_DOG
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        tags:
+          key: tags
+      properties:
+        config:
+          $ref: '#/components/schemas/TelemetryProviderConfig_2'
+        createTime:
+          description: Creation timestamp
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        customerUUID:
+          description: Customer UUID
+          format: uuid
+          readOnly: true
+          type: string
+        name:
+          description: Name
+          type: string
+        tags:
+          additionalProperties:
+            type: string
+          description: Extra Tags
+          type: object
+        updateTime:
+          description: Updation timestamp
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        uuid:
+          description: Telemetry Provider UUID
+          format: uuid
+          readOnly: true
+          type: string
+      required:
+      - config
+      - customerUUID
+      - name
+      - tags
+      - uuid
+      type: object
+    TelemetryProviderConfig_2:
+      description: Telemetry Provider Configuration
+      discriminator:
+        propertyName: type
+      example:
+        type: DATA_DOG
+      properties:
+        type:
+          description: Telemetry Provider Type
+          enum:
+          - DATA_DOG
+          - SPLUNK
+          - AWS_CLOUDWATCH
+          - GCP_CLOUD_MONITORING
+          - LOKI
+          - DYNATRACE
+          - S3
+          - OTLP
+          type: string
+      type: object
+    YBPSuccess_2:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+      type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key obtained from the YugabyteDB Aeon UI under User Profile > API Keys. Pass the key as a Bearer token in the Authorization header.
+externalDocs:
+  description: YugabyteDB Aeon REST API Documentation
+  url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/

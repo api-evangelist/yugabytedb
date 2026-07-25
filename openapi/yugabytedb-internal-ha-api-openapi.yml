@@ -1,0 +1,268 @@
+openapi: 3.1.0
+info:
+  title: YugabyteDB Aeon REST Access Keys Internal HA API
+  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.
+  version: v1
+  contact:
+    name: Yugabyte Support
+    url: https://support.yugabyte.com
+  termsOfService: https://www.yugabyte.com/yugabytedb-managed-service-terms/
+  x-generated-from: documentation
+  x-source-url: https://api-docs.yugabyte.com/docs/managed-apis/
+  x-last-validated: '2026-05-03'
+servers:
+- url: https://cloud.yugabyte.com/api/public/v1
+  description: YugabyteDB Aeon Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Internal HA
+paths:
+  /api/v1/settings/ha/internal/backups/{backupName}/validate:
+    get:
+      operationId: validateBackup
+      parameters:
+      - in: path
+        name: backupName
+        required: true
+        schema:
+          type: string
+        example: example-backupName
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      tags:
+      - Internal HA
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/settings/ha/internal/config:
+    get:
+      operationId: getHAConfigByClusterKey
+      parameters:
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      tags:
+      - Internal HA
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/settings/ha/internal/config/demote/{timestamp}:
+    put:
+      description: Available since YBA version 2.20.0.
+      operationId: demoteLocalLeader
+      parameters:
+      - in: path
+        name: timestamp
+        required: true
+        schema:
+          format: int64
+          type: integer
+        example: 1000
+      - in: query
+        name: promote
+        schema:
+          default: false
+          type: boolean
+        example: false
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformInstance'
+              examples:
+                DemoteLocalLeader200Example:
+                  summary: Default demoteLocalLeader 200 response
+                  x-microcks-default: true
+                  value:
+                    address: address
+                    config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    instance_state: Awaiting Connection to Replicas
+                    ybaVersion: ybaVersion
+                    state: LEADER
+                    is_local: true
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    is_leader: true
+                    last_backup: 2022-12-12 13:07:18+00:00
+          description: successful operation
+      summary: YugabyteDB Anywhere Demote Local Leader
+      tags:
+      - Internal HA
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/settings/ha/internal/config/sync/{timestamp}:
+    put:
+      operationId: syncInstances
+      parameters:
+      - in: path
+        name: timestamp
+        required: true
+        schema:
+          format: int64
+          type: integer
+        example: 1000
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      tags:
+      - Internal HA
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/settings/ha/internal/upload:
+    post:
+      operationId: syncBackups
+      parameters:
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      tags:
+      - Internal HA
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    PlatformInstance:
+      example:
+        address: address
+        config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        instance_state: Awaiting Connection to Replicas
+        ybaVersion: ybaVersion
+        state: LEADER
+        is_local: true
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        is_leader: true
+        last_backup: 2022-12-12 13:07:18+00:00
+      properties:
+        address:
+          type: string
+          example: example-address
+        config_uuid:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        instance_state:
+          enum:
+          - Awaiting Connection to Replicas
+          - Connected
+          - Disconnected
+          type: string
+          example: Awaiting Connection to Replicas
+        is_leader:
+          type: boolean
+          example: true
+        is_local:
+          type: boolean
+          example: true
+        last_backup:
+          description: Last backup time
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        state:
+          enum:
+          - LEADER
+          - STAND_BY
+          type: string
+          example: LEADER
+        uuid:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        ybaVersion:
+          type: string
+          example: 2.20.0.0
+      required:
+      - address
+      - instance_state
+      - is_leader
+      - state
+      - uuid
+      - ybaVersion
+      type: object
+    PlatformInstance_2:
+      example:
+        address: address
+        config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        instance_state: Awaiting Connection to Replicas
+        ybaVersion: ybaVersion
+        state: LEADER
+        is_local: true
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        is_leader: true
+        last_backup: 2022-12-12 13:07:18+00:00
+      properties:
+        address:
+          type: string
+        config_uuid:
+          format: uuid
+          type: string
+        instance_state:
+          enum:
+          - Awaiting Connection to Replicas
+          - Connected
+          - Disconnected
+          type: string
+        is_leader:
+          type: boolean
+        is_local:
+          type: boolean
+        last_backup:
+          description: Last backup time
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        state:
+          enum:
+          - LEADER
+          - STAND_BY
+          type: string
+        uuid:
+          format: uuid
+          type: string
+        ybaVersion:
+          type: string
+      required:
+      - address
+      - instance_state
+      - is_leader
+      - state
+      - uuid
+      - ybaVersion
+      type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key obtained from the YugabyteDB Aeon UI under User Profile > API Keys. Pass the key as a Bearer token in the Authorization header.
+externalDocs:
+  description: YugabyteDB Aeon REST API Documentation
+  url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/

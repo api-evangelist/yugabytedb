@@ -1,0 +1,1260 @@
+openapi: 3.1.0
+info:
+  title: YugabyteDB Aeon REST Access Keys Universe database management API
+  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.
+  version: v1
+  contact:
+    name: Yugabyte Support
+    url: https://support.yugabyte.com
+  termsOfService: https://www.yugabyte.com/yugabytedb-managed-service-terms/
+  x-generated-from: documentation
+  x-source-url: https://api-docs.yugabyte.com/docs/managed-apis/
+  x-last-validated: '2026-05-03'
+servers:
+- url: https://cloud.yugabyte.com/api/public/v1
+  description: YugabyteDB Aeon Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Universe database management
+paths:
+  /api/v1/customers/{cUUID}/universes/{uniUUID}/create_db_credentials:
+    post:
+      description: YbaApi Internal.
+      operationId: createUserInDB
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: uniUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatabaseUserFormData'
+            examples:
+              CreateUserInDBRequestExample:
+                summary: Default createUserInDB request
+                x-microcks-default: true
+                value:
+                  password: password
+                  ycqlAdminUsername: ycqlAdminUsername
+                  dbRoleAttributes:
+                  - name: SUPERUSER
+                  - name: SUPERUSER
+                  ysqlAdminPassword: ysqlAdminPassword
+                  dbName: dbName
+                  ycqlAdminPassword: ycqlAdminPassword
+                  username: username
+                  ysqlAdminUsername: ysqlAdminUsername
+        description: The database user to create
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                CreateUserInDB200Example:
+                  summary: Default createUserInDB 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Create a Database User for a Universe
+      tags:
+      - Universe database management
+      x-codegen-request-body-name: DatabaseUserFormData
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/universes/{uniUUID}/run_query:
+    post:
+      description: YbaApi Internal. Runs a YSQL query. Only valid when the platform is running in `OSS` mode.
+      operationId: runYsqlQueryUniverse
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: uniUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunQueryFormData'
+            examples:
+              RunYsqlQueryUniverseRequestExample:
+                summary: Default runYsqlQueryUniverse request
+                x-microcks-default: true
+                value:
+                  db_name: db_name
+                  query: query
+                  node_name: node_name
+                  table_type: YQL_TABLE_TYPE
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                RunYsqlQueryUniverse200Example:
+                  summary: Default runYsqlQueryUniverse 200 response
+                  x-microcks-default: true
+                  value: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Run a YSQL Query in a Universe
+      tags:
+      - Universe database management
+      x-codegen-request-body-name: RunQueryFormData
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/universes/{uniUUID}/update_db_credentials:
+    post:
+      description: YbaApi Internal.
+      operationId: setDatabaseCredentials
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: uniUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatabaseSecurityFormData'
+            examples:
+              SetDatabaseCredentialsRequestExample:
+                summary: Default setDatabaseCredentials request
+                x-microcks-default: true
+                value:
+                  ycqlAdminUsername: ycqlAdminUsername
+                  ysqlAdminPassword: ysqlAdminPassword
+                  dbName: dbName
+                  ycqlAdminPassword: ycqlAdminPassword
+                  ycqlCurrAdminPassword: ycqlCurrAdminPassword
+                  ysqlCurrAdminPassword: ysqlCurrAdminPassword
+                  ysqlAdminUsername: ysqlAdminUsername
+        description: The database credentials
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                SetDatabaseCredentials200Example:
+                  summary: Default setDatabaseCredentials 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Set a Universe's Database Credentials
+      tags:
+      - Universe database management
+      x-codegen-request-body-name: DatabaseSecurityFormData
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/universes/{univUUID}/configure/ycql:
+    post:
+      description: 'WARNING: This is a preview API that could change. Queues a task to configure ycql in a universe.'
+      operationId: configureYCQL
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: univUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigureYCQLFormData'
+            examples:
+              ConfigureYCQLRequestExample:
+                summary: Default configureYCQL request
+                x-microcks-default: true
+                value:
+                  enableYCQL: true
+                  enableYCQLAuth: true
+                  ycqlPassword: ycqlPassword
+                  communicationPorts:
+                    nodeExporterPort: 5
+                    tserverHttpPort: 9
+                    internalYsqlServerRpcPort: 0
+                    ybControllerHttpPort: 2
+                    redisServerHttpPort: 2
+                    ybControllerrRpcPort: 4
+                    tserverRpcPort: 3
+                    ysqlServerHttpPort: 1
+                    yqlServerRpcPort: 1
+                    masterHttpPort: 6
+                    otelCollectorMetricsPort: 5
+                    ysqlServerRpcPort: 1
+                    yqlServerHttpPort: 7
+                    masterRpcPort: 1
+                    redisServerRpcPort: 7
+        description: Configure YCQL Form Data
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPTask'
+              examples:
+                ConfigureYCQL200Example:
+                  summary: Default configureYCQL 200 response
+                  x-microcks-default: true
+                  value:
+                    taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Configure YCQL
+      tags:
+      - Universe database management
+      x-codegen-request-body-name: configure_ycql_form_data
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/universes/{univUUID}/configure/ysql:
+    post:
+      description: 'WARNING: This is a preview API that could change. Queues a task to configure ysql in a universe.'
+      operationId: configureYSQL
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: univUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigureYSQLFormData'
+            examples:
+              ConfigureYSQLRequestExample:
+                summary: Default configureYSQL request
+                x-microcks-default: true
+                value:
+                  ysqlPassword: ysqlPassword
+                  enableYSQL: true
+                  enableConnectionPooling: true
+                  enableYSQLAuth: true
+                  communicationPorts:
+                    nodeExporterPort: 5
+                    tserverHttpPort: 9
+                    internalYsqlServerRpcPort: 0
+                    ybControllerHttpPort: 2
+                    redisServerHttpPort: 2
+                    ybControllerrRpcPort: 4
+                    tserverRpcPort: 3
+                    ysqlServerHttpPort: 1
+                    yqlServerRpcPort: 1
+                    masterHttpPort: 6
+                    otelCollectorMetricsPort: 5
+                    ysqlServerRpcPort: 1
+                    yqlServerHttpPort: 7
+                    masterRpcPort: 1
+                    redisServerRpcPort: 7
+                  connectionPoolingGflags:
+                    key:
+                      inheritFromPrimary: true
+                      perProcessFlags:
+                        value:
+                          key:
+                            key: value
+                      gflagGroups: '["ENHANCED_POSTGRES_COMPATIBILITY"]'
+                      perAZ:
+                        key:
+                          value:
+                            key:
+                              key: value
+        description: Configure YSQL Form Data
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPTask'
+              examples:
+                ConfigureYSQL200Example:
+                  summary: Default configureYSQL 200 response
+                  x-microcks-default: true
+                  value:
+                    taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Configure YSQL
+      tags:
+      - Universe database management
+      x-codegen-request-body-name: configure_ysql_form_data
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/universes/{uniUUID}/run_in_shell:
+    post:
+      description: This operation is no longer supported, for security reasons.
+      operationId: runInShell
+      parameters:
+      - format: uuid
+        in: path
+        name: cUUID
+        required: true
+        type: string
+      - format: uuid
+        in: path
+        name: uniUUID
+        required: true
+        type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/YBPError'
+      security:
+      - apiKeyAuth: []
+      summary: Run a shell command
+      tags:
+      - Universe database management
+components:
+  schemas:
+    ConfigureYSQLFormData:
+      description: YSQL properties
+      example:
+        ysqlPassword: ysqlPassword
+        enableYSQL: true
+        enableConnectionPooling: true
+        enableYSQLAuth: true
+        communicationPorts:
+          nodeExporterPort: 5
+          tserverHttpPort: 9
+          internalYsqlServerRpcPort: 0
+          ybControllerHttpPort: 2
+          redisServerHttpPort: 2
+          ybControllerrRpcPort: 4
+          tserverRpcPort: 3
+          ysqlServerHttpPort: 1
+          yqlServerRpcPort: 1
+          masterHttpPort: 6
+          otelCollectorMetricsPort: 5
+          ysqlServerRpcPort: 1
+          yqlServerHttpPort: 7
+          masterRpcPort: 1
+          redisServerRpcPort: 7
+        connectionPoolingGflags:
+          key:
+            inheritFromPrimary: true
+            perProcessFlags:
+              value:
+                key:
+                  key: value
+            gflagGroups: '["ENHANCED_POSTGRES_COMPATIBILITY"]'
+            perAZ:
+              key:
+                value:
+                  key:
+                    key: value
+      properties:
+        communicationPorts:
+          $ref: '#/components/schemas/CommunicationPorts'
+        connectionPoolingGflags:
+          additionalProperties:
+            $ref: '#/components/schemas/SpecificGFlags'
+          description: YbaApi Internal. Extra Connection Pooling gflags for the universe. Only Supported for VMs and not yet k8s.
+          type: object
+          example: {}
+        enableConnectionPooling:
+          description: Enable Connection Pooling for the universe
+          type: boolean
+          example: true
+        enableYSQL:
+          description: Enable YSQL Api for the universe
+          type: boolean
+          example: true
+        enableYSQLAuth:
+          description: Enable YSQL Auth for the universe
+          type: boolean
+          example: true
+        ysqlPassword:
+          description: YSQL Auth password
+          type: string
+          example: REDACTED
+      type: object
+    ConfigureYCQLFormData:
+      description: YCQL properties
+      example:
+        enableYCQL: true
+        enableYCQLAuth: true
+        ycqlPassword: ycqlPassword
+        communicationPorts:
+          nodeExporterPort: 5
+          tserverHttpPort: 9
+          internalYsqlServerRpcPort: 0
+          ybControllerHttpPort: 2
+          redisServerHttpPort: 2
+          ybControllerrRpcPort: 4
+          tserverRpcPort: 3
+          ysqlServerHttpPort: 1
+          yqlServerRpcPort: 1
+          masterHttpPort: 6
+          otelCollectorMetricsPort: 5
+          ysqlServerRpcPort: 1
+          yqlServerHttpPort: 7
+          masterRpcPort: 1
+          redisServerRpcPort: 7
+      properties:
+        communicationPorts:
+          $ref: '#/components/schemas/CommunicationPorts'
+        enableYCQL:
+          description: Enable YCQL Api for the universe
+          type: boolean
+          example: true
+        enableYCQLAuth:
+          description: Enable YCQL Auth for the universe
+          type: boolean
+          example: true
+        ycqlPassword:
+          description: YCQL Auth password
+          type: string
+          example: REDACTED
+      type: object
+    RoleAttribute:
+      example:
+        name: SUPERUSER
+      properties:
+        name:
+          enum:
+          - SUPERUSER
+          - NOSUPERUSER
+          - CREATEDB
+          - NOCREATEDB
+          - CREATEROLE
+          - NOCREATEROLE
+          - INHERIT
+          - NOINHERIT
+          - LOGIN
+          - NOLOGIN
+          - REPLICATION
+          - NOREPLICATION
+          - BYPASSRLS
+          - NOBYPASSRLS
+          type: string
+          example: SUPERUSER
+      required:
+      - name
+      type: object
+    DatabaseSecurityFormData:
+      description: Database security properties
+      example:
+        ycqlAdminUsername: ycqlAdminUsername
+        ysqlAdminPassword: ysqlAdminPassword
+        dbName: dbName
+        ycqlAdminPassword: ycqlAdminPassword
+        ycqlCurrAdminPassword: ycqlCurrAdminPassword
+        ysqlCurrAdminPassword: ysqlCurrAdminPassword
+        ysqlAdminUsername: ysqlAdminUsername
+      properties:
+        dbName:
+          description: YSQL DB Name
+          type: string
+          example: example-dbName
+        ycqlAdminPassword:
+          description: New YCQL admin password
+          type: string
+          example: REDACTED
+        ycqlAdminUsername:
+          description: YCQL admin username
+          type: string
+          example: example-ycqlAdminUsername
+        ycqlCurrAdminPassword:
+          description: Current YCQL admin password
+          type: string
+          example: REDACTED
+        ysqlAdminPassword:
+          description: New YSQL admin password
+          type: string
+          example: REDACTED
+        ysqlAdminUsername:
+          description: YSQL admin username
+          type: string
+          example: example-ysqlAdminUsername
+        ysqlCurrAdminPassword:
+          description: Current YSQL admin password
+          type: string
+          example: REDACTED
+      type: object
+    RunQueryFormData:
+      example:
+        db_name: db_name
+        query: query
+        node_name: node_name
+        table_type: YQL_TABLE_TYPE
+      properties:
+        db_name:
+          type: string
+          example: example-db_name
+        node_name:
+          type: string
+          example: example-node_name
+        query:
+          type: string
+          example: example-query
+        table_type:
+          enum:
+          - YQL_TABLE_TYPE
+          - REDIS_TABLE_TYPE
+          - PGSQL_TABLE_TYPE
+          - TRANSACTION_STATUS_TABLE_TYPE
+          type: string
+          example: YQL_TABLE_TYPE
+      required:
+      - db_name
+      - node_name
+      - query
+      - table_type
+      type: object
+    PerProcessFlags:
+      example:
+        value:
+          key:
+            key: value
+      properties:
+        value:
+          additionalProperties:
+            additionalProperties:
+              type: string
+            type: object
+          type: object
+          example: {}
+      required:
+      - value
+      type: object
+    CommunicationPorts:
+      description: Communication ports
+      example:
+        nodeExporterPort: 5
+        tserverHttpPort: 9
+        internalYsqlServerRpcPort: 0
+        ybControllerHttpPort: 2
+        redisServerHttpPort: 2
+        ybControllerrRpcPort: 4
+        tserverRpcPort: 3
+        ysqlServerHttpPort: 1
+        yqlServerRpcPort: 1
+        masterHttpPort: 6
+        otelCollectorMetricsPort: 5
+        ysqlServerRpcPort: 1
+        yqlServerHttpPort: 7
+        masterRpcPort: 1
+        redisServerRpcPort: 7
+      properties:
+        internalYsqlServerRpcPort:
+          description: Internal YSQL RPC port
+          format: int32
+          type: integer
+          example: 5433
+        masterHttpPort:
+          description: Master table HTTP port
+          format: int32
+          type: integer
+          example: 5433
+        masterRpcPort:
+          description: Master table RCP port
+          format: int32
+          type: integer
+          example: 5433
+        nodeExporterPort:
+          description: Node exporter port
+          format: int32
+          type: integer
+          example: 5433
+        otelCollectorMetricsPort:
+          description: Otel Collector metrics port
+          format: int32
+          type: integer
+          example: 5433
+        redisServerHttpPort:
+          description: Redis HTTP port
+          format: int32
+          type: integer
+          example: 5433
+        redisServerRpcPort:
+          description: Redis RPC port
+          format: int32
+          type: integer
+          example: 5433
+        tserverHttpPort:
+          description: Tablet server HTTP port
+          format: int32
+          type: integer
+          example: 5433
+        tserverRpcPort:
+          description: Tablet server RPC port
+          format: int32
+          type: integer
+          example: 5433
+        ybControllerHttpPort:
+          description: Yb controller HTTP port
+          format: int32
+          type: integer
+          example: 5433
+        ybControllerrRpcPort:
+          description: Yb controller RPC port
+          format: int32
+          type: integer
+          example: 5433
+        yqlServerHttpPort:
+          description: YQL HTTP port
+          format: int32
+          type: integer
+          example: 5433
+        yqlServerRpcPort:
+          description: YQL RPC port
+          format: int32
+          type: integer
+          example: 5433
+        ysqlServerHttpPort:
+          description: YSQL HTTP port
+          format: int32
+          type: integer
+          example: 5433
+        ysqlServerRpcPort:
+          description: YSQL RPC port
+          format: int32
+          type: integer
+          example: 5433
+      type: object
+    YBPSuccess:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+          example: Example message
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+          example: true
+      type: object
+    YBPTask:
+      example:
+        taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        resourceUUID:
+          description: UUID of the resource being modified by the task
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        taskUUID:
+          description: Task UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      type: object
+    SpecificGFlags:
+      description: GFlags for current cluster
+      example:
+        inheritFromPrimary: true
+        perProcessFlags:
+          value:
+            key:
+              key: value
+        gflagGroups: '["ENHANCED_POSTGRES_COMPATIBILITY"]'
+        perAZ:
+          key:
+            value:
+              key:
+                key: value
+      properties:
+        gflagGroups:
+          description: YbaApi Internal. GFlag groups to be applied
+          example: '["ENHANCED_POSTGRES_COMPATIBILITY"]'
+          items:
+            enum:
+            - ENHANCED_POSTGRES_COMPATIBILITY
+            type: string
+          type: array
+        inheritFromPrimary:
+          type: boolean
+          example: true
+        perAZ:
+          additionalProperties:
+            $ref: '#/components/schemas/PerProcessFlags'
+          description: Overrides for gflags per availability zone
+          type: object
+          example: {}
+        perProcessFlags:
+          $ref: '#/components/schemas/PerProcessFlags'
+      type: object
+    DatabaseUserFormData:
+      example:
+        password: password
+        ycqlAdminUsername: ycqlAdminUsername
+        dbRoleAttributes:
+        - name: SUPERUSER
+        - name: SUPERUSER
+        ysqlAdminPassword: ysqlAdminPassword
+        dbName: dbName
+        ycqlAdminPassword: ycqlAdminPassword
+        username: username
+        ysqlAdminUsername: ysqlAdminUsername
+      properties:
+        dbName:
+          type: string
+          example: example-dbName
+        dbRoleAttributes:
+          description: YbaApi Internal.
+          items:
+            $ref: '#/components/schemas/RoleAttribute'
+          type: array
+          example:
+          - name: SUPERUSER
+        password:
+          type: string
+          example: REDACTED
+        username:
+          type: string
+          example: example-username
+        ycqlAdminPassword:
+          type: string
+          example: REDACTED
+        ycqlAdminUsername:
+          type: string
+          example: example-ycqlAdminUsername
+        ysqlAdminPassword:
+          type: string
+          example: REDACTED
+        ysqlAdminUsername:
+          type: string
+          example: example-ysqlAdminUsername
+      required:
+      - dbName
+      - password
+      - username
+      - ycqlAdminPassword
+      - ycqlAdminUsername
+      - ysqlAdminPassword
+      - ysqlAdminUsername
+      type: object
+    ConfigureYSQLFormData_2:
+      description: YSQL properties
+      example:
+        ysqlPassword: ysqlPassword
+        enableYSQL: true
+        enableConnectionPooling: true
+        enableYSQLAuth: true
+        communicationPorts:
+          nodeExporterPort: 5
+          tserverHttpPort: 9
+          internalYsqlServerRpcPort: 0
+          ybControllerHttpPort: 2
+          redisServerHttpPort: 2
+          ybControllerrRpcPort: 4
+          tserverRpcPort: 3
+          ysqlServerHttpPort: 1
+          yqlServerRpcPort: 1
+          masterHttpPort: 6
+          otelCollectorMetricsPort: 5
+          ysqlServerRpcPort: 1
+          yqlServerHttpPort: 7
+          masterRpcPort: 1
+          redisServerRpcPort: 7
+        connectionPoolingGflags:
+          key:
+            inheritFromPrimary: true
+            perProcessFlags:
+              value:
+                key:
+                  key: value
+            gflagGroups: '["ENHANCED_POSTGRES_COMPATIBILITY"]'
+            perAZ:
+              key:
+                value:
+                  key:
+                    key: value
+      properties:
+        communicationPorts:
+          $ref: '#/components/schemas/CommunicationPorts_2'
+        connectionPoolingGflags:
+          additionalProperties:
+            $ref: '#/components/schemas/SpecificGFlags_2'
+          description: YbaApi Internal. Extra Connection Pooling gflags for the universe. Only Supported for VMs and not yet k8s.
+          type: object
+        enableConnectionPooling:
+          description: Enable Connection Pooling for the universe
+          type: boolean
+        enableYSQL:
+          description: Enable YSQL Api for the universe
+          type: boolean
+        enableYSQLAuth:
+          description: Enable YSQL Auth for the universe
+          type: boolean
+        ysqlPassword:
+          description: YSQL Auth password
+          type: string
+      type: object
+    ConfigureYCQLFormData_2:
+      description: YCQL properties
+      example:
+        enableYCQL: true
+        enableYCQLAuth: true
+        ycqlPassword: ycqlPassword
+        communicationPorts:
+          nodeExporterPort: 5
+          tserverHttpPort: 9
+          internalYsqlServerRpcPort: 0
+          ybControllerHttpPort: 2
+          redisServerHttpPort: 2
+          ybControllerrRpcPort: 4
+          tserverRpcPort: 3
+          ysqlServerHttpPort: 1
+          yqlServerRpcPort: 1
+          masterHttpPort: 6
+          otelCollectorMetricsPort: 5
+          ysqlServerRpcPort: 1
+          yqlServerHttpPort: 7
+          masterRpcPort: 1
+          redisServerRpcPort: 7
+      properties:
+        communicationPorts:
+          $ref: '#/components/schemas/CommunicationPorts_2'
+        enableYCQL:
+          description: Enable YCQL Api for the universe
+          type: boolean
+        enableYCQLAuth:
+          description: Enable YCQL Auth for the universe
+          type: boolean
+        ycqlPassword:
+          description: YCQL Auth password
+          type: string
+      type: object
+    RoleAttribute_2:
+      example:
+        name: SUPERUSER
+      properties:
+        name:
+          enum:
+          - SUPERUSER
+          - NOSUPERUSER
+          - CREATEDB
+          - NOCREATEDB
+          - CREATEROLE
+          - NOCREATEROLE
+          - INHERIT
+          - NOINHERIT
+          - LOGIN
+          - NOLOGIN
+          - REPLICATION
+          - NOREPLICATION
+          - BYPASSRLS
+          - NOBYPASSRLS
+          type: string
+      required:
+      - name
+      type: object
+    DatabaseSecurityFormData_2:
+      description: Database security properties
+      example:
+        ycqlAdminUsername: ycqlAdminUsername
+        ysqlAdminPassword: ysqlAdminPassword
+        dbName: dbName
+        ycqlAdminPassword: ycqlAdminPassword
+        ycqlCurrAdminPassword: ycqlCurrAdminPassword
+        ysqlCurrAdminPassword: ysqlCurrAdminPassword
+        ysqlAdminUsername: ysqlAdminUsername
+      properties:
+        dbName:
+          description: YSQL DB Name
+          type: string
+        ycqlAdminPassword:
+          description: New YCQL admin password
+          type: string
+        ycqlAdminUsername:
+          description: YCQL admin username
+          type: string
+        ycqlCurrAdminPassword:
+          description: Current YCQL admin password
+          type: string
+        ysqlAdminPassword:
+          description: New YSQL admin password
+          type: string
+        ysqlAdminUsername:
+          description: YSQL admin username
+          type: string
+        ysqlCurrAdminPassword:
+          description: Current YSQL admin password
+          type: string
+      type: object
+    RunQueryFormData_2:
+      example:
+        db_name: db_name
+        query: query
+        node_name: node_name
+        table_type: YQL_TABLE_TYPE
+      properties:
+        db_name:
+          type: string
+        node_name:
+          type: string
+        query:
+          type: string
+        table_type:
+          enum:
+          - YQL_TABLE_TYPE
+          - REDIS_TABLE_TYPE
+          - PGSQL_TABLE_TYPE
+          - TRANSACTION_STATUS_TABLE_TYPE
+          type: string
+      required:
+      - db_name
+      - node_name
+      - query
+      - table_type
+      type: object
+    PerProcessFlags_2:
+      example:
+        value:
+          key:
+            key: value
+      properties:
+        value:
+          additionalProperties:
+            additionalProperties:
+              type: string
+            type: object
+          type: object
+      required:
+      - value
+      type: object
+    CommunicationPorts_2:
+      description: Communication ports
+      example:
+        nodeExporterPort: 5
+        tserverHttpPort: 9
+        internalYsqlServerRpcPort: 0
+        ybControllerHttpPort: 2
+        redisServerHttpPort: 2
+        ybControllerrRpcPort: 4
+        tserverRpcPort: 3
+        ysqlServerHttpPort: 1
+        yqlServerRpcPort: 1
+        masterHttpPort: 6
+        otelCollectorMetricsPort: 5
+        ysqlServerRpcPort: 1
+        yqlServerHttpPort: 7
+        masterRpcPort: 1
+        redisServerRpcPort: 7
+      properties:
+        internalYsqlServerRpcPort:
+          description: Internal YSQL RPC port
+          format: int32
+          type: integer
+        masterHttpPort:
+          description: Master table HTTP port
+          format: int32
+          type: integer
+        masterRpcPort:
+          description: Master table RCP port
+          format: int32
+          type: integer
+        nodeExporterPort:
+          description: Node exporter port
+          format: int32
+          type: integer
+        otelCollectorMetricsPort:
+          description: Otel Collector metrics port
+          format: int32
+          type: integer
+        redisServerHttpPort:
+          description: Redis HTTP port
+          format: int32
+          type: integer
+        redisServerRpcPort:
+          description: Redis RPC port
+          format: int32
+          type: integer
+        tserverHttpPort:
+          description: Tablet server HTTP port
+          format: int32
+          type: integer
+        tserverRpcPort:
+          description: Tablet server RPC port
+          format: int32
+          type: integer
+        ybControllerHttpPort:
+          description: Yb controller HTTP port
+          format: int32
+          type: integer
+        ybControllerrRpcPort:
+          description: Yb controller RPC port
+          format: int32
+          type: integer
+        yqlServerHttpPort:
+          description: YQL HTTP port
+          format: int32
+          type: integer
+        yqlServerRpcPort:
+          description: YQL RPC port
+          format: int32
+          type: integer
+        ysqlServerHttpPort:
+          description: YSQL HTTP port
+          format: int32
+          type: integer
+        ysqlServerRpcPort:
+          description: YSQL RPC port
+          format: int32
+          type: integer
+      type: object
+    YBPSuccess_2:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+      type: object
+    YBPTask_2:
+      example:
+        taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        resourceUUID:
+          description: UUID of the resource being modified by the task
+          format: uuid
+          readOnly: true
+          type: string
+        taskUUID:
+          description: Task UUID
+          format: uuid
+          readOnly: true
+          type: string
+      type: object
+    SpecificGFlags_2:
+      description: GFlags for current cluster
+      example:
+        inheritFromPrimary: true
+        perProcessFlags:
+          value:
+            key:
+              key: value
+        gflagGroups: '["ENHANCED_POSTGRES_COMPATIBILITY"]'
+        perAZ:
+          key:
+            value:
+              key:
+                key: value
+      properties:
+        gflagGroups:
+          description: YbaApi Internal. GFlag groups to be applied
+          example: '["ENHANCED_POSTGRES_COMPATIBILITY"]'
+          items:
+            enum:
+            - ENHANCED_POSTGRES_COMPATIBILITY
+            type: string
+          type: array
+        inheritFromPrimary:
+          type: boolean
+        perAZ:
+          additionalProperties:
+            $ref: '#/components/schemas/PerProcessFlags_2'
+          description: Overrides for gflags per availability zone
+          type: object
+        perProcessFlags:
+          $ref: '#/components/schemas/PerProcessFlags_2'
+      type: object
+    DatabaseUserFormData_2:
+      example:
+        password: password
+        ycqlAdminUsername: ycqlAdminUsername
+        dbRoleAttributes:
+        - name: SUPERUSER
+        - name: SUPERUSER
+        ysqlAdminPassword: ysqlAdminPassword
+        dbName: dbName
+        ycqlAdminPassword: ycqlAdminPassword
+        username: username
+        ysqlAdminUsername: ysqlAdminUsername
+      properties:
+        dbName:
+          type: string
+        dbRoleAttributes:
+          description: YbaApi Internal.
+          items:
+            $ref: '#/components/schemas/RoleAttribute_2'
+          type: array
+        password:
+          type: string
+        username:
+          type: string
+        ycqlAdminPassword:
+          type: string
+        ycqlAdminUsername:
+          type: string
+        ysqlAdminPassword:
+          type: string
+        ysqlAdminUsername:
+          type: string
+      required:
+      - dbName
+      - password
+      - username
+      - ycqlAdminPassword
+      - ycqlAdminUsername
+      - ysqlAdminPassword
+      - ysqlAdminUsername
+      type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key obtained from the YugabyteDB Aeon UI under User Profile > API Keys. Pass the key as a Bearer token in the Authorization header.
+definitions:
+  YBPError:
+    description: Generic error response from the YugabyteDB Anywhere API
+    properties:
+      error:
+        description: User-visible unstructured error message
+        example: There was a problem creating the universe
+        type: string
+      errorJson:
+        description: User visible error message as json object
+        example: '{ "foo" : "bar", "baz" : [1, 2, 3] }'
+        type: object
+      success:
+        description: Always set to false to indicate failure
+        example: false
+        type: boolean
+    type: object
+  YBPSuccess:
+    properties:
+      message:
+        description: API response message.
+        readOnly: true
+        type: string
+      success:
+        description: API operation status. A value of true indicates the operation was successful.
+        readOnly: true
+        type: boolean
+    type: object
+  RunQueryFormData:
+    properties:
+      db_name:
+        type: string
+      query:
+        type: string
+      tableType:
+        enum:
+        - YQL_TABLE_TYPE
+        - REDIS_TABLE_TYPE
+        - PGSQL_TABLE_TYPE
+        - TRANSACTION_STATUS_TABLE_TYPE
+        type: string
+    required:
+    - db_name
+    - query
+    - tableType
+    type: object
+externalDocs:
+  description: YugabyteDB Aeon REST API Documentation
+  url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/

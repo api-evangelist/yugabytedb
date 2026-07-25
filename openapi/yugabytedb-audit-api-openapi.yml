@@ -1,0 +1,963 @@
+openapi: 3.1.0
+info:
+  title: YugabyteDB Aeon REST Access Keys Audit API
+  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.
+  version: v1
+  contact:
+    name: Yugabyte Support
+    url: https://support.yugabyte.com
+  termsOfService: https://www.yugabyte.com/yugabytedb-managed-service-terms/
+  x-generated-from: documentation
+  x-source-url: https://api-docs.yugabyte.com/docs/managed-apis/
+  x-last-validated: '2026-05-03'
+servers:
+- url: https://cloud.yugabyte.com/api/public/v1
+  description: YugabyteDB Aeon Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Audit
+paths:
+  /api/v1/customers/{cUUID}/tasks/{tUUID}/audit_info:
+    get:
+      operationId: getTaskAudit
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: tUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Audit'
+              examples:
+                GetTaskAudit200Example:
+                  summary: Default getTaskAudit 200 response
+                  x-microcks-default: true
+                  value:
+                    auditID: 0
+                    targetID: targetID
+                    additionalDetails: '{}'
+                    taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    target: User
+                    userAddress: userAddress
+                    apiMethod: GET
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    payload: '{}'
+                    action: Create User
+                    apiCall: /api/v1/customers/<496fdea8-df25-11eb-ba80-0242ac130004>/providers
+                    userEmail: userEmail
+                    userUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    timestamp: 2022-12-12 13:07:18+00:00
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get Audit Info for a Task
+      tags:
+      - Audit
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/tasks/{tUUID}/audit_user:
+    get:
+      operationId: getUserFromTask
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: tUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Audit'
+              examples:
+                GetUserFromTask200Example:
+                  summary: Default getUserFromTask 200 response
+                  x-microcks-default: true
+                  value:
+                    auditID: 0
+                    targetID: targetID
+                    additionalDetails: '{}'
+                    taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    target: User
+                    userAddress: userAddress
+                    apiMethod: GET
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    payload: '{}'
+                    action: Create User
+                    apiCall: /api/v1/customers/<496fdea8-df25-11eb-ba80-0242ac130004>/providers
+                    userEmail: userEmail
+                    userUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    timestamp: 2022-12-12 13:07:18+00:00
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get the User Associated with a Task
+      tags:
+      - Audit
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/users/{uUUID}/audit_trail:
+    get:
+      operationId: ListOfAudit
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: uUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Audit'
+                type: array
+              examples:
+                ListOfAudit200Example:
+                  summary: Default ListOfAudit 200 response
+                  x-microcks-default: true
+                  value:
+                  - auditID: 0
+                    targetID: targetID
+                    additionalDetails: '{}'
+                    taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    target: User
+                    userAddress: userAddress
+                    apiMethod: GET
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    payload: '{}'
+                    action: Create User
+                    apiCall: /api/v1/customers/<496fdea8-df25-11eb-ba80-0242ac130004>/providers
+                    userEmail: userEmail
+                    userUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    timestamp: 2022-12-12 13:07:18+00:00
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List a User's Audit Entries
+      tags:
+      - Audit
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Audit:
+      description: Audit logging for requests and responses
+      example:
+        auditID: 0
+        targetID: targetID
+        additionalDetails: '{}'
+        taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        target: User
+        userAddress: userAddress
+        apiMethod: GET
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        payload: '{}'
+        action: Create User
+        apiCall: /api/v1/customers/<496fdea8-df25-11eb-ba80-0242ac130004>/providers
+        userEmail: userEmail
+        userUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        timestamp: 2022-12-12 13:07:18+00:00
+      properties:
+        action:
+          description: Action
+          enum:
+          - Set
+          - Create
+          - Edit
+          - Update
+          - Delete
+          - Register
+          - Refresh
+          - Upload
+          - Upgrade
+          - Import
+          - Attach
+          - Pause
+          - Resume
+          - Restart
+          - Abort
+          - Retry
+          - Rollback
+          - Restore
+          - Alter
+          - Drop
+          - Stop
+          - Validate
+          - Acknowledge
+          - SyncXClusterConfig
+          - SyncDrConfig
+          - Failover
+          - Switchover
+          - Login
+          - ApiLogin
+          - Promote
+          - Bootstrap
+          - Configure
+          - UpdateOptions
+          - UpdateLoadBalancerConfig
+          - RefreshPricing
+          - UpgradeSoftware
+          - FinalizeUpgrade
+          - RollbackUpgrade
+          - UpgradeGFlags
+          - CreateTelemetryConfig
+          - DeleteTelemetryConfig
+          - CreatePACollectorConfig
+          - EditPACollectorConfig
+          - DeletePACollectorConfig
+          - PACollectorRegister
+          - PACollectorUnregister
+          - UpgradeKubernetesOverrides
+          - UpgradeCerts
+          - UpgradeTLS
+          - UpgradeVmImage
+          - UpgradeSystemd
+          - RebootUniverse
+          - ResizeNode
+          - AddMetrics
+          - CreateKubernetes
+          - SetupDocker
+          - RetrieveKmsKey
+          - RemoveKmsKeyReferenceHistory
+          - UpsertCustomerFeatures
+          - CreateSelfSignedCert
+          - UpdateEmptyCustomerCertificate
+          - GetRootCertificate
+          - AddClientCertificate
+          - SetDBCredentials
+          - CreateUserInDB
+          - CreateRestrictedUserInDB
+          - DropUserInDB
+          - SetHelm3Compatible
+          - SetBackupFlag
+          - SetUniverseKey
+          - ResetUniverseVersion
+          - ConfigUniverseAlert
+          - ToggleTls
+          - ModifyAuditLogging
+          - ModifyQueryLogging
+          - ConfigureMetricsExport
+          - TlsConfigUpdate
+          - UpdateDiskSize
+          - CreateCluster
+          - DeleteCluster
+          - CreateAllClusters
+          - UpdatePrimaryCluster
+          - UpdateReadOnlyCluster
+          - CreateReadOnlyCluster
+          - DeleteReadOnlyCluster
+          - RunYsqlQuery
+          - BulkImport
+          - CreateBackup
+          - RestoreBackup
+          - CreateSingleTableBackup
+          - CreateMultiTableBackup
+          - CreateBackupSchedule
+          - CreatePitrConfig
+          - UpdatePitrConfig
+          - RestoreSnapshotSchedule
+          - DeletePitrConfig
+          - EditBackupSchedule
+          - StartPeriodicBackup
+          - StopPeriodicBackup
+          - DetachedNodeInstanceAction
+          - NodeInstanceAction
+          - DeleteBackupSchedule
+          - ChangeUserRole
+          - ChangeUserPassword
+          - SetSecurity
+          - GenerateApiToken
+          - ResetSlowQueries
+          - ExternalScriptSchedule
+          - StopScheduledScript
+          - UpdateScheduledScript
+          - CreateInstanceType
+          - DeleteInstanceType
+          - GetUniverseResources
+          - ThirdpartySoftwareUpgrade
+          - CreateTableSpaces
+          - CreateHook
+          - DeleteHook
+          - UpdateHook
+          - CreateHookScope
+          - DeleteHookScope
+          - AddHook
+          - RemoveHook
+          - RotateAccessKey
+          - CreateAndRotateAccessKey
+          - RunHook
+          - RunApiTriggeredHooks
+          - AddNodeAgent
+          - UpdateNodeAgent
+          - DeleteNodeAgent
+          - DisableYbc
+          - UpgradeYbc
+          - InstallYbc
+          - UpgradeYbcGFlags
+          - SetThrottleParams
+          - CreateImageBundle
+          - DeleteImageBundle
+          - EditImageBundle
+          - Detach
+          - RollbackDetach
+          - DeleteAttachDetachMetadata
+          - Unlock
+          - LdapUniverseSync
+          - UpdateProxyConfig
+          - ProvisionUniverseNodes
+          - CloneNamespace
+          - UpdateAdditionalServicesState
+          - KubernetesToggleImmutableYbc
+          - OperatorImportUniverse
+          - RunScript
+          - CreateFileCollection
+          - DownloadFileCollection
+          - DeleteFileCollection
+          example: Create User
+          readOnly: true
+          type: string
+        additionalDetails:
+          description: Additional Details
+          properties: {}
+          readOnly: true
+          type: object
+          example: {}
+        apiCall:
+          description: API call
+          example: /api/v1/customers/<496fdea8-df25-11eb-ba80-0242ac130004>/providers
+          readOnly: true
+          type: string
+        apiMethod:
+          description: API method
+          example: GET
+          readOnly: true
+          type: string
+        auditID:
+          description: Audit UID
+          format: int64
+          readOnly: true
+          type: integer
+          example: 1000
+        customerUUID:
+          description: Customer UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        payload:
+          description: Audit UUID
+          properties: {}
+          readOnly: true
+          type: object
+          example: {}
+        target:
+          description: Target
+          enum:
+          - Session
+          - CloudProvider
+          - Region
+          - AvailabilityZone
+          - CustomerConfig
+          - KMSConfig
+          - Customer
+          - Release
+          - Certificate
+          - CustomCACertificate
+          - Alert
+          - AlertTemplateSettings
+          - AlertTemplateVariables
+          - AlertChannel
+          - AlertChannelTemplates
+          - AlertDestination
+          - MaintenanceWindow
+          - AccessKey
+          - Universe
+          - XClusterConfig
+          - DrConfig
+          - Table
+          - Backup
+          - CustomerTask
+          - NodeInstance
+          - PlatformInstance
+          - Schedule
+          - User
+          - LoggingConfig
+          - RuntimeConfigKey
+          - HAConfig
+          - HABackup
+          - ScheduledScript
+          - SupportBundle
+          - TelemetryProvider
+          - PACollector
+          - GFlags
+          - Hook
+          - HookScope
+          - NodeAgent
+          - CustomerLicense
+          - PerformanceRecommendation
+          - PerformanceAdvisorSettings
+          - PerformanceAdvisorRun
+          - Role
+          - RoleBinding
+          - GroupMapping
+          - JobSchedule
+          - ContinuousBackup
+          - IsolatedBackup
+          example: User
+          readOnly: true
+          type: string
+        targetID:
+          description: Target ID
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        taskUUID:
+          description: Task UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        timestamp:
+          description: The task creation time.
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        userAddress:
+          description: User IP Address
+          readOnly: true
+          type: string
+          example: example-userAddress
+        userEmail:
+          description: User Email
+          readOnly: true
+          type: string
+          example: admin@example.com
+        userUUID:
+          description: User UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      type: object
+    Audit_2:
+      description: Audit logging for requests and responses
+      example:
+        auditID: 0
+        targetID: targetID
+        additionalDetails: '{}'
+        taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        target: User
+        userAddress: userAddress
+        apiMethod: GET
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        payload: '{}'
+        action: Create User
+        apiCall: /api/v1/customers/<496fdea8-df25-11eb-ba80-0242ac130004>/providers
+        userEmail: userEmail
+        userUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        timestamp: 2022-12-12 13:07:18+00:00
+      properties:
+        action:
+          description: Action
+          enum:
+          - Set
+          - Create
+          - Edit
+          - Update
+          - Delete
+          - Register
+          - Refresh
+          - Upload
+          - Upgrade
+          - Import
+          - Attach
+          - Pause
+          - Resume
+          - Restart
+          - Abort
+          - Retry
+          - Rollback
+          - Restore
+          - Alter
+          - Drop
+          - Stop
+          - Validate
+          - Acknowledge
+          - SyncXClusterConfig
+          - SyncDrConfig
+          - Failover
+          - Switchover
+          - Login
+          - ApiLogin
+          - Promote
+          - Bootstrap
+          - Configure
+          - UpdateOptions
+          - UpdateLoadBalancerConfig
+          - RefreshPricing
+          - UpgradeSoftware
+          - FinalizeUpgrade
+          - RollbackUpgrade
+          - UpgradeGFlags
+          - CreateTelemetryConfig
+          - DeleteTelemetryConfig
+          - CreatePACollectorConfig
+          - EditPACollectorConfig
+          - DeletePACollectorConfig
+          - PACollectorRegister
+          - PACollectorUnregister
+          - UpgradeKubernetesOverrides
+          - UpgradeCerts
+          - UpgradeTLS
+          - UpgradeVmImage
+          - UpgradeSystemd
+          - RebootUniverse
+          - ResizeNode
+          - AddMetrics
+          - CreateKubernetes
+          - SetupDocker
+          - RetrieveKmsKey
+          - RemoveKmsKeyReferenceHistory
+          - UpsertCustomerFeatures
+          - CreateSelfSignedCert
+          - UpdateEmptyCustomerCertificate
+          - GetRootCertificate
+          - AddClientCertificate
+          - SetDBCredentials
+          - CreateUserInDB
+          - CreateRestrictedUserInDB
+          - DropUserInDB
+          - SetHelm3Compatible
+          - SetBackupFlag
+          - SetUniverseKey
+          - ResetUniverseVersion
+          - ConfigUniverseAlert
+          - ToggleTls
+          - ModifyAuditLogging
+          - ModifyQueryLogging
+          - ConfigureMetricsExport
+          - TlsConfigUpdate
+          - UpdateDiskSize
+          - CreateCluster
+          - DeleteCluster
+          - CreateAllClusters
+          - UpdatePrimaryCluster
+          - UpdateReadOnlyCluster
+          - CreateReadOnlyCluster
+          - DeleteReadOnlyCluster
+          - RunYsqlQuery
+          - BulkImport
+          - CreateBackup
+          - RestoreBackup
+          - CreateSingleTableBackup
+          - CreateMultiTableBackup
+          - CreateBackupSchedule
+          - CreatePitrConfig
+          - UpdatePitrConfig
+          - RestoreSnapshotSchedule
+          - DeletePitrConfig
+          - EditBackupSchedule
+          - StartPeriodicBackup
+          - StopPeriodicBackup
+          - DetachedNodeInstanceAction
+          - NodeInstanceAction
+          - DeleteBackupSchedule
+          - ChangeUserRole
+          - ChangeUserPassword
+          - SetSecurity
+          - GenerateApiToken
+          - ResetSlowQueries
+          - ExternalScriptSchedule
+          - StopScheduledScript
+          - UpdateScheduledScript
+          - CreateInstanceType
+          - DeleteInstanceType
+          - GetUniverseResources
+          - ThirdpartySoftwareUpgrade
+          - CreateTableSpaces
+          - CreateHook
+          - DeleteHook
+          - UpdateHook
+          - CreateHookScope
+          - DeleteHookScope
+          - AddHook
+          - RemoveHook
+          - RotateAccessKey
+          - CreateAndRotateAccessKey
+          - RunHook
+          - RunApiTriggeredHooks
+          - AddNodeAgent
+          - UpdateNodeAgent
+          - DeleteNodeAgent
+          - DisableYbc
+          - UpgradeYbc
+          - InstallYbc
+          - UpgradeYbcGFlags
+          - SetThrottleParams
+          - CreateImageBundle
+          - DeleteImageBundle
+          - EditImageBundle
+          - Detach
+          - RollbackDetach
+          - DeleteAttachDetachMetadata
+          - Unlock
+          - LdapUniverseSync
+          - UpdateProxyConfig
+          - ProvisionUniverseNodes
+          - CloneNamespace
+          - UpdateAdditionalServicesState
+          - KubernetesToggleImmutableYbc
+          - OperatorImportUniverse
+          - RunScript
+          - CreateFileCollection
+          - DownloadFileCollection
+          - DeleteFileCollection
+          example: Create User
+          readOnly: true
+          type: string
+        additionalDetails:
+          description: Additional Details
+          properties: {}
+          readOnly: true
+          type: object
+        apiCall:
+          description: API call
+          example: /api/v1/customers/<496fdea8-df25-11eb-ba80-0242ac130004>/providers
+          readOnly: true
+          type: string
+        apiMethod:
+          description: API method
+          example: GET
+          readOnly: true
+          type: string
+        auditID:
+          description: Audit UID
+          format: int64
+          readOnly: true
+          type: integer
+        customerUUID:
+          description: Customer UUID
+          format: uuid
+          readOnly: true
+          type: string
+        payload:
+          description: Audit UUID
+          properties: {}
+          readOnly: true
+          type: object
+        target:
+          description: Target
+          enum:
+          - Session
+          - CloudProvider
+          - Region
+          - AvailabilityZone
+          - CustomerConfig
+          - KMSConfig
+          - Customer
+          - Release
+          - Certificate
+          - CustomCACertificate
+          - Alert
+          - AlertTemplateSettings
+          - AlertTemplateVariables
+          - AlertChannel
+          - AlertChannelTemplates
+          - AlertDestination
+          - MaintenanceWindow
+          - AccessKey
+          - Universe
+          - XClusterConfig
+          - DrConfig
+          - Table
+          - Backup
+          - CustomerTask
+          - NodeInstance
+          - PlatformInstance
+          - Schedule
+          - User
+          - LoggingConfig
+          - RuntimeConfigKey
+          - HAConfig
+          - HABackup
+          - ScheduledScript
+          - SupportBundle
+          - TelemetryProvider
+          - PACollector
+          - GFlags
+          - Hook
+          - HookScope
+          - NodeAgent
+          - CustomerLicense
+          - PerformanceRecommendation
+          - PerformanceAdvisorSettings
+          - PerformanceAdvisorRun
+          - Role
+          - RoleBinding
+          - GroupMapping
+          - JobSchedule
+          - ContinuousBackup
+          - IsolatedBackup
+          example: User
+          readOnly: true
+          type: string
+        targetID:
+          description: Target ID
+          readOnly: true
+          type: string
+        taskUUID:
+          description: Task UUID
+          format: uuid
+          readOnly: true
+          type: string
+        timestamp:
+          description: The task creation time.
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        userAddress:
+          description: User IP Address
+          readOnly: true
+          type: string
+        userEmail:
+          description: User Email
+          readOnly: true
+          type: string
+        userUUID:
+          description: User UUID
+          format: uuid
+          readOnly: true
+          type: string
+      type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key obtained from the YugabyteDB Aeon UI under User Profile > API Keys. Pass the key as a Bearer token in the Authorization header.
+definitions:
+  Audit:
+    description: Audit logging for requests and responses
+    properties:
+      action:
+        description: Action
+        enum:
+        - Set
+        - Create
+        - Edit
+        - Update
+        - Delete
+        - Register
+        - Refresh
+        - Upload
+        - Upgrade
+        - Import
+        - Pause
+        - Resume
+        - Restart
+        - Abort
+        - Retry
+        - Restore
+        - Alter
+        - Drop
+        - Stop
+        - Validate
+        - Acknowledge
+        - SyncXClusterConfig
+        - Login
+        - Promote
+        - Bootstrap
+        - Configure
+        - RefreshPricing
+        - UpgradeSoftware
+        - UpgradeGFlags
+        - UpgradeCerts
+        - UpgradeTLS
+        - UpgradeVmImage
+        - UpgradeSystemd
+        - ResizeNode
+        - AddMetrics
+        - CreateKubernetes
+        - SetupDocker
+        - RetrieveKmsKey
+        - RemoveKmsKeyReferenceHistory
+        - UpsertCustomerFeatures
+        - CreateSelfSignedCert
+        - UpdateEmptyCustomerCertificate
+        - GetRootCertificate
+        - AddClientCertificate
+        - SetDBCredentials
+        - CreateUserInDB
+        - SetHelm3Compatible
+        - SetBackupFlag
+        - SetUniverseKey
+        - ResetUniverseVersion
+        - ConfigUniverseAlert
+        - ToggleTls
+        - TlsConfigUpdate
+        - UpdateDiskSize
+        - CreateCluster
+        - DeleteCluster
+        - CreateAllClusters
+        - UpdatePrimaryCluster
+        - UpdateReadOnlyCluster
+        - CreateReadOnlyCluster
+        - DeleteReadOnlyCluster
+        - RunYsqlQuery
+        - BulkImport
+        - CreateBackup
+        - RestoreBackup
+        - CreateSingleTableBackup
+        - CreateMultiTableBackup
+        - CreateBackupSchedule
+        - EditBackupSchedule
+        - StartPeriodicBackup
+        - StopPeriodicBackup
+        - DetachedNodeInstanceAction
+        - NodeInstanceAction
+        - DeleteBackupSchedule
+        - ChangeUserRole
+        - ChangeUserPassword
+        - SetSecurity
+        - GenerateApiToken
+        - ResetSlowQueries
+        - ExternalScriptSchedule
+        - StopScheduledScript
+        - UpdateScheduledScript
+        - CreateInstanceType
+        - DeleteInstanceType
+        - GetUniverseResources
+        - ThirdpartySoftwareUpgrade
+        - CreateTableSpaces
+        example: Create User
+        readOnly: true
+        type: string
+      additionalDetails:
+        description: Additional Details
+        readOnly: true
+        type: object
+      apiCall:
+        description: API call
+        example: /api/v1/customers/<496fdea8-df25-11eb-ba80-0242ac130004>/providers
+        readOnly: true
+        type: string
+      apiMethod:
+        description: API method
+        example: GET
+        readOnly: true
+        type: string
+      auditID:
+        format: int64
+        type: integer
+      customerUUID:
+        description: Customer UUID
+        format: uuid
+        readOnly: true
+        type: string
+      payload:
+        description: Audit UUID
+        readOnly: true
+        type: object
+      target:
+        description: Target
+        enum:
+        - Session
+        - CloudProvider
+        - Region
+        - AvailabilityZone
+        - CustomerConfig
+        - KMSConfig
+        - Customer
+        - Release
+        - Certificate
+        - Alert
+        - AlertChannel
+        - AlertDestination
+        - MaintenanceWindow
+        - AccessKey
+        - Universe
+        - XClusterConfig
+        - Table
+        - Backup
+        - CustomerTask
+        - NodeInstance
+        - PlatformInstance
+        - Schedule
+        - User
+        - LoggingConfig
+        - RuntimeConfigKey
+        - HAConfig
+        - HABackup
+        - ScheduledScript
+        - SupportBundle
+        - GFlags
+        example: User
+        readOnly: true
+        type: string
+      targetID:
+        description: Target ID
+        readOnly: true
+        type: string
+      taskUUID:
+        description: Task UUID
+        format: uuid
+        readOnly: true
+        type: string
+      timestamp:
+        format: date-time
+        type: string
+      userEmail:
+        description: User Email
+        readOnly: true
+        type: string
+      userUUID:
+        description: User UUID
+        format: uuid
+        readOnly: true
+        type: string
+    required:
+    - auditID
+    - timestamp
+    type: object
+externalDocs:
+  description: YugabyteDB Aeon REST API Documentation
+  url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/

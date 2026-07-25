@@ -1,0 +1,624 @@
+openapi: 3.1.0
+info:
+  title: YugabyteDB Aeon REST Access Keys Continuous Backup API
+  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.
+  version: v1
+  contact:
+    name: Yugabyte Support
+    url: https://support.yugabyte.com
+  termsOfService: https://www.yugabyte.com/yugabytedb-managed-service-terms/
+  x-generated-from: documentation
+  x-source-url: https://api-docs.yugabyte.com/docs/managed-apis/
+  x-last-validated: '2026-05-03'
+servers:
+- url: https://cloud.yugabyte.com/api/public/v1
+  description: YugabyteDB Aeon Production Server
+security:
+- bearerAuth: []
+tags:
+- description: CRUD operations for Continuous YBA Backups
+  name: Continuous Backup
+paths:
+  /customers/{cUUID}/auto-yba-backups:
+    get:
+      description: Get details of the continuous backup configuration
+      operationId: GetContinuousBackup
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContinuousBackup'
+              examples:
+                GetContinuousBackup200Example:
+                  summary: Default GetContinuousBackup 200 response
+                  x-microcks-default: true
+                  value:
+                    spec:
+                      frequency_time_unit: NANOSECONDS
+                      backup_dir: yba_backups
+                      storage_config_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+                      num_backups: 6
+                      frequency: 0
+                    info:
+                      storage_location: s3://backup_storage_path/YBA_1.2.3.4
+                      uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+                      last_backup: 2022-12-12 13:07:18+00:00
+          description: Continuous Backup Config
+        '400':
+          description: Invalid input
+        '500':
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get Continuous Backup
+      tags:
+      - Continuous Backup
+      x-yba-api-audit:
+        noAudit: true
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: other
+          action: read
+        resourceLocation:
+          path: customers
+          sourceType: endpoint
+      x-yba-api-since: 2024.2.0.0
+      x-yba-api-visibility: preview
+      x-accepts:
+      - application/json
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      description: Create a continuous backup configuration
+      operationId: CreateContinuousBackup
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      requestBody:
+        $ref: '#/components/requestBodies/ContinuousBackupCreateReq'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContinuousBackup'
+              examples:
+                CreateContinuousBackup200Example:
+                  summary: Default CreateContinuousBackup 200 response
+                  x-microcks-default: true
+                  value:
+                    spec:
+                      frequency_time_unit: NANOSECONDS
+                      backup_dir: yba_backups
+                      storage_config_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+                      num_backups: 6
+                      frequency: 0
+                    info:
+                      storage_location: s3://backup_storage_path/YBA_1.2.3.4
+                      uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+                      last_backup: 2022-12-12 13:07:18+00:00
+          description: Continuous Backup Config
+        '400':
+          description: Invalid input
+        '500':
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Create Continous Backup
+      tags:
+      - Continuous Backup
+      x-yba-api-audit:
+        auditTargetType: ContinuousBackup
+        auditTargetId: 'null'
+        auditActionType: Create
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: other
+          action: SUPER_ADMIN_ACTIONS
+        resourceLocation:
+          path: customers
+          sourceType: endpoint
+      x-yba-api-since: 2024.2.0.0
+      x-yba-api-visibility: preview
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/{cUUID}/auto-yba-backups/restore:
+    post:
+      description: Restore a backup from a continuous backup configuration
+      operationId: RestoreContinuousBackup
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      requestBody:
+        $ref: '#/components/requestBodies/ContinuousBackupRestoreReq'
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBATask'
+              examples:
+                RestoreContinuousBackup202Example:
+                  summary: Default RestoreContinuousBackup 202 response
+                  x-microcks-default: true
+                  value:
+                    resource_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+                    task_uuid: 89a46d52-4edd-4736-922a-35177a0b990c
+          description: task accepted
+        '400':
+          description: Invalid input
+        '500':
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Restore Continuous Backup
+      tags:
+      - Continuous Backup
+      x-yba-api-audit:
+        auditTargetType: ContinuousBackup
+        auditTargetId: 'null'
+        auditActionType: Restore
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: other
+          action: SUPER_ADMIN_ACTIONS
+        resourceLocation:
+          path: customers
+          sourceType: endpoint
+      x-yba-api-since: 2024.2.0.0
+      x-yba-api-visibility: preview
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/{cUUID}/auto-yba-backups/{bUUID}:
+    delete:
+      description: Delete continuous backup config
+      operationId: DeleteContinuousBackup
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - description: Continuous Backup UUID
+        explode: false
+        in: path
+        name: bUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContinuousBackup'
+              examples:
+                DeleteContinuousBackup200Example:
+                  summary: Default DeleteContinuousBackup 200 response
+                  x-microcks-default: true
+                  value:
+                    spec:
+                      frequency_time_unit: NANOSECONDS
+                      backup_dir: yba_backups
+                      storage_config_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+                      num_backups: 6
+                      frequency: 0
+                    info:
+                      storage_location: s3://backup_storage_path/YBA_1.2.3.4
+                      uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+                      last_backup: 2022-12-12 13:07:18+00:00
+          description: Continuous Backup Config
+        '400':
+          description: Invalid input
+        '500':
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Delete Continuous Backup Config
+      tags:
+      - Continuous Backup
+      x-yba-api-audit:
+        auditTargetType: ContinuousBackup
+        auditTargetId: bUUID.toString()
+        auditActionType: Edit
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: other
+          action: SUPER_ADMIN_ACTIONS
+        resourceLocation:
+          path: customers
+          sourceType: endpoint
+      x-yba-api-since: 2024.2.0.0
+      x-yba-api-visibility: preview
+      x-accepts:
+      - application/json
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      description: Edit continuous backup config
+      operationId: EditContinuousBackup
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - description: Continuous Backup UUID
+        explode: false
+        in: path
+        name: bUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      requestBody:
+        $ref: '#/components/requestBodies/ContinuousBackupCreateReq'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContinuousBackup'
+              examples:
+                EditContinuousBackup200Example:
+                  summary: Default EditContinuousBackup 200 response
+                  x-microcks-default: true
+                  value:
+                    spec:
+                      frequency_time_unit: NANOSECONDS
+                      backup_dir: yba_backups
+                      storage_config_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+                      num_backups: 6
+                      frequency: 0
+                    info:
+                      storage_location: s3://backup_storage_path/YBA_1.2.3.4
+                      uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+                      last_backup: 2022-12-12 13:07:18+00:00
+          description: Continuous Backup Config
+        '400':
+          description: Invalid input
+        '500':
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Edit Continuous Backup Config
+      tags:
+      - Continuous Backup
+      x-yba-api-audit:
+        auditTargetType: ContinuousBackup
+        auditTargetId: bUUID.toString()
+        auditActionType: Edit
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: other
+          action: SUPER_ADMIN_ACTIONS
+        resourceLocation:
+          path: customers
+          sourceType: endpoint
+      x-yba-api-since: 2024.2.0.0
+      x-yba-api-visibility: preview
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    YBATask:
+      description: 'YBATask
+
+
+        YugabyteDB Anywhere Task object is used to represent a task that is being executed on a resource. This Task object can be polled for progress and status of the task. This object is returned as a response to most of the YugabyteDB Anywhere API calls.
+
+        '
+      example:
+        resource_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+        task_uuid: 89a46d52-4edd-4736-922a-35177a0b990c
+      properties:
+        resource_uuid:
+          description: UUID of the resource being modified by the task
+          example: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+          format: uuid
+          readOnly: true
+          type: string
+        task_uuid:
+          description: Task UUID
+          example: 89a46d52-4edd-4736-922a-35177a0b990c
+          format: uuid
+          readOnly: true
+          type: string
+      title: YBATask
+      type: object
+    ContinuousBackupInfo:
+      description: 'ContinuousBackupInfo
+
+
+        These are read-only system generated properties of a continuous backup configuration. Returned as part of the Continuous Backup resource.
+
+        '
+      example:
+        storage_location: s3://backup_storage_path/YBA_1.2.3.4
+        uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+        last_backup: 2022-12-12 13:07:18+00:00
+      properties:
+        uuid:
+          description: UUID of the Continuous Backup Config
+          example: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+          format: uuid
+          readOnly: true
+          type: string
+        storage_location:
+          description: bucket or directory where backups are stored
+          example: s3://backup_storage_path/YBA_1.2.3.4
+          readOnly: true
+          type: string
+        last_backup:
+          description: time of last backup stored
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+      required:
+      - uuid
+      title: ContinuousBackupInfo
+      type: object
+    TimeUnitType:
+      description: 'TimeUnitType
+
+
+        Time units that correspond to TimeUnit.java enum. Used for variable frequencies.
+
+        '
+      enum:
+      - NANOSECONDS
+      - MICROSECONDS
+      - MILLISECONDS
+      - SECONDS
+      - MINUTES
+      - HOURS
+      - DAYS
+      - MONTHS
+      - YEARS
+      title: TimeUnitType
+      type: string
+    ContinuousBackup:
+      description: 'ContinuousBackup
+
+
+        Continuous Backup object which contains the info for a configuration.
+
+        '
+      example:
+        spec:
+          frequency_time_unit: NANOSECONDS
+          backup_dir: yba_backups
+          storage_config_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+          num_backups: 6
+          frequency: 0
+        info:
+          storage_location: s3://backup_storage_path/YBA_1.2.3.4
+          uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+          last_backup: 2022-12-12 13:07:18+00:00
+      properties:
+        info:
+          $ref: '#/components/schemas/ContinuousBackupInfo'
+        spec:
+          $ref: '#/components/schemas/ContinuousBackupSpec'
+      title: ContinuousBackup
+      type: object
+    ContinuousRestoreSpec:
+      description: 'ContinuousRestoreSpec
+
+
+        Continuous Backup Restore time properties. Used to Restore from continuous backup configuration.
+
+        '
+      example:
+        backup_dir: YBA.1.2.3.4
+        storage_config_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+      properties:
+        storage_config_uuid:
+          description: UUID of the storage config to use
+          example: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+          format: uuid
+          readOnly: false
+          type: string
+        backup_dir:
+          description: The name of the directory to restore the most recent back from.
+          example: YBA.1.2.3.4
+          type: string
+      required:
+      - backup_dir
+      - storage_config_uuid
+      title: ContinuousRestoreSpec
+      type: object
+    ContinuousBackupSpec:
+      description: 'ContinuousBackupSpec
+
+
+        User specification for a continuous backup of YBA. All these properties can be edited.
+
+        '
+      example:
+        frequency_time_unit: NANOSECONDS
+        backup_dir: yba_backups
+        storage_config_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+        num_backups: 6
+        frequency: 0
+      properties:
+        storage_config_uuid:
+          description: UUID of the storage config to use
+          example: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+          format: uuid
+          readOnly: false
+          type: string
+        frequency:
+          description: Interval between two backups.
+          format: int64
+          type: integer
+          example: 1000
+        frequency_time_unit:
+          $ref: '#/components/schemas/TimeUnitType'
+        num_backups:
+          default: 5
+          description: The number of historical backups to retain in the storage bucket.
+          format: int32
+          type: integer
+          example: 5
+        backup_dir:
+          description: The name of the directory in the storage config to use for YBA backups.
+          example: yba_backups
+          type: string
+      required:
+      - backup_dir
+      - frequency
+      - frequency_time_unit
+      - storage_config_uuid
+      title: ContinuousBackupSpec
+      type: object
+    ContinuousBackupSpec_2:
+      description: 'ContinuousBackupSpec
+
+
+        User specification for a continuous backup of YBA. All these properties can be edited.
+
+        '
+      example:
+        frequency_time_unit: NANOSECONDS
+        backup_dir: yba_backups
+        storage_config_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+        num_backups: 6
+        frequency: 0
+      properties:
+        storage_config_uuid:
+          description: UUID of the storage config to use
+          example: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+          format: uuid
+          readOnly: false
+          type: string
+        frequency:
+          description: Interval between two backups.
+          format: int64
+          type: integer
+        frequency_time_unit:
+          $ref: '#/components/schemas/TimeUnitType'
+        num_backups:
+          default: 5
+          description: The number of historical backups to retain in the storage bucket.
+          format: int32
+          type: integer
+        backup_dir:
+          description: The name of the directory in the storage config to use for YBA backups.
+          example: yba_backups
+          type: string
+      required:
+      - backup_dir
+      - frequency
+      - frequency_time_unit
+      - storage_config_uuid
+      title: ContinuousBackupSpec
+      type: object
+  requestBodies:
+    ContinuousBackupCreateReq:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContinuousBackupSpec'
+          examples:
+            ContinuousBackupCreateReqExample:
+              summary: Default ContinuousBackupCreateReq request
+              x-microcks-default: true
+              value:
+                frequency_time_unit: NANOSECONDS
+                backup_dir: yba_backups
+                storage_config_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+                num_backups: 6
+                frequency: 0
+      required: true
+    ContinuousBackupRestoreReq:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContinuousRestoreSpec'
+          examples:
+            ContinuousBackupRestoreReqExample:
+              summary: Default ContinuousBackupRestoreReq request
+              x-microcks-default: true
+              value:
+                backup_dir: YBA.1.2.3.4
+                storage_config_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+      required: true
+    ContinuousBackupCreateReq_2:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContinuousBackupSpec_2'
+      required: true
+    ContinuousBackupRestoreReq_2:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContinuousRestoreSpec'
+      required: true
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key obtained from the YugabyteDB Aeon UI under User Profile > API Keys. Pass the key as a Bearer token in the Authorization header.
+externalDocs:
+  description: YugabyteDB Aeon REST API Documentation
+  url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/

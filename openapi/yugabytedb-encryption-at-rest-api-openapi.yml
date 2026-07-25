@@ -1,0 +1,625 @@
+openapi: 3.1.0
+info:
+  title: YugabyteDB Aeon REST Access Keys Encryption at rest API
+  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.
+  version: v1
+  contact:
+    name: Yugabyte Support
+    url: https://support.yugabyte.com
+  termsOfService: https://www.yugabyte.com/yugabytedb-managed-service-terms/
+  x-generated-from: documentation
+  x-source-url: https://api-docs.yugabyte.com/docs/managed-apis/
+  x-last-validated: '2026-05-03'
+servers:
+- url: https://cloud.yugabyte.com/api/public/v1
+  description: YugabyteDB Aeon Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Encryption at rest
+paths:
+  /api/v1/customers/{cUUID}/kms_configs:
+    get:
+      operationId: listKMSConfigs
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  properties: {}
+                  type: object
+                type: array
+              examples:
+                ListKMSConfigs200Example:
+                  summary: Default listKMSConfigs 200 response
+                  x-microcks-default: true
+                  value:
+                  - {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List KMS Configurations
+      tags:
+      - Encryption at rest
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/kms_configs/{configUUID}:
+    delete:
+      operationId: deleteKMSConfig
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: configUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPTask'
+              examples:
+                DeleteKMSConfig200Example:
+                  summary: Default deleteKMSConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Delete a KMS Configuration
+      tags:
+      - Encryption at rest
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      operationId: getKMSConfig
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: configUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  properties: {}
+                  type: object
+                type: object
+              examples:
+                GetKMSConfig200Example:
+                  summary: Default getKMSConfig 200 response
+                  x-microcks-default: true
+                  value: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get Details of a KMS Configuration
+      tags:
+      - Encryption at rest
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/kms_configs/{configUUID}/edit:
+    post:
+      operationId: editKMSConfig
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: configUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              EditKMSConfigRequestExample:
+                summary: Default editKMSConfig request
+                x-microcks-default: true
+                value: {}
+        description: KMS config to be edited
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPTask'
+              examples:
+                EditKMSConfig200Example:
+                  summary: Default editKMSConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Edit a KMS Configuration
+      tags:
+      - Encryption at rest
+      x-codegen-request-body-name: KMS config
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/kms_configs/{configUUID}/refresh:
+    put:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: refreshKMSConfig
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: configUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                RefreshKMSConfig200Example:
+                  summary: Default refreshKMSConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPError'
+              examples:
+                RefreshKMSConfig500Example:
+                  summary: Default refreshKMSConfig 500 response
+                  x-microcks-default: true
+                  value:
+                    success: false
+                    requestUri: /customers/8918921-af3782-633de/universe/8173ab-fd2453/create
+                    error: There was a problem creating the universe
+                    httpMethod: POST
+                    errorJson: '{ "foo" : "bar", "baz" : [1, 2, 3] }'
+                    requestJson: '{ "foo" : "bar", "baz" : [1, 2, 3] }'
+          description: If there is an error refreshing the KMS config.
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Refresh KMS Config
+      tags:
+      - Encryption at rest
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/kms_configs/{kmsProvider}:
+    post:
+      operationId: createKMSConfig
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: kmsProvider
+        required: true
+        schema:
+          type: string
+        example: example-kmsProvider
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              CreateKMSConfigRequestExample:
+                summary: Default createKMSConfig request
+                x-microcks-default: true
+                value: {}
+        description: KMS config to be created
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPTask'
+              examples:
+                CreateKMSConfig200Example:
+                  summary: Default createKMSConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Create a KMS Configuration
+      tags:
+      - Encryption at rest
+      x-codegen-request-body-name: KMS config
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/universes/{uniUUID}/kms:
+    delete:
+      deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Do not use.
+      operationId: removeKeyRefHistory
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: uniUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                RemoveKeyRefHistory200Example:
+                  summary: Default removeKeyRefHistory 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere This API Removes a Universe's Key Reference History - Deprecated
+      tags:
+      - Encryption at rest
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      description: YbaApi Internal.
+      operationId: getKeyRefHistory
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: uniUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  properties: {}
+                  type: object
+                type: array
+              examples:
+                GetKeyRefHistory200Example:
+                  summary: Default getKeyRefHistory 200 response
+                  x-microcks-default: true
+                  value:
+                  - {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get a Universe's Key Reference History
+      tags:
+      - Encryption at rest
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      description: YbaApi Internal.
+      operationId: retrieveKey
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: uniUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  properties: {}
+                  type: object
+                type: object
+              examples:
+                RetrieveKey200Example:
+                  summary: Default retrieveKey 200 response
+                  x-microcks-default: true
+                  value: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Retrive a Universe's KMS Key
+      tags:
+      - Encryption at rest
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/universes/{uniUUID}/kms/key_ref:
+    get:
+      description: YbaApi Internal.
+      operationId: getCurrentKeyRef
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: uniUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  properties: {}
+                  type: object
+                type: object
+              examples:
+                GetCurrentKeyRef200Example:
+                  summary: Default getCurrentKeyRef 200 response
+                  x-microcks-default: true
+                  value: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get a Universe's Key Reference
+      tags:
+      - Encryption at rest
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    YBPError:
+      description: Generic error response from the YugabyteDB Anywhere API
+      example:
+        success: false
+        requestUri: /customers/8918921-af3782-633de/universe/8173ab-fd2453/create
+        error: There was a problem creating the universe
+        httpMethod: POST
+        errorJson: '{ "foo" : "bar", "baz" : [1, 2, 3] }'
+        requestJson: '{ "foo" : "bar", "baz" : [1, 2, 3] }'
+      properties:
+        error:
+          description: User-visible unstructured error message
+          example: There was a problem creating the universe
+          type: string
+        errorJson:
+          description: User visible structured error message as json object
+          example: '{ "foo" : "bar", "baz" : [1, 2, 3] }'
+          properties: {}
+          type: object
+        httpMethod:
+          description: Method for HTTP call that resulted in this error
+          example: POST
+          type: string
+        requestJson:
+          description: User request JSON object
+          example: '{ "foo" : "bar", "baz" : [1, 2, 3] }'
+          properties: {}
+          type: object
+        requestUri:
+          description: URI for HTTP request that resulted in this error
+          example: /customers/8918921-af3782-633de/universe/8173ab-fd2453/create
+          type: string
+        success:
+          description: Always set to false to indicate failure
+          example: false
+          type: boolean
+      type: object
+    YBPTask:
+      example:
+        taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        resourceUUID:
+          description: UUID of the resource being modified by the task
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        taskUUID:
+          description: Task UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      type: object
+    YBPSuccess:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+          example: Example message
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+          example: true
+      type: object
+    YBPTask_2:
+      example:
+        taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        resourceUUID:
+          description: UUID of the resource being modified by the task
+          format: uuid
+          readOnly: true
+          type: string
+        taskUUID:
+          description: Task UUID
+          format: uuid
+          readOnly: true
+          type: string
+      type: object
+    YBPSuccess_2:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+      type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key obtained from the YugabyteDB Aeon UI under User Profile > API Keys. Pass the key as a Bearer token in the Authorization header.
+definitions:
+  YBPSuccess:
+    properties:
+      message:
+        description: API response message.
+        readOnly: true
+        type: string
+      success:
+        description: API operation status. A value of true indicates the operation was successful.
+        readOnly: true
+        type: boolean
+    type: object
+  YBPTask:
+    properties:
+      resourceUUID:
+        description: UUID of the resource being modified by the task
+        format: uuid
+        readOnly: true
+        type: string
+      taskUUID:
+        description: Task UUID
+        format: uuid
+        readOnly: true
+        type: string
+    type: object
+externalDocs:
+  description: YugabyteDB Aeon REST API Documentation
+  url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/

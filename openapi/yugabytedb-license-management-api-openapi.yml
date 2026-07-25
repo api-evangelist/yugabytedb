@@ -1,0 +1,216 @@
+openapi: 3.1.0
+info:
+  title: YugabyteDB Aeon REST Access Keys License management API
+  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.
+  version: v1
+  contact:
+    name: Yugabyte Support
+    url: https://support.yugabyte.com
+  termsOfService: https://www.yugabyte.com/yugabytedb-managed-service-terms/
+  x-generated-from: documentation
+  x-source-url: https://api-docs.yugabyte.com/docs/managed-apis/
+  x-last-validated: '2026-05-03'
+servers:
+- url: https://cloud.yugabyte.com/api/public/v1
+  description: YugabyteDB Aeon Production Server
+security:
+- bearerAuth: []
+tags:
+- name: License management
+paths:
+  /api/v1/customers/{cUUID}/licenses:
+    post:
+      operationId: upload_license
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerLicense'
+              examples:
+                Upload_license200Example:
+                  summary: Default upload_license 200 response
+                  x-microcks-default: true
+                  value:
+                    license: license
+                    licenseType: licenseType
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    licenseUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    creationDate: 2022-12-12 13:07:18+00:00
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Uploads the License
+      tags:
+      - License management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/licenses/{lUUID}:
+    delete:
+      operationId: deleteLicense
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: lUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                DeleteLicense200Example:
+                  summary: Default deleteLicense 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Delete a License
+      tags:
+      - License management
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    CustomerLicense:
+      description: Customer Licenses. This helps customer to upload licenses for the thirdparrty softwares if required.
+      example:
+        license: license
+        licenseType: licenseType
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        licenseUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        creationDate: 2022-12-12 13:07:18+00:00
+      properties:
+        creationDate:
+          description: Creation date of license
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        customerUUID:
+          description: Customer UUID that owns this license
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        license:
+          description: License File Path
+          type: string
+          example: example-license
+        licenseType:
+          description: Type of the license
+          type: string
+          example: DEFAULT
+        licenseUUID:
+          description: License UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      required:
+      - license
+      - licenseType
+      type: object
+    YBPSuccess:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+          example: Example message
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+          example: true
+      type: object
+    CustomerLicense_2:
+      description: Customer Licenses. This helps customer to upload licenses for the thirdparrty softwares if required.
+      example:
+        license: license
+        licenseType: licenseType
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        licenseUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        creationDate: 2022-12-12 13:07:18+00:00
+      properties:
+        creationDate:
+          description: Creation date of license
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        customerUUID:
+          description: Customer UUID that owns this license
+          format: uuid
+          type: string
+        license:
+          description: License File Path
+          type: string
+        licenseType:
+          description: Type of the license
+          type: string
+        licenseUUID:
+          description: License UUID
+          format: uuid
+          readOnly: true
+          type: string
+      required:
+      - license
+      - licenseType
+      type: object
+    YBPSuccess_2:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+      type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key obtained from the YugabyteDB Aeon UI under User Profile > API Keys. Pass the key as a Bearer token in the Authorization header.
+externalDocs:
+  description: YugabyteDB Aeon REST API Documentation
+  url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/

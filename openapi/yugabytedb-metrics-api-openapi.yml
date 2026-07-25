@@ -1,0 +1,151 @@
+openapi: 3.1.0
+info:
+  title: YugabyteDB Aeon REST Access Keys Metrics API
+  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.
+  version: v1
+  contact:
+    name: Yugabyte Support
+    url: https://support.yugabyte.com
+  termsOfService: https://www.yugabyte.com/yugabytedb-managed-service-terms/
+  x-generated-from: documentation
+  x-source-url: https://api-docs.yugabyte.com/docs/managed-apis/
+  x-last-validated: '2026-05-03'
+servers:
+- url: https://cloud.yugabyte.com/api/public/v1
+  description: YugabyteDB Aeon Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Metrics
+paths:
+  /api/v1/prometheus_metrics:
+    get:
+      description: Available since YBA version 2.8.0.0.
+      operationId: MetricsDetail
+      parameters:
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                MetricsDetail200Example:
+                  summary: Default MetricsDetail 200 response
+                  x-microcks-default: true
+                  value: string
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get Prometheus Metrics
+      tags:
+      - Metrics
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /host-info:
+    get:
+      description: Get the Url for the Prometheus instance of the current YBA
+      operationId: GetPrometheusHostInfo
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrometheusHostInfo'
+              examples:
+                GetPrometheusHostInfo200Example:
+                  summary: Default GetPrometheusHostInfo 200 response
+                  x-microcks-default: true
+                  value:
+                    prometheus_url: https://localhost:9000
+                    use_browser_fqdn: true
+          description: success
+          x-yba-api-visibility: internal
+        '400':
+          description: Client Error
+        '500':
+          description: Server Error
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get Prometheus Host Info
+      tags:
+      - Metrics
+      x-yba-api-audit:
+        noAudit: true
+      x-yba-api-authz:
+        noAuthz: true
+      x-yba-api-since: 2024.2.0.0
+      x-yba-api-visibility: internal
+      x-accepts:
+      - application/json
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    PrometheusHostInfo:
+      description: 'PrometheusHostInfo
+
+
+        Information about the the Prometheus instance for the current YBA. Part of PrometheusHostInfoResp.
+
+        '
+      example:
+        prometheus_url: https://localhost:9000
+        use_browser_fqdn: true
+      properties:
+        prometheus_url:
+          description: URL for accessing Prometheus
+          example: https://localhost:9000
+          readOnly: true
+          type: string
+        use_browser_fqdn:
+          description: If the Prometheus link in the browser should use the browser's FQDN or use prometheus url directly.
+          readOnly: true
+          type: boolean
+          example: true
+      required:
+      - prometheus_url
+      - use_browser_fqdn
+      title: PrometheusHostInfo
+      type: object
+      x-yba-api-visibility: internal
+    PrometheusHostInfo_2:
+      description: 'PrometheusHostInfo
+
+
+        Information about the the Prometheus instance for the current YBA. Part of PrometheusHostInfoResp.
+
+        '
+      example:
+        prometheus_url: https://localhost:9000
+        use_browser_fqdn: true
+      properties:
+        prometheus_url:
+          description: URL for accessing Prometheus
+          example: https://localhost:9000
+          readOnly: true
+          type: string
+        use_browser_fqdn:
+          description: If the Prometheus link in the browser should use the browser's FQDN or use prometheus url directly.
+          readOnly: true
+          type: boolean
+      required:
+      - prometheus_url
+      - use_browser_fqdn
+      title: PrometheusHostInfo
+      type: object
+      x-yba-api-visibility: internal
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key obtained from the YugabyteDB Aeon UI under User Profile > API Keys. Pass the key as a Bearer token in the Authorization header.
+externalDocs:
+  description: YugabyteDB Aeon REST API Documentation
+  url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/

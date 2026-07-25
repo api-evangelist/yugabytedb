@@ -1,0 +1,379 @@
+openapi: 3.1.0
+info:
+  title: YugabyteDB Aeon REST Access Keys Platform Instance API
+  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.
+  version: v1
+  contact:
+    name: Yugabyte Support
+    url: https://support.yugabyte.com
+  termsOfService: https://www.yugabyte.com/yugabytedb-managed-service-terms/
+  x-generated-from: documentation
+  x-source-url: https://api-docs.yugabyte.com/docs/managed-apis/
+  x-last-validated: '2026-05-03'
+servers:
+- url: https://cloud.yugabyte.com/api/public/v1
+  description: YugabyteDB Aeon Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Platform Instance
+paths:
+  /api/v1/settings/ha/config/{cUUID}/instance:
+    post:
+      description: Available since YBA version 2.20.0.
+      operationId: createInstance
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlatformInstanceFormData'
+            examples:
+              CreateInstanceRequestExample:
+                summary: Default createInstance request
+                x-microcks-default: true
+                value:
+                  address: address
+                  cleanAddress: cleanAddress
+                  is_local: true
+                  is_leader: true
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformInstance'
+              examples:
+                CreateInstance200Example:
+                  summary: Default createInstance 200 response
+                  x-microcks-default: true
+                  value:
+                    address: address
+                    config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    instance_state: Awaiting Connection to Replicas
+                    ybaVersion: ybaVersion
+                    state: LEADER
+                    is_local: true
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    is_leader: true
+                    last_backup: 2022-12-12 13:07:18+00:00
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Create Platform Instance
+      tags:
+      - Platform Instance
+      x-codegen-request-body-name: PlatformInstanceFormRequest
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/settings/ha/config/{cUUID}/instance/local:
+    get:
+      operationId: getLocal
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      tags:
+      - Platform Instance
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/settings/ha/config/{cUUID}/instance/{iUUID}:
+    delete:
+      operationId: deleteInstance
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: iUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      tags:
+      - Platform Instance
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/settings/ha/config/{cUUID}/instance/{iUUID}/promote:
+    post:
+      description: Available since YBA version 2.20.0.
+      operationId: promoteInstance
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: iUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: curLeader
+        schema:
+          default: 'null'
+          type: string
+        example: 'null'
+      - in: query
+        name: isForcePromote
+        schema:
+          default: true
+          type: boolean
+        example: true
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestorePlatformBackupFormData'
+            examples:
+              PromoteInstanceRequestExample:
+                summary: Default promoteInstance request
+                x-microcks-default: true
+                value:
+                  backup_file: backup_file
+        required: true
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Promote Platform Instance
+      tags:
+      - Platform Instance
+      x-codegen-request-body-name: PlatformBackupRestoreRequest
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    PlatformInstanceFormData:
+      example:
+        address: address
+        cleanAddress: cleanAddress
+        is_local: true
+        is_leader: true
+      properties:
+        address:
+          type: string
+          example: example-address
+        cleanAddress:
+          type: string
+          example: example-cleanAddress
+        is_leader:
+          type: boolean
+          example: true
+        is_local:
+          type: boolean
+          example: true
+      required:
+      - address
+      - cleanAddress
+      - is_leader
+      - is_local
+      type: object
+    RestorePlatformBackupFormData:
+      example:
+        backup_file: backup_file
+      properties:
+        backup_file:
+          type: string
+          example: example-backup_file
+      required:
+      - backup_file
+      type: object
+    PlatformInstance:
+      example:
+        address: address
+        config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        instance_state: Awaiting Connection to Replicas
+        ybaVersion: ybaVersion
+        state: LEADER
+        is_local: true
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        is_leader: true
+        last_backup: 2022-12-12 13:07:18+00:00
+      properties:
+        address:
+          type: string
+          example: example-address
+        config_uuid:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        instance_state:
+          enum:
+          - Awaiting Connection to Replicas
+          - Connected
+          - Disconnected
+          type: string
+          example: Awaiting Connection to Replicas
+        is_leader:
+          type: boolean
+          example: true
+        is_local:
+          type: boolean
+          example: true
+        last_backup:
+          description: Last backup time
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        state:
+          enum:
+          - LEADER
+          - STAND_BY
+          type: string
+          example: LEADER
+        uuid:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        ybaVersion:
+          type: string
+          example: 2.20.0.0
+      required:
+      - address
+      - instance_state
+      - is_leader
+      - state
+      - uuid
+      - ybaVersion
+      type: object
+    PlatformInstanceFormData_2:
+      example:
+        address: address
+        cleanAddress: cleanAddress
+        is_local: true
+        is_leader: true
+      properties:
+        address:
+          type: string
+        cleanAddress:
+          type: string
+        is_leader:
+          type: boolean
+        is_local:
+          type: boolean
+      required:
+      - address
+      - cleanAddress
+      - is_leader
+      - is_local
+      type: object
+    RestorePlatformBackupFormData_2:
+      example:
+        backup_file: backup_file
+      properties:
+        backup_file:
+          type: string
+      required:
+      - backup_file
+      type: object
+    PlatformInstance_2:
+      example:
+        address: address
+        config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        instance_state: Awaiting Connection to Replicas
+        ybaVersion: ybaVersion
+        state: LEADER
+        is_local: true
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        is_leader: true
+        last_backup: 2022-12-12 13:07:18+00:00
+      properties:
+        address:
+          type: string
+        config_uuid:
+          format: uuid
+          type: string
+        instance_state:
+          enum:
+          - Awaiting Connection to Replicas
+          - Connected
+          - Disconnected
+          type: string
+        is_leader:
+          type: boolean
+        is_local:
+          type: boolean
+        last_backup:
+          description: Last backup time
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        state:
+          enum:
+          - LEADER
+          - STAND_BY
+          type: string
+        uuid:
+          format: uuid
+          type: string
+        ybaVersion:
+          type: string
+      required:
+      - address
+      - instance_state
+      - is_leader
+      - state
+      - uuid
+      - ybaVersion
+      type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key obtained from the YugabyteDB Aeon UI under User Profile > API Keys. Pass the key as a Bearer token in the Authorization header.
+externalDocs:
+  description: YugabyteDB Aeon REST API Documentation
+  url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/

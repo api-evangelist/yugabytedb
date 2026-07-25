@@ -1,0 +1,306 @@
+openapi: 3.1.0
+info:
+  title: YugabyteDB Aeon REST Access Keys LoggingConfig API
+  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.
+  version: v1
+  contact:
+    name: Yugabyte Support
+    url: https://support.yugabyte.com
+  termsOfService: https://www.yugabyte.com/yugabytedb-managed-service-terms/
+  x-generated-from: documentation
+  x-source-url: https://api-docs.yugabyte.com/docs/managed-apis/
+  x-last-validated: '2026-05-03'
+servers:
+- url: https://cloud.yugabyte.com/api/public/v1
+  description: YugabyteDB Aeon Production Server
+security:
+- bearerAuth: []
+tags:
+- name: LoggingConfig
+paths:
+  /api/v1/audit_logging_config:
+    post:
+      operationId: setAuditLoggingSettings
+      parameters:
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuditLoggingConfig'
+            examples:
+              SetAuditLoggingSettingsRequestExample:
+                summary: Default setAuditLoggingSettings request
+                x-microcks-default: true
+                value:
+                  outputToStdout: true
+                  maxHistory: 30
+                  fileNamePrefix: yb-platform-
+                  rolloverPattern: yyyy-MM-dd
+                  outputToFile: true
+        description: Audit Logging config to be updated
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditLoggingConfig'
+              examples:
+                SetAuditLoggingSettings200Example:
+                  summary: Default setAuditLoggingSettings 200 response
+                  x-microcks-default: true
+                  value:
+                    outputToStdout: true
+                    maxHistory: 30
+                    fileNamePrefix: yb-platform-
+                    rolloverPattern: yyyy-MM-dd
+                    outputToFile: true
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Set Audit Logging Level
+      tags:
+      - LoggingConfig
+      x-codegen-request-body-name: Audit Logging Config
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/logging_config:
+    post:
+      operationId: setLoggingSettings
+      parameters:
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlatformLoggingConfig'
+            examples:
+              SetLoggingSettingsRequestExample:
+                summary: Default setLoggingSettings request
+                x-microcks-default: true
+                value:
+                  level: ERROR
+                  maxHistory: 0
+                  fileNamePrefix: yb-platform-
+                  rolloverPattern: rolloverPattern
+        description: Logging config to be updated
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformLoggingConfig'
+              examples:
+                SetLoggingSettings200Example:
+                  summary: Default setLoggingSettings 200 response
+                  x-microcks-default: true
+                  value:
+                    level: ERROR
+                    maxHistory: 0
+                    fileNamePrefix: yb-platform-
+                    rolloverPattern: rolloverPattern
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Set Logging Level
+      tags:
+      - LoggingConfig
+      x-codegen-request-body-name: Logging Config
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    PlatformLoggingConfig:
+      example:
+        level: ERROR
+        maxHistory: 0
+        fileNamePrefix: yb-platform-
+        rolloverPattern: rolloverPattern
+      properties:
+        fileNamePrefix:
+          description: 'WARNING: This is a preview API that could change. Application log file name prefix. Defaults to "". For example, setting this to "yb-platform-" will generate application log files as "yb-platform-application.log" instead of "application.log".'
+          example: yb-platform-
+          type: string
+        level:
+          enum:
+          - ERROR
+          - WARN
+          - INFO
+          - DEBUG
+          - TRACE
+          type: string
+          example: ERROR
+        maxHistory:
+          format: int32
+          minimum: 0
+          type: integer
+          example: 10
+        rolloverPattern:
+          type: string
+          example: example-rolloverPattern
+      required:
+      - level
+      - maxHistory
+      - rolloverPattern
+      type: object
+    AuditLoggingConfig:
+      description: Audit Logging Configuration
+      example:
+        outputToStdout: true
+        maxHistory: 30
+        fileNamePrefix: yb-platform-
+        rolloverPattern: yyyy-MM-dd
+        outputToFile: true
+      properties:
+        fileNamePrefix:
+          description: 'WARNING: This is a preview API that could change. Audit log file name prefix. Defaults to "". For example, setting this to "yb-platform-" will generate audit log files as "yb-platform-audit.log" instead of "audit.log".'
+          example: yb-platform-
+          type: string
+        maxHistory:
+          description: Max number of days up till which logs are kept
+          example: 30
+          format: int32
+          minimum: 0
+          type: integer
+        outputToFile:
+          description: Flag to enable/disable audit logs output to file
+          type: boolean
+          example: true
+        outputToStdout:
+          description: Flag to enable/disable audit logs output to stdout
+          type: boolean
+          example: true
+        rolloverPattern:
+          description: Rollover Pattern
+          example: yyyy-MM-dd
+          type: string
+      required:
+      - outputToFile
+      - outputToStdout
+      type: object
+    PlatformLoggingConfig_2:
+      example:
+        level: ERROR
+        maxHistory: 0
+        fileNamePrefix: yb-platform-
+        rolloverPattern: rolloverPattern
+      properties:
+        fileNamePrefix:
+          description: 'WARNING: This is a preview API that could change. Application log file name prefix. Defaults to "". For example, setting this to "yb-platform-" will generate application log files as "yb-platform-application.log" instead of "application.log".'
+          example: yb-platform-
+          type: string
+        level:
+          enum:
+          - ERROR
+          - WARN
+          - INFO
+          - DEBUG
+          - TRACE
+          type: string
+        maxHistory:
+          format: int32
+          minimum: 0
+          type: integer
+        rolloverPattern:
+          type: string
+      required:
+      - level
+      - maxHistory
+      - rolloverPattern
+      type: object
+    AuditLoggingConfig_2:
+      description: Audit Logging Configuration
+      example:
+        outputToStdout: true
+        maxHistory: 30
+        fileNamePrefix: yb-platform-
+        rolloverPattern: yyyy-MM-dd
+        outputToFile: true
+      properties:
+        fileNamePrefix:
+          description: 'WARNING: This is a preview API that could change. Audit log file name prefix. Defaults to "". For example, setting this to "yb-platform-" will generate audit log files as "yb-platform-audit.log" instead of "audit.log".'
+          example: yb-platform-
+          type: string
+        maxHistory:
+          description: Max number of days up till which logs are kept
+          example: 30
+          format: int32
+          minimum: 0
+          type: integer
+        outputToFile:
+          description: Flag to enable/disable audit logs output to file
+          type: boolean
+        outputToStdout:
+          description: Flag to enable/disable audit logs output to stdout
+          type: boolean
+        rolloverPattern:
+          description: Rollover Pattern
+          example: yyyy-MM-dd
+          type: string
+      required:
+      - outputToFile
+      - outputToStdout
+      type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key obtained from the YugabyteDB Aeon UI under User Profile > API Keys. Pass the key as a Bearer token in the Authorization header.
+definitions:
+  PlatformLoggingConfig:
+    properties:
+      level:
+        enum:
+        - ERROR
+        - WARN
+        - INFO
+        - DEBUG
+        - TRACE
+        type: string
+      maxHistory:
+        format: int32
+        minimum: 0
+        type: integer
+      rolloverPattern:
+        type: string
+    required:
+    - level
+    - maxHistory
+    - rolloverPattern
+    type: object
+  AuditLoggingConfig:
+    description: Audit Logging Configuration
+    properties:
+      maxHistory:
+        description: Max number of days up till which logs are kept
+        example: 30
+        format: int32
+        minimum: 0
+        type: integer
+      outputToFile:
+        description: Flag to enable/disable audit logs output to file
+        type: boolean
+      outputToStdout:
+        description: Flag to enable/disable audit logs output to stdout
+        type: boolean
+      rolloverPattern:
+        description: Rollover Pattern
+        example: yyyy-MM-dd
+        type: string
+    required:
+    - outputToFile
+    - outputToStdout
+    type: object
+externalDocs:
+  description: YugabyteDB Aeon REST API Documentation
+  url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/

@@ -1,0 +1,431 @@
+openapi: 3.1.0
+info:
+  title: YugabyteDB Aeon REST Access Keys GFlags Validation APIs API
+  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.
+  version: v1
+  contact:
+    name: Yugabyte Support
+    url: https://support.yugabyte.com
+  termsOfService: https://www.yugabyte.com/yugabytedb-managed-service-terms/
+  x-generated-from: documentation
+  x-source-url: https://api-docs.yugabyte.com/docs/managed-apis/
+  x-last-validated: '2026-05-03'
+servers:
+- url: https://cloud.yugabyte.com/api/public/v1
+  description: YugabyteDB Aeon Production Server
+security:
+- bearerAuth: []
+tags:
+- name: GFlags Validation APIs
+paths:
+  /api/v1/metadata/version/{version}/gflag:
+    get:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: getGFlagMetadata
+      parameters:
+      - in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        example: 2.20.0.0
+      - in: query
+        name: name
+        schema:
+          type: string
+        example: example-name
+      - in: query
+        name: server
+        schema:
+          type: string
+        example: example-server
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GFlagDetails'
+              examples:
+                GetGFlagMetadata200Example:
+                  summary: Default getGFlagMetadata 200 response
+                  x-microcks-default: true
+                  value:
+                    current: current
+                    default: default
+                    file: file
+                    initial: initial
+                    meaning: meaning
+                    name: name
+                    type: type
+                    tags: tags
+                    target: target
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get Gflag Metadata
+      tags:
+      - GFlags Validation APIs
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/metadata/version/{version}/list_gflags:
+    get:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: listGFlags
+      parameters:
+      - in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        example: 2.20.0.0
+      - in: query
+        name: name
+        schema:
+          type: string
+        example: example-name
+      - in: query
+        name: server
+        schema:
+          type: string
+        example: example-server
+      - in: query
+        name: mostUsedGFlags
+        schema:
+          default: false
+          type: boolean
+        example: false
+      - in: query
+        name: showExperimental
+        schema:
+          default: false
+          type: boolean
+        example: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/GFlagDetails'
+                type: array
+              examples:
+                ListGFlags200Example:
+                  summary: Default listGFlags 200 response
+                  x-microcks-default: true
+                  value:
+                  - current: current
+                    default: default
+                    file: file
+                    initial: initial
+                    meaning: meaning
+                    name: name
+                    type: type
+                    tags: tags
+                    target: target
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List All Gflags for a Release
+      tags:
+      - GFlags Validation APIs
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/metadata/version/{version}/validate_gflags:
+    post:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: validateGFlags
+      parameters:
+      - in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        example: 2.20.0.0
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GFlagsValidationFormData'
+            examples:
+              ValidateGFlagsRequestExample:
+                summary: Default validateGFlags request
+                x-microcks-default: true
+                value:
+                  gflags:
+                  - MASTER: MASTER
+                    TSERVER: TSERVER
+                    Name: Name
+                  - MASTER: MASTER
+                    TSERVER: TSERVER
+                    Name: Name
+        description: GFlag validation form data
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/GFlagsValidationResponse'
+                type: array
+              examples:
+                ValidateGFlags200Example:
+                  summary: Default validateGFlags 200 response
+                  x-microcks-default: true
+                  value:
+                  - MASTER:
+                      exist: true
+                      error: error
+                    TSERVER:
+                      exist: true
+                      error: error
+                    Name: Name
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Validate Gflags
+      tags:
+      - GFlags Validation APIs
+      x-codegen-request-body-name: gflag_validation_form_data
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    GFlagsValidationRequest:
+      example:
+        MASTER: MASTER
+        TSERVER: TSERVER
+        Name: Name
+      properties:
+        MASTER:
+          description: 'WARNING: This is a preview API that could change. Value of the gflag for master'
+          type: string
+          example: example-MASTER
+        Name:
+          description: 'WARNING: This is a preview API that could change. Name of the gflag'
+          type: string
+          example: example-Name
+        TSERVER:
+          description: 'WARNING: This is a preview API that could change. Value of the gflag for tserver'
+          type: string
+          example: example-TSERVER
+      type: object
+    GFlagsValidationResponse:
+      example:
+        MASTER:
+          exist: true
+          error: error
+        TSERVER:
+          exist: true
+          error: error
+        Name: Name
+      properties:
+        MASTER:
+          $ref: '#/components/schemas/GFlagValidationDetails'
+        Name:
+          description: 'WARNING: This is a preview API that could change. Name of the gflag'
+          type: string
+          example: example-Name
+        TSERVER:
+          $ref: '#/components/schemas/GFlagValidationDetails'
+      type: object
+    GFlagsValidationFormData:
+      example:
+        gflags:
+        - MASTER: MASTER
+          TSERVER: TSERVER
+          Name: Name
+        - MASTER: MASTER
+          TSERVER: TSERVER
+          Name: Name
+      properties:
+        gflags:
+          description: 'WARNING: This is a preview API that could change. List of gflags to validate'
+          items:
+            $ref: '#/components/schemas/GFlagsValidationRequest'
+          type: array
+          example:
+          - MASTER: MASTER
+            TSERVER: TSERVER
+            Name: Name
+      type: object
+    GFlagDetails:
+      example:
+        current: current
+        default: default
+        file: file
+        initial: initial
+        meaning: meaning
+        name: name
+        type: type
+        tags: tags
+        target: target
+      properties:
+        current:
+          description: 'WARNING: This is a preview API that could change. Current value of the gflag'
+          type: string
+          example: example-current
+        default:
+          description: 'WARNING: This is a preview API that could change. Default value of the gflag'
+          type: string
+          example: example-default
+        file:
+          description: 'WARNING: This is a preview API that could change. File where the gflag is defined'
+          type: string
+          example: example-file
+        initial:
+          description: 'WARNING: This is a preview API that could change. Initial value of the gflag'
+          type: string
+          example: example-initial
+        meaning:
+          description: 'WARNING: This is a preview API that could change. Meaning of the gflag'
+          type: string
+          example: example-meaning
+        name:
+          description: 'WARNING: This is a preview API that could change. Name of the gflag'
+          type: string
+          example: example-name
+        tags:
+          description: 'WARNING: This is a preview API that could change. Tags of the gflag'
+          type: string
+          example: example-tag
+        target:
+          description: 'WARNING: This is a preview API that could change. Target of the gflag'
+          type: string
+          example: example-target
+        type:
+          description: 'WARNING: This is a preview API that could change. Type of the gflag'
+          type: string
+          example: DEFAULT
+      type: object
+    GFlagValidationDetails:
+      example:
+        exist: true
+        error: error
+      properties:
+        error:
+          description: 'WARNING: This is a preview API that could change. Error message if gflag is invalid'
+          type: string
+          example: example-error
+        exist:
+          description: 'WARNING: This is a preview API that could change. Flag to indicate if gflag exists'
+          type: boolean
+          example: true
+      type: object
+    GFlagsValidationRequest_2:
+      example:
+        MASTER: MASTER
+        TSERVER: TSERVER
+        Name: Name
+      properties:
+        MASTER:
+          description: 'WARNING: This is a preview API that could change. Value of the gflag for master'
+          type: string
+        Name:
+          description: 'WARNING: This is a preview API that could change. Name of the gflag'
+          type: string
+        TSERVER:
+          description: 'WARNING: This is a preview API that could change. Value of the gflag for tserver'
+          type: string
+      type: object
+    GFlagsValidationResponse_2:
+      example:
+        MASTER:
+          exist: true
+          error: error
+        TSERVER:
+          exist: true
+          error: error
+        Name: Name
+      properties:
+        MASTER:
+          $ref: '#/components/schemas/GFlagValidationDetails_2'
+        Name:
+          description: 'WARNING: This is a preview API that could change. Name of the gflag'
+          type: string
+        TSERVER:
+          $ref: '#/components/schemas/GFlagValidationDetails_2'
+      type: object
+    GFlagsValidationFormData_2:
+      example:
+        gflags:
+        - MASTER: MASTER
+          TSERVER: TSERVER
+          Name: Name
+        - MASTER: MASTER
+          TSERVER: TSERVER
+          Name: Name
+      properties:
+        gflags:
+          description: 'WARNING: This is a preview API that could change. List of gflags to validate'
+          items:
+            $ref: '#/components/schemas/GFlagsValidationRequest_2'
+          type: array
+      type: object
+    GFlagDetails_2:
+      example:
+        current: current
+        default: default
+        file: file
+        initial: initial
+        meaning: meaning
+        name: name
+        type: type
+        tags: tags
+        target: target
+      properties:
+        current:
+          description: 'WARNING: This is a preview API that could change. Current value of the gflag'
+          type: string
+        default:
+          description: 'WARNING: This is a preview API that could change. Default value of the gflag'
+          type: string
+        file:
+          description: 'WARNING: This is a preview API that could change. File where the gflag is defined'
+          type: string
+        initial:
+          description: 'WARNING: This is a preview API that could change. Initial value of the gflag'
+          type: string
+        meaning:
+          description: 'WARNING: This is a preview API that could change. Meaning of the gflag'
+          type: string
+        name:
+          description: 'WARNING: This is a preview API that could change. Name of the gflag'
+          type: string
+        tags:
+          description: 'WARNING: This is a preview API that could change. Tags of the gflag'
+          type: string
+        target:
+          description: 'WARNING: This is a preview API that could change. Target of the gflag'
+          type: string
+        type:
+          description: 'WARNING: This is a preview API that could change. Type of the gflag'
+          type: string
+      type: object
+    GFlagValidationDetails_2:
+      example:
+        exist: true
+        error: error
+      properties:
+        error:
+          description: 'WARNING: This is a preview API that could change. Error message if gflag is invalid'
+          type: string
+        exist:
+          description: 'WARNING: This is a preview API that could change. Flag to indicate if gflag exists'
+          type: boolean
+      type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key obtained from the YugabyteDB Aeon UI under User Profile > API Keys. Pass the key as a Bearer token in the Authorization header.
+externalDocs:
+  description: YugabyteDB Aeon REST API Documentation
+  url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/

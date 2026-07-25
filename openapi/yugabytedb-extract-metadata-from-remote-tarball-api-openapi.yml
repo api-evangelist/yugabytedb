@@ -1,0 +1,318 @@
+openapi: 3.1.0
+info:
+  title: YugabyteDB Aeon REST Access Keys Extract metadata from remote tarball API
+  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.
+  version: v1
+  contact:
+    name: Yugabyte Support
+    url: https://support.yugabyte.com
+  termsOfService: https://www.yugabyte.com/yugabytedb-managed-service-terms/
+  x-generated-from: documentation
+  x-source-url: https://api-docs.yugabyte.com/docs/managed-apis/
+  x-last-validated: '2026-05-03'
+servers:
+- url: https://cloud.yugabyte.com/api/public/v1
+  description: YugabyteDB Aeon Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Extract metadata from remote tarball
+paths:
+  /api/v1/customers/{cUUID}/ybdb_release/extract_metadata:
+    post:
+      description: 'WARNING: This is a preview API that could change: start extracting metadata from a remote tgz url'
+      operationId: extractMetadata
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExtractMetadata'
+            examples:
+              ExtractMetadataRequestExample:
+                summary: Default extractMetadata request
+                x-microcks-default: true
+                value:
+                  uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  url: url
+        description: Release URL to extract metadata from
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPCreateSuccess'
+              examples:
+                ExtractMetadata200Example:
+                  summary: Default extractMetadata 200 response
+                  x-microcks-default: true
+                  value:
+                    resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Helper to Extract Release Metadata from a Remote Tarball
+      tags:
+      - Extract metadata from remote tarball
+      x-codegen-request-body-name: Release URL
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/ybdb_release/extract_metadata/{rUUID}:
+    get:
+      description: 'WARNING: This is a preview API that could change: Get extract metadata and its progress.'
+      operationId: extractMetadata
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: rUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseExtractMetadata'
+              examples:
+                ExtractMetadata200Example:
+                  summary: Default extractMetadata 200 response
+                  x-microcks-default: true
+                  value:
+                    release_notes: release_notes
+                    sha256: sha256
+                    metadata_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    release_type: release_type
+                    release_date_msecs: 0
+                    version: version
+                    platform: LINUX
+                    yb_type: YBDB
+                    architecture: x86_64
+                    status: waiting
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get the Extract Release Metadata from a Remote Tarball
+      tags:
+      - Extract metadata from remote tarball
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    YBPCreateSuccess:
+      example:
+        resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        resourceUUID:
+          description: UUID of the successfully created resource
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      type: object
+    ResponseExtractMetadata:
+      example:
+        release_notes: release_notes
+        sha256: sha256
+        metadata_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        release_type: release_type
+        release_date_msecs: 0
+        version: version
+        platform: LINUX
+        yb_type: YBDB
+        architecture: x86_64
+        status: waiting
+      properties:
+        architecture:
+          enum:
+          - x86_64
+          - aarch64
+          type: string
+          example: x86_64
+        metadata_uuid:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        platform:
+          enum:
+          - LINUX
+          - KUBERNETES
+          type: string
+          example: LINUX
+        release_date_msecs:
+          format: int64
+          type: integer
+          example: 1000
+        release_notes:
+          type: string
+          example: example-release_notes
+        release_type:
+          type: string
+          example: DEFAULT
+        sha256:
+          type: string
+          example: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+        status:
+          enum:
+          - waiting
+          - running
+          - success
+          - failure
+          type: string
+          example: waiting
+        version:
+          type: string
+          example: 2.20.0.0
+        yb_type:
+          enum:
+          - YBDB
+          type: string
+          example: YBDB
+      required:
+      - architecture
+      - metadata_uuid
+      - platform
+      - release_date_msecs
+      - release_notes
+      - release_type
+      - sha256
+      - status
+      - version
+      - yb_type
+      type: object
+    ExtractMetadata:
+      description: url to release TGZ to extract metadata from
+      example:
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        url: url
+      properties:
+        url:
+          type: string
+          example: https://example.com
+        uuid:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      required:
+      - url
+      - uuid
+      type: object
+    YBPCreateSuccess_2:
+      example:
+        resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        resourceUUID:
+          description: UUID of the successfully created resource
+          format: uuid
+          readOnly: true
+          type: string
+      type: object
+    ResponseExtractMetadata_2:
+      example:
+        release_notes: release_notes
+        sha256: sha256
+        metadata_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        release_type: release_type
+        release_date_msecs: 0
+        version: version
+        platform: LINUX
+        yb_type: YBDB
+        architecture: x86_64
+        status: waiting
+      properties:
+        architecture:
+          enum:
+          - x86_64
+          - aarch64
+          type: string
+        metadata_uuid:
+          format: uuid
+          type: string
+        platform:
+          enum:
+          - LINUX
+          - KUBERNETES
+          type: string
+        release_date_msecs:
+          format: int64
+          type: integer
+        release_notes:
+          type: string
+        release_type:
+          type: string
+        sha256:
+          type: string
+        status:
+          enum:
+          - waiting
+          - running
+          - success
+          - failure
+          type: string
+        version:
+          type: string
+        yb_type:
+          enum:
+          - YBDB
+          type: string
+      required:
+      - architecture
+      - metadata_uuid
+      - platform
+      - release_date_msecs
+      - release_notes
+      - release_type
+      - sha256
+      - status
+      - version
+      - yb_type
+      type: object
+    ExtractMetadata_2:
+      description: url to release TGZ to extract metadata from
+      example:
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        url: url
+      properties:
+        url:
+          type: string
+        uuid:
+          format: uuid
+          type: string
+      required:
+      - url
+      - uuid
+      type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key obtained from the YugabyteDB Aeon UI under User Profile > API Keys. Pass the key as a Bearer token in the Authorization header.
+externalDocs:
+  description: YugabyteDB Aeon REST API Documentation
+  url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/

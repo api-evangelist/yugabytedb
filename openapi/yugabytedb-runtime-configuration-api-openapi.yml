@@ -1,0 +1,782 @@
+openapi: 3.1.0
+info:
+  title: YugabyteDB Aeon REST Access Keys Runtime configuration API
+  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.
+  version: v1
+  contact:
+    name: Yugabyte Support
+    url: https://support.yugabyte.com
+  termsOfService: https://www.yugabyte.com/yugabytedb-managed-service-terms/
+  x-generated-from: documentation
+  x-source-url: https://api-docs.yugabyte.com/docs/managed-apis/
+  x-last-validated: '2026-05-03'
+servers:
+- url: https://cloud.yugabyte.com/api/public/v1
+  description: YugabyteDB Aeon Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Runtime configuration
+paths:
+  /api/v1/customers/{cUUID}/runtime_config/scopes:
+    get:
+      description: Lists all (including empty scopes) runtime config scopes for current customer. List includes the Global scope that spans multiple customers, scope for customer specific overrides for current customer and one scope each for each universe and provider.
+      operationId: listScopes
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuntimeConfigData'
+              examples:
+                ListScopes200Example:
+                  summary: Default listScopes 200 response
+                  x-microcks-default: true
+                  value:
+                    scopedConfigList:
+                    - configEntries:
+                      - inherited: true
+                        value: value
+                        key: key
+                      - inherited: true
+                        value: value
+                        key: key
+                      mutableScope: true
+                      type: GLOBAL
+                      uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    - configEntries:
+                      - inherited: true
+                        value: value
+                        key: key
+                      - inherited: true
+                        value: value
+                        key: key
+                      mutableScope: true
+                      type: GLOBAL
+                      uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Configuration Scopes
+      tags:
+      - Runtime configuration
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/runtime_config/{scope}:
+    get:
+      description: Lists all runtime config entries for a given scope for current customer.
+      operationId: getConfig
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: scope
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: includeInherited
+        schema:
+          default: false
+          type: boolean
+        example: false
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScopedConfig'
+              examples:
+                GetConfig200Example:
+                  summary: Default getConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    configEntries:
+                    - inherited: true
+                      value: value
+                      key: key
+                    - inherited: true
+                      value: value
+                      key: key
+                    mutableScope: true
+                    type: GLOBAL
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Configuration Entries for a Scope
+      tags:
+      - Runtime configuration
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/runtime_config/{scope}/key/{key}:
+    delete:
+      operationId: deleteKey
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: scope
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: key
+        required: true
+        schema:
+          type: string
+        example: example-key
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                DeleteKey200Example:
+                  summary: Default deleteKey 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Delete a Configuration Key
+      tags:
+      - Runtime configuration
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      operationId: getConfigurationKey
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: scope
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: key
+        required: true
+        schema:
+          type: string
+        example: example-key
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                GetConfigurationKey200Example:
+                  summary: Default getConfigurationKey 200 response
+                  x-microcks-default: true
+                  value: string
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get a Configuration Key
+      tags:
+      - Runtime configuration
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: setKey
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: scope
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: key
+        required: true
+        schema:
+          type: string
+        example: example-key
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+            examples:
+              SetKeyRequestExample:
+                summary: Default setKey request
+                x-microcks-default: true
+                value: string
+        description: New value for config key
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                SetKey200Example:
+                  summary: Default setKey 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Update a Configuration Key
+      tags:
+      - Runtime configuration
+      x-codegen-request-body-name: newValue
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/runtime_config/feature_flags:
+    get:
+      description: YbaApi Internal.
+      operationId: listFeatureFlags
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ConfigEntry'
+                type: array
+              examples:
+                ListFeatureFlags200Example:
+                  summary: Default listFeatureFlags 200 response
+                  x-microcks-default: true
+                  value:
+                  - inherited: true
+                    value: value
+                    key: key
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List All the Feature Flag Runtime Config Keys and Their Values.
+      tags:
+      - Runtime configuration
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/runtime_config/mutable_key_info:
+    get:
+      description: List all the mutable runtime config keys with metadata
+      operationId: listKeyInfo
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ConfKeyInfo'
+                type: array
+              examples:
+                ListKeyInfo200Example:
+                  summary: Default listKeyInfo 200 response
+                  x-microcks-default: true
+                  value:
+                  - displayName: displayName
+                    dataType:
+                      name: name
+                    scope: GLOBAL
+                    helpTxt: helpTxt
+                    key: key
+                    tags:
+                    - PUBLIC
+                    - PUBLIC
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Mutable Keys
+      tags:
+      - Runtime configuration
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/runtime_config/mutable_keys:
+    get:
+      description: List all the mutable runtime config keys
+      operationId: listKeys
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+              examples:
+                ListKeys200Example:
+                  summary: Default listKeys 200 response
+                  x-microcks-default: true
+                  value:
+                  - string
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Mutable Keys
+      tags:
+      - Runtime configuration
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ConfDataTypeObject:
+      example:
+        name: name
+      properties:
+        name:
+          type: string
+          example: example-name
+      required:
+      - name
+      type: object
+    RuntimeConfigData:
+      description: Runtime configuration data
+      example:
+        scopedConfigList:
+        - configEntries:
+          - inherited: true
+            value: value
+            key: key
+          - inherited: true
+            value: value
+            key: key
+          mutableScope: true
+          type: GLOBAL
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - configEntries:
+          - inherited: true
+            value: value
+            key: key
+          - inherited: true
+            value: value
+            key: key
+          mutableScope: true
+          type: GLOBAL
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        scopedConfigList:
+          description: List of scoped configurations
+          items:
+            $ref: '#/components/schemas/ScopedConfig'
+          type: array
+          example:
+          - configEntries:
+            - inherited: true
+              value: value
+              key: key
+            - inherited: true
+              value: value
+              key: key
+            mutableScope: true
+            type: GLOBAL
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      type: object
+    YBPSuccess:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+          example: Example message
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+          example: true
+      type: object
+    ScopedConfig:
+      description: Scoped configuration
+      example:
+        configEntries:
+        - inherited: true
+          value: value
+          key: key
+        - inherited: true
+          value: value
+          key: key
+        mutableScope: true
+        type: GLOBAL
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        configEntries:
+          description: List of configurations
+          items:
+            $ref: '#/components/schemas/ConfigEntry'
+          type: array
+          example:
+          - inherited: true
+            value: value
+            key: key
+        mutableScope:
+          description: Mutability of the scope. Only super admin users can change global scope; other scopes are customer-mutable.
+          type: boolean
+          example: true
+        type:
+          description: Scope type
+          enum:
+          - GLOBAL
+          - CUSTOMER
+          - UNIVERSE
+          - PROVIDER
+          type: string
+          example: GLOBAL
+        uuid:
+          description: Scope UIID
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      type: object
+    ConfigEntry:
+      description: Configuration entry
+      example:
+        inherited: true
+        value: value
+        key: key
+      properties:
+        inherited:
+          description: Is this configuration inherited?
+          type: boolean
+          example: true
+        key:
+          description: Configuration key
+          type: string
+          example: example-key
+        value:
+          description: Configuration value
+          type: string
+          example: example-value
+      type: object
+    ConfKeyInfo:
+      example:
+        displayName: displayName
+        dataType:
+          name: name
+        scope: GLOBAL
+        helpTxt: helpTxt
+        key: key
+        tags:
+        - PUBLIC
+        - PUBLIC
+      properties:
+        dataType:
+          $ref: '#/components/schemas/ConfDataTypeObject'
+        displayName:
+          type: string
+          example: example-displayName
+        helpTxt:
+          type: string
+          example: example-helpTxt
+        key:
+          type: string
+          example: example-key
+        scope:
+          enum:
+          - GLOBAL
+          - CUSTOMER
+          - UNIVERSE
+          - PROVIDER
+          type: string
+          example: GLOBAL
+        tags:
+          items:
+            enum:
+            - PUBLIC
+            - INTERNAL
+            - FEATURE_FLAG
+            type: string
+          type: array
+          example:
+          - PUBLIC
+      required:
+      - dataType
+      - displayName
+      - helpTxt
+      - key
+      - scope
+      - tags
+      type: object
+    ConfDataTypeObject_2:
+      example:
+        name: name
+      properties:
+        name:
+          type: string
+      required:
+      - name
+      type: object
+    RuntimeConfigData_2:
+      description: Runtime configuration data
+      example:
+        scopedConfigList:
+        - configEntries:
+          - inherited: true
+            value: value
+            key: key
+          - inherited: true
+            value: value
+            key: key
+          mutableScope: true
+          type: GLOBAL
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - configEntries:
+          - inherited: true
+            value: value
+            key: key
+          - inherited: true
+            value: value
+            key: key
+          mutableScope: true
+          type: GLOBAL
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        scopedConfigList:
+          description: List of scoped configurations
+          items:
+            $ref: '#/components/schemas/ScopedConfig_2'
+          type: array
+      type: object
+    YBPSuccess_2:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+      type: object
+    ScopedConfig_2:
+      description: Scoped configuration
+      example:
+        configEntries:
+        - inherited: true
+          value: value
+          key: key
+        - inherited: true
+          value: value
+          key: key
+        mutableScope: true
+        type: GLOBAL
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        configEntries:
+          description: List of configurations
+          items:
+            $ref: '#/components/schemas/ConfigEntry_2'
+          type: array
+        mutableScope:
+          description: Mutability of the scope. Only super admin users can change global scope; other scopes are customer-mutable.
+          type: boolean
+        type:
+          description: Scope type
+          enum:
+          - GLOBAL
+          - CUSTOMER
+          - UNIVERSE
+          - PROVIDER
+          type: string
+        uuid:
+          description: Scope UIID
+          format: uuid
+          type: string
+      type: object
+    ConfigEntry_2:
+      description: Configuration entry
+      example:
+        inherited: true
+        value: value
+        key: key
+      properties:
+        inherited:
+          description: Is this configuration inherited?
+          type: boolean
+        key:
+          description: Configuration key
+          type: string
+        value:
+          description: Configuration value
+          type: string
+      type: object
+    ConfKeyInfo_2:
+      example:
+        displayName: displayName
+        dataType:
+          name: name
+        scope: GLOBAL
+        helpTxt: helpTxt
+        key: key
+        tags:
+        - PUBLIC
+        - PUBLIC
+      properties:
+        dataType:
+          $ref: '#/components/schemas/ConfDataTypeObject_2'
+        displayName:
+          type: string
+        helpTxt:
+          type: string
+        key:
+          type: string
+        scope:
+          enum:
+          - GLOBAL
+          - CUSTOMER
+          - UNIVERSE
+          - PROVIDER
+          type: string
+        tags:
+          items:
+            enum:
+            - PUBLIC
+            - INTERNAL
+            - FEATURE_FLAG
+            type: string
+          type: array
+      required:
+      - dataType
+      - displayName
+      - helpTxt
+      - key
+      - scope
+      - tags
+      type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key obtained from the YugabyteDB Aeon UI under User Profile > API Keys. Pass the key as a Bearer token in the Authorization header.
+definitions:
+  ScopedConfig:
+    description: Scoped configuration
+    properties:
+      configEntries:
+        description: List of configurations
+        items:
+          $ref: '#/definitions/ConfigEntry'
+        type: array
+      mutableScope:
+        description: Mutability of the scope. Only super admin users can change global scope; other scopes are customer-mutable.
+        type: boolean
+      type:
+        description: Scope type
+        enum:
+        - GLOBAL
+        - CUSTOMER
+        - UNIVERSE
+        - PROVIDER
+        type: string
+      uuid:
+        description: Scope UIID
+        format: uuid
+        type: string
+    type: object
+  YBPSuccess:
+    properties:
+      message:
+        description: API response message.
+        readOnly: true
+        type: string
+      success:
+        description: API operation status. A value of true indicates the operation was successful.
+        readOnly: true
+        type: boolean
+    type: object
+  RuntimeConfigData:
+    description: Runtime configuration data
+    properties:
+      scopedConfigList:
+        description: List of scoped configurations
+        items:
+          $ref: '#/definitions/ScopedConfig'
+        type: array
+    type: object
+  ConfigEntry:
+    description: Configuration entry
+    properties:
+      inherited:
+        description: Is this configuration inherited?
+        type: boolean
+      key:
+        description: Configuration key
+        type: string
+      value:
+        description: Configuration value
+        type: string
+    type: object
+externalDocs:
+  description: YugabyteDB Aeon REST API Documentation
+  url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/

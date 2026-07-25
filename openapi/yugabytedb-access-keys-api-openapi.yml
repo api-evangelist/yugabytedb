@@ -1,0 +1,901 @@
+openapi: 3.1.0
+info:
+  title: YugabyteDB Aeon REST Access Keys API
+  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.
+  version: v1
+  contact:
+    name: Yugabyte Support
+    url: https://support.yugabyte.com
+  termsOfService: https://www.yugabyte.com/yugabytedb-managed-service-terms/
+  x-generated-from: documentation
+  x-source-url: https://api-docs.yugabyte.com/docs/managed-apis/
+  x-last-validated: '2026-05-03'
+servers:
+- url: https://cloud.yugabyte.com/api/public/v1
+  description: YugabyteDB Aeon Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Access Keys
+paths:
+  /api/v1/customers/{cUUID}/access_keys:
+    get:
+      operationId: listAllForCustomer
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AccessKey'
+                type: array
+              examples:
+                ListAllForCustomer200Example:
+                  summary: Default listAllForCustomer 200 response
+                  x-microcks-default: true
+                  value:
+                  - idKey:
+                      keyCode: keyCode
+                      providerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    creationDate: 2022-12-12 13:07:18+00:00
+                    keyInfo:
+                      sshPort: 6
+                      nodeExporterPort: 0
+                      installNodeExporter: true
+                      skipProvisioning: true
+                      nodeExporterUser: nodeExporterUser
+                      provisionInstanceScript: provisionInstanceScript
+                      passwordlessSudoAccess: true
+                      publicKey: publicKey
+                      vaultFile: vaultFile
+                      sshPrivateKeyContent: sshPrivateKeyContent
+                      privateKey: privateKey
+                      setUpChrony: true
+                      vaultPasswordFile: vaultPasswordFile
+                      ntpServers:
+                      - ntpServers
+                      - ntpServers
+                      skipKeyValidateAndUpload: true
+                      sshUser: sshUser
+                      deleteRemote: true
+                      showSetUpChrony: true
+                      airGapInstall: true
+                      keyPairName: keyPairName
+                      managementState: YBAManaged
+                    expirationDate: 2022-12-12 13:07:18+00:00
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Access Keys for All Providers of a Customer
+      tags:
+      - Access Keys
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys:
+    get:
+      operationId: list
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: pUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AccessKey'
+                type: array
+              examples:
+                List200Example:
+                  summary: Default list 200 response
+                  x-microcks-default: true
+                  value:
+                  - idKey:
+                      keyCode: keyCode
+                      providerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    creationDate: 2022-12-12 13:07:18+00:00
+                    keyInfo:
+                      sshPort: 6
+                      nodeExporterPort: 0
+                      installNodeExporter: true
+                      skipProvisioning: true
+                      nodeExporterUser: nodeExporterUser
+                      provisionInstanceScript: provisionInstanceScript
+                      passwordlessSudoAccess: true
+                      publicKey: publicKey
+                      vaultFile: vaultFile
+                      sshPrivateKeyContent: sshPrivateKeyContent
+                      privateKey: privateKey
+                      setUpChrony: true
+                      vaultPasswordFile: vaultPasswordFile
+                      ntpServers:
+                      - ntpServers
+                      - ntpServers
+                      skipKeyValidateAndUpload: true
+                      sshUser: sshUser
+                      deleteRemote: true
+                      showSetUpChrony: true
+                      airGapInstall: true
+                      keyPairName: keyPairName
+                      managementState: YBAManaged
+                    expirationDate: 2022-12-12 13:07:18+00:00
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Access Keys for a Specific Provider
+      tags:
+      - Access Keys
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use /api/v1/customers/{cUUID}/provider/{pUUID}/edit instead for adding the key
+      operationId: createAccesskey
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: pUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessKeyFormData'
+            examples:
+              CreateAccesskeyRequestExample:
+                summary: Default createAccesskey request
+                x-microcks-default: true
+                value:
+                  expirationThresholdDays: 0
+                  keyCode: keyCode
+                  keyContent: keyContent
+                  keyType: PUBLIC
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessKey'
+              examples:
+                CreateAccesskey200Example:
+                  summary: Default createAccesskey 200 response
+                  x-microcks-default: true
+                  value:
+                    idKey:
+                      keyCode: keyCode
+                      providerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    creationDate: 2022-12-12 13:07:18+00:00
+                    keyInfo:
+                      sshPort: 6
+                      nodeExporterPort: 0
+                      installNodeExporter: true
+                      skipProvisioning: true
+                      nodeExporterUser: nodeExporterUser
+                      provisionInstanceScript: provisionInstanceScript
+                      passwordlessSudoAccess: true
+                      publicKey: publicKey
+                      vaultFile: vaultFile
+                      sshPrivateKeyContent: sshPrivateKeyContent
+                      privateKey: privateKey
+                      setUpChrony: true
+                      vaultPasswordFile: vaultPasswordFile
+                      ntpServers:
+                      - ntpServers
+                      - ntpServers
+                      skipKeyValidateAndUpload: true
+                      sshUser: sshUser
+                      deleteRemote: true
+                      showSetUpChrony: true
+                      airGapInstall: true
+                      keyPairName: keyPairName
+                      managementState: YBAManaged
+                    expirationDate: 2022-12-12 13:07:18+00:00
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Create/Upload Access Key for Onprem Provider Region - Deprecated
+      tags:
+      - Access Keys
+      x-codegen-request-body-name: AccessKeyFormData
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys/{keyCode}:
+    delete:
+      operationId: delete_accesskey
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: pUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: keyCode
+        required: true
+        schema:
+          type: string
+        example: OK
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                Delete_accesskey200Example:
+                  summary: Default delete_accesskey 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Delete an Access Key
+      tags:
+      - Access Keys
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      operationId: index
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: pUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: keyCode
+        required: true
+        schema:
+          type: string
+        example: OK
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessKey'
+              examples:
+                Index200Example:
+                  summary: Default index 200 response
+                  x-microcks-default: true
+                  value:
+                    idKey:
+                      keyCode: keyCode
+                      providerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    creationDate: 2022-12-12 13:07:18+00:00
+                    keyInfo:
+                      sshPort: 6
+                      nodeExporterPort: 0
+                      installNodeExporter: true
+                      skipProvisioning: true
+                      nodeExporterUser: nodeExporterUser
+                      provisionInstanceScript: provisionInstanceScript
+                      passwordlessSudoAccess: true
+                      publicKey: publicKey
+                      vaultFile: vaultFile
+                      sshPrivateKeyContent: sshPrivateKeyContent
+                      privateKey: privateKey
+                      setUpChrony: true
+                      vaultPasswordFile: vaultPasswordFile
+                      ntpServers:
+                      - ntpServers
+                      - ntpServers
+                      skipKeyValidateAndUpload: true
+                      sshUser: sshUser
+                      deleteRemote: true
+                      showSetUpChrony: true
+                      airGapInstall: true
+                      keyPairName: keyPairName
+                      managementState: YBAManaged
+                    expirationDate: 2022-12-12 13:07:18+00:00
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get an Access Key
+      tags:
+      - Access Keys
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: editAccesskey
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: pUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: keyCode
+        required: true
+        schema:
+          type: string
+        example: OK
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessKey'
+            examples:
+              EditAccesskeyRequestExample:
+                summary: Default editAccesskey request
+                x-microcks-default: true
+                value:
+                  idKey:
+                    keyCode: keyCode
+                    providerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  creationDate: '2022-12-12T13:07:18+00:00'
+                  keyInfo:
+                    sshPort: 6
+                    nodeExporterPort: 0
+                    installNodeExporter: true
+                    skipProvisioning: true
+                    nodeExporterUser: nodeExporterUser
+                    provisionInstanceScript: provisionInstanceScript
+                    passwordlessSudoAccess: true
+                    publicKey: publicKey
+                    vaultFile: vaultFile
+                    sshPrivateKeyContent: sshPrivateKeyContent
+                    privateKey: privateKey
+                    setUpChrony: true
+                    vaultPasswordFile: vaultPasswordFile
+                    ntpServers:
+                    - ntpServers
+                    - ntpServers
+                    skipKeyValidateAndUpload: true
+                    sshUser: sshUser
+                    deleteRemote: true
+                    showSetUpChrony: true
+                    airGapInstall: true
+                    keyPairName: keyPairName
+                    managementState: YBAManaged
+                  expirationDate: '2022-12-12T13:07:18+00:00'
+        description: access key edit form data
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessKey'
+              examples:
+                EditAccesskey200Example:
+                  summary: Default editAccesskey 200 response
+                  x-microcks-default: true
+                  value:
+                    idKey:
+                      keyCode: keyCode
+                      providerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    creationDate: 2022-12-12 13:07:18+00:00
+                    keyInfo:
+                      sshPort: 6
+                      nodeExporterPort: 0
+                      installNodeExporter: true
+                      skipProvisioning: true
+                      nodeExporterUser: nodeExporterUser
+                      provisionInstanceScript: provisionInstanceScript
+                      passwordlessSudoAccess: true
+                      publicKey: publicKey
+                      vaultFile: vaultFile
+                      sshPrivateKeyContent: sshPrivateKeyContent
+                      privateKey: privateKey
+                      setUpChrony: true
+                      vaultPasswordFile: vaultPasswordFile
+                      ntpServers:
+                      - ntpServers
+                      - ntpServers
+                      skipKeyValidateAndUpload: true
+                      sshUser: sshUser
+                      deleteRemote: true
+                      showSetUpChrony: true
+                      airGapInstall: true
+                      keyPairName: keyPairName
+                      managementState: YBAManaged
+                    expirationDate: 2022-12-12 13:07:18+00:00
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Modify the Existing Access Key
+      tags:
+      - Access Keys
+      x-codegen-request-body-name: accesskey
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    AccessKeyFormData:
+      example:
+        expirationThresholdDays: 0
+        keyCode: keyCode
+        keyContent: keyContent
+        keyType: PUBLIC
+      properties:
+        expirationThresholdDays:
+          format: int32
+          type: integer
+          example: 100
+        keyCode:
+          type: string
+          example: OK
+        keyContent:
+          type: string
+          example: example-key
+        keyType:
+          enum:
+          - PUBLIC
+          - PRIVATE
+          type: string
+          example: PUBLIC
+      required:
+      - keyCode
+      - keyContent
+      - keyType
+      type: object
+    YBPSuccess:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+          example: Example message
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+          example: true
+      type: object
+    AccessKey:
+      description: Access key for the cloud provider. This helps to authenticate the user and get access to the provider.
+      example:
+        idKey:
+          keyCode: keyCode
+          providerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        creationDate: 2022-12-12 13:07:18+00:00
+        keyInfo:
+          sshPort: 6
+          nodeExporterPort: 0
+          installNodeExporter: true
+          skipProvisioning: true
+          nodeExporterUser: nodeExporterUser
+          provisionInstanceScript: provisionInstanceScript
+          passwordlessSudoAccess: true
+          publicKey: publicKey
+          vaultFile: vaultFile
+          sshPrivateKeyContent: sshPrivateKeyContent
+          privateKey: privateKey
+          setUpChrony: true
+          vaultPasswordFile: vaultPasswordFile
+          ntpServers:
+          - ntpServers
+          - ntpServers
+          skipKeyValidateAndUpload: true
+          sshUser: sshUser
+          deleteRemote: true
+          showSetUpChrony: true
+          airGapInstall: true
+          keyPairName: keyPairName
+          managementState: YBAManaged
+        expirationDate: 2022-12-12 13:07:18+00:00
+      properties:
+        creationDate:
+          description: Creation date of key
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        expirationDate:
+          description: Expiration date of key
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        idKey:
+          $ref: '#/components/schemas/AccessKeyId'
+        keyInfo:
+          $ref: '#/components/schemas/KeyInfo'
+      required:
+      - idKey
+      - keyInfo
+      type: object
+    KeyInfo:
+      example:
+        sshPort: 6
+        nodeExporterPort: 0
+        installNodeExporter: true
+        skipProvisioning: true
+        nodeExporterUser: nodeExporterUser
+        provisionInstanceScript: provisionInstanceScript
+        passwordlessSudoAccess: true
+        publicKey: publicKey
+        vaultFile: vaultFile
+        sshPrivateKeyContent: sshPrivateKeyContent
+        privateKey: privateKey
+        setUpChrony: true
+        vaultPasswordFile: vaultPasswordFile
+        ntpServers:
+        - ntpServers
+        - ntpServers
+        skipKeyValidateAndUpload: true
+        sshUser: sshUser
+        deleteRemote: true
+        showSetUpChrony: true
+        airGapInstall: true
+        keyPairName: keyPairName
+        managementState: YBAManaged
+      properties:
+        airGapInstall:
+          type: boolean
+          example: true
+        deleteRemote:
+          type: boolean
+          example: true
+        installNodeExporter:
+          type: boolean
+          example: true
+        keyPairName:
+          type: string
+          example: example-keyPairName
+        managementState:
+          description: Key Management state
+          enum:
+          - YBAManaged
+          - SelfManaged
+          - Unknown
+          readOnly: true
+          type: string
+          example: YBAManaged
+        nodeExporterPort:
+          format: int32
+          type: integer
+          example: 5433
+        nodeExporterUser:
+          type: string
+          example: '5433'
+        ntpServers:
+          items:
+            type: string
+          type: array
+          example:
+          - example-ntpServers
+        passwordlessSudoAccess:
+          type: boolean
+          example: true
+        privateKey:
+          type: string
+          example: example-key
+        provisionInstanceScript:
+          type: string
+          example: example-provisionInstanceScript
+        publicKey:
+          type: string
+          example: example-key
+        setUpChrony:
+          type: boolean
+          example: true
+        showSetUpChrony:
+          type: boolean
+          example: true
+        skipKeyValidateAndUpload:
+          type: boolean
+          example: true
+        skipProvisioning:
+          type: boolean
+          example: true
+        sshPort:
+          format: int32
+          type: integer
+          example: 5433
+        sshPrivateKeyContent:
+          type: string
+          example: example-key
+        sshUser:
+          type: string
+          example: example-sshUser
+        vaultFile:
+          type: string
+          example: example-vaultFile
+        vaultPasswordFile:
+          type: string
+          example: REDACTED
+      type: object
+    AccessKeyId:
+      example:
+        keyCode: keyCode
+        providerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        keyCode:
+          type: string
+          example: OK
+        providerUUID:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      type: object
+    AccessKeyFormData_2:
+      example:
+        expirationThresholdDays: 0
+        keyCode: keyCode
+        keyContent: keyContent
+        keyType: PUBLIC
+      properties:
+        expirationThresholdDays:
+          format: int32
+          type: integer
+        keyCode:
+          type: string
+        keyContent:
+          type: string
+        keyType:
+          enum:
+          - PUBLIC
+          - PRIVATE
+          type: string
+      required:
+      - keyCode
+      - keyContent
+      - keyType
+      type: object
+    YBPSuccess_2:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+      type: object
+    KeyInfo_2:
+      example:
+        sshPort: 6
+        nodeExporterPort: 0
+        installNodeExporter: true
+        skipProvisioning: true
+        nodeExporterUser: nodeExporterUser
+        provisionInstanceScript: provisionInstanceScript
+        passwordlessSudoAccess: true
+        publicKey: publicKey
+        vaultFile: vaultFile
+        sshPrivateKeyContent: sshPrivateKeyContent
+        privateKey: privateKey
+        setUpChrony: true
+        vaultPasswordFile: vaultPasswordFile
+        ntpServers:
+        - ntpServers
+        - ntpServers
+        skipKeyValidateAndUpload: true
+        sshUser: sshUser
+        deleteRemote: true
+        showSetUpChrony: true
+        airGapInstall: true
+        keyPairName: keyPairName
+        managementState: YBAManaged
+      properties:
+        airGapInstall:
+          type: boolean
+        deleteRemote:
+          type: boolean
+        installNodeExporter:
+          type: boolean
+        keyPairName:
+          type: string
+        managementState:
+          description: Key Management state
+          enum:
+          - YBAManaged
+          - SelfManaged
+          - Unknown
+          readOnly: true
+          type: string
+        nodeExporterPort:
+          format: int32
+          type: integer
+        nodeExporterUser:
+          type: string
+        ntpServers:
+          items:
+            type: string
+          type: array
+        passwordlessSudoAccess:
+          type: boolean
+        privateKey:
+          type: string
+        provisionInstanceScript:
+          type: string
+        publicKey:
+          type: string
+        setUpChrony:
+          type: boolean
+        showSetUpChrony:
+          type: boolean
+        skipKeyValidateAndUpload:
+          type: boolean
+        skipProvisioning:
+          type: boolean
+        sshPort:
+          format: int32
+          type: integer
+        sshPrivateKeyContent:
+          type: string
+        sshUser:
+          type: string
+        vaultFile:
+          type: string
+        vaultPasswordFile:
+          type: string
+      type: object
+    AccessKeyId_2:
+      example:
+        keyCode: keyCode
+        providerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        keyCode:
+          type: string
+        providerUUID:
+          format: uuid
+          type: string
+      type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key obtained from the YugabyteDB Aeon UI under User Profile > API Keys. Pass the key as a Bearer token in the Authorization header.
+definitions:
+  YBPSuccess:
+    properties:
+      message:
+        description: API response message.
+        readOnly: true
+        type: string
+      success:
+        description: API operation status. A value of true indicates the operation was successful.
+        readOnly: true
+        type: boolean
+    type: object
+  AccessKey:
+    description: Access key for the cloud provider. This helps to authenticate the user and get access to the provider.
+    properties:
+      idKey:
+        $ref: '#/definitions/AccessKeyId'
+      keyInfo:
+        $ref: '#/definitions/KeyInfo'
+        description: Cloud provider key information
+    required:
+    - idKey
+    - keyInfo
+    type: object
+  KeyInfo:
+    properties:
+      airGapInstall:
+        type: boolean
+      deleteRemote:
+        type: boolean
+      installNodeExporter:
+        type: boolean
+      nodeExporterPort:
+        format: int32
+        type: integer
+      nodeExporterUser:
+        type: string
+      ntpServers:
+        items:
+          type: string
+        type: array
+      passwordlessSudoAccess:
+        type: boolean
+      privateKey:
+        type: string
+      provisionInstanceScript:
+        type: string
+      publicKey:
+        type: string
+      setUpChrony:
+        type: boolean
+      showSetUpChrony:
+        type: boolean
+      skipProvisioning:
+        type: boolean
+      sshPort:
+        format: int32
+        type: integer
+      sshUser:
+        type: string
+      vaultFile:
+        type: string
+      vaultPasswordFile:
+        type: string
+    type: object
+  AccessKeyId:
+    properties:
+      keyCode:
+        type: string
+      providerUUID:
+        format: uuid
+        type: string
+    type: object
+externalDocs:
+  description: YugabyteDB Aeon REST API Documentation
+  url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/

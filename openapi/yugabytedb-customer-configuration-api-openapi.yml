@@ -1,0 +1,1079 @@
+openapi: 3.1.0
+info:
+  title: YugabyteDB Aeon REST Access Keys Customer Configuration API
+  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.
+  version: v1
+  contact:
+    name: Yugabyte Support
+    url: https://support.yugabyte.com
+  termsOfService: https://www.yugabyte.com/yugabytedb-managed-service-terms/
+  x-generated-from: documentation
+  x-source-url: https://api-docs.yugabyte.com/docs/managed-apis/
+  x-last-validated: '2026-05-03'
+servers:
+- url: https://cloud.yugabyte.com/api/public/v1
+  description: YugabyteDB Aeon Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Customer Configuration
+paths:
+  /api/v1/customers/{cUUID}/cloud/{cloud}/buckets:
+    post:
+      operationId: listBuckets
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: cloud
+        required: true
+        schema:
+          type: string
+        example: example-cloud
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerConfigData'
+            examples:
+              ListBucketsRequestExample:
+                summary: Default listBuckets request
+                x-microcks-default: true
+                value: {}
+        description: Credentials to list buckets
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                ListBuckets200Example:
+                  summary: Default listBuckets 200 response
+                  x-microcks-default: true
+                  value: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Buckets with Provided Credentials
+      tags:
+      - Customer Configuration
+      x-codegen-request-body-name: Credentials
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/configs:
+    get:
+      operationId: getListOfCustomerConfig
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CustomerConfigUI'
+                type: array
+              examples:
+                GetListOfCustomerConfig200Example:
+                  summary: Default getListOfCustomerConfig 200 response
+                  x-microcks-default: true
+                  value:
+                  - configName: backup20-01-2021
+                    configUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    data: '{"AWS_ACCESS_KEY_ID": "AK****************ZD"}'
+                    universeDetails: '{"name": "jd-aws-21-6-21-test4"}'
+                    inUse: true
+                    kubernetesOperatorControlled: true
+                    name: S3
+                    state: Active
+                    type: STORAGE
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List All Customer Configurations
+      tags:
+      - Customer Configuration
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createCustomerConfig
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerConfig'
+            examples:
+              CreateCustomerConfigRequestExample:
+                summary: Default createCustomerConfig request
+                x-microcks-default: true
+                value:
+                  configName: backup20-01-2021
+                  configUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  data: '{"AWS_ACCESS_KEY_ID": "AK****************ZD"}'
+                  kubernetesOperatorControlled: true
+                  name: S3
+                  state: Active
+                  type: STORAGE
+        description: Configuration data to be created
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerConfig'
+              examples:
+                CreateCustomerConfig200Example:
+                  summary: Default createCustomerConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    configName: backup20-01-2021
+                    configUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    data: '{"AWS_ACCESS_KEY_ID": "AK****************ZD"}'
+                    kubernetesOperatorControlled: true
+                    name: S3
+                    state: Active
+                    type: STORAGE
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Create a Customer Configuration
+      tags:
+      - Customer Configuration
+      x-codegen-request-body-name: Config
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/configs/{configUUID}:
+    delete:
+      deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2.25.0.0.</b></p>Use 'Delete a customer configuration V2' instead.
+      operationId: deleteCustomerConfig
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: configUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: isDeleteBackups
+        schema:
+          default: false
+          type: boolean
+        example: false
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPTask'
+              examples:
+                DeleteCustomerConfig200Example:
+                  summary: Default deleteCustomerConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Delete a Customer Configuration
+      tags:
+      - Customer Configuration
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: editCustomerConfig
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: configUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerConfig'
+            examples:
+              EditCustomerConfigRequestExample:
+                summary: Default editCustomerConfig request
+                x-microcks-default: true
+                value:
+                  configName: backup20-01-2021
+                  configUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  data: '{"AWS_ACCESS_KEY_ID": "AK****************ZD"}'
+                  kubernetesOperatorControlled: true
+                  name: S3
+                  state: Active
+                  type: STORAGE
+        description: Configuration data to be updated
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerConfig'
+              examples:
+                EditCustomerConfig200Example:
+                  summary: Default editCustomerConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    configName: backup20-01-2021
+                    configUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    data: '{"AWS_ACCESS_KEY_ID": "AK****************ZD"}'
+                    kubernetesOperatorControlled: true
+                    name: S3
+                    state: Active
+                    type: STORAGE
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Update a Customer Configuration
+      tags:
+      - Customer Configuration
+      x-codegen-request-body-name: Config
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/configs/{configUUID}/backup_dirs:
+    get:
+      operationId: getListOfYbaBackupDirsCustomerConfig
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: configUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+              examples:
+                GetListOfYbaBackupDirsCustomerConfig200Example:
+                  summary: Default getListOfYbaBackupDirsCustomerConfig 200 response
+                  x-microcks-default: true
+                  value:
+                  - string
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List All Backup Dirs Within a Customer Configurations
+      tags:
+      - Customer Configuration
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/configs/{configUUID}/delete:
+    delete:
+      operationId: deleteCustomerConfigV2
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: configUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: isDeleteBackups
+        schema:
+          default: false
+          type: boolean
+        example: false
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPTask'
+              examples:
+                DeleteCustomerConfigV2200Example:
+                  summary: Default deleteCustomerConfigV2 200 response
+                  x-microcks-default: true
+                  value:
+                    taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Delete a Customer Configuration V2
+      tags:
+      - Customer Configuration
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/configs/{configUUID}/edit:
+    put:
+      operationId: editCustomerConfig
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: configUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerConfig'
+            examples:
+              EditCustomerConfigRequestExample:
+                summary: Default editCustomerConfig request
+                x-microcks-default: true
+                value:
+                  configName: backup20-01-2021
+                  configUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  data: '{"AWS_ACCESS_KEY_ID": "AK****************ZD"}'
+                  kubernetesOperatorControlled: true
+                  name: S3
+                  state: Active
+                  type: STORAGE
+        description: Configuration data to be updated
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerConfig'
+              examples:
+                EditCustomerConfig200Example:
+                  summary: Default editCustomerConfig 200 response
+                  x-microcks-default: true
+                  value:
+                    configName: backup20-01-2021
+                    configUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    data: '{"AWS_ACCESS_KEY_ID": "AK****************ZD"}'
+                    kubernetesOperatorControlled: true
+                    name: S3
+                    state: Active
+                    type: STORAGE
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Update a Customer Configuration V2
+      tags:
+      - Customer Configuration
+      x-codegen-request-body-name: Config
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/api_token:
+    put:
+      description: UNOFFICIAL API ADDITION - Requires a DUMMY body to work around issue https://yugabyte.atlassian.net/browse/PLAT-2076
+      operationId: generateAPIToken
+      parameters:
+      - format: uuid
+        in: path
+        name: cUUID
+        required: true
+        type: string
+      - description: Dummy value to work around platform bug PLAT-2076
+        in: body
+        name: Dummy
+        required: true
+        schema:
+          $ref: '#/definitions/DummyBody'
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/SessionInfo'
+      security:
+      - apiKeyAuth: []
+      summary: Generate an API token for the current user
+      tags:
+      - Customer Configuration
+components:
+  schemas:
+    CustomerConfig:
+      description: Customer configuration. Includes storage, alerts, password policy, and call-home level.
+      example:
+        configName: backup20-01-2021
+        configUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        data: '{"AWS_ACCESS_KEY_ID": "AK****************ZD"}'
+        kubernetesOperatorControlled: true
+        name: S3
+        state: Active
+        type: STORAGE
+      properties:
+        configName:
+          description: Config name
+          example: backup20-01-2021
+          maxLength: 100
+          minLength: 1
+          type: string
+        configUUID:
+          description: Config UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        customerUUID:
+          description: Customer UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        data:
+          description: Configuration data
+          example: '{"AWS_ACCESS_KEY_ID": "AK****************ZD"}'
+          properties: {}
+          type: object
+        kubernetesOperatorControlled:
+          type: boolean
+          example: true
+        name:
+          description: Name
+          example: S3
+          maxLength: 50
+          minLength: 1
+          type: string
+        state:
+          description: state of the customerConfig. Possible values are Active, QueuedForDeletion.
+          enum:
+          - Active
+          - QueuedForDeletion
+          readOnly: true
+          type: string
+          example: Active
+        type:
+          description: Config type
+          enum:
+          - STORAGE
+          - ALERTS
+          - CALLHOME
+          - PASSWORD_POLICY
+          example: STORAGE
+          type: string
+      required:
+      - configName
+      - customerUUID
+      - data
+      - kubernetesOperatorControlled
+      - name
+      - type
+      type: object
+    CustomerConfigUI:
+      description: Customer configuration with additional information. Includes storage, alerts, password policy, and call-home level.
+      example:
+        configName: backup20-01-2021
+        configUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        data: '{"AWS_ACCESS_KEY_ID": "AK****************ZD"}'
+        universeDetails: '{"name": "jd-aws-21-6-21-test4"}'
+        inUse: true
+        kubernetesOperatorControlled: true
+        name: S3
+        state: Active
+        type: STORAGE
+      properties:
+        configName:
+          description: Config name
+          example: backup20-01-2021
+          maxLength: 100
+          minLength: 1
+          type: string
+        configUUID:
+          description: Config UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        customerUUID:
+          description: Customer UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        data:
+          description: Configuration data
+          example: '{"AWS_ACCESS_KEY_ID": "AK****************ZD"}'
+          properties: {}
+          type: object
+        inUse:
+          description: True if there is an in use reference to the object
+          readOnly: true
+          type: boolean
+          example: true
+        kubernetesOperatorControlled:
+          type: boolean
+          example: true
+        name:
+          description: Name
+          example: S3
+          maxLength: 50
+          minLength: 1
+          type: string
+        state:
+          description: state of the customerConfig. Possible values are Active, QueuedForDeletion.
+          enum:
+          - Active
+          - QueuedForDeletion
+          readOnly: true
+          type: string
+          example: Active
+        type:
+          description: Config type
+          enum:
+          - STORAGE
+          - ALERTS
+          - CALLHOME
+          - PASSWORD_POLICY
+          example: STORAGE
+          type: string
+        universeDetails:
+          description: Universe details
+          example: '{"name": "jd-aws-21-6-21-test4"}'
+          items:
+            $ref: '#/components/schemas/UniverseDetailSubset'
+          type: array
+      required:
+      - configName
+      - customerUUID
+      - data
+      - kubernetesOperatorControlled
+      - name
+      - type
+      type: object
+    UniverseDetailSubset:
+      description: A small subset of universe information
+      example:
+        universePaused: true
+        updateSucceeded: true
+        name: name
+        updateInProgress: true
+        creationDate: 1
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        creationDate:
+          format: int64
+          type: integer
+          example: 1000
+        name:
+          type: string
+          example: example-name
+        universePaused:
+          type: boolean
+          example: true
+        updateInProgress:
+          type: boolean
+          example: true
+        updateSucceeded:
+          type: boolean
+          example: true
+        uuid:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      required:
+      - creationDate
+      - name
+      - universePaused
+      - updateInProgress
+      - updateSucceeded
+      - uuid
+      type: object
+    CustomerConfigData:
+      type: object
+    YBPTask:
+      example:
+        taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        resourceUUID:
+          description: UUID of the resource being modified by the task
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        taskUUID:
+          description: Task UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      type: object
+    CustomerConfig_2:
+      description: Customer configuration. Includes storage, alerts, password policy, and call-home level.
+      example:
+        configName: backup20-01-2021
+        configUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        data: '{"AWS_ACCESS_KEY_ID": "AK****************ZD"}'
+        kubernetesOperatorControlled: true
+        name: S3
+        state: Active
+        type: STORAGE
+      properties:
+        configName:
+          description: Config name
+          example: backup20-01-2021
+          maxLength: 100
+          minLength: 1
+          type: string
+        configUUID:
+          description: Config UUID
+          format: uuid
+          readOnly: true
+          type: string
+        customerUUID:
+          description: Customer UUID
+          format: uuid
+          readOnly: true
+          type: string
+        data:
+          description: Configuration data
+          example: '{"AWS_ACCESS_KEY_ID": "AK****************ZD"}'
+          properties: {}
+          type: object
+        kubernetesOperatorControlled:
+          type: boolean
+        name:
+          description: Name
+          example: S3
+          maxLength: 50
+          minLength: 1
+          type: string
+        state:
+          description: state of the customerConfig. Possible values are Active, QueuedForDeletion.
+          enum:
+          - Active
+          - QueuedForDeletion
+          readOnly: true
+          type: string
+        type:
+          description: Config type
+          enum:
+          - STORAGE
+          - ALERTS
+          - CALLHOME
+          - PASSWORD_POLICY
+          example: STORAGE
+          type: string
+      required:
+      - configName
+      - customerUUID
+      - data
+      - kubernetesOperatorControlled
+      - name
+      - type
+      type: object
+    CustomerConfigUI_2:
+      description: Customer configuration with additional information. Includes storage, alerts, password policy, and call-home level.
+      example:
+        configName: backup20-01-2021
+        configUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        data: '{"AWS_ACCESS_KEY_ID": "AK****************ZD"}'
+        universeDetails: '{"name": "jd-aws-21-6-21-test4"}'
+        inUse: true
+        kubernetesOperatorControlled: true
+        name: S3
+        state: Active
+        type: STORAGE
+      properties:
+        configName:
+          description: Config name
+          example: backup20-01-2021
+          maxLength: 100
+          minLength: 1
+          type: string
+        configUUID:
+          description: Config UUID
+          format: uuid
+          readOnly: true
+          type: string
+        customerUUID:
+          description: Customer UUID
+          format: uuid
+          readOnly: true
+          type: string
+        data:
+          description: Configuration data
+          example: '{"AWS_ACCESS_KEY_ID": "AK****************ZD"}'
+          properties: {}
+          type: object
+        inUse:
+          description: True if there is an in use reference to the object
+          readOnly: true
+          type: boolean
+        kubernetesOperatorControlled:
+          type: boolean
+        name:
+          description: Name
+          example: S3
+          maxLength: 50
+          minLength: 1
+          type: string
+        state:
+          description: state of the customerConfig. Possible values are Active, QueuedForDeletion.
+          enum:
+          - Active
+          - QueuedForDeletion
+          readOnly: true
+          type: string
+        type:
+          description: Config type
+          enum:
+          - STORAGE
+          - ALERTS
+          - CALLHOME
+          - PASSWORD_POLICY
+          example: STORAGE
+          type: string
+        universeDetails:
+          description: Universe details
+          example: '{"name": "jd-aws-21-6-21-test4"}'
+          items:
+            $ref: '#/components/schemas/UniverseDetailSubset_2'
+          type: array
+      required:
+      - configName
+      - customerUUID
+      - data
+      - kubernetesOperatorControlled
+      - name
+      - type
+      type: object
+    UniverseDetailSubset_2:
+      description: A small subset of universe information
+      example:
+        universePaused: true
+        updateSucceeded: true
+        name: name
+        updateInProgress: true
+        creationDate: 1
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        creationDate:
+          format: int64
+          type: integer
+        name:
+          type: string
+        universePaused:
+          type: boolean
+        updateInProgress:
+          type: boolean
+        updateSucceeded:
+          type: boolean
+        uuid:
+          format: uuid
+          type: string
+      required:
+      - creationDate
+      - name
+      - universePaused
+      - updateInProgress
+      - updateSucceeded
+      - uuid
+      type: object
+    YBPTask_2:
+      example:
+        taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        resourceUUID:
+          description: UUID of the resource being modified by the task
+          format: uuid
+          readOnly: true
+          type: string
+        taskUUID:
+          description: Task UUID
+          format: uuid
+          readOnly: true
+          type: string
+      type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key obtained from the YugabyteDB Aeon UI under User Profile > API Keys. Pass the key as a Bearer token in the Authorization header.
+definitions:
+  YBPTask:
+    properties:
+      resourceUUID:
+        description: UUID of the resource being modified by the task
+        format: uuid
+        readOnly: true
+        type: string
+      taskUUID:
+        description: Task UUID
+        format: uuid
+        readOnly: true
+        type: string
+    type: object
+  SessionInfo:
+    description: Session information
+    properties:
+      apiToken:
+        description: API token
+        type: string
+      authToken:
+        description: Auth token
+        type: string
+      customerUUID:
+        description: Customer UUID
+        format: uuid
+        type: string
+      userUUID:
+        description: User UUID
+        format: uuid
+        type: string
+    type: object
+  DummyBody:
+    description: Dummy value to work around platform bug PLAT-2076
+    properties:
+      dummy:
+        format: int32
+        type: integer
+    type: object
+  CustomerConfig:
+    description: Customer configuration. Includes storage, alerts, password policy, and call-home level.
+    properties:
+      configName:
+        description: Config name
+        example: backup20-01-2021
+        maxLength: 100
+        minLength: 1
+        type: string
+      configUUID:
+        description: Config UUID
+        format: uuid
+        readOnly: true
+        type: string
+      customerUUID:
+        description: Customer UUID
+        format: uuid
+        readOnly: true
+        type: string
+      data:
+        description: Configuration data
+        example: '{"AWS_ACCESS_KEY_ID": "AK****************ZD"}'
+        type: object
+      name:
+        description: Name
+        example: S3
+        maxLength: 50
+        minLength: 1
+        type: string
+      state:
+        description: state of the customerConfig. Possible values are Active, QueuedForDeletion.
+        enum:
+        - Active
+        - QueuedForDeletion
+        readOnly: true
+        type: string
+      type:
+        description: Config type
+        enum:
+        - STORAGE
+        - ALERTS
+        - CALLHOME
+        - PASSWORD_POLICY
+        - OTHER
+        example: STORAGE
+        type: string
+    required:
+    - configName
+    - customerUUID
+    - data
+    - name
+    - type
+    type: object
+  CustomerConfigUI:
+    description: Customer configuration with additional information. Includes storage, alerts, password policy, and call-home level.
+    properties:
+      configName:
+        description: Config name
+        example: backup20-01-2021
+        maxLength: 100
+        minLength: 1
+        type: string
+      configUUID:
+        description: Config UUID
+        format: uuid
+        readOnly: true
+        type: string
+      customerUUID:
+        description: Customer UUID
+        format: uuid
+        readOnly: true
+        type: string
+      data:
+        description: Configuration data
+        example: '{"AWS_ACCESS_KEY_ID": "AK****************ZD"}'
+        type: object
+      inUse:
+        description: True if there is an in use reference to the object
+        readOnly: true
+        type: boolean
+      name:
+        description: Name
+        example: S3
+        maxLength: 50
+        minLength: 1
+        type: string
+      state:
+        description: state of the customerConfig. Possible values are Active, QueuedForDeletion.
+        enum:
+        - Active
+        - QueuedForDeletion
+        readOnly: true
+        type: string
+      type:
+        description: Config type
+        enum:
+        - STORAGE
+        - ALERTS
+        - CALLHOME
+        - PASSWORD_POLICY
+        - OTHER
+        example: STORAGE
+        type: string
+      universeDetails:
+        description: Universe details
+        example: '{"name": "jd-aws-21-6-21-test4"}'
+        items:
+          $ref: '#/definitions/UniverseDetailSubset'
+        type: array
+    required:
+    - configName
+    - customerUUID
+    - data
+    - name
+    - type
+    type: object
+  UniverseDetailSubset:
+    description: A small subset of universe information
+    properties:
+      creationDate:
+        format: int64
+        type: integer
+      name:
+        type: string
+      universePaused:
+        type: boolean
+      updateInProgress:
+        type: boolean
+      updateSucceeded:
+        type: boolean
+      uuid:
+        format: uuid
+        type: string
+    required:
+    - creationDate
+    - name
+    - universePaused
+    - updateInProgress
+    - updateSucceeded
+    - uuid
+    type: object
+externalDocs:
+  description: YugabyteDB Aeon REST API Documentation
+  url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/

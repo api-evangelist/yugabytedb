@@ -1,0 +1,752 @@
+openapi: 3.1.0
+info:
+  title: YugabyteDB Aeon REST Access Keys PA Collector API
+  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.
+  version: v1
+  contact:
+    name: Yugabyte Support
+    url: https://support.yugabyte.com
+  termsOfService: https://www.yugabyte.com/yugabytedb-managed-service-terms/
+  x-generated-from: documentation
+  x-source-url: https://api-docs.yugabyte.com/docs/managed-apis/
+  x-last-validated: '2026-05-03'
+servers:
+- url: https://cloud.yugabyte.com/api/public/v1
+  description: YugabyteDB Aeon Production Server
+security:
+- bearerAuth: []
+tags:
+- name: PA Collector
+paths:
+  /api/v1/customers/{cUUID}/pa_collector:
+    get:
+      description: YbaApi Internal.
+      operationId: listAllPACollectors
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PA Collector Details Model'
+                type: array
+              examples:
+                ListAllPACollectors200Example:
+                  summary: Default listAllPACollectors 200 response
+                  x-microcks-default: true
+                  value: []
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List All PA Collectors
+      tags:
+      - PA Collector
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      description: YbaApi Internal.
+      operationId: createPACollector
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PACollector'
+            examples:
+              CreatePACollectorRequestExample:
+                summary: Default createPACollector request
+                x-microcks-default: true
+                value:
+                  apiToken: apiToken
+                  customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  metricsPassword: metricsPassword
+                  metricsUsername: metricsUsername
+                  metricsUrl: metricsUrl
+                  paApiToken: paApiToken
+                  paUrl: paUrl
+                  ybaUrl: ybaUrl
+                  metricsScrapePeriodSecs: 0
+                  uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PACollector'
+              examples:
+                CreatePACollector200Example:
+                  summary: Default createPACollector 200 response
+                  x-microcks-default: true
+                  value:
+                    apiToken: apiToken
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    metricsPassword: metricsPassword
+                    metricsUsername: metricsUsername
+                    metricsUrl: metricsUrl
+                    paApiToken: paApiToken
+                    paUrl: paUrl
+                    ybaUrl: ybaUrl
+                    metricsScrapePeriodSecs: 0
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Create PA Collector
+      tags:
+      - PA Collector
+      x-codegen-request-body-name: collectorData
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/pa_collector/{paUUID}:
+    delete:
+      description: YbaApi Internal.
+      operationId: deletePACollector
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: paUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: force
+        schema:
+          default: false
+          type: boolean
+        example: false
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: boolean
+              examples:
+                DeletePACollector200Example:
+                  summary: Default deletePACollector 200 response
+                  x-microcks-default: true
+                  value: true
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Delete PA Collector
+      tags:
+      - PA Collector
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      description: YbaApi Internal.
+      operationId: getPACollector
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: paUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PA Collector Details Model'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Get PA Collector
+      tags:
+      - PA Collector
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      description: YbaApi Internal.
+      operationId: editPACollector
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: paUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: force
+        schema:
+          default: false
+          type: boolean
+        example: false
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PACollector'
+            examples:
+              EditPACollectorRequestExample:
+                summary: Default editPACollector request
+                x-microcks-default: true
+                value:
+                  apiToken: apiToken
+                  customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  metricsPassword: metricsPassword
+                  metricsUsername: metricsUsername
+                  metricsUrl: metricsUrl
+                  paApiToken: paApiToken
+                  paUrl: paUrl
+                  ybaUrl: ybaUrl
+                  metricsScrapePeriodSecs: 0
+                  uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PACollector'
+              examples:
+                EditPACollector200Example:
+                  summary: Default editPACollector 200 response
+                  x-microcks-default: true
+                  value:
+                    apiToken: apiToken
+                    customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    metricsPassword: metricsPassword
+                    metricsUsername: metricsUsername
+                    metricsUrl: metricsUrl
+                    paApiToken: paApiToken
+                    paUrl: paUrl
+                    ybaUrl: ybaUrl
+                    metricsScrapePeriodSecs: 0
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Edit PA Collector
+      tags:
+      - PA Collector
+      x-codegen-request-body-name: collectorData
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/universes/{uUUID}/pa_collector:
+    delete:
+      description: YbaApi Internal.
+      operationId: unregisterUniverse
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: uUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                UnregisterUniverse200Example:
+                  summary: Default unregisterUniverse 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Unregister Universe from PA Collector
+      tags:
+      - PA Collector
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      description: YbaApi Internal.
+      operationId: checkRegistered
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: uUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PA Collector universe registration status'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Check if Universe is Registered with PA Collector
+      tags:
+      - PA Collector
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/universes/{uUUID}/pa_collector/{paUUID}:
+    put:
+      description: YbaApi Internal.
+      operationId: registerUniverse
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: uUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: paUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: advancedObservability
+        schema:
+          default: false
+          type: boolean
+        example: false
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                RegisterUniverse200Example:
+                  summary: Default registerUniverse 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Register Universe with PA Collector
+      tags:
+      - PA Collector
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    PACollector:
+      description: Performance Advisor Collector Model
+      example:
+        apiToken: apiToken
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        metricsPassword: metricsPassword
+        metricsUsername: metricsUsername
+        metricsUrl: metricsUrl
+        paApiToken: paApiToken
+        paUrl: paUrl
+        ybaUrl: ybaUrl
+        metricsScrapePeriodSecs: 0
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        apiToken:
+          description: YBA API Token
+          type: string
+          example: REDACTED
+        customerUUID:
+          description: Customer UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        metricsPassword:
+          description: Metrics API Password
+          type: string
+          example: REDACTED
+        metricsScrapePeriodSecs:
+          description: Metrics Scrape Period Seconds
+          format: int64
+          type: integer
+          example: 1000
+        metricsUrl:
+          description: Metrics URL
+          type: string
+          example: https://example.com
+        metricsUsername:
+          description: Metrics API Username
+          type: string
+          example: example-metricsUsername
+        paApiToken:
+          description: PA Collector API Token
+          type: string
+          example: REDACTED
+        paUrl:
+          description: PA Collector URL
+          type: string
+          example: https://example.com
+        uuid:
+          description: PA Collector UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        ybaUrl:
+          description: YBA URL
+          type: string
+          example: https://example.com
+      required:
+      - apiToken
+      - customerUUID
+      - metricsScrapePeriodSecs
+      - metricsUrl
+      - paUrl
+      - uuid
+      - ybaUrl
+      type: object
+    YBPSuccess:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+          example: Example message
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+          example: true
+      type: object
+    PA Collector Details Model:
+      example:
+        inUseStatus: IN_USE
+        apiToken: apiToken
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        metricsPassword: metricsPassword
+        metricsUsername: metricsUsername
+        metricsUrl: metricsUrl
+        paApiToken: paApiToken
+        paUrl: paUrl
+        ybaUrl: ybaUrl
+        metricsScrapePeriodSecs: 0
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        apiToken:
+          description: YBA API Token
+          type: string
+          example: REDACTED
+        customerUUID:
+          description: Customer UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        inUseStatus:
+          description: In Use Status
+          enum:
+          - IN_USE
+          - NOT_IN_USE
+          - ERROR
+          type: string
+          example: IN_USE
+        metricsPassword:
+          description: Metrics API Password
+          type: string
+          example: REDACTED
+        metricsScrapePeriodSecs:
+          description: Metrics Scrape Period Seconds
+          format: int64
+          type: integer
+          example: 1000
+        metricsUrl:
+          description: Metrics URL
+          type: string
+          example: https://example.com
+        metricsUsername:
+          description: Metrics API Username
+          type: string
+          example: example-metricsUsername
+        paApiToken:
+          description: PA Collector API Token
+          type: string
+          example: REDACTED
+        paUrl:
+          description: PA Collector URL
+          type: string
+          example: https://example.com
+        uuid:
+          description: PA Collector UUID
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        ybaUrl:
+          description: YBA URL
+          type: string
+          example: https://example.com
+      required:
+      - apiToken
+      - customerUUID
+      - metricsScrapePeriodSecs
+      - metricsUrl
+      - paUrl
+      - uuid
+      - ybaUrl
+      type: object
+    PA Collector universe registration status:
+      example:
+        success: true
+        advancedObservability: true
+      properties:
+        advancedObservability:
+          description: Whether advanced observability (metrics export to Prometheus) is enabled
+          type: boolean
+          example: true
+        success:
+          description: Whether the universe is registered with PA Collector
+          type: boolean
+          example: true
+      type: object
+    PACollector_2:
+      description: Performance Advisor Collector Model
+      example:
+        apiToken: apiToken
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        metricsPassword: metricsPassword
+        metricsUsername: metricsUsername
+        metricsUrl: metricsUrl
+        paApiToken: paApiToken
+        paUrl: paUrl
+        ybaUrl: ybaUrl
+        metricsScrapePeriodSecs: 0
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        apiToken:
+          description: YBA API Token
+          type: string
+        customerUUID:
+          description: Customer UUID
+          format: uuid
+          readOnly: true
+          type: string
+        metricsPassword:
+          description: Metrics API Password
+          type: string
+        metricsScrapePeriodSecs:
+          description: Metrics Scrape Period Seconds
+          format: int64
+          type: integer
+        metricsUrl:
+          description: Metrics URL
+          type: string
+        metricsUsername:
+          description: Metrics API Username
+          type: string
+        paApiToken:
+          description: PA Collector API Token
+          type: string
+        paUrl:
+          description: PA Collector URL
+          type: string
+        uuid:
+          description: PA Collector UUID
+          format: uuid
+          readOnly: true
+          type: string
+        ybaUrl:
+          description: YBA URL
+          type: string
+      required:
+      - apiToken
+      - customerUUID
+      - metricsScrapePeriodSecs
+      - metricsUrl
+      - paUrl
+      - uuid
+      - ybaUrl
+      type: object
+    YBPSuccess_2:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+      type: object
+    PA Collector Details Model_2:
+      example:
+        inUseStatus: IN_USE
+        apiToken: apiToken
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        metricsPassword: metricsPassword
+        metricsUsername: metricsUsername
+        metricsUrl: metricsUrl
+        paApiToken: paApiToken
+        paUrl: paUrl
+        ybaUrl: ybaUrl
+        metricsScrapePeriodSecs: 0
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        apiToken:
+          description: YBA API Token
+          type: string
+        customerUUID:
+          description: Customer UUID
+          format: uuid
+          readOnly: true
+          type: string
+        inUseStatus:
+          description: In Use Status
+          enum:
+          - IN_USE
+          - NOT_IN_USE
+          - ERROR
+          type: string
+        metricsPassword:
+          description: Metrics API Password
+          type: string
+        metricsScrapePeriodSecs:
+          description: Metrics Scrape Period Seconds
+          format: int64
+          type: integer
+        metricsUrl:
+          description: Metrics URL
+          type: string
+        metricsUsername:
+          description: Metrics API Username
+          type: string
+        paApiToken:
+          description: PA Collector API Token
+          type: string
+        paUrl:
+          description: PA Collector URL
+          type: string
+        uuid:
+          description: PA Collector UUID
+          format: uuid
+          readOnly: true
+          type: string
+        ybaUrl:
+          description: YBA URL
+          type: string
+      required:
+      - apiToken
+      - customerUUID
+      - metricsScrapePeriodSecs
+      - metricsUrl
+      - paUrl
+      - uuid
+      - ybaUrl
+      type: object
+    PA Collector universe registration status_2:
+      example:
+        success: true
+        advancedObservability: true
+      properties:
+        advancedObservability:
+          description: Whether advanced observability (metrics export to Prometheus) is enabled
+          type: boolean
+        success:
+          description: Whether the universe is registered with PA Collector
+          type: boolean
+      type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key obtained from the YugabyteDB Aeon UI under User Profile > API Keys. Pass the key as a Bearer token in the Authorization header.
+externalDocs:
+  description: YugabyteDB Aeon REST API Documentation
+  url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/

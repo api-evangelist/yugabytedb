@@ -1,0 +1,181 @@
+openapi: 3.1.0
+info:
+  title: YugabyteDB Aeon REST Access Keys Platform Replication API
+  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.
+  version: v1
+  contact:
+    name: Yugabyte Support
+    url: https://support.yugabyte.com
+  termsOfService: https://www.yugabyte.com/yugabytedb-managed-service-terms/
+  x-generated-from: documentation
+  x-source-url: https://api-docs.yugabyte.com/docs/managed-apis/
+  x-last-validated: '2026-05-03'
+servers:
+- url: https://cloud.yugabyte.com/api/public/v1
+  description: YugabyteDB Aeon Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Platform Replication
+paths:
+  /api/v1/settings/ha/config/{cUUID}/backup/list:
+    get:
+      description: Available since YBA version 2.20.0.
+      operationId: listBackups
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: leader
+        schema:
+          default: 'null'
+          type: string
+        example: 'null'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+              examples:
+                ListBackups200Example:
+                  summary: Default listBackups 200 response
+                  x-microcks-default: true
+                  value:
+                  - string
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Backups
+      tags:
+      - Platform Replication
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/settings/ha/config/{cUUID}/replication_schedule:
+    get:
+      operationId: getBackupInfo
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      tags:
+      - Platform Replication
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/settings/ha/config/{cUUID}/replication_schedule/start:
+    put:
+      description: Available since YBA version 2.20.0.
+      operationId: startPeriodicBackup
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlatformBackupFrequencyFormData'
+            examples:
+              StartPeriodicBackupRequestExample:
+                summary: Default startPeriodicBackup request
+                x-microcks-default: true
+                value:
+                  frequency_milliseconds: 0
+        required: true
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Start Periodic Backup
+      tags:
+      - Platform Replication
+      x-codegen-request-body-name: PlatformBackupFrequencyRequest
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/settings/ha/config/{cUUID}/replication_schedule/stop:
+    put:
+      operationId: stopPeriodicBackup
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      tags:
+      - Platform Replication
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    PlatformBackupFrequencyFormData:
+      example:
+        frequency_milliseconds: 0
+      properties:
+        frequency_milliseconds:
+          format: int64
+          type: integer
+          example: 1000
+      required:
+      - frequency_milliseconds
+      type: object
+    PlatformBackupFrequencyFormData_2:
+      example:
+        frequency_milliseconds: 0
+      properties:
+        frequency_milliseconds:
+          format: int64
+          type: integer
+      required:
+      - frequency_milliseconds
+      type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key obtained from the YugabyteDB Aeon UI under User Profile > API Keys. Pass the key as a Bearer token in the Authorization header.
+externalDocs:
+  description: YugabyteDB Aeon REST API Documentation
+  url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/

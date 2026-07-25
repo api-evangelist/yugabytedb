@@ -1,0 +1,604 @@
+openapi: 3.1.0
+info:
+  title: YugabyteDB Aeon REST Access Keys Authentication API
+  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.
+  version: v1
+  contact:
+    name: Yugabyte Support
+    url: https://support.yugabyte.com
+  termsOfService: https://www.yugabyte.com/yugabytedb-managed-service-terms/
+  x-generated-from: documentation
+  x-source-url: https://api-docs.yugabyte.com/docs/managed-apis/
+  x-last-validated: '2026-05-03'
+servers:
+- url: https://cloud.yugabyte.com/api/public/v1
+  description: YugabyteDB Aeon Production Server
+security:
+- bearerAuth: []
+tags:
+- description: Authentication operations on YBA
+  name: Authentication
+paths:
+  /customers/{cUUID}/auth/group-mappings:
+    get:
+      description: Get list of all OIDC and LDAP Group Mappings.
+      operationId: listMappings
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AuthGroupToRolesMapping'
+                type: array
+              examples:
+                ListMappings200Example:
+                  summary: Default listMappings 200 response
+                  x-microcks-default: true
+                  value:
+                  - role_resource_definitions:
+                    - resource_group:
+                        resource_definition_set:
+                        - resource_type: UNIVERSE
+                          resource_uuid_set:
+                          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                          allow_all: true
+                        - resource_type: UNIVERSE
+                          resource_uuid_set:
+                          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                          allow_all: true
+                      role_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    - resource_group:
+                        resource_definition_set:
+                        - resource_type: UNIVERSE
+                          resource_uuid_set:
+                          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                          allow_all: true
+                        - resource_type: UNIVERSE
+                          resource_uuid_set:
+                          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                          allow_all: true
+                      role_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    group_identifier: group_identifier
+                    creation_date: 2022-12-12 13:07:18+00:00
+                    type: LDAP
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          description: OK
+        '400':
+          description: Invalid input
+        '500':
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Group Mappings
+      tags:
+      - Authentication
+      x-yba-api-audit:
+        noAudit: true
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: other
+          action: read
+        resourceLocation:
+          path: customers
+          sourceType: endpoint
+      x-yba-api-since: 2024.2.0.0
+      x-yba-api-visibility: preview
+      x-accepts:
+      - application/json
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      description: Map LDAP and OIDC groups to YBA roles
+      operationId: updateGroupMappings
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      requestBody:
+        $ref: '#/components/requestBodies/AuthGroupToRolesMappingReq'
+      responses:
+        '200':
+          description: Operation Successfull
+        '400':
+          description: Invalid input
+        '500':
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Create Group Mappings
+      tags:
+      - Authentication
+      x-yba-api-audit:
+        auditTargetType: GroupMapping
+        auditTargetId: cUUID.toString()
+        auditActionType: Set
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: other
+          action: super_admin_actions
+        resourceLocation:
+          path: customers
+          sourceType: endpoint
+      x-yba-api-since: 2024.2.0.0
+      x-yba-api-visibility: preview
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/{cUUID}/auth/group-mappings/{gUUID}:
+    delete:
+      description: Delete LDAP and OIDC group mapping
+      operationId: deleteGroupMappings
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - description: Group UUID
+        explode: false
+        in: path
+        name: gUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Invalid input
+        '404':
+          description: Not found
+        '500':
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Delete Group Mappings
+      tags:
+      - Authentication
+      x-yba-api-audit:
+        auditTargetType: GroupMapping
+        auditTargetId: gUUID.toString()
+        auditActionType: Delete
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: other
+          action: super_admin_actions
+        resourceLocation:
+          path: customers
+          sourceType: endpoint
+      x-yba-api-since: 2024.2.0.0
+      x-yba-api-visibility: preview
+      x-accepts:
+      - application/json
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ResourceGroup:
+      description: Resource group definition for the role. Only applicable for custom roles.
+      example:
+        resource_definition_set:
+        - resource_type: UNIVERSE
+          resource_uuid_set:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          allow_all: true
+        - resource_type: UNIVERSE
+          resource_uuid_set:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          allow_all: true
+      properties:
+        resource_definition_set:
+          items:
+            $ref: '#/components/schemas/ResourceDefinition'
+          type: array
+          example:
+          - resource_type: UNIVERSE
+            resource_uuid_set:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            allow_all: true
+      required:
+      - resource_definition_set
+      title: ResourceGroup
+      type: object
+    RoleResourceDefinition:
+      description: Defines the association of Role to Resource Groups. Part of AuthGroupToRolesMapping.
+      example:
+        resource_group:
+          resource_definition_set:
+          - resource_type: UNIVERSE
+            resource_uuid_set:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            allow_all: true
+          - resource_type: UNIVERSE
+            resource_uuid_set:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            allow_all: true
+        role_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        role_uuid:
+          description: UUID of the role to attach resource group to.
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        resource_group:
+          $ref: '#/components/schemas/ResourceGroup'
+      required:
+      - role_uuid
+      title: RoleResourceDefinition.
+      type: object
+    ResourceDefinition:
+      description: Resource definition containing the resource type and resource set.
+      example:
+        resource_type: UNIVERSE
+        resource_uuid_set:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        allow_all: true
+      properties:
+        resource_type:
+          description: Resource Type
+          enum:
+          - UNIVERSE
+          - ROLE
+          - USER
+          - OTHER
+          type: string
+          example: UNIVERSE
+        allow_all:
+          description: Select all resources (including future resources)
+          type: boolean
+          example: true
+        resource_uuid_set:
+          default: []
+          description: Set of resource UUIDs
+          items:
+            format: uuid
+            type: string
+          type: array
+          example: []
+      required:
+      - allow_all
+      - resource_type
+      title: ResourceDefinition
+      type: object
+    AuthGroupToRolesMapping:
+      description: 'AuthGroupToRolesMapping
+
+
+        Group mapping properties. This is used to map LDAP and OIDC group to YBA roles.
+
+        '
+      example:
+        role_resource_definitions:
+        - resource_group:
+            resource_definition_set:
+            - resource_type: UNIVERSE
+              resource_uuid_set:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              allow_all: true
+            - resource_type: UNIVERSE
+              resource_uuid_set:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              allow_all: true
+          role_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - resource_group:
+            resource_definition_set:
+            - resource_type: UNIVERSE
+              resource_uuid_set:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              allow_all: true
+            - resource_type: UNIVERSE
+              resource_uuid_set:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              allow_all: true
+          role_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        group_identifier: group_identifier
+        creation_date: 2022-12-12 13:07:18+00:00
+        type: LDAP
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        group_identifier:
+          description: Group name incase of OIDC. Group DN incase of LDAP.
+          type: string
+          example: example-group_identifier
+        uuid:
+          description: System generated UUID for this group mapping.
+          format: uuid
+          readOnly: true
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        type:
+          description: The type of group. Can be either LDAP/OIDC.
+          enum:
+          - LDAP
+          - OIDC
+          type: string
+          example: LDAP
+        creation_date:
+          description: Group mapping creation date.
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        role_resource_definitions:
+          items:
+            $ref: '#/components/schemas/RoleResourceDefinition'
+          type: array
+          example:
+          - resource_group:
+              resource_definition_set:
+              - resource_type: UNIVERSE
+                resource_uuid_set:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                allow_all: true
+              - resource_type: UNIVERSE
+                resource_uuid_set:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                allow_all: true
+            role_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      required:
+      - group_identifier
+      - role_resource_definitions
+      - type
+      title: AuthGroupToRolesMapping
+      type: object
+    ResourceGroup_2:
+      description: Resource group definition for the role. Only applicable for custom roles.
+      example:
+        resource_definition_set:
+        - resource_type: UNIVERSE
+          resource_uuid_set:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          allow_all: true
+        - resource_type: UNIVERSE
+          resource_uuid_set:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          allow_all: true
+      properties:
+        resource_definition_set:
+          items:
+            $ref: '#/components/schemas/ResourceDefinition_2'
+          type: array
+      required:
+      - resource_definition_set
+      title: ResourceGroup
+      type: object
+    RoleResourceDefinition_2:
+      description: Defines the association of Role to Resource Groups. Part of AuthGroupToRolesMapping.
+      example:
+        resource_group:
+          resource_definition_set:
+          - resource_type: UNIVERSE
+            resource_uuid_set:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            allow_all: true
+          - resource_type: UNIVERSE
+            resource_uuid_set:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            allow_all: true
+        role_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        role_uuid:
+          description: UUID of the role to attach resource group to.
+          format: uuid
+          type: string
+        resource_group:
+          $ref: '#/components/schemas/ResourceGroup_2'
+      required:
+      - role_uuid
+      title: RoleResourceDefinition.
+      type: object
+    ResourceDefinition_2:
+      description: Resource definition containing the resource type and resource set.
+      example:
+        resource_type: UNIVERSE
+        resource_uuid_set:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        allow_all: true
+      properties:
+        resource_type:
+          description: Resource Type
+          enum:
+          - UNIVERSE
+          - ROLE
+          - USER
+          - OTHER
+          type: string
+        allow_all:
+          description: Select all resources (including future resources)
+          type: boolean
+        resource_uuid_set:
+          default: []
+          description: Set of resource UUIDs
+          items:
+            format: uuid
+            type: string
+          type: array
+      required:
+      - allow_all
+      - resource_type
+      title: ResourceDefinition
+      type: object
+    AuthGroupToRolesMapping_2:
+      description: 'AuthGroupToRolesMapping
+
+
+        Group mapping properties. This is used to map LDAP and OIDC group to YBA roles.
+
+        '
+      example:
+        role_resource_definitions:
+        - resource_group:
+            resource_definition_set:
+            - resource_type: UNIVERSE
+              resource_uuid_set:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              allow_all: true
+            - resource_type: UNIVERSE
+              resource_uuid_set:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              allow_all: true
+          role_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - resource_group:
+            resource_definition_set:
+            - resource_type: UNIVERSE
+              resource_uuid_set:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              allow_all: true
+            - resource_type: UNIVERSE
+              resource_uuid_set:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              allow_all: true
+          role_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        group_identifier: group_identifier
+        creation_date: 2022-12-12 13:07:18+00:00
+        type: LDAP
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        group_identifier:
+          description: Group name incase of OIDC. Group DN incase of LDAP.
+          type: string
+        uuid:
+          description: System generated UUID for this group mapping.
+          format: uuid
+          readOnly: true
+          type: string
+        type:
+          description: The type of group. Can be either LDAP/OIDC.
+          enum:
+          - LDAP
+          - OIDC
+          type: string
+        creation_date:
+          description: Group mapping creation date.
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        role_resource_definitions:
+          items:
+            $ref: '#/components/schemas/RoleResourceDefinition_2'
+          type: array
+      required:
+      - group_identifier
+      - role_resource_definitions
+      - type
+      title: AuthGroupToRolesMapping
+      type: object
+  requestBodies:
+    AuthGroupToRolesMappingReq:
+      content:
+        application/json:
+          schema:
+            items:
+              $ref: '#/components/schemas/AuthGroupToRolesMapping'
+            type: array
+          examples:
+            AuthGroupToRolesMappingReqExample:
+              summary: Default AuthGroupToRolesMappingReq request
+              x-microcks-default: true
+              value:
+              - role_resource_definitions:
+                - resource_group:
+                    resource_definition_set:
+                    - resource_type: UNIVERSE
+                      resource_uuid_set:
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      allow_all: true
+                    - resource_type: UNIVERSE
+                      resource_uuid_set:
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      allow_all: true
+                  role_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - resource_group:
+                    resource_definition_set:
+                    - resource_type: UNIVERSE
+                      resource_uuid_set:
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      allow_all: true
+                    - resource_type: UNIVERSE
+                      resource_uuid_set:
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                      allow_all: true
+                  role_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                group_identifier: group_identifier
+                creation_date: 2022-12-12 13:07:18+00:00
+                type: LDAP
+                uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      required: true
+    AuthGroupToRolesMappingReq_2:
+      content:
+        application/json:
+          schema:
+            items:
+              $ref: '#/components/schemas/AuthGroupToRolesMapping_2'
+            type: array
+      required: true
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key obtained from the YugabyteDB Aeon UI under User Profile > API Keys. Pass the key as a Bearer token in the Authorization header.
+externalDocs:
+  description: YugabyteDB Aeon REST API Documentation
+  url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/

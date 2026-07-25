@@ -1,0 +1,1191 @@
+openapi: 3.1.0
+info:
+  title: YugabyteDB Aeon REST Access Keys Availability Zones API
+  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.
+  version: v1
+  contact:
+    name: Yugabyte Support
+    url: https://support.yugabyte.com
+  termsOfService: https://www.yugabyte.com/yugabytedb-managed-service-terms/
+  x-generated-from: documentation
+  x-source-url: https://api-docs.yugabyte.com/docs/managed-apis/
+  x-last-validated: '2026-05-03'
+servers:
+- url: https://cloud.yugabyte.com/api/public/v1
+  description: YugabyteDB Aeon Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Availability Zones
+paths:
+  /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID}/region_zones:
+    post:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: createZone
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: pUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: rUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AvailabilityZone'
+            examples:
+              CreateZoneRequestExample:
+                summary: Default createZone request
+                x-microcks-default: true
+                value:
+                  subnet: subnet id
+                  code: us-west1-a
+                  name: us-west1-a
+                  active: true
+                  details:
+                    cloudInfo:
+                      kubernetes:
+                        kubeNamespace: kubeNamespace
+                        kubernetesImagePullSecretName: kubernetesImagePullSecretName
+                        kubernetesPullSecretContent: kubernetesPullSecretContent
+                        certManagerIssuer: certManagerIssuer
+                        isKubernetesOperatorControlled: true
+                        kubernetesOperatorControlled: true
+                        kubeConfig: kubeConfig
+                        kubeDomain: kubeDomain
+                        overrides: overrides
+                        certManagerIssuerName: certManagerIssuerName
+                        kubernetesPullSecret: kubernetesPullSecret
+                        kubeConfigName: kubeConfigName
+                        certManagerIssuerKind: certManagerIssuerKind
+                        kubePodAddressTemplate: kubePodAddressTemplate
+                        kubernetesProvider: kubernetesProvider
+                        kubeConfigContent: kubeConfigContent
+                        kubernetesPullSecretName: kubernetesPullSecretName
+                        certManagerIssuerGroup: certManagerIssuerGroup
+                        kubernetesImageRegistry: kubernetesImageRegistry
+                        certManagerClusterIssuer: certManagerClusterIssuer
+                        kubernetesStorageClass: kubernetesStorageClass
+                        kubernetesServiceAccount: kubernetesServiceAccount
+                  kubeconfigPath: kubeconfigPath
+                  config:
+                    key: config
+                  uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  secondarySubnet: secondary subnet id
+        description: Availability Zone to create
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  $ref: '#/components/schemas/AvailabilityZone'
+                type: object
+              examples:
+                CreateZone200Example:
+                  summary: Default createZone 200 response
+                  x-microcks-default: true
+                  value: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Create an Availability Zone
+      tags:
+      - Availability Zones
+      x-codegen-request-body-name: azData
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID}/region_zones/{azUUID}:
+    put:
+      description: 'WARNING: This is a preview API that could change.'
+      operationId: editZone
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: pUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: rUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: azUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AvailabilityZone'
+            examples:
+              EditZoneRequestExample:
+                summary: Default editZone request
+                x-microcks-default: true
+                value:
+                  subnet: subnet id
+                  code: us-west1-a
+                  name: us-west1-a
+                  active: true
+                  details:
+                    cloudInfo:
+                      kubernetes:
+                        kubeNamespace: kubeNamespace
+                        kubernetesImagePullSecretName: kubernetesImagePullSecretName
+                        kubernetesPullSecretContent: kubernetesPullSecretContent
+                        certManagerIssuer: certManagerIssuer
+                        isKubernetesOperatorControlled: true
+                        kubernetesOperatorControlled: true
+                        kubeConfig: kubeConfig
+                        kubeDomain: kubeDomain
+                        overrides: overrides
+                        certManagerIssuerName: certManagerIssuerName
+                        kubernetesPullSecret: kubernetesPullSecret
+                        kubeConfigName: kubeConfigName
+                        certManagerIssuerKind: certManagerIssuerKind
+                        kubePodAddressTemplate: kubePodAddressTemplate
+                        kubernetesProvider: kubernetesProvider
+                        kubeConfigContent: kubeConfigContent
+                        kubernetesPullSecretName: kubernetesPullSecretName
+                        certManagerIssuerGroup: certManagerIssuerGroup
+                        kubernetesImageRegistry: kubernetesImageRegistry
+                        certManagerClusterIssuer: certManagerClusterIssuer
+                        kubernetesStorageClass: kubernetesStorageClass
+                        kubernetesServiceAccount: kubernetesServiceAccount
+                  kubeconfigPath: kubeconfigPath
+                  config:
+                    key: config
+                  uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                  secondarySubnet: secondary subnet id
+        description: Availability zone to edit
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AvailabilityZone'
+              examples:
+                EditZone200Example:
+                  summary: Default editZone 200 response
+                  x-microcks-default: true
+                  value:
+                    subnet: subnet id
+                    code: us-west1-a
+                    name: us-west1-a
+                    active: true
+                    details:
+                      cloudInfo:
+                        kubernetes:
+                          kubeNamespace: kubeNamespace
+                          kubernetesImagePullSecretName: kubernetesImagePullSecretName
+                          kubernetesPullSecretContent: kubernetesPullSecretContent
+                          certManagerIssuer: certManagerIssuer
+                          isKubernetesOperatorControlled: true
+                          kubernetesOperatorControlled: true
+                          kubeConfig: kubeConfig
+                          kubeDomain: kubeDomain
+                          overrides: overrides
+                          certManagerIssuerName: certManagerIssuerName
+                          kubernetesPullSecret: kubernetesPullSecret
+                          kubeConfigName: kubeConfigName
+                          certManagerIssuerKind: certManagerIssuerKind
+                          kubePodAddressTemplate: kubePodAddressTemplate
+                          kubernetesProvider: kubernetesProvider
+                          kubeConfigContent: kubeConfigContent
+                          kubernetesPullSecretName: kubernetesPullSecretName
+                          certManagerIssuerGroup: certManagerIssuerGroup
+                          kubernetesImageRegistry: kubernetesImageRegistry
+                          certManagerClusterIssuer: certManagerClusterIssuer
+                          kubernetesStorageClass: kubernetesStorageClass
+                          kubernetesServiceAccount: kubernetesServiceAccount
+                    kubeconfigPath: kubeconfigPath
+                    config:
+                      key: config
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    secondarySubnet: secondary subnet id
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Modify an Availability Zone
+      tags:
+      - Availability Zones
+      x-codegen-request-body-name: azData
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones:
+    get:
+      operationId: listOfAZ
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: pUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: rUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AvailabilityZone'
+                type: array
+              examples:
+                ListOfAZ200Example:
+                  summary: Default listOfAZ 200 response
+                  x-microcks-default: true
+                  value:
+                  - subnet: subnet id
+                    code: us-west1-a
+                    name: us-west1-a
+                    active: true
+                    details:
+                      cloudInfo:
+                        kubernetes:
+                          kubeNamespace: kubeNamespace
+                          kubernetesImagePullSecretName: kubernetesImagePullSecretName
+                          kubernetesPullSecretContent: kubernetesPullSecretContent
+                          certManagerIssuer: certManagerIssuer
+                          isKubernetesOperatorControlled: true
+                          kubernetesOperatorControlled: true
+                          kubeConfig: kubeConfig
+                          kubeDomain: kubeDomain
+                          overrides: overrides
+                          certManagerIssuerName: certManagerIssuerName
+                          kubernetesPullSecret: kubernetesPullSecret
+                          kubeConfigName: kubeConfigName
+                          certManagerIssuerKind: certManagerIssuerKind
+                          kubePodAddressTemplate: kubePodAddressTemplate
+                          kubernetesProvider: kubernetesProvider
+                          kubeConfigContent: kubeConfigContent
+                          kubernetesPullSecretName: kubernetesPullSecretName
+                          certManagerIssuerGroup: certManagerIssuerGroup
+                          kubernetesImageRegistry: kubernetesImageRegistry
+                          certManagerClusterIssuer: certManagerClusterIssuer
+                          kubernetesStorageClass: kubernetesStorageClass
+                          kubernetesServiceAccount: kubernetesServiceAccount
+                    kubeconfigPath: kubeconfigPath
+                    config:
+                      key: config
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    secondarySubnet: secondary subnet id
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere List Availability Zones
+      tags:
+      - Availability Zones
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2.18.2.0.</b></p>Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones instead
+      operationId: createAZ
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: pUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: rUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AvailabilityZoneFormData'
+            examples:
+              CreateAZRequestExample:
+                summary: Default createAZ request
+                x-microcks-default: true
+                value:
+                  availabilityZones:
+                  - subnet: subnet
+                    code: code
+                    name: name
+                    secondarySubnet: secondarySubnet
+                  - subnet: subnet
+                    code: code
+                    name: name
+                    secondarySubnet: secondarySubnet
+        description: Availability zone form data
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  $ref: '#/components/schemas/AvailabilityZone'
+                type: object
+              examples:
+                CreateAZ200Example:
+                  summary: Default createAZ 200 response
+                  x-microcks-default: true
+                  value: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Create an Availability Zone - Deprecated
+      tags:
+      - Availability Zones
+      x-codegen-request-body-name: azFormData
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones/{azUUID}:
+    delete:
+      operationId: deleteAZ
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: pUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: rUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: azUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+              examples:
+                DeleteAZ200Example:
+                  summary: Default deleteAZ 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: message
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Delete an Availability Zone
+      tags:
+      - Availability Zones
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2.18.2.0.</b></p>Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones/:zUUID instead
+      operationId: editAZ
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: pUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: rUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: path
+        name: azUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AvailabilityZoneFormData'
+            examples:
+              EditAZRequestExample:
+                summary: Default editAZ request
+                x-microcks-default: true
+                value:
+                  availabilityZones:
+                  - subnet: subnet
+                    code: code
+                    name: name
+                    secondarySubnet: secondarySubnet
+                  - subnet: subnet
+                    code: code
+                    name: name
+                    secondarySubnet: secondarySubnet
+        description: Availability zone edit form data
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AvailabilityZone'
+              examples:
+                EditAZ200Example:
+                  summary: Default editAZ 200 response
+                  x-microcks-default: true
+                  value:
+                    subnet: subnet id
+                    code: us-west1-a
+                    name: us-west1-a
+                    active: true
+                    details:
+                      cloudInfo:
+                        kubernetes:
+                          kubeNamespace: kubeNamespace
+                          kubernetesImagePullSecretName: kubernetesImagePullSecretName
+                          kubernetesPullSecretContent: kubernetesPullSecretContent
+                          certManagerIssuer: certManagerIssuer
+                          isKubernetesOperatorControlled: true
+                          kubernetesOperatorControlled: true
+                          kubeConfig: kubeConfig
+                          kubeDomain: kubeDomain
+                          overrides: overrides
+                          certManagerIssuerName: certManagerIssuerName
+                          kubernetesPullSecret: kubernetesPullSecret
+                          kubeConfigName: kubeConfigName
+                          certManagerIssuerKind: certManagerIssuerKind
+                          kubePodAddressTemplate: kubePodAddressTemplate
+                          kubernetesProvider: kubernetesProvider
+                          kubeConfigContent: kubeConfigContent
+                          kubernetesPullSecretName: kubernetesPullSecretName
+                          certManagerIssuerGroup: certManagerIssuerGroup
+                          kubernetesImageRegistry: kubernetesImageRegistry
+                          certManagerClusterIssuer: certManagerClusterIssuer
+                          kubernetesStorageClass: kubernetesStorageClass
+                          kubernetesServiceAccount: kubernetesServiceAccount
+                    kubeconfigPath: kubeconfigPath
+                    config:
+                      key: config
+                    uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    secondarySubnet: secondary subnet id
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Edit an Availabilty Zone - Deprecated
+      tags:
+      - Availability Zones
+      x-codegen-request-body-name: azFormData
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    AvailabilityZoneFormData:
+      example:
+        availabilityZones:
+        - subnet: subnet
+          code: code
+          name: name
+          secondarySubnet: secondarySubnet
+        - subnet: subnet
+          code: code
+          name: name
+          secondarySubnet: secondarySubnet
+      properties:
+        availabilityZones:
+          description: List of availability zones
+          items:
+            $ref: '#/components/schemas/AvailabilityZoneData'
+          type: array
+          example:
+          - subnet: subnet
+            code: code
+            name: name
+            secondarySubnet: secondarySubnet
+      required:
+      - availabilityZones
+      type: object
+    AvailabilityZone:
+      description: Availability zone (AZ) for a region
+      example:
+        subnet: subnet id
+        code: us-west1-a
+        name: us-west1-a
+        active: true
+        details:
+          cloudInfo:
+            kubernetes:
+              kubeNamespace: kubeNamespace
+              kubernetesImagePullSecretName: kubernetesImagePullSecretName
+              kubernetesPullSecretContent: kubernetesPullSecretContent
+              certManagerIssuer: certManagerIssuer
+              isKubernetesOperatorControlled: true
+              kubernetesOperatorControlled: true
+              kubeConfig: kubeConfig
+              kubeDomain: kubeDomain
+              overrides: overrides
+              certManagerIssuerName: certManagerIssuerName
+              kubernetesPullSecret: kubernetesPullSecret
+              kubeConfigName: kubeConfigName
+              certManagerIssuerKind: certManagerIssuerKind
+              kubePodAddressTemplate: kubePodAddressTemplate
+              kubernetesProvider: kubernetesProvider
+              kubeConfigContent: kubeConfigContent
+              kubernetesPullSecretName: kubernetesPullSecretName
+              certManagerIssuerGroup: certManagerIssuerGroup
+              kubernetesImageRegistry: kubernetesImageRegistry
+              certManagerClusterIssuer: certManagerClusterIssuer
+              kubernetesStorageClass: kubernetesStorageClass
+              kubernetesServiceAccount: kubernetesServiceAccount
+        kubeconfigPath: kubeconfigPath
+        config:
+          key: config
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        secondarySubnet: secondary subnet id
+      properties:
+        active:
+          description: AZ status. This value is `true` for an active AZ.
+          readOnly: true
+          type: boolean
+          example: true
+        code:
+          description: AZ code
+          example: us-west1-a
+          type: string
+        config:
+          additionalProperties:
+            type: string
+          description: AZ configuration values
+          type: object
+          example: {}
+        details:
+          $ref: '#/components/schemas/AvailabilityZoneDetails'
+        kubeconfigPath:
+          description: Path to Kubernetes configuration file
+          readOnly: true
+          type: string
+          example: /var/lib/yugabyte/example
+        name:
+          description: AZ name
+          example: us-west1-a
+          type: string
+        secondarySubnet:
+          description: AZ secondary subnet
+          example: secondary subnet id
+          type: string
+        subnet:
+          description: AZ subnet
+          example: subnet id
+          type: string
+        uuid:
+          description: AZ UUID. This must be specified for existing AZs on update
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      required:
+      - name
+      type: object
+    YBPSuccess:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+          example: Example message
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+          example: true
+      type: object
+    AvailabilityZoneDetails:
+      example:
+        cloudInfo:
+          kubernetes:
+            kubeNamespace: kubeNamespace
+            kubernetesImagePullSecretName: kubernetesImagePullSecretName
+            kubernetesPullSecretContent: kubernetesPullSecretContent
+            certManagerIssuer: certManagerIssuer
+            isKubernetesOperatorControlled: true
+            kubernetesOperatorControlled: true
+            kubeConfig: kubeConfig
+            kubeDomain: kubeDomain
+            overrides: overrides
+            certManagerIssuerName: certManagerIssuerName
+            kubernetesPullSecret: kubernetesPullSecret
+            kubeConfigName: kubeConfigName
+            certManagerIssuerKind: certManagerIssuerKind
+            kubePodAddressTemplate: kubePodAddressTemplate
+            kubernetesProvider: kubernetesProvider
+            kubeConfigContent: kubeConfigContent
+            kubernetesPullSecretName: kubernetesPullSecretName
+            certManagerIssuerGroup: certManagerIssuerGroup
+            kubernetesImageRegistry: kubernetesImageRegistry
+            certManagerClusterIssuer: certManagerClusterIssuer
+            kubernetesStorageClass: kubernetesStorageClass
+            kubernetesServiceAccount: kubernetesServiceAccount
+      properties:
+        cloudInfo:
+          $ref: '#/components/schemas/AZCloudInfo'
+      type: object
+    AvailabilityZoneData:
+      description: Details of an availability zone, used by the API and UI to validate data against input constraints
+      example:
+        subnet: subnet
+        code: code
+        name: name
+        secondarySubnet: secondarySubnet
+      properties:
+        code:
+          description: AZ code
+          type: string
+          example: OK
+        name:
+          description: AZ name
+          type: string
+          example: example-name
+        secondarySubnet:
+          description: AZ secondary subnet
+          type: string
+          example: example-secondarySubnet
+        subnet:
+          description: AZ subnet
+          type: string
+          example: example-subnet
+      required:
+      - code
+      - name
+      type: object
+    AZCloudInfo:
+      example:
+        kubernetes:
+          kubeNamespace: kubeNamespace
+          kubernetesImagePullSecretName: kubernetesImagePullSecretName
+          kubernetesPullSecretContent: kubernetesPullSecretContent
+          certManagerIssuer: certManagerIssuer
+          isKubernetesOperatorControlled: true
+          kubernetesOperatorControlled: true
+          kubeConfig: kubeConfig
+          kubeDomain: kubeDomain
+          overrides: overrides
+          certManagerIssuerName: certManagerIssuerName
+          kubernetesPullSecret: kubernetesPullSecret
+          kubeConfigName: kubeConfigName
+          certManagerIssuerKind: certManagerIssuerKind
+          kubePodAddressTemplate: kubePodAddressTemplate
+          kubernetesProvider: kubernetesProvider
+          kubeConfigContent: kubeConfigContent
+          kubernetesPullSecretName: kubernetesPullSecretName
+          certManagerIssuerGroup: certManagerIssuerGroup
+          kubernetesImageRegistry: kubernetesImageRegistry
+          certManagerClusterIssuer: certManagerClusterIssuer
+          kubernetesStorageClass: kubernetesStorageClass
+          kubernetesServiceAccount: kubernetesServiceAccount
+      properties:
+        kubernetes:
+          $ref: '#/components/schemas/KubernetesRegionInfo'
+      type: object
+    KubernetesRegionInfo:
+      example:
+        kubeNamespace: kubeNamespace
+        kubernetesImagePullSecretName: kubernetesImagePullSecretName
+        kubernetesPullSecretContent: kubernetesPullSecretContent
+        certManagerIssuer: certManagerIssuer
+        isKubernetesOperatorControlled: true
+        kubernetesOperatorControlled: true
+        kubeConfig: kubeConfig
+        kubeDomain: kubeDomain
+        overrides: overrides
+        certManagerIssuerName: certManagerIssuerName
+        kubernetesPullSecret: kubernetesPullSecret
+        kubeConfigName: kubeConfigName
+        certManagerIssuerKind: certManagerIssuerKind
+        kubePodAddressTemplate: kubePodAddressTemplate
+        kubernetesProvider: kubernetesProvider
+        kubeConfigContent: kubeConfigContent
+        kubernetesPullSecretName: kubernetesPullSecretName
+        certManagerIssuerGroup: certManagerIssuerGroup
+        kubernetesImageRegistry: kubernetesImageRegistry
+        certManagerClusterIssuer: certManagerClusterIssuer
+        kubernetesStorageClass: kubernetesStorageClass
+        kubernetesServiceAccount: kubernetesServiceAccount
+      properties:
+        certManagerClusterIssuer:
+          description: <b style="color:#ff0000">Deprecated since YBA version 2024.2.3.0.</b>. Use certManagerIssuerKind and certManagerIssuerName instead
+          type: string
+          example: example-certManagerClusterIssuer
+        certManagerIssuer:
+          description: <b style="color:#ff0000">Deprecated since YBA version 2024.2.3.0.</b>. Use certManagerIssuerKind and certManagerIssuerName instead
+          type: string
+          example: example-certManagerIssuer
+        certManagerIssuerGroup:
+          type: string
+          example: example-certManagerIssuerGroup
+        certManagerIssuerKind:
+          type: string
+          example: DEFAULT
+        certManagerIssuerName:
+          type: string
+          example: example-certManagerIssuerName
+        isKubernetesOperatorControlled:
+          readOnly: true
+          type: boolean
+          example: true
+        kubeConfig:
+          readOnly: true
+          type: string
+          example: example-kubeConfig
+        kubeConfigContent:
+          type: string
+          example: example-kubeConfigContent
+        kubeConfigName:
+          type: string
+          example: example-kubeConfigName
+        kubeDomain:
+          type: string
+          example: example.com
+        kubeNamespace:
+          type: string
+          example: example-kubeNamespace
+        kubePodAddressTemplate:
+          type: string
+          example: example-kubePodAddressTemplate
+        kubernetesImagePullSecretName:
+          type: string
+          example: REDACTED
+        kubernetesImageRegistry:
+          type: string
+          example: example-kubernetesImageRegistry
+        kubernetesOperatorControlled:
+          type: boolean
+          example: true
+        kubernetesProvider:
+          type: string
+          example: example-kubernetesProvider
+        kubernetesPullSecret:
+          readOnly: true
+          type: string
+          example: REDACTED
+        kubernetesPullSecretContent:
+          type: string
+          example: REDACTED
+        kubernetesPullSecretName:
+          type: string
+          example: REDACTED
+        kubernetesServiceAccount:
+          description: <b style="color:#ff0000">Deprecated since YBA version 2.17.3.0.</b> kubernetes service account is not needed.
+          type: string
+          example: example-kubernetesServiceAccount
+        kubernetesStorageClass:
+          type: string
+          example: example-kubernetesStorageClass
+        overrides:
+          type: string
+          example: example-overrides
+      required:
+      - kubernetesOperatorControlled
+      type: object
+    AvailabilityZoneFormData_2:
+      example:
+        availabilityZones:
+        - subnet: subnet
+          code: code
+          name: name
+          secondarySubnet: secondarySubnet
+        - subnet: subnet
+          code: code
+          name: name
+          secondarySubnet: secondarySubnet
+      properties:
+        availabilityZones:
+          description: List of availability zones
+          items:
+            $ref: '#/components/schemas/AvailabilityZoneData_2'
+          type: array
+      required:
+      - availabilityZones
+      type: object
+    AvailabilityZone_2:
+      description: Availability zone (AZ) for a region
+      example:
+        subnet: subnet id
+        code: us-west1-a
+        name: us-west1-a
+        active: true
+        details:
+          cloudInfo:
+            kubernetes:
+              kubeNamespace: kubeNamespace
+              kubernetesImagePullSecretName: kubernetesImagePullSecretName
+              kubernetesPullSecretContent: kubernetesPullSecretContent
+              certManagerIssuer: certManagerIssuer
+              isKubernetesOperatorControlled: true
+              kubernetesOperatorControlled: true
+              kubeConfig: kubeConfig
+              kubeDomain: kubeDomain
+              overrides: overrides
+              certManagerIssuerName: certManagerIssuerName
+              kubernetesPullSecret: kubernetesPullSecret
+              kubeConfigName: kubeConfigName
+              certManagerIssuerKind: certManagerIssuerKind
+              kubePodAddressTemplate: kubePodAddressTemplate
+              kubernetesProvider: kubernetesProvider
+              kubeConfigContent: kubeConfigContent
+              kubernetesPullSecretName: kubernetesPullSecretName
+              certManagerIssuerGroup: certManagerIssuerGroup
+              kubernetesImageRegistry: kubernetesImageRegistry
+              certManagerClusterIssuer: certManagerClusterIssuer
+              kubernetesStorageClass: kubernetesStorageClass
+              kubernetesServiceAccount: kubernetesServiceAccount
+        kubeconfigPath: kubeconfigPath
+        config:
+          key: config
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        secondarySubnet: secondary subnet id
+      properties:
+        active:
+          description: AZ status. This value is `true` for an active AZ.
+          readOnly: true
+          type: boolean
+        code:
+          description: AZ code
+          example: us-west1-a
+          type: string
+        config:
+          additionalProperties:
+            type: string
+          description: AZ configuration values
+          type: object
+        details:
+          $ref: '#/components/schemas/AvailabilityZoneDetails'
+        kubeconfigPath:
+          description: Path to Kubernetes configuration file
+          readOnly: true
+          type: string
+        name:
+          description: AZ name
+          example: us-west1-a
+          type: string
+        secondarySubnet:
+          description: AZ secondary subnet
+          example: secondary subnet id
+          type: string
+        subnet:
+          description: AZ subnet
+          example: subnet id
+          type: string
+        uuid:
+          description: AZ UUID. This must be specified for existing AZs on update
+          format: uuid
+          type: string
+      required:
+      - name
+      type: object
+    YBPSuccess_2:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+      type: object
+    AvailabilityZoneData_2:
+      description: Details of an availability zone, used by the API and UI to validate data against input constraints
+      example:
+        subnet: subnet
+        code: code
+        name: name
+        secondarySubnet: secondarySubnet
+      properties:
+        code:
+          description: AZ code
+          type: string
+        name:
+          description: AZ name
+          type: string
+        secondarySubnet:
+          description: AZ secondary subnet
+          type: string
+        subnet:
+          description: AZ subnet
+          type: string
+      required:
+      - code
+      - name
+      type: object
+    KubernetesRegionInfo_2:
+      example:
+        kubeNamespace: kubeNamespace
+        kubernetesImagePullSecretName: kubernetesImagePullSecretName
+        kubernetesPullSecretContent: kubernetesPullSecretContent
+        certManagerIssuer: certManagerIssuer
+        isKubernetesOperatorControlled: true
+        kubernetesOperatorControlled: true
+        kubeConfig: kubeConfig
+        kubeDomain: kubeDomain
+        overrides: overrides
+        certManagerIssuerName: certManagerIssuerName
+        kubernetesPullSecret: kubernetesPullSecret
+        kubeConfigName: kubeConfigName
+        certManagerIssuerKind: certManagerIssuerKind
+        kubePodAddressTemplate: kubePodAddressTemplate
+        kubernetesProvider: kubernetesProvider
+        kubeConfigContent: kubeConfigContent
+        kubernetesPullSecretName: kubernetesPullSecretName
+        certManagerIssuerGroup: certManagerIssuerGroup
+        kubernetesImageRegistry: kubernetesImageRegistry
+        certManagerClusterIssuer: certManagerClusterIssuer
+        kubernetesStorageClass: kubernetesStorageClass
+        kubernetesServiceAccount: kubernetesServiceAccount
+      properties:
+        certManagerClusterIssuer:
+          description: <b style="color:#ff0000">Deprecated since YBA version 2024.2.3.0.</b>. Use certManagerIssuerKind and certManagerIssuerName instead
+          type: string
+        certManagerIssuer:
+          description: <b style="color:#ff0000">Deprecated since YBA version 2024.2.3.0.</b>. Use certManagerIssuerKind and certManagerIssuerName instead
+          type: string
+        certManagerIssuerGroup:
+          type: string
+        certManagerIssuerKind:
+          type: string
+        certManagerIssuerName:
+          type: string
+        isKubernetesOperatorControlled:
+          readOnly: true
+          type: boolean
+        kubeConfig:
+          readOnly: true
+          type: string
+        kubeConfigContent:
+          type: string
+        kubeConfigName:
+          type: string
+        kubeDomain:
+          type: string
+        kubeNamespace:
+          type: string
+        kubePodAddressTemplate:
+          type: string
+        kubernetesImagePullSecretName:
+          type: string
+        kubernetesImageRegistry:
+          type: string
+        kubernetesOperatorControlled:
+          type: boolean
+        kubernetesProvider:
+          type: string
+        kubernetesPullSecret:
+          readOnly: true
+          type: string
+        kubernetesPullSecretContent:
+          type: string
+        kubernetesPullSecretName:
+          type: string
+        kubernetesServiceAccount:
+          description: <b style="color:#ff0000">Deprecated since YBA version 2.17.3.0.</b> kubernetes service account is not needed.
+          type: string
+        kubernetesStorageClass:
+          type: string
+        overrides:
+          type: string
+      required:
+      - kubernetesOperatorControlled
+      type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key obtained from the YugabyteDB Aeon UI under User Profile > API Keys. Pass the key as a Bearer token in the Authorization header.
+definitions:
+  AvailabilityZone:
+    description: Availability zone (AZ) for a region
+    properties:
+      active:
+        description: AZ status. This value is `true` for an active AZ.
+        readOnly: true
+        type: boolean
+      code:
+        description: AZ code
+        example: us-west1-a
+        type: string
+      config:
+        additionalProperties:
+          type: string
+        description: AZ configuration values
+        type: object
+      kubeconfigPath:
+        description: Path to Kubernetes configuration file
+        readOnly: true
+        type: string
+      name:
+        description: AZ name
+        example: us-west1-a
+        type: string
+      secondarySubnet:
+        description: AZ secondary subnet
+        example: secondary subnet id
+        type: string
+      subnet:
+        description: AZ subnet
+        example: subnet id
+        type: string
+      uuid:
+        description: AZ UUID
+        format: uuid
+        readOnly: true
+        type: string
+    required:
+    - name
+    type: object
+  YBPSuccess:
+    properties:
+      message:
+        description: API response message.
+        readOnly: true
+        type: string
+      success:
+        description: API operation status. A value of true indicates the operation was successful.
+        readOnly: true
+        type: boolean
+    type: object
+  AvailabilityZoneFormData:
+    properties:
+      availabilityZones:
+        description: List of availability zones
+        items:
+          $ref: '#/definitions/AvailabilityZoneData'
+        type: array
+    required:
+    - availabilityZones
+    type: object
+  AvailabilityZoneData:
+    description: Details of an availability zone, used by the API and UI to validate data against input constraints
+    properties:
+      code:
+        description: AZ code
+        type: string
+      name:
+        description: AZ name
+        type: string
+      subnet:
+        description: AZ subnet
+        type: string
+    required:
+    - code
+    - name
+    type: object
+externalDocs:
+  description: YugabyteDB Aeon REST API Documentation
+  url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/

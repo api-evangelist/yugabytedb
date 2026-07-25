@@ -1,0 +1,315 @@
+openapi: 3.1.0
+info:
+  title: YugabyteDB Aeon REST Access Keys Universe actions API
+  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.
+  version: v1
+  contact:
+    name: Yugabyte Support
+    url: https://support.yugabyte.com
+  termsOfService: https://www.yugabyte.com/yugabytedb-managed-service-terms/
+  x-generated-from: documentation
+  x-source-url: https://api-docs.yugabyte.com/docs/managed-apis/
+  x-last-validated: '2026-05-03'
+servers:
+- url: https://cloud.yugabyte.com/api/public/v1
+  description: YugabyteDB Aeon Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Universe actions
+paths:
+  /api/v1/customers/{cUUID}/universes/import:
+    post:
+      deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2.19.3.0.</b></p>Do not use, this will be removed soon.
+      operationId: importUniverse
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      - in: query
+        name: request
+        schema: {}
+        example: example-request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportUniverseFormData'
+              examples:
+                ImportUniverse200Example:
+                  summary: Default importUniverse 200 response
+                  x-microcks-default: true
+                  value:
+                    singleStep: true
+                    replicationFactor: 0
+                    instanceType: instanceType
+                    regionName: regionName
+                    providerType: unknown
+                    masterAddresses: masterAddresses
+                    universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                    regionCode: regionCode
+                    cloudName: cloudName
+                    cloudProviderType: cloudProviderType
+                    zoneName: zoneName
+                    currentState: BEGIN
+                    universeName: universeName
+                    zoneCode: zoneCode
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: YugabyteDB Anywhere Import a Universe - Deprecated
+      tags:
+      - Universe actions
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ImportUniverseFormData:
+      example:
+        singleStep: true
+        replicationFactor: 0
+        instanceType: instanceType
+        regionName: regionName
+        providerType: unknown
+        masterAddresses: masterAddresses
+        universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        regionCode: regionCode
+        cloudName: cloudName
+        cloudProviderType: cloudProviderType
+        zoneName: zoneName
+        currentState: BEGIN
+        universeName: universeName
+        zoneCode: zoneCode
+      properties:
+        cloudName:
+          type: string
+          example: example-cloudName
+        cloudProviderType:
+          type: string
+          example: DEFAULT
+        currentState:
+          enum:
+          - BEGIN
+          - IMPORTED_MASTERS
+          - IMPORTED_TSERVERS
+          - FINISHED
+          type: string
+          example: BEGIN
+        instanceType:
+          type: string
+          example: DEFAULT
+        masterAddresses:
+          type: string
+          example: example-masterAddresses
+        providerType:
+          enum:
+          - unknown
+          - aws
+          - gcp
+          - azu
+          - docker
+          - onprem
+          - kubernetes
+          - local
+          - other
+          type: string
+          example: unknown
+        regionCode:
+          type: string
+          example: us-east-1
+        regionName:
+          type: string
+          example: us-east-1
+        replicationFactor:
+          format: int32
+          type: integer
+          example: 100
+        singleStep:
+          type: boolean
+          example: true
+        universeName:
+          type: string
+          example: example-universeName
+        universeUUID:
+          format: uuid
+          type: string
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        zoneCode:
+          type: string
+          example: us-east-1a
+        zoneName:
+          type: string
+          example: us-east-1a
+      required:
+      - cloudName
+      - cloudProviderType
+      - currentState
+      - instanceType
+      - masterAddresses
+      - providerType
+      - regionCode
+      - regionName
+      - replicationFactor
+      - singleStep
+      - universeName
+      - universeUUID
+      - zoneCode
+      - zoneName
+      type: object
+    ImportUniverseFormData_2:
+      example:
+        singleStep: true
+        replicationFactor: 0
+        instanceType: instanceType
+        regionName: regionName
+        providerType: unknown
+        masterAddresses: masterAddresses
+        universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        regionCode: regionCode
+        cloudName: cloudName
+        cloudProviderType: cloudProviderType
+        zoneName: zoneName
+        currentState: BEGIN
+        universeName: universeName
+        zoneCode: zoneCode
+      properties:
+        cloudName:
+          type: string
+        cloudProviderType:
+          type: string
+        currentState:
+          enum:
+          - BEGIN
+          - IMPORTED_MASTERS
+          - IMPORTED_TSERVERS
+          - FINISHED
+          type: string
+        instanceType:
+          type: string
+        masterAddresses:
+          type: string
+        providerType:
+          enum:
+          - unknown
+          - aws
+          - gcp
+          - azu
+          - docker
+          - onprem
+          - kubernetes
+          - local
+          - other
+          type: string
+        regionCode:
+          type: string
+        regionName:
+          type: string
+        replicationFactor:
+          format: int32
+          type: integer
+        singleStep:
+          type: boolean
+        universeName:
+          type: string
+        universeUUID:
+          format: uuid
+          type: string
+        zoneCode:
+          type: string
+        zoneName:
+          type: string
+      required:
+      - cloudName
+      - cloudProviderType
+      - currentState
+      - instanceType
+      - masterAddresses
+      - providerType
+      - regionCode
+      - regionName
+      - replicationFactor
+      - singleStep
+      - universeName
+      - universeUUID
+      - zoneCode
+      - zoneName
+      type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key obtained from the YugabyteDB Aeon UI under User Profile > API Keys. Pass the key as a Bearer token in the Authorization header.
+definitions:
+  ImportUniverseFormData:
+    properties:
+      cloudName:
+        type: string
+      cloudProviderType:
+        type: string
+      currentState:
+        enum:
+        - BEGIN
+        - IMPORTED_MASTERS
+        - IMPORTED_TSERVERS
+        - FINISHED
+        type: string
+      instanceType:
+        type: string
+      masterAddresses:
+        type: string
+      providerType:
+        enum:
+        - unknown
+        - aws
+        - gcp
+        - azu
+        - docker
+        - onprem
+        - kubernetes
+        - local
+        - other
+        type: string
+      regionCode:
+        type: string
+      regionName:
+        type: string
+      replicationFactor:
+        format: int32
+        type: integer
+      singleStep:
+        type: boolean
+      universeName:
+        type: string
+      universeUUID:
+        format: uuid
+        type: string
+      zoneCode:
+        type: string
+      zoneName:
+        type: string
+    required:
+    - cloudName
+    - cloudProviderType
+    - currentState
+    - instanceType
+    - masterAddresses
+    - providerType
+    - regionCode
+    - regionName
+    - replicationFactor
+    - singleStep
+    - universeName
+    - universeUUID
+    - zoneCode
+    - zoneName
+    type: object
+externalDocs:
+  description: YugabyteDB Aeon REST API Documentation
+  url: https://docs.yugabyte.com/stable/yugabyte-cloud/managed-automation/managed-api/
