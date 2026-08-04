@@ -1,0 +1,825 @@
+{
+  "info": {
+    "_postman_id": "f0d241b4-5fac-4d55-b5e8-35d8d64ad471",
+    "name": "YugabyteDB Aeon REST Access Keys API",
+    "description": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:36:14.000Z",
+    "updatedAt": "2026-07-28T03:36:14.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f0d241b4-5fac-4d55-b5e8-35d8d64ad471"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "customers",
+              "item": [
+                {
+                  "name": "{cUUID}",
+                  "item": [
+                    {
+                      "name": "access_keys",
+                      "item": [
+                        {
+                          "name": "YugabyteDB Anywhere List Access Keys for All Providers of a Customer",
+                          "id": "4ef91790-1736-4e86-b691-229fc5632f9f",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/customers/:cUUID/access_keys",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "customers",
+                                ":cUUID",
+                                "access_keys"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "84829b04-0cec-4627-a6b6-5fc9c8b755d7",
+                                  "key": "cUUID",
+                                  "value": "<uuid>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "6ca85355-f613-4e99-81be-cb4bac8a0930",
+                              "name": "successful operation",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/access_keys",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "access_keys"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "cUUID"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "[\n  {\n    \"idKey\": {\n      \"keyCode\": \"<string>\",\n      \"providerUUID\": \"<uuid>\"\n    },\n    \"keyInfo\": {\n      \"airGapInstall\": \"<boolean>\",\n      \"deleteRemote\": \"<boolean>\",\n      \"installNodeExporter\": \"<boolean>\",\n      \"keyPairName\": \"<string>\",\n      \"managementState\": \"Unknown\",\n      \"nodeExporterPort\": \"<integer>\",\n      \"nodeExporterUser\": \"<string>\",\n      \"ntpServers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"passwordlessSudoAccess\": \"<boolean>\",\n      \"privateKey\": \"<string>\",\n      \"provisionInstanceScript\": \"<string>\",\n      \"publicKey\": \"<string>\",\n      \"setUpChrony\": \"<boolean>\",\n      \"showSetUpChrony\": \"<boolean>\",\n      \"skipKeyValidateAndUpload\": \"<boolean>\",\n      \"skipProvisioning\": \"<boolean>\",\n      \"sshPort\": \"<integer>\",\n      \"sshPrivateKeyContent\": \"<string>\",\n      \"sshUser\": \"<string>\",\n      \"vaultFile\": \"<string>\",\n      \"vaultPasswordFile\": \"<string>\"\n    },\n    \"creationDate\": \"<dateTime>\",\n    \"expirationDate\": \"<dateTime>\"\n  },\n  {\n    \"idKey\": {\n      \"keyCode\": \"<string>\",\n      \"providerUUID\": \"<uuid>\"\n    },\n    \"keyInfo\": {\n      \"airGapInstall\": \"<boolean>\",\n      \"deleteRemote\": \"<boolean>\",\n      \"installNodeExporter\": \"<boolean>\",\n      \"keyPairName\": \"<string>\",\n      \"managementState\": \"Unknown\",\n      \"nodeExporterPort\": \"<integer>\",\n      \"nodeExporterUser\": \"<string>\",\n      \"ntpServers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"passwordlessSudoAccess\": \"<boolean>\",\n      \"privateKey\": \"<string>\",\n      \"provisionInstanceScript\": \"<string>\",\n      \"publicKey\": \"<string>\",\n      \"setUpChrony\": \"<boolean>\",\n      \"showSetUpChrony\": \"<boolean>\",\n      \"skipKeyValidateAndUpload\": \"<boolean>\",\n      \"skipProvisioning\": \"<boolean>\",\n      \"sshPort\": \"<integer>\",\n      \"sshPrivateKeyContent\": \"<string>\",\n      \"sshUser\": \"<string>\",\n      \"vaultFile\": \"<string>\",\n      \"vaultPasswordFile\": \"<string>\"\n    },\n    \"creationDate\": \"<dateTime>\",\n    \"expirationDate\": \"<dateTime>\"\n  }\n]",
+                              "createdAt": "2026-07-28T03:36:15.000Z",
+                              "updatedAt": "2026-07-28T03:36:15.000Z",
+                              "uid": "35240-6ca85355-f613-4e99-81be-cb4bac8a0930"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:36:15.000Z",
+                          "updatedAt": "2026-07-28T03:36:15.000Z",
+                          "uid": "35240-4ef91790-1736-4e86-b691-229fc5632f9f"
+                        }
+                      ],
+                      "id": "8fac08f4-1e26-4cc2-b303-549d29447246",
+                      "createdAt": "2026-07-28T03:36:15.000Z",
+                      "updatedAt": "2026-07-28T03:36:15.000Z",
+                      "uid": "35240-8fac08f4-1e26-4cc2-b303-549d29447246"
+                    },
+                    {
+                      "name": "providers",
+                      "item": [
+                        {
+                          "name": "{pUUID}",
+                          "item": [
+                            {
+                              "name": "access_keys",
+                              "item": [
+                                {
+                                  "name": "{keyCode}",
+                                  "item": [
+                                    {
+                                      "name": "YugabyteDB Anywhere Delete an Access Key",
+                                      "id": "a991bc32-2a5f-4f3d-b062-ddf815fb77b5",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "DELETE",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/providers/:pUUID/access_keys/:keyCode",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "providers",
+                                            ":pUUID",
+                                            "access_keys",
+                                            ":keyCode"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "a9ba1559-92bd-4e2c-aa49-b3998c3127ae",
+                                              "key": "cUUID",
+                                              "value": "<uuid>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "943429f6-e763-4898-bfa8-cea0ff3bb9dc",
+                                              "key": "pUUID",
+                                              "value": "<uuid>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "64724b75-03a0-43e9-80b4-18c6fd31614e",
+                                              "key": "keyCode",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "c47a964c-f3cb-4fd5-a7f9-d6254cbdd46f",
+                                          "name": "successful operation",
+                                          "originalRequest": {
+                                            "method": "DELETE",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/api/v1/customers/:cUUID/providers/:pUUID/access_keys/:keyCode",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "api",
+                                                "v1",
+                                                "customers",
+                                                ":cUUID",
+                                                "providers",
+                                                ":pUUID",
+                                                "access_keys",
+                                                ":keyCode"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "cUUID"
+                                                },
+                                                {
+                                                  "key": "pUUID"
+                                                },
+                                                {
+                                                  "key": "keyCode"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"message\": \"<string>\",\n  \"success\": \"<boolean>\"\n}",
+                                          "createdAt": "2026-07-28T03:36:15.000Z",
+                                          "updatedAt": "2026-07-28T03:36:15.000Z",
+                                          "uid": "35240-c47a964c-f3cb-4fd5-a7f9-d6254cbdd46f"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T03:36:15.000Z",
+                                      "updatedAt": "2026-07-28T03:36:15.000Z",
+                                      "uid": "35240-a991bc32-2a5f-4f3d-b062-ddf815fb77b5"
+                                    },
+                                    {
+                                      "name": "YugabyteDB Anywhere Get an Access Key",
+                                      "id": "cd33bc3c-d571-424d-a701-e5f16130174a",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/providers/:pUUID/access_keys/:keyCode",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "providers",
+                                            ":pUUID",
+                                            "access_keys",
+                                            ":keyCode"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "0887f260-2ef6-482d-99f5-d315709ba039",
+                                              "key": "cUUID",
+                                              "value": "<uuid>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "586d1d9f-d94b-44c7-99a1-6a92b2b8e93b",
+                                              "key": "pUUID",
+                                              "value": "<uuid>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "18f6bc9b-4a0f-4225-b437-25b9d072d38d",
+                                              "key": "keyCode",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "f9227049-63ae-45e8-a73b-2eaf24e7e0f2",
+                                          "name": "successful operation",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/api/v1/customers/:cUUID/providers/:pUUID/access_keys/:keyCode",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "api",
+                                                "v1",
+                                                "customers",
+                                                ":cUUID",
+                                                "providers",
+                                                ":pUUID",
+                                                "access_keys",
+                                                ":keyCode"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "cUUID"
+                                                },
+                                                {
+                                                  "key": "pUUID"
+                                                },
+                                                {
+                                                  "key": "keyCode"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"idKey\": {\n    \"keyCode\": \"<string>\",\n    \"providerUUID\": \"<uuid>\"\n  },\n  \"keyInfo\": {\n    \"airGapInstall\": \"<boolean>\",\n    \"deleteRemote\": \"<boolean>\",\n    \"installNodeExporter\": \"<boolean>\",\n    \"keyPairName\": \"<string>\",\n    \"managementState\": \"YBAManaged\",\n    \"nodeExporterPort\": \"<integer>\",\n    \"nodeExporterUser\": \"<string>\",\n    \"ntpServers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"passwordlessSudoAccess\": \"<boolean>\",\n    \"privateKey\": \"<string>\",\n    \"provisionInstanceScript\": \"<string>\",\n    \"publicKey\": \"<string>\",\n    \"setUpChrony\": \"<boolean>\",\n    \"showSetUpChrony\": \"<boolean>\",\n    \"skipKeyValidateAndUpload\": \"<boolean>\",\n    \"skipProvisioning\": \"<boolean>\",\n    \"sshPort\": \"<integer>\",\n    \"sshPrivateKeyContent\": \"<string>\",\n    \"sshUser\": \"<string>\",\n    \"vaultFile\": \"<string>\",\n    \"vaultPasswordFile\": \"<string>\"\n  },\n  \"creationDate\": \"<dateTime>\",\n  \"expirationDate\": \"<dateTime>\"\n}",
+                                          "createdAt": "2026-07-28T03:36:15.000Z",
+                                          "updatedAt": "2026-07-28T03:36:15.000Z",
+                                          "uid": "35240-f9227049-63ae-45e8-a73b-2eaf24e7e0f2"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T03:36:15.000Z",
+                                      "updatedAt": "2026-07-28T03:36:15.000Z",
+                                      "uid": "35240-cd33bc3c-d571-424d-a701-e5f16130174a"
+                                    },
+                                    {
+                                      "name": "YugabyteDB Anywhere Modify the Existing Access Key",
+                                      "id": "d4cbf24b-3179-49c9-99d8-07174ce79a50",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"idKey\": {\n    \"keyCode\": \"<string>\",\n    \"providerUUID\": \"<uuid>\"\n  },\n  \"keyInfo\": {\n    \"airGapInstall\": \"<boolean>\",\n    \"deleteRemote\": \"<boolean>\",\n    \"installNodeExporter\": \"<boolean>\",\n    \"keyPairName\": \"<string>\",\n    \"managementState\": \"YBAManaged\",\n    \"nodeExporterPort\": \"<integer>\",\n    \"nodeExporterUser\": \"<string>\",\n    \"ntpServers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"passwordlessSudoAccess\": \"<boolean>\",\n    \"privateKey\": \"<string>\",\n    \"provisionInstanceScript\": \"<string>\",\n    \"publicKey\": \"<string>\",\n    \"setUpChrony\": \"<boolean>\",\n    \"showSetUpChrony\": \"<boolean>\",\n    \"skipKeyValidateAndUpload\": \"<boolean>\",\n    \"skipProvisioning\": \"<boolean>\",\n    \"sshPort\": \"<integer>\",\n    \"sshPrivateKeyContent\": \"<string>\",\n    \"sshUser\": \"<string>\",\n    \"vaultFile\": \"<string>\",\n    \"vaultPasswordFile\": \"<string>\"\n  },\n  \"creationDate\": \"<dateTime>\",\n  \"expirationDate\": \"<dateTime>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/providers/:pUUID/access_keys/:keyCode",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "providers",
+                                            ":pUUID",
+                                            "access_keys",
+                                            ":keyCode"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "3da4f4c8-843a-4691-b1ab-1fb96f1ec845",
+                                              "key": "cUUID",
+                                              "value": "<uuid>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "85417b3e-6ae4-47fe-81c9-9d9b959c56da",
+                                              "key": "pUUID",
+                                              "value": "<uuid>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "92c1bd88-76dc-415f-a267-164fef1dc528",
+                                              "key": "keyCode",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "WARNING: This is a preview API that could change."
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "54025425-8b66-48c0-826e-2ab5fc8290b6",
+                                          "name": "successful operation",
+                                          "originalRequest": {
+                                            "method": "PUT",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"idKey\": {\n    \"keyCode\": \"<string>\",\n    \"providerUUID\": \"<uuid>\"\n  },\n  \"keyInfo\": {\n    \"airGapInstall\": \"<boolean>\",\n    \"deleteRemote\": \"<boolean>\",\n    \"installNodeExporter\": \"<boolean>\",\n    \"keyPairName\": \"<string>\",\n    \"managementState\": \"YBAManaged\",\n    \"nodeExporterPort\": \"<integer>\",\n    \"nodeExporterUser\": \"<string>\",\n    \"ntpServers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"passwordlessSudoAccess\": \"<boolean>\",\n    \"privateKey\": \"<string>\",\n    \"provisionInstanceScript\": \"<string>\",\n    \"publicKey\": \"<string>\",\n    \"setUpChrony\": \"<boolean>\",\n    \"showSetUpChrony\": \"<boolean>\",\n    \"skipKeyValidateAndUpload\": \"<boolean>\",\n    \"skipProvisioning\": \"<boolean>\",\n    \"sshPort\": \"<integer>\",\n    \"sshPrivateKeyContent\": \"<string>\",\n    \"sshUser\": \"<string>\",\n    \"vaultFile\": \"<string>\",\n    \"vaultPasswordFile\": \"<string>\"\n  },\n  \"creationDate\": \"<dateTime>\",\n  \"expirationDate\": \"<dateTime>\"\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/api/v1/customers/:cUUID/providers/:pUUID/access_keys/:keyCode",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "api",
+                                                "v1",
+                                                "customers",
+                                                ":cUUID",
+                                                "providers",
+                                                ":pUUID",
+                                                "access_keys",
+                                                ":keyCode"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "cUUID"
+                                                },
+                                                {
+                                                  "key": "pUUID"
+                                                },
+                                                {
+                                                  "key": "keyCode"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"idKey\": {\n    \"keyCode\": \"<string>\",\n    \"providerUUID\": \"<uuid>\"\n  },\n  \"keyInfo\": {\n    \"airGapInstall\": \"<boolean>\",\n    \"deleteRemote\": \"<boolean>\",\n    \"installNodeExporter\": \"<boolean>\",\n    \"keyPairName\": \"<string>\",\n    \"managementState\": \"YBAManaged\",\n    \"nodeExporterPort\": \"<integer>\",\n    \"nodeExporterUser\": \"<string>\",\n    \"ntpServers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"passwordlessSudoAccess\": \"<boolean>\",\n    \"privateKey\": \"<string>\",\n    \"provisionInstanceScript\": \"<string>\",\n    \"publicKey\": \"<string>\",\n    \"setUpChrony\": \"<boolean>\",\n    \"showSetUpChrony\": \"<boolean>\",\n    \"skipKeyValidateAndUpload\": \"<boolean>\",\n    \"skipProvisioning\": \"<boolean>\",\n    \"sshPort\": \"<integer>\",\n    \"sshPrivateKeyContent\": \"<string>\",\n    \"sshUser\": \"<string>\",\n    \"vaultFile\": \"<string>\",\n    \"vaultPasswordFile\": \"<string>\"\n  },\n  \"creationDate\": \"<dateTime>\",\n  \"expirationDate\": \"<dateTime>\"\n}",
+                                          "createdAt": "2026-07-28T03:36:15.000Z",
+                                          "updatedAt": "2026-07-28T03:36:15.000Z",
+                                          "uid": "35240-54025425-8b66-48c0-826e-2ab5fc8290b6"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T03:36:15.000Z",
+                                      "updatedAt": "2026-07-28T03:36:15.000Z",
+                                      "uid": "35240-d4cbf24b-3179-49c9-99d8-07174ce79a50"
+                                    }
+                                  ],
+                                  "id": "c08f2aad-1c06-4065-a32c-18c481c96e09",
+                                  "createdAt": "2026-07-28T03:36:15.000Z",
+                                  "updatedAt": "2026-07-28T03:36:15.000Z",
+                                  "uid": "35240-c08f2aad-1c06-4065-a32c-18c481c96e09"
+                                },
+                                {
+                                  "name": "YugabyteDB Anywhere List Access Keys for a Specific Provider",
+                                  "id": "78fdd7b1-bc4d-4324-901d-ae799b5f420f",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/providers/:pUUID/access_keys",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "providers",
+                                        ":pUUID",
+                                        "access_keys"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "d17103a4-8040-443b-a8f5-8fdc2a9536b0",
+                                          "key": "cUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "e12e9909-d5cd-4f87-ba55-1c37e3e372f5",
+                                          "key": "pUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "ba679c76-7596-481e-82a9-835bea69203a",
+                                      "name": "successful operation",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/providers/:pUUID/access_keys",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "providers",
+                                            ":pUUID",
+                                            "access_keys"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "cUUID"
+                                            },
+                                            {
+                                              "key": "pUUID"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "[\n  {\n    \"idKey\": {\n      \"keyCode\": \"<string>\",\n      \"providerUUID\": \"<uuid>\"\n    },\n    \"keyInfo\": {\n      \"airGapInstall\": \"<boolean>\",\n      \"deleteRemote\": \"<boolean>\",\n      \"installNodeExporter\": \"<boolean>\",\n      \"keyPairName\": \"<string>\",\n      \"managementState\": \"Unknown\",\n      \"nodeExporterPort\": \"<integer>\",\n      \"nodeExporterUser\": \"<string>\",\n      \"ntpServers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"passwordlessSudoAccess\": \"<boolean>\",\n      \"privateKey\": \"<string>\",\n      \"provisionInstanceScript\": \"<string>\",\n      \"publicKey\": \"<string>\",\n      \"setUpChrony\": \"<boolean>\",\n      \"showSetUpChrony\": \"<boolean>\",\n      \"skipKeyValidateAndUpload\": \"<boolean>\",\n      \"skipProvisioning\": \"<boolean>\",\n      \"sshPort\": \"<integer>\",\n      \"sshPrivateKeyContent\": \"<string>\",\n      \"sshUser\": \"<string>\",\n      \"vaultFile\": \"<string>\",\n      \"vaultPasswordFile\": \"<string>\"\n    },\n    \"creationDate\": \"<dateTime>\",\n    \"expirationDate\": \"<dateTime>\"\n  },\n  {\n    \"idKey\": {\n      \"keyCode\": \"<string>\",\n      \"providerUUID\": \"<uuid>\"\n    },\n    \"keyInfo\": {\n      \"airGapInstall\": \"<boolean>\",\n      \"deleteRemote\": \"<boolean>\",\n      \"installNodeExporter\": \"<boolean>\",\n      \"keyPairName\": \"<string>\",\n      \"managementState\": \"Unknown\",\n      \"nodeExporterPort\": \"<integer>\",\n      \"nodeExporterUser\": \"<string>\",\n      \"ntpServers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"passwordlessSudoAccess\": \"<boolean>\",\n      \"privateKey\": \"<string>\",\n      \"provisionInstanceScript\": \"<string>\",\n      \"publicKey\": \"<string>\",\n      \"setUpChrony\": \"<boolean>\",\n      \"showSetUpChrony\": \"<boolean>\",\n      \"skipKeyValidateAndUpload\": \"<boolean>\",\n      \"skipProvisioning\": \"<boolean>\",\n      \"sshPort\": \"<integer>\",\n      \"sshPrivateKeyContent\": \"<string>\",\n      \"sshUser\": \"<string>\",\n      \"vaultFile\": \"<string>\",\n      \"vaultPasswordFile\": \"<string>\"\n    },\n    \"creationDate\": \"<dateTime>\",\n    \"expirationDate\": \"<dateTime>\"\n  }\n]",
+                                      "createdAt": "2026-07-28T03:36:15.000Z",
+                                      "updatedAt": "2026-07-28T03:36:15.000Z",
+                                      "uid": "35240-ba679c76-7596-481e-82a9-835bea69203a"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:36:15.000Z",
+                                  "updatedAt": "2026-07-28T03:36:15.000Z",
+                                  "uid": "35240-78fdd7b1-bc4d-4324-901d-ae799b5f420f"
+                                },
+                                {
+                                  "name": "YugabyteDB Anywhere Create/Upload Access Key for Onprem Provider Region - Deprecated",
+                                  "id": "8fd10ed4-54d2-46c1-8711-0042bdc55ac9",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"keyCode\": \"<string>\",\n  \"keyContent\": \"<string>\",\n  \"keyType\": \"PUBLIC\",\n  \"expirationThresholdDays\": \"<integer>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/providers/:pUUID/access_keys",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "providers",
+                                        ":pUUID",
+                                        "access_keys"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "3ece2c80-ff42-4414-9b8a-d5432ec813d5",
+                                          "key": "cUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "f51c7920-aa8e-4ca4-a5bf-9c4950b23900",
+                                          "key": "pUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "<b style=\"color:#ff0000\">Deprecated since YBA version 2.20.0.0.</b></p>Use /api/v1/customers/{cUUID}/provider/{pUUID}/edit instead for adding the key"
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "91246946-89ea-44ba-a1a9-4c06f11395ec",
+                                      "name": "successful operation",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"keyCode\": \"<string>\",\n  \"keyContent\": \"<string>\",\n  \"keyType\": \"PUBLIC\",\n  \"expirationThresholdDays\": \"<integer>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/providers/:pUUID/access_keys",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "providers",
+                                            ":pUUID",
+                                            "access_keys"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "cUUID"
+                                            },
+                                            {
+                                              "key": "pUUID"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"idKey\": {\n    \"keyCode\": \"<string>\",\n    \"providerUUID\": \"<uuid>\"\n  },\n  \"keyInfo\": {\n    \"airGapInstall\": \"<boolean>\",\n    \"deleteRemote\": \"<boolean>\",\n    \"installNodeExporter\": \"<boolean>\",\n    \"keyPairName\": \"<string>\",\n    \"managementState\": \"YBAManaged\",\n    \"nodeExporterPort\": \"<integer>\",\n    \"nodeExporterUser\": \"<string>\",\n    \"ntpServers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"passwordlessSudoAccess\": \"<boolean>\",\n    \"privateKey\": \"<string>\",\n    \"provisionInstanceScript\": \"<string>\",\n    \"publicKey\": \"<string>\",\n    \"setUpChrony\": \"<boolean>\",\n    \"showSetUpChrony\": \"<boolean>\",\n    \"skipKeyValidateAndUpload\": \"<boolean>\",\n    \"skipProvisioning\": \"<boolean>\",\n    \"sshPort\": \"<integer>\",\n    \"sshPrivateKeyContent\": \"<string>\",\n    \"sshUser\": \"<string>\",\n    \"vaultFile\": \"<string>\",\n    \"vaultPasswordFile\": \"<string>\"\n  },\n  \"creationDate\": \"<dateTime>\",\n  \"expirationDate\": \"<dateTime>\"\n}",
+                                      "createdAt": "2026-07-28T03:36:15.000Z",
+                                      "updatedAt": "2026-07-28T03:36:15.000Z",
+                                      "uid": "35240-91246946-89ea-44ba-a1a9-4c06f11395ec"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:36:15.000Z",
+                                  "updatedAt": "2026-07-28T03:36:15.000Z",
+                                  "uid": "35240-8fd10ed4-54d2-46c1-8711-0042bdc55ac9"
+                                }
+                              ],
+                              "id": "68f9ad0f-8d71-4ce2-89bf-4a89b5d65a0d",
+                              "createdAt": "2026-07-28T03:36:15.000Z",
+                              "updatedAt": "2026-07-28T03:36:15.000Z",
+                              "uid": "35240-68f9ad0f-8d71-4ce2-89bf-4a89b5d65a0d"
+                            }
+                          ],
+                          "id": "1d2a9622-5fb0-4a7d-bd89-fe4f1effd16b",
+                          "createdAt": "2026-07-28T03:36:15.000Z",
+                          "updatedAt": "2026-07-28T03:36:15.000Z",
+                          "uid": "35240-1d2a9622-5fb0-4a7d-bd89-fe4f1effd16b"
+                        }
+                      ],
+                      "id": "c4a29595-75ea-4f0b-bb80-f2bdfc677b4e",
+                      "createdAt": "2026-07-28T03:36:15.000Z",
+                      "updatedAt": "2026-07-28T03:36:15.000Z",
+                      "uid": "35240-c4a29595-75ea-4f0b-bb80-f2bdfc677b4e"
+                    }
+                  ],
+                  "id": "d4136cc2-b076-4320-b377-137465ffab9c",
+                  "createdAt": "2026-07-28T03:36:15.000Z",
+                  "updatedAt": "2026-07-28T03:36:15.000Z",
+                  "uid": "35240-d4136cc2-b076-4320-b377-137465ffab9c"
+                }
+              ],
+              "id": "982940d2-3cf9-4091-9c06-d2fb2018db2b",
+              "createdAt": "2026-07-28T03:36:15.000Z",
+              "updatedAt": "2026-07-28T03:36:15.000Z",
+              "uid": "35240-982940d2-3cf9-4091-9c06-d2fb2018db2b"
+            }
+          ],
+          "id": "a4407c5a-1c78-449d-a92d-6a7a72bbbe92",
+          "createdAt": "2026-07-28T03:36:15.000Z",
+          "updatedAt": "2026-07-28T03:36:15.000Z",
+          "uid": "35240-a4407c5a-1c78-449d-a92d-6a7a72bbbe92"
+        }
+      ],
+      "id": "e5818ef4-2343-40be-ba93-650029e49b4c",
+      "createdAt": "2026-07-28T03:36:15.000Z",
+      "updatedAt": "2026-07-28T03:36:15.000Z",
+      "uid": "35240-e5818ef4-2343-40be-ba93-650029e49b4c"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.yugabyte.com/api/public/v1"
+    }
+  ]
+}

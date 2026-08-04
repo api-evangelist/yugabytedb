@@ -1,0 +1,1629 @@
+{
+  "info": {
+    "_postman_id": "9d757f71-ff98-4759-957f-da04c0789d68",
+    "name": "YugabyteDB Aeon REST Access Keys Table management API",
+    "description": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:38:50.000Z",
+    "updatedAt": "2026-07-28T03:38:51.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9d757f71-ff98-4759-957f-da04c0789d68"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "customers",
+              "item": [
+                {
+                  "name": "{cUUID}",
+                  "item": [
+                    {
+                      "name": "universes",
+                      "item": [
+                        {
+                          "name": "{uniUUID}",
+                          "item": [
+                            {
+                              "name": "namespaces",
+                              "item": [
+                                {
+                                  "name": "YugabyteDB Anywhere Get a List of All Namespaces in the Specified Universe.",
+                                  "id": "199cbd61-b714-493b-a46f-59506d7d3a29",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/namespaces?includeSystemNamespaces=false",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "universes",
+                                        ":uniUUID",
+                                        "namespaces"
+                                      ],
+                                      "query": [
+                                        {
+                                          "key": "includeSystemNamespaces",
+                                          "value": "false"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "2faa638e-6f8a-47e1-878c-00d5c5a645cd",
+                                          "key": "cUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "358e0b3f-6dd7-45b7-b410-c474e437d80a",
+                                          "key": "uniUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "WARNING: This is a preview API that could change."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "e3c4f592-0d60-4d13-883b-27a0ca448b55",
+                                      "name": "successful operation",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/namespaces?includeSystemNamespaces=false",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "universes",
+                                            ":uniUUID",
+                                            "namespaces"
+                                          ],
+                                          "query": [
+                                            {
+                                              "key": "includeSystemNamespaces",
+                                              "value": "false"
+                                            }
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "cUUID"
+                                            },
+                                            {
+                                              "key": "uniUUID"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "[\n  {\n    \"name\": \"<string>\",\n    \"namespaceUUID\": \"<uuid>\",\n    \"tableType\": \"REDIS_TABLE_TYPE\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"namespaceUUID\": \"<uuid>\",\n    \"tableType\": \"PGSQL_TABLE_TYPE\"\n  }\n]",
+                                      "createdAt": "2026-07-28T03:38:51.000Z",
+                                      "updatedAt": "2026-07-28T03:38:51.000Z",
+                                      "uid": "35240-e3c4f592-0d60-4d13-883b-27a0ca448b55"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:38:51.000Z",
+                                  "updatedAt": "2026-07-28T03:38:51.000Z",
+                                  "uid": "35240-199cbd61-b714-493b-a46f-59506d7d3a29"
+                                }
+                              ],
+                              "id": "9574ec91-fffb-40c1-bb50-680ad89980f2",
+                              "createdAt": "2026-07-28T03:38:51.000Z",
+                              "updatedAt": "2026-07-28T03:38:51.000Z",
+                              "uid": "35240-9574ec91-fffb-40c1-bb50-680ad89980f2"
+                            },
+                            {
+                              "name": "tables",
+                              "item": [
+                                {
+                                  "name": "{tableUUID}",
+                                  "item": [
+                                    {
+                                      "name": "bulk_import",
+                                      "item": [
+                                        {
+                                          "name": "YugabyteDB Anywhere Bulk Import Data",
+                                          "id": "6fff99a4-eaba-42e0-9bfc-6351e661a69b",
+                                          "protocolProfileBehavior": {
+                                            "disableBodyPruning": true
+                                          },
+                                          "request": {
+                                            "method": "PUT",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"creatingUser\": {\n    \"email\": \"<string>\",\n    \"groupMemberships\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"primary\": \"<boolean>\",\n    \"authTokenIssueDate\": \"<dateTime>\",\n    \"creationDate\": \"<dateTime>\",\n    \"customerUUID\": \"<uuid>\",\n    \"ldapSpecifiedRole\": \"<boolean>\",\n    \"oidcJwtAuthToken\": \"<string>\",\n    \"role\": \"ConnectOnly\",\n    \"timezone\": \"<string>\",\n    \"userType\": \"oidc\",\n    \"uuid\": \"<uuid>\"\n  },\n  \"platformUrl\": \"<string>\",\n  \"s3Bucket\": \"<string>\",\n  \"sleepAfterMasterRestartMillis\": \"<integer>\",\n  \"sleepAfterTServerRestartMillis\": \"<integer>\",\n  \"cmkArn\": \"<string>\",\n  \"communicationPorts\": {\n    \"internalYsqlServerRpcPort\": \"<integer>\",\n    \"masterHttpPort\": \"<integer>\",\n    \"masterRpcPort\": \"<integer>\",\n    \"nodeExporterPort\": \"<integer>\",\n    \"otelCollectorMetricsPort\": \"<integer>\",\n    \"redisServerHttpPort\": \"<integer>\",\n    \"redisServerRpcPort\": \"<integer>\",\n    \"tserverHttpPort\": \"<integer>\",\n    \"tserverRpcPort\": \"<integer>\",\n    \"ybControllerHttpPort\": \"<integer>\",\n    \"ybControllerrRpcPort\": \"<integer>\",\n    \"yqlServerHttpPort\": \"<integer>\",\n    \"yqlServerRpcPort\": \"<integer>\",\n    \"ysqlServerHttpPort\": \"<integer>\",\n    \"ysqlServerRpcPort\": \"<integer>\"\n  },\n  \"deviceInfo\": {\n    \"cloudVolumeEncryption\": {\n      \"enableVolumeEncryption\": \"<boolean>\",\n      \"kmsConfigUUID\": \"<uuid>\"\n    },\n    \"diskIops\": \"<integer>\",\n    \"mountPoints\": \"<string>\",\n    \"numVolumes\": \"<integer>\",\n    \"storageClass\": \"<string>\",\n    \"storageType\": \"GP2\",\n    \"throughput\": \"<integer>\",\n    \"volumeSize\": \"<integer>\"\n  },\n  \"enableYbc\": \"<boolean>\",\n  \"encryptionAtRestConfig\": {\n    \"encryptionAtRestEnabled\": \"<boolean>\",\n    \"kmsConfigUUID\": \"<uuid>\",\n    \"opType\": \"ENABLE\",\n    \"type\": \"DATA_KEY\"\n  },\n  \"errorString\": \"<string>\",\n  \"expectedUniverseVersion\": \"<integer>\",\n  \"extraDependencies\": {\n    \"installNodeExporter\": \"<boolean>\"\n  },\n  \"installYbc\": \"<boolean>\",\n  \"instanceCount\": \"<integer>\",\n  \"keyspace\": \"<string>\",\n  \"nodeDetailsSet\": [\n    {\n      \"autoSyncMasterAddrs\": \"<boolean>\",\n      \"azUuid\": \"<uuid>\",\n      \"cloudInfo\": {\n        \"assignPublicIP\": \"<boolean>\",\n        \"az\": \"<string>\",\n        \"cloud\": \"<string>\",\n        \"instance_type\": \"<string>\",\n        \"kubernetesNamespace\": \"<string>\",\n        \"kubernetesPodName\": \"<string>\",\n        \"lun_indexes\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"mount_roots\": \"<string>\",\n        \"private_dns\": \"<string>\",\n        \"private_ip\": \"<string>\",\n        \"public_dns\": \"<string>\",\n        \"public_ip\": \"<string>\",\n        \"region\": \"<string>\",\n        \"root_volume\": \"<string>\",\n        \"secondary_private_ip\": \"<string>\",\n        \"secondary_subnet_id\": \"<string>\",\n        \"subnet_id\": \"<string>\",\n        \"useTimeSync\": \"<boolean>\"\n      },\n      \"cronsActive\": \"<boolean>\",\n      \"dedicatedTo\": \"TSERVER\",\n      \"disksAreMountedByUUID\": \"<boolean>\",\n      \"internalYsqlServerRpcPort\": \"<integer>\",\n      \"isMaster\": \"<boolean>\",\n      \"isRedisServer\": \"<boolean>\",\n      \"isTserver\": \"<boolean>\",\n      \"isYqlServer\": \"<boolean>\",\n      \"isYsqlServer\": \"<boolean>\",\n      \"lastVolumeUpdateTime\": \"<dateTime>\",\n      \"machineImage\": \"<string>\",\n      \"masterHttpPort\": \"<integer>\",\n      \"masterRpcPort\": \"<integer>\",\n      \"masterState\": \"ToStop\",\n      \"nodeExporterPort\": \"<integer>\",\n      \"nodeIdx\": \"<integer>\",\n      \"nodeName\": \"<string>\",\n      \"nodeUuid\": \"<uuid>\",\n      \"otelCollectorMetricsPort\": \"<integer>\",\n      \"placementUuid\": \"<uuid>\",\n      \"redisServerHttpPort\": \"<integer>\",\n      \"redisServerRpcPort\": \"<integer>\",\n      \"sshPortOverride\": \"<integer>\",\n      \"sshUserOverride\": \"<string>\",\n      \"state\": \"Provisioned\",\n      \"tserverHttpPort\": \"<integer>\",\n      \"tserverRpcPort\": \"<integer>\",\n      \"ybControllerHttpPort\": \"<integer>\",\n      \"ybControllerRpcPort\": \"<integer>\",\n      \"ybPrebuiltAmi\": \"<boolean>\",\n      \"yqlServerHttpPort\": \"<integer>\",\n      \"yqlServerRpcPort\": \"<integer>\",\n      \"ysqlServerHttpPort\": \"<integer>\",\n      \"ysqlServerRpcPort\": \"<integer>\"\n    },\n    {\n      \"autoSyncMasterAddrs\": \"<boolean>\",\n      \"azUuid\": \"<uuid>\",\n      \"cloudInfo\": {\n        \"assignPublicIP\": \"<boolean>\",\n        \"az\": \"<string>\",\n        \"cloud\": \"<string>\",\n        \"instance_type\": \"<string>\",\n        \"kubernetesNamespace\": \"<string>\",\n        \"kubernetesPodName\": \"<string>\",\n        \"lun_indexes\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"mount_roots\": \"<string>\",\n        \"private_dns\": \"<string>\",\n        \"private_ip\": \"<string>\",\n        \"public_dns\": \"<string>\",\n        \"public_ip\": \"<string>\",\n        \"region\": \"<string>\",\n        \"root_volume\": \"<string>\",\n        \"secondary_private_ip\": \"<string>\",\n        \"secondary_subnet_id\": \"<string>\",\n        \"subnet_id\": \"<string>\",\n        \"useTimeSync\": \"<boolean>\"\n      },\n      \"cronsActive\": \"<boolean>\",\n      \"dedicatedTo\": \"CONTROLLER\",\n      \"disksAreMountedByUUID\": \"<boolean>\",\n      \"internalYsqlServerRpcPort\": \"<integer>\",\n      \"isMaster\": \"<boolean>\",\n      \"isRedisServer\": \"<boolean>\",\n      \"isTserver\": \"<boolean>\",\n      \"isYqlServer\": \"<boolean>\",\n      \"isYsqlServer\": \"<boolean>\",\n      \"lastVolumeUpdateTime\": \"<dateTime>\",\n      \"machineImage\": \"<string>\",\n      \"masterHttpPort\": \"<integer>\",\n      \"masterRpcPort\": \"<integer>\",\n      \"masterState\": \"Configured\",\n      \"nodeExporterPort\": \"<integer>\",\n      \"nodeIdx\": \"<integer>\",\n      \"nodeName\": \"<string>\",\n      \"nodeUuid\": \"<uuid>\",\n      \"otelCollectorMetricsPort\": \"<integer>\",\n      \"placementUuid\": \"<uuid>\",\n      \"redisServerHttpPort\": \"<integer>\",\n      \"redisServerRpcPort\": \"<integer>\",\n      \"sshPortOverride\": \"<integer>\",\n      \"sshUserOverride\": \"<string>\",\n      \"state\": \"InstanceStopping\",\n      \"tserverHttpPort\": \"<integer>\",\n      \"tserverRpcPort\": \"<integer>\",\n      \"ybControllerHttpPort\": \"<integer>\",\n      \"ybControllerRpcPort\": \"<integer>\",\n      \"ybPrebuiltAmi\": \"<boolean>\",\n      \"yqlServerHttpPort\": \"<integer>\",\n      \"yqlServerRpcPort\": \"<integer>\",\n      \"ysqlServerHttpPort\": \"<integer>\",\n      \"ysqlServerRpcPort\": \"<integer>\"\n    }\n  ],\n  \"nodeExporterUser\": \"<string>\",\n  \"platformVersion\": \"<string>\",\n  \"previousTaskUUID\": \"<uuid>\",\n  \"runOnlyPrechecks\": \"<boolean>\",\n  \"sourceXClusterConfigs\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"sse\": \"<boolean>\",\n  \"tableName\": \"<string>\",\n  \"tableUUID\": \"<uuid>\",\n  \"targetXClusterConfigs\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"universeUUID\": \"<uuid>\",\n  \"ybPrevSoftwareVersion\": \"<string>\",\n  \"ybcInstalled\": \"<boolean>\",\n  \"ybcSoftwareVersion\": \"<string>\"\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/tables/:tableUUID/bulk_import",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "api",
+                                                "v1",
+                                                "customers",
+                                                ":cUUID",
+                                                "universes",
+                                                ":uniUUID",
+                                                "tables",
+                                                ":tableUUID",
+                                                "bulk_import"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "id": "bb764b67-97d7-4df8-bf2f-ab03d2a08c78",
+                                                  "key": "cUUID",
+                                                  "value": "<uuid>",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "d431b916-ce4a-4b62-9fe4-b968a9ed62ed",
+                                                  "key": "uniUUID",
+                                                  "value": "<uuid>",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "cef1f687-4340-4003-b1e2-48532f17b1cb",
+                                                  "key": "tableUUID",
+                                                  "value": "<uuid>",
+                                                  "description": "(Required) "
+                                                }
+                                              ]
+                                            },
+                                            "description": "YbaApi Internal. Bulk import data into the specified table. This is currently AWS-only."
+                                          },
+                                          "response": [
+                                            {
+                                              "id": "37042a8d-8aad-41ae-bbeb-daac5e13099d",
+                                              "name": "successful operation",
+                                              "originalRequest": {
+                                                "method": "PUT",
+                                                "header": [
+                                                  {
+                                                    "key": "Content-Type",
+                                                    "value": "application/json"
+                                                  },
+                                                  {
+                                                    "key": "Accept",
+                                                    "value": "application/json"
+                                                  },
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "body": {
+                                                  "mode": "raw",
+                                                  "raw": "{\n  \"creatingUser\": {\n    \"email\": \"<string>\",\n    \"groupMemberships\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"primary\": \"<boolean>\",\n    \"authTokenIssueDate\": \"<dateTime>\",\n    \"creationDate\": \"<dateTime>\",\n    \"customerUUID\": \"<uuid>\",\n    \"ldapSpecifiedRole\": \"<boolean>\",\n    \"oidcJwtAuthToken\": \"<string>\",\n    \"role\": \"ConnectOnly\",\n    \"timezone\": \"<string>\",\n    \"userType\": \"oidc\",\n    \"uuid\": \"<uuid>\"\n  },\n  \"platformUrl\": \"<string>\",\n  \"s3Bucket\": \"<string>\",\n  \"sleepAfterMasterRestartMillis\": \"<integer>\",\n  \"sleepAfterTServerRestartMillis\": \"<integer>\",\n  \"cmkArn\": \"<string>\",\n  \"communicationPorts\": {\n    \"internalYsqlServerRpcPort\": \"<integer>\",\n    \"masterHttpPort\": \"<integer>\",\n    \"masterRpcPort\": \"<integer>\",\n    \"nodeExporterPort\": \"<integer>\",\n    \"otelCollectorMetricsPort\": \"<integer>\",\n    \"redisServerHttpPort\": \"<integer>\",\n    \"redisServerRpcPort\": \"<integer>\",\n    \"tserverHttpPort\": \"<integer>\",\n    \"tserverRpcPort\": \"<integer>\",\n    \"ybControllerHttpPort\": \"<integer>\",\n    \"ybControllerrRpcPort\": \"<integer>\",\n    \"yqlServerHttpPort\": \"<integer>\",\n    \"yqlServerRpcPort\": \"<integer>\",\n    \"ysqlServerHttpPort\": \"<integer>\",\n    \"ysqlServerRpcPort\": \"<integer>\"\n  },\n  \"deviceInfo\": {\n    \"cloudVolumeEncryption\": {\n      \"enableVolumeEncryption\": \"<boolean>\",\n      \"kmsConfigUUID\": \"<uuid>\"\n    },\n    \"diskIops\": \"<integer>\",\n    \"mountPoints\": \"<string>\",\n    \"numVolumes\": \"<integer>\",\n    \"storageClass\": \"<string>\",\n    \"storageType\": \"GP2\",\n    \"throughput\": \"<integer>\",\n    \"volumeSize\": \"<integer>\"\n  },\n  \"enableYbc\": \"<boolean>\",\n  \"encryptionAtRestConfig\": {\n    \"encryptionAtRestEnabled\": \"<boolean>\",\n    \"kmsConfigUUID\": \"<uuid>\",\n    \"opType\": \"ENABLE\",\n    \"type\": \"DATA_KEY\"\n  },\n  \"errorString\": \"<string>\",\n  \"expectedUniverseVersion\": \"<integer>\",\n  \"extraDependencies\": {\n    \"installNodeExporter\": \"<boolean>\"\n  },\n  \"installYbc\": \"<boolean>\",\n  \"instanceCount\": \"<integer>\",\n  \"keyspace\": \"<string>\",\n  \"nodeDetailsSet\": [\n    {\n      \"autoSyncMasterAddrs\": \"<boolean>\",\n      \"azUuid\": \"<uuid>\",\n      \"cloudInfo\": {\n        \"assignPublicIP\": \"<boolean>\",\n        \"az\": \"<string>\",\n        \"cloud\": \"<string>\",\n        \"instance_type\": \"<string>\",\n        \"kubernetesNamespace\": \"<string>\",\n        \"kubernetesPodName\": \"<string>\",\n        \"lun_indexes\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"mount_roots\": \"<string>\",\n        \"private_dns\": \"<string>\",\n        \"private_ip\": \"<string>\",\n        \"public_dns\": \"<string>\",\n        \"public_ip\": \"<string>\",\n        \"region\": \"<string>\",\n        \"root_volume\": \"<string>\",\n        \"secondary_private_ip\": \"<string>\",\n        \"secondary_subnet_id\": \"<string>\",\n        \"subnet_id\": \"<string>\",\n        \"useTimeSync\": \"<boolean>\"\n      },\n      \"cronsActive\": \"<boolean>\",\n      \"dedicatedTo\": \"TSERVER\",\n      \"disksAreMountedByUUID\": \"<boolean>\",\n      \"internalYsqlServerRpcPort\": \"<integer>\",\n      \"isMaster\": \"<boolean>\",\n      \"isRedisServer\": \"<boolean>\",\n      \"isTserver\": \"<boolean>\",\n      \"isYqlServer\": \"<boolean>\",\n      \"isYsqlServer\": \"<boolean>\",\n      \"lastVolumeUpdateTime\": \"<dateTime>\",\n      \"machineImage\": \"<string>\",\n      \"masterHttpPort\": \"<integer>\",\n      \"masterRpcPort\": \"<integer>\",\n      \"masterState\": \"ToStop\",\n      \"nodeExporterPort\": \"<integer>\",\n      \"nodeIdx\": \"<integer>\",\n      \"nodeName\": \"<string>\",\n      \"nodeUuid\": \"<uuid>\",\n      \"otelCollectorMetricsPort\": \"<integer>\",\n      \"placementUuid\": \"<uuid>\",\n      \"redisServerHttpPort\": \"<integer>\",\n      \"redisServerRpcPort\": \"<integer>\",\n      \"sshPortOverride\": \"<integer>\",\n      \"sshUserOverride\": \"<string>\",\n      \"state\": \"Provisioned\",\n      \"tserverHttpPort\": \"<integer>\",\n      \"tserverRpcPort\": \"<integer>\",\n      \"ybControllerHttpPort\": \"<integer>\",\n      \"ybControllerRpcPort\": \"<integer>\",\n      \"ybPrebuiltAmi\": \"<boolean>\",\n      \"yqlServerHttpPort\": \"<integer>\",\n      \"yqlServerRpcPort\": \"<integer>\",\n      \"ysqlServerHttpPort\": \"<integer>\",\n      \"ysqlServerRpcPort\": \"<integer>\"\n    },\n    {\n      \"autoSyncMasterAddrs\": \"<boolean>\",\n      \"azUuid\": \"<uuid>\",\n      \"cloudInfo\": {\n        \"assignPublicIP\": \"<boolean>\",\n        \"az\": \"<string>\",\n        \"cloud\": \"<string>\",\n        \"instance_type\": \"<string>\",\n        \"kubernetesNamespace\": \"<string>\",\n        \"kubernetesPodName\": \"<string>\",\n        \"lun_indexes\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"mount_roots\": \"<string>\",\n        \"private_dns\": \"<string>\",\n        \"private_ip\": \"<string>\",\n        \"public_dns\": \"<string>\",\n        \"public_ip\": \"<string>\",\n        \"region\": \"<string>\",\n        \"root_volume\": \"<string>\",\n        \"secondary_private_ip\": \"<string>\",\n        \"secondary_subnet_id\": \"<string>\",\n        \"subnet_id\": \"<string>\",\n        \"useTimeSync\": \"<boolean>\"\n      },\n      \"cronsActive\": \"<boolean>\",\n      \"dedicatedTo\": \"CONTROLLER\",\n      \"disksAreMountedByUUID\": \"<boolean>\",\n      \"internalYsqlServerRpcPort\": \"<integer>\",\n      \"isMaster\": \"<boolean>\",\n      \"isRedisServer\": \"<boolean>\",\n      \"isTserver\": \"<boolean>\",\n      \"isYqlServer\": \"<boolean>\",\n      \"isYsqlServer\": \"<boolean>\",\n      \"lastVolumeUpdateTime\": \"<dateTime>\",\n      \"machineImage\": \"<string>\",\n      \"masterHttpPort\": \"<integer>\",\n      \"masterRpcPort\": \"<integer>\",\n      \"masterState\": \"Configured\",\n      \"nodeExporterPort\": \"<integer>\",\n      \"nodeIdx\": \"<integer>\",\n      \"nodeName\": \"<string>\",\n      \"nodeUuid\": \"<uuid>\",\n      \"otelCollectorMetricsPort\": \"<integer>\",\n      \"placementUuid\": \"<uuid>\",\n      \"redisServerHttpPort\": \"<integer>\",\n      \"redisServerRpcPort\": \"<integer>\",\n      \"sshPortOverride\": \"<integer>\",\n      \"sshUserOverride\": \"<string>\",\n      \"state\": \"InstanceStopping\",\n      \"tserverHttpPort\": \"<integer>\",\n      \"tserverRpcPort\": \"<integer>\",\n      \"ybControllerHttpPort\": \"<integer>\",\n      \"ybControllerRpcPort\": \"<integer>\",\n      \"ybPrebuiltAmi\": \"<boolean>\",\n      \"yqlServerHttpPort\": \"<integer>\",\n      \"yqlServerRpcPort\": \"<integer>\",\n      \"ysqlServerHttpPort\": \"<integer>\",\n      \"ysqlServerRpcPort\": \"<integer>\"\n    }\n  ],\n  \"nodeExporterUser\": \"<string>\",\n  \"platformVersion\": \"<string>\",\n  \"previousTaskUUID\": \"<uuid>\",\n  \"runOnlyPrechecks\": \"<boolean>\",\n  \"sourceXClusterConfigs\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"sse\": \"<boolean>\",\n  \"tableName\": \"<string>\",\n  \"tableUUID\": \"<uuid>\",\n  \"targetXClusterConfigs\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"universeUUID\": \"<uuid>\",\n  \"ybPrevSoftwareVersion\": \"<string>\",\n  \"ybcInstalled\": \"<boolean>\",\n  \"ybcSoftwareVersion\": \"<string>\"\n}",
+                                                  "options": {
+                                                    "raw": {
+                                                      "headerFamily": "json",
+                                                      "language": "json"
+                                                    }
+                                                  }
+                                                },
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/tables/:tableUUID/bulk_import",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "api",
+                                                    "v1",
+                                                    "customers",
+                                                    ":cUUID",
+                                                    "universes",
+                                                    ":uniUUID",
+                                                    "tables",
+                                                    ":tableUUID",
+                                                    "bulk_import"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "cUUID"
+                                                    },
+                                                    {
+                                                      "key": "uniUUID"
+                                                    },
+                                                    {
+                                                      "key": "tableUUID"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "OK",
+                                              "code": 200,
+                                              "_postman_previewlanguage": "json",
+                                              "header": [
+                                                {
+                                                  "key": "Content-Type",
+                                                  "value": "application/json"
+                                                }
+                                              ],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": "{\n  \"resourceUUID\": \"<uuid>\",\n  \"taskUUID\": \"<uuid>\"\n}",
+                                              "createdAt": "2026-07-28T03:38:51.000Z",
+                                              "updatedAt": "2026-07-28T03:38:51.000Z",
+                                              "uid": "35240-37042a8d-8aad-41ae-bbeb-daac5e13099d"
+                                            }
+                                          ],
+                                          "createdAt": "2026-07-28T03:38:51.000Z",
+                                          "updatedAt": "2026-07-28T03:38:51.000Z",
+                                          "uid": "35240-6fff99a4-eaba-42e0-9bfc-6351e661a69b"
+                                        }
+                                      ],
+                                      "id": "ff8b8560-f2ef-4dd4-b8f7-48b7ba057f4e",
+                                      "createdAt": "2026-07-28T03:38:51.000Z",
+                                      "updatedAt": "2026-07-28T03:38:51.000Z",
+                                      "uid": "35240-ff8b8560-f2ef-4dd4-b8f7-48b7ba057f4e"
+                                    },
+                                    {
+                                      "name": "create_backup",
+                                      "item": [
+                                        {
+                                          "name": "Create a single-table backup",
+                                          "id": "f9930bcf-4cc8-4490-acbc-8e6027e76fb6",
+                                          "protocolProfileBehavior": {
+                                            "disableBodyPruning": true
+                                          },
+                                          "request": {
+                                            "method": "PUT",
+                                            "header": [],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/tables/:tableUUID/create_backup",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "api",
+                                                "v1",
+                                                "customers",
+                                                ":cUUID",
+                                                "universes",
+                                                ":uniUUID",
+                                                "tables",
+                                                ":tableUUID",
+                                                "create_backup"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "id": "05c5ad6b-8723-4675-a89e-9b76555da53d",
+                                                  "key": "cUUID",
+                                                  "value": "",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "7388667e-2a96-493a-ad0c-d51f0b537323",
+                                                  "key": "uniUUID",
+                                                  "value": "",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "51854049-91a7-44d7-87c3-3f574cc0677c",
+                                                  "key": "tableUUID",
+                                                  "value": "",
+                                                  "description": "(Required) "
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "response": [
+                                            {
+                                              "id": "be5753d3-4134-44ee-b901-a8b172ed422d",
+                                              "name": "successful operation",
+                                              "originalRequest": {
+                                                "method": "PUT",
+                                                "header": [
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/tables/:tableUUID/create_backup",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "api",
+                                                    "v1",
+                                                    "customers",
+                                                    ":cUUID",
+                                                    "universes",
+                                                    ":uniUUID",
+                                                    "tables",
+                                                    ":tableUUID",
+                                                    "create_backup"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "cUUID"
+                                                    },
+                                                    {
+                                                      "key": "uniUUID"
+                                                    },
+                                                    {
+                                                      "key": "tableUUID"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "OK",
+                                              "code": 200,
+                                              "_postman_previewlanguage": "text",
+                                              "header": [],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": null,
+                                              "createdAt": "2026-07-28T03:38:51.000Z",
+                                              "updatedAt": "2026-07-28T03:38:51.000Z",
+                                              "uid": "35240-be5753d3-4134-44ee-b901-a8b172ed422d"
+                                            }
+                                          ],
+                                          "createdAt": "2026-07-28T03:38:51.000Z",
+                                          "updatedAt": "2026-07-28T03:38:51.000Z",
+                                          "uid": "35240-f9930bcf-4cc8-4490-acbc-8e6027e76fb6"
+                                        }
+                                      ],
+                                      "id": "933a2c01-a468-4efb-8183-c00c7145d5b2",
+                                      "createdAt": "2026-07-28T03:38:51.000Z",
+                                      "updatedAt": "2026-07-28T03:38:51.000Z",
+                                      "uid": "35240-933a2c01-a468-4efb-8183-c00c7145d5b2"
+                                    },
+                                    {
+                                      "name": "YugabyteDB Anywhere Drop a YugabyteDB Table",
+                                      "id": "aec714fd-5868-43e3-9842-ba49ab4610ac",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "DELETE",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/tables/:tableUUID",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "universes",
+                                            ":uniUUID",
+                                            "tables",
+                                            ":tableUUID"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "b76a30a8-3f73-4e61-bedc-3172d59f0455",
+                                              "key": "cUUID",
+                                              "value": "<uuid>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "669da47e-0204-41d5-96b9-fc918c9d167f",
+                                              "key": "uniUUID",
+                                              "value": "<uuid>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "d2744dc5-6e5b-42e9-b18c-8a5952b51654",
+                                              "key": "tableUUID",
+                                              "value": "<uuid>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "YbaApi Internal."
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "93272a5a-c1ed-42dd-ada0-386390fab43a",
+                                          "name": "successful operation",
+                                          "originalRequest": {
+                                            "method": "DELETE",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/tables/:tableUUID",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "api",
+                                                "v1",
+                                                "customers",
+                                                ":cUUID",
+                                                "universes",
+                                                ":uniUUID",
+                                                "tables",
+                                                ":tableUUID"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "cUUID"
+                                                },
+                                                {
+                                                  "key": "uniUUID"
+                                                },
+                                                {
+                                                  "key": "tableUUID"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"resourceUUID\": \"<uuid>\",\n  \"taskUUID\": \"<uuid>\"\n}",
+                                          "createdAt": "2026-07-28T03:38:51.000Z",
+                                          "updatedAt": "2026-07-28T03:38:51.000Z",
+                                          "uid": "35240-93272a5a-c1ed-42dd-ada0-386390fab43a"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T03:38:51.000Z",
+                                      "updatedAt": "2026-07-28T03:38:51.000Z",
+                                      "uid": "35240-aec714fd-5868-43e3-9842-ba49ab4610ac"
+                                    },
+                                    {
+                                      "name": "YugabyteDB Anywhere Describe a Table",
+                                      "id": "4b91b6d2-2130-47a3-9a62-4a94abcb11dd",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/tables/:tableUUID",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "universes",
+                                            ":uniUUID",
+                                            "tables",
+                                            ":tableUUID"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "48de1091-b0b9-4ce1-83e3-eccd998b258e",
+                                              "key": "cUUID",
+                                              "value": "<uuid>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "cd32533a-c0e6-49d6-a699-1ddf0f1ac219",
+                                              "key": "uniUUID",
+                                              "value": "<uuid>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "bb4fb573-0328-4dce-9812-51d1ea9260be",
+                                              "key": "tableUUID",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "WARNING: This is a preview API that could change."
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "1e3516ec-4f0d-4f9d-b0f5-96afa01a4928",
+                                          "name": "successful operation",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/tables/:tableUUID",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "api",
+                                                "v1",
+                                                "customers",
+                                                ":cUUID",
+                                                "universes",
+                                                ":uniUUID",
+                                                "tables",
+                                                ":tableUUID"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "cUUID"
+                                                },
+                                                {
+                                                  "key": "uniUUID"
+                                                },
+                                                {
+                                                  "key": "tableUUID"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"creatingUser\": {\n    \"email\": \"<string>\",\n    \"groupMemberships\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"primary\": \"<boolean>\",\n    \"authTokenIssueDate\": \"<dateTime>\",\n    \"creationDate\": \"<dateTime>\",\n    \"customerUUID\": \"<uuid>\",\n    \"ldapSpecifiedRole\": \"<boolean>\",\n    \"oidcJwtAuthToken\": \"<string>\",\n    \"role\": \"ReadOnly\",\n    \"timezone\": \"<string>\",\n    \"userType\": \"oidc\",\n    \"uuid\": \"<uuid>\"\n  },\n  \"platformUrl\": \"<string>\",\n  \"sleepAfterMasterRestartMillis\": \"<integer>\",\n  \"sleepAfterTServerRestartMillis\": \"<integer>\",\n  \"tableDetails\": {\n    \"columns\": [\n      {\n        \"columnOrder\": \"<integer>\",\n        \"isClusteringKey\": \"<boolean>\",\n        \"isPartitionKey\": \"<boolean>\",\n        \"keyType\": \"LIST\",\n        \"name\": \"<string>\",\n        \"sortOrder\": \"NONE\",\n        \"type\": \"INT\",\n        \"valueType\": \"FLOAT\"\n      },\n      {\n        \"columnOrder\": \"<integer>\",\n        \"isClusteringKey\": \"<boolean>\",\n        \"isPartitionKey\": \"<boolean>\",\n        \"keyType\": \"LIST\",\n        \"name\": \"<string>\",\n        \"sortOrder\": \"DESC\",\n        \"type\": \"SMALLINT\",\n        \"valueType\": \"BLOB\"\n      }\n    ],\n    \"keyspace\": \"<string>\",\n    \"splitValues\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"tableName\": \"<string>\",\n    \"ttlInSeconds\": \"<long>\"\n  },\n  \"tableType\": \"REDIS_TABLE_TYPE\",\n  \"tableUUID\": \"<uuid>\",\n  \"cmkArn\": \"<string>\",\n  \"communicationPorts\": {\n    \"internalYsqlServerRpcPort\": \"<integer>\",\n    \"masterHttpPort\": \"<integer>\",\n    \"masterRpcPort\": \"<integer>\",\n    \"nodeExporterPort\": \"<integer>\",\n    \"otelCollectorMetricsPort\": \"<integer>\",\n    \"redisServerHttpPort\": \"<integer>\",\n    \"redisServerRpcPort\": \"<integer>\",\n    \"tserverHttpPort\": \"<integer>\",\n    \"tserverRpcPort\": \"<integer>\",\n    \"ybControllerHttpPort\": \"<integer>\",\n    \"ybControllerrRpcPort\": \"<integer>\",\n    \"yqlServerHttpPort\": \"<integer>\",\n    \"yqlServerRpcPort\": \"<integer>\",\n    \"ysqlServerHttpPort\": \"<integer>\",\n    \"ysqlServerRpcPort\": \"<integer>\"\n  },\n  \"deviceInfo\": {\n    \"cloudVolumeEncryption\": {\n      \"enableVolumeEncryption\": \"<boolean>\",\n      \"kmsConfigUUID\": \"<uuid>\"\n    },\n    \"diskIops\": \"<integer>\",\n    \"mountPoints\": \"<string>\",\n    \"numVolumes\": \"<integer>\",\n    \"storageClass\": \"<string>\",\n    \"storageType\": \"GP3\",\n    \"throughput\": \"<integer>\",\n    \"volumeSize\": \"<integer>\"\n  },\n  \"enableYbc\": \"<boolean>\",\n  \"encryptionAtRestConfig\": {\n    \"encryptionAtRestEnabled\": \"<boolean>\",\n    \"kmsConfigUUID\": \"<uuid>\",\n    \"opType\": \"DISABLE\",\n    \"type\": \"CMK\"\n  },\n  \"errorString\": \"<string>\",\n  \"expectedUniverseVersion\": \"<integer>\",\n  \"extraDependencies\": {\n    \"installNodeExporter\": \"<boolean>\"\n  },\n  \"installYbc\": \"<boolean>\",\n  \"nodeDetailsSet\": [\n    {\n      \"autoSyncMasterAddrs\": \"<boolean>\",\n      \"azUuid\": \"<uuid>\",\n      \"cloudInfo\": {\n        \"assignPublicIP\": \"<boolean>\",\n        \"az\": \"<string>\",\n        \"cloud\": \"<string>\",\n        \"instance_type\": \"<string>\",\n        \"kubernetesNamespace\": \"<string>\",\n        \"kubernetesPodName\": \"<string>\",\n        \"lun_indexes\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"mount_roots\": \"<string>\",\n        \"private_dns\": \"<string>\",\n        \"private_ip\": \"<string>\",\n        \"public_dns\": \"<string>\",\n        \"public_ip\": \"<string>\",\n        \"region\": \"<string>\",\n        \"root_volume\": \"<string>\",\n        \"secondary_private_ip\": \"<string>\",\n        \"secondary_subnet_id\": \"<string>\",\n        \"subnet_id\": \"<string>\",\n        \"useTimeSync\": \"<boolean>\"\n      },\n      \"cronsActive\": \"<boolean>\",\n      \"dedicatedTo\": \"MASTER\",\n      \"disksAreMountedByUUID\": \"<boolean>\",\n      \"internalYsqlServerRpcPort\": \"<integer>\",\n      \"isMaster\": \"<boolean>\",\n      \"isRedisServer\": \"<boolean>\",\n      \"isTserver\": \"<boolean>\",\n      \"isYqlServer\": \"<boolean>\",\n      \"isYsqlServer\": \"<boolean>\",\n      \"lastVolumeUpdateTime\": \"<dateTime>\",\n      \"machineImage\": \"<string>\",\n      \"masterHttpPort\": \"<integer>\",\n      \"masterRpcPort\": \"<integer>\",\n      \"masterState\": \"ToStart\",\n      \"nodeExporterPort\": \"<integer>\",\n      \"nodeIdx\": \"<integer>\",\n      \"nodeName\": \"<string>\",\n      \"nodeUuid\": \"<uuid>\",\n      \"otelCollectorMetricsPort\": \"<integer>\",\n      \"placementUuid\": \"<uuid>\",\n      \"redisServerHttpPort\": \"<integer>\",\n      \"redisServerRpcPort\": \"<integer>\",\n      \"sshPortOverride\": \"<integer>\",\n      \"sshUserOverride\": \"<string>\",\n      \"state\": \"UpgradeSoftware\",\n      \"tserverHttpPort\": \"<integer>\",\n      \"tserverRpcPort\": \"<integer>\",\n      \"ybControllerHttpPort\": \"<integer>\",\n      \"ybControllerRpcPort\": \"<integer>\",\n      \"ybPrebuiltAmi\": \"<boolean>\",\n      \"yqlServerHttpPort\": \"<integer>\",\n      \"yqlServerRpcPort\": \"<integer>\",\n      \"ysqlServerHttpPort\": \"<integer>\",\n      \"ysqlServerRpcPort\": \"<integer>\"\n    },\n    {\n      \"autoSyncMasterAddrs\": \"<boolean>\",\n      \"azUuid\": \"<uuid>\",\n      \"cloudInfo\": {\n        \"assignPublicIP\": \"<boolean>\",\n        \"az\": \"<string>\",\n        \"cloud\": \"<string>\",\n        \"instance_type\": \"<string>\",\n        \"kubernetesNamespace\": \"<string>\",\n        \"kubernetesPodName\": \"<string>\",\n        \"lun_indexes\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"mount_roots\": \"<string>\",\n        \"private_dns\": \"<string>\",\n        \"private_ip\": \"<string>\",\n        \"public_dns\": \"<string>\",\n        \"public_ip\": \"<string>\",\n        \"region\": \"<string>\",\n        \"root_volume\": \"<string>\",\n        \"secondary_private_ip\": \"<string>\",\n        \"secondary_subnet_id\": \"<string>\",\n        \"subnet_id\": \"<string>\",\n        \"useTimeSync\": \"<boolean>\"\n      },\n      \"cronsActive\": \"<boolean>\",\n      \"dedicatedTo\": \"EITHER\",\n      \"disksAreMountedByUUID\": \"<boolean>\",\n      \"internalYsqlServerRpcPort\": \"<integer>\",\n      \"isMaster\": \"<boolean>\",\n      \"isRedisServer\": \"<boolean>\",\n      \"isTserver\": \"<boolean>\",\n      \"isYqlServer\": \"<boolean>\",\n      \"isYsqlServer\": \"<boolean>\",\n      \"lastVolumeUpdateTime\": \"<dateTime>\",\n      \"machineImage\": \"<string>\",\n      \"masterHttpPort\": \"<integer>\",\n      \"masterRpcPort\": \"<integer>\",\n      \"masterState\": \"ToStop\",\n      \"nodeExporterPort\": \"<integer>\",\n      \"nodeIdx\": \"<integer>\",\n      \"nodeName\": \"<string>\",\n      \"nodeUuid\": \"<uuid>\",\n      \"otelCollectorMetricsPort\": \"<integer>\",\n      \"placementUuid\": \"<uuid>\",\n      \"redisServerHttpPort\": \"<integer>\",\n      \"redisServerRpcPort\": \"<integer>\",\n      \"sshPortOverride\": \"<integer>\",\n      \"sshUserOverride\": \"<string>\",\n      \"state\": \"UpgradeMasterSoftware\",\n      \"tserverHttpPort\": \"<integer>\",\n      \"tserverRpcPort\": \"<integer>\",\n      \"ybControllerHttpPort\": \"<integer>\",\n      \"ybControllerRpcPort\": \"<integer>\",\n      \"ybPrebuiltAmi\": \"<boolean>\",\n      \"yqlServerHttpPort\": \"<integer>\",\n      \"yqlServerRpcPort\": \"<integer>\",\n      \"ysqlServerHttpPort\": \"<integer>\",\n      \"ysqlServerRpcPort\": \"<integer>\"\n    }\n  ],\n  \"nodeExporterUser\": \"<string>\",\n  \"platformVersion\": \"<string>\",\n  \"previousTaskUUID\": \"<uuid>\",\n  \"runOnlyPrechecks\": \"<boolean>\",\n  \"sourceXClusterConfigs\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"targetXClusterConfigs\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"universeUUID\": \"<uuid>\",\n  \"ybPrevSoftwareVersion\": \"<string>\",\n  \"ybcInstalled\": \"<boolean>\",\n  \"ybcSoftwareVersion\": \"<string>\"\n}",
+                                          "createdAt": "2026-07-28T03:38:51.000Z",
+                                          "updatedAt": "2026-07-28T03:38:51.000Z",
+                                          "uid": "35240-1e3516ec-4f0d-4f9d-b0f5-96afa01a4928"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T03:38:51.000Z",
+                                      "updatedAt": "2026-07-28T03:38:51.000Z",
+                                      "uid": "35240-4b91b6d2-2130-47a3-9a62-4a94abcb11dd"
+                                    },
+                                    {
+                                      "name": "YugabyteDB Anywhere Alter a YugabyteDB Table",
+                                      "id": "39b8c707-c9d0-4a88-acd0-2e73e5defcfd",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/tables/:tableUUID",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "universes",
+                                            ":uniUUID",
+                                            "tables",
+                                            ":tableUUID"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "5093602d-3a87-491e-9c72-522fa0706aed",
+                                              "key": "cUUID",
+                                              "value": "<uuid>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "3b2b701e-e7a4-4636-9d02-b292a8cae1bb",
+                                              "key": "uniUUID",
+                                              "value": "<uuid>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "929732b7-d047-4d70-a41f-5993abe781a4",
+                                              "key": "tableUUID",
+                                              "value": "<uuid>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "YbaApi Internal."
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "a37f7dca-6c6b-4098-b352-5818edcc3986",
+                                          "name": "successful operation",
+                                          "originalRequest": {
+                                            "method": "PUT",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/tables/:tableUUID",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "api",
+                                                "v1",
+                                                "customers",
+                                                ":cUUID",
+                                                "universes",
+                                                ":uniUUID",
+                                                "tables",
+                                                ":tableUUID"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "cUUID"
+                                                },
+                                                {
+                                                  "key": "uniUUID"
+                                                },
+                                                {
+                                                  "key": "tableUUID"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"dolor1\": {}\n}",
+                                          "createdAt": "2026-07-28T03:38:51.000Z",
+                                          "updatedAt": "2026-07-28T03:38:51.000Z",
+                                          "uid": "35240-a37f7dca-6c6b-4098-b352-5818edcc3986"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T03:38:51.000Z",
+                                      "updatedAt": "2026-07-28T03:38:51.000Z",
+                                      "uid": "35240-39b8c707-c9d0-4a88-acd0-2e73e5defcfd"
+                                    }
+                                  ],
+                                  "id": "48d45386-0803-432f-ab97-1015d5368a08",
+                                  "createdAt": "2026-07-28T03:38:51.000Z",
+                                  "updatedAt": "2026-07-28T03:38:51.000Z",
+                                  "uid": "35240-48d45386-0803-432f-ab97-1015d5368a08"
+                                },
+                                {
+                                  "name": "YugabyteDB Anywhere Get a List of All Tables in the Specified Universe",
+                                  "id": "e29f0026-fbf5-4f97-aa8c-ad1a57e10a8b",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/tables?includeParentTableInfo=false&excludeColocatedTables=false&includeColocatedParentTables=true&xClusterSupportedOnly=false",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "universes",
+                                        ":uniUUID",
+                                        "tables"
+                                      ],
+                                      "query": [
+                                        {
+                                          "key": "includeParentTableInfo",
+                                          "value": "false"
+                                        },
+                                        {
+                                          "key": "excludeColocatedTables",
+                                          "value": "false"
+                                        },
+                                        {
+                                          "key": "includeColocatedParentTables",
+                                          "value": "true"
+                                        },
+                                        {
+                                          "key": "xClusterSupportedOnly",
+                                          "value": "false"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "98ad1213-5cf1-409b-9765-64015aa4526a",
+                                          "key": "cUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "14cc69ee-9579-497a-8740-c1507497c21a",
+                                          "key": "uniUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "WARNING: This is a preview API that could change."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "b21fa4bc-22ca-42cd-8f6b-ff5ab9609433",
+                                      "name": "successful operation",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/tables?includeParentTableInfo=false&excludeColocatedTables=false&includeColocatedParentTables=true&xClusterSupportedOnly=false",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "universes",
+                                            ":uniUUID",
+                                            "tables"
+                                          ],
+                                          "query": [
+                                            {
+                                              "key": "includeParentTableInfo",
+                                              "value": "false"
+                                            },
+                                            {
+                                              "key": "excludeColocatedTables",
+                                              "value": "false"
+                                            },
+                                            {
+                                              "key": "includeColocatedParentTables",
+                                              "value": "true"
+                                            },
+                                            {
+                                              "key": "xClusterSupportedOnly",
+                                              "value": "false"
+                                            }
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "cUUID"
+                                            },
+                                            {
+                                              "key": "uniUUID"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "[\n  {\n    \"colocated\": \"<boolean>\",\n    \"colocationParentId\": \"<string>\",\n    \"indexTableIDs\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"keySpace\": \"<string>\",\n    \"mainTableUUID\": \"<uuid>\",\n    \"nameSpace\": \"<string>\",\n    \"parentTableUUID\": \"<uuid>\",\n    \"pgSchemaName\": \"<string>\",\n    \"relationType\": \"SYSTEM_TABLE_RELATION\",\n    \"sizeBytes\": \"<double>\",\n    \"tableID\": \"<string>\",\n    \"tableName\": \"<string>\",\n    \"tableSpace\": \"<string>\",\n    \"tableType\": \"PGSQL_TABLE_TYPE\",\n    \"tableUUID\": \"<uuid>\",\n    \"walSizeBytes\": \"<double>\"\n  },\n  {\n    \"colocated\": \"<boolean>\",\n    \"colocationParentId\": \"<string>\",\n    \"indexTableIDs\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"keySpace\": \"<string>\",\n    \"mainTableUUID\": \"<uuid>\",\n    \"nameSpace\": \"<string>\",\n    \"parentTableUUID\": \"<uuid>\",\n    \"pgSchemaName\": \"<string>\",\n    \"relationType\": \"SYSTEM_TABLE_RELATION\",\n    \"sizeBytes\": \"<double>\",\n    \"tableID\": \"<string>\",\n    \"tableName\": \"<string>\",\n    \"tableSpace\": \"<string>\",\n    \"tableType\": \"REDIS_TABLE_TYPE\",\n    \"tableUUID\": \"<uuid>\",\n    \"walSizeBytes\": \"<double>\"\n  }\n]",
+                                      "createdAt": "2026-07-28T03:38:51.000Z",
+                                      "updatedAt": "2026-07-28T03:38:51.000Z",
+                                      "uid": "35240-b21fa4bc-22ca-42cd-8f6b-ff5ab9609433"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:38:51.000Z",
+                                  "updatedAt": "2026-07-28T03:38:51.000Z",
+                                  "uid": "35240-e29f0026-fbf5-4f97-aa8c-ad1a57e10a8b"
+                                },
+                                {
+                                  "name": "YugabyteDB Anywhere Create a YugabyteDB Table",
+                                  "id": "6c9376cc-c727-470e-bb52-e8aa8f72bf5f",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"creatingUser\": {\n    \"email\": \"<string>\",\n    \"groupMemberships\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"primary\": \"<boolean>\",\n    \"authTokenIssueDate\": \"<dateTime>\",\n    \"creationDate\": \"<dateTime>\",\n    \"customerUUID\": \"<uuid>\",\n    \"ldapSpecifiedRole\": \"<boolean>\",\n    \"oidcJwtAuthToken\": \"<string>\",\n    \"role\": \"ReadOnly\",\n    \"timezone\": \"<string>\",\n    \"userType\": \"oidc\",\n    \"uuid\": \"<uuid>\"\n  },\n  \"platformUrl\": \"<string>\",\n  \"sleepAfterMasterRestartMillis\": \"<integer>\",\n  \"sleepAfterTServerRestartMillis\": \"<integer>\",\n  \"tableDetails\": {\n    \"columns\": [\n      {\n        \"columnOrder\": \"<integer>\",\n        \"isClusteringKey\": \"<boolean>\",\n        \"isPartitionKey\": \"<boolean>\",\n        \"keyType\": \"LIST\",\n        \"name\": \"<string>\",\n        \"sortOrder\": \"NONE\",\n        \"type\": \"INT\",\n        \"valueType\": \"FLOAT\"\n      },\n      {\n        \"columnOrder\": \"<integer>\",\n        \"isClusteringKey\": \"<boolean>\",\n        \"isPartitionKey\": \"<boolean>\",\n        \"keyType\": \"LIST\",\n        \"name\": \"<string>\",\n        \"sortOrder\": \"DESC\",\n        \"type\": \"SMALLINT\",\n        \"valueType\": \"BLOB\"\n      }\n    ],\n    \"keyspace\": \"<string>\",\n    \"splitValues\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"tableName\": \"<string>\",\n    \"ttlInSeconds\": \"<long>\"\n  },\n  \"tableType\": \"REDIS_TABLE_TYPE\",\n  \"tableUUID\": \"<uuid>\",\n  \"cmkArn\": \"<string>\",\n  \"communicationPorts\": {\n    \"internalYsqlServerRpcPort\": \"<integer>\",\n    \"masterHttpPort\": \"<integer>\",\n    \"masterRpcPort\": \"<integer>\",\n    \"nodeExporterPort\": \"<integer>\",\n    \"otelCollectorMetricsPort\": \"<integer>\",\n    \"redisServerHttpPort\": \"<integer>\",\n    \"redisServerRpcPort\": \"<integer>\",\n    \"tserverHttpPort\": \"<integer>\",\n    \"tserverRpcPort\": \"<integer>\",\n    \"ybControllerHttpPort\": \"<integer>\",\n    \"ybControllerrRpcPort\": \"<integer>\",\n    \"yqlServerHttpPort\": \"<integer>\",\n    \"yqlServerRpcPort\": \"<integer>\",\n    \"ysqlServerHttpPort\": \"<integer>\",\n    \"ysqlServerRpcPort\": \"<integer>\"\n  },\n  \"deviceInfo\": {\n    \"cloudVolumeEncryption\": {\n      \"enableVolumeEncryption\": \"<boolean>\",\n      \"kmsConfigUUID\": \"<uuid>\"\n    },\n    \"diskIops\": \"<integer>\",\n    \"mountPoints\": \"<string>\",\n    \"numVolumes\": \"<integer>\",\n    \"storageClass\": \"<string>\",\n    \"storageType\": \"GP3\",\n    \"throughput\": \"<integer>\",\n    \"volumeSize\": \"<integer>\"\n  },\n  \"enableYbc\": \"<boolean>\",\n  \"encryptionAtRestConfig\": {\n    \"encryptionAtRestEnabled\": \"<boolean>\",\n    \"kmsConfigUUID\": \"<uuid>\",\n    \"opType\": \"DISABLE\",\n    \"type\": \"CMK\"\n  },\n  \"errorString\": \"<string>\",\n  \"expectedUniverseVersion\": \"<integer>\",\n  \"extraDependencies\": {\n    \"installNodeExporter\": \"<boolean>\"\n  },\n  \"installYbc\": \"<boolean>\",\n  \"nodeDetailsSet\": [\n    {\n      \"autoSyncMasterAddrs\": \"<boolean>\",\n      \"azUuid\": \"<uuid>\",\n      \"cloudInfo\": {\n        \"assignPublicIP\": \"<boolean>\",\n        \"az\": \"<string>\",\n        \"cloud\": \"<string>\",\n        \"instance_type\": \"<string>\",\n        \"kubernetesNamespace\": \"<string>\",\n        \"kubernetesPodName\": \"<string>\",\n        \"lun_indexes\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"mount_roots\": \"<string>\",\n        \"private_dns\": \"<string>\",\n        \"private_ip\": \"<string>\",\n        \"public_dns\": \"<string>\",\n        \"public_ip\": \"<string>\",\n        \"region\": \"<string>\",\n        \"root_volume\": \"<string>\",\n        \"secondary_private_ip\": \"<string>\",\n        \"secondary_subnet_id\": \"<string>\",\n        \"subnet_id\": \"<string>\",\n        \"useTimeSync\": \"<boolean>\"\n      },\n      \"cronsActive\": \"<boolean>\",\n      \"dedicatedTo\": \"MASTER\",\n      \"disksAreMountedByUUID\": \"<boolean>\",\n      \"internalYsqlServerRpcPort\": \"<integer>\",\n      \"isMaster\": \"<boolean>\",\n      \"isRedisServer\": \"<boolean>\",\n      \"isTserver\": \"<boolean>\",\n      \"isYqlServer\": \"<boolean>\",\n      \"isYsqlServer\": \"<boolean>\",\n      \"lastVolumeUpdateTime\": \"<dateTime>\",\n      \"machineImage\": \"<string>\",\n      \"masterHttpPort\": \"<integer>\",\n      \"masterRpcPort\": \"<integer>\",\n      \"masterState\": \"ToStart\",\n      \"nodeExporterPort\": \"<integer>\",\n      \"nodeIdx\": \"<integer>\",\n      \"nodeName\": \"<string>\",\n      \"nodeUuid\": \"<uuid>\",\n      \"otelCollectorMetricsPort\": \"<integer>\",\n      \"placementUuid\": \"<uuid>\",\n      \"redisServerHttpPort\": \"<integer>\",\n      \"redisServerRpcPort\": \"<integer>\",\n      \"sshPortOverride\": \"<integer>\",\n      \"sshUserOverride\": \"<string>\",\n      \"state\": \"UpgradeSoftware\",\n      \"tserverHttpPort\": \"<integer>\",\n      \"tserverRpcPort\": \"<integer>\",\n      \"ybControllerHttpPort\": \"<integer>\",\n      \"ybControllerRpcPort\": \"<integer>\",\n      \"ybPrebuiltAmi\": \"<boolean>\",\n      \"yqlServerHttpPort\": \"<integer>\",\n      \"yqlServerRpcPort\": \"<integer>\",\n      \"ysqlServerHttpPort\": \"<integer>\",\n      \"ysqlServerRpcPort\": \"<integer>\"\n    },\n    {\n      \"autoSyncMasterAddrs\": \"<boolean>\",\n      \"azUuid\": \"<uuid>\",\n      \"cloudInfo\": {\n        \"assignPublicIP\": \"<boolean>\",\n        \"az\": \"<string>\",\n        \"cloud\": \"<string>\",\n        \"instance_type\": \"<string>\",\n        \"kubernetesNamespace\": \"<string>\",\n        \"kubernetesPodName\": \"<string>\",\n        \"lun_indexes\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"mount_roots\": \"<string>\",\n        \"private_dns\": \"<string>\",\n        \"private_ip\": \"<string>\",\n        \"public_dns\": \"<string>\",\n        \"public_ip\": \"<string>\",\n        \"region\": \"<string>\",\n        \"root_volume\": \"<string>\",\n        \"secondary_private_ip\": \"<string>\",\n        \"secondary_subnet_id\": \"<string>\",\n        \"subnet_id\": \"<string>\",\n        \"useTimeSync\": \"<boolean>\"\n      },\n      \"cronsActive\": \"<boolean>\",\n      \"dedicatedTo\": \"EITHER\",\n      \"disksAreMountedByUUID\": \"<boolean>\",\n      \"internalYsqlServerRpcPort\": \"<integer>\",\n      \"isMaster\": \"<boolean>\",\n      \"isRedisServer\": \"<boolean>\",\n      \"isTserver\": \"<boolean>\",\n      \"isYqlServer\": \"<boolean>\",\n      \"isYsqlServer\": \"<boolean>\",\n      \"lastVolumeUpdateTime\": \"<dateTime>\",\n      \"machineImage\": \"<string>\",\n      \"masterHttpPort\": \"<integer>\",\n      \"masterRpcPort\": \"<integer>\",\n      \"masterState\": \"ToStop\",\n      \"nodeExporterPort\": \"<integer>\",\n      \"nodeIdx\": \"<integer>\",\n      \"nodeName\": \"<string>\",\n      \"nodeUuid\": \"<uuid>\",\n      \"otelCollectorMetricsPort\": \"<integer>\",\n      \"placementUuid\": \"<uuid>\",\n      \"redisServerHttpPort\": \"<integer>\",\n      \"redisServerRpcPort\": \"<integer>\",\n      \"sshPortOverride\": \"<integer>\",\n      \"sshUserOverride\": \"<string>\",\n      \"state\": \"UpgradeMasterSoftware\",\n      \"tserverHttpPort\": \"<integer>\",\n      \"tserverRpcPort\": \"<integer>\",\n      \"ybControllerHttpPort\": \"<integer>\",\n      \"ybControllerRpcPort\": \"<integer>\",\n      \"ybPrebuiltAmi\": \"<boolean>\",\n      \"yqlServerHttpPort\": \"<integer>\",\n      \"yqlServerRpcPort\": \"<integer>\",\n      \"ysqlServerHttpPort\": \"<integer>\",\n      \"ysqlServerRpcPort\": \"<integer>\"\n    }\n  ],\n  \"nodeExporterUser\": \"<string>\",\n  \"platformVersion\": \"<string>\",\n  \"previousTaskUUID\": \"<uuid>\",\n  \"runOnlyPrechecks\": \"<boolean>\",\n  \"sourceXClusterConfigs\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"targetXClusterConfigs\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"universeUUID\": \"<uuid>\",\n  \"ybPrevSoftwareVersion\": \"<string>\",\n  \"ybcInstalled\": \"<boolean>\",\n  \"ybcSoftwareVersion\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/tables",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "universes",
+                                        ":uniUUID",
+                                        "tables"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "7673c6cd-a394-455d-9cd3-e98248960ee5",
+                                          "key": "cUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "8655fce7-5d77-4555-af1b-d1de79390963",
+                                          "key": "uniUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "YbaApi Internal."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "63181c7f-50f0-4897-8c7a-287f1e32d5e5",
+                                      "name": "successful operation",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"creatingUser\": {\n    \"email\": \"<string>\",\n    \"groupMemberships\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"primary\": \"<boolean>\",\n    \"authTokenIssueDate\": \"<dateTime>\",\n    \"creationDate\": \"<dateTime>\",\n    \"customerUUID\": \"<uuid>\",\n    \"ldapSpecifiedRole\": \"<boolean>\",\n    \"oidcJwtAuthToken\": \"<string>\",\n    \"role\": \"ReadOnly\",\n    \"timezone\": \"<string>\",\n    \"userType\": \"oidc\",\n    \"uuid\": \"<uuid>\"\n  },\n  \"platformUrl\": \"<string>\",\n  \"sleepAfterMasterRestartMillis\": \"<integer>\",\n  \"sleepAfterTServerRestartMillis\": \"<integer>\",\n  \"tableDetails\": {\n    \"columns\": [\n      {\n        \"columnOrder\": \"<integer>\",\n        \"isClusteringKey\": \"<boolean>\",\n        \"isPartitionKey\": \"<boolean>\",\n        \"keyType\": \"LIST\",\n        \"name\": \"<string>\",\n        \"sortOrder\": \"NONE\",\n        \"type\": \"INT\",\n        \"valueType\": \"FLOAT\"\n      },\n      {\n        \"columnOrder\": \"<integer>\",\n        \"isClusteringKey\": \"<boolean>\",\n        \"isPartitionKey\": \"<boolean>\",\n        \"keyType\": \"LIST\",\n        \"name\": \"<string>\",\n        \"sortOrder\": \"DESC\",\n        \"type\": \"SMALLINT\",\n        \"valueType\": \"BLOB\"\n      }\n    ],\n    \"keyspace\": \"<string>\",\n    \"splitValues\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"tableName\": \"<string>\",\n    \"ttlInSeconds\": \"<long>\"\n  },\n  \"tableType\": \"REDIS_TABLE_TYPE\",\n  \"tableUUID\": \"<uuid>\",\n  \"cmkArn\": \"<string>\",\n  \"communicationPorts\": {\n    \"internalYsqlServerRpcPort\": \"<integer>\",\n    \"masterHttpPort\": \"<integer>\",\n    \"masterRpcPort\": \"<integer>\",\n    \"nodeExporterPort\": \"<integer>\",\n    \"otelCollectorMetricsPort\": \"<integer>\",\n    \"redisServerHttpPort\": \"<integer>\",\n    \"redisServerRpcPort\": \"<integer>\",\n    \"tserverHttpPort\": \"<integer>\",\n    \"tserverRpcPort\": \"<integer>\",\n    \"ybControllerHttpPort\": \"<integer>\",\n    \"ybControllerrRpcPort\": \"<integer>\",\n    \"yqlServerHttpPort\": \"<integer>\",\n    \"yqlServerRpcPort\": \"<integer>\",\n    \"ysqlServerHttpPort\": \"<integer>\",\n    \"ysqlServerRpcPort\": \"<integer>\"\n  },\n  \"deviceInfo\": {\n    \"cloudVolumeEncryption\": {\n      \"enableVolumeEncryption\": \"<boolean>\",\n      \"kmsConfigUUID\": \"<uuid>\"\n    },\n    \"diskIops\": \"<integer>\",\n    \"mountPoints\": \"<string>\",\n    \"numVolumes\": \"<integer>\",\n    \"storageClass\": \"<string>\",\n    \"storageType\": \"GP3\",\n    \"throughput\": \"<integer>\",\n    \"volumeSize\": \"<integer>\"\n  },\n  \"enableYbc\": \"<boolean>\",\n  \"encryptionAtRestConfig\": {\n    \"encryptionAtRestEnabled\": \"<boolean>\",\n    \"kmsConfigUUID\": \"<uuid>\",\n    \"opType\": \"DISABLE\",\n    \"type\": \"CMK\"\n  },\n  \"errorString\": \"<string>\",\n  \"expectedUniverseVersion\": \"<integer>\",\n  \"extraDependencies\": {\n    \"installNodeExporter\": \"<boolean>\"\n  },\n  \"installYbc\": \"<boolean>\",\n  \"nodeDetailsSet\": [\n    {\n      \"autoSyncMasterAddrs\": \"<boolean>\",\n      \"azUuid\": \"<uuid>\",\n      \"cloudInfo\": {\n        \"assignPublicIP\": \"<boolean>\",\n        \"az\": \"<string>\",\n        \"cloud\": \"<string>\",\n        \"instance_type\": \"<string>\",\n        \"kubernetesNamespace\": \"<string>\",\n        \"kubernetesPodName\": \"<string>\",\n        \"lun_indexes\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"mount_roots\": \"<string>\",\n        \"private_dns\": \"<string>\",\n        \"private_ip\": \"<string>\",\n        \"public_dns\": \"<string>\",\n        \"public_ip\": \"<string>\",\n        \"region\": \"<string>\",\n        \"root_volume\": \"<string>\",\n        \"secondary_private_ip\": \"<string>\",\n        \"secondary_subnet_id\": \"<string>\",\n        \"subnet_id\": \"<string>\",\n        \"useTimeSync\": \"<boolean>\"\n      },\n      \"cronsActive\": \"<boolean>\",\n      \"dedicatedTo\": \"MASTER\",\n      \"disksAreMountedByUUID\": \"<boolean>\",\n      \"internalYsqlServerRpcPort\": \"<integer>\",\n      \"isMaster\": \"<boolean>\",\n      \"isRedisServer\": \"<boolean>\",\n      \"isTserver\": \"<boolean>\",\n      \"isYqlServer\": \"<boolean>\",\n      \"isYsqlServer\": \"<boolean>\",\n      \"lastVolumeUpdateTime\": \"<dateTime>\",\n      \"machineImage\": \"<string>\",\n      \"masterHttpPort\": \"<integer>\",\n      \"masterRpcPort\": \"<integer>\",\n      \"masterState\": \"ToStart\",\n      \"nodeExporterPort\": \"<integer>\",\n      \"nodeIdx\": \"<integer>\",\n      \"nodeName\": \"<string>\",\n      \"nodeUuid\": \"<uuid>\",\n      \"otelCollectorMetricsPort\": \"<integer>\",\n      \"placementUuid\": \"<uuid>\",\n      \"redisServerHttpPort\": \"<integer>\",\n      \"redisServerRpcPort\": \"<integer>\",\n      \"sshPortOverride\": \"<integer>\",\n      \"sshUserOverride\": \"<string>\",\n      \"state\": \"UpgradeSoftware\",\n      \"tserverHttpPort\": \"<integer>\",\n      \"tserverRpcPort\": \"<integer>\",\n      \"ybControllerHttpPort\": \"<integer>\",\n      \"ybControllerRpcPort\": \"<integer>\",\n      \"ybPrebuiltAmi\": \"<boolean>\",\n      \"yqlServerHttpPort\": \"<integer>\",\n      \"yqlServerRpcPort\": \"<integer>\",\n      \"ysqlServerHttpPort\": \"<integer>\",\n      \"ysqlServerRpcPort\": \"<integer>\"\n    },\n    {\n      \"autoSyncMasterAddrs\": \"<boolean>\",\n      \"azUuid\": \"<uuid>\",\n      \"cloudInfo\": {\n        \"assignPublicIP\": \"<boolean>\",\n        \"az\": \"<string>\",\n        \"cloud\": \"<string>\",\n        \"instance_type\": \"<string>\",\n        \"kubernetesNamespace\": \"<string>\",\n        \"kubernetesPodName\": \"<string>\",\n        \"lun_indexes\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"mount_roots\": \"<string>\",\n        \"private_dns\": \"<string>\",\n        \"private_ip\": \"<string>\",\n        \"public_dns\": \"<string>\",\n        \"public_ip\": \"<string>\",\n        \"region\": \"<string>\",\n        \"root_volume\": \"<string>\",\n        \"secondary_private_ip\": \"<string>\",\n        \"secondary_subnet_id\": \"<string>\",\n        \"subnet_id\": \"<string>\",\n        \"useTimeSync\": \"<boolean>\"\n      },\n      \"cronsActive\": \"<boolean>\",\n      \"dedicatedTo\": \"EITHER\",\n      \"disksAreMountedByUUID\": \"<boolean>\",\n      \"internalYsqlServerRpcPort\": \"<integer>\",\n      \"isMaster\": \"<boolean>\",\n      \"isRedisServer\": \"<boolean>\",\n      \"isTserver\": \"<boolean>\",\n      \"isYqlServer\": \"<boolean>\",\n      \"isYsqlServer\": \"<boolean>\",\n      \"lastVolumeUpdateTime\": \"<dateTime>\",\n      \"machineImage\": \"<string>\",\n      \"masterHttpPort\": \"<integer>\",\n      \"masterRpcPort\": \"<integer>\",\n      \"masterState\": \"ToStop\",\n      \"nodeExporterPort\": \"<integer>\",\n      \"nodeIdx\": \"<integer>\",\n      \"nodeName\": \"<string>\",\n      \"nodeUuid\": \"<uuid>\",\n      \"otelCollectorMetricsPort\": \"<integer>\",\n      \"placementUuid\": \"<uuid>\",\n      \"redisServerHttpPort\": \"<integer>\",\n      \"redisServerRpcPort\": \"<integer>\",\n      \"sshPortOverride\": \"<integer>\",\n      \"sshUserOverride\": \"<string>\",\n      \"state\": \"UpgradeMasterSoftware\",\n      \"tserverHttpPort\": \"<integer>\",\n      \"tserverRpcPort\": \"<integer>\",\n      \"ybControllerHttpPort\": \"<integer>\",\n      \"ybControllerRpcPort\": \"<integer>\",\n      \"ybPrebuiltAmi\": \"<boolean>\",\n      \"yqlServerHttpPort\": \"<integer>\",\n      \"yqlServerRpcPort\": \"<integer>\",\n      \"ysqlServerHttpPort\": \"<integer>\",\n      \"ysqlServerRpcPort\": \"<integer>\"\n    }\n  ],\n  \"nodeExporterUser\": \"<string>\",\n  \"platformVersion\": \"<string>\",\n  \"previousTaskUUID\": \"<uuid>\",\n  \"runOnlyPrechecks\": \"<boolean>\",\n  \"sourceXClusterConfigs\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"targetXClusterConfigs\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"universeUUID\": \"<uuid>\",\n  \"ybPrevSoftwareVersion\": \"<string>\",\n  \"ybcInstalled\": \"<boolean>\",\n  \"ybcSoftwareVersion\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/tables",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "universes",
+                                            ":uniUUID",
+                                            "tables"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "cUUID"
+                                            },
+                                            {
+                                              "key": "uniUUID"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"resourceUUID\": \"<uuid>\",\n  \"taskUUID\": \"<uuid>\"\n}",
+                                      "createdAt": "2026-07-28T03:38:51.000Z",
+                                      "updatedAt": "2026-07-28T03:38:51.000Z",
+                                      "uid": "35240-63181c7f-50f0-4897-8c7a-287f1e32d5e5"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:38:51.000Z",
+                                  "updatedAt": "2026-07-28T03:38:51.000Z",
+                                  "uid": "35240-6c9376cc-c727-470e-bb52-e8aa8f72bf5f"
+                                }
+                              ],
+                              "id": "39ef58b6-c787-4296-aaf8-1e07cee14bba",
+                              "createdAt": "2026-07-28T03:38:51.000Z",
+                              "updatedAt": "2026-07-28T03:38:51.000Z",
+                              "uid": "35240-39ef58b6-c787-4296-aaf8-1e07cee14bba"
+                            },
+                            {
+                              "name": "tablespaces",
+                              "item": [
+                                {
+                                  "name": "YugabyteDB Anywhere Get a List of All Tablespaces of a Given Universe.",
+                                  "id": "a66602f7-12b8-4fad-83a4-037935b74afa",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/tablespaces",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "universes",
+                                        ":uniUUID",
+                                        "tablespaces"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "8d3aafa6-d4f1-4173-80d1-2170ea0aa493",
+                                          "key": "cUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "401e6aa8-ccc1-495e-afa5-06be17b4d75e",
+                                          "key": "uniUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "WARNING: This is a preview API that could change."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "55c9afe5-fab3-45af-bba6-6fac45aa7de9",
+                                      "name": "successful operation",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/tablespaces",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "universes",
+                                            ":uniUUID",
+                                            "tablespaces"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "cUUID"
+                                            },
+                                            {
+                                              "key": "uniUUID"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "[\n  {\n    \"name\": \"<string>\",\n    \"placementBlocks\": [\n      {\n        \"cloud\": \"<string>\",\n        \"region\": \"<string>\",\n        \"zone\": \"<string>\",\n        \"leader_preference\": \"<integer>\",\n        \"min_num_replicas\": \"<integer>\"\n      }\n    ],\n    \"numReplicas\": \"<integer>\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"placementBlocks\": [\n      {\n        \"cloud\": \"<string>\",\n        \"region\": \"<string>\",\n        \"zone\": \"<string>\",\n        \"leader_preference\": \"<integer>\",\n        \"min_num_replicas\": \"<integer>\"\n      }\n    ],\n    \"numReplicas\": \"<integer>\"\n  }\n]",
+                                      "createdAt": "2026-07-28T03:38:51.000Z",
+                                      "updatedAt": "2026-07-28T03:38:51.000Z",
+                                      "uid": "35240-55c9afe5-fab3-45af-bba6-6fac45aa7de9"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:38:51.000Z",
+                                  "updatedAt": "2026-07-28T03:38:51.000Z",
+                                  "uid": "35240-a66602f7-12b8-4fad-83a4-037935b74afa"
+                                },
+                                {
+                                  "name": "YugabyteDB Anywhere Create TableSpaces",
+                                  "id": "b2bbb37d-c03e-47c0-8c8c-fd53027f4242",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"tablespaceInfos\": [\n    {\n      \"name\": \"<string>\",\n      \"placementBlocks\": [\n        {\n          \"cloud\": \"<string>\",\n          \"region\": \"<string>\",\n          \"zone\": \"<string>\",\n          \"leader_preference\": \"<integer>\",\n          \"min_num_replicas\": \"<integer>\"\n        }\n      ],\n      \"numReplicas\": \"<integer>\"\n    }\n  ]\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/tablespaces",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "universes",
+                                        ":uniUUID",
+                                        "tablespaces"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "de2951e5-929e-421a-82bd-347ee1b85834",
+                                          "key": "cUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "fdc451e8-521b-4402-b5fe-e9676f0bfb34",
+                                          "key": "uniUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "YbaApi Internal."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "8ddec97d-761e-422b-b5c4-4e7c45ddae6f",
+                                      "name": "successful operation",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"tablespaceInfos\": [\n    {\n      \"name\": \"<string>\",\n      \"placementBlocks\": [\n        {\n          \"cloud\": \"<string>\",\n          \"region\": \"<string>\",\n          \"zone\": \"<string>\",\n          \"leader_preference\": \"<integer>\",\n          \"min_num_replicas\": \"<integer>\"\n        }\n      ],\n      \"numReplicas\": \"<integer>\"\n    }\n  ]\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/tablespaces",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "universes",
+                                            ":uniUUID",
+                                            "tablespaces"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "cUUID"
+                                            },
+                                            {
+                                              "key": "uniUUID"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"resourceUUID\": \"<uuid>\",\n  \"taskUUID\": \"<uuid>\"\n}",
+                                      "createdAt": "2026-07-28T03:38:51.000Z",
+                                      "updatedAt": "2026-07-28T03:38:51.000Z",
+                                      "uid": "35240-8ddec97d-761e-422b-b5c4-4e7c45ddae6f"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:38:51.000Z",
+                                  "updatedAt": "2026-07-28T03:38:51.000Z",
+                                  "uid": "35240-b2bbb37d-c03e-47c0-8c8c-fd53027f4242"
+                                }
+                              ],
+                              "id": "919295fe-d361-47d3-a0e7-1bf843d13aa1",
+                              "createdAt": "2026-07-28T03:38:51.000Z",
+                              "updatedAt": "2026-07-28T03:38:51.000Z",
+                              "uid": "35240-919295fe-d361-47d3-a0e7-1bf843d13aa1"
+                            },
+                            {
+                              "name": "multi_table_backup",
+                              "item": [
+                                {
+                                  "name": "Create a multi-table backup",
+                                  "id": "e148b62a-a8eb-4d64-921e-d55d22519419",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "PUT",
+                                    "header": [],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/multi_table_backup",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "universes",
+                                        ":uniUUID",
+                                        "multi_table_backup"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "7baefec2-713c-4b28-9fb2-6e12083acd64",
+                                          "key": "cUUID",
+                                          "value": "",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "7d22c39b-ba92-4a77-82f8-715b738eacc8",
+                                          "key": "uniUUID",
+                                          "value": "",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "fff6bb50-347f-4092-821a-8821b2dd3a13",
+                                      "name": "If requested schedule backup. Changes from upstream: This API call actually returns a task, not a Schedule",
+                                      "originalRequest": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/multi_table_backup",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "universes",
+                                            ":uniUUID",
+                                            "multi_table_backup"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "cUUID"
+                                            },
+                                            {
+                                              "key": "uniUUID"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T03:38:51.000Z",
+                                      "updatedAt": "2026-07-28T03:38:51.000Z",
+                                      "uid": "35240-fff6bb50-347f-4092-821a-8821b2dd3a13"
+                                    },
+                                    {
+                                      "id": "7caa4555-f21a-4f40-b2bd-267d4ac7121e",
+                                      "name": "When request fails validations. Changes from upstream: Return code 400 is not in swagger spec",
+                                      "originalRequest": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/multi_table_backup",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "universes",
+                                            ":uniUUID",
+                                            "multi_table_backup"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "cUUID"
+                                            },
+                                            {
+                                              "key": "uniUUID"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Bad Request",
+                                      "code": 400,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T03:38:51.000Z",
+                                      "updatedAt": "2026-07-28T03:38:51.000Z",
+                                      "uid": "35240-7caa4555-f21a-4f40-b2bd-267d4ac7121e"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:38:51.000Z",
+                                  "updatedAt": "2026-07-28T03:38:51.000Z",
+                                  "uid": "35240-e148b62a-a8eb-4d64-921e-d55d22519419"
+                                }
+                              ],
+                              "id": "2155ee81-4ace-43eb-92fa-d2ed3994ca4c",
+                              "createdAt": "2026-07-28T03:38:51.000Z",
+                              "updatedAt": "2026-07-28T03:38:51.000Z",
+                              "uid": "35240-2155ee81-4ace-43eb-92fa-d2ed3994ca4c"
+                            }
+                          ],
+                          "id": "54dff577-8335-4d39-87bd-3f6b464546b1",
+                          "createdAt": "2026-07-28T03:38:51.000Z",
+                          "updatedAt": "2026-07-28T03:38:51.000Z",
+                          "uid": "35240-54dff577-8335-4d39-87bd-3f6b464546b1"
+                        }
+                      ],
+                      "id": "470302e2-a6df-4fb1-b11d-c69c62faf22b",
+                      "createdAt": "2026-07-28T03:38:51.000Z",
+                      "updatedAt": "2026-07-28T03:38:51.000Z",
+                      "uid": "35240-470302e2-a6df-4fb1-b11d-c69c62faf22b"
+                    }
+                  ],
+                  "id": "fe9a266b-06f4-4655-8bc6-a6b15b2c5543",
+                  "createdAt": "2026-07-28T03:38:51.000Z",
+                  "updatedAt": "2026-07-28T03:38:51.000Z",
+                  "uid": "35240-fe9a266b-06f4-4655-8bc6-a6b15b2c5543"
+                }
+              ],
+              "id": "e88ce1ef-376a-47e0-81f1-8856b421fd71",
+              "createdAt": "2026-07-28T03:38:51.000Z",
+              "updatedAt": "2026-07-28T03:38:51.000Z",
+              "uid": "35240-e88ce1ef-376a-47e0-81f1-8856b421fd71"
+            },
+            {
+              "name": "metadata",
+              "item": [
+                {
+                  "name": "yql_data_types",
+                  "item": [
+                    {
+                      "name": "YugabyteDB Anywhere List Column Types",
+                      "id": "c76a9ab6-600b-47e2-b1b9-db77b713c070",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/metadata/yql_data_types",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "metadata",
+                            "yql_data_types"
+                          ]
+                        },
+                        "description": "YbaApi Internal. Get a list of all defined column types."
+                      },
+                      "response": [
+                        {
+                          "id": "161d6a2b-4902-4087-8751-920b2a005782",
+                          "name": "successful operation",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/metadata/yql_data_types",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "metadata",
+                                "yql_data_types"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  \"TIMEUUID\",\n  \"INT\"\n]",
+                          "createdAt": "2026-07-28T03:38:51.000Z",
+                          "updatedAt": "2026-07-28T03:38:51.000Z",
+                          "uid": "35240-161d6a2b-4902-4087-8751-920b2a005782"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:38:51.000Z",
+                      "updatedAt": "2026-07-28T03:38:51.000Z",
+                      "uid": "35240-c76a9ab6-600b-47e2-b1b9-db77b713c070"
+                    }
+                  ],
+                  "id": "40c86b77-0689-4bc1-9a82-2cfa5709b7d7",
+                  "createdAt": "2026-07-28T03:38:51.000Z",
+                  "updatedAt": "2026-07-28T03:38:51.000Z",
+                  "uid": "35240-40c86b77-0689-4bc1-9a82-2cfa5709b7d7"
+                }
+              ],
+              "id": "5163c341-6265-4e0d-a122-58ae29a00b69",
+              "createdAt": "2026-07-28T03:38:51.000Z",
+              "updatedAt": "2026-07-28T03:38:51.000Z",
+              "uid": "35240-5163c341-6265-4e0d-a122-58ae29a00b69"
+            }
+          ],
+          "id": "c00eaf1f-99b2-4d6e-9f7e-00252e4fcdc0",
+          "createdAt": "2026-07-28T03:38:51.000Z",
+          "updatedAt": "2026-07-28T03:38:51.000Z",
+          "uid": "35240-c00eaf1f-99b2-4d6e-9f7e-00252e4fcdc0"
+        }
+      ],
+      "id": "8efce2f5-d27e-43ef-9969-efe804787380",
+      "createdAt": "2026-07-28T03:38:51.000Z",
+      "updatedAt": "2026-07-28T03:38:51.000Z",
+      "uid": "35240-8efce2f5-d27e-43ef-9969-efe804787380"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.yugabyte.com/api/public/v1"
+    }
+  ]
+}

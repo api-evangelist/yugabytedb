@@ -1,0 +1,447 @@
+{
+  "info": {
+    "_postman_id": "0338f88a-b162-4903-b5db-cadbccfb208c",
+    "name": "YugabyteDB Aeon REST Access Keys Audit API",
+    "description": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:36:36.000Z",
+    "updatedAt": "2026-07-28T03:36:36.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0338f88a-b162-4903-b5db-cadbccfb208c"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "customers",
+              "item": [
+                {
+                  "name": "{cUUID}",
+                  "item": [
+                    {
+                      "name": "tasks",
+                      "item": [
+                        {
+                          "name": "{tUUID}",
+                          "item": [
+                            {
+                              "name": "audit_info",
+                              "item": [
+                                {
+                                  "name": "YugabyteDB Anywhere Get Audit Info for a Task",
+                                  "id": "cb4e8c1a-39d9-4893-a7fb-d5e5f03f6d45",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/tasks/:tUUID/audit_info",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "tasks",
+                                        ":tUUID",
+                                        "audit_info"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "5cd34c5a-887f-4532-ba54-f9542999d332",
+                                          "key": "cUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "260d9786-96b9-4729-bc96-7bdb90879f55",
+                                          "key": "tUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "18d4081f-f087-471a-b4e1-1c02c6497f31",
+                                      "name": "successful operation",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/tasks/:tUUID/audit_info",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "tasks",
+                                            ":tUUID",
+                                            "audit_info"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "cUUID"
+                                            },
+                                            {
+                                              "key": "tUUID"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"action\": \"UpgradeTLS\",\n  \"additionalDetails\": {},\n  \"apiCall\": \"<string>\",\n  \"apiMethod\": \"<string>\",\n  \"auditID\": \"<long>\",\n  \"customerUUID\": \"<uuid>\",\n  \"payload\": {},\n  \"target\": \"User\",\n  \"targetID\": \"<string>\",\n  \"taskUUID\": \"<uuid>\",\n  \"timestamp\": \"<dateTime>\",\n  \"userAddress\": \"<string>\",\n  \"userEmail\": \"<string>\",\n  \"userUUID\": \"<uuid>\"\n}",
+                                      "createdAt": "2026-07-28T03:36:36.000Z",
+                                      "updatedAt": "2026-07-28T03:36:36.000Z",
+                                      "uid": "35240-18d4081f-f087-471a-b4e1-1c02c6497f31"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:36:36.000Z",
+                                  "updatedAt": "2026-07-28T03:36:36.000Z",
+                                  "uid": "35240-cb4e8c1a-39d9-4893-a7fb-d5e5f03f6d45"
+                                }
+                              ],
+                              "id": "2ca7787b-db73-48b6-a848-043b57e18ccc",
+                              "createdAt": "2026-07-28T03:36:36.000Z",
+                              "updatedAt": "2026-07-28T03:36:36.000Z",
+                              "uid": "35240-2ca7787b-db73-48b6-a848-043b57e18ccc"
+                            },
+                            {
+                              "name": "audit_user",
+                              "item": [
+                                {
+                                  "name": "YugabyteDB Anywhere Get the User Associated with a Task",
+                                  "id": "96294c33-53f3-4cab-a8ad-b96a7fc13d98",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/tasks/:tUUID/audit_user",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "tasks",
+                                        ":tUUID",
+                                        "audit_user"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "c8f81b10-17ce-4583-af43-0efe1a4a911e",
+                                          "key": "cUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "3ec7c905-92a2-4175-974e-b97c71ca6c26",
+                                          "key": "tUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "0227682d-9da5-4706-985b-a23da7a3ee43",
+                                      "name": "successful operation",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/tasks/:tUUID/audit_user",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "tasks",
+                                            ":tUUID",
+                                            "audit_user"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "cUUID"
+                                            },
+                                            {
+                                              "key": "tUUID"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"action\": \"UpgradeTLS\",\n  \"additionalDetails\": {},\n  \"apiCall\": \"<string>\",\n  \"apiMethod\": \"<string>\",\n  \"auditID\": \"<long>\",\n  \"customerUUID\": \"<uuid>\",\n  \"payload\": {},\n  \"target\": \"User\",\n  \"targetID\": \"<string>\",\n  \"taskUUID\": \"<uuid>\",\n  \"timestamp\": \"<dateTime>\",\n  \"userAddress\": \"<string>\",\n  \"userEmail\": \"<string>\",\n  \"userUUID\": \"<uuid>\"\n}",
+                                      "createdAt": "2026-07-28T03:36:36.000Z",
+                                      "updatedAt": "2026-07-28T03:36:36.000Z",
+                                      "uid": "35240-0227682d-9da5-4706-985b-a23da7a3ee43"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:36:36.000Z",
+                                  "updatedAt": "2026-07-28T03:36:36.000Z",
+                                  "uid": "35240-96294c33-53f3-4cab-a8ad-b96a7fc13d98"
+                                }
+                              ],
+                              "id": "ab56432c-ba2c-425e-a422-03ffe8f4fbab",
+                              "createdAt": "2026-07-28T03:36:36.000Z",
+                              "updatedAt": "2026-07-28T03:36:36.000Z",
+                              "uid": "35240-ab56432c-ba2c-425e-a422-03ffe8f4fbab"
+                            }
+                          ],
+                          "id": "95826e34-6047-468d-ba64-3766642a88a6",
+                          "createdAt": "2026-07-28T03:36:36.000Z",
+                          "updatedAt": "2026-07-28T03:36:36.000Z",
+                          "uid": "35240-95826e34-6047-468d-ba64-3766642a88a6"
+                        }
+                      ],
+                      "id": "747b8d27-338f-419c-baab-363f4f578ac2",
+                      "createdAt": "2026-07-28T03:36:36.000Z",
+                      "updatedAt": "2026-07-28T03:36:36.000Z",
+                      "uid": "35240-747b8d27-338f-419c-baab-363f4f578ac2"
+                    },
+                    {
+                      "name": "users",
+                      "item": [
+                        {
+                          "name": "{uUUID}",
+                          "item": [
+                            {
+                              "name": "audit_trail",
+                              "item": [
+                                {
+                                  "name": "YugabyteDB Anywhere List a User's Audit Entries",
+                                  "id": "8a4196e3-249c-4c34-a7b2-c9bf3f7e95ee",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/users/:uUUID/audit_trail",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "users",
+                                        ":uUUID",
+                                        "audit_trail"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "d9a8f693-2fbe-48e7-bd79-5f9ed4670ab6",
+                                          "key": "cUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "c8d088d9-1667-483a-88d0-4f39373ee0d1",
+                                          "key": "uUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "4141d491-f47d-4911-931a-bbfd701500da",
+                                      "name": "successful operation",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/users/:uUUID/audit_trail",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "users",
+                                            ":uUUID",
+                                            "audit_trail"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "cUUID"
+                                            },
+                                            {
+                                              "key": "uUUID"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "[\n  {\n    \"action\": \"SyncDrConfig\",\n    \"additionalDetails\": {},\n    \"apiCall\": \"<string>\",\n    \"apiMethod\": \"<string>\",\n    \"auditID\": \"<long>\",\n    \"customerUUID\": \"<uuid>\",\n    \"payload\": {},\n    \"target\": \"KMSConfig\",\n    \"targetID\": \"<string>\",\n    \"taskUUID\": \"<uuid>\",\n    \"timestamp\": \"<dateTime>\",\n    \"userAddress\": \"<string>\",\n    \"userEmail\": \"<string>\",\n    \"userUUID\": \"<uuid>\"\n  },\n  {\n    \"action\": \"ConfigUniverseAlert\",\n    \"additionalDetails\": {},\n    \"apiCall\": \"<string>\",\n    \"apiMethod\": \"<string>\",\n    \"auditID\": \"<long>\",\n    \"customerUUID\": \"<uuid>\",\n    \"payload\": {},\n    \"target\": \"CustomerLicense\",\n    \"targetID\": \"<string>\",\n    \"taskUUID\": \"<uuid>\",\n    \"timestamp\": \"<dateTime>\",\n    \"userAddress\": \"<string>\",\n    \"userEmail\": \"<string>\",\n    \"userUUID\": \"<uuid>\"\n  }\n]",
+                                      "createdAt": "2026-07-28T03:36:36.000Z",
+                                      "updatedAt": "2026-07-28T03:36:36.000Z",
+                                      "uid": "35240-4141d491-f47d-4911-931a-bbfd701500da"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:36:36.000Z",
+                                  "updatedAt": "2026-07-28T03:36:36.000Z",
+                                  "uid": "35240-8a4196e3-249c-4c34-a7b2-c9bf3f7e95ee"
+                                }
+                              ],
+                              "id": "86e9aaa2-6253-4820-9647-8eafd565a774",
+                              "createdAt": "2026-07-28T03:36:36.000Z",
+                              "updatedAt": "2026-07-28T03:36:36.000Z",
+                              "uid": "35240-86e9aaa2-6253-4820-9647-8eafd565a774"
+                            }
+                          ],
+                          "id": "93193324-95d3-4fc2-b18d-caf32afdd3bd",
+                          "createdAt": "2026-07-28T03:36:36.000Z",
+                          "updatedAt": "2026-07-28T03:36:36.000Z",
+                          "uid": "35240-93193324-95d3-4fc2-b18d-caf32afdd3bd"
+                        }
+                      ],
+                      "id": "742d1baa-2801-40bd-98e8-cafa6d1fe317",
+                      "createdAt": "2026-07-28T03:36:36.000Z",
+                      "updatedAt": "2026-07-28T03:36:36.000Z",
+                      "uid": "35240-742d1baa-2801-40bd-98e8-cafa6d1fe317"
+                    }
+                  ],
+                  "id": "61ccdce1-ddb7-466d-be6e-609e3dabc488",
+                  "createdAt": "2026-07-28T03:36:36.000Z",
+                  "updatedAt": "2026-07-28T03:36:36.000Z",
+                  "uid": "35240-61ccdce1-ddb7-466d-be6e-609e3dabc488"
+                }
+              ],
+              "id": "ecceb1a5-414d-4846-b553-ca7dd7fa6485",
+              "createdAt": "2026-07-28T03:36:36.000Z",
+              "updatedAt": "2026-07-28T03:36:36.000Z",
+              "uid": "35240-ecceb1a5-414d-4846-b553-ca7dd7fa6485"
+            }
+          ],
+          "id": "d90b7fca-a617-4e6c-bf1d-4aec0824b658",
+          "createdAt": "2026-07-28T03:36:36.000Z",
+          "updatedAt": "2026-07-28T03:36:36.000Z",
+          "uid": "35240-d90b7fca-a617-4e6c-bf1d-4aec0824b658"
+        }
+      ],
+      "id": "eeeac79b-539f-4c29-871e-baca1b1c69f4",
+      "createdAt": "2026-07-28T03:36:36.000Z",
+      "updatedAt": "2026-07-28T03:36:36.000Z",
+      "uid": "35240-eeeac79b-539f-4c29-871e-baca1b1c69f4"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.yugabyte.com/api/public/v1"
+    }
+  ]
+}

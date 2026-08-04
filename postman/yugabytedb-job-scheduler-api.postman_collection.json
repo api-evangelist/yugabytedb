@@ -1,0 +1,1457 @@
+{
+  "info": {
+    "_postman_id": "3c870587-3171-401b-9187-0ce45b913c76",
+    "name": "YugabyteDB Aeon REST Access Keys Job Scheduler API",
+    "description": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:37:27.000Z",
+    "updatedAt": "2026-07-28T03:37:27.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3c870587-3171-401b-9187-0ce45b913c76"
+  },
+  "item": [
+    {
+      "name": "customers",
+      "item": [
+        {
+          "name": "{cUUID}",
+          "item": [
+            {
+              "name": "job-schedules",
+              "item": [
+                {
+                  "name": "{jUUID}",
+                  "item": [
+                    {
+                      "name": "job-instances",
+                      "item": [
+                        {
+                          "name": "page",
+                          "item": [
+                            {
+                              "name": "YugabyteDB Anywhere List Job Instances (paginated)",
+                              "id": "f7111539-5fc3-4b9c-8321-fe84c1e2550f",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"direction\": \"DESC\",\n  \"filter\": {\n    \"start_window_secs\": \"<long>\",\n    \"state\": \"SUCCESS\"\n  },\n  \"sort_by\": \"endTime\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/customers/:cUUID/job-schedules/:jUUID/job-instances/page",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "customers",
+                                    ":cUUID",
+                                    "job-schedules",
+                                    ":jUUID",
+                                    "job-instances",
+                                    "page"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "22cb54ec-9577-46b3-96d2-a56c65ec7db5",
+                                      "key": "cUUID",
+                                      "value": "<uuid>",
+                                      "description": "(Required) Customer UUID"
+                                    },
+                                    {
+                                      "id": "6326f6ca-0a22-4f1b-bbdb-36b31270c5aa",
+                                      "key": "jUUID",
+                                      "value": "<uuid>",
+                                      "description": "(Required) Job Schedule UUID"
+                                    }
+                                  ]
+                                },
+                                "description": "WARNING: This is a preview API that could change."
+                              },
+                              "response": [
+                                {
+                                  "id": "b50e1f2a-db37-4862-bbc7-bb700c1cb911",
+                                  "name": "Job instances",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"direction\": \"DESC\",\n  \"filter\": {\n    \"start_window_secs\": \"<long>\",\n    \"state\": \"SUCCESS\"\n  },\n  \"sort_by\": \"endTime\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/customers/:cUUID/job-schedules/:jUUID/job-instances/page",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "customers",
+                                        ":cUUID",
+                                        "job-schedules",
+                                        ":jUUID",
+                                        "job-instances",
+                                        "page"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cUUID"
+                                        },
+                                        {
+                                          "key": "jUUID"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"has_next\": \"<boolean>\",\n  \"has_prev\": \"<boolean>\",\n  \"total_count\": \"<integer>\",\n  \"entities\": [\n    {\n      \"created_at\": \"<dateTime>\",\n      \"end_time\": \"<dateTime>\",\n      \"job_schedule_uuid\": \"<uuid>\",\n      \"start_time\": \"<dateTime>\",\n      \"state\": \"SKIPPED\",\n      \"uuid\": \"<uuid>\"\n    },\n    {\n      \"created_at\": \"<dateTime>\",\n      \"end_time\": \"<dateTime>\",\n      \"job_schedule_uuid\": \"<uuid>\",\n      \"start_time\": \"<dateTime>\",\n      \"state\": \"SCHEDULED\",\n      \"uuid\": \"<uuid>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T03:37:27.000Z",
+                                  "updatedAt": "2026-07-28T03:37:27.000Z",
+                                  "uid": "35240-b50e1f2a-db37-4862-bbc7-bb700c1cb911"
+                                },
+                                {
+                                  "id": "2ee63472-4f16-4b07-b35d-664b50216bf8",
+                                  "name": "Invalid input",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"direction\": \"DESC\",\n  \"filter\": {\n    \"start_window_secs\": \"<long>\",\n    \"state\": \"SUCCESS\"\n  },\n  \"sort_by\": \"endTime\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/customers/:cUUID/job-schedules/:jUUID/job-instances/page",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "customers",
+                                        ":cUUID",
+                                        "job-schedules",
+                                        ":jUUID",
+                                        "job-instances",
+                                        "page"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cUUID"
+                                        },
+                                        {
+                                          "key": "jUUID"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Bad Request",
+                                  "code": 400,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:37:27.000Z",
+                                  "updatedAt": "2026-07-28T03:37:27.000Z",
+                                  "uid": "35240-2ee63472-4f16-4b07-b35d-664b50216bf8"
+                                },
+                                {
+                                  "id": "e9cb5874-b828-4a4b-9c93-3def4b50c0ad",
+                                  "name": "Server error",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"direction\": \"DESC\",\n  \"filter\": {\n    \"start_window_secs\": \"<long>\",\n    \"state\": \"SUCCESS\"\n  },\n  \"sort_by\": \"endTime\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/customers/:cUUID/job-schedules/:jUUID/job-instances/page",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "customers",
+                                        ":cUUID",
+                                        "job-schedules",
+                                        ":jUUID",
+                                        "job-instances",
+                                        "page"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cUUID"
+                                        },
+                                        {
+                                          "key": "jUUID"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Internal Server Error",
+                                  "code": 500,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:37:27.000Z",
+                                  "updatedAt": "2026-07-28T03:37:27.000Z",
+                                  "uid": "35240-e9cb5874-b828-4a4b-9c93-3def4b50c0ad"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:37:27.000Z",
+                              "updatedAt": "2026-07-28T03:37:27.000Z",
+                              "uid": "35240-f7111539-5fc3-4b9c-8321-fe84c1e2550f"
+                            }
+                          ],
+                          "id": "6fcfc330-de8c-4007-a069-1eea73a5cd4a",
+                          "createdAt": "2026-07-28T03:37:27.000Z",
+                          "updatedAt": "2026-07-28T03:37:27.000Z",
+                          "uid": "35240-6fcfc330-de8c-4007-a069-1eea73a5cd4a"
+                        }
+                      ],
+                      "id": "51202cae-1303-49ef-986a-88be7a230a4f",
+                      "createdAt": "2026-07-28T03:37:27.000Z",
+                      "updatedAt": "2026-07-28T03:37:27.000Z",
+                      "uid": "35240-51202cae-1303-49ef-986a-88be7a230a4f"
+                    },
+                    {
+                      "name": "snooze",
+                      "item": [
+                        {
+                          "name": "YugabyteDB Anywhere Snooze Job Schedule",
+                          "id": "814b7180-c42d-4f57-a5e7-b937c7e64906",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"snooze_secs\": \"<long>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/customers/:cUUID/job-schedules/:jUUID/snooze",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "customers",
+                                ":cUUID",
+                                "job-schedules",
+                                ":jUUID",
+                                "snooze"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "d10b4a22-95e2-4fb9-9290-71c18f3f13e1",
+                                  "key": "cUUID",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Customer UUID"
+                                },
+                                {
+                                  "id": "9e19abee-5107-449d-955f-d56544f98479",
+                                  "key": "jUUID",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Job Schedule UUID"
+                                }
+                              ]
+                            },
+                            "description": "WARNING: This is a preview API that could change."
+                          },
+                          "response": [
+                            {
+                              "id": "e14dc579-7096-4e43-a7d7-81012aef2eb0",
+                              "name": "Job schedule",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"snooze_secs\": \"<long>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/customers/:cUUID/job-schedules/:jUUID/snooze",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "customers",
+                                    ":cUUID",
+                                    "job-schedules",
+                                    ":jUUID",
+                                    "snooze"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "cUUID"
+                                    },
+                                    {
+                                      "key": "jUUID"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"spec\": {\n    \"job_config\": {\n      \"classname\": \"<string>\",\n      \"config\": {\n        \"doe2\": {}\n      }\n    },\n    \"name\": \"<string>\",\n    \"schedule_config\": {\n      \"disabled\": \"<boolean>\",\n      \"interval_secs\": \"<long>\",\n      \"type\": \"FIXED_RATE\",\n      \"snooze_until\": \"<dateTime>\"\n    }\n  },\n  \"info\": {\n    \"created_at\": \"<dateTime>\",\n    \"customer_uuid\": \"<uuid>\",\n    \"execution_count\": \"<long>\",\n    \"failed_count\": \"<long>\",\n    \"last_end_time\": \"<dateTime>\",\n    \"last_job_instance_uuid\": \"<uuid>\",\n    \"last_start_time\": \"<dateTime>\",\n    \"next_start_time\": \"<dateTime>\",\n    \"state\": \"INACTIVE\",\n    \"updated_at\": \"<dateTime>\",\n    \"uuid\": \"<uuid>\"\n  }\n}",
+                              "createdAt": "2026-07-28T03:37:27.000Z",
+                              "updatedAt": "2026-07-28T03:37:27.000Z",
+                              "uid": "35240-e14dc579-7096-4e43-a7d7-81012aef2eb0"
+                            },
+                            {
+                              "id": "9f4e50af-e54a-47ba-a6b6-45511ae7bd47",
+                              "name": "Invalid input",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"snooze_secs\": \"<long>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/customers/:cUUID/job-schedules/:jUUID/snooze",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "customers",
+                                    ":cUUID",
+                                    "job-schedules",
+                                    ":jUUID",
+                                    "snooze"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "cUUID"
+                                    },
+                                    {
+                                      "key": "jUUID"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:37:27.000Z",
+                              "updatedAt": "2026-07-28T03:37:27.000Z",
+                              "uid": "35240-9f4e50af-e54a-47ba-a6b6-45511ae7bd47"
+                            },
+                            {
+                              "id": "54f1704a-e58f-4103-8334-4db597ca474d",
+                              "name": "Server error",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"snooze_secs\": \"<long>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/customers/:cUUID/job-schedules/:jUUID/snooze",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "customers",
+                                    ":cUUID",
+                                    "job-schedules",
+                                    ":jUUID",
+                                    "snooze"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "cUUID"
+                                    },
+                                    {
+                                      "key": "jUUID"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:37:27.000Z",
+                              "updatedAt": "2026-07-28T03:37:27.000Z",
+                              "uid": "35240-54f1704a-e58f-4103-8334-4db597ca474d"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:37:27.000Z",
+                          "updatedAt": "2026-07-28T03:37:27.000Z",
+                          "uid": "35240-814b7180-c42d-4f57-a5e7-b937c7e64906"
+                        }
+                      ],
+                      "id": "8ad5d88a-ab8d-49a7-a9dd-be474fdaa1d1",
+                      "createdAt": "2026-07-28T03:37:27.000Z",
+                      "updatedAt": "2026-07-28T03:37:27.000Z",
+                      "uid": "35240-8ad5d88a-ab8d-49a7-a9dd-be474fdaa1d1"
+                    },
+                    {
+                      "name": "YugabyteDB Anywhere Delete Job Schedule",
+                      "id": "dae1cf43-0ec2-4f2d-9e6d-ae303ee7aa71",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/customers/:cUUID/job-schedules/:jUUID",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "customers",
+                            ":cUUID",
+                            "job-schedules",
+                            ":jUUID"
+                          ],
+                          "variable": [
+                            {
+                              "id": "4b10d36b-8255-4cf4-bd06-667343ea40b2",
+                              "key": "cUUID",
+                              "value": "<uuid>",
+                              "description": "(Required) Customer UUID"
+                            },
+                            {
+                              "id": "ce0cd29a-b9ee-40e7-836a-9300acb83bdc",
+                              "key": "jUUID",
+                              "value": "<uuid>",
+                              "description": "(Required) Job Schedule UUID"
+                            }
+                          ]
+                        },
+                        "description": "WARNING: This is a preview API that could change."
+                      },
+                      "response": [
+                        {
+                          "id": "8efc0c3c-1a8c-49c0-8472-b26d02073ee0",
+                          "name": "Job schedule",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/customers/:cUUID/job-schedules/:jUUID",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "customers",
+                                ":cUUID",
+                                "job-schedules",
+                                ":jUUID"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "cUUID"
+                                },
+                                {
+                                  "key": "jUUID"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"spec\": {\n    \"job_config\": {\n      \"classname\": \"<string>\",\n      \"config\": {\n        \"doe2\": {}\n      }\n    },\n    \"name\": \"<string>\",\n    \"schedule_config\": {\n      \"disabled\": \"<boolean>\",\n      \"interval_secs\": \"<long>\",\n      \"type\": \"FIXED_RATE\",\n      \"snooze_until\": \"<dateTime>\"\n    }\n  },\n  \"info\": {\n    \"created_at\": \"<dateTime>\",\n    \"customer_uuid\": \"<uuid>\",\n    \"execution_count\": \"<long>\",\n    \"failed_count\": \"<long>\",\n    \"last_end_time\": \"<dateTime>\",\n    \"last_job_instance_uuid\": \"<uuid>\",\n    \"last_start_time\": \"<dateTime>\",\n    \"next_start_time\": \"<dateTime>\",\n    \"state\": \"INACTIVE\",\n    \"updated_at\": \"<dateTime>\",\n    \"uuid\": \"<uuid>\"\n  }\n}",
+                          "createdAt": "2026-07-28T03:37:27.000Z",
+                          "updatedAt": "2026-07-28T03:37:27.000Z",
+                          "uid": "35240-8efc0c3c-1a8c-49c0-8472-b26d02073ee0"
+                        },
+                        {
+                          "id": "1007787c-9894-41a3-a18d-09aa7a1ef1c2",
+                          "name": "Invalid input",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/customers/:cUUID/job-schedules/:jUUID",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "customers",
+                                ":cUUID",
+                                "job-schedules",
+                                ":jUUID"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "cUUID"
+                                },
+                                {
+                                  "key": "jUUID"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:37:27.000Z",
+                          "updatedAt": "2026-07-28T03:37:27.000Z",
+                          "uid": "35240-1007787c-9894-41a3-a18d-09aa7a1ef1c2"
+                        },
+                        {
+                          "id": "30ecd893-bfc9-4725-b555-2544da0a733d",
+                          "name": "Server error",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/customers/:cUUID/job-schedules/:jUUID",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "customers",
+                                ":cUUID",
+                                "job-schedules",
+                                ":jUUID"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "cUUID"
+                                },
+                                {
+                                  "key": "jUUID"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:37:27.000Z",
+                          "updatedAt": "2026-07-28T03:37:27.000Z",
+                          "uid": "35240-30ecd893-bfc9-4725-b555-2544da0a733d"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:37:27.000Z",
+                      "updatedAt": "2026-07-28T03:37:27.000Z",
+                      "uid": "35240-dae1cf43-0ec2-4f2d-9e6d-ae303ee7aa71"
+                    },
+                    {
+                      "name": "YugabyteDB Anywhere Get Job Schedule",
+                      "id": "81b551a7-7e9e-4a3f-b541-9c8b2a909938",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/customers/:cUUID/job-schedules/:jUUID",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "customers",
+                            ":cUUID",
+                            "job-schedules",
+                            ":jUUID"
+                          ],
+                          "variable": [
+                            {
+                              "id": "744d02be-67c8-45f4-b682-9ce121b1b6a1",
+                              "key": "cUUID",
+                              "value": "<uuid>",
+                              "description": "(Required) Customer UUID"
+                            },
+                            {
+                              "id": "d0258500-d8e0-431c-afd1-e417b1fceea5",
+                              "key": "jUUID",
+                              "value": "<uuid>",
+                              "description": "(Required) Job Schedule UUID"
+                            }
+                          ]
+                        },
+                        "description": "WARNING: This is a preview API that could change."
+                      },
+                      "response": [
+                        {
+                          "id": "b026e4a7-dba0-4ad8-9a61-7fbe8512c20b",
+                          "name": "Job schedule",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/customers/:cUUID/job-schedules/:jUUID",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "customers",
+                                ":cUUID",
+                                "job-schedules",
+                                ":jUUID"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "cUUID"
+                                },
+                                {
+                                  "key": "jUUID"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"spec\": {\n    \"job_config\": {\n      \"classname\": \"<string>\",\n      \"config\": {\n        \"doe2\": {}\n      }\n    },\n    \"name\": \"<string>\",\n    \"schedule_config\": {\n      \"disabled\": \"<boolean>\",\n      \"interval_secs\": \"<long>\",\n      \"type\": \"FIXED_RATE\",\n      \"snooze_until\": \"<dateTime>\"\n    }\n  },\n  \"info\": {\n    \"created_at\": \"<dateTime>\",\n    \"customer_uuid\": \"<uuid>\",\n    \"execution_count\": \"<long>\",\n    \"failed_count\": \"<long>\",\n    \"last_end_time\": \"<dateTime>\",\n    \"last_job_instance_uuid\": \"<uuid>\",\n    \"last_start_time\": \"<dateTime>\",\n    \"next_start_time\": \"<dateTime>\",\n    \"state\": \"INACTIVE\",\n    \"updated_at\": \"<dateTime>\",\n    \"uuid\": \"<uuid>\"\n  }\n}",
+                          "createdAt": "2026-07-28T03:37:27.000Z",
+                          "updatedAt": "2026-07-28T03:37:27.000Z",
+                          "uid": "35240-b026e4a7-dba0-4ad8-9a61-7fbe8512c20b"
+                        },
+                        {
+                          "id": "da5bada4-51a8-4702-b199-96e0b8684bd4",
+                          "name": "Invalid input",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/customers/:cUUID/job-schedules/:jUUID",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "customers",
+                                ":cUUID",
+                                "job-schedules",
+                                ":jUUID"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "cUUID"
+                                },
+                                {
+                                  "key": "jUUID"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:37:27.000Z",
+                          "updatedAt": "2026-07-28T03:37:27.000Z",
+                          "uid": "35240-da5bada4-51a8-4702-b199-96e0b8684bd4"
+                        },
+                        {
+                          "id": "921ded72-ed05-48f0-9e44-e63b13236769",
+                          "name": "Server error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/customers/:cUUID/job-schedules/:jUUID",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "customers",
+                                ":cUUID",
+                                "job-schedules",
+                                ":jUUID"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "cUUID"
+                                },
+                                {
+                                  "key": "jUUID"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:37:27.000Z",
+                          "updatedAt": "2026-07-28T03:37:27.000Z",
+                          "uid": "35240-921ded72-ed05-48f0-9e44-e63b13236769"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:37:27.000Z",
+                      "updatedAt": "2026-07-28T03:37:27.000Z",
+                      "uid": "35240-81b551a7-7e9e-4a3f-b541-9c8b2a909938"
+                    },
+                    {
+                      "name": "YugabyteDB Anywhere Update Job Schedule",
+                      "id": "c9ee579a-6999-4b97-bea1-2ceba9bb6210",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"disabled\": \"<boolean>\",\n  \"interval_secs\": \"<long>\",\n  \"type\": \"FIXED_DELAY\",\n  \"snooze_until\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/customers/:cUUID/job-schedules/:jUUID",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "customers",
+                            ":cUUID",
+                            "job-schedules",
+                            ":jUUID"
+                          ],
+                          "variable": [
+                            {
+                              "id": "9ddf0a2d-5f5e-484d-9fa8-b902ca48f345",
+                              "key": "cUUID",
+                              "value": "<uuid>",
+                              "description": "(Required) Customer UUID"
+                            },
+                            {
+                              "id": "f3294eff-06b2-4591-bace-ed7e23e1d42e",
+                              "key": "jUUID",
+                              "value": "<uuid>",
+                              "description": "(Required) Job Schedule UUID"
+                            }
+                          ]
+                        },
+                        "description": "WARNING: This is a preview API that could change."
+                      },
+                      "response": [
+                        {
+                          "id": "1bec0ad7-67ba-427f-9283-6907fd6c348f",
+                          "name": "Job schedule",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"disabled\": \"<boolean>\",\n  \"interval_secs\": \"<long>\",\n  \"type\": \"FIXED_DELAY\",\n  \"snooze_until\": \"<dateTime>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/customers/:cUUID/job-schedules/:jUUID",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "customers",
+                                ":cUUID",
+                                "job-schedules",
+                                ":jUUID"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "cUUID"
+                                },
+                                {
+                                  "key": "jUUID"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"spec\": {\n    \"job_config\": {\n      \"classname\": \"<string>\",\n      \"config\": {\n        \"doe2\": {}\n      }\n    },\n    \"name\": \"<string>\",\n    \"schedule_config\": {\n      \"disabled\": \"<boolean>\",\n      \"interval_secs\": \"<long>\",\n      \"type\": \"FIXED_RATE\",\n      \"snooze_until\": \"<dateTime>\"\n    }\n  },\n  \"info\": {\n    \"created_at\": \"<dateTime>\",\n    \"customer_uuid\": \"<uuid>\",\n    \"execution_count\": \"<long>\",\n    \"failed_count\": \"<long>\",\n    \"last_end_time\": \"<dateTime>\",\n    \"last_job_instance_uuid\": \"<uuid>\",\n    \"last_start_time\": \"<dateTime>\",\n    \"next_start_time\": \"<dateTime>\",\n    \"state\": \"INACTIVE\",\n    \"updated_at\": \"<dateTime>\",\n    \"uuid\": \"<uuid>\"\n  }\n}",
+                          "createdAt": "2026-07-28T03:37:27.000Z",
+                          "updatedAt": "2026-07-28T03:37:27.000Z",
+                          "uid": "35240-1bec0ad7-67ba-427f-9283-6907fd6c348f"
+                        },
+                        {
+                          "id": "9a9a3f1d-dcfc-4d1b-ab4c-7aae1e04f32f",
+                          "name": "Invalid input",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"disabled\": \"<boolean>\",\n  \"interval_secs\": \"<long>\",\n  \"type\": \"FIXED_DELAY\",\n  \"snooze_until\": \"<dateTime>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/customers/:cUUID/job-schedules/:jUUID",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "customers",
+                                ":cUUID",
+                                "job-schedules",
+                                ":jUUID"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "cUUID"
+                                },
+                                {
+                                  "key": "jUUID"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:37:27.000Z",
+                          "updatedAt": "2026-07-28T03:37:27.000Z",
+                          "uid": "35240-9a9a3f1d-dcfc-4d1b-ab4c-7aae1e04f32f"
+                        },
+                        {
+                          "id": "bee2877a-fcf8-4e08-a5ba-21362151372b",
+                          "name": "Server error",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"disabled\": \"<boolean>\",\n  \"interval_secs\": \"<long>\",\n  \"type\": \"FIXED_DELAY\",\n  \"snooze_until\": \"<dateTime>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/customers/:cUUID/job-schedules/:jUUID",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "customers",
+                                ":cUUID",
+                                "job-schedules",
+                                ":jUUID"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "cUUID"
+                                },
+                                {
+                                  "key": "jUUID"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:37:27.000Z",
+                          "updatedAt": "2026-07-28T03:37:27.000Z",
+                          "uid": "35240-bee2877a-fcf8-4e08-a5ba-21362151372b"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:37:27.000Z",
+                      "updatedAt": "2026-07-28T03:37:27.000Z",
+                      "uid": "35240-c9ee579a-6999-4b97-bea1-2ceba9bb6210"
+                    }
+                  ],
+                  "id": "d5b8c63f-5908-4fcb-91e5-1e1fc3ccafb5",
+                  "createdAt": "2026-07-28T03:37:27.000Z",
+                  "updatedAt": "2026-07-28T03:37:27.000Z",
+                  "uid": "35240-d5b8c63f-5908-4fcb-91e5-1e1fc3ccafb5"
+                },
+                {
+                  "name": "page",
+                  "item": [
+                    {
+                      "name": "YugabyteDB Anywhere List Job Schedules (paginated)",
+                      "id": "c0e96416-6579-472f-9737-99db80da5747",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"direction\": \"ASC\",\n  \"filter\": {\n    \"config_class\": \"<string>\",\n    \"enabled_only\": \"<boolean>\",\n    \"name_regex\": \"<string>\",\n    \"next_start_window_secs\": \"<long>\",\n    \"type\": \"FIXED_DELAY\"\n  },\n  \"sort_by\": \"state\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/customers/:cUUID/job-schedules/page",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "customers",
+                            ":cUUID",
+                            "job-schedules",
+                            "page"
+                          ],
+                          "variable": [
+                            {
+                              "id": "d6aa5ac9-843b-4a6c-b571-822052d988ce",
+                              "key": "cUUID",
+                              "value": "<uuid>",
+                              "description": "(Required) Customer UUID"
+                            }
+                          ]
+                        },
+                        "description": "WARNING: This is a preview API that could change."
+                      },
+                      "response": [
+                        {
+                          "id": "22daeb51-fbf4-409c-bcd0-992bd159b34b",
+                          "name": "Job schedules",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"direction\": \"ASC\",\n  \"filter\": {\n    \"config_class\": \"<string>\",\n    \"enabled_only\": \"<boolean>\",\n    \"name_regex\": \"<string>\",\n    \"next_start_window_secs\": \"<long>\",\n    \"type\": \"FIXED_DELAY\"\n  },\n  \"sort_by\": \"state\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/customers/:cUUID/job-schedules/page",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "customers",
+                                ":cUUID",
+                                "job-schedules",
+                                "page"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "cUUID"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"has_next\": \"<boolean>\",\n  \"has_prev\": \"<boolean>\",\n  \"total_count\": \"<integer>\",\n  \"entities\": [\n    {\n      \"spec\": {\n        \"job_config\": {\n          \"classname\": \"<string>\",\n          \"config\": {\n            \"irured7\": {},\n            \"dolor_6\": {},\n            \"pariaturcdd\": {}\n          }\n        },\n        \"name\": \"<string>\",\n        \"schedule_config\": {\n          \"disabled\": \"<boolean>\",\n          \"interval_secs\": \"<long>\",\n          \"type\": \"FIXED_DELAY\",\n          \"snooze_until\": \"<dateTime>\"\n        }\n      },\n      \"info\": {\n        \"created_at\": \"<dateTime>\",\n        \"customer_uuid\": \"<uuid>\",\n        \"execution_count\": \"<long>\",\n        \"failed_count\": \"<long>\",\n        \"last_end_time\": \"<dateTime>\",\n        \"last_job_instance_uuid\": \"<uuid>\",\n        \"last_start_time\": \"<dateTime>\",\n        \"next_start_time\": \"<dateTime>\",\n        \"state\": \"ACTIVE\",\n        \"updated_at\": \"<dateTime>\",\n        \"uuid\": \"<uuid>\"\n      }\n    },\n    {\n      \"spec\": {\n        \"job_config\": {\n          \"classname\": \"<string>\",\n          \"config\": {\n            \"enim_3\": {},\n            \"dolor_1\": {}\n          }\n        },\n        \"name\": \"<string>\",\n        \"schedule_config\": {\n          \"disabled\": \"<boolean>\",\n          \"interval_secs\": \"<long>\",\n          \"type\": \"FIXED_RATE\",\n          \"snooze_until\": \"<dateTime>\"\n        }\n      },\n      \"info\": {\n        \"created_at\": \"<dateTime>\",\n        \"customer_uuid\": \"<uuid>\",\n        \"execution_count\": \"<long>\",\n        \"failed_count\": \"<long>\",\n        \"last_end_time\": \"<dateTime>\",\n        \"last_job_instance_uuid\": \"<uuid>\",\n        \"last_start_time\": \"<dateTime>\",\n        \"next_start_time\": \"<dateTime>\",\n        \"state\": \"ACTIVE\",\n        \"updated_at\": \"<dateTime>\",\n        \"uuid\": \"<uuid>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:37:27.000Z",
+                          "updatedAt": "2026-07-28T03:37:27.000Z",
+                          "uid": "35240-22daeb51-fbf4-409c-bcd0-992bd159b34b"
+                        },
+                        {
+                          "id": "df3f4f27-5474-4acb-9df6-e19f586c5858",
+                          "name": "Invalid input",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"direction\": \"ASC\",\n  \"filter\": {\n    \"config_class\": \"<string>\",\n    \"enabled_only\": \"<boolean>\",\n    \"name_regex\": \"<string>\",\n    \"next_start_window_secs\": \"<long>\",\n    \"type\": \"FIXED_DELAY\"\n  },\n  \"sort_by\": \"state\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/customers/:cUUID/job-schedules/page",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "customers",
+                                ":cUUID",
+                                "job-schedules",
+                                "page"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "cUUID"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:37:27.000Z",
+                          "updatedAt": "2026-07-28T03:37:27.000Z",
+                          "uid": "35240-df3f4f27-5474-4acb-9df6-e19f586c5858"
+                        },
+                        {
+                          "id": "21535fc6-d80a-4f9a-a57e-a688e61f00f0",
+                          "name": "Server error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"direction\": \"ASC\",\n  \"filter\": {\n    \"config_class\": \"<string>\",\n    \"enabled_only\": \"<boolean>\",\n    \"name_regex\": \"<string>\",\n    \"next_start_window_secs\": \"<long>\",\n    \"type\": \"FIXED_DELAY\"\n  },\n  \"sort_by\": \"state\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/customers/:cUUID/job-schedules/page",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "customers",
+                                ":cUUID",
+                                "job-schedules",
+                                "page"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "cUUID"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:37:27.000Z",
+                          "updatedAt": "2026-07-28T03:37:27.000Z",
+                          "uid": "35240-21535fc6-d80a-4f9a-a57e-a688e61f00f0"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:37:27.000Z",
+                      "updatedAt": "2026-07-28T03:37:27.000Z",
+                      "uid": "35240-c0e96416-6579-472f-9737-99db80da5747"
+                    }
+                  ],
+                  "id": "1934c492-fb56-4ad6-938f-e29197f381f9",
+                  "createdAt": "2026-07-28T03:37:27.000Z",
+                  "updatedAt": "2026-07-28T03:37:27.000Z",
+                  "uid": "35240-1934c492-fb56-4ad6-938f-e29197f381f9"
+                }
+              ],
+              "id": "00dd087e-04af-4afd-9631-2563402ce3a4",
+              "createdAt": "2026-07-28T03:37:27.000Z",
+              "updatedAt": "2026-07-28T03:37:27.000Z",
+              "uid": "35240-00dd087e-04af-4afd-9631-2563402ce3a4"
+            }
+          ],
+          "id": "e2daaa61-90ed-4454-9554-3eb11d1353bf",
+          "createdAt": "2026-07-28T03:37:27.000Z",
+          "updatedAt": "2026-07-28T03:37:27.000Z",
+          "uid": "35240-e2daaa61-90ed-4454-9554-3eb11d1353bf"
+        }
+      ],
+      "id": "a0733c56-5b7f-4118-bf30-862dadff87ec",
+      "createdAt": "2026-07-28T03:37:27.000Z",
+      "updatedAt": "2026-07-28T03:37:27.000Z",
+      "uid": "35240-a0733c56-5b7f-4118-bf30-862dadff87ec"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.yugabyte.com/api/public/v1"
+    }
+  ]
+}

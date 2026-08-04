@@ -1,0 +1,522 @@
+{
+  "info": {
+    "_postman_id": "5302f7e6-63a9-4e81-a529-e3081244d5c2",
+    "name": "YugabyteDB Aeon REST Access Keys Isolated Backup API",
+    "description": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:37:26.000Z",
+    "updatedAt": "2026-07-28T03:37:26.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5302f7e6-63a9-4e81-a529-e3081244d5c2"
+  },
+  "item": [
+    {
+      "name": "customers",
+      "item": [
+        {
+          "name": "{cUUID}",
+          "item": [
+            {
+              "name": "yba-backups",
+              "item": [
+                {
+                  "name": "restore",
+                  "item": [
+                    {
+                      "name": "YugabyteDB Anywhere Restore YBA Backup",
+                      "id": "2e06c164-fd2f-4c53-ad63-288982f8be4b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"local_path\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/customers/:cUUID/yba-backups/restore",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "customers",
+                            ":cUUID",
+                            "yba-backups",
+                            "restore"
+                          ],
+                          "variable": [
+                            {
+                              "id": "bafca68b-9263-43cc-9248-3bb276390023",
+                              "key": "cUUID",
+                              "value": "<uuid>",
+                              "description": "(Required) Customer UUID"
+                            }
+                          ]
+                        },
+                        "description": "Trigger a one time restore of YBA from the desired storage location"
+                      },
+                      "response": [
+                        {
+                          "id": "1b41195d-cde2-4c3a-802a-b49873716e6c",
+                          "name": "task accepted",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"local_path\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/customers/:cUUID/yba-backups/restore",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "customers",
+                                ":cUUID",
+                                "yba-backups",
+                                "restore"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "cUUID"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Accepted",
+                          "code": 202,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"resource_uuid\": \"<uuid>\",\n  \"task_uuid\": \"<uuid>\"\n}",
+                          "createdAt": "2026-07-28T03:37:26.000Z",
+                          "updatedAt": "2026-07-28T03:37:26.000Z",
+                          "uid": "35240-1b41195d-cde2-4c3a-802a-b49873716e6c"
+                        },
+                        {
+                          "id": "2d58185d-60ad-4a65-b81d-dc1d5d20e484",
+                          "name": "Invalid input",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"local_path\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/customers/:cUUID/yba-backups/restore",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "customers",
+                                ":cUUID",
+                                "yba-backups",
+                                "restore"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "cUUID"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:37:26.000Z",
+                          "updatedAt": "2026-07-28T03:37:26.000Z",
+                          "uid": "35240-2d58185d-60ad-4a65-b81d-dc1d5d20e484"
+                        },
+                        {
+                          "id": "a6f77719-ffec-4451-b4ca-85f7f432d294",
+                          "name": "Server error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"local_path\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/customers/:cUUID/yba-backups/restore",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "customers",
+                                ":cUUID",
+                                "yba-backups",
+                                "restore"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "cUUID"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:37:26.000Z",
+                          "updatedAt": "2026-07-28T03:37:26.000Z",
+                          "uid": "35240-a6f77719-ffec-4451-b4ca-85f7f432d294"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:37:26.000Z",
+                      "updatedAt": "2026-07-28T03:37:26.000Z",
+                      "uid": "35240-2e06c164-fd2f-4c53-ad63-288982f8be4b"
+                    }
+                  ],
+                  "id": "b7215d5f-f5d9-4e4d-a853-7b5150b90ff8",
+                  "createdAt": "2026-07-28T03:37:26.000Z",
+                  "updatedAt": "2026-07-28T03:37:26.000Z",
+                  "uid": "35240-b7215d5f-f5d9-4e4d-a853-7b5150b90ff8"
+                },
+                {
+                  "name": "YugabyteDB Anywhere Create YBA Backup",
+                  "id": "e3af612a-a70e-4ce9-a4e2-cb7e523c52a3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"components\": [\n    \"YBA\",\n    \"YBA\"\n  ],\n  \"local_dir\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/customers/:cUUID/yba-backups",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customers",
+                        ":cUUID",
+                        "yba-backups"
+                      ],
+                      "variable": [
+                        {
+                          "id": "105a5e6c-41ce-4e2e-87fb-8797efe6f06b",
+                          "key": "cUUID",
+                          "value": "<uuid>",
+                          "description": "(Required) Customer UUID"
+                        }
+                      ]
+                    },
+                    "description": "Trigger a one time backup of YBA to the desired storage location"
+                  },
+                  "response": [
+                    {
+                      "id": "31f49486-121b-45b0-b51b-1356a818db9b",
+                      "name": "task accepted",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"components\": [\n    \"YBA\",\n    \"YBA\"\n  ],\n  \"local_dir\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/customers/:cUUID/yba-backups",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "customers",
+                            ":cUUID",
+                            "yba-backups"
+                          ],
+                          "variable": [
+                            {
+                              "key": "cUUID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"resource_uuid\": \"<uuid>\",\n  \"task_uuid\": \"<uuid>\"\n}",
+                      "createdAt": "2026-07-28T03:37:26.000Z",
+                      "updatedAt": "2026-07-28T03:37:26.000Z",
+                      "uid": "35240-31f49486-121b-45b0-b51b-1356a818db9b"
+                    },
+                    {
+                      "id": "dc7f5b5a-d708-41ad-a045-d51038fec0eb",
+                      "name": "Invalid input",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"components\": [\n    \"YBA\",\n    \"YBA\"\n  ],\n  \"local_dir\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/customers/:cUUID/yba-backups",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "customers",
+                            ":cUUID",
+                            "yba-backups"
+                          ],
+                          "variable": [
+                            {
+                              "key": "cUUID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:37:26.000Z",
+                      "updatedAt": "2026-07-28T03:37:26.000Z",
+                      "uid": "35240-dc7f5b5a-d708-41ad-a045-d51038fec0eb"
+                    },
+                    {
+                      "id": "b29c113d-9949-4ff4-9ed5-ff9c63b1bbad",
+                      "name": "Server error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"components\": [\n    \"YBA\",\n    \"YBA\"\n  ],\n  \"local_dir\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/customers/:cUUID/yba-backups",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "customers",
+                            ":cUUID",
+                            "yba-backups"
+                          ],
+                          "variable": [
+                            {
+                              "key": "cUUID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:37:26.000Z",
+                      "updatedAt": "2026-07-28T03:37:26.000Z",
+                      "uid": "35240-b29c113d-9949-4ff4-9ed5-ff9c63b1bbad"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:37:26.000Z",
+                  "updatedAt": "2026-07-28T03:37:26.000Z",
+                  "uid": "35240-e3af612a-a70e-4ce9-a4e2-cb7e523c52a3"
+                }
+              ],
+              "id": "6b2406c5-1081-4b82-b930-3bf028866c8b",
+              "createdAt": "2026-07-28T03:37:26.000Z",
+              "updatedAt": "2026-07-28T03:37:26.000Z",
+              "uid": "35240-6b2406c5-1081-4b82-b930-3bf028866c8b"
+            }
+          ],
+          "id": "67d43f54-a159-44ae-bdf1-1e8a0039c056",
+          "createdAt": "2026-07-28T03:37:26.000Z",
+          "updatedAt": "2026-07-28T03:37:26.000Z",
+          "uid": "35240-67d43f54-a159-44ae-bdf1-1e8a0039c056"
+        }
+      ],
+      "id": "5f6b21d3-b2b7-4395-8389-f311b64c7cb6",
+      "createdAt": "2026-07-28T03:37:26.000Z",
+      "updatedAt": "2026-07-28T03:37:26.000Z",
+      "uid": "35240-5f6b21d3-b2b7-4395-8389-f311b64c7cb6"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.yugabyte.com/api/public/v1"
+    }
+  ]
+}

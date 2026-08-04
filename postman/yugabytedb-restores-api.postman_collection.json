@@ -1,0 +1,432 @@
+{
+  "info": {
+    "_postman_id": "74b49257-4fd8-41b0-b250-2e4e50d21444",
+    "name": "YugabyteDB Aeon REST Access Keys Restores API",
+    "description": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:38:43.000Z",
+    "updatedAt": "2026-07-28T03:38:43.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-74b49257-4fd8-41b0-b250-2e4e50d21444"
+  },
+  "item": [
+    {
+      "name": "accounts",
+      "item": [
+        {
+          "name": "{accountId}",
+          "item": [
+            {
+              "name": "projects",
+              "item": [
+                {
+                  "name": "{projectId}",
+                  "item": [
+                    {
+                      "name": "clusters",
+                      "item": [
+                        {
+                          "name": "{clusterId}",
+                          "item": [
+                            {
+                              "name": "backups",
+                              "item": [
+                                {
+                                  "name": "{backupId}",
+                                  "item": [
+                                    {
+                                      "name": "restore",
+                                      "item": [
+                                        {
+                                          "name": "YugabyteDB Aeon Restore from Backup",
+                                          "id": "591d75c3-1ee9-439f-b581-ca775e135295",
+                                          "protocolProfileBehavior": {
+                                            "disableBodyPruning": true
+                                          },
+                                          "request": {
+                                            "method": "POST",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId/backups/:backupId/restore",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "accounts",
+                                                ":accountId",
+                                                "projects",
+                                                ":projectId",
+                                                "clusters",
+                                                ":clusterId",
+                                                "backups",
+                                                ":backupId",
+                                                "restore"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "id": "9efe4156-1ffe-4075-94a3-ae2b2f4c6305",
+                                                  "key": "accountId",
+                                                  "value": "<uuid>",
+                                                  "description": "(Required) The unique identifier of the YugabyteDB Aeon account."
+                                                },
+                                                {
+                                                  "id": "e245d295-de35-462b-912e-60608096fd2a",
+                                                  "key": "projectId",
+                                                  "value": "<uuid>",
+                                                  "description": "(Required) The unique identifier of the project within the account."
+                                                },
+                                                {
+                                                  "id": "70181b13-f950-409c-94d7-4954ad981c16",
+                                                  "key": "clusterId",
+                                                  "value": "<uuid>",
+                                                  "description": "(Required) The unique identifier of the cluster."
+                                                },
+                                                {
+                                                  "id": "81a4b91a-b9ba-4b87-abfa-3277dfaf3c75",
+                                                  "key": "backupId",
+                                                  "value": "<uuid>",
+                                                  "description": "(Required) The unique identifier of the backup snapshot."
+                                                }
+                                              ]
+                                            },
+                                            "description": "Restores the specified cluster from a previously created backup. The restore operation overwrites the current cluster data with the state captured in the backup snapshot."
+                                          },
+                                          "response": [
+                                            {
+                                              "id": "a9442f29-ad2b-4aa8-8fe4-b01dc43f237a",
+                                              "name": "Restore initiated successfully",
+                                              "originalRequest": {
+                                                "method": "POST",
+                                                "header": [
+                                                  {
+                                                    "key": "Accept",
+                                                    "value": "application/json"
+                                                  },
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId/backups/:backupId/restore",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "accounts",
+                                                    ":accountId",
+                                                    "projects",
+                                                    ":projectId",
+                                                    "clusters",
+                                                    ":clusterId",
+                                                    "backups",
+                                                    ":backupId",
+                                                    "restore"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "accountId"
+                                                    },
+                                                    {
+                                                      "key": "projectId"
+                                                    },
+                                                    {
+                                                      "key": "clusterId"
+                                                    },
+                                                    {
+                                                      "key": "backupId"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "OK",
+                                              "code": 200,
+                                              "_postman_previewlanguage": "json",
+                                              "header": [
+                                                {
+                                                  "key": "Content-Type",
+                                                  "value": "application/json"
+                                                }
+                                              ],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"state\": \"FAILED\",\n  \"cloud_info\": {\n    \"code\": \"GCP\",\n    \"region\": \"<string>\"\n  },\n  \"cluster_info\": {\n    \"num_nodes\": \"<integer>\",\n    \"fault_tolerance\": \"ZONE\",\n    \"cluster_tier\": \"DEDICATED\",\n    \"node_info\": {\n      \"num_cores\": \"<integer>\",\n      \"memory_mb\": \"<integer>\",\n      \"disk_size_gb\": \"<integer>\"\n    },\n    \"yugabytedb_version\": \"<string>\"\n  },\n  \"cluster_endpoints\": [\n    {\n      \"accessibility_type\": \"PRIVATE\",\n      \"host\": \"<string>\",\n      \"region\": \"<string>\"\n    },\n    {\n      \"accessibility_type\": \"PUBLIC\",\n      \"host\": \"<string>\",\n      \"region\": \"<string>\"\n    }\n  ],\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                                              "createdAt": "2026-07-28T03:38:44.000Z",
+                                              "updatedAt": "2026-07-28T03:38:44.000Z",
+                                              "uid": "35240-a9442f29-ad2b-4aa8-8fe4-b01dc43f237a"
+                                            },
+                                            {
+                                              "id": "cbb12052-974c-4731-8d26-07eedda4ca69",
+                                              "name": "The request was malformed or contained invalid parameters.",
+                                              "originalRequest": {
+                                                "method": "POST",
+                                                "header": [
+                                                  {
+                                                    "key": "Accept",
+                                                    "value": "application/json"
+                                                  },
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId/backups/:backupId/restore",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "accounts",
+                                                    ":accountId",
+                                                    "projects",
+                                                    ":projectId",
+                                                    "clusters",
+                                                    ":clusterId",
+                                                    "backups",
+                                                    ":backupId",
+                                                    "restore"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "accountId"
+                                                    },
+                                                    {
+                                                      "key": "projectId"
+                                                    },
+                                                    {
+                                                      "key": "clusterId"
+                                                    },
+                                                    {
+                                                      "key": "backupId"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "Bad Request",
+                                              "code": 400,
+                                              "_postman_previewlanguage": "json",
+                                              "header": [
+                                                {
+                                                  "key": "Content-Type",
+                                                  "value": "application/json"
+                                                }
+                                              ],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                                              "createdAt": "2026-07-28T03:38:44.000Z",
+                                              "updatedAt": "2026-07-28T03:38:44.000Z",
+                                              "uid": "35240-cbb12052-974c-4731-8d26-07eedda4ca69"
+                                            },
+                                            {
+                                              "id": "3dc41683-dff4-403e-b50d-0ecad5c7f88c",
+                                              "name": "The API key is missing, invalid, or expired.",
+                                              "originalRequest": {
+                                                "method": "POST",
+                                                "header": [
+                                                  {
+                                                    "key": "Accept",
+                                                    "value": "application/json"
+                                                  },
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId/backups/:backupId/restore",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "accounts",
+                                                    ":accountId",
+                                                    "projects",
+                                                    ":projectId",
+                                                    "clusters",
+                                                    ":clusterId",
+                                                    "backups",
+                                                    ":backupId",
+                                                    "restore"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "accountId"
+                                                    },
+                                                    {
+                                                      "key": "projectId"
+                                                    },
+                                                    {
+                                                      "key": "clusterId"
+                                                    },
+                                                    {
+                                                      "key": "backupId"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "Unauthorized",
+                                              "code": 401,
+                                              "_postman_previewlanguage": "json",
+                                              "header": [
+                                                {
+                                                  "key": "Content-Type",
+                                                  "value": "application/json"
+                                                }
+                                              ],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                                              "createdAt": "2026-07-28T03:38:44.000Z",
+                                              "updatedAt": "2026-07-28T03:38:44.000Z",
+                                              "uid": "35240-3dc41683-dff4-403e-b50d-0ecad5c7f88c"
+                                            },
+                                            {
+                                              "id": "8a04c651-162f-4cd4-82b5-15da59a3d277",
+                                              "name": "The requested resource was not found.",
+                                              "originalRequest": {
+                                                "method": "POST",
+                                                "header": [
+                                                  {
+                                                    "key": "Accept",
+                                                    "value": "application/json"
+                                                  },
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId/backups/:backupId/restore",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "accounts",
+                                                    ":accountId",
+                                                    "projects",
+                                                    ":projectId",
+                                                    "clusters",
+                                                    ":clusterId",
+                                                    "backups",
+                                                    ":backupId",
+                                                    "restore"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "accountId"
+                                                    },
+                                                    {
+                                                      "key": "projectId"
+                                                    },
+                                                    {
+                                                      "key": "clusterId"
+                                                    },
+                                                    {
+                                                      "key": "backupId"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "Not Found",
+                                              "code": 404,
+                                              "_postman_previewlanguage": "json",
+                                              "header": [
+                                                {
+                                                  "key": "Content-Type",
+                                                  "value": "application/json"
+                                                }
+                                              ],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                                              "createdAt": "2026-07-28T03:38:44.000Z",
+                                              "updatedAt": "2026-07-28T03:38:44.000Z",
+                                              "uid": "35240-8a04c651-162f-4cd4-82b5-15da59a3d277"
+                                            }
+                                          ],
+                                          "createdAt": "2026-07-28T03:38:44.000Z",
+                                          "updatedAt": "2026-07-28T03:38:44.000Z",
+                                          "uid": "35240-591d75c3-1ee9-439f-b581-ca775e135295"
+                                        }
+                                      ],
+                                      "id": "c7109a25-bfb1-4291-ba8f-2142e83323a7",
+                                      "createdAt": "2026-07-28T03:38:44.000Z",
+                                      "updatedAt": "2026-07-28T03:38:44.000Z",
+                                      "uid": "35240-c7109a25-bfb1-4291-ba8f-2142e83323a7"
+                                    }
+                                  ],
+                                  "id": "3199945f-8108-4dd3-8613-5c8dd08d32ab",
+                                  "createdAt": "2026-07-28T03:38:44.000Z",
+                                  "updatedAt": "2026-07-28T03:38:44.000Z",
+                                  "uid": "35240-3199945f-8108-4dd3-8613-5c8dd08d32ab"
+                                }
+                              ],
+                              "id": "d28a3fa0-2ffe-41ab-88f7-9d1c69bd6505",
+                              "createdAt": "2026-07-28T03:38:44.000Z",
+                              "updatedAt": "2026-07-28T03:38:44.000Z",
+                              "uid": "35240-d28a3fa0-2ffe-41ab-88f7-9d1c69bd6505"
+                            }
+                          ],
+                          "id": "19d12429-3278-49f6-bc68-947e1bc7f8f8",
+                          "createdAt": "2026-07-28T03:38:44.000Z",
+                          "updatedAt": "2026-07-28T03:38:44.000Z",
+                          "uid": "35240-19d12429-3278-49f6-bc68-947e1bc7f8f8"
+                        }
+                      ],
+                      "id": "c0ad941f-4b0a-4eb8-9407-01032f28d943",
+                      "createdAt": "2026-07-28T03:38:44.000Z",
+                      "updatedAt": "2026-07-28T03:38:44.000Z",
+                      "uid": "35240-c0ad941f-4b0a-4eb8-9407-01032f28d943"
+                    }
+                  ],
+                  "id": "16048673-e59e-44a6-a550-f66a065dfc8b",
+                  "createdAt": "2026-07-28T03:38:44.000Z",
+                  "updatedAt": "2026-07-28T03:38:44.000Z",
+                  "uid": "35240-16048673-e59e-44a6-a550-f66a065dfc8b"
+                }
+              ],
+              "id": "adae9585-e62f-44fc-b74c-03dfee3b0871",
+              "createdAt": "2026-07-28T03:38:44.000Z",
+              "updatedAt": "2026-07-28T03:38:44.000Z",
+              "uid": "35240-adae9585-e62f-44fc-b74c-03dfee3b0871"
+            }
+          ],
+          "id": "78cbce84-af97-4a1e-a6fb-6945dda0abaa",
+          "createdAt": "2026-07-28T03:38:44.000Z",
+          "updatedAt": "2026-07-28T03:38:44.000Z",
+          "uid": "35240-78cbce84-af97-4a1e-a6fb-6945dda0abaa"
+        }
+      ],
+      "id": "c043acac-77d0-4fc4-8fe0-026af50f4b41",
+      "createdAt": "2026-07-28T03:38:44.000Z",
+      "updatedAt": "2026-07-28T03:38:44.000Z",
+      "uid": "35240-c043acac-77d0-4fc4-8fe0-026af50f4b41"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.yugabyte.com/api/public/v1"
+    }
+  ]
+}

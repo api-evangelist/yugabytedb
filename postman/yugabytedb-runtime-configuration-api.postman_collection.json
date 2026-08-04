@@ -1,0 +1,964 @@
+{
+  "info": {
+    "_postman_id": "bf1cc29e-e532-44dc-8f83-80f6b471ebfe",
+    "name": "YugabyteDB Aeon REST Access Keys Runtime configuration API",
+    "description": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:38:44.000Z",
+    "updatedAt": "2026-07-28T03:38:44.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-bf1cc29e-e532-44dc-8f83-80f6b471ebfe"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "customers",
+              "item": [
+                {
+                  "name": "{cUUID}",
+                  "item": [
+                    {
+                      "name": "runtime_config",
+                      "item": [
+                        {
+                          "name": "scopes",
+                          "item": [
+                            {
+                              "name": "YugabyteDB Anywhere List Configuration Scopes",
+                              "id": "c4221f5b-daef-4498-a9cf-9e280315a00f",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/runtime_config/scopes",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "runtime_config",
+                                    "scopes"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "34d2e001-03ee-4d31-abe7-1c12150ed977",
+                                      "key": "cUUID",
+                                      "value": "<uuid>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "Lists all (including empty scopes) runtime config scopes for current customer. List includes the Global scope that spans multiple customers, scope for customer specific overrides for current customer and one scope each for each universe and provider."
+                              },
+                              "response": [
+                                {
+                                  "id": "6f1a0a5d-a3f7-42f3-9878-f91c58e791ee",
+                                  "name": "successful operation",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/runtime_config/scopes",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "runtime_config",
+                                        "scopes"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cUUID"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"scopedConfigList\": [\n    {\n      \"configEntries\": [\n        {\n          \"inherited\": \"<boolean>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"inherited\": \"<boolean>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"mutableScope\": \"<boolean>\",\n      \"type\": \"CUSTOMER\",\n      \"uuid\": \"<uuid>\"\n    },\n    {\n      \"configEntries\": [\n        {\n          \"inherited\": \"<boolean>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"inherited\": \"<boolean>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"mutableScope\": \"<boolean>\",\n      \"type\": \"CUSTOMER\",\n      \"uuid\": \"<uuid>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T03:38:45.000Z",
+                                  "updatedAt": "2026-07-28T03:38:45.000Z",
+                                  "uid": "35240-6f1a0a5d-a3f7-42f3-9878-f91c58e791ee"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:38:45.000Z",
+                              "updatedAt": "2026-07-28T03:38:45.000Z",
+                              "uid": "35240-c4221f5b-daef-4498-a9cf-9e280315a00f"
+                            }
+                          ],
+                          "id": "add582de-b84e-48a0-80e8-6857aa2ca932",
+                          "createdAt": "2026-07-28T03:38:45.000Z",
+                          "updatedAt": "2026-07-28T03:38:45.000Z",
+                          "uid": "35240-add582de-b84e-48a0-80e8-6857aa2ca932"
+                        },
+                        {
+                          "name": "{scope}",
+                          "item": [
+                            {
+                              "name": "key",
+                              "item": [
+                                {
+                                  "name": "{key}",
+                                  "item": [
+                                    {
+                                      "name": "YugabyteDB Anywhere Delete a Configuration Key",
+                                      "id": "789fb4c3-5712-4d09-a320-ab5ddea8a2e1",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "DELETE",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/runtime_config/:scope/key/:key",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "runtime_config",
+                                            ":scope",
+                                            "key",
+                                            ":key"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "c5009901-caa0-4446-9a19-4ea7a6191de1",
+                                              "key": "cUUID",
+                                              "value": "<uuid>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "f930388b-76ce-4042-8673-195dc3df434f",
+                                              "key": "scope",
+                                              "value": "<uuid>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "66fd6e71-1b78-4794-bb45-bd50a92a6488",
+                                              "key": "key",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "a0fe77ad-704b-4417-86c2-1491f5faf5ba",
+                                          "name": "successful operation",
+                                          "originalRequest": {
+                                            "method": "DELETE",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/api/v1/customers/:cUUID/runtime_config/:scope/key/:key",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "api",
+                                                "v1",
+                                                "customers",
+                                                ":cUUID",
+                                                "runtime_config",
+                                                ":scope",
+                                                "key",
+                                                ":key"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "cUUID"
+                                                },
+                                                {
+                                                  "key": "scope"
+                                                },
+                                                {
+                                                  "key": "key"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"message\": \"<string>\",\n  \"success\": \"<boolean>\"\n}",
+                                          "createdAt": "2026-07-28T03:38:45.000Z",
+                                          "updatedAt": "2026-07-28T03:38:45.000Z",
+                                          "uid": "35240-a0fe77ad-704b-4417-86c2-1491f5faf5ba"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T03:38:45.000Z",
+                                      "updatedAt": "2026-07-28T03:38:45.000Z",
+                                      "uid": "35240-789fb4c3-5712-4d09-a320-ab5ddea8a2e1"
+                                    },
+                                    {
+                                      "name": "YugabyteDB Anywhere Get a Configuration Key",
+                                      "id": "c967fa06-ce25-4edd-b099-74a8780bdfc3",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "text/plain"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/runtime_config/:scope/key/:key",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "runtime_config",
+                                            ":scope",
+                                            "key",
+                                            ":key"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "f12fd295-88f3-42bd-9b7d-ec9dcb551d5a",
+                                              "key": "cUUID",
+                                              "value": "<uuid>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "07bc48d7-93af-49cd-bb85-26ce20c1a97d",
+                                              "key": "scope",
+                                              "value": "<uuid>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "03ae6641-194f-42d6-980e-ac1638eefe14",
+                                              "key": "key",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "1ffc4193-fd20-4880-bf3f-c17eeb5ffbee",
+                                          "name": "successful operation",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "text/plain"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/api/v1/customers/:cUUID/runtime_config/:scope/key/:key",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "api",
+                                                "v1",
+                                                "customers",
+                                                ":cUUID",
+                                                "runtime_config",
+                                                ":scope",
+                                                "key",
+                                                ":key"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "cUUID"
+                                                },
+                                                {
+                                                  "key": "scope"
+                                                },
+                                                {
+                                                  "key": "key"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "text/plain"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "<string>",
+                                          "createdAt": "2026-07-28T03:38:45.000Z",
+                                          "updatedAt": "2026-07-28T03:38:45.000Z",
+                                          "uid": "35240-1ffc4193-fd20-4880-bf3f-c17eeb5ffbee"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T03:38:45.000Z",
+                                      "updatedAt": "2026-07-28T03:38:45.000Z",
+                                      "uid": "35240-c967fa06-ce25-4edd-b099-74a8780bdfc3"
+                                    },
+                                    {
+                                      "name": "YugabyteDB Anywhere Update a Configuration Key",
+                                      "id": "adacd9a8-dfee-47e9-8cfa-19fe34bbde1b",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "text/plain"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "<string>"
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/runtime_config/:scope/key/:key",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "runtime_config",
+                                            ":scope",
+                                            "key",
+                                            ":key"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "5cc29e14-edbf-4d37-978a-9aedbe8195ea",
+                                              "key": "cUUID",
+                                              "value": "<uuid>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "1527070a-fc63-4fed-9fb8-8ceac5a7ebbb",
+                                              "key": "scope",
+                                              "value": "<uuid>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "77175b43-30ca-4667-a26b-bdfbdf06bc8f",
+                                              "key": "key",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "9c48b0df-18da-45ed-9415-91b14244f749",
+                                          "name": "successful operation",
+                                          "originalRequest": {
+                                            "method": "PUT",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "text/plain"
+                                              },
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "<string>"
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/api/v1/customers/:cUUID/runtime_config/:scope/key/:key",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "api",
+                                                "v1",
+                                                "customers",
+                                                ":cUUID",
+                                                "runtime_config",
+                                                ":scope",
+                                                "key",
+                                                ":key"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "cUUID"
+                                                },
+                                                {
+                                                  "key": "scope"
+                                                },
+                                                {
+                                                  "key": "key"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"message\": \"<string>\",\n  \"success\": \"<boolean>\"\n}",
+                                          "createdAt": "2026-07-28T03:38:45.000Z",
+                                          "updatedAt": "2026-07-28T03:38:45.000Z",
+                                          "uid": "35240-9c48b0df-18da-45ed-9415-91b14244f749"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T03:38:45.000Z",
+                                      "updatedAt": "2026-07-28T03:38:45.000Z",
+                                      "uid": "35240-adacd9a8-dfee-47e9-8cfa-19fe34bbde1b"
+                                    }
+                                  ],
+                                  "id": "4e75449f-fe51-4909-987b-3c4a70b6983a",
+                                  "createdAt": "2026-07-28T03:38:45.000Z",
+                                  "updatedAt": "2026-07-28T03:38:45.000Z",
+                                  "uid": "35240-4e75449f-fe51-4909-987b-3c4a70b6983a"
+                                }
+                              ],
+                              "id": "ecd828a6-59eb-476e-929c-e437d8d207a2",
+                              "createdAt": "2026-07-28T03:38:45.000Z",
+                              "updatedAt": "2026-07-28T03:38:45.000Z",
+                              "uid": "35240-ecd828a6-59eb-476e-929c-e437d8d207a2"
+                            },
+                            {
+                              "name": "YugabyteDB Anywhere List Configuration Entries for a Scope",
+                              "id": "5a020f12-e2c4-435b-9e4e-b9f14f8a80c2",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/runtime_config/:scope?includeInherited=false",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "runtime_config",
+                                    ":scope"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "includeInherited",
+                                      "value": "false"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "716d915a-04d1-4e6f-973b-452a3d57d85e",
+                                      "key": "cUUID",
+                                      "value": "<uuid>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "700158fe-b3c7-47e4-9198-8245f662482c",
+                                      "key": "scope",
+                                      "value": "<uuid>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "Lists all runtime config entries for a given scope for current customer."
+                              },
+                              "response": [
+                                {
+                                  "id": "1d1278a4-fb94-4762-bdfd-f361aa5495ea",
+                                  "name": "successful operation",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/runtime_config/:scope?includeInherited=false",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "runtime_config",
+                                        ":scope"
+                                      ],
+                                      "query": [
+                                        {
+                                          "key": "includeInherited",
+                                          "value": "false"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cUUID"
+                                        },
+                                        {
+                                          "key": "scope"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"configEntries\": [\n    {\n      \"inherited\": \"<boolean>\",\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"inherited\": \"<boolean>\",\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"mutableScope\": \"<boolean>\",\n  \"type\": \"UNIVERSE\",\n  \"uuid\": \"<uuid>\"\n}",
+                                  "createdAt": "2026-07-28T03:38:45.000Z",
+                                  "updatedAt": "2026-07-28T03:38:45.000Z",
+                                  "uid": "35240-1d1278a4-fb94-4762-bdfd-f361aa5495ea"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:38:45.000Z",
+                              "updatedAt": "2026-07-28T03:38:45.000Z",
+                              "uid": "35240-5a020f12-e2c4-435b-9e4e-b9f14f8a80c2"
+                            }
+                          ],
+                          "id": "c1f26b5b-720b-4b49-a9db-e51ed7ec4399",
+                          "createdAt": "2026-07-28T03:38:45.000Z",
+                          "updatedAt": "2026-07-28T03:38:45.000Z",
+                          "uid": "35240-c1f26b5b-720b-4b49-a9db-e51ed7ec4399"
+                        }
+                      ],
+                      "id": "47cd3f48-2001-4735-a9cd-bb1e9d7d761f",
+                      "createdAt": "2026-07-28T03:38:45.000Z",
+                      "updatedAt": "2026-07-28T03:38:45.000Z",
+                      "uid": "35240-47cd3f48-2001-4735-a9cd-bb1e9d7d761f"
+                    }
+                  ],
+                  "id": "d781ba34-c1df-4e36-b307-ac921b818364",
+                  "createdAt": "2026-07-28T03:38:45.000Z",
+                  "updatedAt": "2026-07-28T03:38:45.000Z",
+                  "uid": "35240-d781ba34-c1df-4e36-b307-ac921b818364"
+                }
+              ],
+              "id": "bde70403-c253-4fc7-ada8-e2f30dcdba36",
+              "createdAt": "2026-07-28T03:38:45.000Z",
+              "updatedAt": "2026-07-28T03:38:45.000Z",
+              "uid": "35240-bde70403-c253-4fc7-ada8-e2f30dcdba36"
+            },
+            {
+              "name": "runtime_config",
+              "item": [
+                {
+                  "name": "feature_flags",
+                  "item": [
+                    {
+                      "name": "YugabyteDB Anywhere List All the Feature Flag Runtime Config Keys and Their Values.",
+                      "id": "bc67a21e-d313-45a7-b105-f01c63b31351",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/runtime_config/feature_flags",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "runtime_config",
+                            "feature_flags"
+                          ]
+                        },
+                        "description": "YbaApi Internal."
+                      },
+                      "response": [
+                        {
+                          "id": "a6e15988-f82f-4df1-b9fe-ae201560b4e2",
+                          "name": "successful operation",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/runtime_config/feature_flags",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "runtime_config",
+                                "feature_flags"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"inherited\": \"<boolean>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\"\n  },\n  {\n    \"inherited\": \"<boolean>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\"\n  }\n]",
+                          "createdAt": "2026-07-28T03:38:45.000Z",
+                          "updatedAt": "2026-07-28T03:38:45.000Z",
+                          "uid": "35240-a6e15988-f82f-4df1-b9fe-ae201560b4e2"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:38:45.000Z",
+                      "updatedAt": "2026-07-28T03:38:45.000Z",
+                      "uid": "35240-bc67a21e-d313-45a7-b105-f01c63b31351"
+                    }
+                  ],
+                  "id": "9afacf6f-642e-4def-9f45-62b07065c41e",
+                  "createdAt": "2026-07-28T03:38:45.000Z",
+                  "updatedAt": "2026-07-28T03:38:45.000Z",
+                  "uid": "35240-9afacf6f-642e-4def-9f45-62b07065c41e"
+                },
+                {
+                  "name": "mutable_key_info",
+                  "item": [
+                    {
+                      "name": "YugabyteDB Anywhere List Mutable Keys",
+                      "id": "6afac51f-d67a-4d5d-86c5-c8fd513de8c7",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/runtime_config/mutable_key_info",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "runtime_config",
+                            "mutable_key_info"
+                          ]
+                        },
+                        "description": "List all the mutable runtime config keys with metadata"
+                      },
+                      "response": [
+                        {
+                          "id": "536a491a-89b3-4f50-b8c5-a2487abd5082",
+                          "name": "successful operation",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/runtime_config/mutable_key_info",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "runtime_config",
+                                "mutable_key_info"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"dataType\": {\n      \"name\": \"<string>\"\n    },\n    \"displayName\": \"<string>\",\n    \"helpTxt\": \"<string>\",\n    \"key\": \"<string>\",\n    \"scope\": \"CUSTOMER\",\n    \"tags\": [\n      \"FEATURE_FLAG\",\n      \"FEATURE_FLAG\"\n    ]\n  },\n  {\n    \"dataType\": {\n      \"name\": \"<string>\"\n    },\n    \"displayName\": \"<string>\",\n    \"helpTxt\": \"<string>\",\n    \"key\": \"<string>\",\n    \"scope\": \"PROVIDER\",\n    \"tags\": [\n      \"PUBLIC\",\n      \"PUBLIC\"\n    ]\n  }\n]",
+                          "createdAt": "2026-07-28T03:38:45.000Z",
+                          "updatedAt": "2026-07-28T03:38:45.000Z",
+                          "uid": "35240-536a491a-89b3-4f50-b8c5-a2487abd5082"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:38:45.000Z",
+                      "updatedAt": "2026-07-28T03:38:45.000Z",
+                      "uid": "35240-6afac51f-d67a-4d5d-86c5-c8fd513de8c7"
+                    }
+                  ],
+                  "id": "37b80a93-10d8-4014-9955-6d64cca78db2",
+                  "createdAt": "2026-07-28T03:38:45.000Z",
+                  "updatedAt": "2026-07-28T03:38:45.000Z",
+                  "uid": "35240-37b80a93-10d8-4014-9955-6d64cca78db2"
+                },
+                {
+                  "name": "mutable_keys",
+                  "item": [
+                    {
+                      "name": "YugabyteDB Anywhere List Mutable Keys",
+                      "id": "a2c7487c-c145-425c-81de-aad97fa3f99d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/runtime_config/mutable_keys",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "runtime_config",
+                            "mutable_keys"
+                          ]
+                        },
+                        "description": "List all the mutable runtime config keys"
+                      },
+                      "response": [
+                        {
+                          "id": "0b6084b5-93f3-4ff7-b3f9-5be4f6b280f2",
+                          "name": "successful operation",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/runtime_config/mutable_keys",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "runtime_config",
+                                "mutable_keys"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                          "createdAt": "2026-07-28T03:38:45.000Z",
+                          "updatedAt": "2026-07-28T03:38:45.000Z",
+                          "uid": "35240-0b6084b5-93f3-4ff7-b3f9-5be4f6b280f2"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:38:45.000Z",
+                      "updatedAt": "2026-07-28T03:38:45.000Z",
+                      "uid": "35240-a2c7487c-c145-425c-81de-aad97fa3f99d"
+                    }
+                  ],
+                  "id": "f9f4fd58-9806-47ad-a5fd-30bec4d1f70c",
+                  "createdAt": "2026-07-28T03:38:45.000Z",
+                  "updatedAt": "2026-07-28T03:38:45.000Z",
+                  "uid": "35240-f9f4fd58-9806-47ad-a5fd-30bec4d1f70c"
+                }
+              ],
+              "id": "f957e44f-4103-4b55-b7d9-f72c0d10d4ab",
+              "createdAt": "2026-07-28T03:38:45.000Z",
+              "updatedAt": "2026-07-28T03:38:45.000Z",
+              "uid": "35240-f957e44f-4103-4b55-b7d9-f72c0d10d4ab"
+            }
+          ],
+          "id": "7523db00-ad01-4975-a674-6c012b01e1bf",
+          "createdAt": "2026-07-28T03:38:45.000Z",
+          "updatedAt": "2026-07-28T03:38:45.000Z",
+          "uid": "35240-7523db00-ad01-4975-a674-6c012b01e1bf"
+        }
+      ],
+      "id": "0f17728d-fed7-4de1-8e9e-7a69381a0483",
+      "createdAt": "2026-07-28T03:38:45.000Z",
+      "updatedAt": "2026-07-28T03:38:45.000Z",
+      "uid": "35240-0f17728d-fed7-4de1-8e9e-7a69381a0483"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.yugabyte.com/api/public/v1"
+    }
+  ]
+}

@@ -1,0 +1,1007 @@
+{
+  "info": {
+    "_postman_id": "48f5b037-b30a-416a-8da4-d15a1c361cad",
+    "name": "YugabyteDB Aeon REST Access Keys Session management API",
+    "description": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:38:48.000Z",
+    "updatedAt": "2026-07-28T03:38:48.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-48f5b037-b30a-416a-8da4-d15a1c361cad"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "api_login",
+              "item": [
+                {
+                  "name": "YugabyteDB Anywhere Authenticate User Using Email and Password",
+                  "id": "aee296cb-2d32-4400-8e44-5e38c0114ae2",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/api_login",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "api_login"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "4cd6f82f-1151-4793-beef-bc36df61b79f",
+                      "name": "successful operation",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"email\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/api_login",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "api_login"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"apiToken\": \"<string>\",\n  \"apiTokenVersion\": \"<long>\",\n  \"authToken\": \"<string>\",\n  \"customerUUID\": \"<uuid>\",\n  \"userUUID\": \"<uuid>\"\n}",
+                      "createdAt": "2026-07-28T03:38:48.000Z",
+                      "updatedAt": "2026-07-28T03:38:48.000Z",
+                      "uid": "35240-4cd6f82f-1151-4793-beef-bc36df61b79f"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:38:48.000Z",
+                  "updatedAt": "2026-07-28T03:38:48.000Z",
+                  "uid": "35240-aee296cb-2d32-4400-8e44-5e38c0114ae2"
+                }
+              ],
+              "id": "2b34a7d4-982a-4489-8c6b-97638f8a954d",
+              "createdAt": "2026-07-28T03:38:48.000Z",
+              "updatedAt": "2026-07-28T03:38:48.000Z",
+              "uid": "35240-2b34a7d4-982a-4489-8c6b-97638f8a954d"
+            },
+            {
+              "name": "app_version",
+              "item": [
+                {
+                  "name": "YugabyteDB Anywhere AppVersion",
+                  "id": "83b85b7e-89f5-4a0d-b844-1afef44361ee",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/app_version",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "app_version"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "e6d3a79d-b01e-40c8-a1d1-c10c3174882b",
+                      "name": "successful operation",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/app_version",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "app_version"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"reprehenderit_5\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:38:48.000Z",
+                      "updatedAt": "2026-07-28T03:38:48.000Z",
+                      "uid": "35240-e6d3a79d-b01e-40c8-a1d1-c10c3174882b"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:38:48.000Z",
+                  "updatedAt": "2026-07-28T03:38:48.000Z",
+                  "uid": "35240-83b85b7e-89f5-4a0d-b844-1afef44361ee"
+                }
+              ],
+              "id": "de99a310-adba-4888-a12a-fec2774fcb2b",
+              "createdAt": "2026-07-28T03:38:48.000Z",
+              "updatedAt": "2026-07-28T03:38:48.000Z",
+              "uid": "35240-de99a310-adba-4888-a12a-fec2774fcb2b"
+            },
+            {
+              "name": "customer_count",
+              "item": [
+                {
+                  "name": "YugabyteDB Anywhere CustomerCount",
+                  "id": "552c7573-0e99-4b37-9475-d594654da8b2",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/customer_count",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "customer_count"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "cf1c824e-70c3-4b69-a085-15c582723cd8",
+                      "name": "successful operation",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/customer_count",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "customer_count"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"count\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T03:38:48.000Z",
+                      "updatedAt": "2026-07-28T03:38:48.000Z",
+                      "uid": "35240-cf1c824e-70c3-4b69-a085-15c582723cd8"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:38:48.000Z",
+                  "updatedAt": "2026-07-28T03:38:48.000Z",
+                  "uid": "35240-552c7573-0e99-4b37-9475-d594654da8b2"
+                }
+              ],
+              "id": "6b5d4977-901f-46ce-acfa-cbb87290b076",
+              "createdAt": "2026-07-28T03:38:48.000Z",
+              "updatedAt": "2026-07-28T03:38:48.000Z",
+              "uid": "35240-6b5d4977-901f-46ce-acfa-cbb87290b076"
+            },
+            {
+              "name": "customers",
+              "item": [
+                {
+                  "name": "{cUUID}",
+                  "item": [
+                    {
+                      "name": "admin_notifications",
+                      "item": [
+                        {
+                          "name": "YugabyteDB Anywhere Current List of Notifications for Admin",
+                          "id": "5b56f223-afbc-4a2f-8ddd-453627f6b460",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/customers/:cUUID/admin_notifications",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "customers",
+                                ":cUUID",
+                                "admin_notifications"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "26e470b3-8182-4da9-9c7d-3a54b172ff63",
+                                  "key": "cUUID",
+                                  "value": "<uuid>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "WARNING: This is a preview API that could change."
+                          },
+                          "response": [
+                            {
+                              "id": "4b0f7421-b6dc-4c0a-94fe-9604b502055e",
+                              "name": "successful operation",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/admin_notifications",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "admin_notifications"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "cUUID"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"messages\": [\n    {\n      \"code\": \"<string>\",\n      \"htmlMessage\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"htmlMessage\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T03:38:48.000Z",
+                              "updatedAt": "2026-07-28T03:38:48.000Z",
+                              "uid": "35240-4b0f7421-b6dc-4c0a-94fe-9604b502055e"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:38:48.000Z",
+                          "updatedAt": "2026-07-28T03:38:48.000Z",
+                          "uid": "35240-5b56f223-afbc-4a2f-8ddd-453627f6b460"
+                        }
+                      ],
+                      "id": "c4f74b5c-557f-49f2-9b93-2793f8f9e77c",
+                      "createdAt": "2026-07-28T03:38:48.000Z",
+                      "updatedAt": "2026-07-28T03:38:48.000Z",
+                      "uid": "35240-c4f74b5c-557f-49f2-9b93-2793f8f9e77c"
+                    },
+                    {
+                      "name": "api_token",
+                      "item": [
+                        {
+                          "name": "YugabyteDB Anywhere Regenerate and Fetch API Token",
+                          "id": "429a1c97-bfcf-414a-8b76-cfd888cde75a",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/customers/:cUUID/api_token?apiTokenVersion=-1",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "customers",
+                                ":cUUID",
+                                "api_token"
+                              ],
+                              "query": [
+                                {
+                                  "key": "apiTokenVersion",
+                                  "value": "-1"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "f08e0a2d-8def-48c8-8827-90d3d5196823",
+                                  "key": "cUUID",
+                                  "value": "<uuid>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "3c7c0555-d4fe-4a99-a297-e5ac3df1e250",
+                              "name": "successful operation",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/api_token?apiTokenVersion=-1",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "api_token"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "apiTokenVersion",
+                                      "value": "-1"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "cUUID"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"apiToken\": \"<string>\",\n  \"apiTokenVersion\": \"<long>\",\n  \"authToken\": \"<string>\",\n  \"customerUUID\": \"<uuid>\",\n  \"userUUID\": \"<uuid>\"\n}",
+                              "createdAt": "2026-07-28T03:38:48.000Z",
+                              "updatedAt": "2026-07-28T03:38:48.000Z",
+                              "uid": "35240-3c7c0555-d4fe-4a99-a297-e5ac3df1e250"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:38:48.000Z",
+                          "updatedAt": "2026-07-28T03:38:48.000Z",
+                          "uid": "35240-429a1c97-bfcf-414a-8b76-cfd888cde75a"
+                        }
+                      ],
+                      "id": "d05faf9d-a482-402b-b1c2-70bc9d63e418",
+                      "createdAt": "2026-07-28T03:38:48.000Z",
+                      "updatedAt": "2026-07-28T03:38:48.000Z",
+                      "uid": "35240-d05faf9d-a482-402b-b1c2-70bc9d63e418"
+                    }
+                  ],
+                  "id": "f637f57d-0720-4ead-8d7b-b8d5e40b58d5",
+                  "createdAt": "2026-07-28T03:38:48.000Z",
+                  "updatedAt": "2026-07-28T03:38:48.000Z",
+                  "uid": "35240-f637f57d-0720-4ead-8d7b-b8d5e40b58d5"
+                }
+              ],
+              "id": "a80f4f74-f869-4783-b79c-3ac8ce4f10a9",
+              "createdAt": "2026-07-28T03:38:48.000Z",
+              "updatedAt": "2026-07-28T03:38:48.000Z",
+              "uid": "35240-a80f4f74-f869-4783-b79c-3ac8ce4f10a9"
+            },
+            {
+              "name": "logs",
+              "item": [
+                {
+                  "name": "{maxLines}",
+                  "item": [
+                    {
+                      "name": "YugabyteDB Anywhere GetLogs",
+                      "id": "0c31eafa-3fef-4624-81a1-64ef00a3b462",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/logs/:maxLines",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "logs",
+                            ":maxLines"
+                          ],
+                          "variable": [
+                            {
+                              "id": "2650fc9d-ad16-4145-ae50-9b5c52745473",
+                              "key": "maxLines",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "a290a450-16ab-453f-b8d2-f5b1bc9ddc9e",
+                          "name": "successful operation",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/logs/:maxLines",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "logs",
+                                ":maxLines"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "maxLines"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"lines\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-07-28T03:38:48.000Z",
+                          "updatedAt": "2026-07-28T03:38:48.000Z",
+                          "uid": "35240-a290a450-16ab-453f-b8d2-f5b1bc9ddc9e"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:38:48.000Z",
+                      "updatedAt": "2026-07-28T03:38:48.000Z",
+                      "uid": "35240-0c31eafa-3fef-4624-81a1-64ef00a3b462"
+                    }
+                  ],
+                  "id": "bc118815-54b8-4075-b9ac-89b7c4cd91f4",
+                  "createdAt": "2026-07-28T03:38:48.000Z",
+                  "updatedAt": "2026-07-28T03:38:48.000Z",
+                  "uid": "35240-bc118815-54b8-4075-b9ac-89b7c4cd91f4"
+                },
+                {
+                  "name": "YugabyteDB Anywhere GetFilteredLogs",
+                  "id": "aff6576d-72e3-41f8-b40d-031f44876b9c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/logs?maxLines=10000&universeName=null&queryRegex=null&startDate=null&endDate=null",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "logs"
+                      ],
+                      "query": [
+                        {
+                          "key": "maxLines",
+                          "value": "10000"
+                        },
+                        {
+                          "key": "universeName",
+                          "value": "null"
+                        },
+                        {
+                          "key": "queryRegex",
+                          "value": "null"
+                        },
+                        {
+                          "key": "startDate",
+                          "value": "null"
+                        },
+                        {
+                          "key": "endDate",
+                          "value": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "8e3ba13d-a292-45ea-af64-98b6a40f8982",
+                      "name": "successful operation",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/logs?maxLines=10000&universeName=null&queryRegex=null&startDate=null&endDate=null",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "logs"
+                          ],
+                          "query": [
+                            {
+                              "key": "maxLines",
+                              "value": "10000"
+                            },
+                            {
+                              "key": "universeName",
+                              "value": "null"
+                            },
+                            {
+                              "key": "queryRegex",
+                              "value": "null"
+                            },
+                            {
+                              "key": "startDate",
+                              "value": "null"
+                            },
+                            {
+                              "key": "endDate",
+                              "value": "null"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "text/plain"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<string>",
+                      "createdAt": "2026-07-28T03:38:48.000Z",
+                      "updatedAt": "2026-07-28T03:38:48.000Z",
+                      "uid": "35240-8e3ba13d-a292-45ea-af64-98b6a40f8982"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:38:48.000Z",
+                  "updatedAt": "2026-07-28T03:38:48.000Z",
+                  "uid": "35240-aff6576d-72e3-41f8-b40d-031f44876b9c"
+                }
+              ],
+              "id": "f354fd44-485c-4b7b-89f1-80010314efaf",
+              "createdAt": "2026-07-28T03:38:48.000Z",
+              "updatedAt": "2026-07-28T03:38:48.000Z",
+              "uid": "35240-f354fd44-485c-4b7b-89f1-80010314efaf"
+            },
+            {
+              "name": "register",
+              "item": [
+                {
+                  "name": "YugabyteDB Anywhere Register a Customer",
+                  "id": "794a3c13-06fa-482b-ab3e-a16a0cce6c3f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"code\": \"<string>\",\n  \"email\": \"<string>\",\n  \"name\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/register?generateApiToken=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "register"
+                      ],
+                      "query": [
+                        {
+                          "key": "generateApiToken",
+                          "value": "false"
+                        }
+                      ]
+                    },
+                    "description": "Creates new customer and user"
+                  },
+                  "response": [
+                    {
+                      "id": "c38b1bd1-55bc-413f-ab47-861c7b715d4e",
+                      "name": "successful operation",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"code\": \"<string>\",\n  \"email\": \"<string>\",\n  \"name\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/register?generateApiToken=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "register"
+                          ],
+                          "query": [
+                            {
+                              "key": "generateApiToken",
+                              "value": "false"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"apiToken\": \"<string>\",\n  \"apiTokenVersion\": \"<long>\",\n  \"authToken\": \"<string>\",\n  \"customerUUID\": \"<uuid>\",\n  \"userUUID\": \"<uuid>\"\n}",
+                      "createdAt": "2026-07-28T03:38:48.000Z",
+                      "updatedAt": "2026-07-28T03:38:48.000Z",
+                      "uid": "35240-c38b1bd1-55bc-413f-ab47-861c7b715d4e"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:38:48.000Z",
+                  "updatedAt": "2026-07-28T03:38:48.000Z",
+                  "uid": "35240-794a3c13-06fa-482b-ab3e-a16a0cce6c3f"
+                }
+              ],
+              "id": "902b0ba4-5def-4f16-bebd-e0cb85559af8",
+              "createdAt": "2026-07-28T03:38:48.000Z",
+              "updatedAt": "2026-07-28T03:38:48.000Z",
+              "uid": "35240-902b0ba4-5def-4f16-bebd-e0cb85559af8"
+            },
+            {
+              "name": "session_info",
+              "item": [
+                {
+                  "name": "YugabyteDB Anywhere Get Current User and Customer Uuid. This Will Not Generate or Return the API Token, Use /api_token API for That.",
+                  "id": "d0625ee7-a61c-4f7d-ac72-b4b30683c6c2",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/session_info",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "session_info"
+                      ]
+                    },
+                    "description": "Available since YBA version 2.20.0."
+                  },
+                  "response": [
+                    {
+                      "id": "eeebab1f-4eab-49be-8ca3-8ce185823916",
+                      "name": "successful operation",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/session_info",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "session_info"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"apiToken\": \"<string>\",\n  \"apiTokenVersion\": \"<long>\",\n  \"authToken\": \"<string>\",\n  \"customerUUID\": \"<uuid>\",\n  \"userUUID\": \"<uuid>\"\n}",
+                      "createdAt": "2026-07-28T03:38:48.000Z",
+                      "updatedAt": "2026-07-28T03:38:48.000Z",
+                      "uid": "35240-eeebab1f-4eab-49be-8ca3-8ce185823916"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:38:48.000Z",
+                  "updatedAt": "2026-07-28T03:38:48.000Z",
+                  "uid": "35240-d0625ee7-a61c-4f7d-ac72-b4b30683c6c2"
+                }
+              ],
+              "id": "3669abdb-a4fb-4287-b350-ab61daece136",
+              "createdAt": "2026-07-28T03:38:48.000Z",
+              "updatedAt": "2026-07-28T03:38:48.000Z",
+              "uid": "35240-3669abdb-a4fb-4287-b350-ab61daece136"
+            }
+          ],
+          "id": "1b95c7e7-3675-4508-bcd5-ce8f78b2060c",
+          "createdAt": "2026-07-28T03:38:48.000Z",
+          "updatedAt": "2026-07-28T03:38:48.000Z",
+          "uid": "35240-1b95c7e7-3675-4508-bcd5-ce8f78b2060c"
+        }
+      ],
+      "id": "220e8822-2892-45f7-adcd-acc12e2e874c",
+      "createdAt": "2026-07-28T03:38:48.000Z",
+      "updatedAt": "2026-07-28T03:38:48.000Z",
+      "uid": "35240-220e8822-2892-45f7-adcd-acc12e2e874c"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.yugabyte.com/api/public/v1"
+    }
+  ]
+}

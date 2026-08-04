@@ -1,0 +1,741 @@
+{
+  "info": {
+    "_postman_id": "730a903e-21f3-4edb-a418-684524b3a5a3",
+    "name": "YugabyteDB Aeon REST Access Keys Customer management API",
+    "description": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:36:58.000Z",
+    "updatedAt": "2026-07-28T03:36:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-730a903e-21f3-4edb-a418-684524b3a5a3"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "customers",
+              "item": [
+                {
+                  "name": "{cUUID}",
+                  "item": [
+                    {
+                      "name": "host_info",
+                      "item": [
+                        {
+                          "name": "YugabyteDB Anywhere Get a Customer's Host Info",
+                          "id": "b01b968e-645d-484a-8f2b-608b333bf361",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/customers/:cUUID/host_info",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "customers",
+                                ":cUUID",
+                                "host_info"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "3f5f4ff5-c56e-4697-a182-6e9731b88b88",
+                                  "key": "cUUID",
+                                  "value": "<uuid>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "2c6e791e-31c0-42fc-bb7e-22fd7940b1b3",
+                              "name": "successful operation",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/host_info",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "host_info"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "cUUID"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"ea_3\": {},\n  \"nisib\": {},\n  \"consequat01\": {}\n}",
+                              "createdAt": "2026-07-28T03:36:58.000Z",
+                              "updatedAt": "2026-07-28T03:36:58.000Z",
+                              "uid": "35240-2c6e791e-31c0-42fc-bb7e-22fd7940b1b3"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:36:58.000Z",
+                          "updatedAt": "2026-07-28T03:36:58.000Z",
+                          "uid": "35240-b01b968e-645d-484a-8f2b-608b333bf361"
+                        }
+                      ],
+                      "id": "31ab9e86-0638-426d-a24f-fb264cfaf2af",
+                      "createdAt": "2026-07-28T03:36:58.000Z",
+                      "updatedAt": "2026-07-28T03:36:58.000Z",
+                      "uid": "35240-31ab9e86-0638-426d-a24f-fb264cfaf2af"
+                    },
+                    {
+                      "name": "metrics",
+                      "item": [
+                        {
+                          "name": "YugabyteDB Anywhere Add Metrics to a Customer",
+                          "id": "499881ed-161e-48e7-af3b-d27cc78951bc",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"recharts\": \"<boolean>\",\n  \"start\": \"<long>\",\n  \"xclusterConfigUuid\": \"<uuid>\",\n  \"availabilityZones\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"clusterUuids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"end\": \"<long>\",\n  \"metrics\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"metricsWithSettings\": [\n    {\n      \"metric\": \"<string>\",\n      \"aggregatedValueFunction\": \"AVG\",\n      \"nodeAggregation\": \"MIN\",\n      \"returnAggregatedValue\": \"<boolean>\",\n      \"splitCount\": \"<integer>\",\n      \"splitMode\": \"TOP\",\n      \"splitType\": \"NAMESPACE\",\n      \"timeAggregation\": \"AVG\"\n    },\n    {\n      \"metric\": \"<string>\",\n      \"aggregatedValueFunction\": \"DEFAULT\",\n      \"nodeAggregation\": \"SUM\",\n      \"returnAggregatedValue\": \"<boolean>\",\n      \"splitCount\": \"<integer>\",\n      \"splitMode\": \"TOP\",\n      \"splitType\": \"NONE\",\n      \"timeAggregation\": \"MIN\"\n    }\n  ],\n  \"nodeNames\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"nodePrefix\": \"<string>\",\n  \"regionCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"serverType\": \"MASTER\",\n  \"streamId\": \"<string>\",\n  \"tableId\": \"<string>\",\n  \"tableName\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/customers/:cUUID/metrics",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "customers",
+                                ":cUUID",
+                                "metrics"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "a2c38d94-f677-4d0d-854e-af73ddef5cee",
+                                  "key": "cUUID",
+                                  "value": "<uuid>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "YbaApi Internal."
+                          },
+                          "response": [
+                            {
+                              "id": "fb8b1cba-0973-45e4-8831-c9076125ac05",
+                              "name": "successful operation",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"recharts\": \"<boolean>\",\n  \"start\": \"<long>\",\n  \"xclusterConfigUuid\": \"<uuid>\",\n  \"availabilityZones\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"clusterUuids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"end\": \"<long>\",\n  \"metrics\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"metricsWithSettings\": [\n    {\n      \"metric\": \"<string>\",\n      \"aggregatedValueFunction\": \"AVG\",\n      \"nodeAggregation\": \"MIN\",\n      \"returnAggregatedValue\": \"<boolean>\",\n      \"splitCount\": \"<integer>\",\n      \"splitMode\": \"TOP\",\n      \"splitType\": \"NAMESPACE\",\n      \"timeAggregation\": \"AVG\"\n    },\n    {\n      \"metric\": \"<string>\",\n      \"aggregatedValueFunction\": \"DEFAULT\",\n      \"nodeAggregation\": \"SUM\",\n      \"returnAggregatedValue\": \"<boolean>\",\n      \"splitCount\": \"<integer>\",\n      \"splitMode\": \"TOP\",\n      \"splitType\": \"NONE\",\n      \"timeAggregation\": \"MIN\"\n    }\n  ],\n  \"nodeNames\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"nodePrefix\": \"<string>\",\n  \"regionCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"serverType\": \"MASTER\",\n  \"streamId\": \"<string>\",\n  \"tableId\": \"<string>\",\n  \"tableName\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/metrics",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "metrics"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "cUUID"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"ea_3\": {},\n  \"nisib\": {},\n  \"consequat01\": {}\n}",
+                              "createdAt": "2026-07-28T03:36:58.000Z",
+                              "updatedAt": "2026-07-28T03:36:58.000Z",
+                              "uid": "35240-fb8b1cba-0973-45e4-8831-c9076125ac05"
+                            },
+                            {
+                              "id": "234b1111-aa7c-4eb7-adba-3fd932de2442",
+                              "name": "When request fails validations.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"recharts\": \"<boolean>\",\n  \"start\": \"<long>\",\n  \"xclusterConfigUuid\": \"<uuid>\",\n  \"availabilityZones\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"clusterUuids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"end\": \"<long>\",\n  \"metrics\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"metricsWithSettings\": [\n    {\n      \"metric\": \"<string>\",\n      \"aggregatedValueFunction\": \"AVG\",\n      \"nodeAggregation\": \"MIN\",\n      \"returnAggregatedValue\": \"<boolean>\",\n      \"splitCount\": \"<integer>\",\n      \"splitMode\": \"TOP\",\n      \"splitType\": \"NAMESPACE\",\n      \"timeAggregation\": \"AVG\"\n    },\n    {\n      \"metric\": \"<string>\",\n      \"aggregatedValueFunction\": \"DEFAULT\",\n      \"nodeAggregation\": \"SUM\",\n      \"returnAggregatedValue\": \"<boolean>\",\n      \"splitCount\": \"<integer>\",\n      \"splitMode\": \"TOP\",\n      \"splitType\": \"NONE\",\n      \"timeAggregation\": \"MIN\"\n    }\n  ],\n  \"nodeNames\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"nodePrefix\": \"<string>\",\n  \"regionCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"serverType\": \"MASTER\",\n  \"streamId\": \"<string>\",\n  \"tableId\": \"<string>\",\n  \"tableName\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/metrics",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "metrics"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "cUUID"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"errorJson\": {},\n  \"httpMethod\": \"<string>\",\n  \"requestJson\": {},\n  \"requestUri\": \"<string>\",\n  \"success\": \"<boolean>\"\n}",
+                              "createdAt": "2026-07-28T03:36:58.000Z",
+                              "updatedAt": "2026-07-28T03:36:58.000Z",
+                              "uid": "35240-234b1111-aa7c-4eb7-adba-3fd932de2442"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:36:58.000Z",
+                          "updatedAt": "2026-07-28T03:36:58.000Z",
+                          "uid": "35240-499881ed-161e-48e7-af3b-d27cc78951bc"
+                        }
+                      ],
+                      "id": "2a4acb6d-c6be-43f2-b850-05546c58eadc",
+                      "createdAt": "2026-07-28T03:36:58.000Z",
+                      "updatedAt": "2026-07-28T03:36:58.000Z",
+                      "uid": "35240-2a4acb6d-c6be-43f2-b850-05546c58eadc"
+                    },
+                    {
+                      "name": "YugabyteDB Anywhere Delete a Customer",
+                      "id": "35ace0c9-4582-4127-b78a-e9ed40f19588",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "customers",
+                            ":cUUID"
+                          ],
+                          "variable": [
+                            {
+                              "id": "3aa14c9c-ac0b-4360-add6-24ec06ef078b",
+                              "key": "cUUID",
+                              "value": "<uuid>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "6d4c0444-8a5a-4436-acb8-41d95b402ab6",
+                          "name": "successful operation",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/customers/:cUUID",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "customers",
+                                ":cUUID"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "cUUID"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"success\": \"<boolean>\"\n}",
+                          "createdAt": "2026-07-28T03:36:58.000Z",
+                          "updatedAt": "2026-07-28T03:36:58.000Z",
+                          "uid": "35240-6d4c0444-8a5a-4436-acb8-41d95b402ab6"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:36:58.000Z",
+                      "updatedAt": "2026-07-28T03:36:58.000Z",
+                      "uid": "35240-35ace0c9-4582-4127-b78a-e9ed40f19588"
+                    },
+                    {
+                      "name": "YugabyteDB Anywhere Get a Customer's Details",
+                      "id": "b4d56fd6-c303-4b87-a55c-075c97f1aa56",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "customers",
+                            ":cUUID"
+                          ],
+                          "variable": [
+                            {
+                              "id": "530e9011-9d66-4c0c-9994-24d8b5aa3953",
+                              "key": "cUUID",
+                              "value": "<uuid>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "a16c799a-b5f1-4b9c-8720-929b547ec2fb",
+                          "name": "successful operation",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/customers/:cUUID",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "customers",
+                                ":cUUID"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "cUUID"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"name\": \"<string>\",\n  \"alertingData\": {\n    \"activeAlertNotificationIntervalMs\": \"<long>\",\n    \"alertingEmail\": \"<string>\",\n    \"checkIntervalMs\": \"<long>\",\n    \"reportOnlyErrors\": \"<boolean>\",\n    \"sendAlertsToYb\": \"<boolean>\",\n    \"statusUpdateIntervalMs\": \"<long>\"\n  },\n  \"callhomeLevel\": \"<string>\",\n  \"creationDate\": \"<dateTime>\",\n  \"customerId\": \"<integer>\",\n  \"smtpData\": {\n    \"emailFrom\": \"<string>\",\n    \"smtpPassword\": \"<string>\",\n    \"smtpPort\": \"<integer>\",\n    \"smtpServer\": \"<string>\",\n    \"smtpUsername\": \"<string>\",\n    \"useSSL\": \"<boolean>\",\n    \"useTLS\": \"<boolean>\"\n  },\n  \"universeUUIDs\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"uuid\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T03:36:58.000Z",
+                          "updatedAt": "2026-07-28T03:36:58.000Z",
+                          "uid": "35240-a16c799a-b5f1-4b9c-8720-929b547ec2fb"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:36:58.000Z",
+                      "updatedAt": "2026-07-28T03:36:58.000Z",
+                      "uid": "35240-b4d56fd6-c303-4b87-a55c-075c97f1aa56"
+                    },
+                    {
+                      "name": "YugabyteDB Anywhere Update a Customer",
+                      "id": "b9361d5c-456b-41e5-acb4-880bbc4a3579",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"alertingData\": {\n    \"activeAlertNotificationIntervalMs\": \"<long>\",\n    \"alertingEmail\": \"<string>\",\n    \"checkIntervalMs\": \"<long>\",\n    \"reportOnlyErrors\": \"<boolean>\",\n    \"sendAlertsToYb\": \"<boolean>\",\n    \"statusUpdateIntervalMs\": \"<long>\"\n  },\n  \"callhomeLevel\": \"<string>\",\n  \"smtpData\": {\n    \"emailFrom\": \"<string>\",\n    \"smtpPassword\": \"<string>\",\n    \"smtpPort\": \"<integer>\",\n    \"smtpServer\": \"<string>\",\n    \"smtpUsername\": \"<string>\",\n    \"useSSL\": \"<boolean>\",\n    \"useTLS\": \"<boolean>\"\n  },\n  \"code\": \"<string>\",\n  \"confirmPassword\": \"<string>\",\n  \"email\": \"<string>\",\n  \"features\": {\n    \"aliquip_31\": {},\n    \"laboris_6c\": {},\n    \"nulla_e26\": {},\n    \"proident_0b8\": {}\n  },\n  \"name\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "customers",
+                            ":cUUID"
+                          ],
+                          "variable": [
+                            {
+                              "id": "3058177c-369d-4ed9-bc27-ca31811dabc3",
+                              "key": "cUUID",
+                              "value": "<uuid>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "db9b8624-e531-4fdf-a625-6bdb71aecbfe",
+                          "name": "successful operation",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"alertingData\": {\n    \"activeAlertNotificationIntervalMs\": \"<long>\",\n    \"alertingEmail\": \"<string>\",\n    \"checkIntervalMs\": \"<long>\",\n    \"reportOnlyErrors\": \"<boolean>\",\n    \"sendAlertsToYb\": \"<boolean>\",\n    \"statusUpdateIntervalMs\": \"<long>\"\n  },\n  \"callhomeLevel\": \"<string>\",\n  \"smtpData\": {\n    \"emailFrom\": \"<string>\",\n    \"smtpPassword\": \"<string>\",\n    \"smtpPort\": \"<integer>\",\n    \"smtpServer\": \"<string>\",\n    \"smtpUsername\": \"<string>\",\n    \"useSSL\": \"<boolean>\",\n    \"useTLS\": \"<boolean>\"\n  },\n  \"code\": \"<string>\",\n  \"confirmPassword\": \"<string>\",\n  \"email\": \"<string>\",\n  \"features\": {\n    \"aliquip_31\": {},\n    \"laboris_6c\": {},\n    \"nulla_e26\": {},\n    \"proident_0b8\": {}\n  },\n  \"name\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/customers/:cUUID",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "customers",
+                                ":cUUID"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "cUUID"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"name\": \"<string>\",\n  \"creationDate\": \"<dateTime>\",\n  \"customerId\": \"<long>\",\n  \"uuid\": \"<uuid>\"\n}",
+                          "createdAt": "2026-07-28T03:36:58.000Z",
+                          "updatedAt": "2026-07-28T03:36:58.000Z",
+                          "uid": "35240-db9b8624-e531-4fdf-a625-6bdb71aecbfe"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:36:58.000Z",
+                      "updatedAt": "2026-07-28T03:36:58.000Z",
+                      "uid": "35240-b9361d5c-456b-41e5-acb4-880bbc4a3579"
+                    }
+                  ],
+                  "id": "81c1d48e-cebe-4f0f-8da3-6b9da5e61424",
+                  "createdAt": "2026-07-28T03:36:58.000Z",
+                  "updatedAt": "2026-07-28T03:36:58.000Z",
+                  "uid": "35240-81c1d48e-cebe-4f0f-8da3-6b9da5e61424"
+                },
+                {
+                  "name": "YugabyteDB Anywhere List Customers",
+                  "id": "aca995af-3936-4431-a8c2-e3a235a7dc7d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/customers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "customers"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "c2fb7e5b-8fb1-44b2-bbe8-b4dd64071b63",
+                      "name": "successful operation",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/customers",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "customers"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"code\": \"<string>\",\n    \"name\": \"<string>\",\n    \"creationDate\": \"<dateTime>\",\n    \"customerId\": \"<long>\",\n    \"uuid\": \"<uuid>\"\n  },\n  {\n    \"code\": \"<string>\",\n    \"name\": \"<string>\",\n    \"creationDate\": \"<dateTime>\",\n    \"customerId\": \"<long>\",\n    \"uuid\": \"<uuid>\"\n  }\n]",
+                      "createdAt": "2026-07-28T03:36:58.000Z",
+                      "updatedAt": "2026-07-28T03:36:58.000Z",
+                      "uid": "35240-c2fb7e5b-8fb1-44b2-bbe8-b4dd64071b63"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:36:58.000Z",
+                  "updatedAt": "2026-07-28T03:36:58.000Z",
+                  "uid": "35240-aca995af-3936-4431-a8c2-e3a235a7dc7d"
+                }
+              ],
+              "id": "fad2aeca-c6a7-4368-b55c-d6c0b6025a05",
+              "createdAt": "2026-07-28T03:36:58.000Z",
+              "updatedAt": "2026-07-28T03:36:58.000Z",
+              "uid": "35240-fad2aeca-c6a7-4368-b55c-d6c0b6025a05"
+            }
+          ],
+          "id": "742395ef-fe6d-48a9-ab7e-1cd847640ded",
+          "createdAt": "2026-07-28T03:36:58.000Z",
+          "updatedAt": "2026-07-28T03:36:58.000Z",
+          "uid": "35240-742395ef-fe6d-48a9-ab7e-1cd847640ded"
+        }
+      ],
+      "id": "9505b968-40ff-487c-81aa-29bb11946be2",
+      "createdAt": "2026-07-28T03:36:58.000Z",
+      "updatedAt": "2026-07-28T03:36:58.000Z",
+      "uid": "35240-9505b968-40ff-487c-81aa-29bb11946be2"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.yugabyte.com/api/public/v1"
+    }
+  ]
+}

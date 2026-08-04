@@ -1,0 +1,959 @@
+{
+  "info": {
+    "_postman_id": "91e9f025-04c3-472b-be38-79de077e432f",
+    "name": "YugabyteDB Aeon REST Access Keys AllowLists API",
+    "description": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:36:33.000Z",
+    "updatedAt": "2026-07-28T03:36:34.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-91e9f025-04c3-472b-be38-79de077e432f"
+  },
+  "item": [
+    {
+      "name": "accounts",
+      "item": [
+        {
+          "name": "{accountId}",
+          "item": [
+            {
+              "name": "projects",
+              "item": [
+                {
+                  "name": "{projectId}",
+                  "item": [
+                    {
+                      "name": "allow-lists",
+                      "item": [
+                        {
+                          "name": "{allowListId}",
+                          "item": [
+                            {
+                              "name": "YugabyteDB Aeon Get Allow List",
+                              "id": "f9cd7dd6-d5d2-4167-ae8d-d0f87a9342c7",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/allow-lists/:allowListId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":accountId",
+                                    "projects",
+                                    ":projectId",
+                                    "allow-lists",
+                                    ":allowListId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "d06d15f5-0d06-4c57-a64f-4e1f17ff3614",
+                                      "key": "accountId",
+                                      "value": "<uuid>",
+                                      "description": "(Required) The unique identifier of the YugabyteDB Aeon account."
+                                    },
+                                    {
+                                      "id": "c1aa14c7-925a-4abe-b935-26854858d2e9",
+                                      "key": "projectId",
+                                      "value": "<uuid>",
+                                      "description": "(Required) The unique identifier of the project within the account."
+                                    },
+                                    {
+                                      "id": "12a14f1b-6ab8-4fbc-b013-6ce8e40af14a",
+                                      "key": "allowListId",
+                                      "value": "<uuid>",
+                                      "description": "(Required) The unique identifier of the IP allow list."
+                                    }
+                                  ]
+                                },
+                                "description": "Returns details for a specific IP allow list, including its name, description, and all CIDR entries it contains."
+                              },
+                              "response": [
+                                {
+                                  "id": "276df234-5310-4d9c-a26e-278318310f20",
+                                  "name": "Allow list returned successfully",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/allow-lists/:allowListId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "accounts",
+                                        ":accountId",
+                                        "projects",
+                                        ":projectId",
+                                        "allow-lists",
+                                        ":allowListId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "accountId"
+                                        },
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "allowListId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"allow_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"created_at\": \"<dateTime>\"\n}",
+                                  "createdAt": "2026-07-28T03:36:34.000Z",
+                                  "updatedAt": "2026-07-28T03:36:34.000Z",
+                                  "uid": "35240-276df234-5310-4d9c-a26e-278318310f20"
+                                },
+                                {
+                                  "id": "452a186a-8a26-49a1-bd24-75ddbcd19a75",
+                                  "name": "The API key is missing, invalid, or expired.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/allow-lists/:allowListId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "accounts",
+                                        ":accountId",
+                                        "projects",
+                                        ":projectId",
+                                        "allow-lists",
+                                        ":allowListId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "accountId"
+                                        },
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "allowListId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T03:36:34.000Z",
+                                  "updatedAt": "2026-07-28T03:36:34.000Z",
+                                  "uid": "35240-452a186a-8a26-49a1-bd24-75ddbcd19a75"
+                                },
+                                {
+                                  "id": "3a27e044-2f07-4acc-b748-5f9e25db7492",
+                                  "name": "The requested resource was not found.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/allow-lists/:allowListId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "accounts",
+                                        ":accountId",
+                                        "projects",
+                                        ":projectId",
+                                        "allow-lists",
+                                        ":allowListId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "accountId"
+                                        },
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "allowListId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T03:36:34.000Z",
+                                  "updatedAt": "2026-07-28T03:36:34.000Z",
+                                  "uid": "35240-3a27e044-2f07-4acc-b748-5f9e25db7492"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:36:34.000Z",
+                              "updatedAt": "2026-07-28T03:36:34.000Z",
+                              "uid": "35240-f9cd7dd6-d5d2-4167-ae8d-d0f87a9342c7"
+                            },
+                            {
+                              "name": "YugabyteDB Aeon Delete Allow List",
+                              "id": "dd3788e7-f4b7-401e-ac3a-bafe9f415352",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/allow-lists/:allowListId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":accountId",
+                                    "projects",
+                                    ":projectId",
+                                    "allow-lists",
+                                    ":allowListId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "7df28b87-4796-4248-b539-a0fda5f0bca3",
+                                      "key": "accountId",
+                                      "value": "<uuid>",
+                                      "description": "(Required) The unique identifier of the YugabyteDB Aeon account."
+                                    },
+                                    {
+                                      "id": "8dd51c99-7366-4c00-a71b-72eee27c71d1",
+                                      "key": "projectId",
+                                      "value": "<uuid>",
+                                      "description": "(Required) The unique identifier of the project within the account."
+                                    },
+                                    {
+                                      "id": "07a2e661-6489-4fd2-bb2a-e25752853814",
+                                      "key": "allowListId",
+                                      "value": "<uuid>",
+                                      "description": "(Required) The unique identifier of the IP allow list."
+                                    }
+                                  ]
+                                },
+                                "description": "Permanently deletes the specified IP allow list. The allow list must not be currently assigned to any cluster before it can be deleted."
+                              },
+                              "response": [
+                                {
+                                  "id": "1c76b761-8090-41aa-89b6-19e8915a6f91",
+                                  "name": "Allow list deleted successfully",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/allow-lists/:allowListId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "accounts",
+                                        ":accountId",
+                                        "projects",
+                                        ":projectId",
+                                        "allow-lists",
+                                        ":allowListId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "accountId"
+                                        },
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "allowListId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:36:34.000Z",
+                                  "updatedAt": "2026-07-28T03:36:34.000Z",
+                                  "uid": "35240-1c76b761-8090-41aa-89b6-19e8915a6f91"
+                                },
+                                {
+                                  "id": "56bc88e0-6c26-4e2f-b344-d6436144065c",
+                                  "name": "The API key is missing, invalid, or expired.",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/allow-lists/:allowListId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "accounts",
+                                        ":accountId",
+                                        "projects",
+                                        ":projectId",
+                                        "allow-lists",
+                                        ":allowListId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "accountId"
+                                        },
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "allowListId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T03:36:34.000Z",
+                                  "updatedAt": "2026-07-28T03:36:34.000Z",
+                                  "uid": "35240-56bc88e0-6c26-4e2f-b344-d6436144065c"
+                                },
+                                {
+                                  "id": "2e6893c5-d5be-4a59-9246-d45b3248d8d8",
+                                  "name": "The requested resource was not found.",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/allow-lists/:allowListId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "accounts",
+                                        ":accountId",
+                                        "projects",
+                                        ":projectId",
+                                        "allow-lists",
+                                        ":allowListId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "accountId"
+                                        },
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "allowListId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T03:36:34.000Z",
+                                  "updatedAt": "2026-07-28T03:36:34.000Z",
+                                  "uid": "35240-2e6893c5-d5be-4a59-9246-d45b3248d8d8"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:36:34.000Z",
+                              "updatedAt": "2026-07-28T03:36:34.000Z",
+                              "uid": "35240-dd3788e7-f4b7-401e-ac3a-bafe9f415352"
+                            }
+                          ],
+                          "id": "a20f26a0-dc40-41cc-9dee-9fab43ffa42e",
+                          "createdAt": "2026-07-28T03:36:34.000Z",
+                          "updatedAt": "2026-07-28T03:36:34.000Z",
+                          "uid": "35240-a20f26a0-dc40-41cc-9dee-9fab43ffa42e"
+                        },
+                        {
+                          "name": "YugabyteDB Aeon List Allow Lists",
+                          "id": "2b6401ae-b99e-4dcc-bf3e-317b892d4dfa",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/allow-lists",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":accountId",
+                                "projects",
+                                ":projectId",
+                                "allow-lists"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "8074e055-d302-440a-92dc-bf4e4c09bf1e",
+                                  "key": "accountId",
+                                  "value": "<uuid>",
+                                  "description": "(Required) The unique identifier of the YugabyteDB Aeon account."
+                                },
+                                {
+                                  "id": "bcb37f2b-4efd-4360-9bf5-5e7c74eaec99",
+                                  "key": "projectId",
+                                  "value": "<uuid>",
+                                  "description": "(Required) The unique identifier of the project within the account."
+                                }
+                              ]
+                            },
+                            "description": "Returns all IP allow lists defined within the specified project. Allow lists control which IP addresses or CIDR ranges are permitted to connect to clusters in the project."
+                          },
+                          "response": [
+                            {
+                              "id": "186df9c2-bfec-4e40-8804-4e52fccb1ff1",
+                              "name": "List of allow lists returned successfully",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/allow-lists",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":accountId",
+                                    "projects",
+                                    ":projectId",
+                                    "allow-lists"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "accountId"
+                                    },
+                                    {
+                                      "key": "projectId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"allow_list\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"created_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"allow_list\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"created_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T03:36:34.000Z",
+                              "updatedAt": "2026-07-28T03:36:34.000Z",
+                              "uid": "35240-186df9c2-bfec-4e40-8804-4e52fccb1ff1"
+                            },
+                            {
+                              "id": "a70e8ecc-cbb8-400b-ab53-ff33fb760cd7",
+                              "name": "The API key is missing, invalid, or expired.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/allow-lists",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":accountId",
+                                    "projects",
+                                    ":projectId",
+                                    "allow-lists"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "accountId"
+                                    },
+                                    {
+                                      "key": "projectId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                              "createdAt": "2026-07-28T03:36:34.000Z",
+                              "updatedAt": "2026-07-28T03:36:34.000Z",
+                              "uid": "35240-a70e8ecc-cbb8-400b-ab53-ff33fb760cd7"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:36:34.000Z",
+                          "updatedAt": "2026-07-28T03:36:34.000Z",
+                          "uid": "35240-2b6401ae-b99e-4dcc-bf3e-317b892d4dfa"
+                        },
+                        {
+                          "name": "YugabyteDB Aeon Create Allow List",
+                          "id": "223185e4-42f0-4070-a3c7-58b2f48260b0",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"allow_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/allow-lists",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":accountId",
+                                "projects",
+                                ":projectId",
+                                "allow-lists"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "f4d5e146-8e23-4784-9475-1683a01feee9",
+                                  "key": "accountId",
+                                  "value": "<uuid>",
+                                  "description": "(Required) The unique identifier of the YugabyteDB Aeon account."
+                                },
+                                {
+                                  "id": "39785db8-5398-44a8-8a3a-dc6f5b53e28b",
+                                  "key": "projectId",
+                                  "value": "<uuid>",
+                                  "description": "(Required) The unique identifier of the project within the account."
+                                }
+                              ]
+                            },
+                            "description": "Creates a new IP allow list with one or more CIDR entries. The allow list can be assigned to one or more clusters to permit inbound connections from the specified IP ranges."
+                          },
+                          "response": [
+                            {
+                              "id": "dd02bd7d-6ec8-4d12-a5e8-09b0d48b3868",
+                              "name": "Allow list created successfully",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"allow_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/allow-lists",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":accountId",
+                                    "projects",
+                                    ":projectId",
+                                    "allow-lists"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "accountId"
+                                    },
+                                    {
+                                      "key": "projectId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"allow_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"created_at\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-07-28T03:36:34.000Z",
+                              "updatedAt": "2026-07-28T03:36:34.000Z",
+                              "uid": "35240-dd02bd7d-6ec8-4d12-a5e8-09b0d48b3868"
+                            },
+                            {
+                              "id": "0ec4e1bf-79a3-40b5-8dd5-670c2533044a",
+                              "name": "The request was malformed or contained invalid parameters.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"allow_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/allow-lists",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":accountId",
+                                    "projects",
+                                    ":projectId",
+                                    "allow-lists"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "accountId"
+                                    },
+                                    {
+                                      "key": "projectId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                              "createdAt": "2026-07-28T03:36:34.000Z",
+                              "updatedAt": "2026-07-28T03:36:34.000Z",
+                              "uid": "35240-0ec4e1bf-79a3-40b5-8dd5-670c2533044a"
+                            },
+                            {
+                              "id": "504fc2a0-8e59-4b44-8081-59d90a3a65d0",
+                              "name": "The API key is missing, invalid, or expired.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"allow_list\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/allow-lists",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":accountId",
+                                    "projects",
+                                    ":projectId",
+                                    "allow-lists"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "accountId"
+                                    },
+                                    {
+                                      "key": "projectId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                              "createdAt": "2026-07-28T03:36:34.000Z",
+                              "updatedAt": "2026-07-28T03:36:34.000Z",
+                              "uid": "35240-504fc2a0-8e59-4b44-8081-59d90a3a65d0"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:36:34.000Z",
+                          "updatedAt": "2026-07-28T03:36:34.000Z",
+                          "uid": "35240-223185e4-42f0-4070-a3c7-58b2f48260b0"
+                        }
+                      ],
+                      "id": "6cd0d833-1ae5-45cb-a235-3c2696ea7bb9",
+                      "createdAt": "2026-07-28T03:36:34.000Z",
+                      "updatedAt": "2026-07-28T03:36:34.000Z",
+                      "uid": "35240-6cd0d833-1ae5-45cb-a235-3c2696ea7bb9"
+                    }
+                  ],
+                  "id": "4897dfc1-7458-48e5-9118-4dff6c797f88",
+                  "createdAt": "2026-07-28T03:36:34.000Z",
+                  "updatedAt": "2026-07-28T03:36:34.000Z",
+                  "uid": "35240-4897dfc1-7458-48e5-9118-4dff6c797f88"
+                }
+              ],
+              "id": "a50e8968-e1eb-4dea-a2ea-418e038f75ff",
+              "createdAt": "2026-07-28T03:36:34.000Z",
+              "updatedAt": "2026-07-28T03:36:34.000Z",
+              "uid": "35240-a50e8968-e1eb-4dea-a2ea-418e038f75ff"
+            }
+          ],
+          "id": "f7904e21-4034-43ab-9050-aa35f78b3eac",
+          "createdAt": "2026-07-28T03:36:34.000Z",
+          "updatedAt": "2026-07-28T03:36:34.000Z",
+          "uid": "35240-f7904e21-4034-43ab-9050-aa35f78b3eac"
+        }
+      ],
+      "id": "f51b8e39-7794-4e19-8c19-8ecd144861c8",
+      "createdAt": "2026-07-28T03:36:34.000Z",
+      "updatedAt": "2026-07-28T03:36:34.000Z",
+      "uid": "35240-f51b8e39-7794-4e19-8c19-8ecd144861c8"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.yugabyte.com/api/public/v1"
+    }
+  ]
+}

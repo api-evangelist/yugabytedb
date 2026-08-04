@@ -1,0 +1,604 @@
+{
+  "info": {
+    "_postman_id": "9b3facbc-199f-43e0-8a77-1a0bce0510fa",
+    "name": "YugabyteDB Aeon REST Access Keys LDAPOIDC Role management API",
+    "description": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:37:32.000Z",
+    "updatedAt": "2026-07-28T03:37:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9b3facbc-199f-43e0-8a77-1a0bce0510fa"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "customers",
+              "item": [
+                {
+                  "name": "{cUUID}",
+                  "item": [
+                    {
+                      "name": "ldap_mappings",
+                      "item": [
+                        {
+                          "name": "YugabyteDB Anywhere List LDAP Mappings",
+                          "id": "68f25ec7-7dca-4956-9631-cd7d7dcbac9d",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/customers/:cUUID/ldap_mappings",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "customers",
+                                ":cUUID",
+                                "ldap_mappings"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "65bcd742-1f34-4de1-b20e-f2f085777b37",
+                                  "key": "cUUID",
+                                  "value": "<uuid>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "<b style=\"color:#ff0000\">Deprecated since YBA version 2024.2.0.0.</b> Please use the v2 /auth/group-mappings GET endpoint instead. Note that this API will not return the custom roles assigned to groups via the new /api/v2/customers/{cUUID}/auth/group-mappings API."
+                          },
+                          "response": [
+                            {
+                              "id": "a8d0dc4e-a0fd-4d38-8337-48b4b527f871",
+                              "name": "successful operation",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/ldap_mappings",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "ldap_mappings"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "cUUID"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"ldapDnToYbaRolePairs\": [\n    {\n      \"distinguishedName\": \"<string>\",\n      \"ybaRole\": \"SuperAdmin\"\n    },\n    {\n      \"distinguishedName\": \"<string>\",\n      \"ybaRole\": \"ReadOnly\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T03:37:33.000Z",
+                              "updatedAt": "2026-07-28T03:37:33.000Z",
+                              "uid": "35240-a8d0dc4e-a0fd-4d38-8337-48b4b527f871"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:37:32.000Z",
+                          "updatedAt": "2026-07-28T03:37:32.000Z",
+                          "uid": "35240-68f25ec7-7dca-4956-9631-cd7d7dcbac9d"
+                        },
+                        {
+                          "name": "YugabyteDB Anywhere Set LDAP Mappings",
+                          "id": "ff44c20a-3aea-4016-b6ea-0a0a75c39bfa",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"ldapDnToYbaRolePairs\": [\n    {\n      \"distinguishedName\": \"<string>\",\n      \"ybaRole\": \"SuperAdmin\"\n    },\n    {\n      \"distinguishedName\": \"<string>\",\n      \"ybaRole\": \"ReadOnly\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/customers/:cUUID/ldap_mappings",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "customers",
+                                ":cUUID",
+                                "ldap_mappings"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "f1a0a011-8052-4156-93c9-8d1cce2c77b9",
+                                  "key": "cUUID",
+                                  "value": "<uuid>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "<b style=\"color:#ff0000\">Deprecated since YBA version 2024.2.0.0.</b> Please use the v2 /auth/group-mappings PUT endpoint instead"
+                          },
+                          "response": [
+                            {
+                              "id": "46bba216-c9b1-4197-a551-46d0524bd803",
+                              "name": "successful operation",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"ldapDnToYbaRolePairs\": [\n    {\n      \"distinguishedName\": \"<string>\",\n      \"ybaRole\": \"SuperAdmin\"\n    },\n    {\n      \"distinguishedName\": \"<string>\",\n      \"ybaRole\": \"ReadOnly\"\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/ldap_mappings",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "ldap_mappings"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "cUUID"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:37:33.000Z",
+                              "updatedAt": "2026-07-28T03:37:33.000Z",
+                              "uid": "35240-46bba216-c9b1-4197-a551-46d0524bd803"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:37:32.000Z",
+                          "updatedAt": "2026-07-28T03:37:32.000Z",
+                          "uid": "35240-ff44c20a-3aea-4016-b6ea-0a0a75c39bfa"
+                        }
+                      ],
+                      "id": "d681d944-0aac-46cf-9cf2-708e9e618d97",
+                      "createdAt": "2026-07-28T03:37:32.000Z",
+                      "updatedAt": "2026-07-28T03:37:32.000Z",
+                      "uid": "35240-d681d944-0aac-46cf-9cf2-708e9e618d97"
+                    },
+                    {
+                      "name": "oidc_mappings",
+                      "item": [
+                        {
+                          "name": "{groupName}",
+                          "item": [
+                            {
+                              "name": "YugabyteDB Anywhere Delete a OIDC Group Mapping",
+                              "id": "cdaa1d74-050c-4df5-8409-d4a5b803bcfd",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/oidc_mappings/:groupName",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "oidc_mappings",
+                                    ":groupName"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "db4d47c7-4c01-419b-bc8e-7b9d1669238e",
+                                      "key": "cUUID",
+                                      "value": "<uuid>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "5ecfeb23-c192-4737-bfa8-7b2ac40afea6",
+                                      "key": "groupName",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "<b style=\"color:#ff0000\">Deprecated since YBA version 2024.2.0.0.</b> Please use the v2 /auth/group-mappings/{groupUUID} DELETE endpoint instead"
+                              },
+                              "response": [
+                                {
+                                  "id": "7801c936-42a0-4284-a0dd-3bb0f6a1948d",
+                                  "name": "successful operation",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/oidc_mappings/:groupName",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "oidc_mappings",
+                                        ":groupName"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cUUID"
+                                        },
+                                        {
+                                          "key": "groupName"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"message\": \"<string>\",\n  \"success\": \"<boolean>\"\n}",
+                                  "createdAt": "2026-07-28T03:37:33.000Z",
+                                  "updatedAt": "2026-07-28T03:37:33.000Z",
+                                  "uid": "35240-7801c936-42a0-4284-a0dd-3bb0f6a1948d"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:37:32.000Z",
+                              "updatedAt": "2026-07-28T03:37:32.000Z",
+                              "uid": "35240-cdaa1d74-050c-4df5-8409-d4a5b803bcfd"
+                            }
+                          ],
+                          "id": "1d240fed-c373-411f-8ba0-2d15d98d9a11",
+                          "createdAt": "2026-07-28T03:37:32.000Z",
+                          "updatedAt": "2026-07-28T03:37:32.000Z",
+                          "uid": "35240-1d240fed-c373-411f-8ba0-2d15d98d9a11"
+                        },
+                        {
+                          "name": "YugabyteDB Anywhere List OIDC Group Mappings",
+                          "id": "efc77f3b-cb99-4997-a1f0-fb84955ccd92",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/customers/:cUUID/oidc_mappings",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "customers",
+                                ":cUUID",
+                                "oidc_mappings"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "994bc7d1-d367-42d5-973c-c91a762f329a",
+                                  "key": "cUUID",
+                                  "value": "<uuid>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "<b style=\"color:#ff0000\">Deprecated since YBA version 2024.2.0.0.</b> Please use the v2 /auth/group-mappings GET endpoint instead. Note that this API will not return the custom roles assigned to groups via the new /api/v2/customers/{cUUID}/auth/group-mappings API."
+                          },
+                          "response": [
+                            {
+                              "id": "a56b7331-b1b7-444b-b69e-312a0b1d2124",
+                              "name": "successful operation",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/oidc_mappings",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "oidc_mappings"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "cUUID"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"oidcGroupToYbaRolesPairs\": [\n    {\n      \"groupName\": \"<string>\",\n      \"roles\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    {\n      \"groupName\": \"<string>\",\n      \"roles\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T03:37:33.000Z",
+                              "updatedAt": "2026-07-28T03:37:33.000Z",
+                              "uid": "35240-a56b7331-b1b7-444b-b69e-312a0b1d2124"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:37:32.000Z",
+                          "updatedAt": "2026-07-28T03:37:32.000Z",
+                          "uid": "35240-efc77f3b-cb99-4997-a1f0-fb84955ccd92"
+                        },
+                        {
+                          "name": "YugabyteDB Anywhere Set OIDC Mappings",
+                          "id": "15becb44-f6ca-4f77-9fba-7a3f9f31e390",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"oidcGroupToYbaRolesPairs\": [\n    {\n      \"groupName\": \"<string>\",\n      \"roles\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    {\n      \"groupName\": \"<string>\",\n      \"roles\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/customers/:cUUID/oidc_mappings",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "customers",
+                                ":cUUID",
+                                "oidc_mappings"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "e206cc71-1348-4a3d-a958-d4fcfbf878a0",
+                                  "key": "cUUID",
+                                  "value": "<uuid>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "<b style=\"color:#ff0000\">Deprecated since YBA version 2024.2.0.0.</b> Please use the v2 /auth/group-mappings PUT endpoint instead"
+                          },
+                          "response": [
+                            {
+                              "id": "e37a2a02-d1eb-43f4-a16c-26b9dc517a19",
+                              "name": "successful operation",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"oidcGroupToYbaRolesPairs\": [\n    {\n      \"groupName\": \"<string>\",\n      \"roles\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    {\n      \"groupName\": \"<string>\",\n      \"roles\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/oidc_mappings",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "oidc_mappings"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "cUUID"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:37:33.000Z",
+                              "updatedAt": "2026-07-28T03:37:33.000Z",
+                              "uid": "35240-e37a2a02-d1eb-43f4-a16c-26b9dc517a19"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:37:32.000Z",
+                          "updatedAt": "2026-07-28T03:37:32.000Z",
+                          "uid": "35240-15becb44-f6ca-4f77-9fba-7a3f9f31e390"
+                        }
+                      ],
+                      "id": "03f13ad8-bee7-43ea-97fc-230aff7ba5f2",
+                      "createdAt": "2026-07-28T03:37:32.000Z",
+                      "updatedAt": "2026-07-28T03:37:32.000Z",
+                      "uid": "35240-03f13ad8-bee7-43ea-97fc-230aff7ba5f2"
+                    }
+                  ],
+                  "id": "4317d646-cb49-4060-a59b-2217ecce0165",
+                  "createdAt": "2026-07-28T03:37:32.000Z",
+                  "updatedAt": "2026-07-28T03:37:32.000Z",
+                  "uid": "35240-4317d646-cb49-4060-a59b-2217ecce0165"
+                }
+              ],
+              "id": "34cd2621-84dd-4f8e-ad2b-e18f8ac103ff",
+              "createdAt": "2026-07-28T03:37:32.000Z",
+              "updatedAt": "2026-07-28T03:37:32.000Z",
+              "uid": "35240-34cd2621-84dd-4f8e-ad2b-e18f8ac103ff"
+            }
+          ],
+          "id": "6392437e-ce4d-4feb-876f-e0c5902dc96c",
+          "createdAt": "2026-07-28T03:37:32.000Z",
+          "updatedAt": "2026-07-28T03:37:32.000Z",
+          "uid": "35240-6392437e-ce4d-4feb-876f-e0c5902dc96c"
+        }
+      ],
+      "id": "3cbc6692-7265-4221-a46f-1f213912eb0b",
+      "createdAt": "2026-07-28T03:37:32.000Z",
+      "updatedAt": "2026-07-28T03:37:32.000Z",
+      "uid": "35240-3cbc6692-7265-4221-a46f-1f213912eb0b"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.yugabyte.com/api/public/v1"
+    }
+  ]
+}

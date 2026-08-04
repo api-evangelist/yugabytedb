@@ -1,0 +1,815 @@
+{
+  "info": {
+    "_postman_id": "336ac6d4-0f57-48ec-90bf-9f59728d40e9",
+    "name": "YugabyteDB Aeon REST Access Keys Maintenance windows API",
+    "description": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:37:35.000Z",
+    "updatedAt": "2026-07-28T03:37:35.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-336ac6d4-0f57-48ec-90bf-9f59728d40e9"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "customers",
+              "item": [
+                {
+                  "name": "{cUUID}",
+                  "item": [
+                    {
+                      "name": "maintenance_windows",
+                      "item": [
+                        {
+                          "name": "list",
+                          "item": [
+                            {
+                              "name": "YugabyteDB Anywhere List Maintenance Windows",
+                              "id": "ccc7a48b-454d-4c73-a74b-c197b75cb553",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"states\": [\n    \"ACTIVE\",\n    \"PENDING\"\n  ],\n  \"uuids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/maintenance_windows/list",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "maintenance_windows",
+                                    "list"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "39fca7ef-12f5-4512-8276-acb14665e80b",
+                                      "key": "cUUID",
+                                      "value": "<uuid>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "WARNING: This is a preview API that could change."
+                              },
+                              "response": [
+                                {
+                                  "id": "d9745c86-f4d7-4eff-bec6-a42c106dfed6",
+                                  "name": "successful operation",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"states\": [\n    \"ACTIVE\",\n    \"PENDING\"\n  ],\n  \"uuids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/maintenance_windows/list",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "maintenance_windows",
+                                        "list"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cUUID"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "[\n  {\n    \"alertConfigurationFilter\": {\n      \"active\": \"<boolean>\",\n      \"destinationType\": \"SELECTED_DESTINATION\",\n      \"destinationUuid\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"severity\": \"WARNING\",\n      \"target\": {\n        \"all\": \"<boolean>\",\n        \"uuids\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      },\n      \"targetType\": \"PLATFORM\",\n      \"template\": \"CONTINUOUS_BACKUPS_STATUS\",\n      \"uuids\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"createTime\": \"<dateTime>\",\n    \"customerUUID\": \"<uuid>\",\n    \"description\": \"<string>\",\n    \"endTime\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"startTime\": \"<dateTime>\",\n    \"state\": \"ACTIVE\",\n    \"suppressHealthCheckNotificationsConfig\": {\n      \"suppressAllUniverses\": \"<boolean>\",\n      \"universeUUIDSet\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"uuid\": \"<uuid>\"\n  },\n  {\n    \"alertConfigurationFilter\": {\n      \"active\": \"<boolean>\",\n      \"destinationType\": \"SELECTED_DESTINATION\",\n      \"destinationUuid\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"severity\": \"WARNING\",\n      \"target\": {\n        \"all\": \"<boolean>\",\n        \"uuids\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      },\n      \"targetType\": \"PLATFORM\",\n      \"template\": \"BACKUP_SCHEDULE_FAILURE\",\n      \"uuids\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"createTime\": \"<dateTime>\",\n    \"customerUUID\": \"<uuid>\",\n    \"description\": \"<string>\",\n    \"endTime\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"startTime\": \"<dateTime>\",\n    \"state\": \"PENDING\",\n    \"suppressHealthCheckNotificationsConfig\": {\n      \"suppressAllUniverses\": \"<boolean>\",\n      \"universeUUIDSet\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"uuid\": \"<uuid>\"\n  }\n]",
+                                  "createdAt": "2026-07-28T03:37:35.000Z",
+                                  "updatedAt": "2026-07-28T03:37:35.000Z",
+                                  "uid": "35240-d9745c86-f4d7-4eff-bec6-a42c106dfed6"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:37:35.000Z",
+                              "updatedAt": "2026-07-28T03:37:35.000Z",
+                              "uid": "35240-ccc7a48b-454d-4c73-a74b-c197b75cb553"
+                            }
+                          ],
+                          "id": "ce278206-8e41-4a53-a512-ff5623a85990",
+                          "createdAt": "2026-07-28T03:37:35.000Z",
+                          "updatedAt": "2026-07-28T03:37:35.000Z",
+                          "uid": "35240-ce278206-8e41-4a53-a512-ff5623a85990"
+                        },
+                        {
+                          "name": "page",
+                          "item": [
+                            {
+                              "name": "YugabyteDB Anywhere List Maintenance Windows (paginated)",
+                              "id": "28eb2e2f-fc45-4ad7-b9a3-fedc432e1c97",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"direction\": \"ASC\",\n  \"filter\": {\n    \"states\": [\n      \"PENDING\",\n      \"PENDING\"\n    ],\n    \"uuids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ]\n  },\n  \"limit\": \"<integer>\",\n  \"needTotalCount\": \"<boolean>\",\n  \"offset\": \"<integer>\",\n  \"sortBy\": \"uuid\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/maintenance_windows/page",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "maintenance_windows",
+                                    "page"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "c40c528e-39e8-462c-8c55-ef1838a1b722",
+                                      "key": "cUUID",
+                                      "value": "<uuid>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "WARNING: This is a preview API that could change."
+                              },
+                              "response": [
+                                {
+                                  "id": "5f3effc6-7e18-463b-8507-1dba175501a8",
+                                  "name": "successful operation",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"direction\": \"ASC\",\n  \"filter\": {\n    \"states\": [\n      \"PENDING\",\n      \"PENDING\"\n    ],\n    \"uuids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ]\n  },\n  \"limit\": \"<integer>\",\n  \"needTotalCount\": \"<boolean>\",\n  \"offset\": \"<integer>\",\n  \"sortBy\": \"uuid\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/maintenance_windows/page",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "maintenance_windows",
+                                        "page"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cUUID"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"entities\": [\n    {\n      \"alertConfigurationFilter\": {\n        \"active\": \"<boolean>\",\n        \"destinationType\": \"SELECTED_DESTINATION\",\n        \"destinationUuid\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"severity\": \"WARNING\",\n        \"target\": {\n          \"all\": \"<boolean>\",\n          \"uuids\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ]\n        },\n        \"targetType\": \"PLATFORM\",\n        \"template\": \"ALERT_NOTIFICATION_CHANNEL_ERROR\",\n        \"uuids\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      },\n      \"createTime\": \"<dateTime>\",\n      \"customerUUID\": \"<uuid>\",\n      \"description\": \"<string>\",\n      \"endTime\": \"<dateTime>\",\n      \"name\": \"<string>\",\n      \"startTime\": \"<dateTime>\",\n      \"state\": \"ACTIVE\",\n      \"suppressHealthCheckNotificationsConfig\": {\n        \"suppressAllUniverses\": \"<boolean>\",\n        \"universeUUIDSet\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      },\n      \"uuid\": \"<uuid>\"\n    },\n    {\n      \"alertConfigurationFilter\": {\n        \"active\": \"<boolean>\",\n        \"destinationType\": \"NO_DESTINATION\",\n        \"destinationUuid\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"severity\": \"WARNING\",\n        \"target\": {\n          \"all\": \"<boolean>\",\n          \"uuids\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ]\n        },\n        \"targetType\": \"PLATFORM\",\n        \"template\": \"REPLICATION_LAG\",\n        \"uuids\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      },\n      \"createTime\": \"<dateTime>\",\n      \"customerUUID\": \"<uuid>\",\n      \"description\": \"<string>\",\n      \"endTime\": \"<dateTime>\",\n      \"name\": \"<string>\",\n      \"startTime\": \"<dateTime>\",\n      \"state\": \"ACTIVE\",\n      \"suppressHealthCheckNotificationsConfig\": {\n        \"suppressAllUniverses\": \"<boolean>\",\n        \"universeUUIDSet\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      },\n      \"uuid\": \"<uuid>\"\n    }\n  ],\n  \"hasNext\": \"<boolean>\",\n  \"hasPrev\": \"<boolean>\",\n  \"totalCount\": \"<integer>\"\n}",
+                                  "createdAt": "2026-07-28T03:37:35.000Z",
+                                  "updatedAt": "2026-07-28T03:37:35.000Z",
+                                  "uid": "35240-5f3effc6-7e18-463b-8507-1dba175501a8"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:37:35.000Z",
+                              "updatedAt": "2026-07-28T03:37:35.000Z",
+                              "uid": "35240-28eb2e2f-fc45-4ad7-b9a3-fedc432e1c97"
+                            }
+                          ],
+                          "id": "5a5f5870-4083-46c3-a00c-3e8a539201e1",
+                          "createdAt": "2026-07-28T03:37:35.000Z",
+                          "updatedAt": "2026-07-28T03:37:35.000Z",
+                          "uid": "35240-5a5f5870-4083-46c3-a00c-3e8a539201e1"
+                        },
+                        {
+                          "name": "{windowUUID}",
+                          "item": [
+                            {
+                              "name": "YugabyteDB Anywhere Delete Maintenance Window",
+                              "id": "b00014b1-442d-47fd-b5c6-e00ccdbfa360",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/maintenance_windows/:windowUUID",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "maintenance_windows",
+                                    ":windowUUID"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "435e4d67-f3ac-42c1-b4cf-19a34fff2e1a",
+                                      "key": "cUUID",
+                                      "value": "<uuid>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "037ae67a-6472-4fa6-9d75-ff6b386f56e2",
+                                      "key": "windowUUID",
+                                      "value": "<uuid>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "WARNING: This is a preview API that could change."
+                              },
+                              "response": [
+                                {
+                                  "id": "1c21167c-8740-4489-aa37-2fc151d62ace",
+                                  "name": "successful operation",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/maintenance_windows/:windowUUID",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "maintenance_windows",
+                                        ":windowUUID"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cUUID"
+                                        },
+                                        {
+                                          "key": "windowUUID"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"message\": \"<string>\",\n  \"success\": \"<boolean>\"\n}",
+                                  "createdAt": "2026-07-28T03:37:35.000Z",
+                                  "updatedAt": "2026-07-28T03:37:35.000Z",
+                                  "uid": "35240-1c21167c-8740-4489-aa37-2fc151d62ace"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:37:35.000Z",
+                              "updatedAt": "2026-07-28T03:37:35.000Z",
+                              "uid": "35240-b00014b1-442d-47fd-b5c6-e00ccdbfa360"
+                            },
+                            {
+                              "name": "YugabyteDB Anywhere Get Details of a Maintenance Window",
+                              "id": "8ce2d57c-30e0-4552-9237-3059e5eb4aee",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/maintenance_windows/:windowUUID",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "maintenance_windows",
+                                    ":windowUUID"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "8e99cec5-bb2f-4e2d-9bcc-ca798f86017c",
+                                      "key": "cUUID",
+                                      "value": "<uuid>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "6b6e8ed2-b439-4a01-9093-da7dc79b2484",
+                                      "key": "windowUUID",
+                                      "value": "<uuid>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "WARNING: This is a preview API that could change."
+                              },
+                              "response": [
+                                {
+                                  "id": "e7925ca4-89b6-49df-8e1b-e2796d26f47b",
+                                  "name": "successful operation",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/maintenance_windows/:windowUUID",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "maintenance_windows",
+                                        ":windowUUID"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cUUID"
+                                        },
+                                        {
+                                          "key": "windowUUID"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"alertConfigurationFilter\": {\n    \"active\": \"<boolean>\",\n    \"destinationType\": \"SELECTED_DESTINATION\",\n    \"destinationUuid\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"severity\": \"SEVERE\",\n    \"target\": {\n      \"all\": \"<boolean>\",\n      \"uuids\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"targetType\": \"PLATFORM\",\n    \"template\": \"NODE_CPU_USAGE\",\n    \"uuids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ]\n  },\n  \"createTime\": \"<dateTime>\",\n  \"customerUUID\": \"<uuid>\",\n  \"description\": \"<string>\",\n  \"endTime\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"startTime\": \"<dateTime>\",\n  \"state\": \"FINISHED\",\n  \"suppressHealthCheckNotificationsConfig\": {\n    \"suppressAllUniverses\": \"<boolean>\",\n    \"universeUUIDSet\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ]\n  },\n  \"uuid\": \"<uuid>\"\n}",
+                                  "createdAt": "2026-07-28T03:37:35.000Z",
+                                  "updatedAt": "2026-07-28T03:37:35.000Z",
+                                  "uid": "35240-e7925ca4-89b6-49df-8e1b-e2796d26f47b"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:37:35.000Z",
+                              "updatedAt": "2026-07-28T03:37:35.000Z",
+                              "uid": "35240-8ce2d57c-30e0-4552-9237-3059e5eb4aee"
+                            },
+                            {
+                              "name": "YugabyteDB Anywhere Update Maintenance Window",
+                              "id": "96645d4b-77ef-4c8c-91f5-f81143bc2065",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"alertConfigurationFilter\": {\n    \"active\": \"<boolean>\",\n    \"destinationType\": \"SELECTED_DESTINATION\",\n    \"destinationUuid\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"severity\": \"SEVERE\",\n    \"target\": {\n      \"all\": \"<boolean>\",\n      \"uuids\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"targetType\": \"PLATFORM\",\n    \"template\": \"NODE_CPU_USAGE\",\n    \"uuids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ]\n  },\n  \"createTime\": \"<dateTime>\",\n  \"customerUUID\": \"<uuid>\",\n  \"description\": \"<string>\",\n  \"endTime\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"startTime\": \"<dateTime>\",\n  \"state\": \"FINISHED\",\n  \"suppressHealthCheckNotificationsConfig\": {\n    \"suppressAllUniverses\": \"<boolean>\",\n    \"universeUUIDSet\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ]\n  },\n  \"uuid\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/maintenance_windows/:windowUUID",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "maintenance_windows",
+                                    ":windowUUID"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "d9be7f78-264f-4946-a4b5-6e477b4016c4",
+                                      "key": "cUUID",
+                                      "value": "<uuid>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "c98f3c48-1636-4604-97d7-72fbc298d72b",
+                                      "key": "windowUUID",
+                                      "value": "<uuid>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "WARNING: This is a preview API that could change."
+                              },
+                              "response": [
+                                {
+                                  "id": "2dffeda9-3dfd-44b6-89b9-a2de54f610b8",
+                                  "name": "successful operation",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"alertConfigurationFilter\": {\n    \"active\": \"<boolean>\",\n    \"destinationType\": \"SELECTED_DESTINATION\",\n    \"destinationUuid\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"severity\": \"SEVERE\",\n    \"target\": {\n      \"all\": \"<boolean>\",\n      \"uuids\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"targetType\": \"PLATFORM\",\n    \"template\": \"NODE_CPU_USAGE\",\n    \"uuids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ]\n  },\n  \"createTime\": \"<dateTime>\",\n  \"customerUUID\": \"<uuid>\",\n  \"description\": \"<string>\",\n  \"endTime\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"startTime\": \"<dateTime>\",\n  \"state\": \"FINISHED\",\n  \"suppressHealthCheckNotificationsConfig\": {\n    \"suppressAllUniverses\": \"<boolean>\",\n    \"universeUUIDSet\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ]\n  },\n  \"uuid\": \"<uuid>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/maintenance_windows/:windowUUID",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "maintenance_windows",
+                                        ":windowUUID"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cUUID"
+                                        },
+                                        {
+                                          "key": "windowUUID"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"alertConfigurationFilter\": {\n    \"active\": \"<boolean>\",\n    \"destinationType\": \"SELECTED_DESTINATION\",\n    \"destinationUuid\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"severity\": \"SEVERE\",\n    \"target\": {\n      \"all\": \"<boolean>\",\n      \"uuids\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"targetType\": \"PLATFORM\",\n    \"template\": \"NODE_CPU_USAGE\",\n    \"uuids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ]\n  },\n  \"createTime\": \"<dateTime>\",\n  \"customerUUID\": \"<uuid>\",\n  \"description\": \"<string>\",\n  \"endTime\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"startTime\": \"<dateTime>\",\n  \"state\": \"FINISHED\",\n  \"suppressHealthCheckNotificationsConfig\": {\n    \"suppressAllUniverses\": \"<boolean>\",\n    \"universeUUIDSet\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ]\n  },\n  \"uuid\": \"<uuid>\"\n}",
+                                  "createdAt": "2026-07-28T03:37:35.000Z",
+                                  "updatedAt": "2026-07-28T03:37:35.000Z",
+                                  "uid": "35240-2dffeda9-3dfd-44b6-89b9-a2de54f610b8"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:37:35.000Z",
+                              "updatedAt": "2026-07-28T03:37:35.000Z",
+                              "uid": "35240-96645d4b-77ef-4c8c-91f5-f81143bc2065"
+                            }
+                          ],
+                          "id": "7b3387b5-74c0-4a74-a9e9-41a30c0ffb4e",
+                          "createdAt": "2026-07-28T03:37:35.000Z",
+                          "updatedAt": "2026-07-28T03:37:35.000Z",
+                          "uid": "35240-7b3387b5-74c0-4a74-a9e9-41a30c0ffb4e"
+                        },
+                        {
+                          "name": "YugabyteDB Anywhere Create Maintenance Window",
+                          "id": "54b87d5d-f828-4f18-bff8-7f4cfa551772",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"alertConfigurationFilter\": {\n    \"active\": \"<boolean>\",\n    \"destinationType\": \"SELECTED_DESTINATION\",\n    \"destinationUuid\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"severity\": \"SEVERE\",\n    \"target\": {\n      \"all\": \"<boolean>\",\n      \"uuids\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"targetType\": \"PLATFORM\",\n    \"template\": \"NODE_CPU_USAGE\",\n    \"uuids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ]\n  },\n  \"createTime\": \"<dateTime>\",\n  \"customerUUID\": \"<uuid>\",\n  \"description\": \"<string>\",\n  \"endTime\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"startTime\": \"<dateTime>\",\n  \"state\": \"FINISHED\",\n  \"suppressHealthCheckNotificationsConfig\": {\n    \"suppressAllUniverses\": \"<boolean>\",\n    \"universeUUIDSet\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ]\n  },\n  \"uuid\": \"<uuid>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/customers/:cUUID/maintenance_windows",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "customers",
+                                ":cUUID",
+                                "maintenance_windows"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "85bcb735-4f3a-4f1a-b4d0-0f5c78a98197",
+                                  "key": "cUUID",
+                                  "value": "<uuid>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "WARNING: This is a preview API that could change."
+                          },
+                          "response": [
+                            {
+                              "id": "fa4d1d62-4b40-44c9-b412-3c1d4cb7e585",
+                              "name": "successful operation",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"alertConfigurationFilter\": {\n    \"active\": \"<boolean>\",\n    \"destinationType\": \"SELECTED_DESTINATION\",\n    \"destinationUuid\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"severity\": \"SEVERE\",\n    \"target\": {\n      \"all\": \"<boolean>\",\n      \"uuids\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"targetType\": \"PLATFORM\",\n    \"template\": \"NODE_CPU_USAGE\",\n    \"uuids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ]\n  },\n  \"createTime\": \"<dateTime>\",\n  \"customerUUID\": \"<uuid>\",\n  \"description\": \"<string>\",\n  \"endTime\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"startTime\": \"<dateTime>\",\n  \"state\": \"FINISHED\",\n  \"suppressHealthCheckNotificationsConfig\": {\n    \"suppressAllUniverses\": \"<boolean>\",\n    \"universeUUIDSet\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ]\n  },\n  \"uuid\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/maintenance_windows",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "maintenance_windows"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "cUUID"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"alertConfigurationFilter\": {\n    \"active\": \"<boolean>\",\n    \"destinationType\": \"SELECTED_DESTINATION\",\n    \"destinationUuid\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"severity\": \"SEVERE\",\n    \"target\": {\n      \"all\": \"<boolean>\",\n      \"uuids\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"targetType\": \"PLATFORM\",\n    \"template\": \"NODE_CPU_USAGE\",\n    \"uuids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ]\n  },\n  \"createTime\": \"<dateTime>\",\n  \"customerUUID\": \"<uuid>\",\n  \"description\": \"<string>\",\n  \"endTime\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"startTime\": \"<dateTime>\",\n  \"state\": \"FINISHED\",\n  \"suppressHealthCheckNotificationsConfig\": {\n    \"suppressAllUniverses\": \"<boolean>\",\n    \"universeUUIDSet\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ]\n  },\n  \"uuid\": \"<uuid>\"\n}",
+                              "createdAt": "2026-07-28T03:37:35.000Z",
+                              "updatedAt": "2026-07-28T03:37:35.000Z",
+                              "uid": "35240-fa4d1d62-4b40-44c9-b412-3c1d4cb7e585"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:37:35.000Z",
+                          "updatedAt": "2026-07-28T03:37:35.000Z",
+                          "uid": "35240-54b87d5d-f828-4f18-bff8-7f4cfa551772"
+                        }
+                      ],
+                      "id": "a2da562b-8370-4677-803c-75948dc9d5a7",
+                      "createdAt": "2026-07-28T03:37:35.000Z",
+                      "updatedAt": "2026-07-28T03:37:35.000Z",
+                      "uid": "35240-a2da562b-8370-4677-803c-75948dc9d5a7"
+                    }
+                  ],
+                  "id": "ff870c60-f3f9-43ed-b3a2-838162cbba9f",
+                  "createdAt": "2026-07-28T03:37:35.000Z",
+                  "updatedAt": "2026-07-28T03:37:35.000Z",
+                  "uid": "35240-ff870c60-f3f9-43ed-b3a2-838162cbba9f"
+                }
+              ],
+              "id": "10a504b4-3640-4ec2-b2be-0b2833bf07bf",
+              "createdAt": "2026-07-28T03:37:35.000Z",
+              "updatedAt": "2026-07-28T03:37:35.000Z",
+              "uid": "35240-10a504b4-3640-4ec2-b2be-0b2833bf07bf"
+            }
+          ],
+          "id": "140e432a-57b4-462b-9038-9c4e78079a64",
+          "createdAt": "2026-07-28T03:37:35.000Z",
+          "updatedAt": "2026-07-28T03:37:35.000Z",
+          "uid": "35240-140e432a-57b4-462b-9038-9c4e78079a64"
+        }
+      ],
+      "id": "b3a9d006-0ac7-4f55-ae97-c6849ed9527b",
+      "createdAt": "2026-07-28T03:37:35.000Z",
+      "updatedAt": "2026-07-28T03:37:35.000Z",
+      "uid": "35240-b3a9d006-0ac7-4f55-ae97-c6849ed9527b"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.yugabyte.com/api/public/v1"
+    }
+  ]
+}

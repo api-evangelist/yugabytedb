@@ -1,0 +1,690 @@
+{
+  "info": {
+    "_postman_id": "d7c14176-1bcb-4dbe-b806-94293b011ed6",
+    "name": "YugabyteDB Aeon REST Access Keys MaintenanceWindows API",
+    "description": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:37:36.000Z",
+    "updatedAt": "2026-07-28T03:37:36.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d7c14176-1bcb-4dbe-b806-94293b011ed6"
+  },
+  "item": [
+    {
+      "name": "accounts",
+      "item": [
+        {
+          "name": "{accountId}",
+          "item": [
+            {
+              "name": "projects",
+              "item": [
+                {
+                  "name": "{projectId}",
+                  "item": [
+                    {
+                      "name": "clusters",
+                      "item": [
+                        {
+                          "name": "{clusterId}",
+                          "item": [
+                            {
+                              "name": "maintenance-windows",
+                              "item": [
+                                {
+                                  "name": "YugabyteDB Aeon Get Maintenance Window",
+                                  "id": "be4f2c0f-f362-4975-8096-01986a7d8077",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId/maintenance-windows",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "accounts",
+                                        ":accountId",
+                                        "projects",
+                                        ":projectId",
+                                        "clusters",
+                                        ":clusterId",
+                                        "maintenance-windows"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "200c8b0a-0e25-4712-bfbe-aa7176a8794c",
+                                          "key": "accountId",
+                                          "value": "<uuid>",
+                                          "description": "(Required) The unique identifier of the YugabyteDB Aeon account."
+                                        },
+                                        {
+                                          "id": "14e9de9f-04f5-468a-b9e5-98753fec9f03",
+                                          "key": "projectId",
+                                          "value": "<uuid>",
+                                          "description": "(Required) The unique identifier of the project within the account."
+                                        },
+                                        {
+                                          "id": "9833fc77-7bae-42c6-9bf2-09bd0b04f00b",
+                                          "key": "clusterId",
+                                          "value": "<uuid>",
+                                          "description": "(Required) The unique identifier of the cluster."
+                                        }
+                                      ]
+                                    },
+                                    "description": "Returns the configured maintenance window for the specified cluster, including the scheduled day of week and start hour for Yugabyte to apply patches and infrastructure updates."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "d0fc8f70-c040-4610-82fd-2eb82ab1068b",
+                                      "name": "Maintenance window returned successfully",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId/maintenance-windows",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "accounts",
+                                            ":accountId",
+                                            "projects",
+                                            ":projectId",
+                                            "clusters",
+                                            ":clusterId",
+                                            "maintenance-windows"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "accountId"
+                                            },
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "clusterId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"day_of_week\": \"TUESDAY\",\n  \"start_time\": \"18:28\",\n  \"duration_in_hours\": \"<integer>\"\n}",
+                                      "createdAt": "2026-07-28T03:37:36.000Z",
+                                      "updatedAt": "2026-07-28T03:37:36.000Z",
+                                      "uid": "35240-d0fc8f70-c040-4610-82fd-2eb82ab1068b"
+                                    },
+                                    {
+                                      "id": "40bff852-6ef6-43a0-bbfc-40cf1583a326",
+                                      "name": "The API key is missing, invalid, or expired.",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId/maintenance-windows",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "accounts",
+                                            ":accountId",
+                                            "projects",
+                                            ":projectId",
+                                            "clusters",
+                                            ":clusterId",
+                                            "maintenance-windows"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "accountId"
+                                            },
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "clusterId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unauthorized",
+                                      "code": 401,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                                      "createdAt": "2026-07-28T03:37:36.000Z",
+                                      "updatedAt": "2026-07-28T03:37:36.000Z",
+                                      "uid": "35240-40bff852-6ef6-43a0-bbfc-40cf1583a326"
+                                    },
+                                    {
+                                      "id": "70ec7691-88fc-40cf-bb03-74054b51ab84",
+                                      "name": "The requested resource was not found.",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId/maintenance-windows",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "accounts",
+                                            ":accountId",
+                                            "projects",
+                                            ":projectId",
+                                            "clusters",
+                                            ":clusterId",
+                                            "maintenance-windows"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "accountId"
+                                            },
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "clusterId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Not Found",
+                                      "code": 404,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                                      "createdAt": "2026-07-28T03:37:36.000Z",
+                                      "updatedAt": "2026-07-28T03:37:36.000Z",
+                                      "uid": "35240-70ec7691-88fc-40cf-bb03-74054b51ab84"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:37:36.000Z",
+                                  "updatedAt": "2026-07-28T03:37:36.000Z",
+                                  "uid": "35240-be4f2c0f-f362-4975-8096-01986a7d8077"
+                                },
+                                {
+                                  "name": "YugabyteDB Aeon Update Maintenance Window",
+                                  "id": "2c963e0c-a915-4913-8c77-a2e892384ac4",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"day_of_week\": \"TUESDAY\",\n  \"start_time\": \"18:28\",\n  \"duration_in_hours\": \"<integer>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId/maintenance-windows",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "accounts",
+                                        ":accountId",
+                                        "projects",
+                                        ":projectId",
+                                        "clusters",
+                                        ":clusterId",
+                                        "maintenance-windows"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "6e019bcb-8a37-48c5-a50a-58fd55248061",
+                                          "key": "accountId",
+                                          "value": "<uuid>",
+                                          "description": "(Required) The unique identifier of the YugabyteDB Aeon account."
+                                        },
+                                        {
+                                          "id": "c670a16b-5749-4a4f-a8a5-06936a7c84d7",
+                                          "key": "projectId",
+                                          "value": "<uuid>",
+                                          "description": "(Required) The unique identifier of the project within the account."
+                                        },
+                                        {
+                                          "id": "18e65e91-5206-4b38-b439-f32dc804c1db",
+                                          "key": "clusterId",
+                                          "value": "<uuid>",
+                                          "description": "(Required) The unique identifier of the cluster."
+                                        }
+                                      ]
+                                    },
+                                    "description": "Updates the maintenance window schedule for the specified cluster. Setting a maintenance window allows operators to control when Yugabyte applies updates to minimize disruption."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "c042f126-27c4-4301-9664-7e69b3f7c5eb",
+                                      "name": "Maintenance window updated successfully",
+                                      "originalRequest": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"day_of_week\": \"TUESDAY\",\n  \"start_time\": \"18:28\",\n  \"duration_in_hours\": \"<integer>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId/maintenance-windows",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "accounts",
+                                            ":accountId",
+                                            "projects",
+                                            ":projectId",
+                                            "clusters",
+                                            ":clusterId",
+                                            "maintenance-windows"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "accountId"
+                                            },
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "clusterId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"day_of_week\": \"TUESDAY\",\n  \"start_time\": \"18:28\",\n  \"duration_in_hours\": \"<integer>\"\n}",
+                                      "createdAt": "2026-07-28T03:37:36.000Z",
+                                      "updatedAt": "2026-07-28T03:37:36.000Z",
+                                      "uid": "35240-c042f126-27c4-4301-9664-7e69b3f7c5eb"
+                                    },
+                                    {
+                                      "id": "cefb4a78-dd11-4f3e-aa59-dcc558f01113",
+                                      "name": "The request was malformed or contained invalid parameters.",
+                                      "originalRequest": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"day_of_week\": \"TUESDAY\",\n  \"start_time\": \"18:28\",\n  \"duration_in_hours\": \"<integer>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId/maintenance-windows",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "accounts",
+                                            ":accountId",
+                                            "projects",
+                                            ":projectId",
+                                            "clusters",
+                                            ":clusterId",
+                                            "maintenance-windows"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "accountId"
+                                            },
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "clusterId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Bad Request",
+                                      "code": 400,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                                      "createdAt": "2026-07-28T03:37:36.000Z",
+                                      "updatedAt": "2026-07-28T03:37:36.000Z",
+                                      "uid": "35240-cefb4a78-dd11-4f3e-aa59-dcc558f01113"
+                                    },
+                                    {
+                                      "id": "e7fdf56e-902f-4ef6-8504-9f868e4b791b",
+                                      "name": "The API key is missing, invalid, or expired.",
+                                      "originalRequest": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"day_of_week\": \"TUESDAY\",\n  \"start_time\": \"18:28\",\n  \"duration_in_hours\": \"<integer>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId/maintenance-windows",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "accounts",
+                                            ":accountId",
+                                            "projects",
+                                            ":projectId",
+                                            "clusters",
+                                            ":clusterId",
+                                            "maintenance-windows"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "accountId"
+                                            },
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "clusterId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unauthorized",
+                                      "code": 401,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                                      "createdAt": "2026-07-28T03:37:36.000Z",
+                                      "updatedAt": "2026-07-28T03:37:36.000Z",
+                                      "uid": "35240-e7fdf56e-902f-4ef6-8504-9f868e4b791b"
+                                    },
+                                    {
+                                      "id": "e995febd-e3a2-4e49-8319-2e27d8f9634b",
+                                      "name": "The requested resource was not found.",
+                                      "originalRequest": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"day_of_week\": \"TUESDAY\",\n  \"start_time\": \"18:28\",\n  \"duration_in_hours\": \"<integer>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId/maintenance-windows",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "accounts",
+                                            ":accountId",
+                                            "projects",
+                                            ":projectId",
+                                            "clusters",
+                                            ":clusterId",
+                                            "maintenance-windows"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "accountId"
+                                            },
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "clusterId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Not Found",
+                                      "code": 404,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                                      "createdAt": "2026-07-28T03:37:36.000Z",
+                                      "updatedAt": "2026-07-28T03:37:36.000Z",
+                                      "uid": "35240-e995febd-e3a2-4e49-8319-2e27d8f9634b"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:37:36.000Z",
+                                  "updatedAt": "2026-07-28T03:37:36.000Z",
+                                  "uid": "35240-2c963e0c-a915-4913-8c77-a2e892384ac4"
+                                }
+                              ],
+                              "id": "9097e2ae-5a95-4069-b160-f3409cdca86a",
+                              "createdAt": "2026-07-28T03:37:36.000Z",
+                              "updatedAt": "2026-07-28T03:37:36.000Z",
+                              "uid": "35240-9097e2ae-5a95-4069-b160-f3409cdca86a"
+                            }
+                          ],
+                          "id": "ebae00e4-ce47-4941-927e-31fb214df05f",
+                          "createdAt": "2026-07-28T03:37:36.000Z",
+                          "updatedAt": "2026-07-28T03:37:36.000Z",
+                          "uid": "35240-ebae00e4-ce47-4941-927e-31fb214df05f"
+                        }
+                      ],
+                      "id": "9635ac10-c857-4705-95c7-01fb1c810d1a",
+                      "createdAt": "2026-07-28T03:37:36.000Z",
+                      "updatedAt": "2026-07-28T03:37:36.000Z",
+                      "uid": "35240-9635ac10-c857-4705-95c7-01fb1c810d1a"
+                    }
+                  ],
+                  "id": "2a664090-5444-46f3-b4fd-05fe4c8c5f3f",
+                  "createdAt": "2026-07-28T03:37:36.000Z",
+                  "updatedAt": "2026-07-28T03:37:36.000Z",
+                  "uid": "35240-2a664090-5444-46f3-b4fd-05fe4c8c5f3f"
+                }
+              ],
+              "id": "a5267728-cef0-4442-a770-e96c14363d6c",
+              "createdAt": "2026-07-28T03:37:36.000Z",
+              "updatedAt": "2026-07-28T03:37:36.000Z",
+              "uid": "35240-a5267728-cef0-4442-a770-e96c14363d6c"
+            }
+          ],
+          "id": "9d1f6ad1-5a24-41a9-a926-d9c95c2ec047",
+          "createdAt": "2026-07-28T03:37:36.000Z",
+          "updatedAt": "2026-07-28T03:37:36.000Z",
+          "uid": "35240-9d1f6ad1-5a24-41a9-a926-d9c95c2ec047"
+        }
+      ],
+      "id": "7b9ece4a-d146-453b-a6ed-b08d8c9bf99c",
+      "createdAt": "2026-07-28T03:37:36.000Z",
+      "updatedAt": "2026-07-28T03:37:36.000Z",
+      "uid": "35240-7b9ece4a-d146-453b-a6ed-b08d8c9bf99c"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.yugabyte.com/api/public/v1"
+    }
+  ]
+}

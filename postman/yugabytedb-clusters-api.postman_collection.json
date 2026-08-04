@@ -1,0 +1,1921 @@
+{
+  "info": {
+    "_postman_id": "69377ef6-8718-47c2-b49e-1fa2b4897c52",
+    "name": "YugabyteDB Aeon REST Access Keys Clusters API",
+    "description": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:36:48.000Z",
+    "updatedAt": "2026-07-28T03:36:48.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-69377ef6-8718-47c2-b49e-1fa2b4897c52"
+  },
+  "item": [
+    {
+      "name": "accounts",
+      "item": [
+        {
+          "name": "{accountId}",
+          "item": [
+            {
+              "name": "projects",
+              "item": [
+                {
+                  "name": "{projectId}",
+                  "item": [
+                    {
+                      "name": "clusters",
+                      "item": [
+                        {
+                          "name": "{clusterId}",
+                          "item": [
+                            {
+                              "name": "pause",
+                              "item": [
+                                {
+                                  "name": "YugabyteDB Aeon Pause Cluster",
+                                  "id": "24ede656-9b84-4822-89b6-ea84d33fae96",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId/pause",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "accounts",
+                                        ":accountId",
+                                        "projects",
+                                        ":projectId",
+                                        "clusters",
+                                        ":clusterId",
+                                        "pause"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "e1be6544-e8a1-4e07-bb87-4579920133be",
+                                          "key": "accountId",
+                                          "value": "<uuid>",
+                                          "description": "(Required) The unique identifier of the YugabyteDB Aeon account."
+                                        },
+                                        {
+                                          "id": "7b619262-b52d-426e-b8df-0aedffbbd364",
+                                          "key": "projectId",
+                                          "value": "<uuid>",
+                                          "description": "(Required) The unique identifier of the project within the account."
+                                        },
+                                        {
+                                          "id": "4ec9f6c4-22cc-4b93-85dd-b1bb2663e4d6",
+                                          "key": "clusterId",
+                                          "value": "<uuid>",
+                                          "description": "(Required) The unique identifier of the cluster."
+                                        }
+                                      ]
+                                    },
+                                    "description": "Pauses a running cluster to suspend compute billing while retaining all data and configuration. The cluster can be resumed at any time. Only clusters in the ACTIVE state can be paused."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "377e355d-dc70-4fc5-814f-e3589084512b",
+                                      "name": "Cluster pause initiated successfully",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId/pause",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "accounts",
+                                            ":accountId",
+                                            "projects",
+                                            ":projectId",
+                                            "clusters",
+                                            ":clusterId",
+                                            "pause"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "accountId"
+                                            },
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "clusterId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"state\": \"DELETING\",\n  \"cloud_info\": {\n    \"code\": \"AWS\",\n    \"region\": \"<string>\"\n  },\n  \"cluster_info\": {\n    \"num_nodes\": \"<integer>\",\n    \"fault_tolerance\": \"NODE\",\n    \"cluster_tier\": \"DEDICATED\",\n    \"node_info\": {\n      \"num_cores\": \"<integer>\",\n      \"memory_mb\": \"<integer>\",\n      \"disk_size_gb\": \"<integer>\"\n    },\n    \"yugabytedb_version\": \"<string>\"\n  },\n  \"cluster_endpoints\": [\n    {\n      \"accessibility_type\": \"PUBLIC\",\n      \"host\": \"<string>\",\n      \"region\": \"<string>\"\n    },\n    {\n      \"accessibility_type\": \"PRIVATE\",\n      \"host\": \"<string>\",\n      \"region\": \"<string>\"\n    }\n  ],\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                                      "createdAt": "2026-07-28T03:36:49.000Z",
+                                      "updatedAt": "2026-07-28T03:36:49.000Z",
+                                      "uid": "35240-377e355d-dc70-4fc5-814f-e3589084512b"
+                                    },
+                                    {
+                                      "id": "3597d1f8-1d4a-498a-b52c-f3cdaaee6780",
+                                      "name": "The request was malformed or contained invalid parameters.",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId/pause",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "accounts",
+                                            ":accountId",
+                                            "projects",
+                                            ":projectId",
+                                            "clusters",
+                                            ":clusterId",
+                                            "pause"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "accountId"
+                                            },
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "clusterId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Bad Request",
+                                      "code": 400,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                                      "createdAt": "2026-07-28T03:36:49.000Z",
+                                      "updatedAt": "2026-07-28T03:36:49.000Z",
+                                      "uid": "35240-3597d1f8-1d4a-498a-b52c-f3cdaaee6780"
+                                    },
+                                    {
+                                      "id": "8a949c40-461a-42b8-8bee-0919aa23bd38",
+                                      "name": "The API key is missing, invalid, or expired.",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId/pause",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "accounts",
+                                            ":accountId",
+                                            "projects",
+                                            ":projectId",
+                                            "clusters",
+                                            ":clusterId",
+                                            "pause"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "accountId"
+                                            },
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "clusterId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unauthorized",
+                                      "code": 401,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                                      "createdAt": "2026-07-28T03:36:49.000Z",
+                                      "updatedAt": "2026-07-28T03:36:49.000Z",
+                                      "uid": "35240-8a949c40-461a-42b8-8bee-0919aa23bd38"
+                                    },
+                                    {
+                                      "id": "ab7defa7-d4eb-4bf9-9024-18d4ba14e005",
+                                      "name": "The requested resource was not found.",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId/pause",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "accounts",
+                                            ":accountId",
+                                            "projects",
+                                            ":projectId",
+                                            "clusters",
+                                            ":clusterId",
+                                            "pause"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "accountId"
+                                            },
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "clusterId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Not Found",
+                                      "code": 404,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                                      "createdAt": "2026-07-28T03:36:49.000Z",
+                                      "updatedAt": "2026-07-28T03:36:49.000Z",
+                                      "uid": "35240-ab7defa7-d4eb-4bf9-9024-18d4ba14e005"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:36:48.000Z",
+                                  "updatedAt": "2026-07-28T03:36:48.000Z",
+                                  "uid": "35240-24ede656-9b84-4822-89b6-ea84d33fae96"
+                                }
+                              ],
+                              "id": "62dbc4b7-22e7-4af6-88fa-d923c98bfbba",
+                              "createdAt": "2026-07-28T03:36:48.000Z",
+                              "updatedAt": "2026-07-28T03:36:48.000Z",
+                              "uid": "35240-62dbc4b7-22e7-4af6-88fa-d923c98bfbba"
+                            },
+                            {
+                              "name": "resume",
+                              "item": [
+                                {
+                                  "name": "YugabyteDB Aeon Resume Cluster",
+                                  "id": "b19e7c06-5d36-42c0-934e-7db80517dc33",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId/resume",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "accounts",
+                                        ":accountId",
+                                        "projects",
+                                        ":projectId",
+                                        "clusters",
+                                        ":clusterId",
+                                        "resume"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "80a3057c-5273-48a5-b580-a6af2b38877c",
+                                          "key": "accountId",
+                                          "value": "<uuid>",
+                                          "description": "(Required) The unique identifier of the YugabyteDB Aeon account."
+                                        },
+                                        {
+                                          "id": "12a94aad-def5-4d7f-8e19-f44719b42711",
+                                          "key": "projectId",
+                                          "value": "<uuid>",
+                                          "description": "(Required) The unique identifier of the project within the account."
+                                        },
+                                        {
+                                          "id": "31fc27ea-8ae8-4372-86de-ac6b0d21a8b3",
+                                          "key": "clusterId",
+                                          "value": "<uuid>",
+                                          "description": "(Required) The unique identifier of the cluster."
+                                        }
+                                      ]
+                                    },
+                                    "description": "Resumes a previously paused cluster, restoring it to the ACTIVE state and resuming compute billing. The cluster restores all data and configuration from before the pause."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "db787a6e-a3b4-4cb4-afca-6185e9197e6e",
+                                      "name": "Cluster resume initiated successfully",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId/resume",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "accounts",
+                                            ":accountId",
+                                            "projects",
+                                            ":projectId",
+                                            "clusters",
+                                            ":clusterId",
+                                            "resume"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "accountId"
+                                            },
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "clusterId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"state\": \"DELETING\",\n  \"cloud_info\": {\n    \"code\": \"AWS\",\n    \"region\": \"<string>\"\n  },\n  \"cluster_info\": {\n    \"num_nodes\": \"<integer>\",\n    \"fault_tolerance\": \"NODE\",\n    \"cluster_tier\": \"DEDICATED\",\n    \"node_info\": {\n      \"num_cores\": \"<integer>\",\n      \"memory_mb\": \"<integer>\",\n      \"disk_size_gb\": \"<integer>\"\n    },\n    \"yugabytedb_version\": \"<string>\"\n  },\n  \"cluster_endpoints\": [\n    {\n      \"accessibility_type\": \"PUBLIC\",\n      \"host\": \"<string>\",\n      \"region\": \"<string>\"\n    },\n    {\n      \"accessibility_type\": \"PRIVATE\",\n      \"host\": \"<string>\",\n      \"region\": \"<string>\"\n    }\n  ],\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                                      "createdAt": "2026-07-28T03:36:49.000Z",
+                                      "updatedAt": "2026-07-28T03:36:49.000Z",
+                                      "uid": "35240-db787a6e-a3b4-4cb4-afca-6185e9197e6e"
+                                    },
+                                    {
+                                      "id": "3ff77a7f-e1b0-4feb-bac2-e8bc7e598635",
+                                      "name": "The request was malformed or contained invalid parameters.",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId/resume",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "accounts",
+                                            ":accountId",
+                                            "projects",
+                                            ":projectId",
+                                            "clusters",
+                                            ":clusterId",
+                                            "resume"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "accountId"
+                                            },
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "clusterId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Bad Request",
+                                      "code": 400,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                                      "createdAt": "2026-07-28T03:36:49.000Z",
+                                      "updatedAt": "2026-07-28T03:36:49.000Z",
+                                      "uid": "35240-3ff77a7f-e1b0-4feb-bac2-e8bc7e598635"
+                                    },
+                                    {
+                                      "id": "604f4c1b-6e2f-426f-8089-44f7e9e37ab4",
+                                      "name": "The API key is missing, invalid, or expired.",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId/resume",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "accounts",
+                                            ":accountId",
+                                            "projects",
+                                            ":projectId",
+                                            "clusters",
+                                            ":clusterId",
+                                            "resume"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "accountId"
+                                            },
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "clusterId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unauthorized",
+                                      "code": 401,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                                      "createdAt": "2026-07-28T03:36:49.000Z",
+                                      "updatedAt": "2026-07-28T03:36:49.000Z",
+                                      "uid": "35240-604f4c1b-6e2f-426f-8089-44f7e9e37ab4"
+                                    },
+                                    {
+                                      "id": "b651dd03-6596-4696-a5d8-3a1416967e95",
+                                      "name": "The requested resource was not found.",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId/resume",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "accounts",
+                                            ":accountId",
+                                            "projects",
+                                            ":projectId",
+                                            "clusters",
+                                            ":clusterId",
+                                            "resume"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "accountId"
+                                            },
+                                            {
+                                              "key": "projectId"
+                                            },
+                                            {
+                                              "key": "clusterId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Not Found",
+                                      "code": 404,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                                      "createdAt": "2026-07-28T03:36:49.000Z",
+                                      "updatedAt": "2026-07-28T03:36:49.000Z",
+                                      "uid": "35240-b651dd03-6596-4696-a5d8-3a1416967e95"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:36:48.000Z",
+                                  "updatedAt": "2026-07-28T03:36:48.000Z",
+                                  "uid": "35240-b19e7c06-5d36-42c0-934e-7db80517dc33"
+                                }
+                              ],
+                              "id": "4d196d76-6b25-49d4-821b-cd1ae776ce00",
+                              "createdAt": "2026-07-28T03:36:48.000Z",
+                              "updatedAt": "2026-07-28T03:36:48.000Z",
+                              "uid": "35240-4d196d76-6b25-49d4-821b-cd1ae776ce00"
+                            },
+                            {
+                              "name": "YugabyteDB Aeon Get Cluster",
+                              "id": "3398b873-c2eb-4fd2-a914-fc8b627d6d82",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":accountId",
+                                    "projects",
+                                    ":projectId",
+                                    "clusters",
+                                    ":clusterId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "8f1452d1-d859-417b-a58a-91024f267d9d",
+                                      "key": "accountId",
+                                      "value": "<uuid>",
+                                      "description": "(Required) The unique identifier of the YugabyteDB Aeon account."
+                                    },
+                                    {
+                                      "id": "536c72aa-2422-4a11-87d7-3053cbe7f6d9",
+                                      "key": "projectId",
+                                      "value": "<uuid>",
+                                      "description": "(Required) The unique identifier of the project within the account."
+                                    },
+                                    {
+                                      "id": "ee6372a8-6fe1-4130-b751-7a9b93f68fc4",
+                                      "key": "clusterId",
+                                      "value": "<uuid>",
+                                      "description": "(Required) The unique identifier of the cluster."
+                                    }
+                                  ]
+                                },
+                                "description": "Returns detailed information about a specific cluster, including its current state, configuration, cloud provider, region, node count, and connection endpoints."
+                              },
+                              "response": [
+                                {
+                                  "id": "38a29223-5371-4172-9d5e-688ee8b2f3f0",
+                                  "name": "Cluster details returned successfully",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "accounts",
+                                        ":accountId",
+                                        "projects",
+                                        ":projectId",
+                                        "clusters",
+                                        ":clusterId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "accountId"
+                                        },
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "clusterId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"state\": \"DELETING\",\n  \"cloud_info\": {\n    \"code\": \"AWS\",\n    \"region\": \"<string>\"\n  },\n  \"cluster_info\": {\n    \"num_nodes\": \"<integer>\",\n    \"fault_tolerance\": \"NODE\",\n    \"cluster_tier\": \"DEDICATED\",\n    \"node_info\": {\n      \"num_cores\": \"<integer>\",\n      \"memory_mb\": \"<integer>\",\n      \"disk_size_gb\": \"<integer>\"\n    },\n    \"yugabytedb_version\": \"<string>\"\n  },\n  \"cluster_endpoints\": [\n    {\n      \"accessibility_type\": \"PUBLIC\",\n      \"host\": \"<string>\",\n      \"region\": \"<string>\"\n    },\n    {\n      \"accessibility_type\": \"PRIVATE\",\n      \"host\": \"<string>\",\n      \"region\": \"<string>\"\n    }\n  ],\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                                  "createdAt": "2026-07-28T03:36:49.000Z",
+                                  "updatedAt": "2026-07-28T03:36:49.000Z",
+                                  "uid": "35240-38a29223-5371-4172-9d5e-688ee8b2f3f0"
+                                },
+                                {
+                                  "id": "90c19658-8f86-4656-9c7f-7cedb63dce36",
+                                  "name": "The API key is missing, invalid, or expired.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "accounts",
+                                        ":accountId",
+                                        "projects",
+                                        ":projectId",
+                                        "clusters",
+                                        ":clusterId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "accountId"
+                                        },
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "clusterId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T03:36:49.000Z",
+                                  "updatedAt": "2026-07-28T03:36:49.000Z",
+                                  "uid": "35240-90c19658-8f86-4656-9c7f-7cedb63dce36"
+                                },
+                                {
+                                  "id": "c306cd8e-b878-4946-bb7d-d3771aa950f7",
+                                  "name": "The requested resource was not found.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "accounts",
+                                        ":accountId",
+                                        "projects",
+                                        ":projectId",
+                                        "clusters",
+                                        ":clusterId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "accountId"
+                                        },
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "clusterId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T03:36:49.000Z",
+                                  "updatedAt": "2026-07-28T03:36:49.000Z",
+                                  "uid": "35240-c306cd8e-b878-4946-bb7d-d3771aa950f7"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:36:48.000Z",
+                              "updatedAt": "2026-07-28T03:36:48.000Z",
+                              "uid": "35240-3398b873-c2eb-4fd2-a914-fc8b627d6d82"
+                            },
+                            {
+                              "name": "YugabyteDB Aeon Update Cluster",
+                              "id": "1e858bb2-44dc-4ceb-89d9-a9cec69d8f8a",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"cloud_info\": {\n    \"code\": \"GCP\",\n    \"region\": \"<string>\"\n  },\n  \"cluster_info\": {\n    \"num_nodes\": \"<integer>\",\n    \"fault_tolerance\": \"NONE\",\n    \"cluster_tier\": \"FREE\",\n    \"node_info\": {\n      \"num_cores\": \"<integer>\",\n      \"memory_mb\": \"<integer>\",\n      \"disk_size_gb\": \"<integer>\"\n    },\n    \"yugabytedb_version\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":accountId",
+                                    "projects",
+                                    ":projectId",
+                                    "clusters",
+                                    ":clusterId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "05e646ca-b15b-4788-9e1c-ef196b28d569",
+                                      "key": "accountId",
+                                      "value": "<uuid>",
+                                      "description": "(Required) The unique identifier of the YugabyteDB Aeon account."
+                                    },
+                                    {
+                                      "id": "3a6b9214-997a-49cf-b1d5-954e36585f83",
+                                      "key": "projectId",
+                                      "value": "<uuid>",
+                                      "description": "(Required) The unique identifier of the project within the account."
+                                    },
+                                    {
+                                      "id": "03c87b9d-27ff-4d6f-ac44-af7f82e383ce",
+                                      "key": "clusterId",
+                                      "value": "<uuid>",
+                                      "description": "(Required) The unique identifier of the cluster."
+                                    }
+                                  ]
+                                },
+                                "description": "Updates the configuration of an existing cluster, such as scaling node count, changing disk size, or modifying fault tolerance settings."
+                              },
+                              "response": [
+                                {
+                                  "id": "28a06b63-376b-43e7-b516-ba9e696db80c",
+                                  "name": "Cluster update initiated successfully",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"name\": \"<string>\",\n  \"cloud_info\": {\n    \"code\": \"GCP\",\n    \"region\": \"<string>\"\n  },\n  \"cluster_info\": {\n    \"num_nodes\": \"<integer>\",\n    \"fault_tolerance\": \"NONE\",\n    \"cluster_tier\": \"FREE\",\n    \"node_info\": {\n      \"num_cores\": \"<integer>\",\n      \"memory_mb\": \"<integer>\",\n      \"disk_size_gb\": \"<integer>\"\n    },\n    \"yugabytedb_version\": \"<string>\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "accounts",
+                                        ":accountId",
+                                        "projects",
+                                        ":projectId",
+                                        "clusters",
+                                        ":clusterId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "accountId"
+                                        },
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "clusterId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"state\": \"DELETING\",\n  \"cloud_info\": {\n    \"code\": \"AWS\",\n    \"region\": \"<string>\"\n  },\n  \"cluster_info\": {\n    \"num_nodes\": \"<integer>\",\n    \"fault_tolerance\": \"NODE\",\n    \"cluster_tier\": \"DEDICATED\",\n    \"node_info\": {\n      \"num_cores\": \"<integer>\",\n      \"memory_mb\": \"<integer>\",\n      \"disk_size_gb\": \"<integer>\"\n    },\n    \"yugabytedb_version\": \"<string>\"\n  },\n  \"cluster_endpoints\": [\n    {\n      \"accessibility_type\": \"PUBLIC\",\n      \"host\": \"<string>\",\n      \"region\": \"<string>\"\n    },\n    {\n      \"accessibility_type\": \"PRIVATE\",\n      \"host\": \"<string>\",\n      \"region\": \"<string>\"\n    }\n  ],\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                                  "createdAt": "2026-07-28T03:36:49.000Z",
+                                  "updatedAt": "2026-07-28T03:36:49.000Z",
+                                  "uid": "35240-28a06b63-376b-43e7-b516-ba9e696db80c"
+                                },
+                                {
+                                  "id": "9bcacd7b-a1aa-41c6-8860-11044bef298f",
+                                  "name": "The request was malformed or contained invalid parameters.",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"name\": \"<string>\",\n  \"cloud_info\": {\n    \"code\": \"GCP\",\n    \"region\": \"<string>\"\n  },\n  \"cluster_info\": {\n    \"num_nodes\": \"<integer>\",\n    \"fault_tolerance\": \"NONE\",\n    \"cluster_tier\": \"FREE\",\n    \"node_info\": {\n      \"num_cores\": \"<integer>\",\n      \"memory_mb\": \"<integer>\",\n      \"disk_size_gb\": \"<integer>\"\n    },\n    \"yugabytedb_version\": \"<string>\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "accounts",
+                                        ":accountId",
+                                        "projects",
+                                        ":projectId",
+                                        "clusters",
+                                        ":clusterId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "accountId"
+                                        },
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "clusterId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Bad Request",
+                                  "code": 400,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T03:36:49.000Z",
+                                  "updatedAt": "2026-07-28T03:36:49.000Z",
+                                  "uid": "35240-9bcacd7b-a1aa-41c6-8860-11044bef298f"
+                                },
+                                {
+                                  "id": "9905e749-e5ca-49d7-bb7a-0115710311b9",
+                                  "name": "The API key is missing, invalid, or expired.",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"name\": \"<string>\",\n  \"cloud_info\": {\n    \"code\": \"GCP\",\n    \"region\": \"<string>\"\n  },\n  \"cluster_info\": {\n    \"num_nodes\": \"<integer>\",\n    \"fault_tolerance\": \"NONE\",\n    \"cluster_tier\": \"FREE\",\n    \"node_info\": {\n      \"num_cores\": \"<integer>\",\n      \"memory_mb\": \"<integer>\",\n      \"disk_size_gb\": \"<integer>\"\n    },\n    \"yugabytedb_version\": \"<string>\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "accounts",
+                                        ":accountId",
+                                        "projects",
+                                        ":projectId",
+                                        "clusters",
+                                        ":clusterId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "accountId"
+                                        },
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "clusterId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T03:36:49.000Z",
+                                  "updatedAt": "2026-07-28T03:36:49.000Z",
+                                  "uid": "35240-9905e749-e5ca-49d7-bb7a-0115710311b9"
+                                },
+                                {
+                                  "id": "2a249d79-b584-4060-89dc-12a80e9e432b",
+                                  "name": "The requested resource was not found.",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"name\": \"<string>\",\n  \"cloud_info\": {\n    \"code\": \"GCP\",\n    \"region\": \"<string>\"\n  },\n  \"cluster_info\": {\n    \"num_nodes\": \"<integer>\",\n    \"fault_tolerance\": \"NONE\",\n    \"cluster_tier\": \"FREE\",\n    \"node_info\": {\n      \"num_cores\": \"<integer>\",\n      \"memory_mb\": \"<integer>\",\n      \"disk_size_gb\": \"<integer>\"\n    },\n    \"yugabytedb_version\": \"<string>\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "accounts",
+                                        ":accountId",
+                                        "projects",
+                                        ":projectId",
+                                        "clusters",
+                                        ":clusterId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "accountId"
+                                        },
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "clusterId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T03:36:49.000Z",
+                                  "updatedAt": "2026-07-28T03:36:49.000Z",
+                                  "uid": "35240-2a249d79-b584-4060-89dc-12a80e9e432b"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:36:48.000Z",
+                              "updatedAt": "2026-07-28T03:36:48.000Z",
+                              "uid": "35240-1e858bb2-44dc-4ceb-89d9-a9cec69d8f8a"
+                            },
+                            {
+                              "name": "YugabyteDB Aeon Delete Cluster",
+                              "id": "b2f69345-feaf-44f2-9e7f-56baa6a13d6e",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":accountId",
+                                    "projects",
+                                    ":projectId",
+                                    "clusters",
+                                    ":clusterId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "b0a6754a-6611-4933-bb0c-163accc355b0",
+                                      "key": "accountId",
+                                      "value": "<uuid>",
+                                      "description": "(Required) The unique identifier of the YugabyteDB Aeon account."
+                                    },
+                                    {
+                                      "id": "75e237da-bdb9-4023-abb0-268d52b76ee8",
+                                      "key": "projectId",
+                                      "value": "<uuid>",
+                                      "description": "(Required) The unique identifier of the project within the account."
+                                    },
+                                    {
+                                      "id": "0ecb4a92-49cd-43b0-8d02-22c4d99caf7f",
+                                      "key": "clusterId",
+                                      "value": "<uuid>",
+                                      "description": "(Required) The unique identifier of the cluster."
+                                    }
+                                  ]
+                                },
+                                "description": "Permanently deletes the specified cluster and all its data. This operation is irreversible. All backups associated with the cluster are also deleted."
+                              },
+                              "response": [
+                                {
+                                  "id": "38ea1991-fbd3-41b7-8ba5-63ea0f847ead",
+                                  "name": "Cluster deletion initiated successfully",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "accounts",
+                                        ":accountId",
+                                        "projects",
+                                        ":projectId",
+                                        "clusters",
+                                        ":clusterId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "accountId"
+                                        },
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "clusterId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:36:49.000Z",
+                                  "updatedAt": "2026-07-28T03:36:49.000Z",
+                                  "uid": "35240-38ea1991-fbd3-41b7-8ba5-63ea0f847ead"
+                                },
+                                {
+                                  "id": "45fb308c-64d3-440c-b729-16139ee8bfa8",
+                                  "name": "The API key is missing, invalid, or expired.",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "accounts",
+                                        ":accountId",
+                                        "projects",
+                                        ":projectId",
+                                        "clusters",
+                                        ":clusterId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "accountId"
+                                        },
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "clusterId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T03:36:49.000Z",
+                                  "updatedAt": "2026-07-28T03:36:49.000Z",
+                                  "uid": "35240-45fb308c-64d3-440c-b729-16139ee8bfa8"
+                                },
+                                {
+                                  "id": "6c42de18-ed79-4d33-b876-48fe406e9fe8",
+                                  "name": "The requested resource was not found.",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters/:clusterId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "accounts",
+                                        ":accountId",
+                                        "projects",
+                                        ":projectId",
+                                        "clusters",
+                                        ":clusterId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "accountId"
+                                        },
+                                        {
+                                          "key": "projectId"
+                                        },
+                                        {
+                                          "key": "clusterId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T03:36:49.000Z",
+                                  "updatedAt": "2026-07-28T03:36:49.000Z",
+                                  "uid": "35240-6c42de18-ed79-4d33-b876-48fe406e9fe8"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:36:48.000Z",
+                              "updatedAt": "2026-07-28T03:36:48.000Z",
+                              "uid": "35240-b2f69345-feaf-44f2-9e7f-56baa6a13d6e"
+                            }
+                          ],
+                          "id": "673693fd-c94b-4497-abf0-d6a8b767c25f",
+                          "createdAt": "2026-07-28T03:36:48.000Z",
+                          "updatedAt": "2026-07-28T03:36:48.000Z",
+                          "uid": "35240-673693fd-c94b-4497-abf0-d6a8b767c25f"
+                        },
+                        {
+                          "name": "YugabyteDB Aeon List Clusters",
+                          "id": "1c762f26-3a5d-4364-8c8b-b12785c71f3d",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":accountId",
+                                "projects",
+                                ":projectId",
+                                "clusters"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "160494a5-080b-4000-91cb-d85cd575076e",
+                                  "key": "accountId",
+                                  "value": "<uuid>",
+                                  "description": "(Required) The unique identifier of the YugabyteDB Aeon account."
+                                },
+                                {
+                                  "id": "01d65a26-bcb7-4b9c-b3d7-01f3e86a4669",
+                                  "key": "projectId",
+                                  "value": "<uuid>",
+                                  "description": "(Required) The unique identifier of the project within the account."
+                                }
+                              ]
+                            },
+                            "description": "Returns all clusters within the specified account and project. Each cluster entry includes configuration, state, cloud provider, region placement, and endpoint information."
+                          },
+                          "response": [
+                            {
+                              "id": "06b66c49-8d3e-46fd-a1f6-889cb9d27df7",
+                              "name": "List of clusters returned successfully",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":accountId",
+                                    "projects",
+                                    ":projectId",
+                                    "clusters"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "accountId"
+                                    },
+                                    {
+                                      "key": "projectId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"state\": \"FAILED\",\n      \"cloud_info\": {\n        \"code\": \"AZURE\",\n        \"region\": \"<string>\"\n      },\n      \"cluster_info\": {\n        \"num_nodes\": \"<integer>\",\n        \"fault_tolerance\": \"ZONE\",\n        \"cluster_tier\": \"DEDICATED\",\n        \"node_info\": {\n          \"num_cores\": \"<integer>\",\n          \"memory_mb\": \"<integer>\",\n          \"disk_size_gb\": \"<integer>\"\n        },\n        \"yugabytedb_version\": \"<string>\"\n      },\n      \"cluster_endpoints\": [\n        {\n          \"accessibility_type\": \"PUBLIC\",\n          \"host\": \"<string>\",\n          \"region\": \"<string>\"\n        },\n        {\n          \"accessibility_type\": \"PRIVATE\",\n          \"host\": \"<string>\",\n          \"region\": \"<string>\"\n        }\n      ],\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"state\": \"PAUSED\",\n      \"cloud_info\": {\n        \"code\": \"GCP\",\n        \"region\": \"<string>\"\n      },\n      \"cluster_info\": {\n        \"num_nodes\": \"<integer>\",\n        \"fault_tolerance\": \"NODE\",\n        \"cluster_tier\": \"DEDICATED\",\n        \"node_info\": {\n          \"num_cores\": \"<integer>\",\n          \"memory_mb\": \"<integer>\",\n          \"disk_size_gb\": \"<integer>\"\n        },\n        \"yugabytedb_version\": \"<string>\"\n      },\n      \"cluster_endpoints\": [\n        {\n          \"accessibility_type\": \"PRIVATE\",\n          \"host\": \"<string>\",\n          \"region\": \"<string>\"\n        },\n        {\n          \"accessibility_type\": \"PUBLIC\",\n          \"host\": \"<string>\",\n          \"region\": \"<string>\"\n        }\n      ],\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T03:36:49.000Z",
+                              "updatedAt": "2026-07-28T03:36:49.000Z",
+                              "uid": "35240-06b66c49-8d3e-46fd-a1f6-889cb9d27df7"
+                            },
+                            {
+                              "id": "b3ed00f0-9688-4b49-9570-1301650b1823",
+                              "name": "The API key is missing, invalid, or expired.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":accountId",
+                                    "projects",
+                                    ":projectId",
+                                    "clusters"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "accountId"
+                                    },
+                                    {
+                                      "key": "projectId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                              "createdAt": "2026-07-28T03:36:49.000Z",
+                              "updatedAt": "2026-07-28T03:36:49.000Z",
+                              "uid": "35240-b3ed00f0-9688-4b49-9570-1301650b1823"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:36:48.000Z",
+                          "updatedAt": "2026-07-28T03:36:48.000Z",
+                          "uid": "35240-1c762f26-3a5d-4364-8c8b-b12785c71f3d"
+                        },
+                        {
+                          "name": "YugabyteDB Aeon Create Cluster",
+                          "id": "52cd0a1d-3ed7-4fed-9cf6-4eff1e116c30",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"cloud_info\": {\n    \"code\": \"GCP\",\n    \"region\": \"<string>\"\n  },\n  \"cluster_info\": {\n    \"num_nodes\": \"<integer>\",\n    \"fault_tolerance\": \"NONE\",\n    \"cluster_tier\": \"FREE\",\n    \"node_info\": {\n      \"num_cores\": \"<integer>\",\n      \"memory_mb\": \"<integer>\",\n      \"disk_size_gb\": \"<integer>\"\n    },\n    \"yugabytedb_version\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":accountId",
+                                "projects",
+                                ":projectId",
+                                "clusters"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "21c51d93-56c6-41a0-acc8-9aaf480ca89f",
+                                  "key": "accountId",
+                                  "value": "<uuid>",
+                                  "description": "(Required) The unique identifier of the YugabyteDB Aeon account."
+                                },
+                                {
+                                  "id": "6760e424-fdcb-43c0-aff7-389b6af0381e",
+                                  "key": "projectId",
+                                  "value": "<uuid>",
+                                  "description": "(Required) The unique identifier of the project within the account."
+                                }
+                              ]
+                            },
+                            "description": "Creates a new YugabyteDB Aeon cluster within the specified account and project. The request body defines the cluster name, cloud provider, region, tier, node configuration, and fault tolerance level."
+                          },
+                          "response": [
+                            {
+                              "id": "05f51ecc-c761-4af5-8c1d-404f8d72153f",
+                              "name": "Cluster creation initiated successfully",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"cloud_info\": {\n    \"code\": \"GCP\",\n    \"region\": \"<string>\"\n  },\n  \"cluster_info\": {\n    \"num_nodes\": \"<integer>\",\n    \"fault_tolerance\": \"NONE\",\n    \"cluster_tier\": \"FREE\",\n    \"node_info\": {\n      \"num_cores\": \"<integer>\",\n      \"memory_mb\": \"<integer>\",\n      \"disk_size_gb\": \"<integer>\"\n    },\n    \"yugabytedb_version\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":accountId",
+                                    "projects",
+                                    ":projectId",
+                                    "clusters"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "accountId"
+                                    },
+                                    {
+                                      "key": "projectId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"state\": \"DELETING\",\n  \"cloud_info\": {\n    \"code\": \"AWS\",\n    \"region\": \"<string>\"\n  },\n  \"cluster_info\": {\n    \"num_nodes\": \"<integer>\",\n    \"fault_tolerance\": \"NODE\",\n    \"cluster_tier\": \"DEDICATED\",\n    \"node_info\": {\n      \"num_cores\": \"<integer>\",\n      \"memory_mb\": \"<integer>\",\n      \"disk_size_gb\": \"<integer>\"\n    },\n    \"yugabytedb_version\": \"<string>\"\n  },\n  \"cluster_endpoints\": [\n    {\n      \"accessibility_type\": \"PUBLIC\",\n      \"host\": \"<string>\",\n      \"region\": \"<string>\"\n    },\n    {\n      \"accessibility_type\": \"PRIVATE\",\n      \"host\": \"<string>\",\n      \"region\": \"<string>\"\n    }\n  ],\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-07-28T03:36:49.000Z",
+                              "updatedAt": "2026-07-28T03:36:49.000Z",
+                              "uid": "35240-05f51ecc-c761-4af5-8c1d-404f8d72153f"
+                            },
+                            {
+                              "id": "cceadc92-f337-4fc6-9a4e-fc96ed20d16a",
+                              "name": "The request was malformed or contained invalid parameters.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"cloud_info\": {\n    \"code\": \"GCP\",\n    \"region\": \"<string>\"\n  },\n  \"cluster_info\": {\n    \"num_nodes\": \"<integer>\",\n    \"fault_tolerance\": \"NONE\",\n    \"cluster_tier\": \"FREE\",\n    \"node_info\": {\n      \"num_cores\": \"<integer>\",\n      \"memory_mb\": \"<integer>\",\n      \"disk_size_gb\": \"<integer>\"\n    },\n    \"yugabytedb_version\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":accountId",
+                                    "projects",
+                                    ":projectId",
+                                    "clusters"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "accountId"
+                                    },
+                                    {
+                                      "key": "projectId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                              "createdAt": "2026-07-28T03:36:49.000Z",
+                              "updatedAt": "2026-07-28T03:36:49.000Z",
+                              "uid": "35240-cceadc92-f337-4fc6-9a4e-fc96ed20d16a"
+                            },
+                            {
+                              "id": "6c1293be-5979-439e-ad84-ce85527246c2",
+                              "name": "The API key is missing, invalid, or expired.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"cloud_info\": {\n    \"code\": \"GCP\",\n    \"region\": \"<string>\"\n  },\n  \"cluster_info\": {\n    \"num_nodes\": \"<integer>\",\n    \"fault_tolerance\": \"NONE\",\n    \"cluster_tier\": \"FREE\",\n    \"node_info\": {\n      \"num_cores\": \"<integer>\",\n      \"memory_mb\": \"<integer>\",\n      \"disk_size_gb\": \"<integer>\"\n    },\n    \"yugabytedb_version\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:accountId/projects/:projectId/clusters",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":accountId",
+                                    "projects",
+                                    ":projectId",
+                                    "clusters"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "accountId"
+                                    },
+                                    {
+                                      "key": "projectId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                              "createdAt": "2026-07-28T03:36:49.000Z",
+                              "updatedAt": "2026-07-28T03:36:49.000Z",
+                              "uid": "35240-6c1293be-5979-439e-ad84-ce85527246c2"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:36:48.000Z",
+                          "updatedAt": "2026-07-28T03:36:48.000Z",
+                          "uid": "35240-52cd0a1d-3ed7-4fed-9cf6-4eff1e116c30"
+                        }
+                      ],
+                      "id": "f45f343b-c646-4f75-aeb2-b32bc15bc0ad",
+                      "createdAt": "2026-07-28T03:36:48.000Z",
+                      "updatedAt": "2026-07-28T03:36:48.000Z",
+                      "uid": "35240-f45f343b-c646-4f75-aeb2-b32bc15bc0ad"
+                    }
+                  ],
+                  "id": "a526bb6f-a861-4bb7-a8dc-c0aa780bcd8f",
+                  "createdAt": "2026-07-28T03:36:48.000Z",
+                  "updatedAt": "2026-07-28T03:36:48.000Z",
+                  "uid": "35240-a526bb6f-a861-4bb7-a8dc-c0aa780bcd8f"
+                }
+              ],
+              "id": "6a905942-1fc8-4973-b91b-255785011e73",
+              "createdAt": "2026-07-28T03:36:48.000Z",
+              "updatedAt": "2026-07-28T03:36:48.000Z",
+              "uid": "35240-6a905942-1fc8-4973-b91b-255785011e73"
+            }
+          ],
+          "id": "9acc3ae1-ab79-4711-9082-c2873b59bcc6",
+          "createdAt": "2026-07-28T03:36:48.000Z",
+          "updatedAt": "2026-07-28T03:36:48.000Z",
+          "uid": "35240-9acc3ae1-ab79-4711-9082-c2873b59bcc6"
+        }
+      ],
+      "id": "f11ade6d-a3c8-43be-a311-1ecd5143a0e7",
+      "createdAt": "2026-07-28T03:36:48.000Z",
+      "updatedAt": "2026-07-28T03:36:48.000Z",
+      "uid": "35240-f11ade6d-a3c8-43be-a311-1ecd5143a0e7"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.yugabyte.com/api/public/v1"
+    }
+  ]
+}

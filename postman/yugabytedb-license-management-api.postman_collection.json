@@ -1,0 +1,281 @@
+{
+  "info": {
+    "_postman_id": "e43f31a9-e26f-4e07-be27-2163e887cc8e",
+    "name": "YugabyteDB Aeon REST Access Keys License management API",
+    "description": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:37:33.000Z",
+    "updatedAt": "2026-07-28T03:37:33.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e43f31a9-e26f-4e07-be27-2163e887cc8e"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "customers",
+              "item": [
+                {
+                  "name": "{cUUID}",
+                  "item": [
+                    {
+                      "name": "licenses",
+                      "item": [
+                        {
+                          "name": "{lUUID}",
+                          "item": [
+                            {
+                              "name": "YugabyteDB Anywhere Delete a License",
+                              "id": "24969bcc-ef4b-4bd3-87b8-777dca00326b",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/licenses/:lUUID",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "licenses",
+                                    ":lUUID"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "587c53ed-9b7a-4d77-864f-475c3ea74433",
+                                      "key": "cUUID",
+                                      "value": "<uuid>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "707d0e66-e667-446c-b1d2-98d1106919c5",
+                                      "key": "lUUID",
+                                      "value": "<uuid>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "66106411-fac0-4091-afda-3bb5f12f9fc4",
+                                  "name": "successful operation",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/licenses/:lUUID",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "licenses",
+                                        ":lUUID"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cUUID"
+                                        },
+                                        {
+                                          "key": "lUUID"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"message\": \"<string>\",\n  \"success\": \"<boolean>\"\n}",
+                                  "createdAt": "2026-07-28T03:37:33.000Z",
+                                  "updatedAt": "2026-07-28T03:37:33.000Z",
+                                  "uid": "35240-66106411-fac0-4091-afda-3bb5f12f9fc4"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:37:33.000Z",
+                              "updatedAt": "2026-07-28T03:37:33.000Z",
+                              "uid": "35240-24969bcc-ef4b-4bd3-87b8-777dca00326b"
+                            }
+                          ],
+                          "id": "39adbaf4-de21-427f-8d1d-7de717e9e898",
+                          "createdAt": "2026-07-28T03:37:33.000Z",
+                          "updatedAt": "2026-07-28T03:37:33.000Z",
+                          "uid": "35240-39adbaf4-de21-427f-8d1d-7de717e9e898"
+                        },
+                        {
+                          "name": "YugabyteDB Anywhere Uploads the License",
+                          "id": "a8b7141b-fe67-4f45-8c2c-30a4b12843d6",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/customers/:cUUID/licenses",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "customers",
+                                ":cUUID",
+                                "licenses"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "d6f2436c-8a36-4a31-b7c1-0ef6ec0a8469",
+                                  "key": "cUUID",
+                                  "value": "<uuid>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "675013e9-335d-491f-910c-461090bef74f",
+                              "name": "successful operation",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/licenses",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "licenses"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "cUUID"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"license\": \"<string>\",\n  \"licenseType\": \"<string>\",\n  \"creationDate\": \"<dateTime>\",\n  \"customerUUID\": \"<uuid>\",\n  \"licenseUUID\": \"<uuid>\"\n}",
+                              "createdAt": "2026-07-28T03:37:33.000Z",
+                              "updatedAt": "2026-07-28T03:37:33.000Z",
+                              "uid": "35240-675013e9-335d-491f-910c-461090bef74f"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:37:33.000Z",
+                          "updatedAt": "2026-07-28T03:37:33.000Z",
+                          "uid": "35240-a8b7141b-fe67-4f45-8c2c-30a4b12843d6"
+                        }
+                      ],
+                      "id": "d2f35b4f-e712-4cd8-84a2-ca8896d846e0",
+                      "createdAt": "2026-07-28T03:37:33.000Z",
+                      "updatedAt": "2026-07-28T03:37:33.000Z",
+                      "uid": "35240-d2f35b4f-e712-4cd8-84a2-ca8896d846e0"
+                    }
+                  ],
+                  "id": "36f36ff8-850a-4433-b171-66ed83b2291b",
+                  "createdAt": "2026-07-28T03:37:33.000Z",
+                  "updatedAt": "2026-07-28T03:37:33.000Z",
+                  "uid": "35240-36f36ff8-850a-4433-b171-66ed83b2291b"
+                }
+              ],
+              "id": "477d911c-d807-4647-a23c-153fd9c1fe2a",
+              "createdAt": "2026-07-28T03:37:33.000Z",
+              "updatedAt": "2026-07-28T03:37:33.000Z",
+              "uid": "35240-477d911c-d807-4647-a23c-153fd9c1fe2a"
+            }
+          ],
+          "id": "fe12044d-bbf5-4386-bbad-48049b2fe07a",
+          "createdAt": "2026-07-28T03:37:33.000Z",
+          "updatedAt": "2026-07-28T03:37:33.000Z",
+          "uid": "35240-fe12044d-bbf5-4386-bbad-48049b2fe07a"
+        }
+      ],
+      "id": "d665ee3f-ff5e-4a02-b8f6-e4c0c9826bc2",
+      "createdAt": "2026-07-28T03:37:33.000Z",
+      "updatedAt": "2026-07-28T03:37:33.000Z",
+      "uid": "35240-d665ee3f-ff5e-4a02-b8f6-e4c0c9826bc2"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.yugabyte.com/api/public/v1"
+    }
+  ]
+}

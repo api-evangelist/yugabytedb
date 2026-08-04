@@ -1,0 +1,432 @@
+{
+  "info": {
+    "_postman_id": "19ea6847-f551-4e3e-9bdf-0d77015226c4",
+    "name": "YugabyteDB Aeon REST Access Keys Universe performance suggestions API",
+    "description": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:39:31.000Z",
+    "updatedAt": "2026-07-28T03:39:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-19ea6847-f551-4e3e-9bdf-0d77015226c4"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "customers",
+              "item": [
+                {
+                  "name": "{cUUID}",
+                  "item": [
+                    {
+                      "name": "universes",
+                      "item": [
+                        {
+                          "name": "{uniUUID}",
+                          "item": [
+                            {
+                              "name": "query_distribution_suggestions",
+                              "item": [
+                                {
+                                  "name": "YugabyteDB Anywhere Get Query Distribution Improvement Suggestion for a Universe",
+                                  "id": "1b6e16ed-e017-4c88-8a13-3b55d1e27ec1",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/query_distribution_suggestions",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "universes",
+                                        ":uniUUID",
+                                        "query_distribution_suggestions"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "805ea5b9-c825-49e4-8ab2-e81f426c1f62",
+                                          "key": "cUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "d62d43a3-00eb-4d61-847c-3c6ee23e1fb5",
+                                          "key": "uniUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "WARNING: This is a preview API that could change."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "6514b5c9-5b81-4e87-ab97-5b272b5c5301",
+                                      "name": "successful operation",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/query_distribution_suggestions",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "universes",
+                                            ":uniUUID",
+                                            "query_distribution_suggestions"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "cUUID"
+                                            },
+                                            {
+                                              "key": "uniUUID"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"adviceType\": \"<string>\",\n  \"description\": \"<string>\",\n  \"details\": [\n    {\n      \"node\": \"<string>\",\n      \"numDelete\": \"<integer>\",\n      \"numInsert\": \"<integer>\",\n      \"numSelect\": \"<integer>\",\n      \"numUpdate\": \"<integer>\"\n    },\n    {\n      \"node\": \"<string>\",\n      \"numDelete\": \"<integer>\",\n      \"numInsert\": \"<integer>\",\n      \"numSelect\": \"<integer>\",\n      \"numUpdate\": \"<integer>\"\n    }\n  ],\n  \"endTime\": \"<string>\",\n  \"startTime\": \"<string>\",\n  \"suggestion\": \"<string>\"\n}",
+                                      "createdAt": "2026-07-28T03:39:32.000Z",
+                                      "updatedAt": "2026-07-28T03:39:32.000Z",
+                                      "uid": "35240-6514b5c9-5b81-4e87-ab97-5b272b5c5301"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:39:32.000Z",
+                                  "updatedAt": "2026-07-28T03:39:32.000Z",
+                                  "uid": "35240-1b6e16ed-e017-4c88-8a13-3b55d1e27ec1"
+                                }
+                              ],
+                              "id": "14a822d5-1ae7-4253-9dc4-0584dee39270",
+                              "createdAt": "2026-07-28T03:39:32.000Z",
+                              "updatedAt": "2026-07-28T03:39:32.000Z",
+                              "uid": "35240-14a822d5-1ae7-4253-9dc4-0584dee39270"
+                            },
+                            {
+                              "name": "range_hash",
+                              "item": [
+                                {
+                                  "name": "YugabyteDB Anywhere Return List of Hash Indexes",
+                                  "id": "97384b58-cf87-4d18-a408-f7e4a5ef415b",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/range_hash",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "universes",
+                                        ":uniUUID",
+                                        "range_hash"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "5e3a87c4-c3ff-4251-957e-df8922329c4c",
+                                          "key": "cUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "002d2bb5-d331-42f3-b299-afffb3d26942",
+                                          "key": "uniUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "WARNING: This is a preview API that could change. Returns list of hash indexes on timestamp columns."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "b2a48f59-5105-4199-a70b-5c4763e29bdb",
+                                      "name": "successful operation",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/range_hash",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "universes",
+                                            ":uniUUID",
+                                            "range_hash"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "cUUID"
+                                            },
+                                            {
+                                              "key": "uniUUID"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"current_database\": \"<string>\",\n  \"description\": \"<string>\",\n  \"index_command\": \"<string>\",\n  \"index_name\": \"<string>\",\n  \"table_name\": \"<string>\"\n}",
+                                      "createdAt": "2026-07-28T03:39:32.000Z",
+                                      "updatedAt": "2026-07-28T03:39:32.000Z",
+                                      "uid": "35240-b2a48f59-5105-4199-a70b-5c4763e29bdb"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:39:32.000Z",
+                                  "updatedAt": "2026-07-28T03:39:32.000Z",
+                                  "uid": "35240-97384b58-cf87-4d18-a408-f7e4a5ef415b"
+                                }
+                              ],
+                              "id": "d1556d56-8104-4736-9efb-1af3ed84a839",
+                              "createdAt": "2026-07-28T03:39:32.000Z",
+                              "updatedAt": "2026-07-28T03:39:32.000Z",
+                              "uid": "35240-d1556d56-8104-4736-9efb-1af3ed84a839"
+                            },
+                            {
+                              "name": "unused_indexes",
+                              "item": [
+                                {
+                                  "name": "YugabyteDB Anywhere Return List of Each Unused Index Across the Universe",
+                                  "id": "b2d4aa84-62cf-4ef9-9a20-cac730509f5e",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/unused_indexes",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "universes",
+                                        ":uniUUID",
+                                        "unused_indexes"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "07aa5782-cbee-4da0-b89a-4266af5b583c",
+                                          "key": "cUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "2735f75d-558d-4fde-bc30-e512ae1ed98d",
+                                          "key": "uniUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "WARNING: This is a preview API that could change. Returns list of unused indexes, along with their database and table."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "904724d7-98a5-442c-9aa7-17838abbb7b7",
+                                      "name": "successful operation",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/universes/:uniUUID/unused_indexes",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "universes",
+                                            ":uniUUID",
+                                            "unused_indexes"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "cUUID"
+                                            },
+                                            {
+                                              "key": "uniUUID"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"current_database\": \"<string>\",\n  \"description\": \"<string>\",\n  \"index_command\": \"<string>\",\n  \"index_name\": \"<string>\",\n  \"table_name\": \"<string>\"\n}",
+                                      "createdAt": "2026-07-28T03:39:32.000Z",
+                                      "updatedAt": "2026-07-28T03:39:32.000Z",
+                                      "uid": "35240-904724d7-98a5-442c-9aa7-17838abbb7b7"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:39:32.000Z",
+                                  "updatedAt": "2026-07-28T03:39:32.000Z",
+                                  "uid": "35240-b2d4aa84-62cf-4ef9-9a20-cac730509f5e"
+                                }
+                              ],
+                              "id": "387fcbd9-06d5-48e1-b5bd-11e747e0b8c2",
+                              "createdAt": "2026-07-28T03:39:32.000Z",
+                              "updatedAt": "2026-07-28T03:39:32.000Z",
+                              "uid": "35240-387fcbd9-06d5-48e1-b5bd-11e747e0b8c2"
+                            }
+                          ],
+                          "id": "8f5034c0-459a-4a67-8441-d031373ddd95",
+                          "createdAt": "2026-07-28T03:39:32.000Z",
+                          "updatedAt": "2026-07-28T03:39:32.000Z",
+                          "uid": "35240-8f5034c0-459a-4a67-8441-d031373ddd95"
+                        }
+                      ],
+                      "id": "98319d17-a759-4351-a008-63381d9e7553",
+                      "createdAt": "2026-07-28T03:39:32.000Z",
+                      "updatedAt": "2026-07-28T03:39:32.000Z",
+                      "uid": "35240-98319d17-a759-4351-a008-63381d9e7553"
+                    }
+                  ],
+                  "id": "1ac13bdf-ad0b-49b0-9626-7f40957f8dcc",
+                  "createdAt": "2026-07-28T03:39:32.000Z",
+                  "updatedAt": "2026-07-28T03:39:32.000Z",
+                  "uid": "35240-1ac13bdf-ad0b-49b0-9626-7f40957f8dcc"
+                }
+              ],
+              "id": "07ae66ec-3343-47f8-b7ed-8b0f3873ced9",
+              "createdAt": "2026-07-28T03:39:32.000Z",
+              "updatedAt": "2026-07-28T03:39:32.000Z",
+              "uid": "35240-07ae66ec-3343-47f8-b7ed-8b0f3873ced9"
+            }
+          ],
+          "id": "d1038eac-ade5-441c-b0e2-4076782f4bc7",
+          "createdAt": "2026-07-28T03:39:32.000Z",
+          "updatedAt": "2026-07-28T03:39:32.000Z",
+          "uid": "35240-d1038eac-ade5-441c-b0e2-4076782f4bc7"
+        }
+      ],
+      "id": "88372c41-169d-4265-96b6-6534279f03a0",
+      "createdAt": "2026-07-28T03:39:32.000Z",
+      "updatedAt": "2026-07-28T03:39:32.000Z",
+      "uid": "35240-88372c41-169d-4265-96b6-6534279f03a0"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.yugabyte.com/api/public/v1"
+    }
+  ]
+}

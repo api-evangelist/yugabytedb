@@ -1,0 +1,574 @@
+{
+  "info": {
+    "_postman_id": "264c07de-bb9f-4838-8a84-86f0eae95ab0",
+    "name": "YugabyteDB Aeon REST Access Keys Internal HA API",
+    "description": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:37:25.000Z",
+    "updatedAt": "2026-07-28T03:37:25.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-264c07de-bb9f-4838-8a84-86f0eae95ab0"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "settings",
+              "item": [
+                {
+                  "name": "ha",
+                  "item": [
+                    {
+                      "name": "internal",
+                      "item": [
+                        {
+                          "name": "backups",
+                          "item": [
+                            {
+                              "name": "{backupName}",
+                              "item": [
+                                {
+                                  "name": "validate",
+                                  "item": [
+                                    {
+                                      "name": "validate Backup",
+                                      "id": "672b0076-6b10-4e8c-90cb-5c3e591e9425",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "GET",
+                                        "header": [],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/settings/ha/internal/backups/:backupName/validate",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "settings",
+                                            "ha",
+                                            "internal",
+                                            "backups",
+                                            ":backupName",
+                                            "validate"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "70019503-4437-4812-a2fa-a2730fcfc2fd",
+                                              "key": "backupName",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "92c17757-2876-4bde-921c-fd2b1b23e6e9",
+                                          "name": "successful operation",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/api/v1/settings/ha/internal/backups/:backupName/validate",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "api",
+                                                "v1",
+                                                "settings",
+                                                "ha",
+                                                "internal",
+                                                "backups",
+                                                ":backupName",
+                                                "validate"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "backupName"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Internal Server Error",
+                                          "code": 500,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T03:37:25.000Z",
+                                          "updatedAt": "2026-07-28T03:37:25.000Z",
+                                          "uid": "35240-92c17757-2876-4bde-921c-fd2b1b23e6e9"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T03:37:25.000Z",
+                                      "updatedAt": "2026-07-28T03:37:25.000Z",
+                                      "uid": "35240-672b0076-6b10-4e8c-90cb-5c3e591e9425"
+                                    }
+                                  ],
+                                  "id": "58a0a602-608a-4836-95f6-0ce3935b0358",
+                                  "createdAt": "2026-07-28T03:37:25.000Z",
+                                  "updatedAt": "2026-07-28T03:37:25.000Z",
+                                  "uid": "35240-58a0a602-608a-4836-95f6-0ce3935b0358"
+                                }
+                              ],
+                              "id": "a71fb72e-e43c-4b0a-ad02-ff74987a31d7",
+                              "createdAt": "2026-07-28T03:37:25.000Z",
+                              "updatedAt": "2026-07-28T03:37:25.000Z",
+                              "uid": "35240-a71fb72e-e43c-4b0a-ad02-ff74987a31d7"
+                            }
+                          ],
+                          "id": "50467903-02e2-4484-89d5-0507465231ee",
+                          "createdAt": "2026-07-28T03:37:25.000Z",
+                          "updatedAt": "2026-07-28T03:37:25.000Z",
+                          "uid": "35240-50467903-02e2-4484-89d5-0507465231ee"
+                        },
+                        {
+                          "name": "config",
+                          "item": [
+                            {
+                              "name": "demote",
+                              "item": [
+                                {
+                                  "name": "{timestamp}",
+                                  "item": [
+                                    {
+                                      "name": "YugabyteDB Anywhere Demote Local Leader",
+                                      "id": "4755cf83-230b-4e00-8af0-f1f4ec94b886",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/settings/ha/internal/config/demote/:timestamp?promote=false",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "settings",
+                                            "ha",
+                                            "internal",
+                                            "config",
+                                            "demote",
+                                            ":timestamp"
+                                          ],
+                                          "query": [
+                                            {
+                                              "key": "promote",
+                                              "value": "false"
+                                            }
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "a4f52c95-b943-4627-834f-c00b7af996fc",
+                                              "key": "timestamp",
+                                              "value": "<long>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "Available since YBA version 2.20.0."
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "9d5816fe-078c-4e78-8d9a-fe5f028c4125",
+                                          "name": "successful operation",
+                                          "originalRequest": {
+                                            "method": "PUT",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/api/v1/settings/ha/internal/config/demote/:timestamp?promote=false",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "api",
+                                                "v1",
+                                                "settings",
+                                                "ha",
+                                                "internal",
+                                                "config",
+                                                "demote",
+                                                ":timestamp"
+                                              ],
+                                              "query": [
+                                                {
+                                                  "key": "promote",
+                                                  "value": "false"
+                                                }
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "timestamp"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"address\": \"<string>\",\n  \"instance_state\": \"Connected\",\n  \"is_leader\": \"<boolean>\",\n  \"state\": \"STAND_BY\",\n  \"uuid\": \"<uuid>\",\n  \"ybaVersion\": \"<string>\",\n  \"config_uuid\": \"<uuid>\",\n  \"is_local\": \"<boolean>\",\n  \"last_backup\": \"<dateTime>\"\n}",
+                                          "createdAt": "2026-07-28T03:37:25.000Z",
+                                          "updatedAt": "2026-07-28T03:37:25.000Z",
+                                          "uid": "35240-9d5816fe-078c-4e78-8d9a-fe5f028c4125"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T03:37:25.000Z",
+                                      "updatedAt": "2026-07-28T03:37:25.000Z",
+                                      "uid": "35240-4755cf83-230b-4e00-8af0-f1f4ec94b886"
+                                    }
+                                  ],
+                                  "id": "dcf504a1-6c8b-429e-846d-6cb476462e2f",
+                                  "createdAt": "2026-07-28T03:37:25.000Z",
+                                  "updatedAt": "2026-07-28T03:37:25.000Z",
+                                  "uid": "35240-dcf504a1-6c8b-429e-846d-6cb476462e2f"
+                                }
+                              ],
+                              "id": "fe02f64c-b848-4c60-9812-8d8755ddf959",
+                              "createdAt": "2026-07-28T03:37:25.000Z",
+                              "updatedAt": "2026-07-28T03:37:25.000Z",
+                              "uid": "35240-fe02f64c-b848-4c60-9812-8d8755ddf959"
+                            },
+                            {
+                              "name": "sync",
+                              "item": [
+                                {
+                                  "name": "{timestamp}",
+                                  "item": [
+                                    {
+                                      "name": "sync Instances",
+                                      "id": "bd680bcf-8752-4f79-9e6d-0ec1c825f613",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "PUT",
+                                        "header": [],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/settings/ha/internal/config/sync/:timestamp",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "settings",
+                                            "ha",
+                                            "internal",
+                                            "config",
+                                            "sync",
+                                            ":timestamp"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "537e03b0-bd8b-4d89-a3bd-aafcf34c141c",
+                                              "key": "timestamp",
+                                              "value": "<long>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "d7cec329-4111-46a9-badd-b2a029daaf09",
+                                          "name": "successful operation",
+                                          "originalRequest": {
+                                            "method": "PUT",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/api/v1/settings/ha/internal/config/sync/:timestamp",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "api",
+                                                "v1",
+                                                "settings",
+                                                "ha",
+                                                "internal",
+                                                "config",
+                                                "sync",
+                                                ":timestamp"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "timestamp"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Internal Server Error",
+                                          "code": 500,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T03:37:25.000Z",
+                                          "updatedAt": "2026-07-28T03:37:25.000Z",
+                                          "uid": "35240-d7cec329-4111-46a9-badd-b2a029daaf09"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T03:37:25.000Z",
+                                      "updatedAt": "2026-07-28T03:37:25.000Z",
+                                      "uid": "35240-bd680bcf-8752-4f79-9e6d-0ec1c825f613"
+                                    }
+                                  ],
+                                  "id": "5664004d-f8ab-4b5a-93a0-5a34561ff4a9",
+                                  "createdAt": "2026-07-28T03:37:25.000Z",
+                                  "updatedAt": "2026-07-28T03:37:25.000Z",
+                                  "uid": "35240-5664004d-f8ab-4b5a-93a0-5a34561ff4a9"
+                                }
+                              ],
+                              "id": "9e8334f9-0e24-4c1c-a119-717380831da0",
+                              "createdAt": "2026-07-28T03:37:25.000Z",
+                              "updatedAt": "2026-07-28T03:37:25.000Z",
+                              "uid": "35240-9e8334f9-0e24-4c1c-a119-717380831da0"
+                            },
+                            {
+                              "name": "get HA Config By Cluster Key",
+                              "id": "0962b6f7-487a-4698-8bf9-af0589f53c8f",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/settings/ha/internal/config",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "settings",
+                                    "ha",
+                                    "internal",
+                                    "config"
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "9003d874-5c0e-49d3-845e-0067ce74906e",
+                                  "name": "successful operation",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/settings/ha/internal/config",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "settings",
+                                        "ha",
+                                        "internal",
+                                        "config"
+                                      ]
+                                    }
+                                  },
+                                  "status": "Internal Server Error",
+                                  "code": 500,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:37:25.000Z",
+                                  "updatedAt": "2026-07-28T03:37:25.000Z",
+                                  "uid": "35240-9003d874-5c0e-49d3-845e-0067ce74906e"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:37:25.000Z",
+                              "updatedAt": "2026-07-28T03:37:25.000Z",
+                              "uid": "35240-0962b6f7-487a-4698-8bf9-af0589f53c8f"
+                            }
+                          ],
+                          "id": "19a16a5b-2cca-4930-838d-b6eeab4c6c5f",
+                          "createdAt": "2026-07-28T03:37:25.000Z",
+                          "updatedAt": "2026-07-28T03:37:25.000Z",
+                          "uid": "35240-19a16a5b-2cca-4930-838d-b6eeab4c6c5f"
+                        },
+                        {
+                          "name": "upload",
+                          "item": [
+                            {
+                              "name": "sync Backups",
+                              "id": "d6aab5cc-298a-4e4c-8e12-faae2f2b8ed9",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/settings/ha/internal/upload",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "settings",
+                                    "ha",
+                                    "internal",
+                                    "upload"
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "ee490708-3a36-4c71-a892-d5d4908d0b6f",
+                                  "name": "successful operation",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/settings/ha/internal/upload",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "settings",
+                                        "ha",
+                                        "internal",
+                                        "upload"
+                                      ]
+                                    }
+                                  },
+                                  "status": "Internal Server Error",
+                                  "code": 500,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T03:37:25.000Z",
+                                  "updatedAt": "2026-07-28T03:37:25.000Z",
+                                  "uid": "35240-ee490708-3a36-4c71-a892-d5d4908d0b6f"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:37:25.000Z",
+                              "updatedAt": "2026-07-28T03:37:25.000Z",
+                              "uid": "35240-d6aab5cc-298a-4e4c-8e12-faae2f2b8ed9"
+                            }
+                          ],
+                          "id": "480bea6a-c658-4fbf-8a08-dc8febdc2779",
+                          "createdAt": "2026-07-28T03:37:25.000Z",
+                          "updatedAt": "2026-07-28T03:37:25.000Z",
+                          "uid": "35240-480bea6a-c658-4fbf-8a08-dc8febdc2779"
+                        }
+                      ],
+                      "id": "45f47a6b-c99c-4fe0-90f5-5fcb1c13fee9",
+                      "createdAt": "2026-07-28T03:37:25.000Z",
+                      "updatedAt": "2026-07-28T03:37:25.000Z",
+                      "uid": "35240-45f47a6b-c99c-4fe0-90f5-5fcb1c13fee9"
+                    }
+                  ],
+                  "id": "fefed971-ecdb-49a4-8794-f1fa8bc3109a",
+                  "createdAt": "2026-07-28T03:37:25.000Z",
+                  "updatedAt": "2026-07-28T03:37:25.000Z",
+                  "uid": "35240-fefed971-ecdb-49a4-8794-f1fa8bc3109a"
+                }
+              ],
+              "id": "2d18135d-69d4-49fe-8532-25b5f4b636ba",
+              "createdAt": "2026-07-28T03:37:25.000Z",
+              "updatedAt": "2026-07-28T03:37:25.000Z",
+              "uid": "35240-2d18135d-69d4-49fe-8532-25b5f4b636ba"
+            }
+          ],
+          "id": "5d4e1e46-381f-433e-8c70-d90c28b03484",
+          "createdAt": "2026-07-28T03:37:25.000Z",
+          "updatedAt": "2026-07-28T03:37:25.000Z",
+          "uid": "35240-5d4e1e46-381f-433e-8c70-d90c28b03484"
+        }
+      ],
+      "id": "6f92ef07-ebaa-471b-a44e-b76656902d1f",
+      "createdAt": "2026-07-28T03:37:25.000Z",
+      "updatedAt": "2026-07-28T03:37:25.000Z",
+      "uid": "35240-6f92ef07-ebaa-471b-a44e-b76656902d1f"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.yugabyte.com/api/public/v1"
+    }
+  ]
+}

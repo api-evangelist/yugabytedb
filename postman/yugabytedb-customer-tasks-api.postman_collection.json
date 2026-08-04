@@ -1,0 +1,1014 @@
+{
+  "info": {
+    "_postman_id": "a0b265a3-92b4-49ac-9372-529a2d6cce50",
+    "name": "YugabyteDB Aeon REST Access Keys Customer Tasks API",
+    "description": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:36:59.000Z",
+    "updatedAt": "2026-07-28T03:36:59.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a0b265a3-92b4-49ac-9372-529a2d6cce50"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "customers",
+              "item": [
+                {
+                  "name": "{cUUID}",
+                  "item": [
+                    {
+                      "name": "tasks",
+                      "item": [
+                        {
+                          "name": "{tUUID}",
+                          "item": [
+                            {
+                              "name": "abort",
+                              "item": [
+                                {
+                                  "name": "YugabyteDB Anywhere Abort a Task",
+                                  "id": "a2e284f4-57b1-48dd-bc10-2270e14cb080",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/tasks/:tUUID/abort",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "tasks",
+                                        ":tUUID",
+                                        "abort"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "8812ae27-3791-4164-8562-5842d9f08be1",
+                                          "key": "cUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "31d91b86-a65e-4688-a53d-956806a23e6a",
+                                          "key": "tUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "Aborts a running task"
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "129e3596-230a-4922-988c-f41ac2b72cff",
+                                      "name": "successful operation",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/tasks/:tUUID/abort",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "tasks",
+                                            ":tUUID",
+                                            "abort"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "cUUID"
+                                            },
+                                            {
+                                              "key": "tUUID"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"message\": \"<string>\",\n  \"success\": \"<boolean>\"\n}",
+                                      "createdAt": "2026-07-28T03:37:00.000Z",
+                                      "updatedAt": "2026-07-28T03:37:00.000Z",
+                                      "uid": "35240-129e3596-230a-4922-988c-f41ac2b72cff"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:37:00.000Z",
+                                  "updatedAt": "2026-07-28T03:37:00.000Z",
+                                  "uid": "35240-a2e284f4-57b1-48dd-bc10-2270e14cb080"
+                                }
+                              ],
+                              "id": "52130d87-31c0-4829-b135-25486c276b3b",
+                              "createdAt": "2026-07-28T03:36:59.000Z",
+                              "updatedAt": "2026-07-28T03:36:59.000Z",
+                              "uid": "35240-52130d87-31c0-4829-b135-25486c276b3b"
+                            },
+                            {
+                              "name": "failed",
+                              "item": [
+                                {
+                                  "name": "YugabyteDB Anywhere Fetch Failed Subtasks - Deprecated",
+                                  "id": "f182d862-f539-41ab-9291-cd175aa53456",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/tasks/:tUUID/failed",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "tasks",
+                                        ":tUUID",
+                                        "failed"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "bd04a89f-fc1c-4804-a8cb-4da55a7d7d59",
+                                          "key": "cUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "91e45204-3fb9-4290-9cea-d3105b38d139",
+                                          "key": "tUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "<b style=\"color:#ff0000\">Deprecated since YBA version 2.19.1.0.</b></p>Use /api/v1/customers/{cUUID}/tasks/{tUUID}/failed_subtasks instead."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "593ac057-3986-48da-810a-0ce8de9316cc",
+                                      "name": "successful operation",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/tasks/:tUUID/failed",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "tasks",
+                                            ":tUUID",
+                                            "failed"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "cUUID"
+                                            },
+                                            {
+                                              "key": "tUUID"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"enimd\": {}\n}",
+                                      "createdAt": "2026-07-28T03:37:00.000Z",
+                                      "updatedAt": "2026-07-28T03:37:00.000Z",
+                                      "uid": "35240-593ac057-3986-48da-810a-0ce8de9316cc"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:37:00.000Z",
+                                  "updatedAt": "2026-07-28T03:37:00.000Z",
+                                  "uid": "35240-f182d862-f539-41ab-9291-cd175aa53456"
+                                }
+                              ],
+                              "id": "c4743182-9076-4c66-80ad-238b2e63ee96",
+                              "createdAt": "2026-07-28T03:36:59.000Z",
+                              "updatedAt": "2026-07-28T03:36:59.000Z",
+                              "uid": "35240-c4743182-9076-4c66-80ad-238b2e63ee96"
+                            },
+                            {
+                              "name": "failed_subtasks",
+                              "item": [
+                                {
+                                  "name": "YugabyteDB Anywhere Get a List of Task's Failed Subtasks",
+                                  "id": "05084775-7e5e-486e-9a3c-4f373737cdb3",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/tasks/:tUUID/failed_subtasks",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "tasks",
+                                        ":tUUID",
+                                        "failed_subtasks"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "d7c67335-d834-4d0d-bddf-4306d6344e65",
+                                          "key": "cUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "3f0cb877-903f-4c29-bd29-394284c1dddd",
+                                          "key": "tUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "cbd61edf-d54a-41d6-bbc4-5f74880e88ae",
+                                      "name": "successful operation",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/tasks/:tUUID/failed_subtasks",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "tasks",
+                                            ":tUUID",
+                                            "failed_subtasks"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "cUUID"
+                                            },
+                                            {
+                                              "key": "tUUID"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"failedSubTasks\": [\n    {\n      \"creationTime\": \"<dateTime>\",\n      \"errorCode\": \"PLATFORM_RESTARTED\",\n      \"errorString\": \"<string>\",\n      \"subTaskGroupType\": \"<string>\",\n      \"subTaskState\": \"<string>\",\n      \"subTaskType\": \"<string>\",\n      \"subTaskUUID\": \"<uuid>\"\n    },\n    {\n      \"creationTime\": \"<dateTime>\",\n      \"errorCode\": \"UNKNOWN_ERROR\",\n      \"errorString\": \"<string>\",\n      \"subTaskGroupType\": \"<string>\",\n      \"subTaskState\": \"<string>\",\n      \"subTaskType\": \"<string>\",\n      \"subTaskUUID\": \"<uuid>\"\n    }\n  ]\n}",
+                                      "createdAt": "2026-07-28T03:37:00.000Z",
+                                      "updatedAt": "2026-07-28T03:37:00.000Z",
+                                      "uid": "35240-cbd61edf-d54a-41d6-bbc4-5f74880e88ae"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:37:00.000Z",
+                                  "updatedAt": "2026-07-28T03:37:00.000Z",
+                                  "uid": "35240-05084775-7e5e-486e-9a3c-4f373737cdb3"
+                                }
+                              ],
+                              "id": "bd1dc6d4-9b42-420c-ba5e-62036fba0c49",
+                              "createdAt": "2026-07-28T03:36:59.000Z",
+                              "updatedAt": "2026-07-28T03:36:59.000Z",
+                              "uid": "35240-bd1dc6d4-9b42-420c-ba5e-62036fba0c49"
+                            },
+                            {
+                              "name": "retry",
+                              "item": [
+                                {
+                                  "name": "YugabyteDB Anywhere Retry a Universe or Provider Task",
+                                  "id": "310259e2-284f-4600-a256-d0b1514f1b62",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/tasks/:tUUID/retry",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "tasks",
+                                        ":tUUID",
+                                        "retry"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "4c3544e3-d44f-4aac-8321-2bef00f45573",
+                                          "key": "cUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "5bfd2c9f-0297-4ddc-9685-9a5f8844ac52",
+                                          "key": "tUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "Retry a Universe or Provider task."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "10d962be-6fdb-4d3a-9031-0575c46f1442",
+                                      "name": "successful operation",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/tasks/:tUUID/retry",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "tasks",
+                                            ":tUUID",
+                                            "retry"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "cUUID"
+                                            },
+                                            {
+                                              "key": "tUUID"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"resourceUUID\": \"<uuid>\",\n  \"taskUUID\": \"<uuid>\"\n}",
+                                      "createdAt": "2026-07-28T03:37:00.000Z",
+                                      "updatedAt": "2026-07-28T03:37:00.000Z",
+                                      "uid": "35240-10d962be-6fdb-4d3a-9031-0575c46f1442"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:37:00.000Z",
+                                  "updatedAt": "2026-07-28T03:37:00.000Z",
+                                  "uid": "35240-310259e2-284f-4600-a256-d0b1514f1b62"
+                                }
+                              ],
+                              "id": "b46e3b5c-dddd-40b2-8529-e501281f2f07",
+                              "createdAt": "2026-07-28T03:36:59.000Z",
+                              "updatedAt": "2026-07-28T03:36:59.000Z",
+                              "uid": "35240-b46e3b5c-dddd-40b2-8529-e501281f2f07"
+                            },
+                            {
+                              "name": "rollback",
+                              "item": [
+                                {
+                                  "name": "YugabyteDB Anywhere Rollback a Universe or Provider Task",
+                                  "id": "c26c999d-b429-4f33-9a40-7601f67991ec",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/tasks/:tUUID/rollback",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "tasks",
+                                        ":tUUID",
+                                        "rollback"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "c64fbf2b-6811-410d-b299-c3a49c5a57ac",
+                                          "key": "cUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "4f5456f7-5141-4b55-be5b-11dd5325662e",
+                                          "key": "tUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "Rollback a Universe or Provider task."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "32970c64-0e29-477c-8622-9e78ba3d0bfd",
+                                      "name": "successful operation",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/tasks/:tUUID/rollback",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "tasks",
+                                            ":tUUID",
+                                            "rollback"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "cUUID"
+                                            },
+                                            {
+                                              "key": "tUUID"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"resourceUUID\": \"<uuid>\",\n  \"taskUUID\": \"<uuid>\"\n}",
+                                      "createdAt": "2026-07-28T03:37:00.000Z",
+                                      "updatedAt": "2026-07-28T03:37:00.000Z",
+                                      "uid": "35240-32970c64-0e29-477c-8622-9e78ba3d0bfd"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:37:00.000Z",
+                                  "updatedAt": "2026-07-28T03:37:00.000Z",
+                                  "uid": "35240-c26c999d-b429-4f33-9a40-7601f67991ec"
+                                }
+                              ],
+                              "id": "fc2e624c-0789-471f-b7f4-55628b0e4c1f",
+                              "createdAt": "2026-07-28T03:36:59.000Z",
+                              "updatedAt": "2026-07-28T03:36:59.000Z",
+                              "uid": "35240-fc2e624c-0789-471f-b7f4-55628b0e4c1f"
+                            },
+                            {
+                              "name": "YugabyteDB Anywhere Get a Task's Status",
+                              "id": "964fe0e9-480b-4a48-a2e7-54e7a8eead14",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/tasks/:tUUID",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "tasks",
+                                    ":tUUID"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "4b7c95bf-81da-4c12-8484-c628cbdee2a9",
+                                      "key": "cUUID",
+                                      "value": "<uuid>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "9410e2ff-d844-47e3-93ef-22930cd90e9e",
+                                      "key": "tUUID",
+                                      "value": "<uuid>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "7cc4ecb3-4992-4af3-96ae-c883367f6a0e",
+                                  "name": "successful operation",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/tasks/:tUUID",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "tasks",
+                                        ":tUUID"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cUUID"
+                                        },
+                                        {
+                                          "key": "tUUID"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{}",
+                                  "createdAt": "2026-07-28T03:37:00.000Z",
+                                  "updatedAt": "2026-07-28T03:37:00.000Z",
+                                  "uid": "35240-7cc4ecb3-4992-4af3-96ae-c883367f6a0e"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:37:00.000Z",
+                              "updatedAt": "2026-07-28T03:37:00.000Z",
+                              "uid": "35240-964fe0e9-480b-4a48-a2e7-54e7a8eead14"
+                            }
+                          ],
+                          "id": "8d27189e-85ac-46aa-8e4e-a906030f8883",
+                          "createdAt": "2026-07-28T03:36:59.000Z",
+                          "updatedAt": "2026-07-28T03:36:59.000Z",
+                          "uid": "35240-8d27189e-85ac-46aa-8e4e-a906030f8883"
+                        }
+                      ],
+                      "id": "eff6fd62-35aa-433a-ac72-8624358f573b",
+                      "createdAt": "2026-07-28T03:36:59.000Z",
+                      "updatedAt": "2026-07-28T03:36:59.000Z",
+                      "uid": "35240-eff6fd62-35aa-433a-ac72-8624358f573b"
+                    },
+                    {
+                      "name": "tasks_list",
+                      "item": [
+                        {
+                          "name": "page",
+                          "item": [
+                            {
+                              "name": "YugabyteDB Anywhere List Tasks (paginated)",
+                              "id": "f5f52b4d-eab5-4cf0-90e2-1b3a1e63fe12",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"direction\": \"DESC\",\n  \"filter\": {\n    \"status\": [\n      \"Aborted\",\n      \"Unknown\"\n    ],\n    \"targetList\": [\n      \"Node\",\n      \"MasterKey\"\n    ],\n    \"targetUUIDList\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"typeList\": [\n      \"CreateTableSpaces\",\n      \"CreateYbaBackup\"\n    ],\n    \"typeNameList\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"dateRangeEnd\": \"<dateTime>\",\n    \"dateRangeStart\": \"<dateTime>\"\n  },\n  \"limit\": \"<integer>\",\n  \"needTotalCount\": \"<boolean>\",\n  \"offset\": \"<integer>\",\n  \"sortBy\": \"createTime\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/tasks_list/page",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "tasks_list",
+                                    "page"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "08cb078b-a507-4d8e-bb31-7f1f5f5d46cf",
+                                      "key": "cUUID",
+                                      "value": "<uuid>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "WARNING: This is a preview API that could change."
+                              },
+                              "response": [
+                                {
+                                  "id": "d7303355-a025-45a0-96a5-7bb275f61381",
+                                  "name": "successful operation",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"direction\": \"DESC\",\n  \"filter\": {\n    \"status\": [\n      \"Aborted\",\n      \"Unknown\"\n    ],\n    \"targetList\": [\n      \"Node\",\n      \"MasterKey\"\n    ],\n    \"targetUUIDList\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"typeList\": [\n      \"CreateTableSpaces\",\n      \"CreateYbaBackup\"\n    ],\n    \"typeNameList\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"dateRangeEnd\": \"<dateTime>\",\n    \"dateRangeStart\": \"<dateTime>\"\n  },\n  \"limit\": \"<integer>\",\n  \"needTotalCount\": \"<boolean>\",\n  \"offset\": \"<integer>\",\n  \"sortBy\": \"createTime\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/tasks_list/page",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "tasks_list",
+                                        "page"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cUUID"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"entities\": [\n    {\n      \"abortable\": \"<boolean>\",\n      \"canRollback\": \"<boolean>\",\n      \"completionTime\": \"<dateTime>\",\n      \"correlationId\": \"<string>\",\n      \"createTime\": \"<dateTime>\",\n      \"id\": \"<uuid>\",\n      \"percentComplete\": \"<integer>\",\n      \"retryable\": \"<boolean>\",\n      \"status\": \"<string>\",\n      \"target\": \"<string>\",\n      \"targetUUID\": \"<uuid>\",\n      \"title\": \"<string>\",\n      \"type\": \"<string>\",\n      \"typeName\": \"<string>\",\n      \"userEmail\": \"<string>\"\n    },\n    {\n      \"abortable\": \"<boolean>\",\n      \"canRollback\": \"<boolean>\",\n      \"completionTime\": \"<dateTime>\",\n      \"correlationId\": \"<string>\",\n      \"createTime\": \"<dateTime>\",\n      \"id\": \"<uuid>\",\n      \"percentComplete\": \"<integer>\",\n      \"retryable\": \"<boolean>\",\n      \"status\": \"<string>\",\n      \"target\": \"<string>\",\n      \"targetUUID\": \"<uuid>\",\n      \"title\": \"<string>\",\n      \"type\": \"<string>\",\n      \"typeName\": \"<string>\",\n      \"userEmail\": \"<string>\"\n    }\n  ],\n  \"hasNext\": \"<boolean>\",\n  \"hasPrev\": \"<boolean>\",\n  \"totalCount\": \"<integer>\"\n}",
+                                  "createdAt": "2026-07-28T03:37:00.000Z",
+                                  "updatedAt": "2026-07-28T03:37:00.000Z",
+                                  "uid": "35240-d7303355-a025-45a0-96a5-7bb275f61381"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:37:00.000Z",
+                              "updatedAt": "2026-07-28T03:37:00.000Z",
+                              "uid": "35240-f5f52b4d-eab5-4cf0-90e2-1b3a1e63fe12"
+                            }
+                          ],
+                          "id": "9fd75803-6355-4e8a-bde7-e7f14875c070",
+                          "createdAt": "2026-07-28T03:36:59.000Z",
+                          "updatedAt": "2026-07-28T03:36:59.000Z",
+                          "uid": "35240-9fd75803-6355-4e8a-bde7-e7f14875c070"
+                        },
+                        {
+                          "name": "YugabyteDB Anywhere List Task",
+                          "id": "5bc7c492-ca7f-48cd-b8ef-548b1c3d84aa",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/customers/:cUUID/tasks_list?uUUID=<uuid>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "customers",
+                                ":cUUID",
+                                "tasks_list"
+                              ],
+                              "query": [
+                                {
+                                  "key": "uUUID",
+                                  "value": "<uuid>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "297dc8df-7b77-49fb-9a50-239227fef062",
+                                  "key": "cUUID",
+                                  "value": "<uuid>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "e90e1655-4a5e-47f7-8e96-b186ddb88793",
+                              "name": "successful operation",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/tasks_list?uUUID=<uuid>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "tasks_list"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "uUUID",
+                                      "value": "<uuid>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "cUUID"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "[\n  {\n    \"abortable\": \"<boolean>\",\n    \"canRollback\": \"<boolean>\",\n    \"completionTime\": \"<dateTime>\",\n    \"correlationId\": \"<string>\",\n    \"createTime\": \"<dateTime>\",\n    \"id\": \"<uuid>\",\n    \"percentComplete\": \"<integer>\",\n    \"retryable\": \"<boolean>\",\n    \"status\": \"<string>\",\n    \"target\": \"<string>\",\n    \"targetUUID\": \"<uuid>\",\n    \"title\": \"<string>\",\n    \"type\": \"<string>\",\n    \"typeName\": \"<string>\",\n    \"userEmail\": \"<string>\"\n  },\n  {\n    \"abortable\": \"<boolean>\",\n    \"canRollback\": \"<boolean>\",\n    \"completionTime\": \"<dateTime>\",\n    \"correlationId\": \"<string>\",\n    \"createTime\": \"<dateTime>\",\n    \"id\": \"<uuid>\",\n    \"percentComplete\": \"<integer>\",\n    \"retryable\": \"<boolean>\",\n    \"status\": \"<string>\",\n    \"target\": \"<string>\",\n    \"targetUUID\": \"<uuid>\",\n    \"title\": \"<string>\",\n    \"type\": \"<string>\",\n    \"typeName\": \"<string>\",\n    \"userEmail\": \"<string>\"\n  }\n]",
+                              "createdAt": "2026-07-28T03:37:00.000Z",
+                              "updatedAt": "2026-07-28T03:37:00.000Z",
+                              "uid": "35240-e90e1655-4a5e-47f7-8e96-b186ddb88793"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:37:00.000Z",
+                          "updatedAt": "2026-07-28T03:37:00.000Z",
+                          "uid": "35240-5bc7c492-ca7f-48cd-b8ef-548b1c3d84aa"
+                        }
+                      ],
+                      "id": "6fd6b848-13b6-4163-a430-fbfde2d6cb85",
+                      "createdAt": "2026-07-28T03:36:59.000Z",
+                      "updatedAt": "2026-07-28T03:36:59.000Z",
+                      "uid": "35240-6fd6b848-13b6-4163-a430-fbfde2d6cb85"
+                    }
+                  ],
+                  "id": "fbd0c03f-6fd9-492c-8d08-f7fb180c9751",
+                  "createdAt": "2026-07-28T03:36:59.000Z",
+                  "updatedAt": "2026-07-28T03:36:59.000Z",
+                  "uid": "35240-fbd0c03f-6fd9-492c-8d08-f7fb180c9751"
+                }
+              ],
+              "id": "552f499e-dda2-468c-8585-3bf207ca9e14",
+              "createdAt": "2026-07-28T03:36:59.000Z",
+              "updatedAt": "2026-07-28T03:36:59.000Z",
+              "uid": "35240-552f499e-dda2-468c-8585-3bf207ca9e14"
+            }
+          ],
+          "id": "b4a8cb3b-d819-4783-b520-7e5acceacedb",
+          "createdAt": "2026-07-28T03:36:59.000Z",
+          "updatedAt": "2026-07-28T03:36:59.000Z",
+          "uid": "35240-b4a8cb3b-d819-4783-b520-7e5acceacedb"
+        }
+      ],
+      "id": "35fb05f7-d198-47e7-92d2-beae3d0617ab",
+      "createdAt": "2026-07-28T03:36:59.000Z",
+      "updatedAt": "2026-07-28T03:36:59.000Z",
+      "uid": "35240-35fb05f7-d198-47e7-92d2-beae3d0617ab"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.yugabyte.com/api/public/v1"
+    }
+  ]
+}

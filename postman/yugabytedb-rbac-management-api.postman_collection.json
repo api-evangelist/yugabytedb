@@ -1,0 +1,1058 @@
+{
+  "info": {
+    "_postman_id": "841e5121-c1e3-44b8-b761-8c65612d882f",
+    "name": "YugabyteDB Aeon REST Access Keys RBAC management API",
+    "description": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:38:26.000Z",
+    "updatedAt": "2026-07-28T03:38:26.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-841e5121-c1e3-44b8-b761-8c65612d882f"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "customers",
+              "item": [
+                {
+                  "name": "{cUUID}",
+                  "item": [
+                    {
+                      "name": "rbac",
+                      "item": [
+                        {
+                          "name": "permissions",
+                          "item": [
+                            {
+                              "name": "YugabyteDB Anywhere List All the Permissions Available",
+                              "id": "19badd89-9305-4696-aa8a-59c72e2dce79",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/rbac/permissions?resourceType=null",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "rbac",
+                                    "permissions"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Optional resource type to filter permission list",
+                                      "key": "resourceType",
+                                      "value": "null"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "723b3a8d-3467-48bc-ae0c-77ee235b4f73",
+                                      "key": "cUUID",
+                                      "value": "<uuid>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "WARNING: This is a preview API that could change."
+                              },
+                              "response": [
+                                {
+                                  "id": "a54a0f70-a9ab-46d8-8bf0-03853a867db3",
+                                  "name": "successful operation",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/rbac/permissions?resourceType=null",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "rbac",
+                                        "permissions"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Optional resource type to filter permission list",
+                                          "key": "resourceType",
+                                          "value": "null"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cUUID"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "[\n  {\n    \"action\": \"UPDATE\",\n    \"description\": \"<string>\",\n    \"name\": \"<string>\",\n    \"permissionValidOnResource\": \"<boolean>\",\n    \"prerequisitePermissions\": [\n      {\n        \"action\": \"DELETE\",\n        \"resourceType\": \"USER\"\n      },\n      {\n        \"action\": \"CREATE\",\n        \"resourceType\": \"ROLE\"\n      }\n    ],\n    \"resourceType\": \"ROLE\"\n  },\n  {\n    \"action\": \"DELETE\",\n    \"description\": \"<string>\",\n    \"name\": \"<string>\",\n    \"permissionValidOnResource\": \"<boolean>\",\n    \"prerequisitePermissions\": [\n      {\n        \"action\": \"TROUBLESHOOT\",\n        \"resourceType\": \"OTHER\"\n      },\n      {\n        \"action\": \"CREATE\",\n        \"resourceType\": \"USER\"\n      }\n    ],\n    \"resourceType\": \"ROLE\"\n  }\n]",
+                                  "createdAt": "2026-07-28T03:38:26.000Z",
+                                  "updatedAt": "2026-07-28T03:38:26.000Z",
+                                  "uid": "35240-a54a0f70-a9ab-46d8-8bf0-03853a867db3"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:38:26.000Z",
+                              "updatedAt": "2026-07-28T03:38:26.000Z",
+                              "uid": "35240-19badd89-9305-4696-aa8a-59c72e2dce79"
+                            }
+                          ],
+                          "id": "2d8af882-ded3-42ff-bc71-0d009a1dacd7",
+                          "createdAt": "2026-07-28T03:38:26.000Z",
+                          "updatedAt": "2026-07-28T03:38:26.000Z",
+                          "uid": "35240-2d8af882-ded3-42ff-bc71-0d009a1dacd7"
+                        },
+                        {
+                          "name": "role",
+                          "item": [
+                            {
+                              "name": "{rUUID}",
+                              "item": [
+                                {
+                                  "name": "YugabyteDB Anywhere Delete a Custom Role",
+                                  "id": "4c534b6b-c83e-46e5-b2a7-7833baebae3f",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/rbac/role/:rUUID",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "rbac",
+                                        "role",
+                                        ":rUUID"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "1d89d05f-1d22-41cd-aa5f-f3c79ff62871",
+                                          "key": "cUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "24c3feda-a4df-4dd2-aac4-4cf63acbfb9d",
+                                          "key": "rUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "WARNING: This is a preview API that could change."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "2a96a6eb-c63c-48ae-abd8-ad18100801d7",
+                                      "name": "successful operation",
+                                      "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/rbac/role/:rUUID",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "rbac",
+                                            "role",
+                                            ":rUUID"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "cUUID"
+                                            },
+                                            {
+                                              "key": "rUUID"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"message\": \"<string>\",\n  \"success\": \"<boolean>\"\n}",
+                                      "createdAt": "2026-07-28T03:38:26.000Z",
+                                      "updatedAt": "2026-07-28T03:38:26.000Z",
+                                      "uid": "35240-2a96a6eb-c63c-48ae-abd8-ad18100801d7"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:38:26.000Z",
+                                  "updatedAt": "2026-07-28T03:38:26.000Z",
+                                  "uid": "35240-4c534b6b-c83e-46e5-b2a7-7833baebae3f"
+                                },
+                                {
+                                  "name": "YugabyteDB Anywhere Get a Role's Information",
+                                  "id": "be16d00c-a442-4ef7-91cc-6d650fc4d0a3",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/rbac/role/:rUUID",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "rbac",
+                                        "role",
+                                        ":rUUID"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "6284f484-a9dd-4d18-81fe-1a53e7e21e8c",
+                                          "key": "cUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "3f805d12-175d-484a-bf6b-f8c95909b3c4",
+                                          "key": "rUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "WARNING: This is a preview API that could change."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "26c90f22-3023-4772-a892-c42e23a4f16a",
+                                      "name": "successful operation",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/rbac/role/:rUUID",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "rbac",
+                                            "role",
+                                            ":rUUID"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "cUUID"
+                                            },
+                                            {
+                                              "key": "rUUID"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"createdOn\": \"<dateTime>\",\n  \"customerUUID\": \"<uuid>\",\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"permissionDetails\": {\n    \"permissionList\": [\n      {\n        \"action\": \"CREATE\",\n        \"resourceType\": \"UNIVERSE\"\n      },\n      {\n        \"action\": \"DEBUG\",\n        \"resourceType\": \"UNIVERSE\"\n      }\n    ]\n  },\n  \"roleType\": \"System\",\n  \"roleUUID\": \"<uuid>\",\n  \"updatedOn\": \"<dateTime>\"\n}",
+                                      "createdAt": "2026-07-28T03:38:26.000Z",
+                                      "updatedAt": "2026-07-28T03:38:26.000Z",
+                                      "uid": "35240-26c90f22-3023-4772-a892-c42e23a4f16a"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:38:26.000Z",
+                                  "updatedAt": "2026-07-28T03:38:26.000Z",
+                                  "uid": "35240-be16d00c-a442-4ef7-91cc-6d650fc4d0a3"
+                                },
+                                {
+                                  "name": "YugabyteDB Anywhere Edit a Custom Role",
+                                  "id": "ddb83d36-4f98-4985-ae0e-7f466f1b3719",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"permissionList\": [\n    {\n      \"action\": \"UPDATE_ROLE_BINDINGS\",\n      \"resourceType\": \"USER\"\n    },\n    {\n      \"action\": \"READ\",\n      \"resourceType\": \"UNIVERSE\"\n    }\n  ]\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/rbac/role/:rUUID",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "rbac",
+                                        "role",
+                                        ":rUUID"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "2770ec65-6a2d-473c-bb9c-13e845ebeb1e",
+                                          "key": "cUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "d4d8cb4b-d6d2-4732-a360-81e2fbf100a7",
+                                          "key": "rUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "WARNING: This is a preview API that could change."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "917ac9c4-f293-4927-adb3-b91587c86a9b",
+                                      "name": "successful operation",
+                                      "originalRequest": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"permissionList\": [\n    {\n      \"action\": \"UPDATE_ROLE_BINDINGS\",\n      \"resourceType\": \"USER\"\n    },\n    {\n      \"action\": \"READ\",\n      \"resourceType\": \"UNIVERSE\"\n    }\n  ]\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/rbac/role/:rUUID",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "rbac",
+                                            "role",
+                                            ":rUUID"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "cUUID"
+                                            },
+                                            {
+                                              "key": "rUUID"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"createdOn\": \"<dateTime>\",\n  \"customerUUID\": \"<uuid>\",\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"permissionDetails\": {\n    \"permissionList\": [\n      {\n        \"action\": \"CREATE\",\n        \"resourceType\": \"UNIVERSE\"\n      },\n      {\n        \"action\": \"DEBUG\",\n        \"resourceType\": \"UNIVERSE\"\n      }\n    ]\n  },\n  \"roleType\": \"System\",\n  \"roleUUID\": \"<uuid>\",\n  \"updatedOn\": \"<dateTime>\"\n}",
+                                      "createdAt": "2026-07-28T03:38:26.000Z",
+                                      "updatedAt": "2026-07-28T03:38:26.000Z",
+                                      "uid": "35240-917ac9c4-f293-4927-adb3-b91587c86a9b"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:38:26.000Z",
+                                  "updatedAt": "2026-07-28T03:38:26.000Z",
+                                  "uid": "35240-ddb83d36-4f98-4985-ae0e-7f466f1b3719"
+                                }
+                              ],
+                              "id": "3f7bbfb7-4e2a-47fe-8168-9582b375fd0b",
+                              "createdAt": "2026-07-28T03:38:26.000Z",
+                              "updatedAt": "2026-07-28T03:38:26.000Z",
+                              "uid": "35240-3f7bbfb7-4e2a-47fe-8168-9582b375fd0b"
+                            },
+                            {
+                              "name": "YugabyteDB Anywhere List All the Roles Available",
+                              "id": "ae0a09d3-29ac-45d7-99bb-1dbaa3a61260",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/rbac/role?roleType=null",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "rbac",
+                                    "role"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Optional role type to filter roles list",
+                                      "key": "roleType",
+                                      "value": "null"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "ea499ef8-82fd-4a1c-a2ca-d3b836e8a564",
+                                      "key": "cUUID",
+                                      "value": "<uuid>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "WARNING: This is a preview API that could change."
+                              },
+                              "response": [
+                                {
+                                  "id": "d4687d04-476a-42ce-9a1b-b64b319bd283",
+                                  "name": "successful operation",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/rbac/role?roleType=null",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "rbac",
+                                        "role"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Optional role type to filter roles list",
+                                          "key": "roleType",
+                                          "value": "null"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cUUID"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "[\n  {\n    \"createdOn\": \"<dateTime>\",\n    \"customerUUID\": \"<uuid>\",\n    \"description\": \"<string>\",\n    \"name\": \"<string>\",\n    \"permissionDetails\": {\n      \"permissionList\": [\n        {\n          \"action\": \"BACKUP_RESTORE\",\n          \"resourceType\": \"USER\"\n        },\n        {\n          \"action\": \"CREATE\",\n          \"resourceType\": \"ROLE\"\n        }\n      ]\n    },\n    \"roleType\": \"Custom\",\n    \"roleUUID\": \"<uuid>\",\n    \"updatedOn\": \"<dateTime>\"\n  },\n  {\n    \"createdOn\": \"<dateTime>\",\n    \"customerUUID\": \"<uuid>\",\n    \"description\": \"<string>\",\n    \"name\": \"<string>\",\n    \"permissionDetails\": {\n      \"permissionList\": [\n        {\n          \"action\": \"UPDATE\",\n          \"resourceType\": \"ROLE\"\n        },\n        {\n          \"action\": \"UPDATE_ROLE_BINDINGS\",\n          \"resourceType\": \"OTHER\"\n        }\n      ]\n    },\n    \"roleType\": \"Custom\",\n    \"roleUUID\": \"<uuid>\",\n    \"updatedOn\": \"<dateTime>\"\n  }\n]",
+                                  "createdAt": "2026-07-28T03:38:26.000Z",
+                                  "updatedAt": "2026-07-28T03:38:26.000Z",
+                                  "uid": "35240-d4687d04-476a-42ce-9a1b-b64b319bd283"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:38:26.000Z",
+                              "updatedAt": "2026-07-28T03:38:26.000Z",
+                              "uid": "35240-ae0a09d3-29ac-45d7-99bb-1dbaa3a61260"
+                            },
+                            {
+                              "name": "YugabyteDB Anywhere Create a Custom Role",
+                              "id": "e2d04135-e1fa-4140-b20e-bc43a32b3dd7",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"permissionList\": [\n    {\n      \"action\": \"UPDATE_ROLE_BINDINGS\",\n      \"resourceType\": \"USER\"\n    },\n    {\n      \"action\": \"READ\",\n      \"resourceType\": \"UNIVERSE\"\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/rbac/role",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "rbac",
+                                    "role"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "2b1c50be-8639-4555-9b71-01331a134a3b",
+                                      "key": "cUUID",
+                                      "value": "<uuid>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "WARNING: This is a preview API that could change."
+                              },
+                              "response": [
+                                {
+                                  "id": "75945796-07d0-4104-a0b0-eaa8a3c6b504",
+                                  "name": "successful operation",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"permissionList\": [\n    {\n      \"action\": \"UPDATE_ROLE_BINDINGS\",\n      \"resourceType\": \"USER\"\n    },\n    {\n      \"action\": \"READ\",\n      \"resourceType\": \"UNIVERSE\"\n    }\n  ]\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/rbac/role",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "rbac",
+                                        "role"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cUUID"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"createdOn\": \"<dateTime>\",\n  \"customerUUID\": \"<uuid>\",\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"permissionDetails\": {\n    \"permissionList\": [\n      {\n        \"action\": \"CREATE\",\n        \"resourceType\": \"UNIVERSE\"\n      },\n      {\n        \"action\": \"DEBUG\",\n        \"resourceType\": \"UNIVERSE\"\n      }\n    ]\n  },\n  \"roleType\": \"System\",\n  \"roleUUID\": \"<uuid>\",\n  \"updatedOn\": \"<dateTime>\"\n}",
+                                  "createdAt": "2026-07-28T03:38:26.000Z",
+                                  "updatedAt": "2026-07-28T03:38:26.000Z",
+                                  "uid": "35240-75945796-07d0-4104-a0b0-eaa8a3c6b504"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:38:26.000Z",
+                              "updatedAt": "2026-07-28T03:38:26.000Z",
+                              "uid": "35240-e2d04135-e1fa-4140-b20e-bc43a32b3dd7"
+                            }
+                          ],
+                          "id": "e61fc697-7e55-48b9-8519-ad0be4728618",
+                          "createdAt": "2026-07-28T03:38:26.000Z",
+                          "updatedAt": "2026-07-28T03:38:26.000Z",
+                          "uid": "35240-e61fc697-7e55-48b9-8519-ad0be4728618"
+                        },
+                        {
+                          "name": "role_binding",
+                          "item": [
+                            {
+                              "name": "{userUUID}",
+                              "item": [
+                                {
+                                  "name": "YugabyteDB Anywhere Set the Role Bindings of a User",
+                                  "id": "b3c34f37-43d1-4a1e-841c-c165ec4c9ccd",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"roleResourceDefinitions\": [\n    {\n      \"roleUUID\": \"<uuid>\",\n      \"resourceGroup\": {\n        \"resourceDefinitionSet\": [\n          {\n            \"allowAll\": \"<boolean>\",\n            \"resourceType\": \"ROLE\",\n            \"resourceUUIDSet\": [\n              \"<uuid>\",\n              \"<uuid>\"\n            ]\n          },\n          {\n            \"allowAll\": \"<boolean>\",\n            \"resourceType\": \"ROLE\",\n            \"resourceUUIDSet\": [\n              \"<uuid>\",\n              \"<uuid>\"\n            ]\n          }\n        ]\n      }\n    },\n    {\n      \"roleUUID\": \"<uuid>\",\n      \"resourceGroup\": {\n        \"resourceDefinitionSet\": [\n          {\n            \"allowAll\": \"<boolean>\",\n            \"resourceType\": \"USER\",\n            \"resourceUUIDSet\": [\n              \"<uuid>\",\n              \"<uuid>\"\n            ]\n          },\n          {\n            \"allowAll\": \"<boolean>\",\n            \"resourceType\": \"OTHER\",\n            \"resourceUUIDSet\": [\n              \"<uuid>\",\n              \"<uuid>\"\n            ]\n          }\n        ]\n      }\n    }\n  ]\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/rbac/role_binding/:userUUID",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "rbac",
+                                        "role_binding",
+                                        ":userUUID"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "f7180b14-2336-4d39-9132-2709b394639e",
+                                          "key": "cUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "3e93588b-4cd7-4d9a-b107-0df712002847",
+                                          "key": "userUUID",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "WARNING: This is a preview API that could change."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "4bf9ad02-0012-4057-80d0-f030f810ce5c",
+                                      "name": "successful operation",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"roleResourceDefinitions\": [\n    {\n      \"roleUUID\": \"<uuid>\",\n      \"resourceGroup\": {\n        \"resourceDefinitionSet\": [\n          {\n            \"allowAll\": \"<boolean>\",\n            \"resourceType\": \"ROLE\",\n            \"resourceUUIDSet\": [\n              \"<uuid>\",\n              \"<uuid>\"\n            ]\n          },\n          {\n            \"allowAll\": \"<boolean>\",\n            \"resourceType\": \"ROLE\",\n            \"resourceUUIDSet\": [\n              \"<uuid>\",\n              \"<uuid>\"\n            ]\n          }\n        ]\n      }\n    },\n    {\n      \"roleUUID\": \"<uuid>\",\n      \"resourceGroup\": {\n        \"resourceDefinitionSet\": [\n          {\n            \"allowAll\": \"<boolean>\",\n            \"resourceType\": \"USER\",\n            \"resourceUUIDSet\": [\n              \"<uuid>\",\n              \"<uuid>\"\n            ]\n          },\n          {\n            \"allowAll\": \"<boolean>\",\n            \"resourceType\": \"OTHER\",\n            \"resourceUUIDSet\": [\n              \"<uuid>\",\n              \"<uuid>\"\n            ]\n          }\n        ]\n      }\n    }\n  ]\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/customers/:cUUID/rbac/role_binding/:userUUID",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":cUUID",
+                                            "rbac",
+                                            "role_binding",
+                                            ":userUUID"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "cUUID"
+                                            },
+                                            {
+                                              "key": "userUUID"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "[\n  {\n    \"principal\": {\n      \"groupUUID\": \"<uuid>\",\n      \"type\": \"OIDC_GROUP\",\n      \"userUUID\": \"<uuid>\",\n      \"uuid\": \"<uuid>\"\n    },\n    \"createTime\": \"<dateTime>\",\n    \"groupInfo\": {\n      \"customerUUID\": \"<uuid>\",\n      \"groupUUID\": \"<uuid>\",\n      \"identifier\": \"<string>\",\n      \"roleUUID\": \"<uuid>\",\n      \"type\": \"LDAP\",\n      \"creationDate\": \"<dateTime>\"\n    },\n    \"resourceGroup\": {\n      \"resourceDefinitionSet\": [\n        {\n          \"allowAll\": \"<boolean>\",\n          \"resourceType\": \"OTHER\",\n          \"resourceUUIDSet\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ]\n        },\n        {\n          \"allowAll\": \"<boolean>\",\n          \"resourceType\": \"USER\",\n          \"resourceUUIDSet\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ]\n        }\n      ]\n    },\n    \"role\": {\n      \"createdOn\": \"<dateTime>\",\n      \"customerUUID\": \"<uuid>\",\n      \"description\": \"<string>\",\n      \"name\": \"<string>\",\n      \"permissionDetails\": {\n        \"permissionList\": [\n          {\n            \"action\": \"CREATE\",\n            \"resourceType\": \"UNIVERSE\"\n          },\n          {\n            \"action\": \"READ\",\n            \"resourceType\": \"USER\"\n          }\n        ]\n      },\n      \"roleType\": \"Custom\",\n      \"roleUUID\": \"<uuid>\",\n      \"updatedOn\": \"<dateTime>\"\n    },\n    \"type\": \"System\",\n    \"updateTime\": \"<dateTime>\",\n    \"user\": {\n      \"email\": \"<string>\",\n      \"groupMemberships\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"primary\": \"<boolean>\",\n      \"authTokenIssueDate\": \"<dateTime>\",\n      \"creationDate\": \"<dateTime>\",\n      \"customerUUID\": \"<uuid>\",\n      \"ldapSpecifiedRole\": \"<boolean>\",\n      \"oidcJwtAuthToken\": \"<string>\",\n      \"role\": \"ReadOnly\",\n      \"timezone\": \"<string>\",\n      \"userType\": \"oidc\",\n      \"uuid\": \"<uuid>\"\n    },\n    \"uuid\": \"<uuid>\"\n  },\n  {\n    \"principal\": {\n      \"groupUUID\": \"<uuid>\",\n      \"type\": \"LDAP_GROUP\",\n      \"userUUID\": \"<uuid>\",\n      \"uuid\": \"<uuid>\"\n    },\n    \"createTime\": \"<dateTime>\",\n    \"groupInfo\": {\n      \"customerUUID\": \"<uuid>\",\n      \"groupUUID\": \"<uuid>\",\n      \"identifier\": \"<string>\",\n      \"roleUUID\": \"<uuid>\",\n      \"type\": \"OIDC\",\n      \"creationDate\": \"<dateTime>\"\n    },\n    \"resourceGroup\": {\n      \"resourceDefinitionSet\": [\n        {\n          \"allowAll\": \"<boolean>\",\n          \"resourceType\": \"UNIVERSE\",\n          \"resourceUUIDSet\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ]\n        },\n        {\n          \"allowAll\": \"<boolean>\",\n          \"resourceType\": \"ROLE\",\n          \"resourceUUIDSet\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ]\n        }\n      ]\n    },\n    \"role\": {\n      \"createdOn\": \"<dateTime>\",\n      \"customerUUID\": \"<uuid>\",\n      \"description\": \"<string>\",\n      \"name\": \"<string>\",\n      \"permissionDetails\": {\n        \"permissionList\": [\n          {\n            \"action\": \"XCLUSTER\",\n            \"resourceType\": \"ROLE\"\n          },\n          {\n            \"action\": \"UPDATE_ROLE_BINDINGS\",\n            \"resourceType\": \"OTHER\"\n          }\n        ]\n      },\n      \"roleType\": \"Custom\",\n      \"roleUUID\": \"<uuid>\",\n      \"updatedOn\": \"<dateTime>\"\n    },\n    \"type\": \"Custom\",\n    \"updateTime\": \"<dateTime>\",\n    \"user\": {\n      \"email\": \"<string>\",\n      \"groupMemberships\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"primary\": \"<boolean>\",\n      \"authTokenIssueDate\": \"<dateTime>\",\n      \"creationDate\": \"<dateTime>\",\n      \"customerUUID\": \"<uuid>\",\n      \"ldapSpecifiedRole\": \"<boolean>\",\n      \"oidcJwtAuthToken\": \"<string>\",\n      \"role\": \"Admin\",\n      \"timezone\": \"<string>\",\n      \"userType\": \"local\",\n      \"uuid\": \"<uuid>\"\n    },\n    \"uuid\": \"<uuid>\"\n  }\n]",
+                                      "createdAt": "2026-07-28T03:38:26.000Z",
+                                      "updatedAt": "2026-07-28T03:38:26.000Z",
+                                      "uid": "35240-4bf9ad02-0012-4057-80d0-f030f810ce5c"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:38:26.000Z",
+                                  "updatedAt": "2026-07-28T03:38:26.000Z",
+                                  "uid": "35240-b3c34f37-43d1-4a1e-841c-c165ec4c9ccd"
+                                }
+                              ],
+                              "id": "d10987f5-8e56-43d1-b022-8bbb05647bb1",
+                              "createdAt": "2026-07-28T03:38:26.000Z",
+                              "updatedAt": "2026-07-28T03:38:26.000Z",
+                              "uid": "35240-d10987f5-8e56-43d1-b022-8bbb05647bb1"
+                            },
+                            {
+                              "name": "YugabyteDB Anywhere Get All the Role Bindings Available",
+                              "id": "13358ecb-f75a-4c10-94e8-d02868b45fbc",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/customers/:cUUID/rbac/role_binding?userUUID=<uuid>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":cUUID",
+                                    "rbac",
+                                    "role_binding"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Optional user UUID to filter role binding map",
+                                      "key": "userUUID",
+                                      "value": "<uuid>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "961e802b-2216-4d82-9ec1-d546799e3307",
+                                      "key": "cUUID",
+                                      "value": "<uuid>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "WARNING: This is a preview API that could change."
+                              },
+                              "response": [
+                                {
+                                  "id": "79f2b765-f7ba-4847-a48a-94ba779f595c",
+                                  "name": "successful operation",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/customers/:cUUID/rbac/role_binding?userUUID=<uuid>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":cUUID",
+                                        "rbac",
+                                        "role_binding"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Optional user UUID to filter role binding map",
+                                          "key": "userUUID",
+                                          "value": "<uuid>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cUUID"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"occaecat410\": {\n    \"principal\": {\n      \"groupUUID\": \"<uuid>\",\n      \"type\": \"LDAP_GROUP\",\n      \"userUUID\": \"<uuid>\",\n      \"uuid\": \"<uuid>\"\n    },\n    \"createTime\": \"<dateTime>\",\n    \"groupInfo\": {\n      \"customerUUID\": \"<uuid>\",\n      \"groupUUID\": \"<uuid>\",\n      \"identifier\": \"<string>\",\n      \"roleUUID\": \"<uuid>\",\n      \"type\": \"OIDC\",\n      \"creationDate\": \"<dateTime>\"\n    },\n    \"resourceGroup\": {\n      \"resourceDefinitionSet\": [\n        {\n          \"allowAll\": \"<boolean>\",\n          \"resourceType\": \"UNIVERSE\",\n          \"resourceUUIDSet\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ]\n        },\n        {\n          \"allowAll\": \"<boolean>\",\n          \"resourceType\": \"UNIVERSE\",\n          \"resourceUUIDSet\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ]\n        }\n      ]\n    },\n    \"role\": {\n      \"createdOn\": \"<dateTime>\",\n      \"customerUUID\": \"<uuid>\",\n      \"description\": \"<string>\",\n      \"name\": \"<string>\",\n      \"permissionDetails\": {\n        \"permissionList\": [\n          {\n            \"action\": \"UPDATE_PROFILE\",\n            \"resourceType\": \"OTHER\"\n          },\n          {\n            \"action\": \"SUPER_ADMIN_ACTIONS\",\n            \"resourceType\": \"OTHER\"\n          }\n        ]\n      },\n      \"roleType\": \"Custom\",\n      \"roleUUID\": \"<uuid>\",\n      \"updatedOn\": \"<dateTime>\"\n    },\n    \"type\": \"System\",\n    \"updateTime\": \"<dateTime>\",\n    \"user\": {\n      \"email\": \"<string>\",\n      \"groupMemberships\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"primary\": \"<boolean>\",\n      \"authTokenIssueDate\": \"<dateTime>\",\n      \"creationDate\": \"<dateTime>\",\n      \"customerUUID\": \"<uuid>\",\n      \"ldapSpecifiedRole\": \"<boolean>\",\n      \"oidcJwtAuthToken\": \"<string>\",\n      \"role\": \"Admin\",\n      \"timezone\": \"<string>\",\n      \"userType\": \"ldap\",\n      \"uuid\": \"<uuid>\"\n    },\n    \"uuid\": \"<uuid>\"\n  },\n  \"minim45\": {\n    \"principal\": {\n      \"groupUUID\": \"<uuid>\",\n      \"type\": \"OIDC_GROUP\",\n      \"userUUID\": \"<uuid>\",\n      \"uuid\": \"<uuid>\"\n    },\n    \"createTime\": \"<dateTime>\",\n    \"groupInfo\": {\n      \"customerUUID\": \"<uuid>\",\n      \"groupUUID\": \"<uuid>\",\n      \"identifier\": \"<string>\",\n      \"roleUUID\": \"<uuid>\",\n      \"type\": \"OIDC\",\n      \"creationDate\": \"<dateTime>\"\n    },\n    \"resourceGroup\": {\n      \"resourceDefinitionSet\": [\n        {\n          \"allowAll\": \"<boolean>\",\n          \"resourceType\": \"UNIVERSE\",\n          \"resourceUUIDSet\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ]\n        },\n        {\n          \"allowAll\": \"<boolean>\",\n          \"resourceType\": \"UNIVERSE\",\n          \"resourceUUIDSet\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ]\n        }\n      ]\n    },\n    \"role\": {\n      \"createdOn\": \"<dateTime>\",\n      \"customerUUID\": \"<uuid>\",\n      \"description\": \"<string>\",\n      \"name\": \"<string>\",\n      \"permissionDetails\": {\n        \"permissionList\": [\n          {\n            \"action\": \"SUPER_ADMIN_ACTIONS\",\n            \"resourceType\": \"USER\"\n          },\n          {\n            \"action\": \"CREATE\",\n            \"resourceType\": \"UNIVERSE\"\n          }\n        ]\n      },\n      \"roleType\": \"System\",\n      \"roleUUID\": \"<uuid>\",\n      \"updatedOn\": \"<dateTime>\"\n    },\n    \"type\": \"System\",\n    \"updateTime\": \"<dateTime>\",\n    \"user\": {\n      \"email\": \"<string>\",\n      \"groupMemberships\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"primary\": \"<boolean>\",\n      \"authTokenIssueDate\": \"<dateTime>\",\n      \"creationDate\": \"<dateTime>\",\n      \"customerUUID\": \"<uuid>\",\n      \"ldapSpecifiedRole\": \"<boolean>\",\n      \"oidcJwtAuthToken\": \"<string>\",\n      \"role\": \"Admin\",\n      \"timezone\": \"<string>\",\n      \"userType\": \"local\",\n      \"uuid\": \"<uuid>\"\n    },\n    \"uuid\": \"<uuid>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T03:38:26.000Z",
+                                  "updatedAt": "2026-07-28T03:38:26.000Z",
+                                  "uid": "35240-79f2b765-f7ba-4847-a48a-94ba779f595c"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:38:26.000Z",
+                              "updatedAt": "2026-07-28T03:38:26.000Z",
+                              "uid": "35240-13358ecb-f75a-4c10-94e8-d02868b45fbc"
+                            }
+                          ],
+                          "id": "c70f37b2-19a6-4c3d-b039-02160da7b317",
+                          "createdAt": "2026-07-28T03:38:26.000Z",
+                          "updatedAt": "2026-07-28T03:38:26.000Z",
+                          "uid": "35240-c70f37b2-19a6-4c3d-b039-02160da7b317"
+                        }
+                      ],
+                      "id": "d11b6d2b-1815-47d1-8274-6ee2fb6698fe",
+                      "createdAt": "2026-07-28T03:38:26.000Z",
+                      "updatedAt": "2026-07-28T03:38:26.000Z",
+                      "uid": "35240-d11b6d2b-1815-47d1-8274-6ee2fb6698fe"
+                    }
+                  ],
+                  "id": "1a237509-efbd-4f7a-b053-b08fac2a8637",
+                  "createdAt": "2026-07-28T03:38:26.000Z",
+                  "updatedAt": "2026-07-28T03:38:26.000Z",
+                  "uid": "35240-1a237509-efbd-4f7a-b053-b08fac2a8637"
+                }
+              ],
+              "id": "a1cab92a-138a-418b-82a1-407c3f4d89b3",
+              "createdAt": "2026-07-28T03:38:26.000Z",
+              "updatedAt": "2026-07-28T03:38:26.000Z",
+              "uid": "35240-a1cab92a-138a-418b-82a1-407c3f4d89b3"
+            }
+          ],
+          "id": "6274cfe4-a69e-4e50-9c17-3d8b37994441",
+          "createdAt": "2026-07-28T03:38:26.000Z",
+          "updatedAt": "2026-07-28T03:38:26.000Z",
+          "uid": "35240-6274cfe4-a69e-4e50-9c17-3d8b37994441"
+        }
+      ],
+      "id": "ed17184a-f1c8-4211-a587-61e61ce37ea2",
+      "createdAt": "2026-07-28T03:38:26.000Z",
+      "updatedAt": "2026-07-28T03:38:26.000Z",
+      "uid": "35240-ed17184a-f1c8-4211-a587-61e61ce37ea2"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.yugabyte.com/api/public/v1"
+    }
+  ]
+}

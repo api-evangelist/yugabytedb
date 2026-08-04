@@ -1,0 +1,196 @@
+{
+  "info": {
+    "_postman_id": "006b07bb-bd2a-4581-b028-9bcd1314e462",
+    "name": "YugabyteDB Aeon REST Access Keys Projects API",
+    "description": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:38:18.000Z",
+    "updatedAt": "2026-07-28T03:38:19.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-006b07bb-bd2a-4581-b028-9bcd1314e462"
+  },
+  "item": [
+    {
+      "name": "accounts",
+      "item": [
+        {
+          "name": "{accountId}",
+          "item": [
+            {
+              "name": "projects",
+              "item": [
+                {
+                  "name": "YugabyteDB Aeon List Projects",
+                  "id": "0a22d8d9-4298-4676-ae0a-81c10ec6f288",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/:accountId/projects",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        ":accountId",
+                        "projects"
+                      ],
+                      "variable": [
+                        {
+                          "id": "ff169be0-08e1-44fb-9743-6f81819c9d91",
+                          "key": "accountId",
+                          "value": "<uuid>",
+                          "description": "(Required) The unique identifier of the YugabyteDB Aeon account."
+                        }
+                      ]
+                    },
+                    "description": "Returns all projects within the specified account. Projects group clusters and resources for organizational or billing purposes."
+                  },
+                  "response": [
+                    {
+                      "id": "4b5b041c-22a3-439f-bdf1-4c008ab940dc",
+                      "name": "List of projects returned successfully",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:accountId/projects",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":accountId",
+                            "projects"
+                          ],
+                          "variable": [
+                            {
+                              "key": "accountId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"account_id\": \"<uuid>\",\n      \"created_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"account_id\": \"<uuid>\",\n      \"created_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:38:19.000Z",
+                      "updatedAt": "2026-07-28T03:38:19.000Z",
+                      "uid": "35240-4b5b041c-22a3-439f-bdf1-4c008ab940dc"
+                    },
+                    {
+                      "id": "f2fbb161-c461-4f22-a6a7-7be6ebd728f2",
+                      "name": "The API key is missing, invalid, or expired.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:accountId/projects",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":accountId",
+                            "projects"
+                          ],
+                          "variable": [
+                            {
+                              "key": "accountId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"<integer>\"\n  }\n}",
+                      "createdAt": "2026-07-28T03:38:19.000Z",
+                      "updatedAt": "2026-07-28T03:38:19.000Z",
+                      "uid": "35240-f2fbb161-c461-4f22-a6a7-7be6ebd728f2"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:38:19.000Z",
+                  "updatedAt": "2026-07-28T03:38:19.000Z",
+                  "uid": "35240-0a22d8d9-4298-4676-ae0a-81c10ec6f288"
+                }
+              ],
+              "id": "babf26e9-a003-49a6-9dd0-a4ea1ad864bd",
+              "createdAt": "2026-07-28T03:38:19.000Z",
+              "updatedAt": "2026-07-28T03:38:19.000Z",
+              "uid": "35240-babf26e9-a003-49a6-9dd0-a4ea1ad864bd"
+            }
+          ],
+          "id": "85b892f2-025a-4145-8563-ae5196db8b1e",
+          "createdAt": "2026-07-28T03:38:19.000Z",
+          "updatedAt": "2026-07-28T03:38:19.000Z",
+          "uid": "35240-85b892f2-025a-4145-8563-ae5196db8b1e"
+        }
+      ],
+      "id": "0ffa0b16-b143-4855-835b-ce1c242e5b39",
+      "createdAt": "2026-07-28T03:38:19.000Z",
+      "updatedAt": "2026-07-28T03:38:19.000Z",
+      "uid": "35240-0ffa0b16-b143-4855-835b-ce1c242e5b39"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.yugabyte.com/api/public/v1"
+    }
+  ]
+}
