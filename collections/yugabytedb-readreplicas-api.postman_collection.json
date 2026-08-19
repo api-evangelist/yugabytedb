@@ -1,0 +1,902 @@
+{
+  "item": [
+    {
+      "id": "9f2dd3f4-ab08-40a8-8f52-7ce6a7891b90",
+      "name": "ReadReplicas",
+      "description": {
+        "content": "Manage read replicas for a cluster to serve low-latency read requests from remote regions without affecting the primary cluster workload.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f789afd9-44bf-4761-83b3-77ebcbc474aa",
+          "name": "YugabyteDB Aeon List Read Replicas",
+          "request": {
+            "name": "YugabyteDB Aeon List Read Replicas",
+            "description": {
+              "content": "Returns all read replicas configured for the specified cluster. Read replicas allow routing read traffic to geographically distributed nodes to reduce latency for remote clients.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":accountId",
+                "projects",
+                ":projectId",
+                "clusters",
+                ":clusterId",
+                "read-replicas"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "accountId",
+                  "description": "(Required) The unique identifier of the YugabyteDB Aeon account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "projectId",
+                  "description": "(Required) The unique identifier of the project within the account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "clusterId",
+                  "description": "(Required) The unique identifier of the cluster."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "77a0a358-7f46-403f-98f6-38ae17cdbc7a",
+              "name": "List of read replicas returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId",
+                    "projects",
+                    ":projectId",
+                    "clusters",
+                    ":clusterId",
+                    "read-replicas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "accountId",
+                      "description": "(Required) The unique identifier of the YugabyteDB Aeon account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "projectId",
+                      "description": "(Required) The unique identifier of the project within the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "clusterId",
+                      "description": "(Required) The unique identifier of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"cloud_info\": {\n        \"code\": \"AWS\",\n        \"region\": \"us-east-1\"\n      },\n      \"cluster_info\": {\n        \"num_nodes\": 10,\n        \"fault_tolerance\": \"NONE\",\n        \"cluster_tier\": \"FREE\",\n        \"yugabytedb_version\": \"2.20.0.0\"\n      },\n      \"state\": \"ACTIVE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ec31065-eb75-49e6-b002-666356cb8a02",
+              "name": "The API key is missing, invalid, or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId",
+                    "projects",
+                    ":projectId",
+                    "clusters",
+                    ":clusterId",
+                    "read-replicas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "accountId",
+                      "description": "(Required) The unique identifier of the YugabyteDB Aeon account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "projectId",
+                      "description": "(Required) The unique identifier of the project within the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "clusterId",
+                      "description": "(Required) The unique identifier of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"OK\",\n    \"message\": \"Example message\",\n    \"status\": 100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2a9879b-533d-461b-9232-55e5f62d7115",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId",
+                    "projects",
+                    ":projectId",
+                    "clusters",
+                    ":clusterId",
+                    "read-replicas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "accountId",
+                      "description": "(Required) The unique identifier of the YugabyteDB Aeon account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "projectId",
+                      "description": "(Required) The unique identifier of the project within the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "clusterId",
+                      "description": "(Required) The unique identifier of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"OK\",\n    \"message\": \"Example message\",\n    \"status\": 100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d0d50322-7421-40fa-a05a-82b7caf60842",
+          "name": "YugabyteDB Aeon Create Read Replica",
+          "request": {
+            "name": "YugabyteDB Aeon Create Read Replica",
+            "description": {
+              "content": "Adds a read replica to the specified cluster in the configured cloud region. Read replicas serve read-only traffic and are asynchronously replicated from the primary cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":accountId",
+                "projects",
+                ":projectId",
+                "clusters",
+                ":clusterId",
+                "read-replicas"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "accountId",
+                  "description": "(Required) The unique identifier of the YugabyteDB Aeon account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "projectId",
+                  "description": "(Required) The unique identifier of the project within the account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "clusterId",
+                  "description": "(Required) The unique identifier of the cluster."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cloud_info\": {\n    \"code\": \"<string>\",\n    \"region\": \"<string>\"\n  },\n  \"cluster_info\": {\n    \"num_nodes\": \"<integer>\",\n    \"fault_tolerance\": \"<string>\",\n    \"cluster_tier\": \"<string>\",\n    \"node_info\": {\n      \"num_cores\": \"<integer>\",\n      \"memory_mb\": \"<integer>\",\n      \"disk_size_gb\": \"<integer>\"\n    },\n    \"yugabytedb_version\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0bfcfc6a-a842-4eae-9f1a-6697604130f2",
+              "name": "Read replica creation initiated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId",
+                    "projects",
+                    ":projectId",
+                    "clusters",
+                    ":clusterId",
+                    "read-replicas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "accountId",
+                      "description": "(Required) The unique identifier of the YugabyteDB Aeon account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "projectId",
+                      "description": "(Required) The unique identifier of the project within the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "clusterId",
+                      "description": "(Required) The unique identifier of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cloud_info\": {\n    \"code\": \"AWS\",\n    \"region\": \"us-east-1\"\n  },\n  \"cluster_info\": {\n    \"num_nodes\": 10,\n    \"fault_tolerance\": \"NONE\",\n    \"cluster_tier\": \"FREE\",\n    \"node_info\": {\n      \"num_cores\": 10,\n      \"memory_mb\": 100,\n      \"disk_size_gb\": 10\n    },\n    \"yugabytedb_version\": \"2.20.0.0\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"cloud_info\": {\n    \"code\": \"AWS\",\n    \"region\": \"us-east-1\"\n  },\n  \"cluster_info\": {\n    \"num_nodes\": 10,\n    \"fault_tolerance\": \"NONE\",\n    \"cluster_tier\": \"FREE\",\n    \"node_info\": {\n      \"num_cores\": 10,\n      \"memory_mb\": 100,\n      \"disk_size_gb\": 10\n    },\n    \"yugabytedb_version\": \"2.20.0.0\"\n  },\n  \"state\": \"ACTIVE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7067769b-7781-48a9-a4d9-a98af2b61be9",
+              "name": "The request was malformed or contained invalid parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId",
+                    "projects",
+                    ":projectId",
+                    "clusters",
+                    ":clusterId",
+                    "read-replicas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "accountId",
+                      "description": "(Required) The unique identifier of the YugabyteDB Aeon account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "projectId",
+                      "description": "(Required) The unique identifier of the project within the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "clusterId",
+                      "description": "(Required) The unique identifier of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cloud_info\": {\n    \"code\": \"AWS\",\n    \"region\": \"us-east-1\"\n  },\n  \"cluster_info\": {\n    \"num_nodes\": 10,\n    \"fault_tolerance\": \"NONE\",\n    \"cluster_tier\": \"FREE\",\n    \"node_info\": {\n      \"num_cores\": 10,\n      \"memory_mb\": 100,\n      \"disk_size_gb\": 10\n    },\n    \"yugabytedb_version\": \"2.20.0.0\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"OK\",\n    \"message\": \"Example message\",\n    \"status\": 100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7759e1f-5b35-43b4-b1d3-14e3260b8172",
+              "name": "The API key is missing, invalid, or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId",
+                    "projects",
+                    ":projectId",
+                    "clusters",
+                    ":clusterId",
+                    "read-replicas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "accountId",
+                      "description": "(Required) The unique identifier of the YugabyteDB Aeon account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "projectId",
+                      "description": "(Required) The unique identifier of the project within the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "clusterId",
+                      "description": "(Required) The unique identifier of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cloud_info\": {\n    \"code\": \"AWS\",\n    \"region\": \"us-east-1\"\n  },\n  \"cluster_info\": {\n    \"num_nodes\": 10,\n    \"fault_tolerance\": \"NONE\",\n    \"cluster_tier\": \"FREE\",\n    \"node_info\": {\n      \"num_cores\": 10,\n      \"memory_mb\": 100,\n      \"disk_size_gb\": 10\n    },\n    \"yugabytedb_version\": \"2.20.0.0\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"OK\",\n    \"message\": \"Example message\",\n    \"status\": 100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "41456f81-99b1-491b-8986-86d063edc17b",
+          "name": "YugabyteDB Aeon Delete Read Replica",
+          "request": {
+            "name": "YugabyteDB Aeon Delete Read Replica",
+            "description": {
+              "content": "Removes all read replicas from the specified cluster. This operation is irreversible and immediately terminates read replica nodes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":accountId",
+                "projects",
+                ":projectId",
+                "clusters",
+                ":clusterId",
+                "read-replicas"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "accountId",
+                  "description": "(Required) The unique identifier of the YugabyteDB Aeon account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "projectId",
+                  "description": "(Required) The unique identifier of the project within the account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "clusterId",
+                  "description": "(Required) The unique identifier of the cluster."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b4225d90-c1c3-49f7-bb80-03e71b4afefe",
+              "name": "Read replica deletion initiated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId",
+                    "projects",
+                    ":projectId",
+                    "clusters",
+                    ":clusterId",
+                    "read-replicas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "accountId",
+                      "description": "(Required) The unique identifier of the YugabyteDB Aeon account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "projectId",
+                      "description": "(Required) The unique identifier of the project within the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "clusterId",
+                      "description": "(Required) The unique identifier of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5903ea0d-fa98-4795-bc45-99851abaef51",
+              "name": "The API key is missing, invalid, or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId",
+                    "projects",
+                    ":projectId",
+                    "clusters",
+                    ":clusterId",
+                    "read-replicas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "accountId",
+                      "description": "(Required) The unique identifier of the YugabyteDB Aeon account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "projectId",
+                      "description": "(Required) The unique identifier of the project within the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "clusterId",
+                      "description": "(Required) The unique identifier of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"OK\",\n    \"message\": \"Example message\",\n    \"status\": 100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ccbe9399-fcfb-435a-a1fb-2b8ef9a49da5",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId",
+                    "projects",
+                    ":projectId",
+                    "clusters",
+                    ":clusterId",
+                    "read-replicas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "accountId",
+                      "description": "(Required) The unique identifier of the YugabyteDB Aeon account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "projectId",
+                      "description": "(Required) The unique identifier of the project within the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "clusterId",
+                      "description": "(Required) The unique identifier of the cluster."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"OK\",\n    \"message\": \"Example message\",\n    \"status\": 100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cloud.yugabyte.com/api/public/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b8de88f8-1c19-4c8b-89c4-fdb5b53d117a",
+    "name": "YugabyteDB Aeon REST Access Keys ReadReplicas API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YugabyteDB Aeon REST Access Keys Isolated Backup API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Isolated Backup",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Create YBA Backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/yba-backups",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Trigger a one time backup of YBA to the desired storage location"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Restore YBA Backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/yba-backups/restore",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Trigger a one time restore of YBA from the desired storage location"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

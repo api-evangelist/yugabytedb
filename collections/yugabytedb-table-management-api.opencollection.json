@@ -1,0 +1,375 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YugabyteDB Aeon REST Access Keys Table management API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Table management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Get a List of All Namespaces in the Specified Universe.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/namespaces",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "includeSystemNamespaces",
+                "value": "false",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "WARNING: This is a preview API that could change."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Get a List of All Tables in the Specified Universe",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/tables",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "includeParentTableInfo",
+                "value": "false",
+                "type": "query"
+              },
+              {
+                "name": "excludeColocatedTables",
+                "value": "false",
+                "type": "query"
+              },
+              {
+                "name": "includeColocatedParentTables",
+                "value": "true",
+                "type": "query"
+              },
+              {
+                "name": "xClusterSupportedOnly",
+                "value": "false",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "WARNING: This is a preview API that could change."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Create a YugabyteDB Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/tables",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "YbaApi Internal."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Describe a Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/tables/:tableUUID",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "tableUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "WARNING: This is a preview API that could change."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Alter a YugabyteDB Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/tables/:tableUUID",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "tableUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "YbaApi Internal."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Drop a YugabyteDB Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/tables/:tableUUID",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "tableUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "YbaApi Internal."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Bulk Import Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/tables/:tableUUID/bulk_import",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "tableUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "YbaApi Internal. Bulk import data into the specified table. This is currently AWS-only."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Get a List of All Tablespaces of a Given Universe.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/tablespaces",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "WARNING: This is a preview API that could change."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Create TableSpaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/tablespaces",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "YbaApi Internal."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere List Column Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/metadata/yql_data_types"
+          },
+          "docs": "YbaApi Internal. Get a list of all defined column types."
+        },
+        {
+          "info": {
+            "name": "Create a multi-table backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/multi_table_backup",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create a multi-table backup"
+        },
+        {
+          "info": {
+            "name": "Create a single-table backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/tables/:tableUUID/create_backup",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tableUUID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create a single-table backup"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

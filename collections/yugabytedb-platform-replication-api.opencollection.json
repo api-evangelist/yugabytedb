@@ -1,0 +1,113 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YugabyteDB Aeon REST Access Keys Platform Replication API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Platform Replication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere List Backups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/settings/ha/config/:cUUID/backup/list",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "leader",
+                "value": "null",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Available since YBA version 2.20.0."
+        },
+        {
+          "info": {
+            "name": "getBackupInfo",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/settings/ha/config/:cUUID/replication_schedule",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Start Periodic Backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/settings/ha/config/:cUUID/replication_schedule/start",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Available since YBA version 2.20.0."
+        },
+        {
+          "info": {
+            "name": "stopPeriodicBackup",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/settings/ha/config/:cUUID/replication_schedule/stop",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

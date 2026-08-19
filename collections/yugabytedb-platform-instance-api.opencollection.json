@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YugabyteDB Aeon REST Access Keys Platform Instance API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Platform Instance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Create Platform Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/settings/ha/config/:cUUID/instance",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Available since YBA version 2.20.0."
+        },
+        {
+          "info": {
+            "name": "getLocal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/settings/ha/config/:cUUID/instance/local",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "deleteInstance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/settings/ha/config/:cUUID/instance/:iUUID",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "iUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Promote Platform Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/settings/ha/config/:cUUID/instance/:iUUID/promote",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "iUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "curLeader",
+                "value": "null",
+                "type": "query"
+              },
+              {
+                "name": "isForcePromote",
+                "value": "true",
+                "type": "query"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Available since YBA version 2.20.0."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

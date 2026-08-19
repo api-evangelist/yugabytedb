@@ -1,0 +1,784 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YugabyteDB Aeon REST Access Keys Backups API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Backups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "YugabyteDB Aeon List Backups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/accounts/:accountId/projects/:projectId/clusters/:clusterId/backups",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the YugabyteDB Aeon account."
+              },
+              {
+                "name": "projectId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the project within the account."
+              },
+              {
+                "name": "clusterId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the cluster."
+              }
+            ]
+          },
+          "docs": "Returns all backups for the specified cluster, including both scheduled and on-demand backups. Each entry includes backup state, creation time, expiry time, and size information."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Aeon Create On-demand Backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/accounts/:accountId/projects/:projectId/clusters/:clusterId/backups",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the YugabyteDB Aeon account."
+              },
+              {
+                "name": "projectId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the project within the account."
+              },
+              {
+                "name": "clusterId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the cluster."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Triggers an immediate on-demand backup of the specified cluster. The backup is a full cluster snapshot stored in the same region as the cluster. Retention period can be specified in days."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Create a Backup V2",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/backups",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "YugabyteDB Anywhere Create a Backup V2"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Delete Backups - Deprecated",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/backups",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "<b style=\"color:#ff0000\">Deprecated since YBA version 2.20.0.0.</b></p>Use 'Delete backups V2' instead."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Delete Backups V2",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/backups/delete",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "YugabyteDB Anywhere Delete Backups V2"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere List Backups (paginated) V2",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/backups/page",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "YugabyteDB Anywhere List Backups (paginated) V2"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Get Backup V2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/backups/:backupUUID",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "backupUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "YugabyteDB Anywhere Get Backup V2"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Edit a Backup V2",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/backups/:backupUUID",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "backupUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit a backup"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere List Incremental Backups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/backups/:backupUUID/list_increments",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "backupUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "YugabyteDB Anywhere List Incremental Backups"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Stop a Backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/backups/:backupUUID/stop",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "backupUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Stop an in-progress backup"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere List of All Restorable Entities in the Incremental Backup Chain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/backups/:baseBackupUUID/restorable_keyspace_tables",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "baseBackupUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "WARNING: This is a preview API that could change. List of all restorable entities in the incremental backup chain."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Create Backup Schedule - Deprecated",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/create_backup_schedule",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<b style=\"color:#ff0000\">Deprecated since YBA version 2.20.0.0.</b></p>Use 'Create Backup Schedule Async' instead."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Create Backup Schedule Async",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/create_backup_schedule_async",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "YugabyteDB Anywhere Create Backup Schedule Async"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Restore from a Backup V2",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/restore",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Restore from a backup V2. Running restore preflight before calling actual restore is recommended."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Advanced Restore Preflight Checks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/restore/advanced_restore_preflight",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "WARNING: This is a preview API that could change. Advanced restore preflight checks. Recommended to run before actual restore to retrieve the metadata associated with the backup, as well as check for conflicts with existing keyspaces. Additionally, this checks for unsupported tablespaces. In case of restore to PIT this checks whether backup can restore to the timestamp provided, fails otherwise."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere List Backup Restores (paginated)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/restore/page",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "YugabyteDB Anywhere List Backup Restores (paginated)"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Restore Preflight Checks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/restore/preflight",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Restore preflight checks. Recommended to run before actual restore to retrieve the metadata associated with the backup, as well as check for conflicts with existing keyspaces. Additionally, this checks for unsupported tablespaces. In case of restore to PIT this returns the backup from the backup chain which can be restored to the timestamp provided, fails otherwise."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Validate Keyspace and Tables to Restore Against Backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/restore/validate_restorable_keyspace_tables",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "WARNING: This is a preview API that could change. Validate keyspace and tables to Restore against Backup."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere List a Customer's Backups - Deprecated",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/backups",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "<b style=\"color:#ff0000\">Deprecated since YBA version 2.20.0.0.</b></p>Use 'List Backups (paginated) V2' instead."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Restore from a Backup - Deprecated",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/backups/restore",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<b style=\"color:#ff0000\">Deprecated since YBA version 2.20.0.0.</b></p>Use 'Restore from a backup V2' instead."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere List Backups Associated with a Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/backups/tasks/:tUUID",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "tUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "YugabyteDB Anywhere List Backups Associated with a Task"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Create a Multi-table Backup - Deprecated",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/multi_table_backup",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<b style=\"color:#ff0000\">Deprecated since YBA version 2.20.0.0.</b></p>Use BackupsController."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Create a Single-table Backup - Deprecated",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/tables/:tableUUID/create_backup",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "tableUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<b style=\"color:#ff0000\">Deprecated since YBA version 2.20.0.0.</b></p>Use BackupsController."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Get Throttle Params from YB-Controller",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/ybc_throttle_params",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "YugabyteDB Anywhere Get Throttle Params from YB-Controller"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Set Throttle Params in YB-Controller - Deprecated",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/ybc_throttle_params",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<b style=\"color:#ff0000\">Deprecated since YBA version 2025.2.0.0.</b></p>Use 'Set throttle params in YB-Controller( async )' instead."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Create a Universe Backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:customerUUID/universes/:universeUUID/universe_backup",
+            "params": [
+              {
+                "name": "customerUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "universeUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "WARNING: This is a preview API that could change."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Set a Universe's Backup Flag",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/update_backup_state",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "markActive",
+                "value": "true",
+                "type": "query"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Available since YBA version 2.2.0.0."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,143 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YugabyteDB Aeon REST Access Keys Continuous Backup API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Continuous Backup",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Get Continuous Backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/auto-yba-backups",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              }
+            ]
+          },
+          "docs": "Get details of the continuous backup configuration"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Create Continous Backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/auto-yba-backups",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a continuous backup configuration"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Restore Continuous Backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/auto-yba-backups/restore",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Restore a backup from a continuous backup configuration"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Edit Continuous Backup Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/auto-yba-backups/:bUUID",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "bUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Continuous Backup UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit continuous backup config"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Delete Continuous Backup Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/auto-yba-backups/:bUUID",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "bUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Continuous Backup UUID"
+              }
+            ]
+          },
+          "docs": "Delete continuous backup config"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

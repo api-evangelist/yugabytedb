@@ -1,0 +1,278 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YugabyteDB Aeon REST Access Keys User management API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Reset the User's Password",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/reset_password",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "YugabyteDB Anywhere Reset the User's Password"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere List All Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/users",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "email",
+                "value": "null",
+                "type": "query",
+                "description": "Optional email to filter user list"
+              }
+            ]
+          },
+          "docs": "YugabyteDB Anywhere List All Users"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Create a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/users",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "YugabyteDB Anywhere Create a User"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Get a User's Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/users/:uUUID",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "YugabyteDB Anywhere Get a User's Details"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Change a User's Role",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/users/:uUUID",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "role",
+                "value": "example-role",
+                "type": "query"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Deprecated. Use this method instead: setRoleBinding."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Delete a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/users/:uUUID",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Deletes the specified user. Note that you can't delete a customer's primary user."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Change Password - Deprecated",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/users/:uUUID/change_password",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<b style=\"color:#ff0000\">Deprecated since YBA version 2024.1.0.0.</b></p>"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Retrieve OIDC Auth Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/users/:uUUID/oidc_auth_token",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "YugabyteDB Anywhere Retrieve OIDC Auth Token"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Update a User's Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/users/:uUUID/update_profile",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "YugabyteDB Anywhere Update a User's Profile"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

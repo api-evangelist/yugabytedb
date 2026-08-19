@@ -1,0 +1,157 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YugabyteDB Aeon REST Access Keys Node Agents API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Node Agents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere List Node Agents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/node_agents",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "nodeIp",
+                "value": "node-1",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "YugabyteDB Anywhere List Node Agents"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere List Node Agents (paginated)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/node_agents/page",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "YugabyteDB Anywhere List Node Agents (paginated)"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Get Node Agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/node_agents/:nUUID",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "nUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "YugabyteDB Anywhere Get Node Agent"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Reinstall Node Agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/node_agents",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "YugabyteDB Anywhere Reinstall Node Agent"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Download Node Agent Installer or Package",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/node_agents/download",
+            "params": [
+              {
+                "name": "downloadType",
+                "value": "INSTALLER",
+                "type": "query"
+              },
+              {
+                "name": "os",
+                "value": "example-os",
+                "type": "query"
+              },
+              {
+                "name": "arch",
+                "value": "example-arch",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "YugabyteDB Anywhere Download Node Agent Installer or Package"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

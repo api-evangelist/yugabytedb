@@ -1,0 +1,237 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YugabyteDB Aeon REST Access Keys Clusters API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Clusters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "YugabyteDB Aeon List Clusters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/accounts/:accountId/projects/:projectId/clusters",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the YugabyteDB Aeon account."
+              },
+              {
+                "name": "projectId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the project within the account."
+              }
+            ]
+          },
+          "docs": "Returns all clusters within the specified account and project. Each cluster entry includes configuration, state, cloud provider, region placement, and endpoint information."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Aeon Create Cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/accounts/:accountId/projects/:projectId/clusters",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the YugabyteDB Aeon account."
+              },
+              {
+                "name": "projectId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the project within the account."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new YugabyteDB Aeon cluster within the specified account and project. The request body defines the cluster name, cloud provider, region, tier, node configuration, and fault tolerance level."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Aeon Get Cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/accounts/:accountId/projects/:projectId/clusters/:clusterId",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the YugabyteDB Aeon account."
+              },
+              {
+                "name": "projectId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the project within the account."
+              },
+              {
+                "name": "clusterId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the cluster."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific cluster, including its current state, configuration, cloud provider, region, node count, and connection endpoints."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Aeon Update Cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cloud.yugabyte.com/api/public/v1/accounts/:accountId/projects/:projectId/clusters/:clusterId",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the YugabyteDB Aeon account."
+              },
+              {
+                "name": "projectId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the project within the account."
+              },
+              {
+                "name": "clusterId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the cluster."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing cluster, such as scaling node count, changing disk size, or modifying fault tolerance settings."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Aeon Delete Cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.yugabyte.com/api/public/v1/accounts/:accountId/projects/:projectId/clusters/:clusterId",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the YugabyteDB Aeon account."
+              },
+              {
+                "name": "projectId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the project within the account."
+              },
+              {
+                "name": "clusterId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the cluster."
+              }
+            ]
+          },
+          "docs": "Permanently deletes the specified cluster and all its data. This operation is irreversible. All backups associated with the cluster are also deleted."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Aeon Pause Cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/accounts/:accountId/projects/:projectId/clusters/:clusterId/pause",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the YugabyteDB Aeon account."
+              },
+              {
+                "name": "projectId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the project within the account."
+              },
+              {
+                "name": "clusterId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the cluster."
+              }
+            ]
+          },
+          "docs": "Pauses a running cluster to suspend compute billing while retaining all data and configuration. The cluster can be resumed at any time. Only clusters in the ACTIVE state can be paused."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Aeon Resume Cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/accounts/:accountId/projects/:projectId/clusters/:clusterId/resume",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the YugabyteDB Aeon account."
+              },
+              {
+                "name": "projectId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the project within the account."
+              },
+              {
+                "name": "clusterId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the cluster."
+              }
+            ]
+          },
+          "docs": "Resumes a previously paused cluster, restoring it to the ACTIVE state and resuming compute billing. The cluster restores all data and configuration from before the pause."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

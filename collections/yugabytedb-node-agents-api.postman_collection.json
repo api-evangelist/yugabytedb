@@ -1,0 +1,631 @@
+{
+  "item": [
+    {
+      "id": "4cdd4afb-0f96-4098-827d-cb4477ae97a7",
+      "name": "Node Agents",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b9edc4cf-4817-4ceb-b4f1-aef424004c77",
+          "name": "YugabyteDB Anywhere List Node Agents",
+          "request": {
+            "name": "YugabyteDB Anywhere List Node Agents",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "node_agents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "nodeIp",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "c5c9405c-6f3e-4e64-854f-276416fdd916",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "node_agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "nodeIp",
+                      "value": "node-1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"lastError\": {\n      \"code\": \"UNKNOWN_ERROR\",\n      \"originMessage\": \"originMessage\",\n      \"message\": \"message\"\n    },\n    \"versionMatched\": true,\n    \"ip\": \"ip\",\n    \"providerUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"version\": \"version\",\n    \"reachable\": true,\n    \"home\": \"home\",\n    \"universeUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"customerUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"port\": 0,\n    \"name\": \"name\",\n    \"osType\": \"DARWIN\",\n    \"archType\": \"ARM64\",\n    \"state\": \"REGISTERING\",\n    \"config\": {\n      \"certPath\": \"certPath\",\n      \"serverCert\": \"serverCert\",\n      \"offloadable\": true,\n      \"serverKey\": \"serverKey\",\n      \"compressor\": \"compressor\"\n    },\n    \"providerName\": \"providerName\",\n    \"universeName\": \"universeName\",\n    \"updatedAt\": \"2022-12-21 13:07:18+00:00\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80e7b384-da4c-4ad9-bc97-dd184c132e7e",
+          "name": "YugabyteDB Anywhere List Node Agents (paginated)",
+          "request": {
+            "name": "YugabyteDB Anywhere List Node Agents (paginated)",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "node_agents",
+                "page"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"direction\": \"<string>\",\n  \"filter\": {\n    \"cloudType\": \"<string>\",\n    \"nodeIps\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"providerUuid\": \"<uuid>\",\n    \"regionUuid\": \"<uuid>\",\n    \"universeUuid\": \"<uuid>\",\n    \"zoneUuid\": \"<uuid>\"\n  },\n  \"limit\": \"<integer>\",\n  \"needTotalCount\": \"<boolean>\",\n  \"offset\": \"<integer>\",\n  \"sortBy\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2056b35f-d650-4d14-b7cc-f1e64a517f46",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "node_agents",
+                    "page"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"universeUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"regionUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"cloudType\": \"unknown\",\n    \"zoneUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"providerUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"nodeIps\": [\n      \"nodeIps\",\n      \"nodeIps\"\n    ]\n  },\n  \"offset\": 6,\n  \"needTotalCount\": true,\n  \"limit\": 0,\n  \"sortBy\": \"uuid\",\n  \"direction\": \"ASC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entities\": [\n    {\n      \"lastError\": {\n        \"code\": \"UNKNOWN_ERROR\",\n        \"originMessage\": \"originMessage\",\n        \"message\": \"message\"\n      },\n      \"versionMatched\": true,\n      \"ip\": \"ip\",\n      \"providerUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"version\": \"version\",\n      \"reachable\": true,\n      \"home\": \"home\",\n      \"universeUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"customerUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"port\": 0,\n      \"name\": \"name\",\n      \"osType\": \"DARWIN\",\n      \"archType\": \"ARM64\",\n      \"state\": \"REGISTERING\",\n      \"config\": {\n        \"certPath\": \"certPath\",\n        \"serverCert\": \"serverCert\",\n        \"offloadable\": true,\n        \"serverKey\": \"serverKey\",\n        \"compressor\": \"compressor\"\n      },\n      \"providerName\": \"providerName\",\n      \"universeName\": \"universeName\",\n      \"updatedAt\": \"2022-12-21 13:07:18+00:00\"\n    },\n    {\n      \"lastError\": {\n        \"code\": \"UNKNOWN_ERROR\",\n        \"originMessage\": \"originMessage\",\n        \"message\": \"message\"\n      },\n      \"versionMatched\": true,\n      \"ip\": \"ip\",\n      \"providerUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"version\": \"version\",\n      \"reachable\": true,\n      \"home\": \"home\",\n      \"universeUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"customerUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"port\": 0,\n      \"name\": \"name\",\n      \"osType\": \"DARWIN\",\n      \"archType\": \"ARM64\",\n      \"state\": \"REGISTERING\",\n      \"config\": {\n        \"certPath\": \"certPath\",\n        \"serverCert\": \"serverCert\",\n        \"offloadable\": true,\n        \"serverKey\": \"serverKey\",\n        \"compressor\": \"compressor\"\n      },\n      \"providerName\": \"providerName\",\n      \"universeName\": \"universeName\",\n      \"updatedAt\": \"2022-12-21 13:07:18+00:00\"\n    }\n  ],\n  \"hasPrev\": true,\n  \"hasNext\": true,\n  \"totalCount\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e8974c79-3d5c-4876-81cd-3f07bc7deaf5",
+          "name": "YugabyteDB Anywhere Get Node Agent",
+          "request": {
+            "name": "YugabyteDB Anywhere Get Node Agent",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "node_agents",
+                ":nUUID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "nUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "b3c6fd5d-c8fd-4b8b-b5b4-c21243c0e409",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "node_agents",
+                    ":nUUID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "nUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"lastError\": {\n    \"code\": \"UNKNOWN_ERROR\",\n    \"originMessage\": \"originMessage\",\n    \"message\": \"message\"\n  },\n  \"versionMatched\": true,\n  \"ip\": \"ip\",\n  \"providerUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"version\": \"version\",\n  \"reachable\": true,\n  \"home\": \"home\",\n  \"universeUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"customerUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"port\": 0,\n  \"name\": \"name\",\n  \"osType\": \"DARWIN\",\n  \"archType\": \"ARM64\",\n  \"state\": \"REGISTERING\",\n  \"config\": {\n    \"certPath\": \"certPath\",\n    \"serverCert\": \"serverCert\",\n    \"offloadable\": true,\n    \"serverKey\": \"serverKey\",\n    \"compressor\": \"compressor\"\n  },\n  \"providerName\": \"providerName\",\n  \"universeName\": \"universeName\",\n  \"updatedAt\": \"2022-12-21 13:07:18+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8d2e8113-1f2e-4801-bbb3-8a320aa757c7",
+          "name": "YugabyteDB Anywhere Reinstall Node Agent",
+          "request": {
+            "name": "YugabyteDB Anywhere Reinstall Node Agent",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "universes",
+                ":uniUUID",
+                "node_agents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uniUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nodeNames\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cf781a77-e449-439b-a4b1-c05c00388248",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "universes",
+                    ":uniUUID",
+                    "node_agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uniUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nodeNames\": [\n    \"nodeNames\",\n    \"nodeNames\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"lastError\": {\n    \"code\": \"UNKNOWN_ERROR\",\n    \"originMessage\": \"originMessage\",\n    \"message\": \"message\"\n  },\n  \"ip\": \"ip\",\n  \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"version\": \"version\",\n  \"home\": \"home\",\n  \"customerUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"port\": 0,\n  \"name\": \"name\",\n  \"osType\": \"DARWIN\",\n  \"archType\": \"ARM64\",\n  \"state\": \"REGISTERING\",\n  \"config\": {\n    \"certPath\": \"certPath\",\n    \"serverCert\": \"serverCert\",\n    \"offloadable\": true,\n    \"serverKey\": \"serverKey\",\n    \"compressor\": \"compressor\"\n  },\n  \"updatedAt\": \"2022-12-21 13:07:18+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b4785deb-f97a-44d9-bba5-2b2fdbb490e0",
+          "name": "YugabyteDB Anywhere Download Node Agent Installer or Package",
+          "request": {
+            "name": "YugabyteDB Anywhere Download Node Agent Installer or Package",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "node_agents",
+                "download"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "downloadType",
+                  "value": "INSTALLER"
+                },
+                {
+                  "disabled": false,
+                  "key": "os",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "arch",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/gzip"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "f72454ab-2b18-4076-85c3-010b2a12bdf5",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "node_agents",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "downloadType",
+                      "value": "INSTALLER"
+                    },
+                    {
+                      "key": "os",
+                      "value": "example-os"
+                    },
+                    {
+                      "key": "arch",
+                      "value": "example-arch"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/gzip"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/gzip"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cloud.yugabyte.com/api/public/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5747d7d5-77d5-4720-8507-271478e20cfc",
+    "name": "YugabyteDB Aeon REST Access Keys Node Agents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+      "type": "text/plain"
+    }
+  }
+}

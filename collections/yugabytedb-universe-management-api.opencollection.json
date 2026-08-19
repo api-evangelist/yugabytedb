@@ -1,0 +1,369 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YugabyteDB Aeon REST Access Keys Universe management API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Universe management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere List Universes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "name",
+                "value": "null",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Available since YBA version 2.2.0.0."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Get a Universe",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Available since YBA version 2.2.0.0."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Delete a Universe",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "isForceDelete",
+                "value": "false",
+                "type": "query"
+              },
+              {
+                "name": "isDeleteBackups",
+                "value": "false",
+                "type": "query"
+              },
+              {
+                "name": "isDeleteAssociatedCerts",
+                "value": "false",
+                "type": "query"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Available since YBA version 2.2.0.0."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Configure Alerts for a Universe",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/config_alerts",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "<b style=\"color:#ff0000\">Deprecated since YBA version 2.20.5.0.</b> Deprcated since YBA version 2.20.5.0. Use 'Create maintenance window' API instead."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Flag a Universe as Helm 3-compatible - Deprecated",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/mark_helm3_compatible",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "<b style=\"color:#ff0000\">Deprecated since YBA version 2.20.0.0.</b></p>"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Pause a Universe",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/pause",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Available since YBA version 2.6.0.0."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Resume a Paused Universe",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/resume",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Available since YBA version 2.6.0.0."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Set a Universe's Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/set_key",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Available since YBA version 2.2.0.0."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Reset Universe Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/setup_universe_2dc",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "YbaApi Internal."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Set a Universe's Backup Flag",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/update_backup_state",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "markActive",
+                "value": "true",
+                "type": "query"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Available since YBA version 2.2.0.0."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Update Load Balancer Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/update_lb_config",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "WARNING: This is a preview API that could change."
+        },
+        {
+          "info": {
+            "name": "Toggle a universe's TLS state",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/customers/:cUUID/universes/:uniUUID/toggle_tls",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "uniUUID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Enable or disable node-to-node and client-to-node encryption. Supports rolling and non-rolling universe upgrades."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

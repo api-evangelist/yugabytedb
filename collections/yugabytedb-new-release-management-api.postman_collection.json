@@ -1,0 +1,647 @@
+{
+  "item": [
+    {
+      "id": "5bed45d4-1e07-4771-a77f-ed5188f56e82",
+      "name": "New Release management",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0b44730a-574b-4e31-af57-1aded9eb044c",
+          "name": "YugabyteDB Anywhere List Releases",
+          "request": {
+            "name": "YugabyteDB Anywhere List Releases",
+            "description": {
+              "content": "WARNING: This is a preview API that could change: list ybdb releases",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "ybdb_release"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "deployment_type",
+                  "value": "null"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "c9e90746-ae17-48cd-85e2-7032cad015a3",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "ybdb_release"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "deployment_type",
+                      "value": "null"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"release_notes\": \"release_notes\",\n    \"release_uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"universes\": [\n      {\n        \"name\": \"name\",\n        \"creation_date\": \"2024-07-28 01:02:03+00:00\",\n        \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n      },\n      {\n        \"name\": \"name\",\n        \"creation_date\": \"2024-07-28 01:02:03+00:00\",\n        \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n      }\n    ],\n    \"release_type\": \"release_type\",\n    \"release_date_msecs\": 0,\n    \"state\": \"state\",\n    \"version\": \"version\",\n    \"release_tag\": \"release_tag\",\n    \"yb_type\": \"yb_type\",\n    \"artifacts\": [\n      {\n        \"package_url\": \"package_url\",\n        \"sha256\": \"sha256\",\n        \"package_file_id\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n        \"platform\": \"LINUX\",\n        \"architecture\": \"x86_64\"\n      },\n      {\n        \"package_url\": \"package_url\",\n        \"sha256\": \"sha256\",\n        \"package_file_id\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n        \"platform\": \"LINUX\",\n        \"architecture\": \"x86_64\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2f063adb-03c6-4eb6-82d8-5f5ee1c4fdf0",
+          "name": "YugabyteDB Anywhere Create a Release",
+          "request": {
+            "name": "YugabyteDB Anywhere Create a Release",
+            "description": {
+              "content": "WARNING: This is a preview API that could change: create a ybdb release",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "ybdb_release"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"artifacts\": [\n    {\n      \"architecture\": \"<string>\",\n      \"package_file_id\": \"<uuid>\",\n      \"package_url\": \"<string>\",\n      \"platform\": \"<string>\",\n      \"sha256\": \"<string>\"\n    },\n    {\n      \"architecture\": \"<string>\",\n      \"package_file_id\": \"<uuid>\",\n      \"package_url\": \"<string>\",\n      \"platform\": \"<string>\",\n      \"sha256\": \"<string>\"\n    }\n  ],\n  \"release_date_msecs\": \"<long>\",\n  \"release_notes\": \"<string>\",\n  \"release_tag\": \"<string>\",\n  \"release_type\": \"<string>\",\n  \"release_uuid\": \"<uuid>\",\n  \"version\": \"<string>\",\n  \"yb_type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2046576c-c6c3-4c6d-b2b9-8e5c2a3f2e4a",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "ybdb_release"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"release_notes\": \"release_notes\",\n  \"release_uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"release_type\": \"release_type\",\n  \"release_date_msecs\": 0,\n  \"version\": \"version\",\n  \"release_tag\": \"release_tag\",\n  \"yb_type\": \"yb_type\",\n  \"artifacts\": [\n    {\n      \"package_url\": \"package_url\",\n      \"sha256\": \"sha256\",\n      \"package_file_id\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"platform\": \"LINUX\",\n      \"architecture\": \"x86_64\"\n    },\n    {\n      \"package_url\": \"package_url\",\n      \"sha256\": \"sha256\",\n      \"package_file_id\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"platform\": \"LINUX\",\n      \"architecture\": \"x86_64\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resourceUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c608ef1b-ddb8-43c2-b67d-a24e95dd8c24",
+          "name": "YugabyteDB Anywhere Delete a Release",
+          "request": {
+            "name": "YugabyteDB Anywhere Delete a Release",
+            "description": {
+              "content": "WARNING: This is a preview API that could change: delete a ybdb release",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "ybdb_release",
+                ":rUUID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "rUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE"
+          },
+          "response": [
+            {
+              "id": "a89a5ee4-29c6-4fe2-a511-3249e14783eb",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "ybdb_release",
+                    ":rUUID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "rUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c7997f76-ec6d-4626-b235-367499ebcb2a",
+          "name": "YugabyteDB Anywhere Get a Release",
+          "request": {
+            "name": "YugabyteDB Anywhere Get a Release",
+            "description": {
+              "content": "WARNING: This is a preview API that could change: get a specific ybdb release",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "ybdb_release",
+                ":rUUID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "rUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "cf7638d8-f329-4394-8265-c3083bbfe3b6",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "ybdb_release",
+                    ":rUUID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "rUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"release_notes\": \"release_notes\",\n  \"release_uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"universes\": [\n    {\n      \"name\": \"name\",\n      \"creation_date\": \"2024-07-28 01:02:03+00:00\",\n      \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n    },\n    {\n      \"name\": \"name\",\n      \"creation_date\": \"2024-07-28 01:02:03+00:00\",\n      \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n    }\n  ],\n  \"release_type\": \"release_type\",\n  \"release_date_msecs\": 0,\n  \"state\": \"state\",\n  \"version\": \"version\",\n  \"release_tag\": \"release_tag\",\n  \"yb_type\": \"yb_type\",\n  \"artifacts\": [\n    {\n      \"package_url\": \"package_url\",\n      \"sha256\": \"sha256\",\n      \"package_file_id\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"platform\": \"LINUX\",\n      \"architecture\": \"x86_64\"\n    },\n    {\n      \"package_url\": \"package_url\",\n      \"sha256\": \"sha256\",\n      \"package_file_id\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"platform\": \"LINUX\",\n      \"architecture\": \"x86_64\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "89628d7c-183d-48bb-a86c-60a5303c369e",
+          "name": "YugabyteDB Anywhere Update a Release",
+          "request": {
+            "name": "YugabyteDB Anywhere Update a Release",
+            "description": {
+              "content": "WARNING: This is a preview API that could change: update or edit a ybdb release",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "ybdb_release",
+                ":rUUID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "rUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"artifacts\": [\n    {\n      \"architecture\": \"<string>\",\n      \"package_file_id\": \"<uuid>\",\n      \"package_url\": \"<string>\",\n      \"platform\": \"<string>\",\n      \"sha256\": \"<string>\"\n    },\n    {\n      \"architecture\": \"<string>\",\n      \"package_file_id\": \"<uuid>\",\n      \"package_url\": \"<string>\",\n      \"platform\": \"<string>\",\n      \"sha256\": \"<string>\"\n    }\n  ],\n  \"release_date\": \"<long>\",\n  \"release_notes\": \"<string>\",\n  \"release_tag\": \"<string>\",\n  \"state\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6eb3eea0-512d-4cd7-8b67-532ec506f9b1",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "ybdb_release",
+                    ":rUUID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "rUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"release_notes\": \"release_notes\",\n  \"release_date\": 0,\n  \"state\": \"state\",\n  \"release_tag\": \"release_tag\",\n  \"artifacts\": [\n    {\n      \"package_url\": \"package_url\",\n      \"sha256\": \"sha256\",\n      \"package_file_id\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"platform\": \"LINUX\",\n      \"architecture\": \"x86_64\"\n    },\n    {\n      \"package_url\": \"package_url\",\n      \"sha256\": \"sha256\",\n      \"package_file_id\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"platform\": \"LINUX\",\n      \"architecture\": \"x86_64\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cloud.yugabyte.com/api/public/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "906e5afd-34e2-4faa-b52d-2a1f74023dad",
+    "name": "YugabyteDB Aeon REST Access Keys New Release management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+      "type": "text/plain"
+    }
+  }
+}

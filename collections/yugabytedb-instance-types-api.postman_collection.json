@@ -1,0 +1,896 @@
+{
+  "item": [
+    {
+      "id": "48f2dcb7-a11c-41e9-9fcf-edc365eced3a",
+      "name": "Instance types",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a4ff08d4-fb17-4c20-b267-6cb2763089a1",
+          "name": "YugabyteDB Anywhere List a Provider's Instance Types",
+          "request": {
+            "name": "YugabyteDB Anywhere List a Provider's Instance Types",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "providers",
+                ":pUUID",
+                "instance_types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "zone",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "zone",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "arch",
+                  "value": "null"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "pUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "4bdbad84-970b-4d0d-9927-edfff3e4f10b",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "providers",
+                    ":pUUID",
+                    "instance_types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "zone",
+                      "value": "us-east-1a"
+                    },
+                    {
+                      "key": "arch",
+                      "value": "null"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"numCores\": 1.4658129805029452,\n    \"idKey\": {\n      \"instanceTypeCode\": \"instanceTypeCode\",\n      \"providerUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n    },\n    \"providerCode\": \"providerCode\",\n    \"memSizeGB\": 6.027456183070403,\n    \"instanceTypeCode\": \"instanceTypeCode\",\n    \"instanceTypeDetails\": {\n      \"tenancy\": \"Shared\",\n      \"arch\": \"x86_64\",\n      \"volumeDetailsList\": [\n        {\n          \"volumeSizeGB\": 0,\n          \"volumeType\": \"EBS\",\n          \"mountPath\": \"mountPath\"\n        },\n        {\n          \"volumeSizeGB\": 0,\n          \"volumeType\": \"EBS\",\n          \"mountPath\": \"mountPath\"\n        }\n      ]\n    },\n    \"active\": true,\n    \"providerUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ad6b465-f799-4f5c-a9e9-872d3b698900",
+              "name": "If there was a server or database issue when listing the instance types",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "providers",
+                    ":pUUID",
+                    "instance_types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "zone",
+                      "value": "us-east-1a"
+                    },
+                    {
+                      "key": "arch",
+                      "value": "null"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"requestUri\": \"/customers/8918921-af3782-633de/universe/8173ab-fd2453/create\",\n  \"error\": \"There was a problem creating the universe\",\n  \"httpMethod\": \"POST\",\n  \"errorJson\": \"{ \\\"foo\\\" : \\\"bar\\\", \\\"baz\\\" : [1, 2, 3] }\",\n  \"requestJson\": \"{ \\\"foo\\\" : \\\"bar\\\", \\\"baz\\\" : [1, 2, 3] }\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "461657d3-21d1-44d6-9cf4-c1cc402b782d",
+          "name": "YugabyteDB Anywhere Create an Instance Type",
+          "request": {
+            "name": "YugabyteDB Anywhere Create an Instance Type",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "providers",
+                ":pUUID",
+                "instance_types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "pUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idKey\": {\n    \"instanceTypeCode\": \"<string>\",\n    \"providerUuid\": \"<uuid>\"\n  },\n  \"instanceTypeDetails\": {\n    \"arch\": \"<string>\",\n    \"tenancy\": \"<string>\",\n    \"volumeDetailsList\": [\n      {\n        \"mountPath\": \"<string>\",\n        \"volumeSizeGB\": \"<integer>\",\n        \"volumeType\": \"<string>\"\n      },\n      {\n        \"mountPath\": \"<string>\",\n        \"volumeSizeGB\": \"<integer>\",\n        \"volumeType\": \"<string>\"\n      }\n    ]\n  },\n  \"memSizeGB\": \"<double>\",\n  \"numCores\": \"<double>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b4618678-c59c-45fc-b38a-e8bee54f8e93",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "providers",
+                    ":pUUID",
+                    "instance_types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"numCores\": 6.027456183070403,\n  \"idKey\": {\n    \"instanceTypeCode\": \"instanceTypeCode\",\n    \"providerUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n  },\n  \"memSizeGB\": 0.8008281904610115,\n  \"instanceTypeCode\": \"instanceTypeCode\",\n  \"instanceTypeDetails\": {\n    \"tenancy\": \"Shared\",\n    \"arch\": \"x86_64\",\n    \"volumeDetailsList\": [\n      {\n        \"volumeSizeGB\": 0,\n        \"volumeType\": \"EBS\",\n        \"mountPath\": \"mountPath\"\n      },\n      {\n        \"volumeSizeGB\": 0,\n        \"volumeType\": \"EBS\",\n        \"mountPath\": \"mountPath\"\n      }\n    ]\n  },\n  \"active\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"numCores\": 1.4658129805029452,\n  \"idKey\": {\n    \"instanceTypeCode\": \"instanceTypeCode\",\n    \"providerUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n  },\n  \"providerCode\": \"providerCode\",\n  \"memSizeGB\": 6.027456183070403,\n  \"instanceTypeCode\": \"instanceTypeCode\",\n  \"instanceTypeDetails\": {\n    \"tenancy\": \"Shared\",\n    \"arch\": \"x86_64\",\n    \"volumeDetailsList\": [\n      {\n        \"volumeSizeGB\": 0,\n        \"volumeType\": \"EBS\",\n        \"mountPath\": \"mountPath\"\n      },\n      {\n        \"volumeSizeGB\": 0,\n        \"volumeType\": \"EBS\",\n        \"mountPath\": \"mountPath\"\n      }\n    ]\n  },\n  \"active\": true,\n  \"providerUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e24b41a6-fa49-4f00-b33b-90205010f108",
+          "name": "YugabyteDB Anywhere Delete an Instance Type",
+          "request": {
+            "name": "YugabyteDB Anywhere Delete an Instance Type",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "providers",
+                ":pUUID",
+                "instance_types",
+                ":code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "pUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "code",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE"
+          },
+          "response": [
+            {
+              "id": "64cdc411-8858-461d-8b4c-b4698ce409ac",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "providers",
+                    ":pUUID",
+                    "instance_types",
+                    ":code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a1ad014-37dd-457f-be7b-1a96f9e22231",
+          "name": "YugabyteDB Anywhere Get Details of an Instance Type",
+          "request": {
+            "name": "YugabyteDB Anywhere Get Details of an Instance Type",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "providers",
+                ":pUUID",
+                "instance_types",
+                ":code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "pUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "code",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "31750e91-33fe-45a7-8712-0b5e32f44669",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "providers",
+                    ":pUUID",
+                    "instance_types",
+                    ":code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "pUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"numCores\": 1.4658129805029452,\n  \"idKey\": {\n    \"instanceTypeCode\": \"instanceTypeCode\",\n    \"providerUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n  },\n  \"providerCode\": \"providerCode\",\n  \"memSizeGB\": 6.027456183070403,\n  \"instanceTypeCode\": \"instanceTypeCode\",\n  \"instanceTypeDetails\": {\n    \"tenancy\": \"Shared\",\n    \"arch\": \"x86_64\",\n    \"volumeDetailsList\": [\n      {\n        \"volumeSizeGB\": 0,\n        \"volumeType\": \"EBS\",\n        \"mountPath\": \"mountPath\"\n      },\n      {\n        \"volumeSizeGB\": 0,\n        \"volumeType\": \"EBS\",\n        \"mountPath\": \"mountPath\"\n      }\n    ]\n  },\n  \"active\": true,\n  \"providerUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8d3f2d0c-3782-4e44-b700-66621625e910",
+          "name": "YugabyteDB Anywhere List Supported Azure Disk Types",
+          "request": {
+            "name": "YugabyteDB Anywhere List Supported Azure Disk Types",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "metadata",
+                "azu_types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "9ab75bce-f8da-416d-ad07-187258a4a2e3",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "metadata",
+                    "azu_types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"IO1\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2910fdeb-51ca-4c66-b524-7b291fbe171c",
+          "name": "YugabyteDB Anywhere List Supported EBS Volume Types",
+          "request": {
+            "name": "YugabyteDB Anywhere List Supported EBS Volume Types",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "metadata",
+                "ebs_types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "90abffc1-213d-4a9e-8fb7-b7d8900ef485",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "metadata",
+                    "ebs_types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"IO1\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9d09082d-490c-482d-90eb-5b8128a55e9c",
+          "name": "YugabyteDB Anywhere List Supported GCP Disk Types",
+          "request": {
+            "name": "YugabyteDB Anywhere List Supported GCP Disk Types",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "metadata",
+                "gcp_types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "0133ac79-efe1-44ef-bec6-9d1dcc1dffcf",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "metadata",
+                    "gcp_types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"IO1\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cloud.yugabyte.com/api/public/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "10db3959-1ddd-42f0-b639-d59358dee3ab",
+    "name": "YugabyteDB Aeon REST Access Keys Instance types API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+      "type": "text/plain"
+    }
+  }
+}

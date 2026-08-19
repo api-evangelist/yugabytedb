@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YugabyteDB Aeon REST Access Keys ReadReplicas API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ReadReplicas",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "YugabyteDB Aeon List Read Replicas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/accounts/:accountId/projects/:projectId/clusters/:clusterId/read-replicas",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the YugabyteDB Aeon account."
+              },
+              {
+                "name": "projectId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the project within the account."
+              },
+              {
+                "name": "clusterId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the cluster."
+              }
+            ]
+          },
+          "docs": "Returns all read replicas configured for the specified cluster. Read replicas allow routing read traffic to geographically distributed nodes to reduce latency for remote clients."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Aeon Create Read Replica",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/accounts/:accountId/projects/:projectId/clusters/:clusterId/read-replicas",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the YugabyteDB Aeon account."
+              },
+              {
+                "name": "projectId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the project within the account."
+              },
+              {
+                "name": "clusterId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the cluster."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a read replica to the specified cluster in the configured cloud region. Read replicas serve read-only traffic and are asynchronously replicated from the primary cluster."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Aeon Delete Read Replica",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.yugabyte.com/api/public/v1/accounts/:accountId/projects/:projectId/clusters/:clusterId/read-replicas",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the YugabyteDB Aeon account."
+              },
+              {
+                "name": "projectId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the project within the account."
+              },
+              {
+                "name": "clusterId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the cluster."
+              }
+            ]
+          },
+          "docs": "Removes all read replicas from the specified cluster. This operation is irreversible and immediately terminates read replica nodes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,934 @@
+{
+  "item": [
+    {
+      "id": "9d23291f-24e7-4033-b5e0-ad164a769c16",
+      "name": "Support Bundle management",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c29f2c8b-8ac8-4f97-aeac-90de15331716",
+          "name": "YugabyteDB Anywhere List All Components Available in Support Bundle",
+          "request": {
+            "name": "YugabyteDB Anywhere List All Components Available in Support Bundle",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "support_bundle",
+                "components"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "5463a1fc-b06f-4f14-8685-6936f73cfaa7",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "support_bundle",
+                    "components"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"UniverseLogs\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "98566b3e-11ac-46ce-b73a-9dad701f1c14",
+          "name": "YugabyteDB Anywhere List All Support Bundles from a Universe",
+          "request": {
+            "name": "YugabyteDB Anywhere List All Support Bundles from a Universe",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "universes",
+                ":uniUUID",
+                "support_bundle"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uniUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "c28e96ca-368a-4914-8915-2994b612a136",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "universes",
+                    ":uniUUID",
+                    "support_bundle"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uniUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"path\": \"path\",\n    \"sizeInBytes\": 5,\n    \"scopeUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"bundleDetails\": {\n      \"maxNumRecentCores\": 6,\n      \"components\": [\n        \"UniverseLogs\",\n        \"UniverseLogs\"\n      ],\n      \"paDumpStartDate\": \"2022-12-12 13:07:18+00:00\",\n      \"promDumpEndDate\": \"2022-12-12 13:07:18+00:00\",\n      \"promDumpStartDate\": \"2022-12-12 13:07:18+00:00\",\n      \"promMetricsFormat\": \"PROMQL_JSON\",\n      \"paDumpEndDate\": \"2022-12-12 13:07:18+00:00\",\n      \"paMetricsFormat\": \"PROMQL_JSON\",\n      \"promMetricsStepSec\": 1,\n      \"prometheusMetricsTypes\": [\n        \"MASTER_EXPORT\",\n        \"MASTER_EXPORT\"\n      ],\n      \"maxCoreFileSize\": 0\n    },\n    \"endDate\": \"2022-12-12 13:07:18+00:00\",\n    \"bundleUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"creationDate\": \"2022-12-12 13:07:18+00:00\",\n    \"startDate\": \"2022-12-12 13:07:18+00:00\",\n    \"expirationDate\": \"2022-12-12 13:07:18+00:00\",\n    \"status\": \"Running\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "42a1e7a3-16b8-4b94-bc6e-e65a20dc0bda",
+          "name": "YugabyteDB Anywhere Create Support Bundle for Specific Universe",
+          "request": {
+            "name": "YugabyteDB Anywhere Create Support Bundle for Specific Universe",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "universes",
+                ":uniUUID",
+                "support_bundle"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uniUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"components\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"endDate\": \"<dateTime>\",\n  \"startDate\": \"<dateTime>\",\n  \"batchDurationPromDumpMins\": \"<integer>\",\n  \"filterPgAuditLogs\": \"<boolean>\",\n  \"maxCoreFileSize\": \"<long>\",\n  \"maxNumRecentCores\": \"<integer>\",\n  \"paDumpEndDate\": \"<dateTime>\",\n  \"paDumpStartDate\": \"<dateTime>\",\n  \"paMetricsFormat\": \"<string>\",\n  \"promDumpDownSample\": \"<boolean>\",\n  \"promDumpEndDate\": \"<dateTime>\",\n  \"promDumpStartDate\": \"<dateTime>\",\n  \"promExportType\": \"<string>\",\n  \"promMetricsFormat\": \"<string>\",\n  \"promQueries\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  },\n  \"prometheusMetricsTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"stepPromDumpSecs\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c9264365-893d-4bcf-9922-8049bf19f86f",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "universes",
+                    ":uniUUID",
+                    "support_bundle"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uniUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"maxNumRecentCores\": 1,\n  \"components\": [\n    \"UniverseLogs\",\n    \"UniverseLogs\"\n  ],\n  \"paDumpStartDate\": \"2022-12-12T13:07:18+00:00\",\n  \"promDumpEndDate\": \"2022-12-12T13:07:18+00:00\",\n  \"promDumpStartDate\": \"2022-12-12T13:07:18+00:00\",\n  \"endDate\": \"2022-12-12T13:07:18+00:00\",\n  \"filterPgAuditLogs\": true,\n  \"prometheusMetricsTypes\": [\n    \"MASTER_EXPORT\",\n    \"MASTER_EXPORT\"\n  ],\n  \"promDumpDownSample\": true,\n  \"promQueries\": {\n    \"key\": \"promQueries\"\n  },\n  \"stepPromDumpSecs\": 5,\n  \"batchDurationPromDumpMins\": 0,\n  \"promMetricsFormat\": \"PROMQL_JSON\",\n  \"paDumpEndDate\": \"2022-12-12T13:07:18+00:00\",\n  \"paMetricsFormat\": \"PROMQL_JSON\",\n  \"startDate\": \"2022-12-12T13:07:18+00:00\",\n  \"maxCoreFileSize\": 6,\n  \"promExportType\": \"PROMQL\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"taskUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"resourceUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c91adf1-4df4-473f-80d6-28caaae6b823",
+          "name": "YugabyteDB Anywhere Estimate Support Bundle Size for Specific Universe",
+          "request": {
+            "name": "YugabyteDB Anywhere Estimate Support Bundle Size for Specific Universe",
+            "description": {
+              "content": "YbaApi Internal.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "universes",
+                ":uniUUID",
+                "support_bundle",
+                "estimate_size"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uniUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"components\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"endDate\": \"<dateTime>\",\n  \"startDate\": \"<dateTime>\",\n  \"batchDurationPromDumpMins\": \"<integer>\",\n  \"filterPgAuditLogs\": \"<boolean>\",\n  \"maxCoreFileSize\": \"<long>\",\n  \"maxNumRecentCores\": \"<integer>\",\n  \"paDumpEndDate\": \"<dateTime>\",\n  \"paDumpStartDate\": \"<dateTime>\",\n  \"paMetricsFormat\": \"<string>\",\n  \"promDumpDownSample\": \"<boolean>\",\n  \"promDumpEndDate\": \"<dateTime>\",\n  \"promDumpStartDate\": \"<dateTime>\",\n  \"promExportType\": \"<string>\",\n  \"promMetricsFormat\": \"<string>\",\n  \"promQueries\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  },\n  \"prometheusMetricsTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"stepPromDumpSecs\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2e9dfa96-dc18-402c-adcd-f06c4b0dc64f",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "universes",
+                    ":uniUUID",
+                    "support_bundle",
+                    "estimate_size"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uniUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"maxNumRecentCores\": 1,\n  \"components\": [\n    \"UniverseLogs\",\n    \"UniverseLogs\"\n  ],\n  \"paDumpStartDate\": \"2022-12-12T13:07:18+00:00\",\n  \"promDumpEndDate\": \"2022-12-12T13:07:18+00:00\",\n  \"promDumpStartDate\": \"2022-12-12T13:07:18+00:00\",\n  \"endDate\": \"2022-12-12T13:07:18+00:00\",\n  \"filterPgAuditLogs\": true,\n  \"prometheusMetricsTypes\": [\n    \"MASTER_EXPORT\",\n    \"MASTER_EXPORT\"\n  ],\n  \"promDumpDownSample\": true,\n  \"promQueries\": {\n    \"key\": \"promQueries\"\n  },\n  \"stepPromDumpSecs\": 5,\n  \"batchDurationPromDumpMins\": 0,\n  \"promMetricsFormat\": \"PROMQL_JSON\",\n  \"paDumpEndDate\": \"2022-12-12T13:07:18+00:00\",\n  \"paMetricsFormat\": \"PROMQL_JSON\",\n  \"startDate\": \"2022-12-12T13:07:18+00:00\",\n  \"maxCoreFileSize\": 6,\n  \"promExportType\": \"PROMQL\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"key\": {\n      \"key\": 0\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "685f67d8-82c2-415b-a0a3-e8eab50aaef1",
+          "name": "YugabyteDB Anywhere Delete a Support Bundle",
+          "request": {
+            "name": "YugabyteDB Anywhere Delete a Support Bundle",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "universes",
+                ":uniUUID",
+                "support_bundle",
+                ":sbUUID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uniUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "sbUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE"
+          },
+          "response": [
+            {
+              "id": "076b8579-ba3c-4d51-ac51-c712c84aed3b",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "universes",
+                    ":uniUUID",
+                    "support_bundle",
+                    ":sbUUID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uniUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "sbUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6753bc4f-e548-4343-a440-b4d40f6a8e29",
+          "name": "YugabyteDB Anywhere Get a Support Bundle from a Universe",
+          "request": {
+            "name": "YugabyteDB Anywhere Get a Support Bundle from a Universe",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "universes",
+                ":uniUUID",
+                "support_bundle",
+                ":sbUUID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uniUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "sbUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "baa7c9a8-d4db-4bd6-b92a-d7000b04026e",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "universes",
+                    ":uniUUID",
+                    "support_bundle",
+                    ":sbUUID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uniUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "sbUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"path\": \"path\",\n  \"sizeInBytes\": 5,\n  \"scopeUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"bundleDetails\": {\n    \"maxNumRecentCores\": 6,\n    \"components\": [\n      \"UniverseLogs\",\n      \"UniverseLogs\"\n    ],\n    \"paDumpStartDate\": \"2022-12-12 13:07:18+00:00\",\n    \"promDumpEndDate\": \"2022-12-12 13:07:18+00:00\",\n    \"promDumpStartDate\": \"2022-12-12 13:07:18+00:00\",\n    \"promMetricsFormat\": \"PROMQL_JSON\",\n    \"paDumpEndDate\": \"2022-12-12 13:07:18+00:00\",\n    \"paMetricsFormat\": \"PROMQL_JSON\",\n    \"promMetricsStepSec\": 1,\n    \"prometheusMetricsTypes\": [\n      \"MASTER_EXPORT\",\n      \"MASTER_EXPORT\"\n    ],\n    \"maxCoreFileSize\": 0\n  },\n  \"endDate\": \"2022-12-12 13:07:18+00:00\",\n  \"bundleUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"creationDate\": \"2022-12-12 13:07:18+00:00\",\n  \"startDate\": \"2022-12-12 13:07:18+00:00\",\n  \"expirationDate\": \"2022-12-12 13:07:18+00:00\",\n  \"status\": \"Running\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3985b5a0-4e38-4d1b-ad26-c36258e4b57c",
+          "name": "YugabyteDB Anywhere Download Support Bundle",
+          "request": {
+            "name": "YugabyteDB Anywhere Download Support Bundle",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "universes",
+                ":uniUUID",
+                "support_bundle",
+                ":sbUUID",
+                "download"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uniUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "sbUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/x-compressed"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "03a2b106-058f-4aff-b477-14e611e4b446",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "universes",
+                    ":uniUUID",
+                    "support_bundle",
+                    ":sbUUID",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uniUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "sbUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-compressed"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-compressed"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cloud.yugabyte.com/api/public/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e311f4ed-2f4a-4bd0-bc51-dc1fa293ce34",
+    "name": "YugabyteDB Aeon REST Access Keys Support Bundle management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+      "type": "text/plain"
+    }
+  }
+}

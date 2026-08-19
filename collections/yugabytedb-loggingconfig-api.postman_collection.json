@@ -1,0 +1,239 @@
+{
+  "item": [
+    {
+      "id": "4fa2c80f-4f83-40e6-be10-00111781174e",
+      "name": "LoggingConfig",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "88cfcbb5-a745-4555-8a5a-bd2fdc3ee341",
+          "name": "YugabyteDB Anywhere Set Audit Logging Level",
+          "request": {
+            "name": "YugabyteDB Anywhere Set Audit Logging Level",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "audit_logging_config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"outputToFile\": \"<boolean>\",\n  \"outputToStdout\": \"<boolean>\",\n  \"fileNamePrefix\": \"<string>\",\n  \"maxHistory\": \"<integer>\",\n  \"rolloverPattern\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4c15f338-7aa5-47b5-a9d5-70aee3f6a67a",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "audit_logging_config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"outputToStdout\": true,\n  \"maxHistory\": 30,\n  \"fileNamePrefix\": \"yb-platform-\",\n  \"rolloverPattern\": \"yyyy-MM-dd\",\n  \"outputToFile\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"outputToStdout\": true,\n  \"maxHistory\": 30,\n  \"fileNamePrefix\": \"yb-platform-\",\n  \"rolloverPattern\": \"yyyy-MM-dd\",\n  \"outputToFile\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "70929bf6-7529-4bcc-bf42-20218b8cc2b0",
+          "name": "YugabyteDB Anywhere Set Logging Level",
+          "request": {
+            "name": "YugabyteDB Anywhere Set Logging Level",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "logging_config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"level\": \"<string>\",\n  \"maxHistory\": \"<integer>\",\n  \"rolloverPattern\": \"<string>\",\n  \"fileNamePrefix\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c8083e04-7c46-405e-a4ec-8eda824fad23",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "logging_config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"level\": \"ERROR\",\n  \"maxHistory\": 0,\n  \"fileNamePrefix\": \"yb-platform-\",\n  \"rolloverPattern\": \"rolloverPattern\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"level\": \"ERROR\",\n  \"maxHistory\": 0,\n  \"fileNamePrefix\": \"yb-platform-\",\n  \"rolloverPattern\": \"rolloverPattern\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cloud.yugabyte.com/api/public/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7ea9ce68-eeb8-4d31-9f11-00d8a66b96cb",
+    "name": "YugabyteDB Aeon REST Access Keys LoggingConfig API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+      "type": "text/plain"
+    }
+  }
+}

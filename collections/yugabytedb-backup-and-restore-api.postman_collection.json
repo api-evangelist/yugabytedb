@@ -1,0 +1,160 @@
+{
+  "item": [
+    {
+      "id": "f6f40b53-7e8f-4588-8661-8c89474a197b",
+      "name": "Backup and Restore",
+      "description": {
+        "content": "Operations related to universe backup and restore",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a158737b-86c4-4a60-94ba-e7ea701d7f11",
+          "name": "YugabyteDB Anywhere List YBC Gflags Metadata",
+          "request": {
+            "name": "YugabyteDB Anywhere List YBC Gflags Metadata",
+            "description": {
+              "content": "Get list of all YBC gflags and related metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ybc",
+                "gflags-metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "38e96a58-9858-4e46-b0d1-578e2c3ebace",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ybc",
+                    "gflags-metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"default\": \"default\",\n    \"meaning\": \"meaning\",\n    \"name\": \"name\",\n    \"type\": \"type\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "653f75f1-2323-4193-8b24-6461c335dc3f",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ybc",
+                    "gflags-metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cloud.yugabyte.com/api/public/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3ffa1d31-1d5c-4849-ae7d-34cb95eb7b15",
+    "name": "YugabyteDB Aeon REST Access Keys Backup and Restore API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+      "type": "text/plain"
+    }
+  }
+}

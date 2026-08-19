@@ -1,0 +1,90 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YugabyteDB Aeon REST Access Keys MaintenanceWindows API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "MaintenanceWindows",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "YugabyteDB Aeon Get Maintenance Window",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/accounts/:accountId/projects/:projectId/clusters/:clusterId/maintenance-windows",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the YugabyteDB Aeon account."
+              },
+              {
+                "name": "projectId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the project within the account."
+              },
+              {
+                "name": "clusterId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the cluster."
+              }
+            ]
+          },
+          "docs": "Returns the configured maintenance window for the specified cluster, including the scheduled day of week and start hour for Yugabyte to apply patches and infrastructure updates."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Aeon Update Maintenance Window",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cloud.yugabyte.com/api/public/v1/accounts/:accountId/projects/:projectId/clusters/:clusterId/maintenance-windows",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the YugabyteDB Aeon account."
+              },
+              {
+                "name": "projectId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the project within the account."
+              },
+              {
+                "name": "clusterId",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "The unique identifier of the cluster."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the maintenance window schedule for the specified cluster. Setting a maintenance window allows operators to control when Yugabyte applies updates to minimize disruption."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

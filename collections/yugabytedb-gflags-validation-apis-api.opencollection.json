@@ -1,0 +1,117 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YugabyteDB Aeon REST Access Keys GFlags Validation APIs API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GFlags Validation APIs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Get Gflag Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/metadata/version/:version/gflag",
+            "params": [
+              {
+                "name": "version",
+                "value": "2.20.0.0",
+                "type": "path"
+              },
+              {
+                "name": "name",
+                "value": "example-name",
+                "type": "query"
+              },
+              {
+                "name": "server",
+                "value": "example-server",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "WARNING: This is a preview API that could change."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere List All Gflags for a Release",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/metadata/version/:version/list_gflags",
+            "params": [
+              {
+                "name": "version",
+                "value": "2.20.0.0",
+                "type": "path"
+              },
+              {
+                "name": "name",
+                "value": "example-name",
+                "type": "query"
+              },
+              {
+                "name": "server",
+                "value": "example-server",
+                "type": "query"
+              },
+              {
+                "name": "mostUsedGFlags",
+                "value": "false",
+                "type": "query"
+              },
+              {
+                "name": "showExperimental",
+                "value": "false",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "WARNING: This is a preview API that could change."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Validate Gflags",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/api/v1/metadata/version/:version/validate_gflags",
+            "params": [
+              {
+                "name": "version",
+                "value": "2.20.0.0",
+                "type": "path"
+              },
+              {
+                "name": "request",
+                "value": "example-request",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "WARNING: This is a preview API that could change."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

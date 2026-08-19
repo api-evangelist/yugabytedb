@@ -1,0 +1,1041 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YugabyteDB Aeon REST Access Keys Universe API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Universe",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Get a YugabyteDB Universe",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ]
+          },
+          "docs": "Get details of a single YugabyteDB Universe."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Edit a YugabyteDB Universe",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit the clusters of a single YugabyteDB Universe."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Delete a Universe",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete Universe."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Create a YugabyteDB Universe",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create all the clusters of a YugabyteDB universe."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere List Universes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/page",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns universes for the specified customer\nWARNING: This is a preview API that could change.\n"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Add a Cluster to a YugabyteDB Universe",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/clusters",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a cluster (eg. read replica cluster) to a YugabyteDB universe."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Delete an Additional Cluster(s) of a YugabyteDB Universe",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/clusters/:clsUUID",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              },
+              {
+                "name": "clsUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Cluster UUID"
+              },
+              {
+                "name": "isForceDelete",
+                "value": "false",
+                "type": "query",
+                "description": "Whether to force delete the cluster"
+              }
+            ]
+          },
+          "docs": "Delete an additional cluster (eg. read replica cluster) of a YugabyteDB universe. Primary cluster is deleted along with Universe."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Get Resource Utilisation of a YugabyteDB Universe",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/fetch-universe-resources",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fetches an estimate of pricing and cpu/memory/storage resource utilisation for the Universe. This is meant to be used before creating the Universe."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Edit GFlags",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/gflags",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Queues a task to edit GFlags of a universe. The input set of GFlags will replace any existing GFlags in the universe. Refer [YB-Master configuration flags](https://docs.yugabyte.com/preview/reference/configuration/yb-master/#configuration-flags) and [YB-TServer configuration flags](https://docs.yugabyte.com/preview/reference/configuration/yb-tserver/#configuration-flags)."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Upgrade YugabyteDB Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/upgrade/software",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Queues a task to perform a YugabyteDB Software upgrade."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Get Finalize Information on the YugabyteDB Upgrade",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/upgrade/software/finalize",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ]
+          },
+          "docs": "Get finalize info of a YugabyteDB Software upgrade."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Finalize the Upgrade YugabyteDB",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/upgrade/software/finalize",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Queues a task to perform finalize of a YugabyteDB Software upgrade."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Upgrade Third Party Software",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/upgrade/third-party-software",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Queues a task to perform a third party software upgrade."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Rollback YugabyteDB Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/upgrade/software/rollback",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Queues a task to rollback a YugabyteDB Software upgrade."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Resume Canary Software Upgrade",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/upgrade/software/resume-canary",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Queues a task to resume a paused canary software upgrade."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Precheck YugabyteDB Version Upgrade",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/upgrade/software/precheck",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Queues a task to perform a precheck for a YugabyteDB Software upgrade."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Restart a YugabyteDB Universe",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/restart",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Restart a YugabyteDB Universe."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Migrate to Systemd Controlled Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/systemd",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use Systemd to control YugabyteDB services for this universe. This is a 1 way migration from\ncron-based service management to systemd, and will involve a rolling restart of the universe.\n\nThis is not supported for on prem manual provisioned universes or kubernetes universes.\n"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Enable or Disable Encryption in Transit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/encryption/in-transit",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enable or disable encryption in transit. Encryption in transit can be both node to node or\nnode to client.\n"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Rotate TLS Certs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/encryption/in-transit/rotate",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Rotate the certs used for encryption in transit."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Edit Kubernetes Helm Overrides",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/kubernetes-overrides",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the kubernetes helm override values. This can be used to add custom settings to\nkubernetes resources managed by YugabyteDB Anywhere. These override values can apply globally\nto a universe or per AZ.\n\nSee https://github.com/yugabyte/charts/blob/master/stable/yugabyte/values.yaml for possible\noverride options.\n"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Detach Universe",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/detach",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export universe metadata to a tgz file from (source) YBA"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Rollback Detach Universe",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/detach",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              },
+              {
+                "name": "isForceRollback",
+                "value": "false",
+                "type": "query",
+                "description": "Force rollback without checking current owner or detached state."
+              }
+            ]
+          },
+          "docs": "Invoke this from the YBA that should reclaim ownership of a universe that is currently in a detached\nstate (ie. if this API has been invoked on the universe POST /customers/{cUUID}/universes/{uniUUID}/detach,\non that YBA instance). A Universe can be managed only by a single instance of YBA at any time. So,\nfor cases where the universe was attached to another YBA\n(ie. using POST /customers/{cUUID}/universes/{uniUUID}/attach), only isForceRollback=true\ncan be used to rollback the detach operation "
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Attach Universe",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/attach",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import universe metadata to (destination) YBA using a given tgz file"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Delete Attach/detach Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/attach-detach-metadata",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ]
+          },
+          "docs": "Delete metadata of a universe from (source) YBA"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Configure Query Log for YugabyteDB Universe",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/query-log-config",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configure Query Log for a YugabyteDB Universe."
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Configure Metrics Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/metrics-export-config",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configure metrics export from a universe to a metrics export telemetry provider"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Configure Export Telemetry Configs (unified API)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/export-telemetry-configs",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configure all telemetry export configs (audit logs, query logs, metrics) for a universe\nin a single idempotent API. Replaces the separate audit_log_config, query-log-config,\nand metrics-export-config APIs.\n"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Import Universe to Operator",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/operator-import",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import universe to operator"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Precheck Universe Import to Operator",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/operator-import/precheck",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run precheck to ensure the universe can be imported to the operator"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Run a Script on Database Nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/run-script",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Execute a bash script on one or more nodes in the universe. The script can be provided\ninline as content or as a path to a file on the YugabyteDB Anywhere node. Results including stdout,\nstderr, and exit codes are returned for each node.\n\nThis API requires the runtime configuration `yb.node_script.enabled` to be set to true\nfor the universe.\n\n**Important**: Scripts are executed remotely on database nodes via SSH or Node Agent. Once a\nscript starts executing on a node, it cannot be cancelled remo"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Collect Files from Database Nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/file-collections",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Collect specified files from one or more nodes in the universe. Files can be collected\nby specifying individual file paths or directory paths. The files are packaged into a\ntar.gz archive on each database node.\n\nThis API requires the runtime configuration `yb.node_script.enabled` to be set to true\nfor the universe.\n\n**Important**: The response includes `collection_uuid` which can be used with the\ndownload and cleanup endpoints. The tar files are stored on the database nodes and\ncan be downloaded"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Download Collected Files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/file-collections/:collectionUUID/download",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              },
+              {
+                "name": "collectionUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Collection UUID returned by create file collection API"
+              },
+              {
+                "name": "cleanup_db_nodes_after",
+                "value": "false",
+                "type": "query",
+                "description": "If true, automatically delete the collected files from DB nodes after successful download.\nThis is equivalent to calling DELETE /file-collections/{collectionUUID} with\ndelete_from_db_nodes=true after the download completes.\nDefault is false (files remain on DB nodes until explicitly deleted).\n**Security**: When this is set to true, localhost restriction applies.\n"
+              }
+            ]
+          },
+          "docs": "Download previously collected files from database nodes. Use the collection_uuid\nreturned by the create file collection API (POST /file-collections) to identify\nwhich files to download.\n\nThis API downloads the tar.gz archives from each database node and streams them\nback to the client as a combined archive.\n\n**Note**: By default, this API does NOT have localhost restriction and can be\ncalled from any authorized client. However, if cleanup_db_nodes_after=true is specified,\nlocalhost restriction a"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Delete Collected Files from Database Nodes And/or YBA",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/file-collections/:collectionUUID",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              },
+              {
+                "name": "collectionUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Collection UUID returned by create file collection API"
+              },
+              {
+                "name": "delete_from_db_nodes",
+                "value": "true",
+                "type": "query",
+                "description": "Whether to delete tar files from database nodes"
+              },
+              {
+                "name": "delete_from_yba",
+                "value": "false",
+                "type": "query",
+                "description": "Whether to delete downloaded files from YBA local storage"
+              }
+            ]
+          },
+          "docs": "Delete tar archives created by the create file collection API. By default, this only\ndeletes files from DB nodes. Use `delete_from_yba=true` to also remove downloaded\nfiles from YBA local storage.\n\nUse this API when you are done downloading the collected files and want to free up\ndisk space on the database nodes and/or YBA server.\n\n**Security**: This API can only be called from localhost (the YBA server itself).\nThis restriction exists because it modifies files on database nodes.\n"
+        },
+        {
+          "info": {
+            "name": "YugabyteDB Anywhere Resize Nodes in YBDB Universe.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.yugabyte.com/api/public/v1/customers/:cUUID/universes/:uniUUID/resize-nodes",
+            "params": [
+              {
+                "name": "cUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Customer UUID"
+              },
+              {
+                "name": "uniUUID",
+                "value": "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+                "type": "path",
+                "description": "Universe UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the nodes' size. Size can include the instance type and number/size of disks, in\naddition to updating related gflags and cgroups to match the resize.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

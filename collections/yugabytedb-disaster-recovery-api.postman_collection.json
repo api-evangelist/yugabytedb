@@ -1,0 +1,2124 @@
+{
+  "item": [
+    {
+      "id": "2ff23f1f-ec3c-445f-86ba-2eeb88763134",
+      "name": "Disaster Recovery",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "72df3d37-a838-4558-a9b4-75413a8c9983",
+          "name": "YugabyteDB Anywhere Create Disaster Recovery Config",
+          "request": {
+            "name": "YugabyteDB Anywhere Create Disaster Recovery Config",
+            "description": {
+              "content": "WARNING: This is a preview API that could change.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "dr_configs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dbs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"sourceUniverseUUID\": \"<uuid>\",\n  \"targetUniverseUUID\": \"<uuid>\",\n  \"bootstrapParams\": {\n    \"backupRequestParams\": {\n      \"storageConfigUUID\": \"<uuid>\",\n      \"parallelism\": \"<integer>\"\n    }\n  },\n  \"dryRun\": \"<boolean>\",\n  \"pitrParams\": {\n    \"retentionPeriodSec\": \"<long>\",\n    \"snapshotIntervalSec\": \"<long>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "49c66d6a-3970-4532-9490-1d7e5b88c748",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "dr_configs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetUniverseUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"dryRun\": true,\n  \"bootstrapParams\": {\n    \"backupRequestParams\": {\n      \"storageConfigUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"parallelism\": 0\n    }\n  },\n  \"dbs\": \"[\\\"0000412b000030008000000000000000\\\", \\\"0000412b000030008000000000000001\\\"]\",\n  \"name\": \"Dr-config1\",\n  \"sourceUniverseUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"pitrParams\": {\n    \"snapshotIntervalSec\": 1,\n    \"retentionPeriodSec\": 6\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"taskUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"resourceUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f17de8dd-3691-4ddf-a60a-33d07a08ec62",
+          "name": "YugabyteDB Anywhere Delete Xcluster Config",
+          "request": {
+            "name": "YugabyteDB Anywhere Delete Xcluster Config",
+            "description": {
+              "content": "WARNING: This is a preview API that could change.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "dr_configs",
+                ":drUUID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "isForceDelete",
+                  "value": "false"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "drUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE"
+          },
+          "response": [
+            {
+              "id": "90fadf46-7f6a-4c7a-9b30-04dcc85a5c81",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "dr_configs",
+                    ":drUUID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "isForceDelete",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "drUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"taskUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"resourceUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f1cae544-f3ca-430d-a707-86d038913d5a",
+          "name": "YugabyteDB Anywhere Get Disaster Recovery Config",
+          "request": {
+            "name": "YugabyteDB Anywhere Get Disaster Recovery Config",
+            "description": {
+              "content": "WARNING: This is a preview API that could change.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "dr_configs",
+                ":drUUID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "syncWithDB",
+                  "value": "true"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "drUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "e50ef960-f225-4620-8759-c84bfaa9ece0",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "dr_configs",
+                    ":drUUID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "syncWithDB",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "drUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"paused\": true,\n  \"replicationGroupName\": \"replicationGroupName\",\n  \"bootstrapParams\": {\n    \"backupRequestParams\": {\n      \"storageConfigUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"parallelism\": 0\n    }\n  },\n  \"xclusterConfigUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"drReplicaUniverseState\": \"Unconfigured for DR\",\n  \"type\": \"Basic\",\n  \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"xclusterConfigsUuid\": [\n    \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n  ],\n  \"tableType\": \"UNKNOWN\",\n  \"tables\": [\n    \"tables\",\n    \"tables\"\n  ],\n  \"modifyTime\": \"2022-12-12 13:07:18+00:00\",\n  \"primaryUniverseUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"drReplicaUniverseActive\": true,\n  \"state\": \"Initializing\",\n  \"primaryUniverseState\": \"Unconfigured for DR\",\n  \"tableDetails\": [\n    {\n      \"restoreUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"streamId\": \"a9d2470786694dc4b34e0e58e592da9e\",\n      \"backupUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"replicationStatusErrors\": [\n        \"Unknown error\",\n        \"Unknown error\"\n      ],\n      \"sourceTableInfo\": {\n        \"relationType\": \"SYSTEM_TABLE_RELATION\",\n        \"colocated\": true,\n        \"walSizeBytes\": 3.616076749251911,\n        \"indexTableIDs\": [\n          \"indexTableIDs\",\n          \"indexTableIDs\"\n        ],\n        \"pgSchemaName\": \"public\",\n        \"sizeBytes\": 9.301444243932576,\n        \"tableName\": \"tableName\",\n        \"tableSpace\": \"tableSpace\",\n        \"tableUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n        \"mainTableUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n        \"parentTableUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n        \"tableType\": \"YQL_TABLE_TYPE\",\n        \"keySpace\": \"keySpace\",\n        \"tableID\": \"tableID\",\n        \"nameSpace\": \"nameSpace\",\n        \"colocationParentId\": \"colocationParentId\"\n      },\n      \"replicationSetupDone\": true,\n      \"restoreTime\": \"2022-12-12 13:07:18+00:00\",\n      \"bootstrapCreateTime\": \"2022-12-12 13:07:18+00:00\",\n      \"indexTable\": true,\n      \"tableId\": \"000033df000030008000000000004005\",\n      \"targetTableInfo\": {\n        \"relationType\": \"SYSTEM_TABLE_RELATION\",\n        \"colocated\": true,\n        \"walSizeBytes\": 3.616076749251911,\n        \"indexTableIDs\": [\n          \"indexTableIDs\",\n          \"indexTableIDs\"\n        ],\n        \"pgSchemaName\": \"public\",\n        \"sizeBytes\": 9.301444243932576,\n        \"tableName\": \"tableName\",\n        \"tableSpace\": \"tableSpace\",\n        \"tableUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n        \"mainTableUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n        \"parentTableUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n        \"tableType\": \"YQL_TABLE_TYPE\",\n        \"keySpace\": \"keySpace\",\n        \"tableID\": \"tableID\",\n        \"nameSpace\": \"nameSpace\",\n        \"colocationParentId\": \"colocationParentId\"\n      },\n      \"needBootstrap\": true,\n      \"status\": \"Validated\"\n    },\n    {\n      \"restoreUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"streamId\": \"a9d2470786694dc4b34e0e58e592da9e\",\n      \"backupUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"replicationStatusErrors\": [\n        \"Unknown error\",\n        \"Unknown error\"\n      ],\n      \"sourceTableInfo\": {\n        \"relationType\": \"SYSTEM_TABLE_RELATION\",\n        \"colocated\": true,\n        \"walSizeBytes\": 3.616076749251911,\n        \"indexTableIDs\": [\n          \"indexTableIDs\",\n          \"indexTableIDs\"\n        ],\n        \"pgSchemaName\": \"public\",\n        \"sizeBytes\": 9.301444243932576,\n        \"tableName\": \"tableName\",\n        \"tableSpace\": \"tableSpace\",\n        \"tableUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n        \"mainTableUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n        \"parentTableUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n        \"tableType\": \"YQL_TABLE_TYPE\",\n        \"keySpace\": \"keySpace\",\n        \"tableID\": \"tableID\",\n        \"nameSpace\": \"nameSpace\",\n        \"colocationParentId\": \"colocationParentId\"\n      },\n      \"replicationSetupDone\": true,\n      \"restoreTime\": \"2022-12-12 13:07:18+00:00\",\n      \"bootstrapCreateTime\": \"2022-12-12 13:07:18+00:00\",\n      \"indexTable\": true,\n      \"tableId\": \"000033df000030008000000000004005\",\n      \"targetTableInfo\": {\n        \"relationType\": \"SYSTEM_TABLE_RELATION\",\n        \"colocated\": true,\n        \"walSizeBytes\": 3.616076749251911,\n        \"indexTableIDs\": [\n          \"indexTableIDs\",\n          \"indexTableIDs\"\n        ],\n        \"pgSchemaName\": \"public\",\n        \"sizeBytes\": 9.301444243932576,\n        \"tableName\": \"tableName\",\n        \"tableSpace\": \"tableSpace\",\n        \"tableUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n        \"mainTableUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n        \"parentTableUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n        \"tableType\": \"YQL_TABLE_TYPE\",\n        \"keySpace\": \"keySpace\",\n        \"tableID\": \"tableID\",\n        \"nameSpace\": \"nameSpace\",\n        \"colocationParentId\": \"colocationParentId\"\n      },\n      \"needBootstrap\": true,\n      \"status\": \"Validated\"\n    }\n  ],\n  \"dbDetails\": [\n    {\n      \"restoreUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"sourceNamespaceId\": \"sourceNamespaceId\",\n      \"backupUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"replicationSetupTime\": \"2022-12-12 13:07:18+00:00\",\n      \"sourceNamespaceInfo\": {\n        \"tableType\": \"YQL_TABLE_TYPE\",\n        \"name\": \"name\",\n        \"namespaceUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n      },\n      \"targetNamespaceInfo\": {\n        \"tableType\": \"YQL_TABLE_TYPE\",\n        \"name\": \"name\",\n        \"namespaceUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n      },\n      \"status\": \"Validated\"\n    },\n    {\n      \"restoreUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"sourceNamespaceId\": \"sourceNamespaceId\",\n      \"backupUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"replicationSetupTime\": \"2022-12-12 13:07:18+00:00\",\n      \"sourceNamespaceInfo\": {\n        \"tableType\": \"YQL_TABLE_TYPE\",\n        \"name\": \"name\",\n        \"namespaceUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n      },\n      \"targetNamespaceInfo\": {\n        \"tableType\": \"YQL_TABLE_TYPE\",\n        \"name\": \"name\",\n        \"namespaceUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n      },\n      \"status\": \"Validated\"\n    }\n  ],\n  \"pitrConfigs\": [\n    {\n      \"dbName\": \"dbName\",\n      \"updateTime\": \"2022-12-12 13:07:18+00:00\",\n      \"createdForDr\": true,\n      \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"minRecoverTimeInMillis\": 1,\n      \"scheduleInterval\": 5,\n      \"tableType\": \"YQL_TABLE_TYPE\",\n      \"customerUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"createTime\": \"2022-12-12 13:07:18+00:00\",\n      \"intermittentMinRecoverTimeInMillis\": 0,\n      \"maxRecoverTimeInMillis\": 6,\n      \"name\": \"name\",\n      \"disabled\": true,\n      \"usedForXCluster\": true,\n      \"state\": \"UNKNOWN\",\n      \"retentionPeriod\": 5\n    },\n    {\n      \"dbName\": \"dbName\",\n      \"updateTime\": \"2022-12-12 13:07:18+00:00\",\n      \"createdForDr\": true,\n      \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"minRecoverTimeInMillis\": 1,\n      \"scheduleInterval\": 5,\n      \"tableType\": \"YQL_TABLE_TYPE\",\n      \"customerUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"createTime\": \"2022-12-12 13:07:18+00:00\",\n      \"intermittentMinRecoverTimeInMillis\": 0,\n      \"maxRecoverTimeInMillis\": 6,\n      \"name\": \"name\",\n      \"disabled\": true,\n      \"usedForXCluster\": true,\n      \"state\": \"UNKNOWN\",\n      \"retentionPeriod\": 5\n    }\n  ],\n  \"primaryUniverseActive\": true,\n  \"automaticDdlMode\": true,\n  \"dbs\": [\n    \"dbs\",\n    \"dbs\"\n  ],\n  \"createTime\": \"2022-12-12 13:07:18+00:00\",\n  \"webhooks\": [\n    {\n      \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"url\": \"url\"\n    },\n    {\n      \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"url\": \"url\"\n    }\n  ],\n  \"name\": \"name\",\n  \"drReplicaUniverseUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"keyspacePending\": \"keyspacePending\",\n  \"pitrRetentionPeriodSec\": 2,\n  \"pitrSnapshotIntervalSec\": 7,\n  \"status\": \"Initialized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "238487f1-36b2-4e1c-9b9c-a7422d582298",
+          "name": "YugabyteDB Anywhere Edit Disaster Recovery Config",
+          "request": {
+            "name": "YugabyteDB Anywhere Edit Disaster Recovery Config",
+            "description": {
+              "content": "WARNING: This is a preview API that could change.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "dr_configs",
+                ":drUUID",
+                "edit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "drUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bootstrapParams\": {\n    \"backupRequestParams\": {\n      \"storageConfigUUID\": \"<uuid>\",\n      \"parallelism\": \"<integer>\"\n    }\n  },\n  \"pitrParams\": {\n    \"retentionPeriodSec\": \"<long>\",\n    \"snapshotIntervalSec\": \"<long>\"\n  },\n  \"webhookUrls\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "37b1be41-f24a-40b9-902f-6c6f91fdac17",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "dr_configs",
+                    ":drUUID",
+                    "edit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "drUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bootstrapParams\": {\n    \"backupRequestParams\": {\n      \"storageConfigUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"parallelism\": 0\n    }\n  },\n  \"webhookUrls\": [\n    \"webhookUrls\",\n    \"webhookUrls\"\n  ],\n  \"pitrParams\": {\n    \"snapshotIntervalSec\": 1,\n    \"retentionPeriodSec\": 6\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"taskUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"resourceUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "afbb18d5-d451-4ba9-855b-d4017a9f532f",
+          "name": "YugabyteDB Anywhere Failover a Disaster Recovery Config",
+          "request": {
+            "name": "YugabyteDB Anywhere Failover a Disaster Recovery Config",
+            "description": {
+              "content": "WARNING: This is a preview API that could change.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "dr_configs",
+                ":drUUID",
+                "failover"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "drUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"drReplicaUniverseUuid\": \"<uuid>\",\n  \"namespaceIdSafetimeEpochUsMap\": {\n    \"key_0\": \"<long>\"\n  },\n  \"primaryUniverseUuid\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "457d3b73-7a75-467b-9cc1-80565a788669",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "dr_configs",
+                    ":drUUID",
+                    "failover"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "drUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"namespaceIdSafetimeEpochUsMap\": {\n    \"key\": 0\n  },\n  \"drReplicaUniverseUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"primaryUniverseUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"taskUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"resourceUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e83d03c2-30ea-41ab-a3b8-bba36bc66a1f",
+          "name": "YugabyteDB Anywhere Pause DR Config",
+          "request": {
+            "name": "YugabyteDB Anywhere Pause DR Config",
+            "description": {
+              "content": "WARNING: This is a preview API that could change.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "dr_configs",
+                ":drUUID",
+                "pause"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "drUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST"
+          },
+          "response": [
+            {
+              "id": "a1175c8d-c1cb-4eef-90eb-9b5d5ed31413",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "dr_configs",
+                    ":drUUID",
+                    "pause"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "drUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"taskUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"resourceUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f4e8dfc8-29f4-4c7d-ac00-dc4e07ae34f1",
+          "name": "YugabyteDB Anywhere Pause DR Config and Universes Associated with DR",
+          "request": {
+            "name": "YugabyteDB Anywhere Pause DR Config and Universes Associated with DR",
+            "description": {
+              "content": "WARNING: This is a preview API that could change.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "dr_configs",
+                ":drUUID",
+                "pause_universes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "drUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST"
+          },
+          "response": [
+            {
+              "id": "f4580400-d896-4acc-a3af-87544dd1362c",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "dr_configs",
+                    ":drUUID",
+                    "pause_universes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "drUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"taskUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"resourceUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "75ba267c-8275-478b-9977-7ae51b3ee5f9",
+          "name": "YugabyteDB Anywhere Replace Replica in a Disaster Recovery Config",
+          "request": {
+            "name": "YugabyteDB Anywhere Replace Replica in a Disaster Recovery Config",
+            "description": {
+              "content": "WARNING: This is a preview API that could change.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "dr_configs",
+                ":drUUID",
+                "replace_replica"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "drUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bootstrapParams\": {\n    \"backupRequestParams\": {\n      \"storageConfigUUID\": \"<uuid>\",\n      \"parallelism\": \"<integer>\"\n    }\n  },\n  \"drReplicaUniverseUuid\": \"<uuid>\",\n  \"primaryUniverseUuid\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "12602b0d-7941-423e-8f2d-f4d805caea63",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "dr_configs",
+                    ":drUUID",
+                    "replace_replica"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "drUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bootstrapParams\": {\n    \"backupRequestParams\": {\n      \"storageConfigUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"parallelism\": 0\n    }\n  },\n  \"drReplicaUniverseUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"primaryUniverseUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"taskUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"resourceUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "48ab60a7-3d75-4cb6-9766-6d154372717a",
+          "name": "YugabyteDB Anywhere Restart Disaster Recovery Config",
+          "request": {
+            "name": "YugabyteDB Anywhere Restart Disaster Recovery Config",
+            "description": {
+              "content": "WARNING: This is a preview API that could change.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "dr_configs",
+                ":drUUID",
+                "restart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "isForceDelete",
+                  "value": "false"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "drUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dbs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"bootstrapParams\": {\n    \"backupRequestParams\": {\n      \"storageConfigUUID\": \"<uuid>\",\n      \"parallelism\": \"<integer>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0cfc0a0e-a3aa-4dee-bbc7-c3308e9e3022",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "dr_configs",
+                    ":drUUID",
+                    "restart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "isForceDelete",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "drUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bootstrapParams\": {\n    \"backupRequestParams\": {\n      \"storageConfigUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"parallelism\": 0\n    }\n  },\n  \"dbs\": \"[\\\"0000412b000030008000000000000000\\\", \\\"0000412b000030008000000000000001\\\"]\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"taskUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"resourceUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6691b71-d46f-4486-b18b-d0f4b642d040",
+          "name": "YugabyteDB Anywhere Resume DR Config",
+          "request": {
+            "name": "YugabyteDB Anywhere Resume DR Config",
+            "description": {
+              "content": "WARNING: This is a preview API that could change.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "dr_configs",
+                ":drUUID",
+                "resume"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "drUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST"
+          },
+          "response": [
+            {
+              "id": "c432e2ac-4501-4fe4-ba7b-d29f0dc7b085",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "dr_configs",
+                    ":drUUID",
+                    "resume"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "drUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"taskUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"resourceUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "09817e1b-cbc7-44d3-805c-f374fe437dd0",
+          "name": "YugabyteDB Anywhere Resume DR Config and Universes Associated with DR",
+          "request": {
+            "name": "YugabyteDB Anywhere Resume DR Config and Universes Associated with DR",
+            "description": {
+              "content": "WARNING: This is a preview API that could change.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "dr_configs",
+                ":drUUID",
+                "resume_universes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "drUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST"
+          },
+          "response": [
+            {
+              "id": "347e4d34-5d21-4f45-b6c8-a70336ee22a9",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "dr_configs",
+                    ":drUUID",
+                    "resume_universes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "drUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"taskUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"resourceUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "742254db-1863-4fbc-8ffc-81f679ec1eb8",
+          "name": "YugabyteDB Anywhere Get Disaster Recovery Config Safetime",
+          "request": {
+            "name": "YugabyteDB Anywhere Get Disaster Recovery Config Safetime",
+            "description": {
+              "content": "WARNING: This is a preview API that could change.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "dr_configs",
+                ":drUUID",
+                "safetime"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "drUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "531ce112-2cf1-4f53-b4bc-a2bcb994a55d",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "dr_configs",
+                    ":drUUID",
+                    "safetime"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "drUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"safetimes\": [\n    {\n      \"namespaceId\": \"namespaceId\",\n      \"safetimeLagUs\": 1,\n      \"estimatedDataLossMs\": 0.8008281904610115,\n      \"safetimeEpochUs\": 6,\n      \"namespaceName\": \"namespaceName\",\n      \"safetimeSkewUs\": 5\n    },\n    {\n      \"namespaceId\": \"namespaceId\",\n      \"safetimeLagUs\": 1,\n      \"estimatedDataLossMs\": 0.8008281904610115,\n      \"safetimeEpochUs\": 6,\n      \"namespaceName\": \"namespaceName\",\n      \"safetimeSkewUs\": 5\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fe69a40c-d932-4206-86c2-7d8f1f23444c",
+          "name": "YugabyteDB Anywhere Set Databases in Disaster Recovery Config",
+          "request": {
+            "name": "YugabyteDB Anywhere Set Databases in Disaster Recovery Config",
+            "description": {
+              "content": "WARNING: This is a preview API that could change.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "dr_configs",
+                ":drUUID",
+                "set_dbs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "drUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dbs\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9c7d9eee-248f-4937-9af9-20cdcb24d4ef",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "dr_configs",
+                    ":drUUID",
+                    "set_dbs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "drUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dbs\": \"[\\\"000033df000030008000000000004006\\\", \\\"000033df00003000800000000000400b\\\"]\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"taskUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"resourceUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dde1bdea-2f09-4d2c-8189-87a51af3bbdd",
+          "name": "YugabyteDB Anywhere Set Tables in Disaster Recovery Config",
+          "request": {
+            "name": "YugabyteDB Anywhere Set Tables in Disaster Recovery Config",
+            "description": {
+              "content": "WARNING: This is a preview API that could change.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "dr_configs",
+                ":drUUID",
+                "set_tables"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "drUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"autoIncludeIndexTables\": \"<boolean>\",\n  \"bootstrapParams\": {\n    \"backupRequestParams\": {\n      \"storageConfigUUID\": \"<uuid>\",\n      \"parallelism\": \"<integer>\"\n    }\n  },\n  \"tables\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f381da37-8955-41e7-bd48-e35e8111b8c6",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "dr_configs",
+                    ":drUUID",
+                    "set_tables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "drUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tables\": \"[\\\"000033df000030008000000000004006\\\", \\\"000033df00003000800000000000400b\\\"]\",\n  \"bootstrapParams\": {\n    \"backupRequestParams\": {\n      \"storageConfigUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"parallelism\": 0\n    }\n  },\n  \"autoIncludeIndexTables\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"taskUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"resourceUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8cf6becd-a85a-4d71-9808-e52b9c612929",
+          "name": "YugabyteDB Anywhere Switchover a Disaster Recovery Config",
+          "request": {
+            "name": "YugabyteDB Anywhere Switchover a Disaster Recovery Config",
+            "description": {
+              "content": "WARNING: This is a preview API that could change.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "dr_configs",
+                ":drUUID",
+                "switchover"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "drUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"drReplicaUniverseUuid\": \"<uuid>\",\n  \"primaryUniverseUuid\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "20e1c587-5bfa-47eb-bf4c-bb249da9364f",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "dr_configs",
+                    ":drUUID",
+                    "switchover"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "drUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"drReplicaUniverseUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"primaryUniverseUuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"taskUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"resourceUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bdbbf3f5-dd1c-4667-8b21-c61dc5903f65",
+          "name": "YugabyteDB Anywhere Sync Disaster Recovery Config",
+          "request": {
+            "name": "YugabyteDB Anywhere Sync Disaster Recovery Config",
+            "description": {
+              "content": "WARNING: This is a preview API that could change.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "dr_configs",
+                ":drUUID",
+                "sync"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "drUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST"
+          },
+          "response": [
+            {
+              "id": "e832d353-5e18-43aa-8bbf-27a18fb0a68e",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "dr_configs",
+                    ":drUUID",
+                    "sync"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "drUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"taskUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"resourceUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cloud.yugabyte.com/api/public/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a81f3fa0-b86b-4c55-acc1-bfdd4a457450",
+    "name": "YugabyteDB Aeon REST Access Keys Disaster Recovery API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+      "type": "text/plain"
+    }
+  }
+}

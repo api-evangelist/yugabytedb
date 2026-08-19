@@ -1,0 +1,1439 @@
+{
+  "item": [
+    {
+      "id": "d5b3ca08-3661-48cd-8a79-3e57baf9d173",
+      "name": "Job Scheduler",
+      "description": {
+        "content": "Job Scheduler",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "57eb4529-8aae-42a9-a1da-9ebe7b93401b",
+          "name": "YugabyteDB Anywhere Delete Job Schedule",
+          "request": {
+            "name": "YugabyteDB Anywhere Delete Job Schedule",
+            "description": {
+              "content": "WARNING: This is a preview API that could change.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers",
+                ":cUUID",
+                "job-schedules",
+                ":jUUID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) Customer UUID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "jUUID",
+                  "description": "(Required) Job Schedule UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE"
+          },
+          "response": [
+            {
+              "id": "5d83db0a-c330-44b7-bb0c-30713df44663",
+              "name": "Job schedule",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":cUUID",
+                    "job-schedules",
+                    ":jUUID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) Customer UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "jUUID",
+                      "description": "(Required) Job Schedule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"spec\": {\n    \"job_config\": {\n      \"classname\": \"classname\",\n      \"config\": {\n        \"key\": \"{}\"\n      }\n    },\n    \"name\": \"name\",\n    \"schedule_config\": {\n      \"interval_secs\": 0,\n      \"disabled\": true,\n      \"type\": \"FIXED_DELAY\",\n      \"snooze_until\": \"2024-07-25 13:07:18+00:00\"\n    }\n  },\n  \"info\": {\n    \"last_end_time\": \"2024-07-25 13:07:18+00:00\",\n    \"updated_at\": \"2024-07-25 13:07:18+00:00\",\n    \"execution_count\": 6,\n    \"customer_uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"created_at\": \"2024-07-25 13:07:18+00:00\",\n    \"failed_count\": 1,\n    \"next_start_time\": \"2024-07-25 13:07:18+00:00\",\n    \"state\": \"ACTIVE\",\n    \"last_start_time\": \"2024-07-25 13:07:18+00:00\",\n    \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"last_job_instance_uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa280f0c-7f34-4935-bf2e-eefebe73b3ea",
+              "name": "Invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":cUUID",
+                    "job-schedules",
+                    ":jUUID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) Customer UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "jUUID",
+                      "description": "(Required) Job Schedule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "72bffc0d-649b-4c46-991d-c18613f58cf2",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":cUUID",
+                    "job-schedules",
+                    ":jUUID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) Customer UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "jUUID",
+                      "description": "(Required) Job Schedule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1872e618-4ccb-4b79-820d-e0d9b1b5b412",
+          "name": "YugabyteDB Anywhere Get Job Schedule",
+          "request": {
+            "name": "YugabyteDB Anywhere Get Job Schedule",
+            "description": {
+              "content": "WARNING: This is a preview API that could change.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers",
+                ":cUUID",
+                "job-schedules",
+                ":jUUID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) Customer UUID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "jUUID",
+                  "description": "(Required) Job Schedule UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "ee492f51-11cc-4be9-b58d-c1cfce7a3c4d",
+              "name": "Job schedule",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":cUUID",
+                    "job-schedules",
+                    ":jUUID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) Customer UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "jUUID",
+                      "description": "(Required) Job Schedule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"spec\": {\n    \"job_config\": {\n      \"classname\": \"classname\",\n      \"config\": {\n        \"key\": \"{}\"\n      }\n    },\n    \"name\": \"name\",\n    \"schedule_config\": {\n      \"interval_secs\": 0,\n      \"disabled\": true,\n      \"type\": \"FIXED_DELAY\",\n      \"snooze_until\": \"2024-07-25 13:07:18+00:00\"\n    }\n  },\n  \"info\": {\n    \"last_end_time\": \"2024-07-25 13:07:18+00:00\",\n    \"updated_at\": \"2024-07-25 13:07:18+00:00\",\n    \"execution_count\": 6,\n    \"customer_uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"created_at\": \"2024-07-25 13:07:18+00:00\",\n    \"failed_count\": 1,\n    \"next_start_time\": \"2024-07-25 13:07:18+00:00\",\n    \"state\": \"ACTIVE\",\n    \"last_start_time\": \"2024-07-25 13:07:18+00:00\",\n    \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"last_job_instance_uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8860c7e4-2217-45a1-8664-43f821884857",
+              "name": "Invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":cUUID",
+                    "job-schedules",
+                    ":jUUID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) Customer UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "jUUID",
+                      "description": "(Required) Job Schedule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "846a4286-f823-4cc2-b01a-99a952b29e3c",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":cUUID",
+                    "job-schedules",
+                    ":jUUID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) Customer UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "jUUID",
+                      "description": "(Required) Job Schedule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "801cba64-5cf6-4e82-9c27-615a37c0d0d5",
+          "name": "YugabyteDB Anywhere Update Job Schedule",
+          "request": {
+            "name": "YugabyteDB Anywhere Update Job Schedule",
+            "description": {
+              "content": "WARNING: This is a preview API that could change.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers",
+                ":cUUID",
+                "job-schedules",
+                ":jUUID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) Customer UUID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "jUUID",
+                  "description": "(Required) Job Schedule UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "289eb71e-4903-42f3-b0d1-5b7052c5bde3",
+              "name": "Job schedule",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":cUUID",
+                    "job-schedules",
+                    ":jUUID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) Customer UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "jUUID",
+                      "description": "(Required) Job Schedule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"spec\": {\n    \"job_config\": {\n      \"classname\": \"classname\",\n      \"config\": {\n        \"key\": \"{}\"\n      }\n    },\n    \"name\": \"name\",\n    \"schedule_config\": {\n      \"interval_secs\": 0,\n      \"disabled\": true,\n      \"type\": \"FIXED_DELAY\",\n      \"snooze_until\": \"2024-07-25 13:07:18+00:00\"\n    }\n  },\n  \"info\": {\n    \"last_end_time\": \"2024-07-25 13:07:18+00:00\",\n    \"updated_at\": \"2024-07-25 13:07:18+00:00\",\n    \"execution_count\": 6,\n    \"customer_uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"created_at\": \"2024-07-25 13:07:18+00:00\",\n    \"failed_count\": 1,\n    \"next_start_time\": \"2024-07-25 13:07:18+00:00\",\n    \"state\": \"ACTIVE\",\n    \"last_start_time\": \"2024-07-25 13:07:18+00:00\",\n    \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"last_job_instance_uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f65a593c-e201-490b-999b-f8329e25f0e1",
+              "name": "Invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":cUUID",
+                    "job-schedules",
+                    ":jUUID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) Customer UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "jUUID",
+                      "description": "(Required) Job Schedule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "93a1e683-1ae6-4995-bcc2-e6cdf8881422",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":cUUID",
+                    "job-schedules",
+                    ":jUUID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) Customer UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "jUUID",
+                      "description": "(Required) Job Schedule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d83d7cda-74fc-47c6-900c-538b4b03ce39",
+          "name": "YugabyteDB Anywhere List Job Schedules (paginated)",
+          "request": {
+            "name": "YugabyteDB Anywhere List Job Schedules (paginated)",
+            "description": {
+              "content": "WARNING: This is a preview API that could change.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers",
+                ":cUUID",
+                "job-schedules",
+                "page"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) Customer UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0586f655-9de8-4767-9dac-8d1fd7c5f65e",
+              "name": "Job schedules",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":cUUID",
+                    "job-schedules",
+                    "page"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) Customer UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entities\": [\n    {\n      \"spec\": {\n        \"job_config\": {\n          \"classname\": \"classname\",\n          \"config\": {\n            \"key\": \"{}\"\n          }\n        },\n        \"name\": \"name\",\n        \"schedule_config\": {\n          \"interval_secs\": 0,\n          \"disabled\": true,\n          \"type\": \"FIXED_DELAY\",\n          \"snooze_until\": \"2024-07-25 13:07:18+00:00\"\n        }\n      },\n      \"info\": {\n        \"last_end_time\": \"2024-07-25 13:07:18+00:00\",\n        \"updated_at\": \"2024-07-25 13:07:18+00:00\",\n        \"execution_count\": 6,\n        \"customer_uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n        \"created_at\": \"2024-07-25 13:07:18+00:00\",\n        \"failed_count\": 1,\n        \"next_start_time\": \"2024-07-25 13:07:18+00:00\",\n        \"state\": \"ACTIVE\",\n        \"last_start_time\": \"2024-07-25 13:07:18+00:00\",\n        \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n        \"last_job_instance_uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n      }\n    },\n    {\n      \"spec\": {\n        \"job_config\": {\n          \"classname\": \"classname\",\n          \"config\": {\n            \"key\": \"{}\"\n          }\n        },\n        \"name\": \"name\",\n        \"schedule_config\": {\n          \"interval_secs\": 0,\n          \"disabled\": true,\n          \"type\": \"FIXED_DELAY\",\n          \"snooze_until\": \"2024-07-25 13:07:18+00:00\"\n        }\n      },\n      \"info\": {\n        \"last_end_time\": \"2024-07-25 13:07:18+00:00\",\n        \"updated_at\": \"2024-07-25 13:07:18+00:00\",\n        \"execution_count\": 6,\n        \"customer_uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n        \"created_at\": \"2024-07-25 13:07:18+00:00\",\n        \"failed_count\": 1,\n        \"next_start_time\": \"2024-07-25 13:07:18+00:00\",\n        \"state\": \"ACTIVE\",\n        \"last_start_time\": \"2024-07-25 13:07:18+00:00\",\n        \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n        \"last_job_instance_uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n      }\n    }\n  ],\n  \"total_count\": 0,\n  \"has_next\": true,\n  \"has_prev\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e51ab46-0712-4f94-94bb-5ed11cf17528",
+              "name": "Invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":cUUID",
+                    "job-schedules",
+                    "page"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) Customer UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f7f60ec5-d7bc-498b-8f07-38fd12f06dec",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":cUUID",
+                    "job-schedules",
+                    "page"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) Customer UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b47de44-b246-418b-82fa-ef1bfaf51b98",
+          "name": "YugabyteDB Anywhere List Job Instances (paginated)",
+          "request": {
+            "name": "YugabyteDB Anywhere List Job Instances (paginated)",
+            "description": {
+              "content": "WARNING: This is a preview API that could change.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers",
+                ":cUUID",
+                "job-schedules",
+                ":jUUID",
+                "job-instances",
+                "page"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) Customer UUID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "jUUID",
+                  "description": "(Required) Job Schedule UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "966a520e-075b-4045-9a32-32d6543236d3",
+              "name": "Job instances",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":cUUID",
+                    "job-schedules",
+                    ":jUUID",
+                    "job-instances",
+                    "page"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) Customer UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "jUUID",
+                      "description": "(Required) Job Schedule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entities\": [\n    {\n      \"start_time\": \"2024-07-25 13:07:18+00:00\",\n      \"job_schedule_uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"end_time\": \"2024-07-25 13:07:18+00:00\",\n      \"created_at\": \"2024-07-25 13:07:18+00:00\",\n      \"state\": \"FAILED\",\n      \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n    },\n    {\n      \"start_time\": \"2024-07-25 13:07:18+00:00\",\n      \"job_schedule_uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"end_time\": \"2024-07-25 13:07:18+00:00\",\n      \"created_at\": \"2024-07-25 13:07:18+00:00\",\n      \"state\": \"FAILED\",\n      \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n    }\n  ],\n  \"total_count\": 0,\n  \"has_next\": true,\n  \"has_prev\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2949aeb-c40f-4fa1-bb54-f0bb4d623f16",
+              "name": "Invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":cUUID",
+                    "job-schedules",
+                    ":jUUID",
+                    "job-instances",
+                    "page"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) Customer UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "jUUID",
+                      "description": "(Required) Job Schedule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bae3230c-e523-4593-909f-b9c7728f9d86",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":cUUID",
+                    "job-schedules",
+                    ":jUUID",
+                    "job-instances",
+                    "page"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) Customer UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "jUUID",
+                      "description": "(Required) Job Schedule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "09f05a82-a4dd-4f9d-9926-80523a6dffc5",
+          "name": "YugabyteDB Anywhere Snooze Job Schedule",
+          "request": {
+            "name": "YugabyteDB Anywhere Snooze Job Schedule",
+            "description": {
+              "content": "WARNING: This is a preview API that could change.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers",
+                ":cUUID",
+                "job-schedules",
+                ":jUUID",
+                "snooze"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) Customer UUID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "jUUID",
+                  "description": "(Required) Job Schedule UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"snooze_secs\": \"<long>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "829d87d5-2768-4dd5-8415-e7facf9032ee",
+              "name": "Job schedule",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":cUUID",
+                    "job-schedules",
+                    ":jUUID",
+                    "snooze"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) Customer UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "jUUID",
+                      "description": "(Required) Job Schedule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"spec\": {\n    \"job_config\": {\n      \"classname\": \"classname\",\n      \"config\": {\n        \"key\": \"{}\"\n      }\n    },\n    \"name\": \"name\",\n    \"schedule_config\": {\n      \"interval_secs\": 0,\n      \"disabled\": true,\n      \"type\": \"FIXED_DELAY\",\n      \"snooze_until\": \"2024-07-25 13:07:18+00:00\"\n    }\n  },\n  \"info\": {\n    \"last_end_time\": \"2024-07-25 13:07:18+00:00\",\n    \"updated_at\": \"2024-07-25 13:07:18+00:00\",\n    \"execution_count\": 6,\n    \"customer_uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"created_at\": \"2024-07-25 13:07:18+00:00\",\n    \"failed_count\": 1,\n    \"next_start_time\": \"2024-07-25 13:07:18+00:00\",\n    \"state\": \"ACTIVE\",\n    \"last_start_time\": \"2024-07-25 13:07:18+00:00\",\n    \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"last_job_instance_uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56c359c3-d955-4bf3-bcc9-58db7535743c",
+              "name": "Invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":cUUID",
+                    "job-schedules",
+                    ":jUUID",
+                    "snooze"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) Customer UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "jUUID",
+                      "description": "(Required) Job Schedule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5e229804-db48-40de-8e7b-1a5102943e48",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":cUUID",
+                    "job-schedules",
+                    ":jUUID",
+                    "snooze"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) Customer UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "jUUID",
+                      "description": "(Required) Job Schedule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cloud.yugabyte.com/api/public/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "968f7e25-d9b3-449c-b763-cd267a97970c",
+    "name": "YugabyteDB Aeon REST Access Keys Job Scheduler API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+      "type": "text/plain"
+    }
+  }
+}

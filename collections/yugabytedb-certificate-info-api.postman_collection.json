@@ -1,0 +1,1175 @@
+{
+  "item": [
+    {
+      "id": "6c87ffef-8fff-4e40-888f-638261293e67",
+      "name": "Certificate Info",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "008a4f9c-52f3-4f31-9293-795f9b91c15e",
+          "name": "YugabyteDB Anywhere List a Customer's Certificates",
+          "request": {
+            "name": "YugabyteDB Anywhere List a Customer's Certificates",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "certificates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "055329b5-ce94-448c-ab4e-8420d92a32d3",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "certificates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"customServerCertInfo\": {\n      \"serverCert\": \"serverCert\",\n      \"serverKey\": \"serverKey\"\n    },\n    \"certType\": \"SelfSigned\",\n    \"customHCPKICertInfo\": {\n      \"vaultAddr\": \"vaultAddr\",\n      \"vaultRoleID\": \"vaultRoleID\",\n      \"mountPath\": \"mountPath\",\n      \"role\": \"role\",\n      \"engine\": \"engine\",\n      \"ttlExpiry\": 6,\n      \"vaultAuthNamespace\": \"vaultAuthNamespace\",\n      \"vaultSecretID\": \"vaultSecretID\",\n      \"ttl\": 0,\n      \"vaultToken\": \"vaultToken\"\n    },\n    \"certificate\": \"/opt/yugaware/certs/.../ca.root.cert\",\n    \"label\": \"yb-admin-example\",\n    \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"expiryDateIso\": \"2022-12-12 13:07:18+00:00\",\n    \"expiryDate\": \"2000-01-23 04:56:07+00:00\",\n    \"privateKey\": \"/opt/yugaware/.../example.key.pem\",\n    \"customerUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"universeDetails\": [\n      {\n        \"universePaused\": true,\n        \"updateSucceeded\": true,\n        \"name\": \"name\",\n        \"updateInProgress\": true,\n        \"creationDate\": 1,\n        \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n      },\n      {\n        \"universePaused\": true,\n        \"updateSucceeded\": true,\n        \"name\": \"name\",\n        \"updateInProgress\": true,\n        \"creationDate\": 1,\n        \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n      }\n    ],\n    \"startDateIso\": \"2022-12-12 13:07:18+00:00\",\n    \"universeDetailSubsets\": [\n      {\n        \"universePaused\": true,\n        \"updateSucceeded\": true,\n        \"name\": \"name\",\n        \"updateInProgress\": true,\n        \"creationDate\": 1,\n        \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n      },\n      {\n        \"universePaused\": true,\n        \"updateSucceeded\": true,\n        \"name\": \"name\",\n        \"updateInProgress\": true,\n        \"creationDate\": 1,\n        \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n      }\n    ],\n    \"checksum\": \"checksum\",\n    \"inUse\": true,\n    \"customCertPathParams\": {\n      \"nodeCertPath\": \"nodeCertPath\",\n      \"nodeKeyPath\": \"nodeKeyPath\",\n      \"clientKeyPath\": \"clientKeyPath\",\n      \"clientCertPath\": \"clientCertPath\",\n      \"rootCertPath\": \"rootCertPath\"\n    },\n    \"startDate\": \"2000-01-23 04:56:07+00:00\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9058b432-1dc9-4121-bc56-79b5d51187a6",
+              "name": "If there was a server or database issue when listing the regions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "certificates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"requestUri\": \"/customers/8918921-af3782-633de/universe/8173ab-fd2453/create\",\n  \"error\": \"There was a problem creating the universe\",\n  \"httpMethod\": \"POST\",\n  \"errorJson\": \"{ \\\"foo\\\" : \\\"bar\\\", \\\"baz\\\" : [1, 2, 3] }\",\n  \"requestJson\": \"{ \\\"foo\\\" : \\\"bar\\\", \\\"baz\\\" : [1, 2, 3] }\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "98266619-0c4c-4a26-aa71-ee6050afbf15",
+          "name": "YugabyteDB Anywhere Restore a Certificate from Backup",
+          "request": {
+            "name": "YugabyteDB Anywhere Restore a Certificate from Backup",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "certificates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"certContent\": \"<string>\",\n  \"certExpiry\": \"<long>\",\n  \"certStart\": \"<long>\",\n  \"certType\": \"<string>\",\n  \"label\": \"<string>\",\n  \"customCertInfo\": {\n    \"clientCertPath\": \"<string>\",\n    \"clientKeyPath\": \"<string>\",\n    \"nodeCertPath\": \"<string>\",\n    \"nodeKeyPath\": \"<string>\",\n    \"rootCertPath\": \"<string>\"\n  },\n  \"customServerCertData\": {\n    \"serverCertContent\": \"<string>\",\n    \"serverKeyContent\": \"<string>\"\n  },\n  \"hcVaultCertParams\": {\n    \"engine\": \"<string>\",\n    \"mountPath\": \"<string>\",\n    \"role\": \"<string>\",\n    \"vaultAddr\": \"<string>\",\n    \"ttl\": \"<long>\",\n    \"ttlExpiry\": \"<long>\",\n    \"vaultAuthNamespace\": \"<string>\",\n    \"vaultRoleID\": \"<string>\",\n    \"vaultSecretID\": \"<string>\",\n    \"vaultToken\": \"<string>\"\n  },\n  \"keyContent\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7186fac7-7921-4114-8a6c-a698600da6cb",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "certificates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"certStart\": 6,\n  \"customCertInfo\": {\n    \"nodeCertPath\": \"nodeCertPath\",\n    \"nodeKeyPath\": \"nodeKeyPath\",\n    \"clientKeyPath\": \"clientKeyPath\",\n    \"clientCertPath\": \"clientCertPath\",\n    \"rootCertPath\": \"rootCertPath\"\n  },\n  \"customServerCertData\": {\n    \"serverCertContent\": \"serverCertContent\",\n    \"serverKeyContent\": \"serverKeyContent\"\n  },\n  \"certType\": \"SelfSigned\",\n  \"certContent\": \"certContent\",\n  \"certExpiry\": 0,\n  \"keyContent\": \"keyContent\",\n  \"label\": \"label\",\n  \"hcVaultCertParams\": {\n    \"vaultAddr\": \"vaultAddr\",\n    \"vaultRoleID\": \"vaultRoleID\",\n    \"mountPath\": \"mountPath\",\n    \"role\": \"role\",\n    \"engine\": \"engine\",\n    \"ttlExpiry\": 6,\n    \"vaultAuthNamespace\": \"vaultAuthNamespace\",\n    \"vaultSecretID\": \"vaultSecretID\",\n    \"ttl\": 0,\n    \"vaultToken\": \"vaultToken\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "be9b6691-4c81-4cb1-9dfc-af4f54c23540",
+          "name": "YugabyteDB Anywhere Create a Self Signed Certificate",
+          "request": {
+            "name": "YugabyteDB Anywhere Create a Self Signed Certificate",
+            "description": {
+              "content": "YbaApi Internal.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "certificates",
+                "create_self_signed_cert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "<string>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3f984d1d-e821-4600-a3dd-6de24c931133",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "certificates",
+                    "create_self_signed_cert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "string",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "181b1640-b1b3-4074-a949-e434a1a3be61",
+          "name": "YugabyteDB Anywhere Get a Certificate's UUID",
+          "request": {
+            "name": "YugabyteDB Anywhere Get a Certificate's UUID",
+            "description": {
+              "content": "YbaApi Internal.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "certificates",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "2d85e41b-6964-4066-a178-cda8943f83bf",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "certificates",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b30bf18b-8263-4553-b7b3-f10f8a88e199",
+          "name": "YugabyteDB Anywhere Delete a Certificate",
+          "request": {
+            "name": "YugabyteDB Anywhere Delete a Certificate",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "certificates",
+                ":rUUID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "rUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE"
+          },
+          "response": [
+            {
+              "id": "951cd820-6da0-4a10-a2ea-f04ad8b9f62d",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "certificates",
+                    ":rUUID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "rUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fbab9326-1c55-4eff-a110-172cf7a4f6cf",
+          "name": "YugabyteDB Anywhere Add a Client Certificate",
+          "request": {
+            "name": "YugabyteDB Anywhere Add a Client Certificate",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "certificates",
+                ":rUUID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "rUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"certExpiry\": \"<long>\",\n  \"certStart\": \"<long>\",\n  \"username\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a650b41c-4aac-41d2-87b5-633fe69d674c",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "certificates",
+                    ":rUUID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "rUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"certStart\": 6,\n  \"certExpiry\": 0,\n  \"username\": \"username\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"yugabytedb.key\": \"yugabytedb.key\",\n  \"yugabytedb.crt\": \"yugabytedb.crt\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "339cb0ef-8493-4eb5-9192-1082a9b6db17",
+          "name": "YugabyteDB Anywhere Get a Customer's Root Certificate",
+          "request": {
+            "name": "YugabyteDB Anywhere Get a Customer's Root Certificate",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "certificates",
+                ":rUUID",
+                "download"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "rUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "0bd75d87-980c-4bd4-be7d-90ae15d99235",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "certificates",
+                    ":rUUID",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "rUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9b6d1c14-2ebf-48c6-bd63-b7d7d29db3d6",
+          "name": "YugabyteDB Anywhere Edit TLS Certificate Config Details",
+          "request": {
+            "name": "YugabyteDB Anywhere Edit TLS Certificate Config Details",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "certificates",
+                ":rUUID",
+                "edit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "rUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"certContent\": \"<string>\",\n  \"certExpiry\": \"<long>\",\n  \"certStart\": \"<long>\",\n  \"certType\": \"<string>\",\n  \"label\": \"<string>\",\n  \"customCertInfo\": {\n    \"clientCertPath\": \"<string>\",\n    \"clientKeyPath\": \"<string>\",\n    \"nodeCertPath\": \"<string>\",\n    \"nodeKeyPath\": \"<string>\",\n    \"rootCertPath\": \"<string>\"\n  },\n  \"customServerCertData\": {\n    \"serverCertContent\": \"<string>\",\n    \"serverKeyContent\": \"<string>\"\n  },\n  \"hcVaultCertParams\": {\n    \"engine\": \"<string>\",\n    \"mountPath\": \"<string>\",\n    \"role\": \"<string>\",\n    \"vaultAddr\": \"<string>\",\n    \"ttl\": \"<long>\",\n    \"ttlExpiry\": \"<long>\",\n    \"vaultAuthNamespace\": \"<string>\",\n    \"vaultRoleID\": \"<string>\",\n    \"vaultSecretID\": \"<string>\",\n    \"vaultToken\": \"<string>\"\n  },\n  \"keyContent\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9f257482-65df-488f-addc-3613d038a535",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "certificates",
+                    ":rUUID",
+                    "edit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "rUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"certStart\": 6,\n  \"customCertInfo\": {\n    \"nodeCertPath\": \"nodeCertPath\",\n    \"nodeKeyPath\": \"nodeKeyPath\",\n    \"clientKeyPath\": \"clientKeyPath\",\n    \"clientCertPath\": \"clientCertPath\",\n    \"rootCertPath\": \"rootCertPath\"\n  },\n  \"customServerCertData\": {\n    \"serverCertContent\": \"serverCertContent\",\n    \"serverKeyContent\": \"serverKeyContent\"\n  },\n  \"certType\": \"SelfSigned\",\n  \"certContent\": \"certContent\",\n  \"certExpiry\": 0,\n  \"keyContent\": \"keyContent\",\n  \"label\": \"label\",\n  \"hcVaultCertParams\": {\n    \"vaultAddr\": \"vaultAddr\",\n    \"vaultRoleID\": \"vaultRoleID\",\n    \"mountPath\": \"mountPath\",\n    \"role\": \"role\",\n    \"engine\": \"engine\",\n    \"ttlExpiry\": 6,\n    \"vaultAuthNamespace\": \"vaultAuthNamespace\",\n    \"vaultSecretID\": \"vaultSecretID\",\n    \"ttl\": 0,\n    \"vaultToken\": \"vaultToken\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f87b907d-7903-4a03-9a93-cfdef91a1460",
+          "name": "YugabyteDB Anywhere Update an Empty Certificate",
+          "request": {
+            "name": "YugabyteDB Anywhere Update an Empty Certificate",
+            "description": {
+              "content": "YbaApi Internal.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "certificates",
+                ":rUUID",
+                "update_empty_cert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "rUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST"
+          },
+          "response": [
+            {
+              "id": "1686962f-6899-4e98-bd24-18ca74040520",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "certificates",
+                    ":rUUID",
+                    "update_empty_cert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "rUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"customServerCertInfo\": {\n    \"serverCert\": \"serverCert\",\n    \"serverKey\": \"serverKey\"\n  },\n  \"certType\": \"SelfSigned\",\n  \"customHCPKICertInfo\": {\n    \"vaultAddr\": \"vaultAddr\",\n    \"vaultRoleID\": \"vaultRoleID\",\n    \"mountPath\": \"mountPath\",\n    \"role\": \"role\",\n    \"engine\": \"engine\",\n    \"ttlExpiry\": 6,\n    \"vaultAuthNamespace\": \"vaultAuthNamespace\",\n    \"vaultSecretID\": \"vaultSecretID\",\n    \"ttl\": 0,\n    \"vaultToken\": \"vaultToken\"\n  },\n  \"certificate\": \"/opt/yugaware/certs/.../ca.root.cert\",\n  \"label\": \"yb-admin-example\",\n  \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"expiryDateIso\": \"2022-12-12 13:07:18+00:00\",\n  \"expiryDate\": \"2000-01-23 04:56:07+00:00\",\n  \"privateKey\": \"/opt/yugaware/.../example.key.pem\",\n  \"customerUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"universeDetails\": [\n    {\n      \"universePaused\": true,\n      \"updateSucceeded\": true,\n      \"name\": \"name\",\n      \"updateInProgress\": true,\n      \"creationDate\": 1,\n      \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n    },\n    {\n      \"universePaused\": true,\n      \"updateSucceeded\": true,\n      \"name\": \"name\",\n      \"updateInProgress\": true,\n      \"creationDate\": 1,\n      \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n    }\n  ],\n  \"startDateIso\": \"2022-12-12 13:07:18+00:00\",\n  \"universeDetailSubsets\": [\n    {\n      \"universePaused\": true,\n      \"updateSucceeded\": true,\n      \"name\": \"name\",\n      \"updateInProgress\": true,\n      \"creationDate\": 1,\n      \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n    },\n    {\n      \"universePaused\": true,\n      \"updateSucceeded\": true,\n      \"name\": \"name\",\n      \"updateInProgress\": true,\n      \"creationDate\": 1,\n      \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n    }\n  ],\n  \"checksum\": \"checksum\",\n  \"inUse\": true,\n  \"customCertPathParams\": {\n    \"nodeCertPath\": \"nodeCertPath\",\n    \"nodeKeyPath\": \"nodeKeyPath\",\n    \"clientKeyPath\": \"clientKeyPath\",\n    \"clientCertPath\": \"clientCertPath\",\n    \"rootCertPath\": \"rootCertPath\"\n  },\n  \"startDate\": \"2000-01-23 04:56:07+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cloud.yugabyte.com/api/public/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "51181f82-6fec-437a-9d48-9ebeb89ca5f5",
+    "name": "YugabyteDB Aeon REST Access Keys Certificate Info API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+      "type": "text/plain"
+    }
+  }
+}

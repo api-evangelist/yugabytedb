@@ -1,0 +1,1133 @@
+{
+  "item": [
+    {
+      "id": "99e26d9e-5746-4c21-a7c7-88a46330684d",
+      "name": "User management",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4d5fabd8-7b5d-4ff8-9e56-d4d6e2478762",
+          "name": "YugabyteDB Anywhere Reset the User's Password",
+          "request": {
+            "name": "YugabyteDB Anywhere Reset the User's Password",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "reset_password"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currentPassword\": \"<string>\",\n  \"newPassword\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d4011b5d-4fb8-4314-be7e-764d836d9e6a",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "reset_password"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"newPassword\": \"Test@1234\",\n  \"currentPassword\": \"Test@1234\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "55492a6b-f71a-45c3-b64e-6c9b9d513d47",
+          "name": "YugabyteDB Anywhere List All Users",
+          "request": {
+            "name": "YugabyteDB Anywhere List All Users",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "null",
+                  "description": "Optional email to filter user list"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "11e35b9a-3f6b-4ab8-978c-037d89b1112c",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "null"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"ldapSpecifiedRole\": true,\n    \"customerUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"role\": \"Admin\",\n    \"authTokenIssueDate\": \"2021-06-17 15:00:05+00:00\",\n    \"timezone\": \"timezone\",\n    \"oidcJwtAuthToken\": \"oidcJwtAuthToken\",\n    \"groupMemberships\": [\n      \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n      \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n    ],\n    \"userType\": \"local\",\n    \"creationDate\": \"2022-12-12 13:07:18+00:00\",\n    \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"email\": \"username1@example.com\",\n    \"primary\": true\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "90abbcbe-2625-4be4-88d8-98d9d9c52ded",
+          "name": "YugabyteDB Anywhere Create a User",
+          "request": {
+            "name": "YugabyteDB Anywhere Create a User",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<string>\",\n  \"confirmPassword\": \"<string>\",\n  \"features\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {},\n    \"key_3\": {},\n    \"key_4\": {}\n  },\n  \"password\": \"<string>\",\n  \"role\": \"<string>\",\n  \"roleResourceDefinitions\": [\n    {\n      \"roleUUID\": \"<uuid>\",\n      \"resourceGroup\": {\n        \"resourceDefinitionSet\": [\n          {\n            \"allowAll\": \"<boolean>\",\n            \"resourceType\": \"<string>\",\n            \"resourceUUIDSet\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"allowAll\": \"<boolean>\",\n            \"resourceType\": \"<string>\",\n            \"resourceUUIDSet\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      }\n    },\n    {\n      \"roleUUID\": \"<uuid>\",\n      \"resourceGroup\": {\n        \"resourceDefinitionSet\": [\n          {\n            \"allowAll\": \"<boolean>\",\n            \"resourceType\": \"<string>\",\n            \"resourceUUIDSet\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"allowAll\": \"<boolean>\",\n            \"resourceType\": \"<string>\",\n            \"resourceUUIDSet\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      }\n    }\n  ],\n  \"timezone\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e4f0f889-82e5-4917-9c4e-3a8f24b9067a",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"features\": {\n    \"key\": \"{}\"\n  },\n  \"password\": \"Test@1234\",\n  \"role\": \"Admin\",\n  \"timezone\": \"America/Toronto\",\n  \"confirmPassword\": \"Test@1234\",\n  \"roleResourceDefinitions\": [\n    {\n      \"resourceGroup\": {\n        \"resourceDefinitionSet\": [\n          {\n            \"allowAll\": true,\n            \"resourceUUIDSet\": [\n              \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n              \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n            ],\n            \"resourceType\": \"UNIVERSE\"\n          },\n          {\n            \"allowAll\": true,\n            \"resourceUUIDSet\": [\n              \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n              \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n            ],\n            \"resourceType\": \"UNIVERSE\"\n          }\n        ]\n      },\n      \"roleUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n    },\n    {\n      \"resourceGroup\": {\n        \"resourceDefinitionSet\": [\n          {\n            \"allowAll\": true,\n            \"resourceUUIDSet\": [\n              \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n              \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n            ],\n            \"resourceType\": \"UNIVERSE\"\n          },\n          {\n            \"allowAll\": true,\n            \"resourceUUIDSet\": [\n              \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n              \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n            ],\n            \"resourceType\": \"UNIVERSE\"\n          }\n        ]\n      },\n      \"roleUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n    }\n  ],\n  \"email\": \"test@example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ldapSpecifiedRole\": true,\n  \"customerUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"role\": \"Admin\",\n  \"authTokenIssueDate\": \"2021-06-17 15:00:05+00:00\",\n  \"timezone\": \"timezone\",\n  \"oidcJwtAuthToken\": \"oidcJwtAuthToken\",\n  \"groupMemberships\": [\n    \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n  ],\n  \"userType\": \"local\",\n  \"creationDate\": \"2022-12-12 13:07:18+00:00\",\n  \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"email\": \"username1@example.com\",\n  \"primary\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4cc41979-b56f-4643-a3b5-e766b2350eaf",
+          "name": "YugabyteDB Anywhere Delete a User",
+          "request": {
+            "name": "YugabyteDB Anywhere Delete a User",
+            "description": {
+              "content": "Deletes the specified user. Note that you can't delete a customer's primary user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "users",
+                ":uUUID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE"
+          },
+          "response": [
+            {
+              "id": "11325019-eab2-4dab-9e9b-3829e4299799",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "users",
+                    ":uUUID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af016c29-96e5-48ff-8bb1-099f27f2e70c",
+          "name": "YugabyteDB Anywhere Get a User's Details",
+          "request": {
+            "name": "YugabyteDB Anywhere Get a User's Details",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "users",
+                ":uUUID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "0e22517c-1f77-47d2-822c-89264130e9ac",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "users",
+                    ":uUUID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ldapSpecifiedRole\": true,\n  \"customerUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"role\": \"Admin\",\n  \"authTokenIssueDate\": \"2021-06-17 15:00:05+00:00\",\n  \"timezone\": \"timezone\",\n  \"oidcJwtAuthToken\": \"oidcJwtAuthToken\",\n  \"groupMemberships\": [\n    \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n  ],\n  \"userType\": \"local\",\n  \"creationDate\": \"2022-12-12 13:07:18+00:00\",\n  \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"email\": \"username1@example.com\",\n  \"primary\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "60816c51-c465-49f6-ab70-3dd90acf2db4",
+          "name": "YugabyteDB Anywhere Change a User's Role",
+          "request": {
+            "name": "YugabyteDB Anywhere Change a User's Role",
+            "description": {
+              "content": "Deprecated. Use this method instead: setRoleBinding.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "users",
+                ":uUUID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "role",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT"
+          },
+          "response": [
+            {
+              "id": "17fe4ddf-b5d5-4732-8219-a28a31284fcb",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "users",
+                    ":uUUID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "role",
+                      "value": "example-role"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1f3f2840-43ed-4645-8153-764d8b913445",
+          "name": "YugabyteDB Anywhere Change Password - Deprecated",
+          "request": {
+            "name": "YugabyteDB Anywhere Change Password - Deprecated",
+            "description": {
+              "content": "<b style=\"color:#ff0000\">Deprecated since YBA version 2024.1.0.0.</b></p>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "users",
+                ":uUUID",
+                "change_password"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<string>\",\n  \"confirmPassword\": \"<string>\",\n  \"features\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {},\n    \"key_3\": {},\n    \"key_4\": {}\n  },\n  \"password\": \"<string>\",\n  \"role\": \"<string>\",\n  \"roleResourceDefinitions\": [\n    {\n      \"roleUUID\": \"<uuid>\",\n      \"resourceGroup\": {\n        \"resourceDefinitionSet\": [\n          {\n            \"allowAll\": \"<boolean>\",\n            \"resourceType\": \"<string>\",\n            \"resourceUUIDSet\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"allowAll\": \"<boolean>\",\n            \"resourceType\": \"<string>\",\n            \"resourceUUIDSet\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      }\n    },\n    {\n      \"roleUUID\": \"<uuid>\",\n      \"resourceGroup\": {\n        \"resourceDefinitionSet\": [\n          {\n            \"allowAll\": \"<boolean>\",\n            \"resourceType\": \"<string>\",\n            \"resourceUUIDSet\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"allowAll\": \"<boolean>\",\n            \"resourceType\": \"<string>\",\n            \"resourceUUIDSet\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      }\n    }\n  ],\n  \"timezone\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2e426d85-ca4c-4e12-a913-6e9b61a4f73f",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "users",
+                    ":uUUID",
+                    "change_password"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"features\": {\n    \"key\": \"{}\"\n  },\n  \"password\": \"Test@1234\",\n  \"role\": \"Admin\",\n  \"timezone\": \"America/Toronto\",\n  \"confirmPassword\": \"Test@1234\",\n  \"roleResourceDefinitions\": [\n    {\n      \"resourceGroup\": {\n        \"resourceDefinitionSet\": [\n          {\n            \"allowAll\": true,\n            \"resourceUUIDSet\": [\n              \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n              \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n            ],\n            \"resourceType\": \"UNIVERSE\"\n          },\n          {\n            \"allowAll\": true,\n            \"resourceUUIDSet\": [\n              \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n              \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n            ],\n            \"resourceType\": \"UNIVERSE\"\n          }\n        ]\n      },\n      \"roleUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n    },\n    {\n      \"resourceGroup\": {\n        \"resourceDefinitionSet\": [\n          {\n            \"allowAll\": true,\n            \"resourceUUIDSet\": [\n              \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n              \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n            ],\n            \"resourceType\": \"UNIVERSE\"\n          },\n          {\n            \"allowAll\": true,\n            \"resourceUUIDSet\": [\n              \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n              \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n            ],\n            \"resourceType\": \"UNIVERSE\"\n          }\n        ]\n      },\n      \"roleUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n    }\n  ],\n  \"email\": \"test@example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fc42ca0b-3eea-43b5-9388-b6feb3b5c364",
+          "name": "YugabyteDB Anywhere Retrieve OIDC Auth Token",
+          "request": {
+            "name": "YugabyteDB Anywhere Retrieve OIDC Auth Token",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "users",
+                ":uUUID",
+                "oidc_auth_token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "f9b8d0bd-810b-4e36-a409-56e0239b70bf",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "users",
+                    ":uUUID",
+                    "oidc_auth_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"oidcAuthToken\": \"oidcAuthToken\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f6d6ca6-44f3-45c0-baab-0344992579e1",
+          "name": "YugabyteDB Anywhere Update a User's Profile",
+          "request": {
+            "name": "YugabyteDB Anywhere Update a User's Profile",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "users",
+                ":uUUID",
+                "update_profile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"role\": \"<string>\",\n  \"confirmPassword\": \"<string>\",\n  \"password\": \"<string>\",\n  \"timezone\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9cb44db4-8dc9-445b-939a-a961720edd96",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "users",
+                    ":uUUID",
+                    "update_profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"Test@1234\",\n  \"role\": \"Admin\",\n  \"timezone\": \"America/Toronto\",\n  \"confirmPassword\": \"Test@1234\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ldapSpecifiedRole\": true,\n  \"customerUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"role\": \"Admin\",\n  \"authTokenIssueDate\": \"2021-06-17 15:00:05+00:00\",\n  \"timezone\": \"timezone\",\n  \"oidcJwtAuthToken\": \"oidcJwtAuthToken\",\n  \"groupMemberships\": [\n    \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n  ],\n  \"userType\": \"local\",\n  \"creationDate\": \"2022-12-12 13:07:18+00:00\",\n  \"uuid\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"email\": \"username1@example.com\",\n  \"primary\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cloud.yugabyte.com/api/public/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f5e31a70-165f-4e89-be9e-01a92d130e2a",
+    "name": "YugabyteDB Aeon REST Access Keys User management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+      "type": "text/plain"
+    }
+  }
+}

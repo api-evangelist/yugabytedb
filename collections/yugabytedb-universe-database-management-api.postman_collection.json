@@ -1,0 +1,854 @@
+{
+  "item": [
+    {
+      "id": "50bd8a93-77b4-457c-89a2-eb1a7dfddde4",
+      "name": "Universe database management",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "427e42d3-d83c-4f18-89ba-2be0d31dca54",
+          "name": "YugabyteDB Anywhere Create a Database User for a Universe",
+          "request": {
+            "name": "YugabyteDB Anywhere Create a Database User for a Universe",
+            "description": {
+              "content": "YbaApi Internal.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "universes",
+                ":uniUUID",
+                "create_db_credentials"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uniUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dbName\": \"<string>\",\n  \"password\": \"<string>\",\n  \"username\": \"<string>\",\n  \"ycqlAdminPassword\": \"<string>\",\n  \"ycqlAdminUsername\": \"<string>\",\n  \"ysqlAdminPassword\": \"<string>\",\n  \"ysqlAdminUsername\": \"<string>\",\n  \"dbRoleAttributes\": [\n    {\n      \"name\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3ef64b09-6bdb-4d9c-888a-b75983cdb591",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "universes",
+                    ":uniUUID",
+                    "create_db_credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uniUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"password\",\n  \"ycqlAdminUsername\": \"ycqlAdminUsername\",\n  \"dbRoleAttributes\": [\n    {\n      \"name\": \"SUPERUSER\"\n    },\n    {\n      \"name\": \"SUPERUSER\"\n    }\n  ],\n  \"ysqlAdminPassword\": \"ysqlAdminPassword\",\n  \"dbName\": \"dbName\",\n  \"ycqlAdminPassword\": \"ycqlAdminPassword\",\n  \"username\": \"username\",\n  \"ysqlAdminUsername\": \"ysqlAdminUsername\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d263b07-0a53-4da7-a1ef-b437e29fba96",
+          "name": "YugabyteDB Anywhere Run a YSQL Query in a Universe",
+          "request": {
+            "name": "YugabyteDB Anywhere Run a YSQL Query in a Universe",
+            "description": {
+              "content": "YbaApi Internal. Runs a YSQL query. Only valid when the platform is running in `OSS` mode.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "universes",
+                ":uniUUID",
+                "run_query"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uniUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"db_name\": \"<string>\",\n  \"node_name\": \"<string>\",\n  \"query\": \"<string>\",\n  \"table_type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1c9fec6f-5013-4655-a676-294437edf9e5",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "universes",
+                    ":uniUUID",
+                    "run_query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uniUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"db_name\": \"db_name\",\n  \"query\": \"query\",\n  \"node_name\": \"node_name\",\n  \"table_type\": \"YQL_TABLE_TYPE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ac2584c8-f3dc-4b25-9ff1-3dca2cf79933",
+          "name": "YugabyteDB Anywhere Set a Universe's Database Credentials",
+          "request": {
+            "name": "YugabyteDB Anywhere Set a Universe's Database Credentials",
+            "description": {
+              "content": "YbaApi Internal.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "universes",
+                ":uniUUID",
+                "update_db_credentials"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uniUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dbName\": \"<string>\",\n  \"ycqlAdminPassword\": \"<string>\",\n  \"ycqlAdminUsername\": \"<string>\",\n  \"ycqlCurrAdminPassword\": \"<string>\",\n  \"ysqlAdminPassword\": \"<string>\",\n  \"ysqlAdminUsername\": \"<string>\",\n  \"ysqlCurrAdminPassword\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f9b929da-002a-4a03-927c-814cd0f8603b",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "universes",
+                    ":uniUUID",
+                    "update_db_credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uniUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ycqlAdminUsername\": \"ycqlAdminUsername\",\n  \"ysqlAdminPassword\": \"ysqlAdminPassword\",\n  \"dbName\": \"dbName\",\n  \"ycqlAdminPassword\": \"ycqlAdminPassword\",\n  \"ycqlCurrAdminPassword\": \"ycqlCurrAdminPassword\",\n  \"ysqlCurrAdminPassword\": \"ysqlCurrAdminPassword\",\n  \"ysqlAdminUsername\": \"ysqlAdminUsername\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "78a2f727-88df-4858-acb9-c0681c9ac2fe",
+          "name": "YugabyteDB Anywhere Configure YCQL",
+          "request": {
+            "name": "YugabyteDB Anywhere Configure YCQL",
+            "description": {
+              "content": "WARNING: This is a preview API that could change. Queues a task to configure ycql in a universe.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "universes",
+                ":univUUID",
+                "configure",
+                "ycql"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "univUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"communicationPorts\": {\n    \"internalYsqlServerRpcPort\": \"<integer>\",\n    \"masterHttpPort\": \"<integer>\",\n    \"masterRpcPort\": \"<integer>\",\n    \"nodeExporterPort\": \"<integer>\",\n    \"otelCollectorMetricsPort\": \"<integer>\",\n    \"redisServerHttpPort\": \"<integer>\",\n    \"redisServerRpcPort\": \"<integer>\",\n    \"tserverHttpPort\": \"<integer>\",\n    \"tserverRpcPort\": \"<integer>\",\n    \"ybControllerHttpPort\": \"<integer>\",\n    \"ybControllerrRpcPort\": \"<integer>\",\n    \"yqlServerHttpPort\": \"<integer>\",\n    \"yqlServerRpcPort\": \"<integer>\",\n    \"ysqlServerHttpPort\": \"<integer>\",\n    \"ysqlServerRpcPort\": \"<integer>\"\n  },\n  \"enableYCQL\": \"<boolean>\",\n  \"enableYCQLAuth\": \"<boolean>\",\n  \"ycqlPassword\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "775c4ae5-ad1b-4014-bf47-36dbd831ae96",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "universes",
+                    ":univUUID",
+                    "configure",
+                    "ycql"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "univUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enableYCQL\": true,\n  \"enableYCQLAuth\": true,\n  \"ycqlPassword\": \"ycqlPassword\",\n  \"communicationPorts\": {\n    \"nodeExporterPort\": 5,\n    \"tserverHttpPort\": 9,\n    \"internalYsqlServerRpcPort\": 0,\n    \"ybControllerHttpPort\": 2,\n    \"redisServerHttpPort\": 2,\n    \"ybControllerrRpcPort\": 4,\n    \"tserverRpcPort\": 3,\n    \"ysqlServerHttpPort\": 1,\n    \"yqlServerRpcPort\": 1,\n    \"masterHttpPort\": 6,\n    \"otelCollectorMetricsPort\": 5,\n    \"ysqlServerRpcPort\": 1,\n    \"yqlServerHttpPort\": 7,\n    \"masterRpcPort\": 1,\n    \"redisServerRpcPort\": 7\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"taskUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"resourceUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "53896d8f-55d9-4612-b17a-41a8bf482c59",
+          "name": "YugabyteDB Anywhere Configure YSQL",
+          "request": {
+            "name": "YugabyteDB Anywhere Configure YSQL",
+            "description": {
+              "content": "WARNING: This is a preview API that could change. Queues a task to configure ysql in a universe.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "universes",
+                ":univUUID",
+                "configure",
+                "ysql"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "univUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"communicationPorts\": {\n    \"internalYsqlServerRpcPort\": \"<integer>\",\n    \"masterHttpPort\": \"<integer>\",\n    \"masterRpcPort\": \"<integer>\",\n    \"nodeExporterPort\": \"<integer>\",\n    \"otelCollectorMetricsPort\": \"<integer>\",\n    \"redisServerHttpPort\": \"<integer>\",\n    \"redisServerRpcPort\": \"<integer>\",\n    \"tserverHttpPort\": \"<integer>\",\n    \"tserverRpcPort\": \"<integer>\",\n    \"ybControllerHttpPort\": \"<integer>\",\n    \"ybControllerrRpcPort\": \"<integer>\",\n    \"yqlServerHttpPort\": \"<integer>\",\n    \"yqlServerRpcPort\": \"<integer>\",\n    \"ysqlServerHttpPort\": \"<integer>\",\n    \"ysqlServerRpcPort\": \"<integer>\"\n  },\n  \"connectionPoolingGflags\": {\n    \"key_0\": {\n      \"gflagGroups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"inheritFromPrimary\": \"<boolean>\",\n      \"perAZ\": {\n        \"key_0\": {\n          \"value\": {\n            \"key_0\": {\n              \"key_0\": \"<string>\",\n              \"key_1\": \"<string>\",\n              \"key_2\": \"<string>\"\n            }\n          }\n        },\n        \"key_1\": {\n          \"value\": {\n            \"key_0\": {\n              \"key_0\": \"<string>\"\n            },\n            \"key_1\": {\n              \"key_0\": \"<string>\",\n              \"key_1\": \"<string>\"\n            }\n          }\n        }\n      },\n      \"perProcessFlags\": {\n        \"value\": {\n          \"key_0\": {\n            \"key_0\": \"<string>\",\n            \"key_1\": \"<string>\"\n          }\n        }\n      }\n    }\n  },\n  \"enableConnectionPooling\": \"<boolean>\",\n  \"enableYSQL\": \"<boolean>\",\n  \"enableYSQLAuth\": \"<boolean>\",\n  \"ysqlPassword\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f0a5fd4c-6fd4-403c-9778-e537f9c15448",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "universes",
+                    ":univUUID",
+                    "configure",
+                    "ysql"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "univUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ysqlPassword\": \"ysqlPassword\",\n  \"enableYSQL\": true,\n  \"enableConnectionPooling\": true,\n  \"enableYSQLAuth\": true,\n  \"communicationPorts\": {\n    \"nodeExporterPort\": 5,\n    \"tserverHttpPort\": 9,\n    \"internalYsqlServerRpcPort\": 0,\n    \"ybControllerHttpPort\": 2,\n    \"redisServerHttpPort\": 2,\n    \"ybControllerrRpcPort\": 4,\n    \"tserverRpcPort\": 3,\n    \"ysqlServerHttpPort\": 1,\n    \"yqlServerRpcPort\": 1,\n    \"masterHttpPort\": 6,\n    \"otelCollectorMetricsPort\": 5,\n    \"ysqlServerRpcPort\": 1,\n    \"yqlServerHttpPort\": 7,\n    \"masterRpcPort\": 1,\n    \"redisServerRpcPort\": 7\n  },\n  \"connectionPoolingGflags\": {\n    \"key\": {\n      \"inheritFromPrimary\": true,\n      \"perProcessFlags\": {\n        \"value\": {\n          \"key\": {\n            \"key\": \"value\"\n          }\n        }\n      },\n      \"gflagGroups\": \"[\\\"ENHANCED_POSTGRES_COMPATIBILITY\\\"]\",\n      \"perAZ\": {\n        \"key\": {\n          \"value\": {\n            \"key\": {\n              \"key\": \"value\"\n            }\n          }\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"taskUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n  \"resourceUUID\": \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f6463a7-50a4-4c42-b2ac-59d45be97cb1",
+          "name": "Run a shell command",
+          "request": {
+            "name": "Run a shell command",
+            "description": {
+              "content": "This operation is no longer supported, for security reasons.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                ":cUUID",
+                "universes",
+                ":uniUUID",
+                "run_in_shell"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "cUUID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "uniUUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "POST"
+          },
+          "response": [
+            {
+              "id": "038b40f9-baba-41d2-be94-d6354f223a2d",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "customers",
+                    ":cUUID",
+                    "universes",
+                    ":uniUUID",
+                    "run_in_shell"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "cUUID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "uniUUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cloud.yugabyte.com/api/public/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f477048e-f630-400e-b375-21f49e12b0dc",
+    "name": "YugabyteDB Aeon REST Access Keys Universe database management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.\n\nContact Support:\n Name: Yugabyte Support",
+      "type": "text/plain"
+    }
+  }
+}
