@@ -1,15 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Yugabytedb YBA Instance API
-  version: v2
   contact:
     email: support@yugabyte.com
     name: YugabyteDB Anywhere Support
     url: https://docs.yugabyte.com
+  description: An improved set of APIs for managing YugabyteDB Anywhere
   license:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
-  description: 'Operations tagged YBA Instance across 2 of this provider''s published API definitions: openapi.yaml, yugabytedb-anywhere-v2-openapi.yaml. Each path carries the servers of the definition it was published in.'
+  title: YugabyteDB Anywhere V2 YBA Instance API
+  version: v2
 servers:
 - description: API endpoint of YBA server
   url: '{protocol}://{host_port}/api/v2'
@@ -54,17 +54,6 @@ paths:
       x-yba-api-visibility: internal
       x-accepts:
       - application/json
-    servers:
-    - description: API endpoint of YBA server
-      url: '{protocol}://{host_port}/api/v2'
-      variables:
-        protocol:
-          default: http
-          enum:
-          - http
-          - https
-        host_port:
-          default: localhost:9000
 components:
   schemas:
     YBAInfo:
@@ -81,26 +70,8 @@ components:
       title: YBAInfo
       type: object
       x-yba-api-visibility: internal
-    YBAInfo_2:
-      description: Describes YBA instance info
-      example:
-        fips_enabled: true
-      properties:
-        fips_enabled:
-          description: Whether YBA instance is FIPS compliant
-          readOnly: true
-          type: boolean
-          example: true
-      required:
-      - fips_enabled
-      title: YBAInfo
-      type: object
-      x-yba-api-visibility: internal
   securitySchemes:
     apiKeyAuth:
       in: header
       name: X-AUTH-YW-API-TOKEN
       type: apiKey
-x-refined-from:
-- openapi.yaml
-- yugabytedb-anywhere-v2-openapi.yaml

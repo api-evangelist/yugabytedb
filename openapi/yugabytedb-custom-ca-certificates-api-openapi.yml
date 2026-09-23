@@ -1,17 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Yugabytedb Custom CA Certificates API
-  version: v1
   contact:
     name: https://docs.yugabyte.com
+  description: ALPHA - NOT FOR EXTERNAL USE
   license:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
   termsOfService: TODO(chirag)
-  x-refined-note:
-  - x-source differs across the merged source definitions and was not carried
-  - x-split-from differs across the merged source definitions and was not carried
-  description: 'Operations tagged Custom CA Certificates across 3 of this provider''s published API definitions: openapi_2.yaml, yugabytedb-anywhere-v1-full.yaml, yugabytedb-anywhere-v1-providers-infra.yaml. Each path carries the servers of the definition it was published in.'
+  title: YugabyteDB Anywhere Custom CA Certificates API
+  version: v1
 servers:
 - url: /
 tags:
@@ -52,8 +49,6 @@ paths:
       tags:
       - Custom CA Certificates
       x-codegen-request-body-name: X509CACertificate
-    servers:
-    - url: /
   /api/v1/customers/{cUUID}/customCAStore/{certUUID}:
     post:
       description: 'WARNING: This is a preview API that could change.'
@@ -95,8 +90,6 @@ paths:
       tags:
       - Custom CA Certificates
       x-codegen-request-body-name: X509CACertificate
-    servers:
-    - url: /
   /api/v1/customers/{cUUID}/customCAStoreCertificates:
     get:
       description: 'WARNING: This is a preview API that could change.'
@@ -122,8 +115,6 @@ paths:
       summary: List all custom CA certificates of a customer
       tags:
       - Custom CA Certificates
-    servers:
-    - url: /
   /api/v1/customers/{cUUID}/customCAStoreCertificates/{certUUID}:
     delete:
       description: 'WARNING: This is a preview API that could change.'
@@ -187,8 +178,6 @@ paths:
       summary: Download a custom CA certificates of a customer
       tags:
       - Custom CA Certificates
-    servers:
-    - url: /
 components:
   schemas:
     YBPSuccess:
@@ -204,19 +193,6 @@ components:
           description: API operation status. A value of true indicates the operation was successful.
           readOnly: true
           type: boolean
-      type: object
-    CustomCACertParams:
-      example:
-        contents: contents
-        name: name
-      properties:
-        contents:
-          type: string
-        name:
-          type: string
-      required:
-      - contents
-      - name
       type: object
     CustomCaCertificateInfo:
       description: Custom CA certificate
@@ -265,168 +241,17 @@ components:
       - id
       - name
       type: object
-    YBPSuccess_2:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-          example: Example message
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-          example: true
-      type: object
-    CustomCACertParams_2:
+    CustomCACertParams:
       example:
         contents: contents
         name: name
       properties:
         contents:
           type: string
-          example: example-contents
         name:
           type: string
-          example: example-name
       required:
       - contents
-      - name
-      type: object
-    CustomCaCertificateInfo_2:
-      description: Custom CA certificate
-      example:
-        expiryDate: 2024-07-12 13:07:18+00:00
-        contents: /opt/yugaware/certs/trust-store/<ID>/ca.root.cert
-        customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        name: name
-        active: true
-        createdTime: 2023-11-10 15:09:18+00:00
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        startDate: 2023-10-12 13:07:18+00:00
-      properties:
-        active:
-          type: boolean
-          example: true
-        contents:
-          description: Path to CA Certificate
-          example: /opt/yugaware/certs/trust-store/<ID>/ca.root.cert
-          type: string
-        createdTime:
-          description: Date when certificate was added.
-          example: 2023-11-10 15:09:18+00:00
-          format: date-time
-          type: string
-        customerId:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        expiryDate:
-          description: End date of certificate validity.
-          example: 2024-07-12 13:07:18+00:00
-          format: date-time
-          type: string
-        id:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        name:
-          type: string
-          example: example-name
-        startDate:
-          description: Start date of certificate validity.
-          example: 2023-10-12 13:07:18+00:00
-          format: date-time
-          type: string
-      required:
-      - active
-      - customerId
-      - id
-      - name
-      type: object
-    YBPSuccess_3:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-          example: Example message
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-          example: true
-      type: object
-    CustomCACertParams_3:
-      example:
-        contents: contents
-        name: name
-      properties:
-        contents:
-          type: string
-          example: example-contents
-        name:
-          type: string
-          example: example-name
-      required:
-      - contents
-      - name
-      type: object
-    CustomCaCertificateInfo_3:
-      description: Custom CA certificate
-      example:
-        expiryDate: 2024-07-12 13:07:18+00:00
-        contents: /opt/yugaware/certs/trust-store/<ID>/ca.root.cert
-        customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        name: name
-        active: true
-        createdTime: 2023-11-10 15:09:18+00:00
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        startDate: 2023-10-12 13:07:18+00:00
-      properties:
-        active:
-          type: boolean
-          example: true
-        contents:
-          description: Path to CA Certificate
-          example: /opt/yugaware/certs/trust-store/<ID>/ca.root.cert
-          type: string
-        createdTime:
-          description: Date when certificate was added.
-          example: 2023-11-10 15:09:18+00:00
-          format: date-time
-          type: string
-        customerId:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        expiryDate:
-          description: End date of certificate validity.
-          example: 2024-07-12 13:07:18+00:00
-          format: date-time
-          type: string
-        id:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        name:
-          type: string
-          example: example-name
-        startDate:
-          description: Start date of certificate validity.
-          example: 2023-10-12 13:07:18+00:00
-          format: date-time
-          type: string
-      required:
-      - active
-      - customerId
-      - id
       - name
       type: object
   securitySchemes:
@@ -438,7 +263,4 @@ components:
 externalDocs:
   description: About YugabyteDB Anywhere
   url: https://docs.yugabyte.com/latest/yugabyte-platform/
-x-refined-from:
-- openapi_2.yaml
-- yugabytedb-anywhere-v1-full.yaml
-- yugabytedb-anywhere-v1-providers-infra.yaml
+x-original-swagger-version: '2.0'

@@ -1,21 +1,18 @@
 openapi: 3.2.0
 info:
-  title: Yugabytedb Preview API
-  version: v1
   contact:
     name: https://docs.yugabyte.com
+  description: ALPHA - NOT FOR EXTERNAL USE
   license:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
   termsOfService: TODO(chirag)
-  x-refined-note:
-  - x-source differs across the merged source definitions and was not carried
-  - x-split-from differs across the merged source definitions and was not carried
-  description: 'Operations tagged preview across 3 of this provider''s published API definitions: openapi_2.yaml, yugabytedb-anywhere-v1-full.yaml, yugabytedb-anywhere-v1-releases-maintenance.yaml. Each path carries the servers of the definition it was published in.'
+  title: YugabyteDB Anywhere Preview API
+  version: v1
 servers:
 - url: /
 tags:
-- name: preview
+- name: Preview
 paths:
   /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle:
     get:
@@ -52,7 +49,7 @@ paths:
       - apiKeyAuth: []
       summary: List image bundles
       tags:
-      - preview
+      - Preview
     post:
       description: 'WARNING: This is a preview API that could change.'
       operationId: createImageBundle
@@ -90,10 +87,8 @@ paths:
       - apiKeyAuth: []
       summary: Create a image bundle
       tags:
-      - preview
+      - Preview
       x-codegen-request-body-name: body
-    servers:
-    - url: /
   /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID}:
     delete:
       description: 'WARNING: This is a preview API that could change.'
@@ -131,7 +126,7 @@ paths:
       - apiKeyAuth: []
       summary: Delete a image bundle
       tags:
-      - preview
+      - Preview
     get:
       description: 'WARNING: This is a preview API that could change.'
       operationId: getImageBundle
@@ -165,7 +160,7 @@ paths:
       - apiKeyAuth: []
       summary: Get a image bundle
       tags:
-      - preview
+      - Preview
     put:
       description: 'WARNING: This is a preview API that could change.'
       operationId: editImageBundle
@@ -209,10 +204,8 @@ paths:
       - apiKeyAuth: []
       summary: Update a image bundle
       tags:
-      - preview
+      - Preview
       x-codegen-request-body-name: body
-    servers:
-    - url: /
 components:
   schemas:
     ImageBundle:
@@ -255,23 +248,6 @@ components:
           readOnly: true
           type: string
       type: object
-    Metadata:
-      example:
-        type: YBA_ACTIVE
-        version: version
-      properties:
-        type:
-          enum:
-          - YBA_ACTIVE
-          - YBA_DEPRECATED
-          - CUSTOM
-          type: string
-        version:
-          type: string
-      required:
-      - type
-      - version
-      type: object
     ImageBundleDetails:
       example:
         sshPort: 5
@@ -307,6 +283,37 @@ components:
         useIMDSv2:
           type: boolean
       type: object
+    YBPSuccess:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+      type: object
+    Metadata:
+      example:
+        type: YBA_ACTIVE
+        version: version
+      properties:
+        type:
+          enum:
+          - YBA_ACTIVE
+          - YBA_DEPRECATED
+          - CUSTOM
+          type: string
+        version:
+          type: string
+      required:
+      - type
+      - version
+      type: object
     BundleInfo:
       example:
         sshUserOverride: sshUserOverride
@@ -323,298 +330,6 @@ components:
         ybImage:
           type: string
       type: object
-    YBPSuccess:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-      type: object
-    ImageBundle_2:
-      example:
-        metadata:
-          type: YBA_ACTIVE
-          version: version
-        useAsDefault: true
-        name: name
-        active: true
-        details:
-          sshPort: 5
-          regions:
-            key:
-              sshUserOverride: sshUserOverride
-              ybImage: ybImage
-              sshPortOverride: 1
-          useIMDSv2: true
-          globalYbImage: globalYbImage
-          sshUser: sshUser
-          arch: x86_64
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        active:
-          description: Is the ImageBundle Active
-          type: boolean
-          example: true
-        details:
-          $ref: '#/components/schemas/ImageBundleDetails_2'
-        metadata:
-          $ref: '#/components/schemas/Metadata_2'
-        name:
-          description: Image Bundle Name
-          type: string
-          example: example-name
-        useAsDefault:
-          description: Default Image Bundle. A provider can have two defaults, one per architecture
-          type: boolean
-          example: true
-        uuid:
-          description: Image Bundle UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      type: object
-    Metadata_2:
-      example:
-        type: YBA_ACTIVE
-        version: version
-      properties:
-        type:
-          enum:
-          - YBA_ACTIVE
-          - YBA_DEPRECATED
-          - CUSTOM
-          type: string
-          example: YBA_ACTIVE
-        version:
-          type: string
-          example: 2.20.0.0
-      required:
-      - type
-      - version
-      type: object
-    ImageBundleDetails_2:
-      example:
-        sshPort: 5
-        regions:
-          key:
-            sshUserOverride: sshUserOverride
-            ybImage: ybImage
-            sshPortOverride: 1
-        useIMDSv2: true
-        globalYbImage: globalYbImage
-        sshUser: sshUser
-        arch: x86_64
-      properties:
-        arch:
-          description: Architecture type for the image bundle
-          enum:
-          - x86_64
-          - aarch64
-          type: string
-          example: x86_64
-        globalYbImage:
-          description: Global YB image for the bundle
-          type: string
-          example: example-globalYbImage
-        regions:
-          additionalProperties:
-            $ref: '#/components/schemas/BundleInfo_2'
-          description: Regions override for image bundle
-          type: object
-          example: {}
-        sshPort:
-          format: int32
-          type: integer
-          example: 5433
-        sshUser:
-          type: string
-          example: example-sshUser
-        useIMDSv2:
-          type: boolean
-          example: true
-      type: object
-    BundleInfo_2:
-      example:
-        sshUserOverride: sshUserOverride
-        ybImage: ybImage
-        sshPortOverride: 1
-      properties:
-        sshPortOverride:
-          description: sshPortOverride for the bundle. <b style="color:#ff0000">Deprecated since YBA version 2.20.3.0.</b> Use imageBundles.details.sshUser instead.
-          format: int32
-          type: integer
-          example: 5433
-        sshUserOverride:
-          description: sshUserOverride for the bundle. <b style="color:#ff0000">Deprecated since YBA version 2.20.3.0.</b> Use imageBundles.details.sshUser instead.
-          type: string
-          example: example-sshUserOverride
-        ybImage:
-          type: string
-          example: example-ybImage
-      type: object
-    YBPSuccess_2:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-          example: Example message
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-          example: true
-      type: object
-    ImageBundle_3:
-      example:
-        metadata:
-          type: YBA_ACTIVE
-          version: version
-        useAsDefault: true
-        name: name
-        active: true
-        details:
-          sshPort: 5
-          regions:
-            key:
-              sshUserOverride: sshUserOverride
-              ybImage: ybImage
-              sshPortOverride: 1
-          useIMDSv2: true
-          globalYbImage: globalYbImage
-          sshUser: sshUser
-          arch: x86_64
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        active:
-          description: Is the ImageBundle Active
-          type: boolean
-          example: true
-        details:
-          $ref: '#/components/schemas/ImageBundleDetails_3'
-        metadata:
-          $ref: '#/components/schemas/Metadata_3'
-        name:
-          description: Image Bundle Name
-          type: string
-          example: example-name
-        useAsDefault:
-          description: Default Image Bundle. A provider can have two defaults, one per architecture
-          type: boolean
-          example: true
-        uuid:
-          description: Image Bundle UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      type: object
-    Metadata_3:
-      example:
-        type: YBA_ACTIVE
-        version: version
-      properties:
-        type:
-          enum:
-          - YBA_ACTIVE
-          - YBA_DEPRECATED
-          - CUSTOM
-          type: string
-          example: YBA_ACTIVE
-        version:
-          type: string
-          example: 2.20.0.0
-      required:
-      - type
-      - version
-      type: object
-    ImageBundleDetails_3:
-      example:
-        sshPort: 5
-        regions:
-          key:
-            sshUserOverride: sshUserOverride
-            ybImage: ybImage
-            sshPortOverride: 1
-        useIMDSv2: true
-        globalYbImage: globalYbImage
-        sshUser: sshUser
-        arch: x86_64
-      properties:
-        arch:
-          description: Architecture type for the image bundle
-          enum:
-          - x86_64
-          - aarch64
-          type: string
-          example: x86_64
-        globalYbImage:
-          description: Global YB image for the bundle
-          type: string
-          example: example-globalYbImage
-        regions:
-          additionalProperties:
-            $ref: '#/components/schemas/BundleInfo_3'
-          description: Regions override for image bundle
-          type: object
-          example: {}
-        sshPort:
-          format: int32
-          type: integer
-          example: 5433
-        sshUser:
-          type: string
-          example: example-sshUser
-        useIMDSv2:
-          type: boolean
-          example: true
-      type: object
-    BundleInfo_3:
-      example:
-        sshUserOverride: sshUserOverride
-        ybImage: ybImage
-        sshPortOverride: 1
-      properties:
-        sshPortOverride:
-          description: sshPortOverride for the bundle. <b style="color:#ff0000">Deprecated since YBA version 2.20.3.0.</b> Use imageBundles.details.sshUser instead.
-          format: int32
-          type: integer
-          example: 5433
-        sshUserOverride:
-          description: sshUserOverride for the bundle. <b style="color:#ff0000">Deprecated since YBA version 2.20.3.0.</b> Use imageBundles.details.sshUser instead.
-          type: string
-          example: example-sshUserOverride
-        ybImage:
-          type: string
-          example: example-ybImage
-      type: object
-    YBPSuccess_3:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-          example: Example message
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-          example: true
-      type: object
   securitySchemes:
     apiKeyAuth:
       description: API token passed as header
@@ -624,7 +339,4 @@ components:
 externalDocs:
   description: About YugabyteDB Anywhere
   url: https://docs.yugabyte.com/latest/yugabyte-platform/
-x-refined-from:
-- openapi_2.yaml
-- yugabytedb-anywhere-v1-full.yaml
-- yugabytedb-anywhere-v1-releases-maintenance.yaml
+x-original-swagger-version: '2.0'

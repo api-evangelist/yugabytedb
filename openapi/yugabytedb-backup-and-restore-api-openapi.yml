@@ -1,15 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Yugabytedb Backup and Restore API
-  version: v2
   contact:
     email: support@yugabyte.com
     name: YugabyteDB Anywhere Support
     url: https://docs.yugabyte.com
+  description: An improved set of APIs for managing YugabyteDB Anywhere
   license:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
-  description: 'Operations tagged Backup and Restore across 2 of this provider''s published API definitions: openapi.yaml, yugabytedb-anywhere-v2-openapi.yaml. Each path carries the servers of the definition it was published in.'
+  title: YugabyteDB Anywhere V2 Backup and Restore API
+  version: v2
 servers:
 - description: API endpoint of YBA server
   url: '{protocol}://{host_port}/api/v2'
@@ -23,7 +23,7 @@ servers:
       default: localhost:9000
 tags:
 - description: Operations related to universe backup and restore
-  name: Backup and Restore
+  name: Backup And Restore
 paths:
   /ybc/gflags-metadata:
     get:
@@ -44,7 +44,7 @@ paths:
       - apiKeyAuth: []
       summary: List YBC Gflags metadata
       tags:
-      - Backup and Restore
+      - Backup And Restore
       x-yba-api-audit:
         noAudit: true
       x-yba-api-authz:
@@ -58,17 +58,6 @@ paths:
       x-yba-api-visibility: preview
       x-accepts:
       - application/json
-    servers:
-    - description: API endpoint of YBA server
-      url: '{protocol}://{host_port}/api/v2'
-      variables:
-        protocol:
-          default: http
-          enum:
-          - http
-          - https
-        host_port:
-          default: localhost:9000
 components:
   schemas:
     GflagMetadata:
@@ -93,37 +82,8 @@ components:
           type: string
       title: GflagMetadata
       type: object
-    GflagMetadata_2:
-      description: Metadata for Gflags of YB Controller.
-      example:
-        default: default
-        meaning: meaning
-        name: name
-        type: type
-      properties:
-        name:
-          description: The name of the flag.
-          type: string
-          example: example-name
-        meaning:
-          description: A brief description of what the flag does.
-          type: string
-          example: example-meaning
-        default:
-          description: The default value of the flag.
-          type: string
-          example: example-default
-        type:
-          description: The data type of the flag.
-          type: string
-          example: DEFAULT
-      title: GflagMetadata
-      type: object
   securitySchemes:
     apiKeyAuth:
       in: header
       name: X-AUTH-YW-API-TOKEN
       type: apiKey
-x-refined-from:
-- openapi.yaml
-- yugabytedb-anywhere-v2-openapi.yaml

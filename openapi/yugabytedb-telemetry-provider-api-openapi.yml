@@ -4,11 +4,8 @@ info:
   license:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
-  x-refined-note:
-  - x-source differs across the merged source definitions and was not carried
-  - x-split-from differs across the merged source definitions and was not carried
   version: '1.0'
-  description: 'Operations tagged Telemetry Provider across 5 of this provider''s published API definitions: openapi.yaml, openapi_2.yaml, yugabytedb-anywhere-v1-alerts-monitoring.yaml, yugabytedb-anywhere-v1-full.yaml, yugabytedb-anywhere-v2-openapi.yaml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Telemetry Provider across 2 of this provider''s published API definitions: openapi.yaml, openapi_2.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - description: API endpoint of YBA server
   url: '{protocol}://{host_port}/api/v2'
@@ -246,20 +243,6 @@ components:
       type: object
       x-yba-api-since: 2025.2.0.0
       x-yba-api-visibility: preview
-    YBPSuccess:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-      type: object
     TelemetryProviderConfig:
       description: Telemetry Provider Configuration
       discriminator:
@@ -279,6 +262,20 @@ components:
           - S3
           - OTLP
           type: string
+      type: object
+    YBPSuccess:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
       type: object
     TelemetryProvider:
       description: Telemetry Provider Model
@@ -332,192 +329,6 @@ components:
       - tags
       - uuid
       type: object
-    YBPSuccess_2:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-          example: Example message
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-          example: true
-      type: object
-    TelemetryProviderConfig_2:
-      description: Telemetry Provider Configuration
-      discriminator:
-        propertyName: type
-      example:
-        type: DATA_DOG
-      properties:
-        type:
-          description: Telemetry Provider Type
-          enum:
-          - DATA_DOG
-          - SPLUNK
-          - AWS_CLOUDWATCH
-          - GCP_CLOUD_MONITORING
-          - LOKI
-          - DYNATRACE
-          - S3
-          - OTLP
-          type: string
-          example: DATA_DOG
-      type: object
-    TelemetryProvider_2:
-      description: Telemetry Provider Model
-      example:
-        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        createTime: 2022-12-12 13:07:18+00:00
-        name: name
-        updateTime: 2022-12-12 13:07:18+00:00
-        config:
-          type: DATA_DOG
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        tags:
-          key: tags
-      properties:
-        config:
-          $ref: '#/components/schemas/TelemetryProviderConfig_2'
-        createTime:
-          description: Creation timestamp
-          example: 2022-12-12 13:07:18+00:00
-          format: date-time
-          readOnly: true
-          type: string
-        customerUUID:
-          description: Customer UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        name:
-          description: Name
-          type: string
-          example: example-name
-        tags:
-          additionalProperties:
-            type: string
-          description: Extra Tags
-          type: object
-          example: {}
-        updateTime:
-          description: Updation timestamp
-          example: 2022-12-12 13:07:18+00:00
-          format: date-time
-          readOnly: true
-          type: string
-        uuid:
-          description: Telemetry Provider UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      required:
-      - config
-      - customerUUID
-      - name
-      - tags
-      - uuid
-      type: object
-    YBPSuccess_3:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-          example: Example message
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-          example: true
-      type: object
-    TelemetryProviderConfig_3:
-      description: Telemetry Provider Configuration
-      discriminator:
-        propertyName: type
-      example:
-        type: DATA_DOG
-      properties:
-        type:
-          description: Telemetry Provider Type
-          enum:
-          - DATA_DOG
-          - SPLUNK
-          - AWS_CLOUDWATCH
-          - GCP_CLOUD_MONITORING
-          - LOKI
-          - DYNATRACE
-          - S3
-          - OTLP
-          type: string
-          example: DATA_DOG
-      type: object
-    TelemetryProvider_3:
-      description: Telemetry Provider Model
-      example:
-        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        createTime: 2022-12-12 13:07:18+00:00
-        name: name
-        updateTime: 2022-12-12 13:07:18+00:00
-        config:
-          type: DATA_DOG
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        tags:
-          key: tags
-      properties:
-        config:
-          $ref: '#/components/schemas/TelemetryProviderConfig_3'
-        createTime:
-          description: Creation timestamp
-          example: 2022-12-12 13:07:18+00:00
-          format: date-time
-          readOnly: true
-          type: string
-        customerUUID:
-          description: Customer UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        name:
-          description: Name
-          type: string
-          example: example-name
-        tags:
-          additionalProperties:
-            type: string
-          description: Extra Tags
-          type: object
-          example: {}
-        updateTime:
-          description: Updation timestamp
-          example: 2022-12-12 13:07:18+00:00
-          format: date-time
-          readOnly: true
-          type: string
-        uuid:
-          description: Telemetry Provider UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      required:
-      - config
-      - customerUUID
-      - name
-      - tags
-      - uuid
-      type: object
   securitySchemes:
     apiKeyAuth:
       in: header
@@ -529,6 +340,3 @@ externalDocs:
 x-refined-from:
 - openapi.yaml
 - openapi_2.yaml
-- yugabytedb-anywhere-v1-alerts-monitoring.yaml
-- yugabytedb-anywhere-v1-full.yaml
-- yugabytedb-anywhere-v2-openapi.yaml

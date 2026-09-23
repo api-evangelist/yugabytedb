@@ -8,10 +8,7 @@ info:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
   termsOfService: TODO(chirag)
-  x-refined-note:
-  - x-source differs across the merged source definitions and was not carried
-  - x-split-from differs across the merged source definitions and was not carried
-  description: 'Operations tagged Universe information across 4 of this provider''s published API definitions: openapi_2.yaml, platform.swagger.json, yugabytedb-anywhere-v1-full.yaml, yugabytedb-anywhere-v1-universes.yaml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Universe information across 2 of this provider''s published API definitions: openapi_2.yaml, platform.swagger.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: /
 tags:
@@ -47,7 +44,9 @@ paths:
   /api/v1/customers/{cUUID}/universes/{uniUUID}/cost:
     get:
       deprecated: true
-      description: <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use /universe_resources
+      description: 'Deprecated since YBA version 2.20.0.0.
+
+        Use /universe_resources'
       operationId: getUniverseCost
       parameters:
       - in: path
@@ -365,7 +364,9 @@ paths:
   /api/v1/customers/{cUUID}/universes/{uniUUID}/{nodeName}/download_logs:
     get:
       deprecated: true
-      description: <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>User Support bundle. Downloads the log files from a given node.
+      description: 'Deprecated since YBA version 2.20.0.0.
+
+        User Support bundle. Downloads the log files from a given node.'
       operationId: downloadNodeLogs
       parameters:
       - in: path
@@ -401,6 +402,17 @@ paths:
     - url: /
 components:
   schemas:
+    TriggerHealthCheckResult:
+      description: The response type for triggering a health check. Contains the timestamp of when the health check was triggered.
+      example:
+        timestamp: 2022-12-12 13:07:18+00:00
+      properties:
+        timestamp:
+          description: The ISO-8601 timestamp when the health check was triggered.
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+      type: object
     MetricLabel:
       example:
         name: name
@@ -413,41 +425,6 @@ components:
       required:
       - name
       - value
-      type: object
-    Metric:
-      example:
-        help: help
-        unit: unit
-        values:
-        - value: 0.8008281904610115
-          labels:
-          - name: name
-            value: value
-          - name: name
-            value: value
-        - value: 0.8008281904610115
-          labels:
-          - name: name
-            value: value
-          - name: name
-            value: value
-        name: name
-      properties:
-        help:
-          type: string
-        name:
-          type: string
-        unit:
-          type: string
-        values:
-          items:
-            $ref: '#/components/schemas/MetricValue'
-          type: array
-      required:
-      - help
-      - name
-      - unit
-      - values
       type: object
     UniverseResourceDetails:
       example:
@@ -546,105 +523,6 @@ components:
       - privateIp
       - uptimeSeconds
       type: object
-    TriggerHealthCheckResult:
-      description: The response type for triggering a health check. Contains the timestamp of when the health check was triggered.
-      example:
-        timestamp: 2022-12-12 13:07:18+00:00
-      properties:
-        timestamp:
-          description: The ISO-8601 timestamp when the health check was triggered.
-          example: 2022-12-12 13:07:18+00:00
-          format: date-time
-          type: string
-      type: object
-    NodeData:
-      example:
-        node: node
-        process: process
-        timestamp_iso: 2022-12-12 13:07:18+00:00
-        metrics_only: true
-        has_warning: true
-        node_name: node_name
-        details:
-        - details
-        - details
-        metrics:
-        - help: help
-          unit: unit
-          values:
-          - value: 0.8008281904610115
-            labels:
-            - name: name
-              value: value
-            - name: name
-              value: value
-          - value: 0.8008281904610115
-            labels:
-            - name: name
-              value: value
-            - name: name
-              value: value
-          name: name
-        - help: help
-          unit: unit
-          values:
-          - value: 0.8008281904610115
-            labels:
-            - name: name
-              value: value
-            - name: name
-              value: value
-          - value: 0.8008281904610115
-            labels:
-            - name: name
-              value: value
-            - name: name
-              value: value
-          name: name
-        node_identifier: node_identifier
-        message: message
-        has_error: true
-      properties:
-        details:
-          items:
-            type: string
-          type: array
-        has_error:
-          type: boolean
-        has_warning:
-          type: boolean
-        message:
-          type: string
-        metrics:
-          items:
-            $ref: '#/components/schemas/Metric'
-          type: array
-        metrics_only:
-          type: boolean
-        node:
-          type: string
-        node_identifier:
-          type: string
-        node_name:
-          type: string
-        process:
-          type: string
-        timestamp_iso:
-          example: 2022-12-12 13:07:18+00:00
-          format: date-time
-          type: string
-      required:
-      - details
-      - has_error
-      - has_warning
-      - message
-      - metrics
-      - metrics_only
-      - node
-      - node_identifier
-      - node_name
-      - process
-      type: object
     MetricValue:
       example:
         value: 0.8008281904610115
@@ -664,6 +542,41 @@ components:
       required:
       - labels
       - value
+      type: object
+    Metric:
+      example:
+        help: help
+        unit: unit
+        values:
+        - value: 0.8008281904610115
+          labels:
+          - name: name
+            value: value
+          - name: name
+            value: value
+        - value: 0.8008281904610115
+          labels:
+          - name: name
+            value: value
+          - name: name
+            value: value
+        name: name
+      properties:
+        help:
+          type: string
+        name:
+          type: string
+        unit:
+          type: string
+        values:
+          items:
+            $ref: '#/components/schemas/MetricValue'
+          type: array
+      required:
+      - help
+      - name
+      - unit
+      - values
       type: object
     Details:
       example:
@@ -783,6 +696,94 @@ components:
       - has_warning
       - yb_version
       type: object
+    NodeData:
+      example:
+        node: node
+        process: process
+        timestamp_iso: 2022-12-12 13:07:18+00:00
+        metrics_only: true
+        has_warning: true
+        node_name: node_name
+        details:
+        - details
+        - details
+        metrics:
+        - help: help
+          unit: unit
+          values:
+          - value: 0.8008281904610115
+            labels:
+            - name: name
+              value: value
+            - name: name
+              value: value
+          - value: 0.8008281904610115
+            labels:
+            - name: name
+              value: value
+            - name: name
+              value: value
+          name: name
+        - help: help
+          unit: unit
+          values:
+          - value: 0.8008281904610115
+            labels:
+            - name: name
+              value: value
+            - name: name
+              value: value
+          - value: 0.8008281904610115
+            labels:
+            - name: name
+              value: value
+            - name: name
+              value: value
+          name: name
+        node_identifier: node_identifier
+        message: message
+        has_error: true
+      properties:
+        details:
+          items:
+            type: string
+          type: array
+        has_error:
+          type: boolean
+        has_warning:
+          type: boolean
+        message:
+          type: string
+        metrics:
+          items:
+            $ref: '#/components/schemas/Metric'
+          type: array
+        metrics_only:
+          type: boolean
+        node:
+          type: string
+        node_identifier:
+          type: string
+        node_name:
+          type: string
+        process:
+          type: string
+        timestamp_iso:
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+      required:
+      - details
+      - has_error
+      - has_warning
+      - message
+      - metrics
+      - metrics_only
+      - node
+      - node_identifier
+      - node_name
+      - process
+      type: object
     UniverseResourceDetails_2:
       properties:
         azList:
@@ -839,966 +840,6 @@ components:
           format: date-time
           type: string
       type: object
-    MetricLabel_2:
-      example:
-        name: name
-        value: value
-      properties:
-        name:
-          type: string
-          example: example-name
-        value:
-          type: string
-          example: example-value
-      required:
-      - name
-      - value
-      type: object
-    Metric_2:
-      example:
-        help: help
-        unit: unit
-        values:
-        - value: 0.8008281904610115
-          labels:
-          - name: name
-            value: value
-          - name: name
-            value: value
-        - value: 0.8008281904610115
-          labels:
-          - name: name
-            value: value
-          - name: name
-            value: value
-        name: name
-      properties:
-        help:
-          type: string
-          example: example-help
-        name:
-          type: string
-          example: example-name
-        unit:
-          type: string
-          example: example-unit
-        values:
-          items:
-            $ref: '#/components/schemas/MetricValue_2'
-          type: array
-          example:
-          - value: 0.8008281904610115
-            labels:
-            - name: name
-              value: value
-            - name: name
-              value: value
-      required:
-      - help
-      - name
-      - unit
-      - values
-      type: object
-    UniverseResourceDetails_3:
-      example:
-        numCores: 5.637376656633329
-        volumeSizeGB: 3
-        gp3FreeThroughput: 1
-        numNodes: 2
-        memSizeGB: 5.962133916683182
-        azList:
-        - azList
-        - azList
-        pricePerHour: 7.061401241503109
-        volumeCount: 9
-        pricingKnown: true
-        gp3FreePiops: 6
-        ebsPricePerHour: 0.8008281904610115
-      properties:
-        azList:
-          description: Azs
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-          example:
-          - example-azList
-        ebsPricePerHour:
-          description: EBS price per hour
-          format: double
-          type: number
-          example: 1.5
-        gp3FreePiops:
-          description: gp3 free piops
-          format: int32
-          type: integer
-          example: 100
-        gp3FreeThroughput:
-          description: gp3 free throughput
-          format: int32
-          type: integer
-          example: 100
-        memSizeGB:
-          description: Memory GB
-          format: double
-          type: number
-          example: 1.5
-        numCores:
-          description: Numbers of cores
-          format: double
-          type: number
-          example: 1.5
-        numNodes:
-          description: Numbers of node
-          format: int32
-          type: integer
-          example: 10
-        pricePerHour:
-          description: Price per hour
-          format: double
-          type: number
-          example: 1.5
-        pricingKnown:
-          description: Known pricing info
-          type: boolean
-          example: true
-        volumeCount:
-          description: Volume count
-          format: int32
-          type: integer
-          example: 10
-        volumeSizeGB:
-          description: Volume in GB
-          format: int32
-          type: integer
-          example: 10
-      type: object
-    MasterInfo_2:
-      description: Information about master
-      example:
-        port: 0
-        peerRole: FOLLOWER
-        privateIp: privateIp
-        instanceUUID: instanceUUID
-        uptimeSeconds: 6
-      properties:
-        instanceUUID:
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        peerRole:
-          enum:
-          - FOLLOWER
-          - LEADER
-          - LEARNER
-          - NON_PARTICIPANT
-          - READ_REPLICA
-          - UNKNOWN_ROLE
-          type: string
-          example: FOLLOWER
-        port:
-          format: int32
-          type: integer
-          example: 5433
-        privateIp:
-          type: string
-          example: example-privateIp
-        uptimeSeconds:
-          format: int64
-          type: integer
-          example: 1000
-      required:
-      - instanceUUID
-      - peerRole
-      - port
-      - privateIp
-      - uptimeSeconds
-      type: object
-    NodeData_2:
-      example:
-        node: node
-        process: process
-        timestamp_iso: 2022-12-12 13:07:18+00:00
-        metrics_only: true
-        has_warning: true
-        node_name: node_name
-        details:
-        - details
-        - details
-        metrics:
-        - help: help
-          unit: unit
-          values:
-          - value: 0.8008281904610115
-            labels:
-            - name: name
-              value: value
-            - name: name
-              value: value
-          - value: 0.8008281904610115
-            labels:
-            - name: name
-              value: value
-            - name: name
-              value: value
-          name: name
-        - help: help
-          unit: unit
-          values:
-          - value: 0.8008281904610115
-            labels:
-            - name: name
-              value: value
-            - name: name
-              value: value
-          - value: 0.8008281904610115
-            labels:
-            - name: name
-              value: value
-            - name: name
-              value: value
-          name: name
-        node_identifier: node_identifier
-        message: message
-        has_error: true
-      properties:
-        details:
-          items:
-            type: string
-          type: array
-          example:
-          - example-details
-        has_error:
-          type: boolean
-          example: true
-        has_warning:
-          type: boolean
-          example: true
-        message:
-          type: string
-          example: Example message
-        metrics:
-          items:
-            $ref: '#/components/schemas/Metric_2'
-          type: array
-          example:
-          - help: help
-            unit: unit
-            values:
-            - value: 0.8008281904610115
-              labels:
-              - name: name
-                value: value
-              - name: name
-                value: value
-            - value: 0.8008281904610115
-              labels:
-              - name: name
-                value: value
-              - name: name
-                value: value
-            name: name
-        metrics_only:
-          type: boolean
-          example: true
-        node:
-          type: string
-          example: node-1
-        node_identifier:
-          type: string
-          example: node-1
-        node_name:
-          type: string
-          example: example-node_name
-        process:
-          type: string
-          example: example-process
-        timestamp_iso:
-          example: 2022-12-12 13:07:18+00:00
-          format: date-time
-          type: string
-      required:
-      - details
-      - has_error
-      - has_warning
-      - message
-      - metrics
-      - metrics_only
-      - node
-      - node_identifier
-      - node_name
-      - process
-      type: object
-    MetricValue_2:
-      example:
-        value: 0.8008281904610115
-        labels:
-        - name: name
-          value: value
-        - name: name
-          value: value
-      properties:
-        labels:
-          items:
-            $ref: '#/components/schemas/MetricLabel_2'
-          type: array
-          example:
-          - name: name
-            value: value
-        value:
-          format: double
-          type: number
-          example: 1.5
-      required:
-      - labels
-      - value
-      type: object
-    Details_2:
-      example:
-        timestamp_iso: 2022-12-12 13:07:18+00:00
-        data:
-        - node: node
-          process: process
-          timestamp_iso: 2022-12-12 13:07:18+00:00
-          metrics_only: true
-          has_warning: true
-          node_name: node_name
-          details:
-          - details
-          - details
-          metrics:
-          - help: help
-            unit: unit
-            values:
-            - value: 0.8008281904610115
-              labels:
-              - name: name
-                value: value
-              - name: name
-                value: value
-            - value: 0.8008281904610115
-              labels:
-              - name: name
-                value: value
-              - name: name
-                value: value
-            name: name
-          - help: help
-            unit: unit
-            values:
-            - value: 0.8008281904610115
-              labels:
-              - name: name
-                value: value
-              - name: name
-                value: value
-            - value: 0.8008281904610115
-              labels:
-              - name: name
-                value: value
-              - name: name
-                value: value
-            name: name
-          node_identifier: node_identifier
-          message: message
-          has_error: true
-        - node: node
-          process: process
-          timestamp_iso: 2022-12-12 13:07:18+00:00
-          metrics_only: true
-          has_warning: true
-          node_name: node_name
-          details:
-          - details
-          - details
-          metrics:
-          - help: help
-            unit: unit
-            values:
-            - value: 0.8008281904610115
-              labels:
-              - name: name
-                value: value
-              - name: name
-                value: value
-            - value: 0.8008281904610115
-              labels:
-              - name: name
-                value: value
-              - name: name
-                value: value
-            name: name
-          - help: help
-            unit: unit
-            values:
-            - value: 0.8008281904610115
-              labels:
-              - name: name
-                value: value
-              - name: name
-                value: value
-            - value: 0.8008281904610115
-              labels:
-              - name: name
-                value: value
-              - name: name
-                value: value
-            name: name
-          node_identifier: node_identifier
-          message: message
-          has_error: true
-        has_warning: true
-        has_error: true
-        yb_version: yb_version
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/NodeData_2'
-          type: array
-          example:
-          - node: node
-            process: process
-            timestamp_iso: '2022-12-12T13:07:18+00:00'
-            metrics_only: true
-            has_warning: true
-            node_name: node_name
-            details:
-            - details
-            - details
-            metrics:
-            - help: help
-              unit: unit
-              values:
-              - value: 0.8008281904610115
-                labels:
-                - name: name
-                  value: value
-                - name: name
-                  value: value
-              - value: 0.8008281904610115
-                labels:
-                - name: name
-                  value: value
-                - name: name
-                  value: value
-              name: name
-            - help: help
-              unit: unit
-              values:
-              - value: 0.8008281904610115
-                labels:
-                - name: name
-                  value: value
-                - name: name
-                  value: value
-              - value: 0.8008281904610115
-                labels:
-                - name: name
-                  value: value
-                - name: name
-                  value: value
-              name: name
-            node_identifier: node_identifier
-            message: message
-            has_error: true
-        has_error:
-          type: boolean
-          example: true
-        has_warning:
-          type: boolean
-          example: true
-        timestamp_iso:
-          example: 2022-12-12 13:07:18+00:00
-          format: date-time
-          type: string
-        yb_version:
-          type: string
-          example: 2.20.0.0
-      required:
-      - data
-      - has_error
-      - has_warning
-      - yb_version
-      type: object
-    MetricLabel_3:
-      example:
-        name: name
-        value: value
-      properties:
-        name:
-          type: string
-          example: example-name
-        value:
-          type: string
-          example: example-value
-      required:
-      - name
-      - value
-      type: object
-    Metric_3:
-      example:
-        help: help
-        unit: unit
-        values:
-        - value: 0.8008281904610115
-          labels:
-          - name: name
-            value: value
-          - name: name
-            value: value
-        - value: 0.8008281904610115
-          labels:
-          - name: name
-            value: value
-          - name: name
-            value: value
-        name: name
-      properties:
-        help:
-          type: string
-          example: example-help
-        name:
-          type: string
-          example: example-name
-        unit:
-          type: string
-          example: example-unit
-        values:
-          items:
-            $ref: '#/components/schemas/MetricValue_3'
-          type: array
-          example:
-          - value: 0.8008281904610115
-            labels:
-            - name: name
-              value: value
-            - name: name
-              value: value
-      required:
-      - help
-      - name
-      - unit
-      - values
-      type: object
-    UniverseResourceDetails_4:
-      example:
-        numCores: 5.637376656633329
-        volumeSizeGB: 3
-        gp3FreeThroughput: 1
-        numNodes: 2
-        memSizeGB: 5.962133916683182
-        azList:
-        - azList
-        - azList
-        pricePerHour: 7.061401241503109
-        volumeCount: 9
-        pricingKnown: true
-        gp3FreePiops: 6
-        ebsPricePerHour: 0.8008281904610115
-      properties:
-        azList:
-          description: Azs
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-          example:
-          - example-azList
-        ebsPricePerHour:
-          description: EBS price per hour
-          format: double
-          type: number
-          example: 1.5
-        gp3FreePiops:
-          description: gp3 free piops
-          format: int32
-          type: integer
-          example: 100
-        gp3FreeThroughput:
-          description: gp3 free throughput
-          format: int32
-          type: integer
-          example: 100
-        memSizeGB:
-          description: Memory GB
-          format: double
-          type: number
-          example: 1.5
-        numCores:
-          description: Numbers of cores
-          format: double
-          type: number
-          example: 1.5
-        numNodes:
-          description: Numbers of node
-          format: int32
-          type: integer
-          example: 10
-        pricePerHour:
-          description: Price per hour
-          format: double
-          type: number
-          example: 1.5
-        pricingKnown:
-          description: Known pricing info
-          type: boolean
-          example: true
-        volumeCount:
-          description: Volume count
-          format: int32
-          type: integer
-          example: 10
-        volumeSizeGB:
-          description: Volume in GB
-          format: int32
-          type: integer
-          example: 10
-      type: object
-    MasterInfo_3:
-      description: Information about master
-      example:
-        port: 0
-        peerRole: FOLLOWER
-        privateIp: privateIp
-        instanceUUID: instanceUUID
-        uptimeSeconds: 6
-      properties:
-        instanceUUID:
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        peerRole:
-          enum:
-          - FOLLOWER
-          - LEADER
-          - LEARNER
-          - NON_PARTICIPANT
-          - READ_REPLICA
-          - UNKNOWN_ROLE
-          type: string
-          example: FOLLOWER
-        port:
-          format: int32
-          type: integer
-          example: 5433
-        privateIp:
-          type: string
-          example: example-privateIp
-        uptimeSeconds:
-          format: int64
-          type: integer
-          example: 1000
-      required:
-      - instanceUUID
-      - peerRole
-      - port
-      - privateIp
-      - uptimeSeconds
-      type: object
-    NodeData_3:
-      example:
-        node: node
-        process: process
-        timestamp_iso: 2022-12-12 13:07:18+00:00
-        metrics_only: true
-        has_warning: true
-        node_name: node_name
-        details:
-        - details
-        - details
-        metrics:
-        - help: help
-          unit: unit
-          values:
-          - value: 0.8008281904610115
-            labels:
-            - name: name
-              value: value
-            - name: name
-              value: value
-          - value: 0.8008281904610115
-            labels:
-            - name: name
-              value: value
-            - name: name
-              value: value
-          name: name
-        - help: help
-          unit: unit
-          values:
-          - value: 0.8008281904610115
-            labels:
-            - name: name
-              value: value
-            - name: name
-              value: value
-          - value: 0.8008281904610115
-            labels:
-            - name: name
-              value: value
-            - name: name
-              value: value
-          name: name
-        node_identifier: node_identifier
-        message: message
-        has_error: true
-      properties:
-        details:
-          items:
-            type: string
-          type: array
-          example:
-          - example-details
-        has_error:
-          type: boolean
-          example: true
-        has_warning:
-          type: boolean
-          example: true
-        message:
-          type: string
-          example: Example message
-        metrics:
-          items:
-            $ref: '#/components/schemas/Metric_3'
-          type: array
-          example:
-          - help: help
-            unit: unit
-            values:
-            - value: 0.8008281904610115
-              labels:
-              - name: name
-                value: value
-              - name: name
-                value: value
-            - value: 0.8008281904610115
-              labels:
-              - name: name
-                value: value
-              - name: name
-                value: value
-            name: name
-        metrics_only:
-          type: boolean
-          example: true
-        node:
-          type: string
-          example: node-1
-        node_identifier:
-          type: string
-          example: node-1
-        node_name:
-          type: string
-          example: example-node_name
-        process:
-          type: string
-          example: example-process
-        timestamp_iso:
-          example: 2022-12-12 13:07:18+00:00
-          format: date-time
-          type: string
-      required:
-      - details
-      - has_error
-      - has_warning
-      - message
-      - metrics
-      - metrics_only
-      - node
-      - node_identifier
-      - node_name
-      - process
-      type: object
-    MetricValue_3:
-      example:
-        value: 0.8008281904610115
-        labels:
-        - name: name
-          value: value
-        - name: name
-          value: value
-      properties:
-        labels:
-          items:
-            $ref: '#/components/schemas/MetricLabel_3'
-          type: array
-          example:
-          - name: name
-            value: value
-        value:
-          format: double
-          type: number
-          example: 1.5
-      required:
-      - labels
-      - value
-      type: object
-    Details_3:
-      example:
-        timestamp_iso: 2022-12-12 13:07:18+00:00
-        data:
-        - node: node
-          process: process
-          timestamp_iso: 2022-12-12 13:07:18+00:00
-          metrics_only: true
-          has_warning: true
-          node_name: node_name
-          details:
-          - details
-          - details
-          metrics:
-          - help: help
-            unit: unit
-            values:
-            - value: 0.8008281904610115
-              labels:
-              - name: name
-                value: value
-              - name: name
-                value: value
-            - value: 0.8008281904610115
-              labels:
-              - name: name
-                value: value
-              - name: name
-                value: value
-            name: name
-          - help: help
-            unit: unit
-            values:
-            - value: 0.8008281904610115
-              labels:
-              - name: name
-                value: value
-              - name: name
-                value: value
-            - value: 0.8008281904610115
-              labels:
-              - name: name
-                value: value
-              - name: name
-                value: value
-            name: name
-          node_identifier: node_identifier
-          message: message
-          has_error: true
-        - node: node
-          process: process
-          timestamp_iso: 2022-12-12 13:07:18+00:00
-          metrics_only: true
-          has_warning: true
-          node_name: node_name
-          details:
-          - details
-          - details
-          metrics:
-          - help: help
-            unit: unit
-            values:
-            - value: 0.8008281904610115
-              labels:
-              - name: name
-                value: value
-              - name: name
-                value: value
-            - value: 0.8008281904610115
-              labels:
-              - name: name
-                value: value
-              - name: name
-                value: value
-            name: name
-          - help: help
-            unit: unit
-            values:
-            - value: 0.8008281904610115
-              labels:
-              - name: name
-                value: value
-              - name: name
-                value: value
-            - value: 0.8008281904610115
-              labels:
-              - name: name
-                value: value
-              - name: name
-                value: value
-            name: name
-          node_identifier: node_identifier
-          message: message
-          has_error: true
-        has_warning: true
-        has_error: true
-        yb_version: yb_version
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/NodeData_3'
-          type: array
-          example:
-          - node: node
-            process: process
-            timestamp_iso: '2022-12-12T13:07:18+00:00'
-            metrics_only: true
-            has_warning: true
-            node_name: node_name
-            details:
-            - details
-            - details
-            metrics:
-            - help: help
-              unit: unit
-              values:
-              - value: 0.8008281904610115
-                labels:
-                - name: name
-                  value: value
-                - name: name
-                  value: value
-              - value: 0.8008281904610115
-                labels:
-                - name: name
-                  value: value
-                - name: name
-                  value: value
-              name: name
-            - help: help
-              unit: unit
-              values:
-              - value: 0.8008281904610115
-                labels:
-                - name: name
-                  value: value
-                - name: name
-                  value: value
-              - value: 0.8008281904610115
-                labels:
-                - name: name
-                  value: value
-                - name: name
-                  value: value
-              name: name
-            node_identifier: node_identifier
-            message: message
-            has_error: true
-        has_error:
-          type: boolean
-          example: true
-        has_warning:
-          type: boolean
-          example: true
-        timestamp_iso:
-          example: 2022-12-12 13:07:18+00:00
-          format: date-time
-          type: string
-        yb_version:
-          type: string
-          example: 2.20.0.0
-      required:
-      - data
-      - has_error
-      - has_warning
-      - yb_version
-      type: object
   securitySchemes:
     apiKeyAuth:
       description: API token passed as header
@@ -1811,5 +852,3 @@ externalDocs:
 x-refined-from:
 - openapi_2.yaml
 - platform.swagger.json
-- yugabytedb-anywhere-v1-full.yaml
-- yugabytedb-anywhere-v1-universes.yaml

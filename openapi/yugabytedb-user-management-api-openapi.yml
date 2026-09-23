@@ -8,14 +8,11 @@ info:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
   termsOfService: TODO(chirag)
-  x-refined-note:
-  - x-source differs across the merged source definitions and was not carried
-  - x-split-from differs across the merged source definitions and was not carried
-  description: 'Operations tagged User management across 4 of this provider''s published API definitions: openapi_2.yaml, platform.swagger.json, yugabytedb-anywhere-v1-full.yaml, yugabytedb-anywhere-v1-users-rbac.yaml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged User management across 2 of this provider''s published API definitions: openapi_2.yaml, platform.swagger.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: /
 tags:
-- name: User management
+- name: User Management
 paths:
   /api/v1/customers/{cUUID}/reset_password:
     put:
@@ -48,7 +45,7 @@ paths:
       - apiKeyAuth: []
       summary: Reset the user's password
       tags:
-      - User management
+      - User Management
       x-codegen-request-body-name: Users
     servers:
     - url: /
@@ -81,7 +78,7 @@ paths:
       - apiKeyAuth: []
       summary: List all users
       tags:
-      - User management
+      - User Management
     post:
       operationId: createUser
       parameters:
@@ -112,7 +109,7 @@ paths:
       - apiKeyAuth: []
       summary: Create a user
       tags:
-      - User management
+      - User Management
       x-codegen-request-body-name: User
     servers:
     - url: /
@@ -147,7 +144,7 @@ paths:
       - apiKeyAuth: []
       summary: Delete a user
       tags:
-      - User management
+      - User Management
     get:
       operationId: getUserDetails
       parameters:
@@ -174,7 +171,7 @@ paths:
       - apiKeyAuth: []
       summary: Get a user's details
       tags:
-      - User management
+      - User Management
     put:
       deprecated: true
       description: 'Deprecated. Use this method instead: setRoleBinding.'
@@ -210,13 +207,13 @@ paths:
       - apiKeyAuth: []
       summary: Change a user's role
       tags:
-      - User management
+      - User Management
     servers:
     - url: /
   /api/v1/customers/{cUUID}/users/{uUUID}/change_password:
     put:
       deprecated: true
-      description: <b style="color:#ff0000">Deprecated since YBA version 2024.1.0.0.</b></p>
+      description: Deprecated since YBA version 2024.1.0.0.
       operationId: changePassword
       parameters:
       - in: path
@@ -249,7 +246,7 @@ paths:
       - apiKeyAuth: []
       summary: Change password - deprecated
       tags:
-      - User management
+      - User Management
       x-codegen-request-body-name: Users
     servers:
     - url: /
@@ -283,7 +280,7 @@ paths:
       - apiKeyAuth: []
       summary: Retrieve OIDC auth token
       tags:
-      - User management
+      - User Management
     servers:
     - url: /
   /api/v1/customers/{cUUID}/users/{uUUID}/update_profile:
@@ -323,12 +320,67 @@ paths:
       - apiKeyAuth: []
       summary: Update a user's profile
       tags:
-      - User management
+      - User Management
       x-codegen-request-body-name: Users
     servers:
     - url: /
 components:
   schemas:
+    ResourceGroup:
+      example:
+        resourceDefinitionSet:
+        - allowAll: true
+          resourceUUIDSet:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          resourceType: UNIVERSE
+        - allowAll: true
+          resourceUUIDSet:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          resourceType: UNIVERSE
+      properties:
+        resourceDefinitionSet:
+          items:
+            $ref: '#/components/schemas/ResourceDefinition'
+          type: array
+          uniqueItems: true
+      required:
+      - resourceDefinitionSet
+      type: object
+    UserProfileData:
+      description: User profile data. The API and UI use this to validate form data.
+      example:
+        password: Test@1234
+        role: Admin
+        timezone: America/Toronto
+        confirmPassword: Test@1234
+      properties:
+        confirmPassword:
+          description: Password confirmation
+          example: Test@1234
+          type: string
+        password:
+          description: Password
+          example: Test@1234
+          type: string
+        role:
+          description: User role
+          enum:
+          - ConnectOnly
+          - ReadOnly
+          - BackupAdmin
+          - Admin
+          - SuperAdmin
+          example: Admin
+          type: string
+        timezone:
+          description: User timezone
+          example: America/Toronto
+          type: string
+      required:
+      - role
+      type: object
     UserPasswordChangeFormData:
       description: User registration data. The API and UI use this to validate form data.
       example:
@@ -480,24 +532,78 @@ components:
       required:
       - roleUUID
       type: object
-    UserProfileData:
-      description: User profile data. The API and UI use this to validate form data.
+    YBPSuccess:
       example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+      type: object
+    UserRegistrationData:
+      description: User registration data. The API and UI use this to validate form data.
+      example:
+        features:
+          key: '{}'
         password: Test@1234
         role: Admin
         timezone: America/Toronto
         confirmPassword: Test@1234
+        roleResourceDefinitions:
+        - resourceGroup:
+            resourceDefinitionSet:
+            - allowAll: true
+              resourceUUIDSet:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              resourceType: UNIVERSE
+            - allowAll: true
+              resourceUUIDSet:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              resourceType: UNIVERSE
+          roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - resourceGroup:
+            resourceDefinitionSet:
+            - allowAll: true
+              resourceUUIDSet:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              resourceType: UNIVERSE
+            - allowAll: true
+              resourceUUIDSet:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              resourceType: UNIVERSE
+          roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        email: test@example.com
       properties:
         confirmPassword:
           description: Password confirmation
           example: Test@1234
           type: string
+        email:
+          description: Email address
+          example: test@example.com
+          type: string
+        features:
+          additionalProperties:
+            properties: {}
+            type: object
+          description: User features
+          type: object
         password:
           description: Password
           example: Test@1234
           type: string
         role:
-          description: User role
+          description: <b style="color:#ff0000">Deprecated since YBA version 2.19.3.0.</b> Use field roleResourceDefinitions instead.
           enum:
           - ConnectOnly
           - ReadOnly
@@ -506,12 +612,17 @@ components:
           - SuperAdmin
           example: Admin
           type: string
+        roleResourceDefinitions:
+          description: List of roles and resource groups defined for user.
+          items:
+            $ref: '#/components/schemas/RoleResourceDefinition'
+          type: array
         timezone:
           description: User timezone
           example: America/Toronto
           type: string
       required:
-      - role
+      - email
       type: object
     UserWithFeatures:
       description: A user with set of features, associated with a customer
@@ -596,84 +707,6 @@ components:
       - groupMemberships
       - primary
       type: object
-    UserRegistrationData:
-      description: User registration data. The API and UI use this to validate form data.
-      example:
-        features:
-          key: '{}'
-        password: Test@1234
-        role: Admin
-        timezone: America/Toronto
-        confirmPassword: Test@1234
-        roleResourceDefinitions:
-        - resourceGroup:
-            resourceDefinitionSet:
-            - allowAll: true
-              resourceUUIDSet:
-              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              resourceType: UNIVERSE
-            - allowAll: true
-              resourceUUIDSet:
-              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              resourceType: UNIVERSE
-          roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - resourceGroup:
-            resourceDefinitionSet:
-            - allowAll: true
-              resourceUUIDSet:
-              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              resourceType: UNIVERSE
-            - allowAll: true
-              resourceUUIDSet:
-              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              resourceType: UNIVERSE
-          roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        email: test@example.com
-      properties:
-        confirmPassword:
-          description: Password confirmation
-          example: Test@1234
-          type: string
-        email:
-          description: Email address
-          example: test@example.com
-          type: string
-        features:
-          additionalProperties:
-            properties: {}
-            type: object
-          description: User features
-          type: object
-        password:
-          description: Password
-          example: Test@1234
-          type: string
-        role:
-          description: <b style="color:#ff0000">Deprecated since YBA version 2.19.3.0.</b> Use field roleResourceDefinitions instead.
-          enum:
-          - ConnectOnly
-          - ReadOnly
-          - BackupAdmin
-          - Admin
-          - SuperAdmin
-          example: Admin
-          type: string
-        roleResourceDefinitions:
-          description: List of roles and resource groups defined for user.
-          items:
-            $ref: '#/components/schemas/RoleResourceDefinition'
-          type: array
-        timezone:
-          description: User timezone
-          example: America/Toronto
-          type: string
-      required:
-      - email
-      type: object
     UserOIDCAuthToken:
       example:
         oidcAuthToken: oidcAuthToken
@@ -682,41 +715,32 @@ components:
           description: User OIDC Auth token
           type: string
       type: object
-    YBPSuccess:
-      example:
-        success: true
-        message: message
+    UserProfileData_2:
+      description: User profile data. The API and UI use this to validate form data.
       properties:
-        message:
-          description: API response message.
-          readOnly: true
+        confirmPassword:
+          description: Password confirmation
+          example: Test@1234
           type: string
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-      type: object
-    ResourceGroup:
-      example:
-        resourceDefinitionSet:
-        - allowAll: true
-          resourceUUIDSet:
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          resourceType: UNIVERSE
-        - allowAll: true
-          resourceUUIDSet:
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          resourceType: UNIVERSE
-      properties:
-        resourceDefinitionSet:
-          items:
-            $ref: '#/components/schemas/ResourceDefinition'
-          type: array
-          uniqueItems: true
+        password:
+          description: Password
+          example: Test@1234
+          type: string
+        role:
+          description: User role
+          enum:
+          - Admin
+          - ReadOnly
+          - SuperAdmin
+          - BackupAdmin
+          example: Admin
+          type: string
+        timezone:
+          description: User timezone
+          example: America/Toronto
+          type: string
       required:
-      - resourceDefinitionSet
+      - role
       type: object
     Users_2:
       description: A user associated with a customer
@@ -773,13 +797,33 @@ components:
       required:
       - email
       type: object
-    UserProfileData_2:
-      description: User profile data. The API and UI use this to validate form data.
+    YBPSuccess_2:
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+      type: object
+    UserRegistrationData_2:
+      description: User registration data. The API and UI use this to validate form data.
       properties:
         confirmPassword:
           description: Password confirmation
           example: Test@1234
           type: string
+        email:
+          description: Email address
+          example: test@example.com
+          type: string
+        features:
+          additionalProperties:
+            type: object
+          description: User features
+          type: object
         password:
           description: Password
           example: Test@1234
@@ -798,6 +842,7 @@ components:
           example: America/Toronto
           type: string
       required:
+      - email
       - role
       type: object
     UserWithFeatures_2:
@@ -855,830 +900,6 @@ components:
       required:
       - email
       type: object
-    UserRegistrationData_2:
-      description: User registration data. The API and UI use this to validate form data.
-      properties:
-        confirmPassword:
-          description: Password confirmation
-          example: Test@1234
-          type: string
-        email:
-          description: Email address
-          example: test@example.com
-          type: string
-        features:
-          additionalProperties:
-            type: object
-          description: User features
-          type: object
-        password:
-          description: Password
-          example: Test@1234
-          type: string
-        role:
-          description: User role
-          enum:
-          - Admin
-          - ReadOnly
-          - SuperAdmin
-          - BackupAdmin
-          example: Admin
-          type: string
-        timezone:
-          description: User timezone
-          example: America/Toronto
-          type: string
-      required:
-      - email
-      - role
-      type: object
-    YBPSuccess_2:
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-      type: object
-    ResourceDefinition_2:
-      example:
-        allowAll: true
-        resourceUUIDSet:
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        resourceType: UNIVERSE
-      properties:
-        allowAll:
-          description: Select all resources (including future resources)
-          type: boolean
-          example: true
-        resourceType:
-          description: Resource Type
-          enum:
-          - UNIVERSE
-          - ROLE
-          - USER
-          - OTHER
-          type: string
-          example: UNIVERSE
-        resourceUUIDSet:
-          description: Set of resource uuids
-          items:
-            format: uuid
-            type: string
-          type: array
-          uniqueItems: true
-          example:
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      type: object
-    Users_3:
-      description: A user associated with a customer
-      example:
-        ldapSpecifiedRole: true
-        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        role: Admin
-        authTokenIssueDate: 2021-06-17 15:00:05+00:00
-        timezone: timezone
-        oidcJwtAuthToken: oidcJwtAuthToken
-        groupMemberships:
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        userType: local
-        creationDate: 2022-12-12 13:07:18+00:00
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        email: username1@example.com
-        primary: true
-      properties:
-        authTokenIssueDate:
-          description: UI session token creation date
-          example: 2021-06-17 15:00:05+00:00
-          format: date-time
-          readOnly: true
-          type: string
-        creationDate:
-          description: User creation date
-          example: 2022-12-12 13:07:18+00:00
-          format: date-time
-          readOnly: true
-          type: string
-        customerUUID:
-          description: Customer UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        email:
-          description: User email address
-          example: username1@example.com
-          type: string
-        groupMemberships:
-          items:
-            format: uuid
-            type: string
-          type: array
-          uniqueItems: true
-          example:
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        ldapSpecifiedRole:
-          description: LDAP Specified Role
-          type: boolean
-          example: true
-        oidcJwtAuthToken:
-          readOnly: true
-          type: string
-          example: REDACTED
-        primary:
-          type: boolean
-          example: true
-        role:
-          description: <b style="color:#ff0000">Deprecated since YBA version 2.19.3.0.</b> Use  getRoleBindings instead.
-          enum:
-          - ConnectOnly
-          - ReadOnly
-          - BackupAdmin
-          - Admin
-          - SuperAdmin
-          example: Admin
-          type: string
-        timezone:
-          description: User timezone
-          type: string
-          example: us-east-1a
-        userType:
-          description: User Type
-          enum:
-          - local
-          - ldap
-          - oidc
-          type: string
-          example: local
-        uuid:
-          description: User UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      required:
-      - email
-      - groupMemberships
-      - primary
-      type: object
-    RoleResourceDefinition_2:
-      description: Defines the association of Role to Resource Groups.
-      example:
-        resourceGroup:
-          resourceDefinitionSet:
-          - allowAll: true
-            resourceUUIDSet:
-            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            resourceType: UNIVERSE
-          - allowAll: true
-            resourceUUIDSet:
-            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            resourceType: UNIVERSE
-        roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        resourceGroup:
-          $ref: '#/components/schemas/ResourceGroup_2'
-        roleUUID:
-          description: UUID of the role to attach resource group to.
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      required:
-      - roleUUID
-      type: object
-    UserWithFeatures_3:
-      description: A user with set of features, associated with a customer
-      example:
-        ldapSpecifiedRole: true
-        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        role: Admin
-        authTokenIssueDate: 2021-06-17 15:00:05+00:00
-        timezone: timezone
-        oidcJwtAuthToken: oidcJwtAuthToken
-        groupMemberships:
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        userType: local
-        creationDate: 2022-12-12 13:07:18+00:00
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        email: username1@example.com
-        primary: true
-      properties:
-        authTokenIssueDate:
-          description: UI session token creation date
-          example: 2021-06-17 15:00:05+00:00
-          format: date-time
-          readOnly: true
-          type: string
-        creationDate:
-          description: User creation date
-          example: 2022-12-12 13:07:18+00:00
-          format: date-time
-          readOnly: true
-          type: string
-        customerUUID:
-          description: Customer UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        email:
-          description: User email address
-          example: username1@example.com
-          type: string
-        groupMemberships:
-          items:
-            format: uuid
-            type: string
-          type: array
-          uniqueItems: true
-          example:
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        ldapSpecifiedRole:
-          description: LDAP Specified Role
-          type: boolean
-          example: true
-        oidcJwtAuthToken:
-          readOnly: true
-          type: string
-          example: REDACTED
-        primary:
-          type: boolean
-          example: true
-        role:
-          description: <b style="color:#ff0000">Deprecated since YBA version 2.19.3.0.</b> Use  getRoleBindings instead.
-          enum:
-          - ConnectOnly
-          - ReadOnly
-          - BackupAdmin
-          - Admin
-          - SuperAdmin
-          example: Admin
-          type: string
-        timezone:
-          description: User timezone
-          type: string
-          example: us-east-1a
-        userType:
-          description: User Type
-          enum:
-          - local
-          - ldap
-          - oidc
-          type: string
-          example: local
-        uuid:
-          description: User UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      required:
-      - email
-      - groupMemberships
-      - primary
-      type: object
-    UserRegistrationData_3:
-      description: User registration data. The API and UI use this to validate form data.
-      example:
-        features:
-          key: '{}'
-        password: Test@1234
-        role: Admin
-        timezone: America/Toronto
-        confirmPassword: Test@1234
-        roleResourceDefinitions:
-        - resourceGroup:
-            resourceDefinitionSet:
-            - allowAll: true
-              resourceUUIDSet:
-              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              resourceType: UNIVERSE
-            - allowAll: true
-              resourceUUIDSet:
-              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              resourceType: UNIVERSE
-          roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - resourceGroup:
-            resourceDefinitionSet:
-            - allowAll: true
-              resourceUUIDSet:
-              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              resourceType: UNIVERSE
-            - allowAll: true
-              resourceUUIDSet:
-              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              resourceType: UNIVERSE
-          roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        email: test@example.com
-      properties:
-        confirmPassword:
-          description: Password confirmation
-          example: Test@1234
-          type: string
-        email:
-          description: Email address
-          example: test@example.com
-          type: string
-        features:
-          additionalProperties:
-            properties: {}
-            type: object
-          description: User features
-          type: object
-          example: {}
-        password:
-          description: Password
-          example: Test@1234
-          type: string
-        role:
-          description: <b style="color:#ff0000">Deprecated since YBA version 2.19.3.0.</b> Use field roleResourceDefinitions instead.
-          enum:
-          - ConnectOnly
-          - ReadOnly
-          - BackupAdmin
-          - Admin
-          - SuperAdmin
-          example: Admin
-          type: string
-        roleResourceDefinitions:
-          description: List of roles and resource groups defined for user.
-          items:
-            $ref: '#/components/schemas/RoleResourceDefinition_2'
-          type: array
-          example:
-          - resourceGroup:
-              resourceDefinitionSet:
-              - allowAll: true
-                resourceUUIDSet:
-                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-                resourceType: UNIVERSE
-              - allowAll: true
-                resourceUUIDSet:
-                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-                resourceType: UNIVERSE
-            roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        timezone:
-          description: User timezone
-          example: America/Toronto
-          type: string
-      required:
-      - email
-      type: object
-    UserOIDCAuthToken_2:
-      example:
-        oidcAuthToken: oidcAuthToken
-      properties:
-        oidcAuthToken:
-          description: User OIDC Auth token
-          type: string
-          example: REDACTED
-      type: object
-    YBPSuccess_3:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-          example: Example message
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-          example: true
-      type: object
-    ResourceGroup_2:
-      example:
-        resourceDefinitionSet:
-        - allowAll: true
-          resourceUUIDSet:
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          resourceType: UNIVERSE
-        - allowAll: true
-          resourceUUIDSet:
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          resourceType: UNIVERSE
-      properties:
-        resourceDefinitionSet:
-          items:
-            $ref: '#/components/schemas/ResourceDefinition_2'
-          type: array
-          uniqueItems: true
-          example:
-          - allowAll: true
-            resourceUUIDSet:
-            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            resourceType: UNIVERSE
-      required:
-      - resourceDefinitionSet
-      type: object
-    ResourceDefinition_3:
-      example:
-        allowAll: true
-        resourceUUIDSet:
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        resourceType: UNIVERSE
-      properties:
-        allowAll:
-          description: Select all resources (including future resources)
-          type: boolean
-          example: true
-        resourceType:
-          description: Resource Type
-          enum:
-          - UNIVERSE
-          - ROLE
-          - USER
-          - OTHER
-          type: string
-          example: UNIVERSE
-        resourceUUIDSet:
-          description: Set of resource uuids
-          items:
-            format: uuid
-            type: string
-          type: array
-          uniqueItems: true
-          example:
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      type: object
-    Users_4:
-      description: A user associated with a customer
-      example:
-        ldapSpecifiedRole: true
-        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        role: Admin
-        authTokenIssueDate: 2021-06-17 15:00:05+00:00
-        timezone: timezone
-        oidcJwtAuthToken: oidcJwtAuthToken
-        groupMemberships:
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        userType: local
-        creationDate: 2022-12-12 13:07:18+00:00
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        email: username1@example.com
-        primary: true
-      properties:
-        authTokenIssueDate:
-          description: UI session token creation date
-          example: 2021-06-17 15:00:05+00:00
-          format: date-time
-          readOnly: true
-          type: string
-        creationDate:
-          description: User creation date
-          example: 2022-12-12 13:07:18+00:00
-          format: date-time
-          readOnly: true
-          type: string
-        customerUUID:
-          description: Customer UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        email:
-          description: User email address
-          example: username1@example.com
-          type: string
-        groupMemberships:
-          items:
-            format: uuid
-            type: string
-          type: array
-          uniqueItems: true
-          example:
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        ldapSpecifiedRole:
-          description: LDAP Specified Role
-          type: boolean
-          example: true
-        oidcJwtAuthToken:
-          readOnly: true
-          type: string
-          example: REDACTED
-        primary:
-          type: boolean
-          example: true
-        role:
-          description: <b style="color:#ff0000">Deprecated since YBA version 2.19.3.0.</b> Use  getRoleBindings instead.
-          enum:
-          - ConnectOnly
-          - ReadOnly
-          - BackupAdmin
-          - Admin
-          - SuperAdmin
-          example: Admin
-          type: string
-        timezone:
-          description: User timezone
-          type: string
-          example: us-east-1a
-        userType:
-          description: User Type
-          enum:
-          - local
-          - ldap
-          - oidc
-          type: string
-          example: local
-        uuid:
-          description: User UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      required:
-      - email
-      - groupMemberships
-      - primary
-      type: object
-    RoleResourceDefinition_3:
-      description: Defines the association of Role to Resource Groups.
-      example:
-        resourceGroup:
-          resourceDefinitionSet:
-          - allowAll: true
-            resourceUUIDSet:
-            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            resourceType: UNIVERSE
-          - allowAll: true
-            resourceUUIDSet:
-            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            resourceType: UNIVERSE
-        roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        resourceGroup:
-          $ref: '#/components/schemas/ResourceGroup_3'
-        roleUUID:
-          description: UUID of the role to attach resource group to.
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      required:
-      - roleUUID
-      type: object
-    UserWithFeatures_4:
-      description: A user with set of features, associated with a customer
-      example:
-        ldapSpecifiedRole: true
-        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        role: Admin
-        authTokenIssueDate: 2021-06-17 15:00:05+00:00
-        timezone: timezone
-        oidcJwtAuthToken: oidcJwtAuthToken
-        groupMemberships:
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        userType: local
-        creationDate: 2022-12-12 13:07:18+00:00
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        email: username1@example.com
-        primary: true
-      properties:
-        authTokenIssueDate:
-          description: UI session token creation date
-          example: 2021-06-17 15:00:05+00:00
-          format: date-time
-          readOnly: true
-          type: string
-        creationDate:
-          description: User creation date
-          example: 2022-12-12 13:07:18+00:00
-          format: date-time
-          readOnly: true
-          type: string
-        customerUUID:
-          description: Customer UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        email:
-          description: User email address
-          example: username1@example.com
-          type: string
-        groupMemberships:
-          items:
-            format: uuid
-            type: string
-          type: array
-          uniqueItems: true
-          example:
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        ldapSpecifiedRole:
-          description: LDAP Specified Role
-          type: boolean
-          example: true
-        oidcJwtAuthToken:
-          readOnly: true
-          type: string
-          example: REDACTED
-        primary:
-          type: boolean
-          example: true
-        role:
-          description: <b style="color:#ff0000">Deprecated since YBA version 2.19.3.0.</b> Use  getRoleBindings instead.
-          enum:
-          - ConnectOnly
-          - ReadOnly
-          - BackupAdmin
-          - Admin
-          - SuperAdmin
-          example: Admin
-          type: string
-        timezone:
-          description: User timezone
-          type: string
-          example: us-east-1a
-        userType:
-          description: User Type
-          enum:
-          - local
-          - ldap
-          - oidc
-          type: string
-          example: local
-        uuid:
-          description: User UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      required:
-      - email
-      - groupMemberships
-      - primary
-      type: object
-    UserRegistrationData_4:
-      description: User registration data. The API and UI use this to validate form data.
-      example:
-        features:
-          key: '{}'
-        password: Test@1234
-        role: Admin
-        timezone: America/Toronto
-        confirmPassword: Test@1234
-        roleResourceDefinitions:
-        - resourceGroup:
-            resourceDefinitionSet:
-            - allowAll: true
-              resourceUUIDSet:
-              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              resourceType: UNIVERSE
-            - allowAll: true
-              resourceUUIDSet:
-              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              resourceType: UNIVERSE
-          roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - resourceGroup:
-            resourceDefinitionSet:
-            - allowAll: true
-              resourceUUIDSet:
-              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              resourceType: UNIVERSE
-            - allowAll: true
-              resourceUUIDSet:
-              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              resourceType: UNIVERSE
-          roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        email: test@example.com
-      properties:
-        confirmPassword:
-          description: Password confirmation
-          example: Test@1234
-          type: string
-        email:
-          description: Email address
-          example: test@example.com
-          type: string
-        features:
-          additionalProperties:
-            properties: {}
-            type: object
-          description: User features
-          type: object
-          example: {}
-        password:
-          description: Password
-          example: Test@1234
-          type: string
-        role:
-          description: <b style="color:#ff0000">Deprecated since YBA version 2.19.3.0.</b> Use field roleResourceDefinitions instead.
-          enum:
-          - ConnectOnly
-          - ReadOnly
-          - BackupAdmin
-          - Admin
-          - SuperAdmin
-          example: Admin
-          type: string
-        roleResourceDefinitions:
-          description: List of roles and resource groups defined for user.
-          items:
-            $ref: '#/components/schemas/RoleResourceDefinition_3'
-          type: array
-          example:
-          - resourceGroup:
-              resourceDefinitionSet:
-              - allowAll: true
-                resourceUUIDSet:
-                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-                resourceType: UNIVERSE
-              - allowAll: true
-                resourceUUIDSet:
-                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-                resourceType: UNIVERSE
-            roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        timezone:
-          description: User timezone
-          example: America/Toronto
-          type: string
-      required:
-      - email
-      type: object
-    UserOIDCAuthToken_3:
-      example:
-        oidcAuthToken: oidcAuthToken
-      properties:
-        oidcAuthToken:
-          description: User OIDC Auth token
-          type: string
-          example: REDACTED
-      type: object
-    YBPSuccess_4:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-          example: Example message
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-          example: true
-      type: object
-    ResourceGroup_3:
-      example:
-        resourceDefinitionSet:
-        - allowAll: true
-          resourceUUIDSet:
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          resourceType: UNIVERSE
-        - allowAll: true
-          resourceUUIDSet:
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          resourceType: UNIVERSE
-      properties:
-        resourceDefinitionSet:
-          items:
-            $ref: '#/components/schemas/ResourceDefinition_3'
-          type: array
-          uniqueItems: true
-          example:
-          - allowAll: true
-            resourceUUIDSet:
-            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            resourceType: UNIVERSE
-      required:
-      - resourceDefinitionSet
-      type: object
   securitySchemes:
     apiKeyAuth:
       description: API token passed as header
@@ -1691,5 +912,3 @@ externalDocs:
 x-refined-from:
 - openapi_2.yaml
 - platform.swagger.json
-- yugabytedb-anywhere-v1-full.yaml
-- yugabytedb-anywhere-v1-users-rbac.yaml

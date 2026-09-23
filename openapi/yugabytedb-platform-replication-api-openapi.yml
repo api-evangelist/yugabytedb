@@ -1,17 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Yugabytedb Platform Replication API
-  version: v1
   contact:
     name: https://docs.yugabyte.com
+  description: ALPHA - NOT FOR EXTERNAL USE
   license:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
   termsOfService: TODO(chirag)
-  x-refined-note:
-  - x-source differs across the merged source definitions and was not carried
-  - x-split-from differs across the merged source definitions and was not carried
-  description: 'Operations tagged Platform Replication across 3 of this provider''s published API definitions: openapi_2.yaml, yugabytedb-anywhere-v1-full.yaml, yugabytedb-anywhere-v1-high-availability.yaml. Each path carries the servers of the definition it was published in.'
+  title: YugabyteDB Anywhere Platform Replication API
+  version: v1
 servers:
 - url: /
 tags:
@@ -47,8 +44,6 @@ paths:
       summary: List backups
       tags:
       - Platform Replication
-    servers:
-    - url: /
   /api/v1/settings/ha/config/{cUUID}/replication_schedule:
     get:
       operationId: getBackupInfo
@@ -67,8 +62,8 @@ paths:
       - apiKeyAuth: []
       tags:
       - Platform Replication
-    servers:
-    - url: /
+      summary: Get backup info
+      x-summary-source: derived
   /api/v1/settings/ha/config/{cUUID}/replication_schedule/start:
     put:
       description: Available since YBA version 2.20.0.
@@ -99,8 +94,6 @@ paths:
       tags:
       - Platform Replication
       x-codegen-request-body-name: PlatformBackupFrequencyRequest
-    servers:
-    - url: /
   /api/v1/settings/ha/config/{cUUID}/replication_schedule/stop:
     put:
       operationId: stopPeriodicBackup
@@ -122,8 +115,8 @@ paths:
       - apiKeyAuth: []
       tags:
       - Platform Replication
-    servers:
-    - url: /
+      summary: Stop periodic backup
+      x-summary-source: derived
 components:
   schemas:
     PlatformBackupFrequencyFormData:
@@ -136,28 +129,6 @@ components:
       required:
       - frequency_milliseconds
       type: object
-    PlatformBackupFrequencyFormData_2:
-      example:
-        frequency_milliseconds: 0
-      properties:
-        frequency_milliseconds:
-          format: int64
-          type: integer
-          example: 1000
-      required:
-      - frequency_milliseconds
-      type: object
-    PlatformBackupFrequencyFormData_3:
-      example:
-        frequency_milliseconds: 0
-      properties:
-        frequency_milliseconds:
-          format: int64
-          type: integer
-          example: 1000
-      required:
-      - frequency_milliseconds
-      type: object
   securitySchemes:
     apiKeyAuth:
       description: API token passed as header
@@ -167,7 +138,4 @@ components:
 externalDocs:
   description: About YugabyteDB Anywhere
   url: https://docs.yugabyte.com/latest/yugabyte-platform/
-x-refined-from:
-- openapi_2.yaml
-- yugabytedb-anywhere-v1-full.yaml
-- yugabytedb-anywhere-v1-high-availability.yaml
+x-original-swagger-version: '2.0'

@@ -8,14 +8,11 @@ info:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
   termsOfService: TODO(chirag)
-  x-refined-note:
-  - x-source differs across the merged source definitions and was not carried
-  - x-split-from differs across the merged source definitions and was not carried
-  description: 'Operations tagged Session management across 4 of this provider''s published API definitions: openapi_2.yaml, platform.swagger.json, yugabytedb-anywhere-v1-full.yaml, yugabytedb-anywhere-v1-users-rbac.yaml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Session management across 2 of this provider''s published API definitions: openapi_2.yaml, platform.swagger.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: /
 tags:
-- name: Session management
+- name: Session Management
 paths:
   /api/v1/api_login:
     post:
@@ -39,7 +36,7 @@ paths:
           description: successful operation
       summary: Authenticate user using email and password
       tags:
-      - Session management
+      - Session Management
       x-codegen-request-body-name: CustomerLoginFormData
     servers:
     - url: /
@@ -57,7 +54,7 @@ paths:
           description: successful operation
       summary: appVersion
       tags:
-      - Session management
+      - Session Management
     servers:
     - url: /
   /api/v1/customer_count:
@@ -72,7 +69,7 @@ paths:
           description: successful operation
       summary: customerCount
       tags:
-      - Session management
+      - Session Management
     servers:
     - url: /
   /api/v1/customers/{cUUID}/admin_notifications:
@@ -95,7 +92,7 @@ paths:
           description: successful operation
       summary: Current list of notifications for admin
       tags:
-      - Session management
+      - Session Management
     servers:
     - url: /
   /api/v1/customers/{cUUID}/api_token:
@@ -126,7 +123,7 @@ paths:
           description: successful operation
       summary: Regenerate and fetch API token
       tags:
-      - Session management
+      - Session Management
     servers:
     - url: /
   /api/v1/logs:
@@ -168,7 +165,7 @@ paths:
           description: successful operation
       summary: getFilteredLogs
       tags:
-      - Session management
+      - Session Management
     servers:
     - url: /
   /api/v1/logs/{maxLines}:
@@ -190,7 +187,7 @@ paths:
           description: successful operation
       summary: getLogs
       tags:
-      - Session management
+      - Session Management
     servers:
     - url: /
   /api/v1/register:
@@ -221,7 +218,7 @@ paths:
           description: successful operation
       summary: Register a customer
       tags:
-      - Session management
+      - Session Management
       x-codegen-request-body-name: CustomerRegisterFormData
     servers:
     - url: /
@@ -242,13 +239,47 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Get current user and customer uuid. This will not generate or return the API token, use /api_token API for that.
+      summary: Get current user and customer uuid.
       tags:
-      - Session management
+      - Session Management
     servers:
     - url: /
 components:
   schemas:
+    CustomerLoginFormData:
+      example:
+        password: password
+        email: email
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      required:
+      - email
+      - password
+      type: object
+    CustomerRegisterFormData:
+      example:
+        password: password
+        code: code
+        name: name
+        email: email
+      properties:
+        code:
+          type: string
+        email:
+          type: string
+        name:
+          type: string
+        password:
+          type: string
+      required:
+      - code
+      - email
+      - name
+      - password
+      type: object
     Admin_notification:
       example:
         code: code
@@ -263,19 +294,6 @@ components:
           readOnly: true
           type: string
       type: object
-    CustomerLoginFormData:
-      example:
-        password: password
-        email: email
-      properties:
-        email:
-          type: string
-        password:
-          type: string
-      required:
-      - email
-      - password
-      type: object
     LogData:
       example:
         lines:
@@ -288,31 +306,6 @@ components:
           type: array
       required:
       - lines
-      type: object
-    CustomerCountResp:
-      example:
-        count: 0
-      properties:
-        count:
-          format: int32
-          type: integer
-      required:
-      - count
-      type: object
-    Current_admin_notification_messages:
-      example:
-        messages:
-        - code: code
-          htmlMessage: htmlMessage
-        - code: code
-          htmlMessage: htmlMessage
-      properties:
-        messages:
-          description: Messages
-          items:
-            $ref: '#/components/schemas/Admin_notification'
-          readOnly: true
-          type: array
       type: object
     SessionInfo:
       description: Session information
@@ -342,12 +335,41 @@ components:
           format: uuid
           type: string
       type: object
-    CustomerRegisterFormData:
+    CustomerCountResp:
       example:
-        password: password
-        code: code
-        name: name
-        email: email
+        count: 0
+      properties:
+        count:
+          format: int32
+          type: integer
+      required:
+      - count
+      type: object
+    Current_admin_notification_messages:
+      example:
+        messages:
+        - code: code
+          htmlMessage: htmlMessage
+        - code: code
+          htmlMessage: htmlMessage
+      properties:
+        messages:
+          description: Messages
+          items:
+            $ref: '#/components/schemas/Admin_notification'
+          readOnly: true
+          type: array
+      type: object
+    LogData_2:
+      properties:
+        lines:
+          items:
+            type: string
+          type: array
+      required:
+      - lines
+      type: object
+    CustomerRegisterFormData_2:
       properties:
         code:
           type: string
@@ -362,14 +384,6 @@ components:
       - email
       - name
       - password
-      type: object
-    CustomerCountResp_2:
-      properties:
-        count:
-          format: int32
-          type: integer
-      required:
-      - count
       type: object
     SessionInfo_2:
       description: Session information
@@ -389,262 +403,13 @@ components:
           format: uuid
           type: string
       type: object
-    CustomerRegisterFormData_2:
-      properties:
-        code:
-          type: string
-        email:
-          type: string
-        name:
-          type: string
-        password:
-          type: string
-      required:
-      - code
-      - email
-      - name
-      - password
-      type: object
-    LogData_2:
-      properties:
-        lines:
-          items:
-            type: string
-          type: array
-      required:
-      - lines
-      type: object
-    Admin_notification_2:
-      example:
-        code: code
-        htmlMessage: htmlMessage
-      properties:
-        code:
-          description: Notification code
-          readOnly: true
-          type: string
-          example: OK
-        htmlMessage:
-          description: Notification message with HTML markup
-          readOnly: true
-          type: string
-          example: Example htmlMessage
-      type: object
-    CustomerLoginFormData_2:
-      example:
-        password: password
-        email: email
-      properties:
-        email:
-          type: string
-          example: admin@example.com
-        password:
-          type: string
-          example: REDACTED
-      required:
-      - email
-      - password
-      type: object
-    LogData_3:
-      example:
-        lines:
-        - lines
-        - lines
-      properties:
-        lines:
-          items:
-            type: string
-          type: array
-          example:
-          - example-lines
-      required:
-      - lines
-      type: object
-    CustomerCountResp_3:
-      example:
-        count: 0
+    CustomerCountResp_2:
       properties:
         count:
           format: int32
           type: integer
-          example: 10
       required:
       - count
-      type: object
-    Current_admin_notification_messages_2:
-      example:
-        messages:
-        - code: code
-          htmlMessage: htmlMessage
-        - code: code
-          htmlMessage: htmlMessage
-      properties:
-        messages:
-          description: Messages
-          items:
-            $ref: '#/components/schemas/Admin_notification_2'
-          readOnly: true
-          type: array
-          example:
-          - code: code
-            htmlMessage: htmlMessage
-      type: object
-    SessionInfo_3:
-      description: Session information
-      example:
-        apiToken: apiToken
-        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        apiTokenVersion: 0
-        authToken: authToken
-        userUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        apiToken:
-          description: API token
-          type: string
-          example: REDACTED
-        apiTokenVersion:
-          description: API token version
-          format: int64
-          type: integer
-          example: 1000
-        authToken:
-          description: Auth token
-          type: string
-          example: REDACTED
-        customerUUID:
-          description: Customer UUID
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        userUUID:
-          description: User UUID
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      type: object
-    CustomerRegisterFormData_3:
-      example:
-        password: password
-        code: code
-        name: name
-        email: email
-      properties:
-        code:
-          type: string
-          example: OK
-        email:
-          type: string
-          example: admin@example.com
-        name:
-          type: string
-          example: example-name
-        password:
-          type: string
-          example: REDACTED
-      required:
-      - code
-      - email
-      - name
-      - password
-      type: object
-    CustomerLoginFormData_3:
-      example:
-        password: password
-        email: email
-      properties:
-        email:
-          type: string
-          example: admin@example.com
-        password:
-          type: string
-          example: REDACTED
-      required:
-      - email
-      - password
-      type: object
-    CustomerCountResp_4:
-      example:
-        count: 0
-      properties:
-        count:
-          format: int32
-          type: integer
-          example: 10
-      required:
-      - count
-      type: object
-    LogData_4:
-      example:
-        lines:
-        - lines
-        - lines
-      properties:
-        lines:
-          items:
-            type: string
-          type: array
-          example:
-          - example-lines
-      required:
-      - lines
-      type: object
-    SessionInfo_4:
-      description: Session information
-      example:
-        apiToken: apiToken
-        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        apiTokenVersion: 0
-        authToken: authToken
-        userUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        apiToken:
-          description: API token
-          type: string
-          example: REDACTED
-        apiTokenVersion:
-          description: API token version
-          format: int64
-          type: integer
-          example: 1000
-        authToken:
-          description: Auth token
-          type: string
-          example: REDACTED
-        customerUUID:
-          description: Customer UUID
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        userUUID:
-          description: User UUID
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      type: object
-    CustomerRegisterFormData_4:
-      example:
-        password: password
-        code: code
-        name: name
-        email: email
-      properties:
-        code:
-          type: string
-          example: OK
-        email:
-          type: string
-          example: admin@example.com
-        name:
-          type: string
-          example: example-name
-        password:
-          type: string
-          example: REDACTED
-      required:
-      - code
-      - email
-      - name
-      - password
       type: object
   securitySchemes:
     apiKeyAuth:
@@ -658,5 +423,3 @@ externalDocs:
 x-refined-from:
 - openapi_2.yaml
 - platform.swagger.json
-- yugabytedb-anywhere-v1-full.yaml
-- yugabytedb-anywhere-v1-users-rbac.yaml

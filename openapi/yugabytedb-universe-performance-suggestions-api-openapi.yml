@@ -1,17 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Yugabytedb Universe performance suggestions API
-  version: v1
   contact:
     name: https://docs.yugabyte.com
+  description: ALPHA - NOT FOR EXTERNAL USE
   license:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
   termsOfService: TODO(chirag)
-  x-refined-note:
-  - x-source differs across the merged source definitions and was not carried
-  - x-split-from differs across the merged source definitions and was not carried
-  description: 'Operations tagged Universe performance suggestions across 3 of this provider''s published API definitions: openapi_2.yaml, yugabytedb-anywhere-v1-full.yaml, yugabytedb-anywhere-v1-universes.yaml. Each path carries the servers of the definition it was published in.'
+  title: YugabyteDB Anywhere Universe performance suggestions API
+  version: v1
 servers:
 - url: /
 tags:
@@ -46,8 +43,6 @@ paths:
       summary: Get query distribution improvement suggestion for a universe
       tags:
       - Universe performance suggestions
-    servers:
-    - url: /
   /api/v1/customers/{cUUID}/universes/{uniUUID}/range_hash:
     get:
       description: 'WARNING: This is a preview API that could change. Returns list of hash indexes on timestamp columns.'
@@ -77,8 +72,6 @@ paths:
       summary: Return list of hash indexes
       tags:
       - Universe performance suggestions
-    servers:
-    - url: /
   /api/v1/customers/{cUUID}/universes/{uniUUID}/unused_indexes:
     get:
       description: 'WARNING: This is a preview API that could change. Returns list of unused indexes, along with their database and table.'
@@ -108,48 +101,8 @@ paths:
       summary: Return list of each unused index across the universe
       tags:
       - Universe performance suggestions
-    servers:
-    - url: /
 components:
   schemas:
-    UnusedIndexFinderResponse:
-      example:
-        index_command: index_command
-        description: description
-        current_database: current_database
-        index_name: index_name
-        table_name: table_name
-      properties:
-        current_database:
-          type: string
-        description:
-          type: string
-        index_command:
-          type: string
-        index_name:
-          type: string
-        table_name:
-          type: string
-      type: object
-    HashedTimestampColumnFinderResponse:
-      example:
-        index_command: index_command
-        description: description
-        current_database: current_database
-        index_name: index_name
-        table_name: table_name
-      properties:
-        current_database:
-          type: string
-        description:
-          type: string
-        index_command:
-          type: string
-        index_name:
-          type: string
-        table_name:
-          type: string
-      type: object
     QueryDistributionSuggestionResponse:
       example:
         suggestion: suggestion
@@ -220,7 +173,7 @@ components:
       - numSelect
       - numUpdate
       type: object
-    UnusedIndexFinderResponse_2:
+    UnusedIndexFinderResponse:
       example:
         index_command: index_command
         description: description
@@ -230,21 +183,16 @@ components:
       properties:
         current_database:
           type: string
-          example: example-current_database
         description:
           type: string
-          example: Example description
         index_command:
           type: string
-          example: example-index_command
         index_name:
           type: string
-          example: example-index_name
         table_name:
           type: string
-          example: example-table_name
       type: object
-    HashedTimestampColumnFinderResponse_2:
+    HashedTimestampColumnFinderResponse:
       example:
         index_command: index_command
         description: description
@@ -254,239 +202,14 @@ components:
       properties:
         current_database:
           type: string
-          example: example-current_database
         description:
           type: string
-          example: Example description
         index_command:
           type: string
-          example: example-index_command
         index_name:
           type: string
-          example: example-index_name
         table_name:
           type: string
-          example: example-table_name
-      type: object
-    QueryDistributionSuggestionResponse_2:
-      example:
-        suggestion: suggestion
-        description: description
-        details:
-        - node: node
-          numInsert: 6
-          numDelete: 0
-          numUpdate: 5
-          numSelect: 1
-        - node: node
-          numInsert: 6
-          numDelete: 0
-          numUpdate: 5
-          numSelect: 1
-        startTime: startTime
-        endTime: endTime
-        adviceType: adviceType
-      properties:
-        adviceType:
-          type: string
-          example: DEFAULT
-        description:
-          type: string
-          example: Example description
-        details:
-          items:
-            $ref: '#/components/schemas/NodeQueryDistributionDetails_2'
-          type: array
-          example:
-          - node: node
-            numInsert: 6
-            numDelete: 0
-            numUpdate: 5
-            numSelect: 1
-        endTime:
-          type: string
-          example: '2026-05-03T12:00:00Z'
-        startTime:
-          type: string
-          example: '2026-05-03T12:00:00Z'
-        suggestion:
-          type: string
-          example: example-suggestion
-      required:
-      - adviceType
-      - description
-      - details
-      - endTime
-      - startTime
-      - suggestion
-      type: object
-    NodeQueryDistributionDetails_2:
-      example:
-        node: node
-        numInsert: 6
-        numDelete: 0
-        numUpdate: 5
-        numSelect: 1
-      properties:
-        node:
-          type: string
-          example: node-1
-        numDelete:
-          format: int32
-          type: integer
-          example: 10
-        numInsert:
-          format: int32
-          type: integer
-          example: 10
-        numSelect:
-          format: int32
-          type: integer
-          example: 10
-        numUpdate:
-          format: int32
-          type: integer
-          example: 10
-      required:
-      - node
-      - numDelete
-      - numInsert
-      - numSelect
-      - numUpdate
-      type: object
-    UnusedIndexFinderResponse_3:
-      example:
-        index_command: index_command
-        description: description
-        current_database: current_database
-        index_name: index_name
-        table_name: table_name
-      properties:
-        current_database:
-          type: string
-          example: example-current_database
-        description:
-          type: string
-          example: Example description
-        index_command:
-          type: string
-          example: example-index_command
-        index_name:
-          type: string
-          example: example-index_name
-        table_name:
-          type: string
-          example: example-table_name
-      type: object
-    HashedTimestampColumnFinderResponse_3:
-      example:
-        index_command: index_command
-        description: description
-        current_database: current_database
-        index_name: index_name
-        table_name: table_name
-      properties:
-        current_database:
-          type: string
-          example: example-current_database
-        description:
-          type: string
-          example: Example description
-        index_command:
-          type: string
-          example: example-index_command
-        index_name:
-          type: string
-          example: example-index_name
-        table_name:
-          type: string
-          example: example-table_name
-      type: object
-    QueryDistributionSuggestionResponse_3:
-      example:
-        suggestion: suggestion
-        description: description
-        details:
-        - node: node
-          numInsert: 6
-          numDelete: 0
-          numUpdate: 5
-          numSelect: 1
-        - node: node
-          numInsert: 6
-          numDelete: 0
-          numUpdate: 5
-          numSelect: 1
-        startTime: startTime
-        endTime: endTime
-        adviceType: adviceType
-      properties:
-        adviceType:
-          type: string
-          example: DEFAULT
-        description:
-          type: string
-          example: Example description
-        details:
-          items:
-            $ref: '#/components/schemas/NodeQueryDistributionDetails_3'
-          type: array
-          example:
-          - node: node
-            numInsert: 6
-            numDelete: 0
-            numUpdate: 5
-            numSelect: 1
-        endTime:
-          type: string
-          example: '2026-05-03T12:00:00Z'
-        startTime:
-          type: string
-          example: '2026-05-03T12:00:00Z'
-        suggestion:
-          type: string
-          example: example-suggestion
-      required:
-      - adviceType
-      - description
-      - details
-      - endTime
-      - startTime
-      - suggestion
-      type: object
-    NodeQueryDistributionDetails_3:
-      example:
-        node: node
-        numInsert: 6
-        numDelete: 0
-        numUpdate: 5
-        numSelect: 1
-      properties:
-        node:
-          type: string
-          example: node-1
-        numDelete:
-          format: int32
-          type: integer
-          example: 10
-        numInsert:
-          format: int32
-          type: integer
-          example: 10
-        numSelect:
-          format: int32
-          type: integer
-          example: 10
-        numUpdate:
-          format: int32
-          type: integer
-          example: 10
-      required:
-      - node
-      - numDelete
-      - numInsert
-      - numSelect
-      - numUpdate
       type: object
   securitySchemes:
     apiKeyAuth:
@@ -497,7 +220,4 @@ components:
 externalDocs:
   description: About YugabyteDB Anywhere
   url: https://docs.yugabyte.com/latest/yugabyte-platform/
-x-refined-from:
-- openapi_2.yaml
-- yugabytedb-anywhere-v1-full.yaml
-- yugabytedb-anywhere-v1-universes.yaml
+x-original-swagger-version: '2.0'

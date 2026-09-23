@@ -1,17 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Yugabytedb Internal HA API
-  version: v1
   contact:
     name: https://docs.yugabyte.com
+  description: ALPHA - NOT FOR EXTERNAL USE
   license:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
   termsOfService: TODO(chirag)
-  x-refined-note:
-  - x-source differs across the merged source definitions and was not carried
-  - x-split-from differs across the merged source definitions and was not carried
-  description: 'Operations tagged Internal HA across 3 of this provider''s published API definitions: openapi_2.yaml, yugabytedb-anywhere-v1-full.yaml, yugabytedb-anywhere-v1-high-availability.yaml. Each path carries the servers of the definition it was published in.'
+  title: YugabyteDB Anywhere Internal HA API
+  version: v1
 servers:
 - url: /
 tags:
@@ -35,8 +32,8 @@ paths:
           description: successful operation
       tags:
       - Internal HA
-    servers:
-    - url: /
+      summary: Validate backup
+      x-summary-source: derived
   /api/v1/settings/ha/internal/config:
     get:
       operationId: getHAConfigByClusterKey
@@ -50,8 +47,8 @@ paths:
           description: successful operation
       tags:
       - Internal HA
-    servers:
-    - url: /
+      summary: Get HA config by cluster key
+      x-summary-source: derived
   /api/v1/settings/ha/internal/config/demote/{timestamp}:
     put:
       description: Available since YBA version 2.20.0.
@@ -81,8 +78,6 @@ paths:
       summary: Demote local leader
       tags:
       - Internal HA
-    servers:
-    - url: /
   /api/v1/settings/ha/internal/config/sync/{timestamp}:
     put:
       operationId: syncInstances
@@ -102,8 +97,8 @@ paths:
           description: successful operation
       tags:
       - Internal HA
-    servers:
-    - url: /
+      summary: Sync instances
+      x-summary-source: derived
   /api/v1/settings/ha/internal/upload:
     post:
       operationId: syncBackups
@@ -117,8 +112,8 @@ paths:
           description: successful operation
       tags:
       - Internal HA
-    servers:
-    - url: /
+      summary: Sync backups
+      x-summary-source: derived
 components:
   schemas:
     PlatformInstance:
@@ -171,122 +166,6 @@ components:
       - uuid
       - ybaVersion
       type: object
-    PlatformInstance_2:
-      example:
-        address: address
-        config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        instance_state: Awaiting Connection to Replicas
-        ybaVersion: ybaVersion
-        state: LEADER
-        is_local: true
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        is_leader: true
-        last_backup: 2022-12-12 13:07:18+00:00
-      properties:
-        address:
-          type: string
-          example: example-address
-        config_uuid:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        instance_state:
-          enum:
-          - Awaiting Connection to Replicas
-          - Connected
-          - Disconnected
-          type: string
-          example: Awaiting Connection to Replicas
-        is_leader:
-          type: boolean
-          example: true
-        is_local:
-          type: boolean
-          example: true
-        last_backup:
-          description: Last backup time
-          example: 2022-12-12 13:07:18+00:00
-          format: date-time
-          type: string
-        state:
-          enum:
-          - LEADER
-          - STAND_BY
-          type: string
-          example: LEADER
-        uuid:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        ybaVersion:
-          type: string
-          example: 2.20.0.0
-      required:
-      - address
-      - instance_state
-      - is_leader
-      - state
-      - uuid
-      - ybaVersion
-      type: object
-    PlatformInstance_3:
-      example:
-        address: address
-        config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        instance_state: Awaiting Connection to Replicas
-        ybaVersion: ybaVersion
-        state: LEADER
-        is_local: true
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        is_leader: true
-        last_backup: 2022-12-12 13:07:18+00:00
-      properties:
-        address:
-          type: string
-          example: example-address
-        config_uuid:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        instance_state:
-          enum:
-          - Awaiting Connection to Replicas
-          - Connected
-          - Disconnected
-          type: string
-          example: Awaiting Connection to Replicas
-        is_leader:
-          type: boolean
-          example: true
-        is_local:
-          type: boolean
-          example: true
-        last_backup:
-          description: Last backup time
-          example: 2022-12-12 13:07:18+00:00
-          format: date-time
-          type: string
-        state:
-          enum:
-          - LEADER
-          - STAND_BY
-          type: string
-          example: LEADER
-        uuid:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        ybaVersion:
-          type: string
-          example: 2.20.0.0
-      required:
-      - address
-      - instance_state
-      - is_leader
-      - state
-      - uuid
-      - ybaVersion
-      type: object
   securitySchemes:
     apiKeyAuth:
       description: API token passed as header
@@ -296,7 +175,4 @@ components:
 externalDocs:
   description: About YugabyteDB Anywhere
   url: https://docs.yugabyte.com/latest/yugabyte-platform/
-x-refined-from:
-- openapi_2.yaml
-- yugabytedb-anywhere-v1-full.yaml
-- yugabytedb-anywhere-v1-high-availability.yaml
+x-original-swagger-version: '2.0'

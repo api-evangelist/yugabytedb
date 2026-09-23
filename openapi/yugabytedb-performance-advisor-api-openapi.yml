@@ -1,17 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Yugabytedb Performance Advisor API
-  version: v1
   contact:
     name: https://docs.yugabyte.com
+  description: ALPHA - NOT FOR EXTERNAL USE
   license:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
   termsOfService: TODO(chirag)
-  x-refined-note:
-  - x-source differs across the merged source definitions and was not carried
-  - x-split-from differs across the merged source definitions and was not carried
-  description: 'Operations tagged Performance Advisor across 3 of this provider''s published API definitions: openapi_2.yaml, yugabytedb-anywhere-v1-alerts-monitoring.yaml, yugabytedb-anywhere-v1-full.yaml. Each path carries the servers of the definition it was published in.'
+  title: YugabyteDB Anywhere Performance Advisor API
+  version: v1
 servers:
 - url: /
 tags:
@@ -50,8 +47,6 @@ paths:
       tags:
       - Performance Advisor
       x-codegen-request-body-name: PageStateChangeAuditInfoRequest
-    servers:
-    - url: /
   /api/v1/customers/{cUUID}/performance_recommendations:
     delete:
       description: 'WARNING: This is a preview API that could change.'
@@ -85,8 +80,6 @@ paths:
       tags:
       - Performance Advisor
       x-codegen-request-body-name: DeletePerformanceRecommendationsRequest
-    servers:
-    - url: /
   /api/v1/customers/{cUUID}/performance_recommendations/hide:
     post:
       description: YbaApi Internal.
@@ -120,8 +113,6 @@ paths:
       tags:
       - Performance Advisor
       x-codegen-request-body-name: HidePerformanceRecommendationsRequest
-    servers:
-    - url: /
   /api/v1/customers/{cUUID}/performance_recommendations/page:
     post:
       description: 'WARNING: This is a preview API that could change.'
@@ -155,8 +146,6 @@ paths:
       tags:
       - Performance Advisor
       x-codegen-request-body-name: PagePerformanceRecommendationRequest
-    servers:
-    - url: /
   /api/v1/customers/{cUUID}/performance_recommendations/resolve:
     post:
       description: YbaApi Internal.
@@ -190,8 +179,6 @@ paths:
       tags:
       - Performance Advisor
       x-codegen-request-body-name: ResolvePerformanceRecommendationsRequest
-    servers:
-    - url: /
   /api/v1/customers/{cUUID}/performance_recommendations/{rUUID}:
     get:
       description: 'WARNING: This is a preview API that could change.'
@@ -221,8 +208,6 @@ paths:
       summary: Get performance recommendation details
       tags:
       - Performance Advisor
-    servers:
-    - url: /
   /api/v1/customers/{cUUID}/universes/{uniUUID}/last_run:
     get:
       description: 'WARNING: This is a preview API that could change.'
@@ -252,8 +237,6 @@ paths:
       summary: Get last performance advisor run details
       tags:
       - Performance Advisor
-    servers:
-    - url: /
   /api/v1/customers/{cUUID}/universes/{uniUUID}/perf_advisor_settings:
     get:
       description: 'WARNING: This is a preview API that could change.'
@@ -324,8 +307,6 @@ paths:
       tags:
       - Performance Advisor
       x-codegen-request-body-name: PerformanceAdvisorSettingsRequest
-    servers:
-    - url: /
   /api/v1/customers/{cUUID}/universes/{uniUUID}/start_manually:
     post:
       description: 'WARNING: This is a preview API that could change.'
@@ -358,10 +339,122 @@ paths:
       summary: Start performance advisor run for universe
       tags:
       - Performance Advisor
-    servers:
-    - url: /
 components:
   schemas:
+    PerformanceRecommendation:
+      example:
+        new: true
+        recommendationPriority: HIGH
+        entityType: UNIVERSE
+        observation: observation
+        stateChangeAuditInfoList:
+        - new: true
+          fieldName: fieldName
+          customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          previousValue: previousValue
+          userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          updatedValue: updatedValue
+          timestamp: 0
+        - new: true
+          fieldName: fieldName
+          customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          previousValue: previousValue
+          userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          updatedValue: updatedValue
+          timestamp: 0
+        universeId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        entityNames: entityNames
+        recommendation: recommendation
+        recommendationTimestamp: 0
+        recommendationInfo:
+          key: '{}'
+        recommendationState: OPEN
+        customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        isStale: true
+        recommendationType: UNUSED_INDEX
+      properties:
+        customerId:
+          format: uuid
+          type: string
+        entityNames:
+          type: string
+        entityType:
+          enum:
+          - UNIVERSE
+          - NODE
+          - TABLE
+          - DATABASE
+          - INDEX
+          type: string
+        id:
+          format: uuid
+          type: string
+        isStale:
+          type: boolean
+        new:
+          type: boolean
+        observation:
+          type: string
+        recommendation:
+          type: string
+        recommendationInfo:
+          additionalProperties:
+            properties: {}
+            type: object
+          type: object
+        recommendationPriority:
+          enum:
+          - HIGH
+          - MEDIUM
+          - LOW
+          type: string
+        recommendationState:
+          enum:
+          - OPEN
+          - HIDDEN
+          - RESOLVED
+          type: string
+        recommendationTimestamp:
+          format: int64
+          type: integer
+        recommendationType:
+          enum:
+          - UNUSED_INDEX
+          - RANGE_SHARDING
+          - QUERY_LOAD_SKEW
+          - CONNECTION_SKEW
+          - CPU_SKEW
+          - CPU_USAGE
+          - REJECTED_CONNECTIONS
+          - HOT_SHARD
+          type: string
+        stateChangeAuditInfoList:
+          items:
+            $ref: '#/components/schemas/StateChangeAuditInfo'
+          type: array
+        universeId:
+          format: uuid
+          type: string
+      required:
+      - customerId
+      - entityNames
+      - entityType
+      - id
+      - isStale
+      - new
+      - observation
+      - recommendation
+      - recommendationInfo
+      - recommendationPriority
+      - recommendationState
+      - recommendationTimestamp
+      - recommendationType
+      - stateChangeAuditInfoList
+      - universeId
+      type: object
     StateChangeAuditInfo:
       example:
         new: true
@@ -403,6 +496,162 @@ components:
       - updatedValue
       - userId
       type: object
+    PerfAdvisorSettingsWithDefaults:
+      example:
+        defaultSettings:
+          cpu_skew_interval_mins: 1
+          hot_shard_interval_mins: 1
+          query_skew_min_queries: 1
+          query_skew_interval_mins: 1
+          cpu_usage_interval_mins: 1
+          hot_shard_write_skew_threshold_pct: 1.1231513536777256
+          rejected_conn_interval_mins: 1
+          connection_skew_threshold_pct: 1.1465812980502945
+          enabled: true
+          universe_frequency_mins: 5
+          hot_shard_min_node_writes: 1
+          hot_shard_read_skew_threshold_pct: 1.7386281948385884
+          cpu_skew_min_usage_pct: 1.5637376656633328
+          hot_shard_min_node_reads: 1
+          cpu_usage_threshold: 1.9301444243932577
+          cpu_skew_threshold_pct: 1.2302135886934766
+          query_skew_threshold_pct: 1.684685269835264
+          rejected_conn_threshold: 1
+          connection_skew_min_connections: 1
+          connection_skew_interval_mins: 1
+        universeSettings:
+          cpu_skew_interval_mins: 1
+          hot_shard_interval_mins: 1
+          query_skew_min_queries: 1
+          query_skew_interval_mins: 1
+          cpu_usage_interval_mins: 1
+          hot_shard_write_skew_threshold_pct: 1.1231513536777256
+          rejected_conn_interval_mins: 1
+          connection_skew_threshold_pct: 1.1465812980502945
+          enabled: true
+          universe_frequency_mins: 5
+          hot_shard_min_node_writes: 1
+          hot_shard_read_skew_threshold_pct: 1.7386281948385884
+          cpu_skew_min_usage_pct: 1.5637376656633328
+          hot_shard_min_node_reads: 1
+          cpu_usage_threshold: 1.9301444243932577
+          cpu_skew_threshold_pct: 1.2302135886934766
+          query_skew_threshold_pct: 1.684685269835264
+          rejected_conn_threshold: 1
+          connection_skew_min_connections: 1
+          connection_skew_interval_mins: 1
+      properties:
+        defaultSettings:
+          $ref: '#/components/schemas/PerfAdvisorSettingsFormData'
+        universeSettings:
+          $ref: '#/components/schemas/PerfAdvisorSettingsFormData'
+      type: object
+    StateChangeAuditInfoPagedQuery:
+      example:
+        filter:
+          customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          ids:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          recommendationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        offset: 6
+        needTotalCount: true
+        limit: 0
+        sortBy: id
+        direction: ASC
+      properties:
+        direction:
+          enum:
+          - ASC
+          - DESC
+          type: string
+        filter:
+          $ref: '#/components/schemas/StateChangeAuditInfoFilter'
+        limit:
+          format: int32
+          type: integer
+        needTotalCount:
+          type: boolean
+        offset:
+          format: int32
+          type: integer
+        sortBy:
+          enum:
+          - id
+          - timestamp
+          type: string
+      required:
+      - direction
+      - filter
+      - limit
+      - needTotalCount
+      - offset
+      - sortBy
+      type: object
+    Universe_performance_advisor_status:
+      example:
+        scheduleTime: 2022-12-12 13:07:18+00:00
+        universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        startTime: 2022-12-12 13:07:18+00:00
+        endTime: 2022-12-12 13:07:18+00:00
+        state: PENDING
+        manual: true
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        customerUUID:
+          description: Customer UUID
+          format: uuid
+          readOnly: true
+          type: string
+        endTime:
+          description: Time perf advisor run was finished
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        manual:
+          description: Scheduled or manual run
+          readOnly: true
+          type: boolean
+        scheduleTime:
+          description: Time perf advisor run was scheduled
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        startTime:
+          description: Time perf advisor run was started
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+        state:
+          description: State
+          enum:
+          - PENDING
+          - RUNNING
+          - COMPLETED
+          - FAILED
+          readOnly: true
+          type: string
+        universeUUID:
+          description: Universe UUID
+          format: uuid
+          readOnly: true
+          type: string
+        uuid:
+          description: Perf advisor run UUID
+          format: uuid
+          readOnly: true
+          type: string
+      required:
+      - customerUUID
+      - state
+      - universeUUID
+      - uuid
+      type: object
     StateChangeAuditInfoPagedResponse:
       example:
         entities:
@@ -442,6 +691,209 @@ components:
       - hasNext
       - hasPrev
       - totalCount
+      type: object
+    PerformanceRecommendationFilter:
+      example:
+        priorities:
+        - HIGH
+        - HIGH
+        types:
+        - UNUSED_INDEX
+        - UNUSED_INDEX
+        customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        universeId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        ids:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        createdInstantBefore: 0
+        isStale: true
+        states:
+        - OPEN
+        - OPEN
+      properties:
+        createdInstantBefore:
+          format: int64
+          type: integer
+        customerId:
+          format: uuid
+          type: string
+        ids:
+          items:
+            format: uuid
+            type: string
+          type: array
+          uniqueItems: true
+        isStale:
+          type: boolean
+        priorities:
+          items:
+            enum:
+            - HIGH
+            - MEDIUM
+            - LOW
+            type: string
+          type: array
+          uniqueItems: true
+        states:
+          items:
+            enum:
+            - OPEN
+            - HIDDEN
+            - RESOLVED
+            type: string
+          type: array
+          uniqueItems: true
+        types:
+          items:
+            enum:
+            - UNUSED_INDEX
+            - RANGE_SHARDING
+            - QUERY_LOAD_SKEW
+            - CONNECTION_SKEW
+            - CPU_SKEW
+            - CPU_USAGE
+            - REJECTED_CONNECTIONS
+            - HOT_SHARD
+            type: string
+          type: array
+          uniqueItems: true
+        universeId:
+          format: uuid
+          type: string
+      required:
+      - createdInstantBefore
+      - customerId
+      - ids
+      - isStale
+      - priorities
+      - states
+      - types
+      - universeId
+      type: object
+    PerfAdvisorManualRunStatus:
+      example:
+        activeRun:
+          scheduleTime: 2022-12-12 13:07:18+00:00
+          universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          startTime: 2022-12-12 13:07:18+00:00
+          endTime: 2022-12-12 13:07:18+00:00
+          state: PENDING
+          manual: true
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        success: true
+        message: message
+      properties:
+        activeRun:
+          $ref: '#/components/schemas/Universe_performance_advisor_status'
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+      type: object
+    YBPSuccess:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+      type: object
+    PerformanceRecommendationPagedQuery:
+      example:
+        filter:
+          priorities:
+          - HIGH
+          - HIGH
+          types:
+          - UNUSED_INDEX
+          - UNUSED_INDEX
+          customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          universeId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          ids:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          createdInstantBefore: 0
+          isStale: true
+          states:
+          - OPEN
+          - OPEN
+        offset: 6
+        needTotalCount: true
+        limit: 0
+        sortBy: id
+        direction: ASC
+      properties:
+        direction:
+          enum:
+          - ASC
+          - DESC
+          type: string
+        filter:
+          $ref: '#/components/schemas/PerformanceRecommendationFilter'
+        limit:
+          format: int32
+          type: integer
+        needTotalCount:
+          type: boolean
+        offset:
+          format: int32
+          type: integer
+        sortBy:
+          enum:
+          - id
+          - recommendationType
+          - recommendationState
+          - recommendationPriority
+          - recommendationTimestamp
+          type: string
+      required:
+      - direction
+      - filter
+      - limit
+      - needTotalCount
+      - offset
+      - sortBy
+      type: object
+    StateChangeAuditInfoFilter:
+      example:
+        customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        ids:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        recommendationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        customerId:
+          format: uuid
+          type: string
+        ids:
+          items:
+            format: uuid
+            type: string
+          type: array
+          uniqueItems: true
+        recommendationId:
+          format: uuid
+          type: string
+        userId:
+          format: uuid
+          type: string
+      required:
+      - customerId
+      - ids
+      - recommendationId
+      - userId
       type: object
     PerfAdvisorSettingsFormData:
       example:
@@ -565,99 +1017,6 @@ components:
           minimum: 5
           type: integer
       type: object
-    PerfAdvisorSettingsWithDefaults:
-      example:
-        defaultSettings:
-          cpu_skew_interval_mins: 1
-          hot_shard_interval_mins: 1
-          query_skew_min_queries: 1
-          query_skew_interval_mins: 1
-          cpu_usage_interval_mins: 1
-          hot_shard_write_skew_threshold_pct: 1.1231513536777256
-          rejected_conn_interval_mins: 1
-          connection_skew_threshold_pct: 1.1465812980502945
-          enabled: true
-          universe_frequency_mins: 5
-          hot_shard_min_node_writes: 1
-          hot_shard_read_skew_threshold_pct: 1.7386281948385884
-          cpu_skew_min_usage_pct: 1.5637376656633328
-          hot_shard_min_node_reads: 1
-          cpu_usage_threshold: 1.9301444243932577
-          cpu_skew_threshold_pct: 1.2302135886934766
-          query_skew_threshold_pct: 1.684685269835264
-          rejected_conn_threshold: 1
-          connection_skew_min_connections: 1
-          connection_skew_interval_mins: 1
-        universeSettings:
-          cpu_skew_interval_mins: 1
-          hot_shard_interval_mins: 1
-          query_skew_min_queries: 1
-          query_skew_interval_mins: 1
-          cpu_usage_interval_mins: 1
-          hot_shard_write_skew_threshold_pct: 1.1231513536777256
-          rejected_conn_interval_mins: 1
-          connection_skew_threshold_pct: 1.1465812980502945
-          enabled: true
-          universe_frequency_mins: 5
-          hot_shard_min_node_writes: 1
-          hot_shard_read_skew_threshold_pct: 1.7386281948385884
-          cpu_skew_min_usage_pct: 1.5637376656633328
-          hot_shard_min_node_reads: 1
-          cpu_usage_threshold: 1.9301444243932577
-          cpu_skew_threshold_pct: 1.2302135886934766
-          query_skew_threshold_pct: 1.684685269835264
-          rejected_conn_threshold: 1
-          connection_skew_min_connections: 1
-          connection_skew_interval_mins: 1
-      properties:
-        defaultSettings:
-          $ref: '#/components/schemas/PerfAdvisorSettingsFormData'
-        universeSettings:
-          $ref: '#/components/schemas/PerfAdvisorSettingsFormData'
-      type: object
-    StateChangeAuditInfoPagedQuery:
-      example:
-        filter:
-          customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ids:
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          recommendationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        offset: 6
-        needTotalCount: true
-        limit: 0
-        sortBy: id
-        direction: ASC
-      properties:
-        direction:
-          enum:
-          - ASC
-          - DESC
-          type: string
-        filter:
-          $ref: '#/components/schemas/StateChangeAuditInfoFilter'
-        limit:
-          format: int32
-          type: integer
-        needTotalCount:
-          type: boolean
-        offset:
-          format: int32
-          type: integer
-        sortBy:
-          enum:
-          - id
-          - timestamp
-          type: string
-      required:
-      - direction
-      - filter
-      - limit
-      - needTotalCount
-      - offset
-      - sortBy
-      type: object
     PerformanceRecommendationPagedResponse:
       example:
         entities:
@@ -746,2016 +1105,6 @@ components:
       - hasPrev
       - totalCount
       type: object
-    PerformanceRecommendationFilter:
-      example:
-        priorities:
-        - HIGH
-        - HIGH
-        types:
-        - UNUSED_INDEX
-        - UNUSED_INDEX
-        customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        universeId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        ids:
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        createdInstantBefore: 0
-        isStale: true
-        states:
-        - OPEN
-        - OPEN
-      properties:
-        createdInstantBefore:
-          format: int64
-          type: integer
-        customerId:
-          format: uuid
-          type: string
-        ids:
-          items:
-            format: uuid
-            type: string
-          type: array
-          uniqueItems: true
-        isStale:
-          type: boolean
-        priorities:
-          items:
-            enum:
-            - HIGH
-            - MEDIUM
-            - LOW
-            type: string
-          type: array
-          uniqueItems: true
-        states:
-          items:
-            enum:
-            - OPEN
-            - HIDDEN
-            - RESOLVED
-            type: string
-          type: array
-          uniqueItems: true
-        types:
-          items:
-            enum:
-            - UNUSED_INDEX
-            - RANGE_SHARDING
-            - QUERY_LOAD_SKEW
-            - CONNECTION_SKEW
-            - CPU_SKEW
-            - CPU_USAGE
-            - REJECTED_CONNECTIONS
-            - HOT_SHARD
-            type: string
-          type: array
-          uniqueItems: true
-        universeId:
-          format: uuid
-          type: string
-      required:
-      - createdInstantBefore
-      - customerId
-      - ids
-      - isStale
-      - priorities
-      - states
-      - types
-      - universeId
-      type: object
-    PerformanceRecommendationPagedQuery:
-      example:
-        filter:
-          priorities:
-          - HIGH
-          - HIGH
-          types:
-          - UNUSED_INDEX
-          - UNUSED_INDEX
-          customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          universeId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ids:
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          createdInstantBefore: 0
-          isStale: true
-          states:
-          - OPEN
-          - OPEN
-        offset: 6
-        needTotalCount: true
-        limit: 0
-        sortBy: id
-        direction: ASC
-      properties:
-        direction:
-          enum:
-          - ASC
-          - DESC
-          type: string
-        filter:
-          $ref: '#/components/schemas/PerformanceRecommendationFilter'
-        limit:
-          format: int32
-          type: integer
-        needTotalCount:
-          type: boolean
-        offset:
-          format: int32
-          type: integer
-        sortBy:
-          enum:
-          - id
-          - recommendationType
-          - recommendationState
-          - recommendationPriority
-          - recommendationTimestamp
-          type: string
-      required:
-      - direction
-      - filter
-      - limit
-      - needTotalCount
-      - offset
-      - sortBy
-      type: object
-    PerformanceRecommendation:
-      example:
-        new: true
-        recommendationPriority: HIGH
-        entityType: UNIVERSE
-        observation: observation
-        stateChangeAuditInfoList:
-        - new: true
-          fieldName: fieldName
-          customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          previousValue: previousValue
-          userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          updatedValue: updatedValue
-          timestamp: 0
-        - new: true
-          fieldName: fieldName
-          customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          previousValue: previousValue
-          userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          updatedValue: updatedValue
-          timestamp: 0
-        universeId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        entityNames: entityNames
-        recommendation: recommendation
-        recommendationTimestamp: 0
-        recommendationInfo:
-          key: '{}'
-        recommendationState: OPEN
-        customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        isStale: true
-        recommendationType: UNUSED_INDEX
-      properties:
-        customerId:
-          format: uuid
-          type: string
-        entityNames:
-          type: string
-        entityType:
-          enum:
-          - UNIVERSE
-          - NODE
-          - TABLE
-          - DATABASE
-          - INDEX
-          type: string
-        id:
-          format: uuid
-          type: string
-        isStale:
-          type: boolean
-        new:
-          type: boolean
-        observation:
-          type: string
-        recommendation:
-          type: string
-        recommendationInfo:
-          additionalProperties:
-            properties: {}
-            type: object
-          type: object
-        recommendationPriority:
-          enum:
-          - HIGH
-          - MEDIUM
-          - LOW
-          type: string
-        recommendationState:
-          enum:
-          - OPEN
-          - HIDDEN
-          - RESOLVED
-          type: string
-        recommendationTimestamp:
-          format: int64
-          type: integer
-        recommendationType:
-          enum:
-          - UNUSED_INDEX
-          - RANGE_SHARDING
-          - QUERY_LOAD_SKEW
-          - CONNECTION_SKEW
-          - CPU_SKEW
-          - CPU_USAGE
-          - REJECTED_CONNECTIONS
-          - HOT_SHARD
-          type: string
-        stateChangeAuditInfoList:
-          items:
-            $ref: '#/components/schemas/StateChangeAuditInfo'
-          type: array
-        universeId:
-          format: uuid
-          type: string
-      required:
-      - customerId
-      - entityNames
-      - entityType
-      - id
-      - isStale
-      - new
-      - observation
-      - recommendation
-      - recommendationInfo
-      - recommendationPriority
-      - recommendationState
-      - recommendationTimestamp
-      - recommendationType
-      - stateChangeAuditInfoList
-      - universeId
-      type: object
-    StateChangeAuditInfoFilter:
-      example:
-        customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        ids:
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        recommendationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        customerId:
-          format: uuid
-          type: string
-        ids:
-          items:
-            format: uuid
-            type: string
-          type: array
-          uniqueItems: true
-        recommendationId:
-          format: uuid
-          type: string
-        userId:
-          format: uuid
-          type: string
-      required:
-      - customerId
-      - ids
-      - recommendationId
-      - userId
-      type: object
-    PerfAdvisorManualRunStatus:
-      example:
-        activeRun:
-          scheduleTime: 2022-12-12 13:07:18+00:00
-          universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          startTime: 2022-12-12 13:07:18+00:00
-          endTime: 2022-12-12 13:07:18+00:00
-          state: PENDING
-          manual: true
-          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        success: true
-        message: message
-      properties:
-        activeRun:
-          $ref: '#/components/schemas/Universe_performance_advisor_status'
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-      type: object
-    YBPSuccess:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-      type: object
-    Universe_performance_advisor_status:
-      example:
-        scheduleTime: 2022-12-12 13:07:18+00:00
-        universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        startTime: 2022-12-12 13:07:18+00:00
-        endTime: 2022-12-12 13:07:18+00:00
-        state: PENDING
-        manual: true
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        customerUUID:
-          description: Customer UUID
-          format: uuid
-          readOnly: true
-          type: string
-        endTime:
-          description: Time perf advisor run was finished
-          example: 2022-12-12 13:07:18+00:00
-          format: date-time
-          readOnly: true
-          type: string
-        manual:
-          description: Scheduled or manual run
-          readOnly: true
-          type: boolean
-        scheduleTime:
-          description: Time perf advisor run was scheduled
-          example: 2022-12-12 13:07:18+00:00
-          format: date-time
-          readOnly: true
-          type: string
-        startTime:
-          description: Time perf advisor run was started
-          example: 2022-12-12 13:07:18+00:00
-          format: date-time
-          readOnly: true
-          type: string
-        state:
-          description: State
-          enum:
-          - PENDING
-          - RUNNING
-          - COMPLETED
-          - FAILED
-          readOnly: true
-          type: string
-        universeUUID:
-          description: Universe UUID
-          format: uuid
-          readOnly: true
-          type: string
-        uuid:
-          description: Perf advisor run UUID
-          format: uuid
-          readOnly: true
-          type: string
-      required:
-      - customerUUID
-      - state
-      - universeUUID
-      - uuid
-      type: object
-    StateChangeAuditInfo_2:
-      example:
-        new: true
-        fieldName: fieldName
-        customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        previousValue: previousValue
-        userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        updatedValue: updatedValue
-        timestamp: 0
-      properties:
-        customerId:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        fieldName:
-          type: string
-          example: example-fieldName
-        id:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        new:
-          type: boolean
-          example: true
-        previousValue:
-          type: string
-          example: example-value
-        timestamp:
-          format: int64
-          type: integer
-          example: 1000
-        updatedValue:
-          type: string
-          example: '2026-05-03'
-        userId:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      required:
-      - customerId
-      - fieldName
-      - id
-      - new
-      - previousValue
-      - timestamp
-      - updatedValue
-      - userId
-      type: object
-    StateChangeAuditInfoPagedResponse_2:
-      example:
-        entities:
-        - new: true
-          fieldName: fieldName
-          customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          previousValue: previousValue
-          userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          updatedValue: updatedValue
-          timestamp: 0
-        - new: true
-          fieldName: fieldName
-          customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          previousValue: previousValue
-          userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          updatedValue: updatedValue
-          timestamp: 0
-        hasPrev: true
-        hasNext: true
-        totalCount: 6
-      properties:
-        entities:
-          items:
-            $ref: '#/components/schemas/StateChangeAuditInfo_2'
-          type: array
-          example:
-          - new: true
-            fieldName: fieldName
-            customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            previousValue: previousValue
-            userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            updatedValue: updatedValue
-            timestamp: 0
-        hasNext:
-          type: boolean
-          example: true
-        hasPrev:
-          type: boolean
-          example: true
-        totalCount:
-          format: int32
-          type: integer
-          example: 10
-      required:
-      - entities
-      - hasNext
-      - hasPrev
-      - totalCount
-      type: object
-    PerfAdvisorSettingsFormData_2:
-      example:
-        cpu_skew_interval_mins: 1
-        hot_shard_interval_mins: 1
-        query_skew_min_queries: 1
-        query_skew_interval_mins: 1
-        cpu_usage_interval_mins: 1
-        hot_shard_write_skew_threshold_pct: 1.1231513536777256
-        rejected_conn_interval_mins: 1
-        connection_skew_threshold_pct: 1.1465812980502945
-        enabled: true
-        universe_frequency_mins: 5
-        hot_shard_min_node_writes: 1
-        hot_shard_read_skew_threshold_pct: 1.7386281948385884
-        cpu_skew_min_usage_pct: 1.5637376656633328
-        hot_shard_min_node_reads: 1
-        cpu_usage_threshold: 1.9301444243932577
-        cpu_skew_threshold_pct: 1.2302135886934766
-        query_skew_threshold_pct: 1.684685269835264
-        rejected_conn_threshold: 1
-        connection_skew_min_connections: 1
-        connection_skew_interval_mins: 1
-      properties:
-        connection_skew_interval_mins:
-          description: Perf advisor connection skew check interval
-          format: int32
-          minimum: 1
-          type: integer
-          example: 100
-        connection_skew_min_connections:
-          description: Perf advisor connection skew min connections
-          format: int32
-          minimum: 1
-          type: integer
-          example: 100
-        connection_skew_threshold_pct:
-          description: Perf advisor connection skew threshold
-          format: double
-          minimum: 1
-          type: number
-          example: 1.5
-        cpu_skew_interval_mins:
-          description: Perf advisor cpu skew check interval
-          format: int32
-          minimum: 1
-          type: integer
-          example: 100
-        cpu_skew_min_usage_pct:
-          description: Perf advisor cpu skew min cpu usage
-          format: double
-          minimum: 1
-          type: number
-          example: 1.5
-        cpu_skew_threshold_pct:
-          description: Perf advisor cpu skew threshold
-          format: double
-          minimum: 1
-          type: number
-          example: 1.5
-        cpu_usage_interval_mins:
-          description: Perf advisor CPU usage check interval
-          format: int32
-          minimum: 1
-          type: integer
-          example: 100
-        cpu_usage_threshold:
-          description: Perf advisor CPU usage threshold
-          format: double
-          minimum: 1
-          type: number
-          example: 1.5
-        enabled:
-          description: Enable/disable perf advisor runs for the universe
-          type: boolean
-          example: true
-        hot_shard_interval_mins:
-          description: Perf Advisor hot shard check interval
-          format: int32
-          minimum: 1
-          type: integer
-          example: 100
-        hot_shard_min_node_reads:
-          description: Perf advisor hot shard minimal node reads
-          format: int32
-          minimum: 1
-          type: integer
-          example: 100
-        hot_shard_min_node_writes:
-          description: Perf advisor hot shard minimal node writes
-          format: int32
-          minimum: 1
-          type: integer
-          example: 100
-        hot_shard_read_skew_threshold_pct:
-          description: Perf Advisor hot shard read skew threshold
-          format: double
-          minimum: 1
-          type: number
-          example: 1.5
-        hot_shard_write_skew_threshold_pct:
-          description: Perf Advisor hot shard write skew threshold
-          format: double
-          minimum: 1
-          type: number
-          example: 1.5
-        query_skew_interval_mins:
-          description: Perf advisor query skew check interval
-          format: int32
-          minimum: 1
-          type: integer
-          example: 100
-        query_skew_min_queries:
-          description: Perf advisor query skew min queries
-          format: int32
-          minimum: 1
-          type: integer
-          example: 100
-        query_skew_threshold_pct:
-          description: Perf advisor query skew threshold
-          format: double
-          minimum: 1
-          type: number
-          example: 1.5
-        rejected_conn_interval_mins:
-          description: Perf advisor rejected connections check interval
-          format: int32
-          minimum: 1
-          type: integer
-          example: 100
-        rejected_conn_threshold:
-          description: Perf advisor rejected connections threshold
-          format: int32
-          minimum: 1
-          type: integer
-          example: 100
-        universe_frequency_mins:
-          description: Perf advisor runs frequency, in minutes
-          format: int32
-          minimum: 5
-          type: integer
-          example: 100
-      type: object
-    StateChangeAuditInfoPagedQuery_2:
-      example:
-        filter:
-          customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ids:
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          recommendationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        offset: 6
-        needTotalCount: true
-        limit: 0
-        sortBy: id
-        direction: ASC
-      properties:
-        direction:
-          enum:
-          - ASC
-          - DESC
-          type: string
-          example: ASC
-        filter:
-          $ref: '#/components/schemas/StateChangeAuditInfoFilter_2'
-        limit:
-          format: int32
-          type: integer
-          example: 10
-        needTotalCount:
-          type: boolean
-          example: true
-        offset:
-          format: int32
-          type: integer
-          example: 100
-        sortBy:
-          enum:
-          - id
-          - timestamp
-          type: string
-          example: id
-      required:
-      - direction
-      - filter
-      - limit
-      - needTotalCount
-      - offset
-      - sortBy
-      type: object
-    PerformanceRecommendationPagedResponse_2:
-      example:
-        entities:
-        - new: true
-          recommendationPriority: HIGH
-          entityType: UNIVERSE
-          observation: observation
-          stateChangeAuditInfoList:
-          - new: true
-            fieldName: fieldName
-            customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            previousValue: previousValue
-            userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            updatedValue: updatedValue
-            timestamp: 0
-          - new: true
-            fieldName: fieldName
-            customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            previousValue: previousValue
-            userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            updatedValue: updatedValue
-            timestamp: 0
-          universeId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          entityNames: entityNames
-          recommendation: recommendation
-          recommendationTimestamp: 0
-          recommendationInfo:
-            key: '{}'
-          recommendationState: OPEN
-          customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          isStale: true
-          recommendationType: UNUSED_INDEX
-        - new: true
-          recommendationPriority: HIGH
-          entityType: UNIVERSE
-          observation: observation
-          stateChangeAuditInfoList:
-          - new: true
-            fieldName: fieldName
-            customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            previousValue: previousValue
-            userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            updatedValue: updatedValue
-            timestamp: 0
-          - new: true
-            fieldName: fieldName
-            customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            previousValue: previousValue
-            userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            updatedValue: updatedValue
-            timestamp: 0
-          universeId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          entityNames: entityNames
-          recommendation: recommendation
-          recommendationTimestamp: 0
-          recommendationInfo:
-            key: '{}'
-          recommendationState: OPEN
-          customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          isStale: true
-          recommendationType: UNUSED_INDEX
-        hasPrev: true
-        hasNext: true
-        totalCount: 6
-      properties:
-        entities:
-          items:
-            $ref: '#/components/schemas/PerformanceRecommendation_2'
-          type: array
-          example:
-          - new: true
-            recommendationPriority: HIGH
-            entityType: UNIVERSE
-            observation: observation
-            stateChangeAuditInfoList:
-            - new: true
-              fieldName: fieldName
-              customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              previousValue: previousValue
-              userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              updatedValue: updatedValue
-              timestamp: 0
-            - new: true
-              fieldName: fieldName
-              customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              previousValue: previousValue
-              userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              updatedValue: updatedValue
-              timestamp: 0
-            universeId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            entityNames: entityNames
-            recommendation: recommendation
-            recommendationTimestamp: 0
-            recommendationInfo:
-              key: '{}'
-            recommendationState: OPEN
-            customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            isStale: true
-            recommendationType: UNUSED_INDEX
-        hasNext:
-          type: boolean
-          example: true
-        hasPrev:
-          type: boolean
-          example: true
-        totalCount:
-          format: int32
-          type: integer
-          example: 10
-      required:
-      - entities
-      - hasNext
-      - hasPrev
-      - totalCount
-      type: object
-    PerformanceRecommendationPagedQuery_2:
-      example:
-        filter:
-          priorities:
-          - HIGH
-          - HIGH
-          types:
-          - UNUSED_INDEX
-          - UNUSED_INDEX
-          customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          universeId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ids:
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          createdInstantBefore: 0
-          isStale: true
-          states:
-          - OPEN
-          - OPEN
-        offset: 6
-        needTotalCount: true
-        limit: 0
-        sortBy: id
-        direction: ASC
-      properties:
-        direction:
-          enum:
-          - ASC
-          - DESC
-          type: string
-          example: ASC
-        filter:
-          $ref: '#/components/schemas/PerformanceRecommendationFilter_2'
-        limit:
-          format: int32
-          type: integer
-          example: 10
-        needTotalCount:
-          type: boolean
-          example: true
-        offset:
-          format: int32
-          type: integer
-          example: 100
-        sortBy:
-          enum:
-          - id
-          - recommendationType
-          - recommendationState
-          - recommendationPriority
-          - recommendationTimestamp
-          type: string
-          example: id
-      required:
-      - direction
-      - filter
-      - limit
-      - needTotalCount
-      - offset
-      - sortBy
-      type: object
-    PerformanceRecommendation_2:
-      example:
-        new: true
-        recommendationPriority: HIGH
-        entityType: UNIVERSE
-        observation: observation
-        stateChangeAuditInfoList:
-        - new: true
-          fieldName: fieldName
-          customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          previousValue: previousValue
-          userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          updatedValue: updatedValue
-          timestamp: 0
-        - new: true
-          fieldName: fieldName
-          customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          previousValue: previousValue
-          userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          updatedValue: updatedValue
-          timestamp: 0
-        universeId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        entityNames: entityNames
-        recommendation: recommendation
-        recommendationTimestamp: 0
-        recommendationInfo:
-          key: '{}'
-        recommendationState: OPEN
-        customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        isStale: true
-        recommendationType: UNUSED_INDEX
-      properties:
-        customerId:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        entityNames:
-          type: string
-          example: example-entityNames
-        entityType:
-          enum:
-          - UNIVERSE
-          - NODE
-          - TABLE
-          - DATABASE
-          - INDEX
-          type: string
-          example: UNIVERSE
-        id:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        isStale:
-          type: boolean
-          example: true
-        new:
-          type: boolean
-          example: true
-        observation:
-          type: string
-          example: example-observation
-        recommendation:
-          type: string
-          example: example-recommendation
-        recommendationInfo:
-          additionalProperties:
-            properties: {}
-            type: object
-          type: object
-          example: {}
-        recommendationPriority:
-          enum:
-          - HIGH
-          - MEDIUM
-          - LOW
-          type: string
-          example: HIGH
-        recommendationState:
-          enum:
-          - OPEN
-          - HIDDEN
-          - RESOLVED
-          type: string
-          example: OPEN
-        recommendationTimestamp:
-          format: int64
-          type: integer
-          example: 1000
-        recommendationType:
-          enum:
-          - UNUSED_INDEX
-          - RANGE_SHARDING
-          - QUERY_LOAD_SKEW
-          - CONNECTION_SKEW
-          - CPU_SKEW
-          - CPU_USAGE
-          - REJECTED_CONNECTIONS
-          - HOT_SHARD
-          type: string
-          example: UNUSED_INDEX
-        stateChangeAuditInfoList:
-          items:
-            $ref: '#/components/schemas/StateChangeAuditInfo_2'
-          type: array
-          example:
-          - new: true
-            fieldName: fieldName
-            customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            previousValue: previousValue
-            userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            updatedValue: updatedValue
-            timestamp: 0
-        universeId:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      required:
-      - customerId
-      - entityNames
-      - entityType
-      - id
-      - isStale
-      - new
-      - observation
-      - recommendation
-      - recommendationInfo
-      - recommendationPriority
-      - recommendationState
-      - recommendationTimestamp
-      - recommendationType
-      - stateChangeAuditInfoList
-      - universeId
-      type: object
-    StateChangeAuditInfoFilter_2:
-      example:
-        customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        ids:
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        recommendationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        customerId:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        ids:
-          items:
-            format: uuid
-            type: string
-          type: array
-          uniqueItems: true
-          example:
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        recommendationId:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        userId:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      required:
-      - customerId
-      - ids
-      - recommendationId
-      - userId
-      type: object
-    PerfAdvisorManualRunStatus_2:
-      example:
-        activeRun:
-          scheduleTime: 2022-12-12 13:07:18+00:00
-          universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          startTime: 2022-12-12 13:07:18+00:00
-          endTime: 2022-12-12 13:07:18+00:00
-          state: PENDING
-          manual: true
-          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        success: true
-        message: message
-      properties:
-        activeRun:
-          $ref: '#/components/schemas/Universe performance advisor status'
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-          example: Example message
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-          example: true
-      type: object
-    YBPSuccess_2:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-          example: Example message
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-          example: true
-      type: object
-    PerformanceRecommendationFilter_2:
-      example:
-        priorities:
-        - HIGH
-        - HIGH
-        types:
-        - UNUSED_INDEX
-        - UNUSED_INDEX
-        customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        universeId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        ids:
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        createdInstantBefore: 0
-        isStale: true
-        states:
-        - OPEN
-        - OPEN
-      properties:
-        createdInstantBefore:
-          format: int64
-          type: integer
-          example: 1000
-        customerId:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        ids:
-          items:
-            format: uuid
-            type: string
-          type: array
-          uniqueItems: true
-          example:
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        isStale:
-          type: boolean
-          example: true
-        priorities:
-          items:
-            enum:
-            - HIGH
-            - MEDIUM
-            - LOW
-            type: string
-          type: array
-          uniqueItems: true
-          example:
-          - HIGH
-        states:
-          items:
-            enum:
-            - OPEN
-            - HIDDEN
-            - RESOLVED
-            type: string
-          type: array
-          uniqueItems: true
-          example:
-          - OPEN
-        types:
-          items:
-            enum:
-            - UNUSED_INDEX
-            - RANGE_SHARDING
-            - QUERY_LOAD_SKEW
-            - CONNECTION_SKEW
-            - CPU_SKEW
-            - CPU_USAGE
-            - REJECTED_CONNECTIONS
-            - HOT_SHARD
-            type: string
-          type: array
-          uniqueItems: true
-          example:
-          - UNUSED_INDEX
-        universeId:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      required:
-      - createdInstantBefore
-      - customerId
-      - ids
-      - isStale
-      - priorities
-      - states
-      - types
-      - universeId
-      type: object
-    StateChangeAuditInfo_3:
-      example:
-        new: true
-        fieldName: fieldName
-        customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        previousValue: previousValue
-        userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        updatedValue: updatedValue
-        timestamp: 0
-      properties:
-        customerId:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        fieldName:
-          type: string
-          example: example-fieldName
-        id:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        new:
-          type: boolean
-          example: true
-        previousValue:
-          type: string
-          example: example-value
-        timestamp:
-          format: int64
-          type: integer
-          example: 1000
-        updatedValue:
-          type: string
-          example: '2026-05-03'
-        userId:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      required:
-      - customerId
-      - fieldName
-      - id
-      - new
-      - previousValue
-      - timestamp
-      - updatedValue
-      - userId
-      type: object
-    StateChangeAuditInfoPagedResponse_3:
-      example:
-        entities:
-        - new: true
-          fieldName: fieldName
-          customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          previousValue: previousValue
-          userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          updatedValue: updatedValue
-          timestamp: 0
-        - new: true
-          fieldName: fieldName
-          customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          previousValue: previousValue
-          userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          updatedValue: updatedValue
-          timestamp: 0
-        hasPrev: true
-        hasNext: true
-        totalCount: 6
-      properties:
-        entities:
-          items:
-            $ref: '#/components/schemas/StateChangeAuditInfo_3'
-          type: array
-          example:
-          - new: true
-            fieldName: fieldName
-            customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            previousValue: previousValue
-            userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            updatedValue: updatedValue
-            timestamp: 0
-        hasNext:
-          type: boolean
-          example: true
-        hasPrev:
-          type: boolean
-          example: true
-        totalCount:
-          format: int32
-          type: integer
-          example: 10
-      required:
-      - entities
-      - hasNext
-      - hasPrev
-      - totalCount
-      type: object
-    PerfAdvisorSettingsFormData_3:
-      example:
-        cpu_skew_interval_mins: 1
-        hot_shard_interval_mins: 1
-        query_skew_min_queries: 1
-        query_skew_interval_mins: 1
-        cpu_usage_interval_mins: 1
-        hot_shard_write_skew_threshold_pct: 1.1231513536777256
-        rejected_conn_interval_mins: 1
-        connection_skew_threshold_pct: 1.1465812980502945
-        enabled: true
-        universe_frequency_mins: 5
-        hot_shard_min_node_writes: 1
-        hot_shard_read_skew_threshold_pct: 1.7386281948385884
-        cpu_skew_min_usage_pct: 1.5637376656633328
-        hot_shard_min_node_reads: 1
-        cpu_usage_threshold: 1.9301444243932577
-        cpu_skew_threshold_pct: 1.2302135886934766
-        query_skew_threshold_pct: 1.684685269835264
-        rejected_conn_threshold: 1
-        connection_skew_min_connections: 1
-        connection_skew_interval_mins: 1
-      properties:
-        connection_skew_interval_mins:
-          description: Perf advisor connection skew check interval
-          format: int32
-          minimum: 1
-          type: integer
-          example: 100
-        connection_skew_min_connections:
-          description: Perf advisor connection skew min connections
-          format: int32
-          minimum: 1
-          type: integer
-          example: 100
-        connection_skew_threshold_pct:
-          description: Perf advisor connection skew threshold
-          format: double
-          minimum: 1
-          type: number
-          example: 1.5
-        cpu_skew_interval_mins:
-          description: Perf advisor cpu skew check interval
-          format: int32
-          minimum: 1
-          type: integer
-          example: 100
-        cpu_skew_min_usage_pct:
-          description: Perf advisor cpu skew min cpu usage
-          format: double
-          minimum: 1
-          type: number
-          example: 1.5
-        cpu_skew_threshold_pct:
-          description: Perf advisor cpu skew threshold
-          format: double
-          minimum: 1
-          type: number
-          example: 1.5
-        cpu_usage_interval_mins:
-          description: Perf advisor CPU usage check interval
-          format: int32
-          minimum: 1
-          type: integer
-          example: 100
-        cpu_usage_threshold:
-          description: Perf advisor CPU usage threshold
-          format: double
-          minimum: 1
-          type: number
-          example: 1.5
-        enabled:
-          description: Enable/disable perf advisor runs for the universe
-          type: boolean
-          example: true
-        hot_shard_interval_mins:
-          description: Perf Advisor hot shard check interval
-          format: int32
-          minimum: 1
-          type: integer
-          example: 100
-        hot_shard_min_node_reads:
-          description: Perf advisor hot shard minimal node reads
-          format: int32
-          minimum: 1
-          type: integer
-          example: 100
-        hot_shard_min_node_writes:
-          description: Perf advisor hot shard minimal node writes
-          format: int32
-          minimum: 1
-          type: integer
-          example: 100
-        hot_shard_read_skew_threshold_pct:
-          description: Perf Advisor hot shard read skew threshold
-          format: double
-          minimum: 1
-          type: number
-          example: 1.5
-        hot_shard_write_skew_threshold_pct:
-          description: Perf Advisor hot shard write skew threshold
-          format: double
-          minimum: 1
-          type: number
-          example: 1.5
-        query_skew_interval_mins:
-          description: Perf advisor query skew check interval
-          format: int32
-          minimum: 1
-          type: integer
-          example: 100
-        query_skew_min_queries:
-          description: Perf advisor query skew min queries
-          format: int32
-          minimum: 1
-          type: integer
-          example: 100
-        query_skew_threshold_pct:
-          description: Perf advisor query skew threshold
-          format: double
-          minimum: 1
-          type: number
-          example: 1.5
-        rejected_conn_interval_mins:
-          description: Perf advisor rejected connections check interval
-          format: int32
-          minimum: 1
-          type: integer
-          example: 100
-        rejected_conn_threshold:
-          description: Perf advisor rejected connections threshold
-          format: int32
-          minimum: 1
-          type: integer
-          example: 100
-        universe_frequency_mins:
-          description: Perf advisor runs frequency, in minutes
-          format: int32
-          minimum: 5
-          type: integer
-          example: 100
-      type: object
-    StateChangeAuditInfoPagedQuery_3:
-      example:
-        filter:
-          customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ids:
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          recommendationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        offset: 6
-        needTotalCount: true
-        limit: 0
-        sortBy: id
-        direction: ASC
-      properties:
-        direction:
-          enum:
-          - ASC
-          - DESC
-          type: string
-          example: ASC
-        filter:
-          $ref: '#/components/schemas/StateChangeAuditInfoFilter_3'
-        limit:
-          format: int32
-          type: integer
-          example: 10
-        needTotalCount:
-          type: boolean
-          example: true
-        offset:
-          format: int32
-          type: integer
-          example: 100
-        sortBy:
-          enum:
-          - id
-          - timestamp
-          type: string
-          example: id
-      required:
-      - direction
-      - filter
-      - limit
-      - needTotalCount
-      - offset
-      - sortBy
-      type: object
-    PerformanceRecommendationPagedResponse_3:
-      example:
-        entities:
-        - new: true
-          recommendationPriority: HIGH
-          entityType: UNIVERSE
-          observation: observation
-          stateChangeAuditInfoList:
-          - new: true
-            fieldName: fieldName
-            customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            previousValue: previousValue
-            userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            updatedValue: updatedValue
-            timestamp: 0
-          - new: true
-            fieldName: fieldName
-            customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            previousValue: previousValue
-            userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            updatedValue: updatedValue
-            timestamp: 0
-          universeId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          entityNames: entityNames
-          recommendation: recommendation
-          recommendationTimestamp: 0
-          recommendationInfo:
-            key: '{}'
-          recommendationState: OPEN
-          customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          isStale: true
-          recommendationType: UNUSED_INDEX
-        - new: true
-          recommendationPriority: HIGH
-          entityType: UNIVERSE
-          observation: observation
-          stateChangeAuditInfoList:
-          - new: true
-            fieldName: fieldName
-            customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            previousValue: previousValue
-            userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            updatedValue: updatedValue
-            timestamp: 0
-          - new: true
-            fieldName: fieldName
-            customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            previousValue: previousValue
-            userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            updatedValue: updatedValue
-            timestamp: 0
-          universeId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          entityNames: entityNames
-          recommendation: recommendation
-          recommendationTimestamp: 0
-          recommendationInfo:
-            key: '{}'
-          recommendationState: OPEN
-          customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          isStale: true
-          recommendationType: UNUSED_INDEX
-        hasPrev: true
-        hasNext: true
-        totalCount: 6
-      properties:
-        entities:
-          items:
-            $ref: '#/components/schemas/PerformanceRecommendation_3'
-          type: array
-          example:
-          - new: true
-            recommendationPriority: HIGH
-            entityType: UNIVERSE
-            observation: observation
-            stateChangeAuditInfoList:
-            - new: true
-              fieldName: fieldName
-              customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              previousValue: previousValue
-              userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              updatedValue: updatedValue
-              timestamp: 0
-            - new: true
-              fieldName: fieldName
-              customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              previousValue: previousValue
-              userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              updatedValue: updatedValue
-              timestamp: 0
-            universeId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            entityNames: entityNames
-            recommendation: recommendation
-            recommendationTimestamp: 0
-            recommendationInfo:
-              key: '{}'
-            recommendationState: OPEN
-            customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            isStale: true
-            recommendationType: UNUSED_INDEX
-        hasNext:
-          type: boolean
-          example: true
-        hasPrev:
-          type: boolean
-          example: true
-        totalCount:
-          format: int32
-          type: integer
-          example: 10
-      required:
-      - entities
-      - hasNext
-      - hasPrev
-      - totalCount
-      type: object
-    PerformanceRecommendationFilter_3:
-      example:
-        priorities:
-        - HIGH
-        - HIGH
-        types:
-        - UNUSED_INDEX
-        - UNUSED_INDEX
-        customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        universeId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        ids:
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        createdInstantBefore: 0
-        isStale: true
-        states:
-        - OPEN
-        - OPEN
-      properties:
-        createdInstantBefore:
-          format: int64
-          type: integer
-          example: 1000
-        customerId:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        ids:
-          items:
-            format: uuid
-            type: string
-          type: array
-          uniqueItems: true
-          example:
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        isStale:
-          type: boolean
-          example: true
-        priorities:
-          items:
-            enum:
-            - HIGH
-            - MEDIUM
-            - LOW
-            type: string
-          type: array
-          uniqueItems: true
-          example:
-          - HIGH
-        states:
-          items:
-            enum:
-            - OPEN
-            - HIDDEN
-            - RESOLVED
-            type: string
-          type: array
-          uniqueItems: true
-          example:
-          - OPEN
-        types:
-          items:
-            enum:
-            - UNUSED_INDEX
-            - RANGE_SHARDING
-            - QUERY_LOAD_SKEW
-            - CONNECTION_SKEW
-            - CPU_SKEW
-            - CPU_USAGE
-            - REJECTED_CONNECTIONS
-            - HOT_SHARD
-            type: string
-          type: array
-          uniqueItems: true
-          example:
-          - UNUSED_INDEX
-        universeId:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      required:
-      - createdInstantBefore
-      - customerId
-      - ids
-      - isStale
-      - priorities
-      - states
-      - types
-      - universeId
-      type: object
-    PerformanceRecommendationPagedQuery_3:
-      example:
-        filter:
-          priorities:
-          - HIGH
-          - HIGH
-          types:
-          - UNUSED_INDEX
-          - UNUSED_INDEX
-          customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          universeId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ids:
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          createdInstantBefore: 0
-          isStale: true
-          states:
-          - OPEN
-          - OPEN
-        offset: 6
-        needTotalCount: true
-        limit: 0
-        sortBy: id
-        direction: ASC
-      properties:
-        direction:
-          enum:
-          - ASC
-          - DESC
-          type: string
-          example: ASC
-        filter:
-          $ref: '#/components/schemas/PerformanceRecommendationFilter_3'
-        limit:
-          format: int32
-          type: integer
-          example: 10
-        needTotalCount:
-          type: boolean
-          example: true
-        offset:
-          format: int32
-          type: integer
-          example: 100
-        sortBy:
-          enum:
-          - id
-          - recommendationType
-          - recommendationState
-          - recommendationPriority
-          - recommendationTimestamp
-          type: string
-          example: id
-      required:
-      - direction
-      - filter
-      - limit
-      - needTotalCount
-      - offset
-      - sortBy
-      type: object
-    PerformanceRecommendation_3:
-      example:
-        new: true
-        recommendationPriority: HIGH
-        entityType: UNIVERSE
-        observation: observation
-        stateChangeAuditInfoList:
-        - new: true
-          fieldName: fieldName
-          customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          previousValue: previousValue
-          userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          updatedValue: updatedValue
-          timestamp: 0
-        - new: true
-          fieldName: fieldName
-          customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          previousValue: previousValue
-          userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          updatedValue: updatedValue
-          timestamp: 0
-        universeId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        entityNames: entityNames
-        recommendation: recommendation
-        recommendationTimestamp: 0
-        recommendationInfo:
-          key: '{}'
-        recommendationState: OPEN
-        customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        isStale: true
-        recommendationType: UNUSED_INDEX
-      properties:
-        customerId:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        entityNames:
-          type: string
-          example: example-entityNames
-        entityType:
-          enum:
-          - UNIVERSE
-          - NODE
-          - TABLE
-          - DATABASE
-          - INDEX
-          type: string
-          example: UNIVERSE
-        id:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        isStale:
-          type: boolean
-          example: true
-        new:
-          type: boolean
-          example: true
-        observation:
-          type: string
-          example: example-observation
-        recommendation:
-          type: string
-          example: example-recommendation
-        recommendationInfo:
-          additionalProperties:
-            properties: {}
-            type: object
-          type: object
-          example: {}
-        recommendationPriority:
-          enum:
-          - HIGH
-          - MEDIUM
-          - LOW
-          type: string
-          example: HIGH
-        recommendationState:
-          enum:
-          - OPEN
-          - HIDDEN
-          - RESOLVED
-          type: string
-          example: OPEN
-        recommendationTimestamp:
-          format: int64
-          type: integer
-          example: 1000
-        recommendationType:
-          enum:
-          - UNUSED_INDEX
-          - RANGE_SHARDING
-          - QUERY_LOAD_SKEW
-          - CONNECTION_SKEW
-          - CPU_SKEW
-          - CPU_USAGE
-          - REJECTED_CONNECTIONS
-          - HOT_SHARD
-          type: string
-          example: UNUSED_INDEX
-        stateChangeAuditInfoList:
-          items:
-            $ref: '#/components/schemas/StateChangeAuditInfo_3'
-          type: array
-          example:
-          - new: true
-            fieldName: fieldName
-            customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            previousValue: previousValue
-            userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            updatedValue: updatedValue
-            timestamp: 0
-        universeId:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      required:
-      - customerId
-      - entityNames
-      - entityType
-      - id
-      - isStale
-      - new
-      - observation
-      - recommendation
-      - recommendationInfo
-      - recommendationPriority
-      - recommendationState
-      - recommendationTimestamp
-      - recommendationType
-      - stateChangeAuditInfoList
-      - universeId
-      type: object
-    StateChangeAuditInfoFilter_3:
-      example:
-        customerId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        ids:
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        recommendationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        customerId:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        ids:
-          items:
-            format: uuid
-            type: string
-          type: array
-          uniqueItems: true
-          example:
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        recommendationId:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        userId:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      required:
-      - customerId
-      - ids
-      - recommendationId
-      - userId
-      type: object
-    PerfAdvisorManualRunStatus_3:
-      example:
-        activeRun:
-          scheduleTime: 2022-12-12 13:07:18+00:00
-          universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          startTime: 2022-12-12 13:07:18+00:00
-          endTime: 2022-12-12 13:07:18+00:00
-          state: PENDING
-          manual: true
-          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        success: true
-        message: message
-      properties:
-        activeRun:
-          $ref: '#/components/schemas/Universe_performance_advisor_status_2'
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-          example: Example message
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-          example: true
-      type: object
-    YBPSuccess_3:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-          example: Example message
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-          example: true
-      type: object
-    Universe_performance_advisor_status_2:
-      example:
-        scheduleTime: 2022-12-12 13:07:18+00:00
-        universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        startTime: 2022-12-12 13:07:18+00:00
-        endTime: 2022-12-12 13:07:18+00:00
-        state: PENDING
-        manual: true
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        customerUUID:
-          description: Customer UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        endTime:
-          description: Time perf advisor run was finished
-          example: 2022-12-12 13:07:18+00:00
-          format: date-time
-          readOnly: true
-          type: string
-        manual:
-          description: Scheduled or manual run
-          readOnly: true
-          type: boolean
-          example: true
-        scheduleTime:
-          description: Time perf advisor run was scheduled
-          example: 2022-12-12 13:07:18+00:00
-          format: date-time
-          readOnly: true
-          type: string
-        startTime:
-          description: Time perf advisor run was started
-          example: 2022-12-12 13:07:18+00:00
-          format: date-time
-          readOnly: true
-          type: string
-        state:
-          description: State
-          enum:
-          - PENDING
-          - RUNNING
-          - COMPLETED
-          - FAILED
-          readOnly: true
-          type: string
-          example: PENDING
-        universeUUID:
-          description: Universe UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        uuid:
-          description: Perf advisor run UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      required:
-      - customerUUID
-      - state
-      - universeUUID
-      - uuid
-      type: object
   securitySchemes:
     apiKeyAuth:
       description: API token passed as header
@@ -2765,7 +1114,4 @@ components:
 externalDocs:
   description: About YugabyteDB Anywhere
   url: https://docs.yugabyte.com/latest/yugabyte-platform/
-x-refined-from:
-- openapi_2.yaml
-- yugabytedb-anywhere-v1-alerts-monitoring.yaml
-- yugabytedb-anywhere-v1-full.yaml
+x-original-swagger-version: '2.0'

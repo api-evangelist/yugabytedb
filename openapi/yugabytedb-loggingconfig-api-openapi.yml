@@ -8,10 +8,7 @@ info:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
   termsOfService: TODO(chirag)
-  x-refined-note:
-  - x-source differs across the merged source definitions and was not carried
-  - x-split-from differs across the merged source definitions and was not carried
-  description: 'Operations tagged LoggingConfig across 4 of this provider''s published API definitions: openapi_2.yaml, platform.swagger.json, yugabytedb-anywhere-v1-alerts-monitoring.yaml, yugabytedb-anywhere-v1-full.yaml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged LoggingConfig across 2 of this provider''s published API definitions: openapi_2.yaml, platform.swagger.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: /
 tags:
@@ -77,36 +74,6 @@ paths:
     - url: /
 components:
   schemas:
-    PlatformLoggingConfig:
-      example:
-        level: ERROR
-        maxHistory: 0
-        fileNamePrefix: yb-platform-
-        rolloverPattern: rolloverPattern
-      properties:
-        fileNamePrefix:
-          description: 'WARNING: This is a preview API that could change. Application log file name prefix. Defaults to "". For example, setting this to "yb-platform-" will generate application log files as "yb-platform-application.log" instead of "application.log".'
-          example: yb-platform-
-          type: string
-        level:
-          enum:
-          - ERROR
-          - WARN
-          - INFO
-          - DEBUG
-          - TRACE
-          type: string
-        maxHistory:
-          format: int32
-          minimum: 0
-          type: integer
-        rolloverPattern:
-          type: string
-      required:
-      - level
-      - maxHistory
-      - rolloverPattern
-      type: object
     AuditLoggingConfig:
       description: Audit Logging Configuration
       example:
@@ -140,8 +107,17 @@ components:
       - outputToFile
       - outputToStdout
       type: object
-    PlatformLoggingConfig_2:
+    PlatformLoggingConfig:
+      example:
+        level: ERROR
+        maxHistory: 0
+        fileNamePrefix: yb-platform-
+        rolloverPattern: rolloverPattern
       properties:
+        fileNamePrefix:
+          description: 'WARNING: This is a preview API that could change. Application log file name prefix. Defaults to "". For example, setting this to "yb-platform-" will generate application log files as "yb-platform-application.log" instead of "application.log".'
+          example: yb-platform-
+          type: string
         level:
           enum:
           - ERROR
@@ -184,17 +160,8 @@ components:
       - outputToFile
       - outputToStdout
       type: object
-    PlatformLoggingConfig_3:
-      example:
-        level: ERROR
-        maxHistory: 0
-        fileNamePrefix: yb-platform-
-        rolloverPattern: rolloverPattern
+    PlatformLoggingConfig_2:
       properties:
-        fileNamePrefix:
-          description: 'WARNING: This is a preview API that could change. Application log file name prefix. Defaults to "". For example, setting this to "yb-platform-" will generate application log files as "yb-platform-application.log" instead of "application.log".'
-          example: yb-platform-
-          type: string
         level:
           enum:
           - ERROR
@@ -203,122 +170,16 @@ components:
           - DEBUG
           - TRACE
           type: string
-          example: ERROR
         maxHistory:
           format: int32
           minimum: 0
           type: integer
-          example: 10
         rolloverPattern:
           type: string
-          example: example-rolloverPattern
       required:
       - level
       - maxHistory
       - rolloverPattern
-      type: object
-    AuditLoggingConfig_3:
-      description: Audit Logging Configuration
-      example:
-        outputToStdout: true
-        maxHistory: 30
-        fileNamePrefix: yb-platform-
-        rolloverPattern: yyyy-MM-dd
-        outputToFile: true
-      properties:
-        fileNamePrefix:
-          description: 'WARNING: This is a preview API that could change. Audit log file name prefix. Defaults to "". For example, setting this to "yb-platform-" will generate audit log files as "yb-platform-audit.log" instead of "audit.log".'
-          example: yb-platform-
-          type: string
-        maxHistory:
-          description: Max number of days up till which logs are kept
-          example: 30
-          format: int32
-          minimum: 0
-          type: integer
-        outputToFile:
-          description: Flag to enable/disable audit logs output to file
-          type: boolean
-          example: true
-        outputToStdout:
-          description: Flag to enable/disable audit logs output to stdout
-          type: boolean
-          example: true
-        rolloverPattern:
-          description: Rollover Pattern
-          example: yyyy-MM-dd
-          type: string
-      required:
-      - outputToFile
-      - outputToStdout
-      type: object
-    PlatformLoggingConfig_4:
-      example:
-        level: ERROR
-        maxHistory: 0
-        fileNamePrefix: yb-platform-
-        rolloverPattern: rolloverPattern
-      properties:
-        fileNamePrefix:
-          description: 'WARNING: This is a preview API that could change. Application log file name prefix. Defaults to "". For example, setting this to "yb-platform-" will generate application log files as "yb-platform-application.log" instead of "application.log".'
-          example: yb-platform-
-          type: string
-        level:
-          enum:
-          - ERROR
-          - WARN
-          - INFO
-          - DEBUG
-          - TRACE
-          type: string
-          example: ERROR
-        maxHistory:
-          format: int32
-          minimum: 0
-          type: integer
-          example: 10
-        rolloverPattern:
-          type: string
-          example: example-rolloverPattern
-      required:
-      - level
-      - maxHistory
-      - rolloverPattern
-      type: object
-    AuditLoggingConfig_4:
-      description: Audit Logging Configuration
-      example:
-        outputToStdout: true
-        maxHistory: 30
-        fileNamePrefix: yb-platform-
-        rolloverPattern: yyyy-MM-dd
-        outputToFile: true
-      properties:
-        fileNamePrefix:
-          description: 'WARNING: This is a preview API that could change. Audit log file name prefix. Defaults to "". For example, setting this to "yb-platform-" will generate audit log files as "yb-platform-audit.log" instead of "audit.log".'
-          example: yb-platform-
-          type: string
-        maxHistory:
-          description: Max number of days up till which logs are kept
-          example: 30
-          format: int32
-          minimum: 0
-          type: integer
-        outputToFile:
-          description: Flag to enable/disable audit logs output to file
-          type: boolean
-          example: true
-        outputToStdout:
-          description: Flag to enable/disable audit logs output to stdout
-          type: boolean
-          example: true
-        rolloverPattern:
-          description: Rollover Pattern
-          example: yyyy-MM-dd
-          type: string
-      required:
-      - outputToFile
-      - outputToStdout
       type: object
   securitySchemes:
     apiKeyAuth:
@@ -332,5 +193,3 @@ externalDocs:
 x-refined-from:
 - openapi_2.yaml
 - platform.swagger.json
-- yugabytedb-anywhere-v1-alerts-monitoring.yaml
-- yugabytedb-anywhere-v1-full.yaml

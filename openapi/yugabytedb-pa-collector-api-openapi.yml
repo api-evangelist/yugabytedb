@@ -1,17 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Yugabytedb PA Collector API
-  version: v1
   contact:
     name: https://docs.yugabyte.com
+  description: ALPHA - NOT FOR EXTERNAL USE
   license:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
   termsOfService: TODO(chirag)
-  x-refined-note:
-  - x-source differs across the merged source definitions and was not carried
-  - x-split-from differs across the merged source definitions and was not carried
-  description: 'Operations tagged PA Collector across 3 of this provider''s published API definitions: openapi_2.yaml, yugabytedb-anywhere-v1-alerts-monitoring.yaml, yugabytedb-anywhere-v1-full.yaml. Each path carries the servers of the definition it was published in.'
+  title: YugabyteDB Anywhere PA Collector API
+  version: v1
 servers:
 - url: /
 tags:
@@ -74,8 +71,6 @@ paths:
       tags:
       - PA Collector
       x-codegen-request-body-name: collectorData
-    servers:
-    - url: /
   /api/v1/customers/{cUUID}/pa_collector/{paUUID}:
     delete:
       description: YbaApi Internal.
@@ -184,8 +179,6 @@ paths:
       tags:
       - PA Collector
       x-codegen-request-body-name: collectorData
-    servers:
-    - url: /
   /api/v1/customers/{cUUID}/universes/{uUUID}/pa_collector:
     delete:
       description: YbaApi Internal.
@@ -246,8 +239,6 @@ paths:
       summary: Check if universe is registered with PA Collector
       tags:
       - PA Collector
-    servers:
-    - url: /
   /api/v1/customers/{cUUID}/universes/{uUUID}/pa_collector/{paUUID}:
     put:
       description: YbaApi Internal.
@@ -291,8 +282,6 @@ paths:
       summary: Register universe with PA Collector
       tags:
       - PA Collector
-    servers:
-    - url: /
 components:
   schemas:
     PA_Collector_Details_Model:
@@ -360,6 +349,32 @@ components:
       - uuid
       - ybaUrl
       type: object
+    PA_Collector_universe_registration_status:
+      example:
+        success: true
+        advancedObservability: true
+      properties:
+        advancedObservability:
+          description: Whether advanced observability (metrics export to Prometheus) is enabled
+          type: boolean
+        success:
+          description: Whether the universe is registered with PA Collector
+          type: boolean
+      type: object
+    YBPSuccess:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+      type: object
     PACollector:
       description: Performance Advisor Collector Model
       example:
@@ -418,290 +433,6 @@ components:
       - uuid
       - ybaUrl
       type: object
-    YBPSuccess:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-      type: object
-    PA_Collector_universe_registration_status:
-      example:
-        success: true
-        advancedObservability: true
-      properties:
-        advancedObservability:
-          description: Whether advanced observability (metrics export to Prometheus) is enabled
-          type: boolean
-        success:
-          description: Whether the universe is registered with PA Collector
-          type: boolean
-      type: object
-    PACollector_2:
-      description: Performance Advisor Collector Model
-      example:
-        apiToken: apiToken
-        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        metricsPassword: metricsPassword
-        metricsUsername: metricsUsername
-        metricsUrl: metricsUrl
-        paApiToken: paApiToken
-        paUrl: paUrl
-        ybaUrl: ybaUrl
-        metricsScrapePeriodSecs: 0
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        apiToken:
-          description: YBA API Token
-          type: string
-          example: REDACTED
-        customerUUID:
-          description: Customer UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        metricsPassword:
-          description: Metrics API Password
-          type: string
-          example: REDACTED
-        metricsScrapePeriodSecs:
-          description: Metrics Scrape Period Seconds
-          format: int64
-          type: integer
-          example: 1000
-        metricsUrl:
-          description: Metrics URL
-          type: string
-          example: https://example.com
-        metricsUsername:
-          description: Metrics API Username
-          type: string
-          example: example-metricsUsername
-        paApiToken:
-          description: PA Collector API Token
-          type: string
-          example: REDACTED
-        paUrl:
-          description: PA Collector URL
-          type: string
-          example: https://example.com
-        uuid:
-          description: PA Collector UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        ybaUrl:
-          description: YBA URL
-          type: string
-          example: https://example.com
-      required:
-      - apiToken
-      - customerUUID
-      - metricsScrapePeriodSecs
-      - metricsUrl
-      - paUrl
-      - uuid
-      - ybaUrl
-      type: object
-    YBPSuccess_2:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-          example: Example message
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-          example: true
-      type: object
-    PA_Collector_Details_Model_2:
-      example:
-        inUseStatus: IN_USE
-        apiToken: apiToken
-        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        metricsPassword: metricsPassword
-        metricsUsername: metricsUsername
-        metricsUrl: metricsUrl
-        paApiToken: paApiToken
-        paUrl: paUrl
-        ybaUrl: ybaUrl
-        metricsScrapePeriodSecs: 0
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        apiToken:
-          description: YBA API Token
-          type: string
-          example: REDACTED
-        customerUUID:
-          description: Customer UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        inUseStatus:
-          description: In Use Status
-          enum:
-          - IN_USE
-          - NOT_IN_USE
-          - ERROR
-          type: string
-          example: IN_USE
-        metricsPassword:
-          description: Metrics API Password
-          type: string
-          example: REDACTED
-        metricsScrapePeriodSecs:
-          description: Metrics Scrape Period Seconds
-          format: int64
-          type: integer
-          example: 1000
-        metricsUrl:
-          description: Metrics URL
-          type: string
-          example: https://example.com
-        metricsUsername:
-          description: Metrics API Username
-          type: string
-          example: example-metricsUsername
-        paApiToken:
-          description: PA Collector API Token
-          type: string
-          example: REDACTED
-        paUrl:
-          description: PA Collector URL
-          type: string
-          example: https://example.com
-        uuid:
-          description: PA Collector UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        ybaUrl:
-          description: YBA URL
-          type: string
-          example: https://example.com
-      required:
-      - apiToken
-      - customerUUID
-      - metricsScrapePeriodSecs
-      - metricsUrl
-      - paUrl
-      - uuid
-      - ybaUrl
-      type: object
-    PACollector_3:
-      description: Performance Advisor Collector Model
-      example:
-        apiToken: apiToken
-        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        metricsPassword: metricsPassword
-        metricsUsername: metricsUsername
-        metricsUrl: metricsUrl
-        paApiToken: paApiToken
-        paUrl: paUrl
-        ybaUrl: ybaUrl
-        metricsScrapePeriodSecs: 0
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        apiToken:
-          description: YBA API Token
-          type: string
-          example: REDACTED
-        customerUUID:
-          description: Customer UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        metricsPassword:
-          description: Metrics API Password
-          type: string
-          example: REDACTED
-        metricsScrapePeriodSecs:
-          description: Metrics Scrape Period Seconds
-          format: int64
-          type: integer
-          example: 1000
-        metricsUrl:
-          description: Metrics URL
-          type: string
-          example: https://example.com
-        metricsUsername:
-          description: Metrics API Username
-          type: string
-          example: example-metricsUsername
-        paApiToken:
-          description: PA Collector API Token
-          type: string
-          example: REDACTED
-        paUrl:
-          description: PA Collector URL
-          type: string
-          example: https://example.com
-        uuid:
-          description: PA Collector UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        ybaUrl:
-          description: YBA URL
-          type: string
-          example: https://example.com
-      required:
-      - apiToken
-      - customerUUID
-      - metricsScrapePeriodSecs
-      - metricsUrl
-      - paUrl
-      - uuid
-      - ybaUrl
-      type: object
-    YBPSuccess_3:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-          example: Example message
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-          example: true
-      type: object
-    PA_Collector_universe_registration_status_2:
-      example:
-        success: true
-        advancedObservability: true
-      properties:
-        advancedObservability:
-          description: Whether advanced observability (metrics export to Prometheus) is enabled
-          type: boolean
-          example: true
-        success:
-          description: Whether the universe is registered with PA Collector
-          type: boolean
-          example: true
-      type: object
   securitySchemes:
     apiKeyAuth:
       description: API token passed as header
@@ -711,7 +442,4 @@ components:
 externalDocs:
   description: About YugabyteDB Anywhere
   url: https://docs.yugabyte.com/latest/yugabyte-platform/
-x-refined-from:
-- openapi_2.yaml
-- yugabytedb-anywhere-v1-alerts-monitoring.yaml
-- yugabytedb-anywhere-v1-full.yaml
+x-original-swagger-version: '2.0'

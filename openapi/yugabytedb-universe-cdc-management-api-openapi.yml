@@ -1,17 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Yugabytedb Universe CDC Management API
-  version: v1
   contact:
     name: https://docs.yugabyte.com
+  description: ALPHA - NOT FOR EXTERNAL USE
   license:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
   termsOfService: TODO(chirag)
-  x-refined-note:
-  - x-source differs across the merged source definitions and was not carried
-  - x-split-from differs across the merged source definitions and was not carried
-  description: 'Operations tagged Universe CDC Management across 3 of this provider''s published API definitions: openapi_2.yaml, yugabytedb-anywhere-v1-full.yaml, yugabytedb-anywhere-v1-universes.yaml. Each path carries the servers of the definition it was published in.'
+  title: YugabyteDB Anywhere Universe CDC Management API
+  version: v1
 servers:
 - url: /
 tags:
@@ -43,8 +40,6 @@ paths:
       summary: List CDC Replication slot for a cluster
       tags:
       - Universe CDC Management
-    servers:
-    - url: /
   /api/v1/customers/{cUUID}/universes/{uniUUID}/cdc_streams:
     get:
       description: YbaApi Internal.
@@ -99,8 +94,6 @@ paths:
       summary: Create CDC Stream for a cluster
       tags:
       - Universe CDC Management
-    servers:
-    - url: /
   /api/v1/customers/{cUUID}/universes/{uniUUID}/cdc_streams/{streamId}:
     delete:
       description: YbaApi Internal.
@@ -132,8 +125,6 @@ paths:
       summary: Delete a CDC stream for a cluster
       tags:
       - Universe CDC Management
-    servers:
-    - url: /
 components:
   securitySchemes:
     apiKeyAuth:
@@ -144,7 +135,4 @@ components:
 externalDocs:
   description: About YugabyteDB Anywhere
   url: https://docs.yugabyte.com/latest/yugabyte-platform/
-x-refined-from:
-- openapi_2.yaml
-- yugabytedb-anywhere-v1-full.yaml
-- yugabytedb-anywhere-v1-universes.yaml
+x-original-swagger-version: '2.0'

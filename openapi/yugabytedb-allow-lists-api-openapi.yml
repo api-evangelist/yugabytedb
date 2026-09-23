@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: YugabyteDB Aeon REST Allow Lists API
-  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.
+  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service.
   version: v1
   contact:
     name: Yugabyte Support
@@ -16,7 +16,7 @@ servers:
 security:
 - bearerAuth: []
 tags:
-- name: AllowLists
+- name: Allow Lists
   description: Manage IP allow lists that control which client IP addresses or CIDR ranges are permitted to connect to a cluster.
 paths:
   /accounts/{accountId}/projects/{projectId}/allow-lists:
@@ -25,7 +25,7 @@ paths:
       summary: YugabyteDB Aeon List Allow Lists
       description: Returns all IP allow lists defined within the specified project. Allow lists control which IP addresses or CIDR ranges are permitted to connect to clusters in the project.
       tags:
-      - AllowLists
+      - Allow Lists
       parameters:
       - $ref: '#/components/parameters/accountId'
       - $ref: '#/components/parameters/projectId'
@@ -63,7 +63,7 @@ paths:
       summary: YugabyteDB Aeon Create Allow List
       description: Creates a new IP allow list with one or more CIDR entries. The allow list can be assigned to one or more clusters to permit inbound connections from the specified IP ranges.
       tags:
-      - AllowLists
+      - Allow Lists
       parameters:
       - $ref: '#/components/parameters/accountId'
       - $ref: '#/components/parameters/projectId'
@@ -113,7 +113,7 @@ paths:
       summary: YugabyteDB Aeon Get Allow List
       description: Returns details for a specific IP allow list, including its name, description, and all CIDR entries it contains.
       tags:
-      - AllowLists
+      - Allow Lists
       parameters:
       - $ref: '#/components/parameters/accountId'
       - $ref: '#/components/parameters/projectId'
@@ -148,7 +148,7 @@ paths:
       summary: YugabyteDB Aeon Delete Allow List
       description: Permanently deletes the specified IP allow list. The allow list must not be currently assigned to any cluster before it can be deleted.
       tags:
-      - AllowLists
+      - Allow Lists
       parameters:
       - $ref: '#/components/parameters/accountId'
       - $ref: '#/components/parameters/projectId'
@@ -243,6 +243,15 @@ components:
           description: Timestamp when the allow list was created.
           example: '2026-05-03T12:00:00Z'
   parameters:
+    accountId:
+      name: accountId
+      in: path
+      required: true
+      description: The unique identifier of the YugabyteDB Aeon account.
+      schema:
+        type: string
+        format: uuid
+      example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
     allowListId:
       name: allowListId
       in: path
@@ -261,31 +270,7 @@ components:
         type: string
         format: uuid
       example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-    accountId:
-      name: accountId
-      in: path
-      required: true
-      description: The unique identifier of the YugabyteDB Aeon account.
-      schema:
-        type: string
-        format: uuid
-      example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
   responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            NotFoundExample:
-              summary: Default NotFound response
-              x-microcks-default: true
-              value:
-                error:
-                  code: OK
-                  message: Example message
-                  status: 100
     Unauthorized:
       description: The API key is missing, invalid, or expired.
       content:
@@ -295,6 +280,21 @@ components:
           examples:
             UnauthorizedExample:
               summary: Default Unauthorized response
+              x-microcks-default: true
+              value:
+                error:
+                  code: OK
+                  message: Example message
+                  status: 100
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            NotFoundExample:
+              summary: Default NotFound response
               x-microcks-default: true
               value:
                 error:

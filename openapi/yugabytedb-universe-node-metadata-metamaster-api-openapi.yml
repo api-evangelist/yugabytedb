@@ -8,10 +8,7 @@ info:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
   termsOfService: TODO(chirag)
-  x-refined-note:
-  - x-source differs across the merged source definitions and was not carried
-  - x-split-from differs across the merged source definitions and was not carried
-  description: 'Operations tagged Universe node metadata (metamaster) across 4 of this provider''s published API definitions: openapi_2.yaml, platform.swagger.json, yugabytedb-anywhere-v1-full.yaml, yugabytedb-anywhere-v1-universes.yaml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Universe node metadata (metamaster) across 2 of this provider''s published API definitions: openapi_2.yaml, platform.swagger.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: /
 tags:
@@ -253,40 +250,6 @@ components:
       required:
       - masters
       type: object
-    MasterNode:
-      example:
-        cloudInfo:
-          mount_roots: mount_roots
-          kubernetesNamespace: kubernetesNamespace
-          public_ip: public_ip
-          secondary_subnet_id: secondary_subnet_id
-          private_dns: private_dns
-          useTimeSync: true
-          kubernetesPodName: kubernetesPodName
-          root_volume: root_volume
-          secondary_private_ip: secondary_private_ip
-          private_ip: private_ip
-          cloud: cloud
-          lun_indexes:
-          - 6
-          - 6
-          assignPublicIP: true
-          az: az
-          subnet_id: subnet_id
-          public_dns: public_dns
-          region: region
-          instance_type: instance_type
-        masterRpcPort: 0
-      properties:
-        cloudInfo:
-          $ref: '#/components/schemas/CloudSpecificInfo'
-        masterRpcPort:
-          format: int32
-          type: integer
-      required:
-      - cloudInfo
-      - masterRpcPort
-      type: object
     MasterLBStateResponse:
       description: Master tablet load balancer status
       example:
@@ -389,12 +352,39 @@ components:
           description: True if `use time sync` is enabled
           type: boolean
       type: object
-    DummyBody:
-      description: Dummy value to work around platform bug PLAT-2076
+    MasterNode:
+      example:
+        cloudInfo:
+          mount_roots: mount_roots
+          kubernetesNamespace: kubernetesNamespace
+          public_ip: public_ip
+          secondary_subnet_id: secondary_subnet_id
+          private_dns: private_dns
+          useTimeSync: true
+          kubernetesPodName: kubernetesPodName
+          root_volume: root_volume
+          secondary_private_ip: secondary_private_ip
+          private_ip: private_ip
+          cloud: cloud
+          lun_indexes:
+          - 6
+          - 6
+          assignPublicIP: true
+          az: az
+          subnet_id: subnet_id
+          public_dns: public_dns
+          region: region
+          instance_type: instance_type
+        masterRpcPort: 0
       properties:
-        dummy:
+        cloudInfo:
+          $ref: '#/components/schemas/CloudSpecificInfo'
+        masterRpcPort:
           format: int32
           type: integer
+      required:
+      - cloudInfo
+      - masterRpcPort
       type: object
     MastersList_2:
       properties:
@@ -405,16 +395,12 @@ components:
       required:
       - masters
       type: object
-    MasterNode_2:
+    DummyBody:
+      description: Dummy value to work around platform bug PLAT-2076
       properties:
-        cloudInfo:
-          $ref: '#/components/schemas/CloudSpecificInfo_2'
-        masterRpcPort:
+        dummy:
           format: int32
           type: integer
-      required:
-      - cloudInfo
-      - masterRpcPort
       type: object
     CloudSpecificInfo_2:
       description: Node information reported by the cloud provider
@@ -462,479 +448,16 @@ components:
           description: True if `use time sync` is enabled
           type: boolean
       type: object
-    MastersList_3:
-      example:
-        masters:
-        - cloudInfo:
-            mount_roots: mount_roots
-            kubernetesNamespace: kubernetesNamespace
-            public_ip: public_ip
-            secondary_subnet_id: secondary_subnet_id
-            private_dns: private_dns
-            useTimeSync: true
-            kubernetesPodName: kubernetesPodName
-            root_volume: root_volume
-            secondary_private_ip: secondary_private_ip
-            private_ip: private_ip
-            cloud: cloud
-            lun_indexes:
-            - 6
-            - 6
-            assignPublicIP: true
-            az: az
-            subnet_id: subnet_id
-            public_dns: public_dns
-            region: region
-            instance_type: instance_type
-          masterRpcPort: 0
-        - cloudInfo:
-            mount_roots: mount_roots
-            kubernetesNamespace: kubernetesNamespace
-            public_ip: public_ip
-            secondary_subnet_id: secondary_subnet_id
-            private_dns: private_dns
-            useTimeSync: true
-            kubernetesPodName: kubernetesPodName
-            root_volume: root_volume
-            secondary_private_ip: secondary_private_ip
-            private_ip: private_ip
-            cloud: cloud
-            lun_indexes:
-            - 6
-            - 6
-            assignPublicIP: true
-            az: az
-            subnet_id: subnet_id
-            public_dns: public_dns
-            region: region
-            instance_type: instance_type
-          masterRpcPort: 0
-      properties:
-        masters:
-          items:
-            $ref: '#/components/schemas/MasterNode_3'
-          type: array
-          example:
-          - cloudInfo:
-              mount_roots: mount_roots
-              kubernetesNamespace: kubernetesNamespace
-              public_ip: public_ip
-              secondary_subnet_id: secondary_subnet_id
-              private_dns: private_dns
-              useTimeSync: true
-              kubernetesPodName: kubernetesPodName
-              root_volume: root_volume
-              secondary_private_ip: secondary_private_ip
-              private_ip: private_ip
-              cloud: cloud
-              lun_indexes:
-              - 6
-              - 6
-              assignPublicIP: true
-              az: az
-              subnet_id: subnet_id
-              public_dns: public_dns
-              region: region
-              instance_type: instance_type
-            masterRpcPort: 0
-      required:
-      - masters
-      type: object
-    MasterNode_3:
-      example:
-        cloudInfo:
-          mount_roots: mount_roots
-          kubernetesNamespace: kubernetesNamespace
-          public_ip: public_ip
-          secondary_subnet_id: secondary_subnet_id
-          private_dns: private_dns
-          useTimeSync: true
-          kubernetesPodName: kubernetesPodName
-          root_volume: root_volume
-          secondary_private_ip: secondary_private_ip
-          private_ip: private_ip
-          cloud: cloud
-          lun_indexes:
-          - 6
-          - 6
-          assignPublicIP: true
-          az: az
-          subnet_id: subnet_id
-          public_dns: public_dns
-          region: region
-          instance_type: instance_type
-        masterRpcPort: 0
+    MasterNode_2:
       properties:
         cloudInfo:
-          $ref: '#/components/schemas/CloudSpecificInfo_3'
+          $ref: '#/components/schemas/CloudSpecificInfo_2'
         masterRpcPort:
           format: int32
           type: integer
-          example: 5433
       required:
       - cloudInfo
       - masterRpcPort
-      type: object
-    MasterLBStateResponse_2:
-      description: Master tablet load balancer status
-      example:
-        isEnabled: true
-        isIdle: true
-        estTimeToBalanceSecs: 0
-      properties:
-        estTimeToBalanceSecs:
-          description: YbaApi Internal Estimate of time for which master tablet load balancer will be active
-          format: int64
-          type: integer
-          example: 1000
-        isEnabled:
-          description: YbaApi Internal Whether master tablet load balancer is enabled
-          type: boolean
-          example: true
-        isIdle:
-          description: YbaApi Internal Whether master tablet load balancer is inactive
-          type: boolean
-          example: true
-      required:
-      - isEnabled
-      type: object
-    CloudSpecificInfo_3:
-      description: Node information reported by the cloud provider
-      example:
-        mount_roots: mount_roots
-        kubernetesNamespace: kubernetesNamespace
-        public_ip: public_ip
-        secondary_subnet_id: secondary_subnet_id
-        private_dns: private_dns
-        useTimeSync: true
-        kubernetesPodName: kubernetesPodName
-        root_volume: root_volume
-        secondary_private_ip: secondary_private_ip
-        private_ip: private_ip
-        cloud: cloud
-        lun_indexes:
-        - 6
-        - 6
-        assignPublicIP: true
-        az: az
-        subnet_id: subnet_id
-        public_dns: public_dns
-        region: region
-        instance_type: instance_type
-      properties:
-        assignPublicIP:
-          description: True if the node has a public IP address assigned
-          type: boolean
-          example: true
-        az:
-          description: The node's availability zone
-          type: string
-          example: example-az
-        cloud:
-          description: The node's cloud provider
-          type: string
-          example: example-cloud
-        instance_type:
-          description: The node's instance type
-          type: string
-          example: DEFAULT
-        kubernetesNamespace:
-          description: Kubernetes namespace
-          type: string
-          example: example-kubernetesNamespace
-        kubernetesPodName:
-          description: Pod name in Kubernetes
-          type: string
-          example: example-kubernetesPodName
-        lun_indexes:
-          description: Mounted disks LUN indexes
-          items:
-            format: int32
-            type: integer
-          type: array
-          example:
-          - 100
-        mount_roots:
-          description: Mount roots
-          type: string
-          example: example-mount_roots
-        private_dns:
-          description: The node's private DNS
-          type: string
-          example: example-private_dns
-        private_ip:
-          description: The node's private IP address
-          type: string
-          example: 10.0.0.1
-        public_dns:
-          description: The node's public DNS name
-          type: string
-          example: example-public_dns
-        public_ip:
-          description: The node's public IP address
-          type: string
-          example: 10.0.0.1
-        region:
-          description: The node's region
-          type: string
-          example: us-east-1
-        root_volume:
-          description: Root volume ID or name
-          type: string
-          example: example-root_volume
-        secondary_private_ip:
-          description: Secondary Private IP
-          type: string
-          example: 10.0.0.1
-        secondary_subnet_id:
-          description: Secondary Subnet IP
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        subnet_id:
-          description: ID of the subnet on which this node is deployed
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        useTimeSync:
-          description: True if `use time sync` is enabled
-          type: boolean
-          example: true
-      type: object
-    MastersList_4:
-      example:
-        masters:
-        - cloudInfo:
-            mount_roots: mount_roots
-            kubernetesNamespace: kubernetesNamespace
-            public_ip: public_ip
-            secondary_subnet_id: secondary_subnet_id
-            private_dns: private_dns
-            useTimeSync: true
-            kubernetesPodName: kubernetesPodName
-            root_volume: root_volume
-            secondary_private_ip: secondary_private_ip
-            private_ip: private_ip
-            cloud: cloud
-            lun_indexes:
-            - 6
-            - 6
-            assignPublicIP: true
-            az: az
-            subnet_id: subnet_id
-            public_dns: public_dns
-            region: region
-            instance_type: instance_type
-          masterRpcPort: 0
-        - cloudInfo:
-            mount_roots: mount_roots
-            kubernetesNamespace: kubernetesNamespace
-            public_ip: public_ip
-            secondary_subnet_id: secondary_subnet_id
-            private_dns: private_dns
-            useTimeSync: true
-            kubernetesPodName: kubernetesPodName
-            root_volume: root_volume
-            secondary_private_ip: secondary_private_ip
-            private_ip: private_ip
-            cloud: cloud
-            lun_indexes:
-            - 6
-            - 6
-            assignPublicIP: true
-            az: az
-            subnet_id: subnet_id
-            public_dns: public_dns
-            region: region
-            instance_type: instance_type
-          masterRpcPort: 0
-      properties:
-        masters:
-          items:
-            $ref: '#/components/schemas/MasterNode_4'
-          type: array
-          example:
-          - cloudInfo:
-              mount_roots: mount_roots
-              kubernetesNamespace: kubernetesNamespace
-              public_ip: public_ip
-              secondary_subnet_id: secondary_subnet_id
-              private_dns: private_dns
-              useTimeSync: true
-              kubernetesPodName: kubernetesPodName
-              root_volume: root_volume
-              secondary_private_ip: secondary_private_ip
-              private_ip: private_ip
-              cloud: cloud
-              lun_indexes:
-              - 6
-              - 6
-              assignPublicIP: true
-              az: az
-              subnet_id: subnet_id
-              public_dns: public_dns
-              region: region
-              instance_type: instance_type
-            masterRpcPort: 0
-      required:
-      - masters
-      type: object
-    MasterNode_4:
-      example:
-        cloudInfo:
-          mount_roots: mount_roots
-          kubernetesNamespace: kubernetesNamespace
-          public_ip: public_ip
-          secondary_subnet_id: secondary_subnet_id
-          private_dns: private_dns
-          useTimeSync: true
-          kubernetesPodName: kubernetesPodName
-          root_volume: root_volume
-          secondary_private_ip: secondary_private_ip
-          private_ip: private_ip
-          cloud: cloud
-          lun_indexes:
-          - 6
-          - 6
-          assignPublicIP: true
-          az: az
-          subnet_id: subnet_id
-          public_dns: public_dns
-          region: region
-          instance_type: instance_type
-        masterRpcPort: 0
-      properties:
-        cloudInfo:
-          $ref: '#/components/schemas/CloudSpecificInfo_4'
-        masterRpcPort:
-          format: int32
-          type: integer
-          example: 5433
-      required:
-      - cloudInfo
-      - masterRpcPort
-      type: object
-    MasterLBStateResponse_3:
-      description: Master tablet load balancer status
-      example:
-        isEnabled: true
-        isIdle: true
-        estTimeToBalanceSecs: 0
-      properties:
-        estTimeToBalanceSecs:
-          description: YbaApi Internal Estimate of time for which master tablet load balancer will be active
-          format: int64
-          type: integer
-          example: 1000
-        isEnabled:
-          description: YbaApi Internal Whether master tablet load balancer is enabled
-          type: boolean
-          example: true
-        isIdle:
-          description: YbaApi Internal Whether master tablet load balancer is inactive
-          type: boolean
-          example: true
-      required:
-      - isEnabled
-      type: object
-    CloudSpecificInfo_4:
-      description: Node information reported by the cloud provider
-      example:
-        mount_roots: mount_roots
-        kubernetesNamespace: kubernetesNamespace
-        public_ip: public_ip
-        secondary_subnet_id: secondary_subnet_id
-        private_dns: private_dns
-        useTimeSync: true
-        kubernetesPodName: kubernetesPodName
-        root_volume: root_volume
-        secondary_private_ip: secondary_private_ip
-        private_ip: private_ip
-        cloud: cloud
-        lun_indexes:
-        - 6
-        - 6
-        assignPublicIP: true
-        az: az
-        subnet_id: subnet_id
-        public_dns: public_dns
-        region: region
-        instance_type: instance_type
-      properties:
-        assignPublicIP:
-          description: True if the node has a public IP address assigned
-          type: boolean
-          example: true
-        az:
-          description: The node's availability zone
-          type: string
-          example: example-az
-        cloud:
-          description: The node's cloud provider
-          type: string
-          example: example-cloud
-        instance_type:
-          description: The node's instance type
-          type: string
-          example: DEFAULT
-        kubernetesNamespace:
-          description: Kubernetes namespace
-          type: string
-          example: example-kubernetesNamespace
-        kubernetesPodName:
-          description: Pod name in Kubernetes
-          type: string
-          example: example-kubernetesPodName
-        lun_indexes:
-          description: Mounted disks LUN indexes
-          items:
-            format: int32
-            type: integer
-          type: array
-          example:
-          - 100
-        mount_roots:
-          description: Mount roots
-          type: string
-          example: example-mount_roots
-        private_dns:
-          description: The node's private DNS
-          type: string
-          example: example-private_dns
-        private_ip:
-          description: The node's private IP address
-          type: string
-          example: 10.0.0.1
-        public_dns:
-          description: The node's public DNS name
-          type: string
-          example: example-public_dns
-        public_ip:
-          description: The node's public IP address
-          type: string
-          example: 10.0.0.1
-        region:
-          description: The node's region
-          type: string
-          example: us-east-1
-        root_volume:
-          description: Root volume ID or name
-          type: string
-          example: example-root_volume
-        secondary_private_ip:
-          description: Secondary Private IP
-          type: string
-          example: 10.0.0.1
-        secondary_subnet_id:
-          description: Secondary Subnet IP
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        subnet_id:
-          description: ID of the subnet on which this node is deployed
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        useTimeSync:
-          description: True if `use time sync` is enabled
-          type: boolean
-          example: true
       type: object
   securitySchemes:
     apiKeyAuth:
@@ -948,5 +471,3 @@ externalDocs:
 x-refined-from:
 - openapi_2.yaml
 - platform.swagger.json
-- yugabytedb-anywhere-v1-full.yaml
-- yugabytedb-anywhere-v1-universes.yaml

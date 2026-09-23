@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: YugabyteDB Aeon REST Read Replicas API
-  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service. Developers and operators can use it to deploy and manage database clusters, configure read replicas, schedule and execute on-demand backups and restores, manage IP allow lists, and set up monitoring and alerts. Authentication is performed using API keys passed as bearer tokens in the Authorization header. All paths are scoped to an account and project, which can be obtained from the YugabyteDB Aeon UI profile page.
+  description: The YugabyteDB Aeon REST API provides programmatic access to YugabyteDB's fully managed cloud database service.
   version: v1
   contact:
     name: Yugabyte Support
@@ -16,7 +16,7 @@ servers:
 security:
 - bearerAuth: []
 tags:
-- name: ReadReplicas
+- name: Read Replicas
   description: Manage read replicas for a cluster to serve low-latency read requests from remote regions without affecting the primary cluster workload.
 paths:
   /accounts/{accountId}/projects/{projectId}/clusters/{clusterId}/read-replicas:
@@ -25,7 +25,7 @@ paths:
       summary: YugabyteDB Aeon List Read Replicas
       description: Returns all read replicas configured for the specified cluster. Read replicas allow routing read traffic to geographically distributed nodes to reduce latency for remote clients.
       tags:
-      - ReadReplicas
+      - Read Replicas
       parameters:
       - $ref: '#/components/parameters/accountId'
       - $ref: '#/components/parameters/projectId'
@@ -70,7 +70,7 @@ paths:
       summary: YugabyteDB Aeon Create Read Replica
       description: Adds a read replica to the specified cluster in the configured cloud region. Read replicas serve read-only traffic and are asynchronously replicated from the primary cluster.
       tags:
-      - ReadReplicas
+      - Read Replicas
       parameters:
       - $ref: '#/components/parameters/accountId'
       - $ref: '#/components/parameters/projectId'
@@ -136,7 +136,7 @@ paths:
       summary: YugabyteDB Aeon Delete Read Replica
       description: Removes all read replicas from the specified cluster. This operation is irreversible and immediately terminates read replica nodes.
       tags:
-      - ReadReplicas
+      - Read Replicas
       parameters:
       - $ref: '#/components/parameters/accountId'
       - $ref: '#/components/parameters/projectId'
@@ -153,28 +153,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ReadReplica:
-      type: object
-      description: A read replica configuration attached to a primary cluster.
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier for the read replica.
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        cloud_info:
-          $ref: '#/components/schemas/CloudInfo'
-        cluster_info:
-          $ref: '#/components/schemas/ClusterInfo'
-        state:
-          type: string
-          description: Current operational state of the read replica.
-          enum:
-          - ACTIVE
-          - CREATING
-          - DELETING
-          - FAILED
-          example: ACTIVE
     ReadReplicaSpec:
       type: object
       description: Specification for creating a read replica on a cluster.
@@ -225,22 +203,6 @@ components:
             code: OK
             message: Example message
             status: 100
-    NodeInfo:
-      type: object
-      description: Per-node compute and storage resource allocation.
-      properties:
-        num_cores:
-          type: integer
-          description: Number of vCPU cores per node.
-          example: 10
-        memory_mb:
-          type: integer
-          description: Memory in megabytes per node.
-          example: 100
-        disk_size_gb:
-          type: integer
-          description: Storage disk size in gigabytes per node.
-          example: 10
     ClusterInfo:
       type: object
       description: Compute and storage configuration for a cluster.
@@ -272,7 +234,54 @@ components:
           type: string
           description: YugabyteDB software version to deploy on the cluster.
           example: 2.20.0.0
+    ReadReplica:
+      type: object
+      description: A read replica configuration attached to a primary cluster.
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the read replica.
+          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        cloud_info:
+          $ref: '#/components/schemas/CloudInfo'
+        cluster_info:
+          $ref: '#/components/schemas/ClusterInfo'
+        state:
+          type: string
+          description: Current operational state of the read replica.
+          enum:
+          - ACTIVE
+          - CREATING
+          - DELETING
+          - FAILED
+          example: ACTIVE
+    NodeInfo:
+      type: object
+      description: Per-node compute and storage resource allocation.
+      properties:
+        num_cores:
+          type: integer
+          description: Number of vCPU cores per node.
+          example: 10
+        memory_mb:
+          type: integer
+          description: Memory in megabytes per node.
+          example: 100
+        disk_size_gb:
+          type: integer
+          description: Storage disk size in gigabytes per node.
+          example: 10
   parameters:
+    accountId:
+      name: accountId
+      in: path
+      required: true
+      description: The unique identifier of the YugabyteDB Aeon account.
+      schema:
+        type: string
+        format: uuid
+      example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
     clusterId:
       name: clusterId
       in: path
@@ -291,31 +300,7 @@ components:
         type: string
         format: uuid
       example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-    accountId:
-      name: accountId
-      in: path
-      required: true
-      description: The unique identifier of the YugabyteDB Aeon account.
-      schema:
-        type: string
-        format: uuid
-      example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
   responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            NotFoundExample:
-              summary: Default NotFound response
-              x-microcks-default: true
-              value:
-                error:
-                  code: OK
-                  message: Example message
-                  status: 100
     Unauthorized:
       description: The API key is missing, invalid, or expired.
       content:
@@ -325,6 +310,21 @@ components:
           examples:
             UnauthorizedExample:
               summary: Default Unauthorized response
+              x-microcks-default: true
+              value:
+                error:
+                  code: OK
+                  message: Example message
+                  status: 100
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            NotFoundExample:
+              summary: Default NotFound response
               x-microcks-default: true
               value:
                 error:

@@ -1,15 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Yugabytedb Isolated Backup API
-  version: v2
   contact:
     email: support@yugabyte.com
     name: YugabyteDB Anywhere Support
     url: https://docs.yugabyte.com
+  description: An improved set of APIs for managing YugabyteDB Anywhere
   license:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
-  description: 'Operations tagged Isolated Backup across 2 of this provider''s published API definitions: openapi.yaml, yugabytedb-anywhere-v2-openapi.yaml. Each path carries the servers of the definition it was published in.'
+  title: YugabyteDB Anywhere V2 Isolated Backup API
+  version: v2
 servers:
 - description: API endpoint of YBA server
   url: '{protocol}://{host_port}/api/v2'
@@ -73,17 +73,6 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
-    servers:
-    - description: API endpoint of YBA server
-      url: '{protocol}://{host_port}/api/v2'
-      variables:
-        protocol:
-          default: http
-          enum:
-          - http
-          - https
-        host_port:
-          default: localhost:9000
   /customers/{cUUID}/yba-backups/restore:
     post:
       description: Trigger a one time restore of YBA from the desired storage location
@@ -132,83 +121,25 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
-    servers:
-    - description: API endpoint of YBA server
-      url: '{protocol}://{host_port}/api/v2'
-      variables:
-        protocol:
-          default: http
-          enum:
-          - http
-          - https
-        host_port:
-          default: localhost:9000
 components:
-  requestBodies:
-    IsolatedBackupCreateReq:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IsolatedBackupCreateSpec'
-      required: true
-    IsolatedBackupRestoreReq:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IsolatedBackupRestoreSpec'
-      required: true
-    IsolatedBackupCreateReq_2:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IsolatedBackupCreateSpec_2'
-          examples:
-            IsolatedBackupCreateReqExample:
-              summary: Default IsolatedBackupCreateReq request
-              x-microcks-default: true
-              value:
-                components:
-                - YBA
-                - YBA
-                local_dir: /opt/yba_backups
-      required: true
-    IsolatedBackupRestoreReq_2:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IsolatedBackupRestoreSpec'
-          examples:
-            IsolatedBackupRestoreReqExample:
-              summary: Default IsolatedBackupRestoreReq request
-              x-microcks-default: true
-              value:
-                local_path: /opt/yba_backups/yba_backup.tar.gz
-      required: true
   schemas:
-    YBATask:
-      description: 'YBATask
+    IsolatedBackupRestoreSpec:
+      description: 'IsolatedBackupRestoreSpec
 
 
-        YugabyteDB Anywhere Task object is used to represent a task that is being executed on a resource. This Task object can be polled for progress and status of the task. This object is returned as a response to most of the YugabyteDB Anywhere API calls.
+        User provided details to trigger a restore of YBA from a local filepath.
 
         '
       example:
-        resource_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
-        task_uuid: 89a46d52-4edd-4736-922a-35177a0b990c
+        local_path: /opt/yba_backups/yba_backup.tar.gz
       properties:
-        resource_uuid:
-          description: UUID of the resource being modified by the task
-          example: f33e3c9b-75ab-4c30-80ad-cba85646ea39
-          format: uuid
-          readOnly: true
+        local_path:
+          description: full path to YBA backup file on host
+          example: /opt/yba_backups/yba_backup.tar.gz
           type: string
-        task_uuid:
-          description: Task UUID
-          example: 89a46d52-4edd-4736-922a-35177a0b990c
-          format: uuid
-          readOnly: true
-          type: string
-      title: YBATask
+      required:
+      - local_path
+      title: IsolatedBackupRestoreSpec
       type: object
     IsolatedBackupCreateSpec:
       description: 'IsolatedBackupCreateSpec
@@ -237,24 +168,6 @@ components:
       - local_dir
       title: IsolatedBackupCreateSpec
       type: object
-    IsolatedBackupRestoreSpec:
-      description: 'IsolatedBackupRestoreSpec
-
-
-        User provided details to trigger a restore of YBA from a local filepath.
-
-        '
-      example:
-        local_path: /opt/yba_backups/yba_backup.tar.gz
-      properties:
-        local_path:
-          description: full path to YBA backup file on host
-          example: /opt/yba_backups/yba_backup.tar.gz
-          type: string
-      required:
-      - local_path
-      title: IsolatedBackupRestoreSpec
-      type: object
     YbaComponent:
       description: 'Individual YBA components to be backed up
 
@@ -265,40 +178,46 @@ components:
       - RELEASES
       title: YbaComponent
       type: string
-    IsolatedBackupCreateSpec_2:
-      description: 'IsolatedBackupCreateSpec
+    YBATask:
+      description: 'YBATask
 
 
-        User provided details to trigger a one time backup of YBA to a particular local directory.
+        YugabyteDB Anywhere Task object is used to represent a task that is being executed on a resource. This Task object can be polled for progress and status of the task. This object is returned as a response to most of the YugabyteDB Anywhere API calls.
 
         '
       example:
-        components:
-        - YBA
-        - YBA
-        local_dir: /opt/yba_backups
+        resource_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+        task_uuid: 89a46d52-4edd-4736-922a-35177a0b990c
       properties:
-        local_dir:
-          description: local directory to store backup
-          example: /opt/yba_backups
+        resource_uuid:
+          description: UUID of the resource being modified by the task
+          example: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+          format: uuid
+          readOnly: true
           type: string
-        components:
-          description: the components to include in YBA backup
-          items:
-            $ref: '#/components/schemas/YbaComponent'
-          type: array
-          example:
-          - YBA
-      required:
-      - components
-      - local_dir
-      title: IsolatedBackupCreateSpec
+        task_uuid:
+          description: Task UUID
+          example: 89a46d52-4edd-4736-922a-35177a0b990c
+          format: uuid
+          readOnly: true
+          type: string
+      title: YBATask
       type: object
+  requestBodies:
+    IsolatedBackupRestoreReq:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IsolatedBackupRestoreSpec'
+      required: true
+    IsolatedBackupCreateReq:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IsolatedBackupCreateSpec'
+      required: true
   securitySchemes:
     apiKeyAuth:
       in: header
       name: X-AUTH-YW-API-TOKEN
       type: apiKey
-x-refined-from:
-- openapi.yaml
-- yugabytedb-anywhere-v2-openapi.yaml

@@ -8,10 +8,7 @@ info:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
   termsOfService: TODO(chirag)
-  x-refined-note:
-  - x-source differs across the merged source definitions and was not carried
-  - x-split-from differs across the merged source definitions and was not carried
-  description: 'Operations tagged Universe actions across 4 of this provider''s published API definitions: openapi_2.yaml, platform.swagger.json, yugabytedb-anywhere-v1-full.yaml, yugabytedb-anywhere-v1-universes.yaml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Universe actions across 2 of this provider''s published API definitions: openapi_2.yaml, platform.swagger.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: /
 tags:
@@ -20,7 +17,9 @@ paths:
   /api/v1/customers/{cUUID}/universes/import:
     post:
       deprecated: true
-      description: <b style="color:#ff0000">Deprecated since YBA version 2.19.3.0.</b></p>Do not use, this will be removed soon.
+      description: 'Deprecated since YBA version 2.19.3.0.
+
+        Do not use, this will be removed soon.'
       operationId: importUniverse
       parameters:
       - in: path
@@ -189,190 +188,6 @@ components:
       - zoneCode
       - zoneName
       type: object
-    ImportUniverseFormData_3:
-      example:
-        singleStep: true
-        replicationFactor: 0
-        instanceType: instanceType
-        regionName: regionName
-        providerType: unknown
-        masterAddresses: masterAddresses
-        universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        regionCode: regionCode
-        cloudName: cloudName
-        cloudProviderType: cloudProviderType
-        zoneName: zoneName
-        currentState: BEGIN
-        universeName: universeName
-        zoneCode: zoneCode
-      properties:
-        cloudName:
-          type: string
-          example: example-cloudName
-        cloudProviderType:
-          type: string
-          example: DEFAULT
-        currentState:
-          enum:
-          - BEGIN
-          - IMPORTED_MASTERS
-          - IMPORTED_TSERVERS
-          - FINISHED
-          type: string
-          example: BEGIN
-        instanceType:
-          type: string
-          example: DEFAULT
-        masterAddresses:
-          type: string
-          example: example-masterAddresses
-        providerType:
-          enum:
-          - unknown
-          - aws
-          - gcp
-          - azu
-          - docker
-          - onprem
-          - kubernetes
-          - local
-          - other
-          type: string
-          example: unknown
-        regionCode:
-          type: string
-          example: us-east-1
-        regionName:
-          type: string
-          example: us-east-1
-        replicationFactor:
-          format: int32
-          type: integer
-          example: 100
-        singleStep:
-          type: boolean
-          example: true
-        universeName:
-          type: string
-          example: example-universeName
-        universeUUID:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        zoneCode:
-          type: string
-          example: us-east-1a
-        zoneName:
-          type: string
-          example: us-east-1a
-      required:
-      - cloudName
-      - cloudProviderType
-      - currentState
-      - instanceType
-      - masterAddresses
-      - providerType
-      - regionCode
-      - regionName
-      - replicationFactor
-      - singleStep
-      - universeName
-      - universeUUID
-      - zoneCode
-      - zoneName
-      type: object
-    ImportUniverseFormData_4:
-      example:
-        singleStep: true
-        replicationFactor: 0
-        instanceType: instanceType
-        regionName: regionName
-        providerType: unknown
-        masterAddresses: masterAddresses
-        universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        regionCode: regionCode
-        cloudName: cloudName
-        cloudProviderType: cloudProviderType
-        zoneName: zoneName
-        currentState: BEGIN
-        universeName: universeName
-        zoneCode: zoneCode
-      properties:
-        cloudName:
-          type: string
-          example: example-cloudName
-        cloudProviderType:
-          type: string
-          example: DEFAULT
-        currentState:
-          enum:
-          - BEGIN
-          - IMPORTED_MASTERS
-          - IMPORTED_TSERVERS
-          - FINISHED
-          type: string
-          example: BEGIN
-        instanceType:
-          type: string
-          example: DEFAULT
-        masterAddresses:
-          type: string
-          example: example-masterAddresses
-        providerType:
-          enum:
-          - unknown
-          - aws
-          - gcp
-          - azu
-          - docker
-          - onprem
-          - kubernetes
-          - local
-          - other
-          type: string
-          example: unknown
-        regionCode:
-          type: string
-          example: us-east-1
-        regionName:
-          type: string
-          example: us-east-1
-        replicationFactor:
-          format: int32
-          type: integer
-          example: 100
-        singleStep:
-          type: boolean
-          example: true
-        universeName:
-          type: string
-          example: example-universeName
-        universeUUID:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        zoneCode:
-          type: string
-          example: us-east-1a
-        zoneName:
-          type: string
-          example: us-east-1a
-      required:
-      - cloudName
-      - cloudProviderType
-      - currentState
-      - instanceType
-      - masterAddresses
-      - providerType
-      - regionCode
-      - regionName
-      - replicationFactor
-      - singleStep
-      - universeName
-      - universeUUID
-      - zoneCode
-      - zoneName
-      type: object
   securitySchemes:
     apiKeyAuth:
       description: API token passed as header
@@ -385,5 +200,3 @@ externalDocs:
 x-refined-from:
 - openapi_2.yaml
 - platform.swagger.json
-- yugabytedb-anywhere-v1-full.yaml
-- yugabytedb-anywhere-v1-universes.yaml

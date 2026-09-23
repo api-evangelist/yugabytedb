@@ -1,15 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Yugabytedb Continuous Backup API
-  version: v2
   contact:
     email: support@yugabyte.com
     name: YugabyteDB Anywhere Support
     url: https://docs.yugabyte.com
+  description: An improved set of APIs for managing YugabyteDB Anywhere
   license:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
-  description: 'Operations tagged Continuous Backup across 2 of this provider''s published API definitions: openapi.yaml, yugabytedb-anywhere-v2-openapi.yaml. Each path carries the servers of the definition it was published in.'
+  title: YugabyteDB Anywhere V2 Continuous Backup API
+  version: v2
 servers:
 - description: API endpoint of YBA server
   url: '{protocol}://{host_port}/api/v2'
@@ -115,17 +115,6 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
-    servers:
-    - description: API endpoint of YBA server
-      url: '{protocol}://{host_port}/api/v2'
-      variables:
-        protocol:
-          default: http
-          enum:
-          - http
-          - https
-        host_port:
-          default: localhost:9000
   /customers/{cUUID}/auto-yba-backups/restore:
     post:
       description: Restore a backup from a continuous backup configuration
@@ -174,17 +163,6 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
-    servers:
-    - description: API endpoint of YBA server
-      url: '{protocol}://{host_port}/api/v2'
-      variables:
-        protocol:
-          default: http
-          enum:
-          - http
-          - https
-        host_port:
-          default: localhost:9000
   /customers/{cUUID}/auto-yba-backups/{bUUID}:
     delete:
       description: Delete continuous backup config
@@ -295,38 +273,109 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
-    servers:
-    - description: API endpoint of YBA server
-      url: '{protocol}://{host_port}/api/v2'
-      variables:
-        protocol:
-          default: http
-          enum:
-          - http
-          - https
-        host_port:
-          default: localhost:9000
 components:
   schemas:
-    TimeUnitType:
-      description: 'TimeUnitType
+    ContinuousRestoreSpec:
+      description: 'ContinuousRestoreSpec
 
 
-        Time units that correspond to TimeUnit.java enum. Used for variable frequencies.
+        Continuous Backup Restore time properties. Used to Restore from continuous backup configuration.
 
         '
-      enum:
-      - NANOSECONDS
-      - MICROSECONDS
-      - MILLISECONDS
-      - SECONDS
-      - MINUTES
-      - HOURS
-      - DAYS
-      - MONTHS
-      - YEARS
-      title: TimeUnitType
-      type: string
+      example:
+        backup_dir: YBA.1.2.3.4
+        storage_config_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+      properties:
+        storage_config_uuid:
+          description: UUID of the storage config to use
+          example: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+          format: uuid
+          readOnly: false
+          type: string
+        backup_dir:
+          description: The name of the directory to restore the most recent back from.
+          example: YBA.1.2.3.4
+          type: string
+      required:
+      - backup_dir
+      - storage_config_uuid
+      title: ContinuousRestoreSpec
+      type: object
+    ContinuousBackupInfo:
+      description: 'ContinuousBackupInfo
+
+
+        These are read-only system generated properties of a continuous backup configuration. Returned as part of the Continuous Backup resource.
+
+        '
+      example:
+        storage_location: s3://backup_storage_path/YBA_1.2.3.4
+        uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+        last_backup: 2022-12-12 13:07:18+00:00
+      properties:
+        uuid:
+          description: UUID of the Continuous Backup Config
+          example: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+          format: uuid
+          readOnly: true
+          type: string
+        storage_location:
+          description: bucket or directory where backups are stored
+          example: s3://backup_storage_path/YBA_1.2.3.4
+          readOnly: true
+          type: string
+        last_backup:
+          description: time of last backup stored
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          readOnly: true
+          type: string
+      required:
+      - uuid
+      title: ContinuousBackupInfo
+      type: object
+    ContinuousBackupSpec:
+      description: 'ContinuousBackupSpec
+
+
+        User specification for a continuous backup of YBA. All these properties can be edited.
+
+        '
+      example:
+        frequency_time_unit: NANOSECONDS
+        backup_dir: yba_backups
+        storage_config_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+        num_backups: 6
+        frequency: 0
+      properties:
+        storage_config_uuid:
+          description: UUID of the storage config to use
+          example: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+          format: uuid
+          readOnly: false
+          type: string
+        frequency:
+          description: Interval between two backups.
+          format: int64
+          type: integer
+        frequency_time_unit:
+          $ref: '#/components/schemas/TimeUnitType'
+        num_backups:
+          default: 5
+          description: The number of historical backups to retain in the storage bucket.
+          format: int32
+          type: integer
+        backup_dir:
+          description: The name of the directory in the storage config to use for YBA backups.
+          example: yba_backups
+          type: string
+      required:
+      - backup_dir
+      - frequency
+      - frequency_time_unit
+      - storage_config_uuid
+      title: ContinuousBackupSpec
+      type: object
     YBATask:
       description: 'YBATask
 
@@ -377,151 +426,25 @@ components:
           $ref: '#/components/schemas/ContinuousBackupSpec'
       title: ContinuousBackup
       type: object
-    ContinuousBackupSpec:
-      description: 'ContinuousBackupSpec
+    TimeUnitType:
+      description: 'TimeUnitType
 
 
-        User specification for a continuous backup of YBA. All these properties can be edited.
-
-        '
-      example:
-        frequency_time_unit: NANOSECONDS
-        backup_dir: yba_backups
-        storage_config_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
-        num_backups: 6
-        frequency: 0
-      properties:
-        storage_config_uuid:
-          description: UUID of the storage config to use
-          example: f33e3c9b-75ab-4c30-80ad-cba85646ea39
-          format: uuid
-          readOnly: false
-          type: string
-        frequency:
-          description: Interval between two backups.
-          format: int64
-          type: integer
-        frequency_time_unit:
-          $ref: '#/components/schemas/TimeUnitType'
-        num_backups:
-          default: 5
-          description: The number of historical backups to retain in the storage bucket.
-          format: int32
-          type: integer
-        backup_dir:
-          description: The name of the directory in the storage config to use for YBA backups.
-          example: yba_backups
-          type: string
-      required:
-      - backup_dir
-      - frequency
-      - frequency_time_unit
-      - storage_config_uuid
-      title: ContinuousBackupSpec
-      type: object
-    ContinuousBackupInfo:
-      description: 'ContinuousBackupInfo
-
-
-        These are read-only system generated properties of a continuous backup configuration. Returned as part of the Continuous Backup resource.
+        Time units that correspond to TimeUnit.java enum. Used for variable frequencies.
 
         '
-      example:
-        storage_location: s3://backup_storage_path/YBA_1.2.3.4
-        uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
-        last_backup: 2022-12-12 13:07:18+00:00
-      properties:
-        uuid:
-          description: UUID of the Continuous Backup Config
-          example: f33e3c9b-75ab-4c30-80ad-cba85646ea39
-          format: uuid
-          readOnly: true
-          type: string
-        storage_location:
-          description: bucket or directory where backups are stored
-          example: s3://backup_storage_path/YBA_1.2.3.4
-          readOnly: true
-          type: string
-        last_backup:
-          description: time of last backup stored
-          example: 2022-12-12 13:07:18+00:00
-          format: date-time
-          readOnly: true
-          type: string
-      required:
-      - uuid
-      title: ContinuousBackupInfo
-      type: object
-    ContinuousRestoreSpec:
-      description: 'ContinuousRestoreSpec
-
-
-        Continuous Backup Restore time properties. Used to Restore from continuous backup configuration.
-
-        '
-      example:
-        backup_dir: YBA.1.2.3.4
-        storage_config_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
-      properties:
-        storage_config_uuid:
-          description: UUID of the storage config to use
-          example: f33e3c9b-75ab-4c30-80ad-cba85646ea39
-          format: uuid
-          readOnly: false
-          type: string
-        backup_dir:
-          description: The name of the directory to restore the most recent back from.
-          example: YBA.1.2.3.4
-          type: string
-      required:
-      - backup_dir
-      - storage_config_uuid
-      title: ContinuousRestoreSpec
-      type: object
-    ContinuousBackupSpec_2:
-      description: 'ContinuousBackupSpec
-
-
-        User specification for a continuous backup of YBA. All these properties can be edited.
-
-        '
-      example:
-        frequency_time_unit: NANOSECONDS
-        backup_dir: yba_backups
-        storage_config_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
-        num_backups: 6
-        frequency: 0
-      properties:
-        storage_config_uuid:
-          description: UUID of the storage config to use
-          example: f33e3c9b-75ab-4c30-80ad-cba85646ea39
-          format: uuid
-          readOnly: false
-          type: string
-        frequency:
-          description: Interval between two backups.
-          format: int64
-          type: integer
-          example: 1000
-        frequency_time_unit:
-          $ref: '#/components/schemas/TimeUnitType'
-        num_backups:
-          default: 5
-          description: The number of historical backups to retain in the storage bucket.
-          format: int32
-          type: integer
-          example: 5
-        backup_dir:
-          description: The name of the directory in the storage config to use for YBA backups.
-          example: yba_backups
-          type: string
-      required:
-      - backup_dir
-      - frequency
-      - frequency_time_unit
-      - storage_config_uuid
-      title: ContinuousBackupSpec
-      type: object
+      enum:
+      - NANOSECONDS
+      - MICROSECONDS
+      - MILLISECONDS
+      - SECONDS
+      - MINUTES
+      - HOURS
+      - DAYS
+      - MONTHS
+      - YEARS
+      title: TimeUnitType
+      type: string
   requestBodies:
     ContinuousBackupRestoreReq:
       content:
@@ -535,40 +458,8 @@ components:
           schema:
             $ref: '#/components/schemas/ContinuousBackupSpec'
       required: true
-    ContinuousBackupRestoreReq_2:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ContinuousRestoreSpec'
-          examples:
-            ContinuousBackupRestoreReqExample:
-              summary: Default ContinuousBackupRestoreReq request
-              x-microcks-default: true
-              value:
-                backup_dir: YBA.1.2.3.4
-                storage_config_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
-      required: true
-    ContinuousBackupCreateReq_2:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ContinuousBackupSpec_2'
-          examples:
-            ContinuousBackupCreateReqExample:
-              summary: Default ContinuousBackupCreateReq request
-              x-microcks-default: true
-              value:
-                frequency_time_unit: NANOSECONDS
-                backup_dir: yba_backups
-                storage_config_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
-                num_backups: 6
-                frequency: 0
-      required: true
   securitySchemes:
     apiKeyAuth:
       in: header
       name: X-AUTH-YW-API-TOKEN
       type: apiKey
-x-refined-from:
-- openapi.yaml
-- yugabytedb-anywhere-v2-openapi.yaml

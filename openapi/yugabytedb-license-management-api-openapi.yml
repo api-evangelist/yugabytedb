@@ -1,21 +1,18 @@
 openapi: 3.2.0
 info:
-  title: Yugabytedb License management API
-  version: v1
   contact:
     name: https://docs.yugabyte.com
+  description: ALPHA - NOT FOR EXTERNAL USE
   license:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
   termsOfService: TODO(chirag)
-  x-refined-note:
-  - x-source differs across the merged source definitions and was not carried
-  - x-split-from differs across the merged source definitions and was not carried
-  description: 'Operations tagged License management across 3 of this provider''s published API definitions: openapi_2.yaml, yugabytedb-anywhere-v1-full.yaml, yugabytedb-anywhere-v1-users-rbac.yaml. Each path carries the servers of the definition it was published in.'
+  title: YugabyteDB Anywhere License management API
+  version: v1
 servers:
 - url: /
 tags:
-- name: License management
+- name: License Management
 paths:
   /api/v1/customers/{cUUID}/licenses:
     post:
@@ -41,9 +38,7 @@ paths:
       - apiKeyAuth: []
       summary: Uploads the license
       tags:
-      - License management
-    servers:
-    - url: /
+      - License Management
   /api/v1/customers/{cUUID}/licenses/{lUUID}:
     delete:
       operationId: deleteLicense
@@ -74,9 +69,7 @@ paths:
       - apiKeyAuth: []
       summary: Delete a license
       tags:
-      - License management
-    servers:
-    - url: /
+      - License Management
 components:
   schemas:
     YBPSuccess:
@@ -127,114 +120,6 @@ components:
       - license
       - licenseType
       type: object
-    YBPSuccess_2:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-          example: Example message
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-          example: true
-      type: object
-    CustomerLicense_2:
-      description: Customer Licenses. This helps customer to upload licenses for the thirdparrty softwares if required.
-      example:
-        license: license
-        licenseType: licenseType
-        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        licenseUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        creationDate: 2022-12-12 13:07:18+00:00
-      properties:
-        creationDate:
-          description: Creation date of license
-          example: 2022-12-12 13:07:18+00:00
-          format: date-time
-          readOnly: true
-          type: string
-        customerUUID:
-          description: Customer UUID that owns this license
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        license:
-          description: License File Path
-          type: string
-          example: example-license
-        licenseType:
-          description: Type of the license
-          type: string
-          example: DEFAULT
-        licenseUUID:
-          description: License UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      required:
-      - license
-      - licenseType
-      type: object
-    YBPSuccess_3:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-          example: Example message
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-          example: true
-      type: object
-    CustomerLicense_3:
-      description: Customer Licenses. This helps customer to upload licenses for the thirdparrty softwares if required.
-      example:
-        license: license
-        licenseType: licenseType
-        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        licenseUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        creationDate: 2022-12-12 13:07:18+00:00
-      properties:
-        creationDate:
-          description: Creation date of license
-          example: 2022-12-12 13:07:18+00:00
-          format: date-time
-          readOnly: true
-          type: string
-        customerUUID:
-          description: Customer UUID that owns this license
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        license:
-          description: License File Path
-          type: string
-          example: example-license
-        licenseType:
-          description: Type of the license
-          type: string
-          example: DEFAULT
-        licenseUUID:
-          description: License UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      required:
-      - license
-      - licenseType
-      type: object
   securitySchemes:
     apiKeyAuth:
       description: API token passed as header
@@ -244,7 +129,4 @@ components:
 externalDocs:
   description: About YugabyteDB Anywhere
   url: https://docs.yugabyte.com/latest/yugabyte-platform/
-x-refined-from:
-- openapi_2.yaml
-- yugabytedb-anywhere-v1-full.yaml
-- yugabytedb-anywhere-v1-users-rbac.yaml
+x-original-swagger-version: '2.0'

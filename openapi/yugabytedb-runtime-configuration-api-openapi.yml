@@ -8,10 +8,7 @@ info:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
   termsOfService: TODO(chirag)
-  x-refined-note:
-  - x-source differs across the merged source definitions and was not carried
-  - x-split-from differs across the merged source definitions and was not carried
-  description: 'Operations tagged Runtime configuration across 4 of this provider''s published API definitions: openapi_2.yaml, platform.swagger.json, yugabytedb-anywhere-v1-full.yaml, yugabytedb-anywhere-v1-releases-maintenance.yaml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Runtime configuration across 2 of this provider''s published API definitions: openapi_2.yaml, platform.swagger.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: /
 tags:
@@ -215,7 +212,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: List all the feature flag runtime config keys and their values.
+      summary: List all the feature flag runtime config keys and their values
       tags:
       - Runtime configuration
     servers:
@@ -262,41 +259,6 @@ paths:
     - url: /
 components:
   schemas:
-    ScopedConfig:
-      description: Scoped configuration
-      example:
-        configEntries:
-        - inherited: true
-          value: value
-          key: key
-        - inherited: true
-          value: value
-          key: key
-        mutableScope: true
-        type: GLOBAL
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        configEntries:
-          description: List of configurations
-          items:
-            $ref: '#/components/schemas/ConfigEntry'
-          type: array
-        mutableScope:
-          description: Mutability of the scope. Only super admin users can change global scope; other scopes are customer-mutable.
-          type: boolean
-        type:
-          description: Scope type
-          enum:
-          - GLOBAL
-          - CUSTOMER
-          - UNIVERSE
-          - PROVIDER
-          type: string
-        uuid:
-          description: Scope UIID
-          format: uuid
-          type: string
-      type: object
     ConfDataTypeObject:
       example:
         name: name
@@ -349,6 +311,20 @@ components:
       - scope
       - tags
       type: object
+    YBPSuccess:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+      type: object
     ConfigEntry:
       description: Configuration entry
       example:
@@ -365,20 +341,6 @@ components:
         value:
           description: Configuration value
           type: string
-      type: object
-    YBPSuccess:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
       type: object
     RuntimeConfigData:
       description: Runtime configuration data
@@ -411,13 +373,24 @@ components:
             $ref: '#/components/schemas/ScopedConfig'
           type: array
       type: object
-    ScopedConfig_2:
+    ScopedConfig:
       description: Scoped configuration
+      example:
+        configEntries:
+        - inherited: true
+          value: value
+          key: key
+        - inherited: true
+          value: value
+          key: key
+        mutableScope: true
+        type: GLOBAL
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         configEntries:
           description: List of configurations
           items:
-            $ref: '#/components/schemas/ConfigEntry_2'
+            $ref: '#/components/schemas/ConfigEntry'
           type: array
         mutableScope:
           description: Mutability of the scope. Only super admin users can change global scope; other scopes are customer-mutable.
@@ -459,6 +432,30 @@ components:
           readOnly: true
           type: boolean
       type: object
+    ScopedConfig_2:
+      description: Scoped configuration
+      properties:
+        configEntries:
+          description: List of configurations
+          items:
+            $ref: '#/components/schemas/ConfigEntry_2'
+          type: array
+        mutableScope:
+          description: Mutability of the scope. Only super admin users can change global scope; other scopes are customer-mutable.
+          type: boolean
+        type:
+          description: Scope type
+          enum:
+          - GLOBAL
+          - CUSTOMER
+          - UNIVERSE
+          - PROVIDER
+          type: string
+        uuid:
+          description: Scope UIID
+          format: uuid
+          type: string
+      type: object
     RuntimeConfigData_2:
       description: Runtime configuration data
       properties:
@@ -467,364 +464,6 @@ components:
           items:
             $ref: '#/components/schemas/ScopedConfig_2'
           type: array
-      type: object
-    ScopedConfig_3:
-      description: Scoped configuration
-      example:
-        configEntries:
-        - inherited: true
-          value: value
-          key: key
-        - inherited: true
-          value: value
-          key: key
-        mutableScope: true
-        type: GLOBAL
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        configEntries:
-          description: List of configurations
-          items:
-            $ref: '#/components/schemas/ConfigEntry_3'
-          type: array
-          example:
-          - inherited: true
-            value: value
-            key: key
-        mutableScope:
-          description: Mutability of the scope. Only super admin users can change global scope; other scopes are customer-mutable.
-          type: boolean
-          example: true
-        type:
-          description: Scope type
-          enum:
-          - GLOBAL
-          - CUSTOMER
-          - UNIVERSE
-          - PROVIDER
-          type: string
-          example: GLOBAL
-        uuid:
-          description: Scope UIID
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      type: object
-    ConfDataTypeObject_2:
-      example:
-        name: name
-      properties:
-        name:
-          type: string
-          example: example-name
-      required:
-      - name
-      type: object
-    ConfKeyInfo_2:
-      example:
-        displayName: displayName
-        dataType:
-          name: name
-        scope: GLOBAL
-        helpTxt: helpTxt
-        key: key
-        tags:
-        - PUBLIC
-        - PUBLIC
-      properties:
-        dataType:
-          $ref: '#/components/schemas/ConfDataTypeObject_2'
-        displayName:
-          type: string
-          example: example-displayName
-        helpTxt:
-          type: string
-          example: example-helpTxt
-        key:
-          type: string
-          example: example-key
-        scope:
-          enum:
-          - GLOBAL
-          - CUSTOMER
-          - UNIVERSE
-          - PROVIDER
-          type: string
-          example: GLOBAL
-        tags:
-          items:
-            enum:
-            - PUBLIC
-            - INTERNAL
-            - FEATURE_FLAG
-            type: string
-          type: array
-          example:
-          - PUBLIC
-      required:
-      - dataType
-      - displayName
-      - helpTxt
-      - key
-      - scope
-      - tags
-      type: object
-    ConfigEntry_3:
-      description: Configuration entry
-      example:
-        inherited: true
-        value: value
-        key: key
-      properties:
-        inherited:
-          description: Is this configuration inherited?
-          type: boolean
-          example: true
-        key:
-          description: Configuration key
-          type: string
-          example: example-key
-        value:
-          description: Configuration value
-          type: string
-          example: example-value
-      type: object
-    YBPSuccess_3:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-          example: Example message
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-          example: true
-      type: object
-    RuntimeConfigData_3:
-      description: Runtime configuration data
-      example:
-        scopedConfigList:
-        - configEntries:
-          - inherited: true
-            value: value
-            key: key
-          - inherited: true
-            value: value
-            key: key
-          mutableScope: true
-          type: GLOBAL
-          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - configEntries:
-          - inherited: true
-            value: value
-            key: key
-          - inherited: true
-            value: value
-            key: key
-          mutableScope: true
-          type: GLOBAL
-          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        scopedConfigList:
-          description: List of scoped configurations
-          items:
-            $ref: '#/components/schemas/ScopedConfig_3'
-          type: array
-          example:
-          - configEntries:
-            - inherited: true
-              value: value
-              key: key
-            - inherited: true
-              value: value
-              key: key
-            mutableScope: true
-            type: GLOBAL
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      type: object
-    ScopedConfig_4:
-      description: Scoped configuration
-      example:
-        configEntries:
-        - inherited: true
-          value: value
-          key: key
-        - inherited: true
-          value: value
-          key: key
-        mutableScope: true
-        type: GLOBAL
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        configEntries:
-          description: List of configurations
-          items:
-            $ref: '#/components/schemas/ConfigEntry_4'
-          type: array
-          example:
-          - inherited: true
-            value: value
-            key: key
-        mutableScope:
-          description: Mutability of the scope. Only super admin users can change global scope; other scopes are customer-mutable.
-          type: boolean
-          example: true
-        type:
-          description: Scope type
-          enum:
-          - GLOBAL
-          - CUSTOMER
-          - UNIVERSE
-          - PROVIDER
-          type: string
-          example: GLOBAL
-        uuid:
-          description: Scope UIID
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      type: object
-    ConfDataTypeObject_3:
-      example:
-        name: name
-      properties:
-        name:
-          type: string
-          example: example-name
-      required:
-      - name
-      type: object
-    ConfKeyInfo_3:
-      example:
-        displayName: displayName
-        dataType:
-          name: name
-        scope: GLOBAL
-        helpTxt: helpTxt
-        key: key
-        tags:
-        - PUBLIC
-        - PUBLIC
-      properties:
-        dataType:
-          $ref: '#/components/schemas/ConfDataTypeObject_3'
-        displayName:
-          type: string
-          example: example-displayName
-        helpTxt:
-          type: string
-          example: example-helpTxt
-        key:
-          type: string
-          example: example-key
-        scope:
-          enum:
-          - GLOBAL
-          - CUSTOMER
-          - UNIVERSE
-          - PROVIDER
-          type: string
-          example: GLOBAL
-        tags:
-          items:
-            enum:
-            - PUBLIC
-            - INTERNAL
-            - FEATURE_FLAG
-            type: string
-          type: array
-          example:
-          - PUBLIC
-      required:
-      - dataType
-      - displayName
-      - helpTxt
-      - key
-      - scope
-      - tags
-      type: object
-    ConfigEntry_4:
-      description: Configuration entry
-      example:
-        inherited: true
-        value: value
-        key: key
-      properties:
-        inherited:
-          description: Is this configuration inherited?
-          type: boolean
-          example: true
-        key:
-          description: Configuration key
-          type: string
-          example: example-key
-        value:
-          description: Configuration value
-          type: string
-          example: example-value
-      type: object
-    YBPSuccess_4:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-          example: Example message
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-          example: true
-      type: object
-    RuntimeConfigData_4:
-      description: Runtime configuration data
-      example:
-        scopedConfigList:
-        - configEntries:
-          - inherited: true
-            value: value
-            key: key
-          - inherited: true
-            value: value
-            key: key
-          mutableScope: true
-          type: GLOBAL
-          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - configEntries:
-          - inherited: true
-            value: value
-            key: key
-          - inherited: true
-            value: value
-            key: key
-          mutableScope: true
-          type: GLOBAL
-          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        scopedConfigList:
-          description: List of scoped configurations
-          items:
-            $ref: '#/components/schemas/ScopedConfig_4'
-          type: array
-          example:
-          - configEntries:
-            - inherited: true
-              value: value
-              key: key
-            - inherited: true
-              value: value
-              key: key
-            mutableScope: true
-            type: GLOBAL
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       type: object
   securitySchemes:
     apiKeyAuth:
@@ -838,5 +477,3 @@ externalDocs:
 x-refined-from:
 - openapi_2.yaml
 - platform.swagger.json
-- yugabytedb-anywhere-v1-full.yaml
-- yugabytedb-anywhere-v1-releases-maintenance.yaml

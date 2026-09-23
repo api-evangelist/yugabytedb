@@ -1,17 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Yugabytedb Upload Release packages API
-  version: v1
   contact:
     name: https://docs.yugabyte.com
+  description: ALPHA - NOT FOR EXTERNAL USE
   license:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
   termsOfService: TODO(chirag)
-  x-refined-note:
-  - x-source differs across the merged source definitions and was not carried
-  - x-split-from differs across the merged source definitions and was not carried
-  description: 'Operations tagged Upload Release packages across 3 of this provider''s published API definitions: openapi_2.yaml, yugabytedb-anywhere-v1-full.yaml, yugabytedb-anywhere-v1-releases-maintenance.yaml. Each path carries the servers of the definition it was published in.'
+  title: YugabyteDB Anywhere Upload Release packages API
+  version: v1
 servers:
 - url: /
 tags:
@@ -43,8 +40,6 @@ paths:
       summary: upload a release tgz
       tags:
       - Upload Release packages
-    servers:
-    - url: /
   /api/v1/customers/{cUUID}/ybdb_release/upload/{rUUID}:
     get:
       description: 'WARNING: This is a preview API that could change: get uploaded release metadata'
@@ -77,20 +72,8 @@ paths:
       summary: get an uploaded release metadata
       tags:
       - Upload Release packages
-    servers:
-    - url: /
 components:
   schemas:
-    YBPCreateSuccess:
-      example:
-        resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        resourceUUID:
-          description: UUID of the successfully created resource
-          format: uuid
-          readOnly: true
-          type: string
-      type: object
     ResponseExtractMetadata:
       example:
         release_notes: release_notes
@@ -151,7 +134,7 @@ components:
       - version
       - yb_type
       type: object
-    YBPCreateSuccess_2:
+    YBPCreateSuccess:
       example:
         resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
@@ -160,158 +143,6 @@ components:
           format: uuid
           readOnly: true
           type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      type: object
-    ResponseExtractMetadata_2:
-      example:
-        release_notes: release_notes
-        sha256: sha256
-        metadata_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        release_type: release_type
-        release_date_msecs: 0
-        version: version
-        platform: LINUX
-        yb_type: YBDB
-        architecture: x86_64
-        status: waiting
-      properties:
-        architecture:
-          enum:
-          - x86_64
-          - aarch64
-          type: string
-          example: x86_64
-        metadata_uuid:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        platform:
-          enum:
-          - LINUX
-          - KUBERNETES
-          type: string
-          example: LINUX
-        release_date_msecs:
-          format: int64
-          type: integer
-          example: 1000
-        release_notes:
-          type: string
-          example: example-release_notes
-        release_type:
-          type: string
-          example: DEFAULT
-        sha256:
-          type: string
-          example: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-        status:
-          enum:
-          - waiting
-          - running
-          - success
-          - failure
-          type: string
-          example: waiting
-        version:
-          type: string
-          example: 2.20.0.0
-        yb_type:
-          enum:
-          - YBDB
-          type: string
-          example: YBDB
-      required:
-      - architecture
-      - metadata_uuid
-      - platform
-      - release_date_msecs
-      - release_notes
-      - release_type
-      - sha256
-      - status
-      - version
-      - yb_type
-      type: object
-    YBPCreateSuccess_3:
-      example:
-        resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        resourceUUID:
-          description: UUID of the successfully created resource
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      type: object
-    ResponseExtractMetadata_3:
-      example:
-        release_notes: release_notes
-        sha256: sha256
-        metadata_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        release_type: release_type
-        release_date_msecs: 0
-        version: version
-        platform: LINUX
-        yb_type: YBDB
-        architecture: x86_64
-        status: waiting
-      properties:
-        architecture:
-          enum:
-          - x86_64
-          - aarch64
-          type: string
-          example: x86_64
-        metadata_uuid:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        platform:
-          enum:
-          - LINUX
-          - KUBERNETES
-          type: string
-          example: LINUX
-        release_date_msecs:
-          format: int64
-          type: integer
-          example: 1000
-        release_notes:
-          type: string
-          example: example-release_notes
-        release_type:
-          type: string
-          example: DEFAULT
-        sha256:
-          type: string
-          example: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-        status:
-          enum:
-          - waiting
-          - running
-          - success
-          - failure
-          type: string
-          example: waiting
-        version:
-          type: string
-          example: 2.20.0.0
-        yb_type:
-          enum:
-          - YBDB
-          type: string
-          example: YBDB
-      required:
-      - architecture
-      - metadata_uuid
-      - platform
-      - release_date_msecs
-      - release_notes
-      - release_type
-      - sha256
-      - status
-      - version
-      - yb_type
       type: object
   securitySchemes:
     apiKeyAuth:
@@ -322,7 +153,4 @@ components:
 externalDocs:
   description: About YugabyteDB Anywhere
   url: https://docs.yugabyte.com/latest/yugabyte-platform/
-x-refined-from:
-- openapi_2.yaml
-- yugabytedb-anywhere-v1-full.yaml
-- yugabytedb-anywhere-v1-releases-maintenance.yaml
+x-original-swagger-version: '2.0'

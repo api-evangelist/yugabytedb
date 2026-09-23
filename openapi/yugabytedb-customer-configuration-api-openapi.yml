@@ -8,10 +8,7 @@ info:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
   termsOfService: TODO(chirag)
-  x-refined-note:
-  - x-source differs across the merged source definitions and was not carried
-  - x-split-from differs across the merged source definitions and was not carried
-  description: 'Operations tagged Customer Configuration across 4 of this provider''s published API definitions: openapi_2.yaml, platform.swagger.json, yugabytedb-anywhere-v1-backups-restore.yaml, yugabytedb-anywhere-v1-full.yaml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Customer Configuration across 2 of this provider''s published API definitions: openapi_2.yaml, platform.swagger.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: /
 tags:
@@ -118,7 +115,9 @@ paths:
   /api/v1/customers/{cUUID}/configs/{configUUID}:
     delete:
       deprecated: true
-      description: <b style="color:#ff0000">Deprecated since YBA version 2.25.0.0.</b></p>Use 'Delete a customer configuration V2' instead.
+      description: 'Deprecated since YBA version 2.25.0.0.
+
+        Use ''Delete a customer configuration V2'' instead.'
       operationId: deleteCustomerConfig
       parameters:
       - in: path
@@ -336,8 +335,6 @@ paths:
         required: true
 components:
   schemas:
-    CustomerConfigData:
-      type: object
     CustomerConfigUI:
       description: Customer configuration with additional information. Includes storage, alerts, password policy, and call-home level.
       example:
@@ -415,37 +412,23 @@ components:
       - name
       - type
       type: object
-    UniverseDetailSubset:
-      description: A small subset of universe information
+    YBPTask:
       example:
-        universePaused: true
-        updateSucceeded: true
-        name: name
-        updateInProgress: true
-        creationDate: 1
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
-        creationDate:
-          format: int64
-          type: integer
-        name:
-          type: string
-        universePaused:
-          type: boolean
-        updateInProgress:
-          type: boolean
-        updateSucceeded:
-          type: boolean
-        uuid:
+        resourceUUID:
+          description: UUID of the resource being modified by the task
           format: uuid
+          readOnly: true
           type: string
-      required:
-      - creationDate
-      - name
-      - universePaused
-      - updateInProgress
-      - updateSucceeded
-      - uuid
+        taskUUID:
+          description: Task UUID
+          format: uuid
+          readOnly: true
+          type: string
+      type: object
+    CustomerConfigData:
       type: object
     CustomerConfig:
       description: Customer configuration. Includes storage, alerts, password policy, and call-home level.
@@ -512,21 +495,37 @@ components:
       - name
       - type
       type: object
-    YBPTask:
+    UniverseDetailSubset:
+      description: A small subset of universe information
       example:
-        taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        universePaused: true
+        updateSucceeded: true
+        name: name
+        updateInProgress: true
+        creationDate: 1
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
-        resourceUUID:
-          description: UUID of the resource being modified by the task
-          format: uuid
-          readOnly: true
+        creationDate:
+          format: int64
+          type: integer
+        name:
           type: string
-        taskUUID:
-          description: Task UUID
+        universePaused:
+          type: boolean
+        updateInProgress:
+          type: boolean
+        updateSucceeded:
+          type: boolean
+        uuid:
           format: uuid
-          readOnly: true
           type: string
+      required:
+      - creationDate
+      - name
+      - universePaused
+      - updateInProgress
+      - updateSucceeded
+      - uuid
       type: object
     CustomerConfigUI_2:
       description: Customer configuration with additional information. Includes storage, alerts, password policy, and call-home level.
@@ -598,30 +597,36 @@ components:
           format: int32
           type: integer
       type: object
-    UniverseDetailSubset_2:
-      description: A small subset of universe information
+    SessionInfo:
+      description: Session information
       properties:
-        creationDate:
-          format: int64
-          type: integer
-        name:
+        apiToken:
+          description: API token
           type: string
-        universePaused:
-          type: boolean
-        updateInProgress:
-          type: boolean
-        updateSucceeded:
-          type: boolean
-        uuid:
+        authToken:
+          description: Auth token
+          type: string
+        customerUUID:
+          description: Customer UUID
           format: uuid
           type: string
-      required:
-      - creationDate
-      - name
-      - universePaused
-      - updateInProgress
-      - updateSucceeded
-      - uuid
+        userUUID:
+          description: User UUID
+          format: uuid
+          type: string
+      type: object
+    YBPTask_2:
+      properties:
+        resourceUUID:
+          description: UUID of the resource being modified by the task
+          format: uuid
+          readOnly: true
+          type: string
+        taskUUID:
+          description: Task UUID
+          format: uuid
+          readOnly: true
+          type: string
       type: object
     CustomerConfig_2:
       description: Customer configuration. Includes storage, alerts, password policy, and call-home level.
@@ -676,149 +681,23 @@ components:
       - name
       - type
       type: object
-    SessionInfo:
-      description: Session information
-      properties:
-        apiToken:
-          description: API token
-          type: string
-        authToken:
-          description: Auth token
-          type: string
-        customerUUID:
-          description: Customer UUID
-          format: uuid
-          type: string
-        userUUID:
-          description: User UUID
-          format: uuid
-          type: string
-      type: object
-    YBPTask_2:
-      properties:
-        resourceUUID:
-          description: UUID of the resource being modified by the task
-          format: uuid
-          readOnly: true
-          type: string
-        taskUUID:
-          description: Task UUID
-          format: uuid
-          readOnly: true
-          type: string
-      type: object
-    CustomerConfigUI_3:
-      description: Customer configuration with additional information. Includes storage, alerts, password policy, and call-home level.
-      example:
-        configName: backup20-01-2021
-        configUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        data: '{"AWS_ACCESS_KEY_ID": "AK****************ZD"}'
-        universeDetails: '{"name": "jd-aws-21-6-21-test4"}'
-        inUse: true
-        kubernetesOperatorControlled: true
-        name: S3
-        state: Active
-        type: STORAGE
-      properties:
-        configName:
-          description: Config name
-          example: backup20-01-2021
-          maxLength: 100
-          minLength: 1
-          type: string
-        configUUID:
-          description: Config UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        customerUUID:
-          description: Customer UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        data:
-          description: Configuration data
-          example: '{"AWS_ACCESS_KEY_ID": "AK****************ZD"}'
-          properties: {}
-          type: object
-        inUse:
-          description: True if there is an in use reference to the object
-          readOnly: true
-          type: boolean
-          example: true
-        kubernetesOperatorControlled:
-          type: boolean
-          example: true
-        name:
-          description: Name
-          example: S3
-          maxLength: 50
-          minLength: 1
-          type: string
-        state:
-          description: state of the customerConfig. Possible values are Active, QueuedForDeletion.
-          enum:
-          - Active
-          - QueuedForDeletion
-          readOnly: true
-          type: string
-          example: Active
-        type:
-          description: Config type
-          enum:
-          - STORAGE
-          - ALERTS
-          - CALLHOME
-          - PASSWORD_POLICY
-          example: STORAGE
-          type: string
-        universeDetails:
-          description: Universe details
-          example: '{"name": "jd-aws-21-6-21-test4"}'
-          items:
-            $ref: '#/components/schemas/UniverseDetailSubset_3'
-          type: array
-      required:
-      - configName
-      - customerUUID
-      - data
-      - kubernetesOperatorControlled
-      - name
-      - type
-      type: object
-    UniverseDetailSubset_3:
+    UniverseDetailSubset_2:
       description: A small subset of universe information
-      example:
-        universePaused: true
-        updateSucceeded: true
-        name: name
-        updateInProgress: true
-        creationDate: 1
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         creationDate:
           format: int64
           type: integer
-          example: 1000
         name:
           type: string
-          example: example-name
         universePaused:
           type: boolean
-          example: true
         updateInProgress:
           type: boolean
-          example: true
         updateSucceeded:
           type: boolean
-          example: true
         uuid:
           format: uuid
           type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       required:
       - creationDate
       - name
@@ -826,300 +705,6 @@ components:
       - updateInProgress
       - updateSucceeded
       - uuid
-      type: object
-    CustomerConfig_3:
-      description: Customer configuration. Includes storage, alerts, password policy, and call-home level.
-      example:
-        configName: backup20-01-2021
-        configUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        data: '{"AWS_ACCESS_KEY_ID": "AK****************ZD"}'
-        kubernetesOperatorControlled: true
-        name: S3
-        state: Active
-        type: STORAGE
-      properties:
-        configName:
-          description: Config name
-          example: backup20-01-2021
-          maxLength: 100
-          minLength: 1
-          type: string
-        configUUID:
-          description: Config UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        customerUUID:
-          description: Customer UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        data:
-          description: Configuration data
-          example: '{"AWS_ACCESS_KEY_ID": "AK****************ZD"}'
-          properties: {}
-          type: object
-        kubernetesOperatorControlled:
-          type: boolean
-          example: true
-        name:
-          description: Name
-          example: S3
-          maxLength: 50
-          minLength: 1
-          type: string
-        state:
-          description: state of the customerConfig. Possible values are Active, QueuedForDeletion.
-          enum:
-          - Active
-          - QueuedForDeletion
-          readOnly: true
-          type: string
-          example: Active
-        type:
-          description: Config type
-          enum:
-          - STORAGE
-          - ALERTS
-          - CALLHOME
-          - PASSWORD_POLICY
-          example: STORAGE
-          type: string
-      required:
-      - configName
-      - customerUUID
-      - data
-      - kubernetesOperatorControlled
-      - name
-      - type
-      type: object
-    YBPTask_3:
-      example:
-        taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        resourceUUID:
-          description: UUID of the resource being modified by the task
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        taskUUID:
-          description: Task UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      type: object
-    CustomerConfigUI_4:
-      description: Customer configuration with additional information. Includes storage, alerts, password policy, and call-home level.
-      example:
-        configName: backup20-01-2021
-        configUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        data: '{"AWS_ACCESS_KEY_ID": "AK****************ZD"}'
-        universeDetails: '{"name": "jd-aws-21-6-21-test4"}'
-        inUse: true
-        kubernetesOperatorControlled: true
-        name: S3
-        state: Active
-        type: STORAGE
-      properties:
-        configName:
-          description: Config name
-          example: backup20-01-2021
-          maxLength: 100
-          minLength: 1
-          type: string
-        configUUID:
-          description: Config UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        customerUUID:
-          description: Customer UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        data:
-          description: Configuration data
-          example: '{"AWS_ACCESS_KEY_ID": "AK****************ZD"}'
-          properties: {}
-          type: object
-        inUse:
-          description: True if there is an in use reference to the object
-          readOnly: true
-          type: boolean
-          example: true
-        kubernetesOperatorControlled:
-          type: boolean
-          example: true
-        name:
-          description: Name
-          example: S3
-          maxLength: 50
-          minLength: 1
-          type: string
-        state:
-          description: state of the customerConfig. Possible values are Active, QueuedForDeletion.
-          enum:
-          - Active
-          - QueuedForDeletion
-          readOnly: true
-          type: string
-          example: Active
-        type:
-          description: Config type
-          enum:
-          - STORAGE
-          - ALERTS
-          - CALLHOME
-          - PASSWORD_POLICY
-          example: STORAGE
-          type: string
-        universeDetails:
-          description: Universe details
-          example: '{"name": "jd-aws-21-6-21-test4"}'
-          items:
-            $ref: '#/components/schemas/UniverseDetailSubset_4'
-          type: array
-      required:
-      - configName
-      - customerUUID
-      - data
-      - kubernetesOperatorControlled
-      - name
-      - type
-      type: object
-    UniverseDetailSubset_4:
-      description: A small subset of universe information
-      example:
-        universePaused: true
-        updateSucceeded: true
-        name: name
-        updateInProgress: true
-        creationDate: 1
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        creationDate:
-          format: int64
-          type: integer
-          example: 1000
-        name:
-          type: string
-          example: example-name
-        universePaused:
-          type: boolean
-          example: true
-        updateInProgress:
-          type: boolean
-          example: true
-        updateSucceeded:
-          type: boolean
-          example: true
-        uuid:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      required:
-      - creationDate
-      - name
-      - universePaused
-      - updateInProgress
-      - updateSucceeded
-      - uuid
-      type: object
-    CustomerConfig_4:
-      description: Customer configuration. Includes storage, alerts, password policy, and call-home level.
-      example:
-        configName: backup20-01-2021
-        configUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        data: '{"AWS_ACCESS_KEY_ID": "AK****************ZD"}'
-        kubernetesOperatorControlled: true
-        name: S3
-        state: Active
-        type: STORAGE
-      properties:
-        configName:
-          description: Config name
-          example: backup20-01-2021
-          maxLength: 100
-          minLength: 1
-          type: string
-        configUUID:
-          description: Config UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        customerUUID:
-          description: Customer UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        data:
-          description: Configuration data
-          example: '{"AWS_ACCESS_KEY_ID": "AK****************ZD"}'
-          properties: {}
-          type: object
-        kubernetesOperatorControlled:
-          type: boolean
-          example: true
-        name:
-          description: Name
-          example: S3
-          maxLength: 50
-          minLength: 1
-          type: string
-        state:
-          description: state of the customerConfig. Possible values are Active, QueuedForDeletion.
-          enum:
-          - Active
-          - QueuedForDeletion
-          readOnly: true
-          type: string
-          example: Active
-        type:
-          description: Config type
-          enum:
-          - STORAGE
-          - ALERTS
-          - CALLHOME
-          - PASSWORD_POLICY
-          example: STORAGE
-          type: string
-      required:
-      - configName
-      - customerUUID
-      - data
-      - kubernetesOperatorControlled
-      - name
-      - type
-      type: object
-    YBPTask_4:
-      example:
-        taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        resourceUUID:
-          description: UUID of the resource being modified by the task
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        taskUUID:
-          description: Task UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       type: object
   securitySchemes:
     apiKeyAuth:
@@ -1133,5 +718,3 @@ externalDocs:
 x-refined-from:
 - openapi_2.yaml
 - platform.swagger.json
-- yugabytedb-anywhere-v1-backups-restore.yaml
-- yugabytedb-anywhere-v1-full.yaml

@@ -8,10 +8,7 @@ info:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
   termsOfService: TODO(chirag)
-  x-refined-note:
-  - x-source differs across the merged source definitions and was not carried
-  - x-split-from differs across the merged source definitions and was not carried
-  description: 'Operations tagged Access Keys across 4 of this provider''s published API definitions: openapi_2.yaml, platform.swagger.json, yugabytedb-anywhere-v1-full.yaml, yugabytedb-anywhere-v1-providers-infra.yaml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Access Keys across 2 of this provider''s published API definitions: openapi_2.yaml, platform.swagger.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: /
 tags:
@@ -75,7 +72,9 @@ paths:
       - Access Keys
     post:
       deprecated: true
-      description: <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use /api/v1/customers/{cUUID}/provider/{pUUID}/edit instead for adding the key
+      description: 'Deprecated since YBA version 2.20.0.0.
+
+        Use /api/v1/customers/{cUUID}/provider/{pUUID}/edit instead for adding the key'
       operationId: createAccesskey
       parameters:
       - in: path
@@ -241,81 +240,19 @@ components:
           format: uuid
           type: string
       type: object
-    AccessKey:
-      description: Access key for the cloud provider. This helps to authenticate the user and get access to the provider.
+    YBPSuccess:
       example:
-        idKey:
-          keyCode: keyCode
-          providerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        creationDate: 2022-12-12 13:07:18+00:00
-        keyInfo:
-          sshPort: 6
-          nodeExporterPort: 0
-          installNodeExporter: true
-          skipProvisioning: true
-          nodeExporterUser: nodeExporterUser
-          provisionInstanceScript: provisionInstanceScript
-          passwordlessSudoAccess: true
-          publicKey: publicKey
-          vaultFile: vaultFile
-          sshPrivateKeyContent: sshPrivateKeyContent
-          privateKey: privateKey
-          setUpChrony: true
-          vaultPasswordFile: vaultPasswordFile
-          ntpServers:
-          - ntpServers
-          - ntpServers
-          skipKeyValidateAndUpload: true
-          sshUser: sshUser
-          deleteRemote: true
-          showSetUpChrony: true
-          airGapInstall: true
-          keyPairName: keyPairName
-          managementState: YBAManaged
-        expirationDate: 2022-12-12 13:07:18+00:00
+        success: true
+        message: message
       properties:
-        creationDate:
-          description: Creation date of key
-          example: 2022-12-12 13:07:18+00:00
-          format: date-time
+        message:
+          description: API response message.
           readOnly: true
           type: string
-        expirationDate:
-          description: Expiration date of key
-          example: 2022-12-12 13:07:18+00:00
-          format: date-time
-          type: string
-        idKey:
-          $ref: '#/components/schemas/AccessKeyId'
-        keyInfo:
-          $ref: '#/components/schemas/KeyInfo'
-      required:
-      - idKey
-      - keyInfo
-      type: object
-    AccessKeyFormData:
-      example:
-        expirationThresholdDays: 0
-        keyCode: keyCode
-        keyContent: keyContent
-        keyType: PUBLIC
-      properties:
-        expirationThresholdDays:
-          format: int32
-          type: integer
-        keyCode:
-          type: string
-        keyContent:
-          type: string
-        keyType:
-          enum:
-          - PUBLIC
-          - PRIVATE
-          type: string
-      required:
-      - keyCode
-      - keyContent
-      - keyType
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
       type: object
     KeyInfo:
       example:
@@ -396,19 +333,81 @@ components:
         vaultPasswordFile:
           type: string
       type: object
-    YBPSuccess:
+    AccessKey:
+      description: Access key for the cloud provider. This helps to authenticate the user and get access to the provider.
       example:
-        success: true
-        message: message
+        idKey:
+          keyCode: keyCode
+          providerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        creationDate: 2022-12-12 13:07:18+00:00
+        keyInfo:
+          sshPort: 6
+          nodeExporterPort: 0
+          installNodeExporter: true
+          skipProvisioning: true
+          nodeExporterUser: nodeExporterUser
+          provisionInstanceScript: provisionInstanceScript
+          passwordlessSudoAccess: true
+          publicKey: publicKey
+          vaultFile: vaultFile
+          sshPrivateKeyContent: sshPrivateKeyContent
+          privateKey: privateKey
+          setUpChrony: true
+          vaultPasswordFile: vaultPasswordFile
+          ntpServers:
+          - ntpServers
+          - ntpServers
+          skipKeyValidateAndUpload: true
+          sshUser: sshUser
+          deleteRemote: true
+          showSetUpChrony: true
+          airGapInstall: true
+          keyPairName: keyPairName
+          managementState: YBAManaged
+        expirationDate: 2022-12-12 13:07:18+00:00
       properties:
-        message:
-          description: API response message.
+        creationDate:
+          description: Creation date of key
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
           readOnly: true
           type: string
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
+        expirationDate:
+          description: Expiration date of key
+          example: 2022-12-12 13:07:18+00:00
+          format: date-time
+          type: string
+        idKey:
+          $ref: '#/components/schemas/AccessKeyId'
+        keyInfo:
+          $ref: '#/components/schemas/KeyInfo'
+      required:
+      - idKey
+      - keyInfo
+      type: object
+    AccessKeyFormData:
+      example:
+        expirationThresholdDays: 0
+        keyCode: keyCode
+        keyContent: keyContent
+        keyType: PUBLIC
+      properties:
+        expirationThresholdDays:
+          format: int32
+          type: integer
+        keyCode:
+          type: string
+        keyContent:
+          type: string
+        keyType:
+          enum:
+          - PUBLIC
+          - PRIVATE
+          type: string
+      required:
+      - keyCode
+      - keyContent
+      - keyType
       type: object
     YBPSuccess_2:
       properties:
@@ -462,6 +461,14 @@ components:
         vaultPasswordFile:
           type: string
       type: object
+    AccessKeyId_2:
+      properties:
+        keyCode:
+          type: string
+        providerUUID:
+          format: uuid
+          type: string
+      type: object
     AccessKey_2:
       description: Access key for the cloud provider. This helps to authenticate the user and get access to the provider.
       properties:
@@ -473,330 +480,6 @@ components:
       required:
       - idKey
       - keyInfo
-      type: object
-    AccessKeyId_2:
-      properties:
-        keyCode:
-          type: string
-        providerUUID:
-          format: uuid
-          type: string
-      type: object
-    AccessKeyId_3:
-      example:
-        keyCode: keyCode
-        providerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        keyCode:
-          type: string
-          example: OK
-        providerUUID:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      type: object
-    AccessKeyFormData_2:
-      example:
-        expirationThresholdDays: 0
-        keyCode: keyCode
-        keyContent: keyContent
-        keyType: PUBLIC
-      properties:
-        expirationThresholdDays:
-          format: int32
-          type: integer
-          example: 100
-        keyCode:
-          type: string
-          example: OK
-        keyContent:
-          type: string
-          example: example-key
-        keyType:
-          enum:
-          - PUBLIC
-          - PRIVATE
-          type: string
-          example: PUBLIC
-      required:
-      - keyCode
-      - keyContent
-      - keyType
-      type: object
-    KeyInfo_3:
-      example:
-        sshPort: 6
-        nodeExporterPort: 0
-        installNodeExporter: true
-        skipProvisioning: true
-        nodeExporterUser: nodeExporterUser
-        provisionInstanceScript: provisionInstanceScript
-        passwordlessSudoAccess: true
-        publicKey: publicKey
-        vaultFile: vaultFile
-        sshPrivateKeyContent: sshPrivateKeyContent
-        privateKey: privateKey
-        setUpChrony: true
-        vaultPasswordFile: vaultPasswordFile
-        ntpServers:
-        - ntpServers
-        - ntpServers
-        skipKeyValidateAndUpload: true
-        sshUser: sshUser
-        deleteRemote: true
-        showSetUpChrony: true
-        airGapInstall: true
-        keyPairName: keyPairName
-        managementState: YBAManaged
-      properties:
-        airGapInstall:
-          type: boolean
-          example: true
-        deleteRemote:
-          type: boolean
-          example: true
-        installNodeExporter:
-          type: boolean
-          example: true
-        keyPairName:
-          type: string
-          example: example-keyPairName
-        managementState:
-          description: Key Management state
-          enum:
-          - YBAManaged
-          - SelfManaged
-          - Unknown
-          readOnly: true
-          type: string
-          example: YBAManaged
-        nodeExporterPort:
-          format: int32
-          type: integer
-          example: 5433
-        nodeExporterUser:
-          type: string
-          example: '5433'
-        ntpServers:
-          items:
-            type: string
-          type: array
-          example:
-          - example-ntpServers
-        passwordlessSudoAccess:
-          type: boolean
-          example: true
-        privateKey:
-          type: string
-          example: example-key
-        provisionInstanceScript:
-          type: string
-          example: example-provisionInstanceScript
-        publicKey:
-          type: string
-          example: example-key
-        setUpChrony:
-          type: boolean
-          example: true
-        showSetUpChrony:
-          type: boolean
-          example: true
-        skipKeyValidateAndUpload:
-          type: boolean
-          example: true
-        skipProvisioning:
-          type: boolean
-          example: true
-        sshPort:
-          format: int32
-          type: integer
-          example: 5433
-        sshPrivateKeyContent:
-          type: string
-          example: example-key
-        sshUser:
-          type: string
-          example: example-sshUser
-        vaultFile:
-          type: string
-          example: example-vaultFile
-        vaultPasswordFile:
-          type: string
-          example: REDACTED
-      type: object
-    YBPSuccess_3:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-          example: Example message
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-          example: true
-      type: object
-    AccessKeyId_4:
-      example:
-        keyCode: keyCode
-        providerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        keyCode:
-          type: string
-          example: OK
-        providerUUID:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      type: object
-    AccessKeyFormData_3:
-      example:
-        expirationThresholdDays: 0
-        keyCode: keyCode
-        keyContent: keyContent
-        keyType: PUBLIC
-      properties:
-        expirationThresholdDays:
-          format: int32
-          type: integer
-          example: 100
-        keyCode:
-          type: string
-          example: OK
-        keyContent:
-          type: string
-          example: example-key
-        keyType:
-          enum:
-          - PUBLIC
-          - PRIVATE
-          type: string
-          example: PUBLIC
-      required:
-      - keyCode
-      - keyContent
-      - keyType
-      type: object
-    KeyInfo_4:
-      example:
-        sshPort: 6
-        nodeExporterPort: 0
-        installNodeExporter: true
-        skipProvisioning: true
-        nodeExporterUser: nodeExporterUser
-        provisionInstanceScript: provisionInstanceScript
-        passwordlessSudoAccess: true
-        publicKey: publicKey
-        vaultFile: vaultFile
-        sshPrivateKeyContent: sshPrivateKeyContent
-        privateKey: privateKey
-        setUpChrony: true
-        vaultPasswordFile: vaultPasswordFile
-        ntpServers:
-        - ntpServers
-        - ntpServers
-        skipKeyValidateAndUpload: true
-        sshUser: sshUser
-        deleteRemote: true
-        showSetUpChrony: true
-        airGapInstall: true
-        keyPairName: keyPairName
-        managementState: YBAManaged
-      properties:
-        airGapInstall:
-          type: boolean
-          example: true
-        deleteRemote:
-          type: boolean
-          example: true
-        installNodeExporter:
-          type: boolean
-          example: true
-        keyPairName:
-          type: string
-          example: example-keyPairName
-        managementState:
-          description: Key Management state
-          enum:
-          - YBAManaged
-          - SelfManaged
-          - Unknown
-          readOnly: true
-          type: string
-          example: YBAManaged
-        nodeExporterPort:
-          format: int32
-          type: integer
-          example: 5433
-        nodeExporterUser:
-          type: string
-          example: '5433'
-        ntpServers:
-          items:
-            type: string
-          type: array
-          example:
-          - example-ntpServers
-        passwordlessSudoAccess:
-          type: boolean
-          example: true
-        privateKey:
-          type: string
-          example: example-key
-        provisionInstanceScript:
-          type: string
-          example: example-provisionInstanceScript
-        publicKey:
-          type: string
-          example: example-key
-        setUpChrony:
-          type: boolean
-          example: true
-        showSetUpChrony:
-          type: boolean
-          example: true
-        skipKeyValidateAndUpload:
-          type: boolean
-          example: true
-        skipProvisioning:
-          type: boolean
-          example: true
-        sshPort:
-          format: int32
-          type: integer
-          example: 5433
-        sshPrivateKeyContent:
-          type: string
-          example: example-key
-        sshUser:
-          type: string
-          example: example-sshUser
-        vaultFile:
-          type: string
-          example: example-vaultFile
-        vaultPasswordFile:
-          type: string
-          example: REDACTED
-      type: object
-    YBPSuccess_4:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-          example: Example message
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-          example: true
       type: object
   securitySchemes:
     apiKeyAuth:
@@ -810,5 +493,3 @@ externalDocs:
 x-refined-from:
 - openapi_2.yaml
 - platform.swagger.json
-- yugabytedb-anywhere-v1-full.yaml
-- yugabytedb-anywhere-v1-providers-infra.yaml

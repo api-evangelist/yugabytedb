@@ -4,11 +4,8 @@ info:
   license:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
-  x-refined-note:
-  - x-source differs across the merged source definitions and was not carried
-  - x-split-from differs across the merged source definitions and was not carried
   version: '1.0'
-  description: 'Operations tagged Metrics across 6 of this provider''s published API definitions: openapi.yaml, openapi_2.yaml, platform.swagger.json, yugabytedb-anywhere-v1-alerts-monitoring.yaml, yugabytedb-anywhere-v1-full.yaml, yugabytedb-anywhere-v2-openapi.yaml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Metrics across 3 of this provider''s published API definitions: openapi.yaml, openapi_2.yaml, platform.swagger.json. Each path carries the servers of the definition it was published in.'
 servers:
 - description: API endpoint of YBA server
   url: '{protocol}://{host_port}/api/v2'
@@ -115,33 +112,6 @@ components:
       title: PrometheusHostInfo
       type: object
       x-yba-api-visibility: internal
-    PrometheusHostInfo_2:
-      description: 'PrometheusHostInfo
-
-
-        Information about the the Prometheus instance for the current YBA. Part of PrometheusHostInfoResp.
-
-        '
-      example:
-        prometheus_url: https://localhost:9000
-        use_browser_fqdn: true
-      properties:
-        prometheus_url:
-          description: URL for accessing Prometheus
-          example: https://localhost:9000
-          readOnly: true
-          type: string
-        use_browser_fqdn:
-          description: If the Prometheus link in the browser should use the browser's FQDN or use prometheus url directly.
-          readOnly: true
-          type: boolean
-          example: true
-      required:
-      - prometheus_url
-      - use_browser_fqdn
-      title: PrometheusHostInfo
-      type: object
-      x-yba-api-visibility: internal
   securitySchemes:
     apiKeyAuth:
       in: header
@@ -154,6 +124,3 @@ x-refined-from:
 - openapi.yaml
 - openapi_2.yaml
 - platform.swagger.json
-- yugabytedb-anywhere-v1-alerts-monitoring.yaml
-- yugabytedb-anywhere-v1-full.yaml
-- yugabytedb-anywhere-v2-openapi.yaml

@@ -1,17 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Yugabytedb GFlags Validation APIs API
-  version: v1
   contact:
     name: https://docs.yugabyte.com
+  description: ALPHA - NOT FOR EXTERNAL USE
   license:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
   termsOfService: TODO(chirag)
-  x-refined-note:
-  - x-source differs across the merged source definitions and was not carried
-  - x-split-from differs across the merged source definitions and was not carried
-  description: 'Operations tagged GFlags Validation APIs across 3 of this provider''s published API definitions: openapi_2.yaml, yugabytedb-anywhere-v1-full.yaml, yugabytedb-anywhere-v1-universes.yaml. Each path carries the servers of the definition it was published in.'
+  title: YugabyteDB Anywhere GFlags Validation APIs API
+  version: v1
 servers:
 - url: /
 tags:
@@ -47,8 +44,6 @@ paths:
       summary: Get gflag metadata
       tags:
       - GFlags Validation APIs
-    servers:
-    - url: /
   /api/v1/metadata/version/{version}/list_gflags:
     get:
       description: 'WARNING: This is a preview API that could change.'
@@ -91,8 +86,6 @@ paths:
       summary: List all gflags for a release
       tags:
       - GFlags Validation APIs
-    servers:
-    - url: /
   /api/v1/metadata/version/{version}/validate_gflags:
     post:
       description: 'WARNING: This is a preview API that could change.'
@@ -128,10 +121,52 @@ paths:
       tags:
       - GFlags Validation APIs
       x-codegen-request-body-name: gflag_validation_form_data
-    servers:
-    - url: /
 components:
   schemas:
+    GFlagsValidationFormData:
+      example:
+        gflags:
+        - MASTER: MASTER
+          TSERVER: TSERVER
+          Name: Name
+        - MASTER: MASTER
+          TSERVER: TSERVER
+          Name: Name
+      properties:
+        gflags:
+          description: 'WARNING: This is a preview API that could change. List of gflags to validate'
+          items:
+            $ref: '#/components/schemas/GFlagsValidationRequest'
+          type: array
+      type: object
+    GFlagValidationDetails:
+      example:
+        exist: true
+        error: error
+      properties:
+        error:
+          description: 'WARNING: This is a preview API that could change. Error message if gflag is invalid'
+          type: string
+        exist:
+          description: 'WARNING: This is a preview API that could change. Flag to indicate if gflag exists'
+          type: boolean
+      type: object
+    GFlagsValidationRequest:
+      example:
+        MASTER: MASTER
+        TSERVER: TSERVER
+        Name: Name
+      properties:
+        MASTER:
+          description: 'WARNING: This is a preview API that could change. Value of the gflag for master'
+          type: string
+        Name:
+          description: 'WARNING: This is a preview API that could change. Name of the gflag'
+          type: string
+        TSERVER:
+          description: 'WARNING: This is a preview API that could change. Value of the gflag for tserver'
+          type: string
+      type: object
     GFlagDetails:
       example:
         current: current
@@ -190,292 +225,6 @@ components:
         TSERVER:
           $ref: '#/components/schemas/GFlagValidationDetails'
       type: object
-    GFlagValidationDetails:
-      example:
-        exist: true
-        error: error
-      properties:
-        error:
-          description: 'WARNING: This is a preview API that could change. Error message if gflag is invalid'
-          type: string
-        exist:
-          description: 'WARNING: This is a preview API that could change. Flag to indicate if gflag exists'
-          type: boolean
-      type: object
-    GFlagsValidationFormData:
-      example:
-        gflags:
-        - MASTER: MASTER
-          TSERVER: TSERVER
-          Name: Name
-        - MASTER: MASTER
-          TSERVER: TSERVER
-          Name: Name
-      properties:
-        gflags:
-          description: 'WARNING: This is a preview API that could change. List of gflags to validate'
-          items:
-            $ref: '#/components/schemas/GFlagsValidationRequest'
-          type: array
-      type: object
-    GFlagsValidationRequest:
-      example:
-        MASTER: MASTER
-        TSERVER: TSERVER
-        Name: Name
-      properties:
-        MASTER:
-          description: 'WARNING: This is a preview API that could change. Value of the gflag for master'
-          type: string
-        Name:
-          description: 'WARNING: This is a preview API that could change. Name of the gflag'
-          type: string
-        TSERVER:
-          description: 'WARNING: This is a preview API that could change. Value of the gflag for tserver'
-          type: string
-      type: object
-    GFlagDetails_2:
-      example:
-        current: current
-        default: default
-        file: file
-        initial: initial
-        meaning: meaning
-        name: name
-        type: type
-        tags: tags
-        target: target
-      properties:
-        current:
-          description: 'WARNING: This is a preview API that could change. Current value of the gflag'
-          type: string
-          example: example-current
-        default:
-          description: 'WARNING: This is a preview API that could change. Default value of the gflag'
-          type: string
-          example: example-default
-        file:
-          description: 'WARNING: This is a preview API that could change. File where the gflag is defined'
-          type: string
-          example: example-file
-        initial:
-          description: 'WARNING: This is a preview API that could change. Initial value of the gflag'
-          type: string
-          example: example-initial
-        meaning:
-          description: 'WARNING: This is a preview API that could change. Meaning of the gflag'
-          type: string
-          example: example-meaning
-        name:
-          description: 'WARNING: This is a preview API that could change. Name of the gflag'
-          type: string
-          example: example-name
-        tags:
-          description: 'WARNING: This is a preview API that could change. Tags of the gflag'
-          type: string
-          example: example-tag
-        target:
-          description: 'WARNING: This is a preview API that could change. Target of the gflag'
-          type: string
-          example: example-target
-        type:
-          description: 'WARNING: This is a preview API that could change. Type of the gflag'
-          type: string
-          example: DEFAULT
-      type: object
-    GFlagsValidationResponse_2:
-      example:
-        MASTER:
-          exist: true
-          error: error
-        TSERVER:
-          exist: true
-          error: error
-        Name: Name
-      properties:
-        MASTER:
-          $ref: '#/components/schemas/GFlagValidationDetails_2'
-        Name:
-          description: 'WARNING: This is a preview API that could change. Name of the gflag'
-          type: string
-          example: example-Name
-        TSERVER:
-          $ref: '#/components/schemas/GFlagValidationDetails_2'
-      type: object
-    GFlagValidationDetails_2:
-      example:
-        exist: true
-        error: error
-      properties:
-        error:
-          description: 'WARNING: This is a preview API that could change. Error message if gflag is invalid'
-          type: string
-          example: example-error
-        exist:
-          description: 'WARNING: This is a preview API that could change. Flag to indicate if gflag exists'
-          type: boolean
-          example: true
-      type: object
-    GFlagsValidationFormData_2:
-      example:
-        gflags:
-        - MASTER: MASTER
-          TSERVER: TSERVER
-          Name: Name
-        - MASTER: MASTER
-          TSERVER: TSERVER
-          Name: Name
-      properties:
-        gflags:
-          description: 'WARNING: This is a preview API that could change. List of gflags to validate'
-          items:
-            $ref: '#/components/schemas/GFlagsValidationRequest_2'
-          type: array
-          example:
-          - MASTER: MASTER
-            TSERVER: TSERVER
-            Name: Name
-      type: object
-    GFlagsValidationRequest_2:
-      example:
-        MASTER: MASTER
-        TSERVER: TSERVER
-        Name: Name
-      properties:
-        MASTER:
-          description: 'WARNING: This is a preview API that could change. Value of the gflag for master'
-          type: string
-          example: example-MASTER
-        Name:
-          description: 'WARNING: This is a preview API that could change. Name of the gflag'
-          type: string
-          example: example-Name
-        TSERVER:
-          description: 'WARNING: This is a preview API that could change. Value of the gflag for tserver'
-          type: string
-          example: example-TSERVER
-      type: object
-    GFlagDetails_3:
-      example:
-        current: current
-        default: default
-        file: file
-        initial: initial
-        meaning: meaning
-        name: name
-        type: type
-        tags: tags
-        target: target
-      properties:
-        current:
-          description: 'WARNING: This is a preview API that could change. Current value of the gflag'
-          type: string
-          example: example-current
-        default:
-          description: 'WARNING: This is a preview API that could change. Default value of the gflag'
-          type: string
-          example: example-default
-        file:
-          description: 'WARNING: This is a preview API that could change. File where the gflag is defined'
-          type: string
-          example: example-file
-        initial:
-          description: 'WARNING: This is a preview API that could change. Initial value of the gflag'
-          type: string
-          example: example-initial
-        meaning:
-          description: 'WARNING: This is a preview API that could change. Meaning of the gflag'
-          type: string
-          example: example-meaning
-        name:
-          description: 'WARNING: This is a preview API that could change. Name of the gflag'
-          type: string
-          example: example-name
-        tags:
-          description: 'WARNING: This is a preview API that could change. Tags of the gflag'
-          type: string
-          example: example-tag
-        target:
-          description: 'WARNING: This is a preview API that could change. Target of the gflag'
-          type: string
-          example: example-target
-        type:
-          description: 'WARNING: This is a preview API that could change. Type of the gflag'
-          type: string
-          example: DEFAULT
-      type: object
-    GFlagsValidationResponse_3:
-      example:
-        MASTER:
-          exist: true
-          error: error
-        TSERVER:
-          exist: true
-          error: error
-        Name: Name
-      properties:
-        MASTER:
-          $ref: '#/components/schemas/GFlagValidationDetails_3'
-        Name:
-          description: 'WARNING: This is a preview API that could change. Name of the gflag'
-          type: string
-          example: example-Name
-        TSERVER:
-          $ref: '#/components/schemas/GFlagValidationDetails_3'
-      type: object
-    GFlagValidationDetails_3:
-      example:
-        exist: true
-        error: error
-      properties:
-        error:
-          description: 'WARNING: This is a preview API that could change. Error message if gflag is invalid'
-          type: string
-          example: example-error
-        exist:
-          description: 'WARNING: This is a preview API that could change. Flag to indicate if gflag exists'
-          type: boolean
-          example: true
-      type: object
-    GFlagsValidationFormData_3:
-      example:
-        gflags:
-        - MASTER: MASTER
-          TSERVER: TSERVER
-          Name: Name
-        - MASTER: MASTER
-          TSERVER: TSERVER
-          Name: Name
-      properties:
-        gflags:
-          description: 'WARNING: This is a preview API that could change. List of gflags to validate'
-          items:
-            $ref: '#/components/schemas/GFlagsValidationRequest_3'
-          type: array
-          example:
-          - MASTER: MASTER
-            TSERVER: TSERVER
-            Name: Name
-      type: object
-    GFlagsValidationRequest_3:
-      example:
-        MASTER: MASTER
-        TSERVER: TSERVER
-        Name: Name
-      properties:
-        MASTER:
-          description: 'WARNING: This is a preview API that could change. Value of the gflag for master'
-          type: string
-          example: example-MASTER
-        Name:
-          description: 'WARNING: This is a preview API that could change. Name of the gflag'
-          type: string
-          example: example-Name
-        TSERVER:
-          description: 'WARNING: This is a preview API that could change. Value of the gflag for tserver'
-          type: string
-          example: example-TSERVER
-      type: object
   securitySchemes:
     apiKeyAuth:
       description: API token passed as header
@@ -485,7 +234,4 @@ components:
 externalDocs:
   description: About YugabyteDB Anywhere
   url: https://docs.yugabyte.com/latest/yugabyte-platform/
-x-refined-from:
-- openapi_2.yaml
-- yugabytedb-anywhere-v1-full.yaml
-- yugabytedb-anywhere-v1-universes.yaml
+x-original-swagger-version: '2.0'

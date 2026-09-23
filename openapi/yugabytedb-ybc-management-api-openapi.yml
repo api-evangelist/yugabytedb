@@ -1,17 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Yugabytedb Ybc Management API
-  version: v1
   contact:
     name: https://docs.yugabyte.com
+  description: ALPHA - NOT FOR EXTERNAL USE
   license:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
   termsOfService: TODO(chirag)
-  x-refined-note:
-  - x-source differs across the merged source definitions and was not carried
-  - x-split-from differs across the merged source definitions and was not carried
-  description: 'Operations tagged Ybc Management across 3 of this provider''s published API definitions: openapi_2.yaml, yugabytedb-anywhere-v1-full.yaml, yugabytedb-anywhere-v1-universes.yaml. Each path carries the servers of the definition it was published in.'
+  title: YugabyteDB Anywhere Ybc Management API
+  version: v1
 servers:
 - url: /
 tags:
@@ -49,8 +46,6 @@ paths:
       summary: Disable YBC on the universe nodes
       tags:
       - Ybc Management
-    servers:
-    - url: /
   /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc/install:
     put:
       description: YbaApi Internal.
@@ -87,8 +82,6 @@ paths:
       summary: Install YBC on the universe nodes
       tags:
       - Ybc Management
-    servers:
-    - url: /
   /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc/upgrade:
     put:
       description: YbaApi Internal.
@@ -125,8 +118,6 @@ paths:
       summary: Upgrade YBC on the universe nodes
       tags:
       - Ybc Management
-    servers:
-    - url: /
   /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc/upgrade/gflags:
     put:
       description: YbaApi Internal.
@@ -159,8 +150,6 @@ paths:
       summary: Upgrade YBC gflags on the universe nodes
       tags:
       - Ybc Management
-    servers:
-    - url: /
   /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc_throttle_params_async:
     post:
       operationId: setThrottleParams
@@ -200,10 +189,22 @@ paths:
       tags:
       - Ybc Management
       x-codegen-request-body-name: throttleParams
-    servers:
-    - url: /
 components:
   schemas:
+    YBPSuccess:
+      example:
+        success: true
+        message: message
+      properties:
+        message:
+          description: API response message.
+          readOnly: true
+          type: string
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
+      type: object
     YBPTask:
       example:
         taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -219,20 +220,6 @@ components:
           format: uuid
           readOnly: true
           type: string
-      type: object
-    YBPSuccess:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
       type: object
     YbcThrottleParameters:
       description: YB-Controller throttle parameters
@@ -273,166 +260,6 @@ components:
           description: Unset Throttle parameters in YB-Controller
           type: boolean
       type: object
-    YBPTask_2:
-      example:
-        taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        resourceUUID:
-          description: UUID of the resource being modified by the task
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        taskUUID:
-          description: Task UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      type: object
-    YBPSuccess_2:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-          example: Example message
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-          example: true
-      type: object
-    YbcThrottleParameters_2:
-      description: YB-Controller throttle parameters
-      example:
-        diskWriteBytesPerSecond: 6
-        maxConcurrentDownloads: 1
-        maxConcurrentUploads: 5
-        perDownloadNumObjects: 5
-        diskReadBytesPerSecond: 0
-        perUploadNumObjects: 2
-        resetDefaults: true
-      properties:
-        diskReadBytesPerSecond:
-          description: 'WARNING: This is a preview API that could change. Disk read bytes per second to throttle disk usage during backups'
-          format: int64
-          type: integer
-          example: 1000
-        diskWriteBytesPerSecond:
-          description: 'WARNING: This is a preview API that could change. Disk write bytes per second to throttle disk usage during restore'
-          format: int64
-          type: integer
-          example: 1000
-        maxConcurrentDownloads:
-          description: Max concurrent downloads per node
-          format: int64
-          type: integer
-          example: 10
-        maxConcurrentUploads:
-          description: Max concurrent uploads per node
-          format: int64
-          type: integer
-          example: 10
-        perDownloadNumObjects:
-          description: Max objects per download per node
-          format: int64
-          type: integer
-          example: 10
-        perUploadNumObjects:
-          description: Max objects per upload per node
-          format: int64
-          type: integer
-          example: 10
-        resetDefaults:
-          description: Unset Throttle parameters in YB-Controller
-          type: boolean
-          example: true
-      type: object
-    YBPTask_3:
-      example:
-        taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        resourceUUID:
-          description: UUID of the resource being modified by the task
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        taskUUID:
-          description: Task UUID
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      type: object
-    YBPSuccess_3:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-          example: Example message
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-          example: true
-      type: object
-    YbcThrottleParameters_3:
-      description: YB-Controller throttle parameters
-      example:
-        diskWriteBytesPerSecond: 6
-        maxConcurrentDownloads: 1
-        maxConcurrentUploads: 5
-        perDownloadNumObjects: 5
-        diskReadBytesPerSecond: 0
-        perUploadNumObjects: 2
-        resetDefaults: true
-      properties:
-        diskReadBytesPerSecond:
-          description: 'WARNING: This is a preview API that could change. Disk read bytes per second to throttle disk usage during backups'
-          format: int64
-          type: integer
-          example: 1000
-        diskWriteBytesPerSecond:
-          description: 'WARNING: This is a preview API that could change. Disk write bytes per second to throttle disk usage during restore'
-          format: int64
-          type: integer
-          example: 1000
-        maxConcurrentDownloads:
-          description: Max concurrent downloads per node
-          format: int64
-          type: integer
-          example: 10
-        maxConcurrentUploads:
-          description: Max concurrent uploads per node
-          format: int64
-          type: integer
-          example: 10
-        perDownloadNumObjects:
-          description: Max objects per download per node
-          format: int64
-          type: integer
-          example: 10
-        perUploadNumObjects:
-          description: Max objects per upload per node
-          format: int64
-          type: integer
-          example: 10
-        resetDefaults:
-          description: Unset Throttle parameters in YB-Controller
-          type: boolean
-          example: true
-      type: object
   securitySchemes:
     apiKeyAuth:
       description: API token passed as header
@@ -442,7 +269,4 @@ components:
 externalDocs:
   description: About YugabyteDB Anywhere
   url: https://docs.yugabyte.com/latest/yugabyte-platform/
-x-refined-from:
-- openapi_2.yaml
-- yugabytedb-anywhere-v1-full.yaml
-- yugabytedb-anywhere-v1-universes.yaml
+x-original-swagger-version: '2.0'

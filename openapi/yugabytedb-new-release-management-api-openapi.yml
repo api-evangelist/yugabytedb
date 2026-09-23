@@ -1,17 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Yugabytedb New Release management API
-  version: v1
   contact:
     name: https://docs.yugabyte.com
+  description: ALPHA - NOT FOR EXTERNAL USE
   license:
     name: Polyform Free Trial License 1.0.0
     url: https://github.com/yugabyte/yugabyte-db/blob/master/licenses/POLYFORM-FREE-TRIAL-LICENSE-1.0.0.txt
   termsOfService: TODO(chirag)
-  x-refined-note:
-  - x-source differs across the merged source definitions and was not carried
-  - x-split-from differs across the merged source definitions and was not carried
-  description: 'Operations tagged New Release management across 3 of this provider''s published API definitions: openapi_2.yaml, yugabytedb-anywhere-v1-full.yaml, yugabytedb-anywhere-v1-releases-maintenance.yaml. Each path carries the servers of the definition it was published in.'
+  title: YugabyteDB Anywhere New Release management API
+  version: v1
 servers:
 - url: /
 tags:
@@ -83,8 +80,6 @@ paths:
       tags:
       - New Release management
       x-codegen-request-body-name: Release
-    servers:
-    - url: /
   /api/v1/customers/{cUUID}/ybdb_release/{rUUID}:
     delete:
       description: 'WARNING: This is a preview API that could change: delete a ybdb release'
@@ -187,42 +182,8 @@ paths:
       tags:
       - New Release management
       x-codegen-request-body-name: Release
-    servers:
-    - url: /
 components:
   schemas:
-    Artifact:
-      example:
-        package_url: package_url
-        sha256: sha256
-        package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        platform: LINUX
-        architecture: x86_64
-      properties:
-        architecture:
-          enum:
-          - x86_64
-          - aarch64
-          type: string
-        package_file_id:
-          format: uuid
-          type: string
-        package_url:
-          type: string
-        platform:
-          enum:
-          - LINUX
-          - KUBERNETES
-          type: string
-        sha256:
-          type: string
-      required:
-      - architecture
-      - package_file_id
-      - package_url
-      - platform
-      - sha256
-      type: object
     UpdateRelease:
       description: Release metadata required to create a new release
       example:
@@ -262,87 +223,51 @@ components:
       - release_tag
       - state
       type: object
-    CreateRelease:
-      description: Release metadata required to create a new release
+    Artifact:
       example:
-        release_notes: release_notes
-        release_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        release_type: release_type
-        release_date_msecs: 0
-        version: version
-        release_tag: release_tag
-        yb_type: yb_type
-        artifacts:
-        - package_url: package_url
-          sha256: sha256
-          package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          platform: LINUX
-          architecture: x86_64
-        - package_url: package_url
-          sha256: sha256
-          package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          platform: LINUX
-          architecture: x86_64
+        package_url: package_url
+        sha256: sha256
+        package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        platform: LINUX
+        architecture: x86_64
       properties:
-        artifacts:
-          items:
-            $ref: '#/components/schemas/Artifact'
-          type: array
-        release_date_msecs:
-          format: int64
-          type: integer
-        release_notes:
+        architecture:
+          enum:
+          - x86_64
+          - aarch64
           type: string
-        release_tag:
-          type: string
-        release_type:
-          type: string
-        release_uuid:
+        package_file_id:
           format: uuid
           type: string
-        version:
+        package_url:
           type: string
-        yb_type:
+        platform:
+          enum:
+          - LINUX
+          - KUBERNETES
+          type: string
+        sha256:
           type: string
       required:
-      - artifacts
-      - release_date_msecs
-      - release_notes
-      - release_tag
-      - release_type
-      - release_uuid
-      - version
-      - yb_type
+      - architecture
+      - package_file_id
+      - package_url
+      - platform
+      - sha256
       type: object
-    Universe:
+    YBPSuccess:
       example:
-        name: name
-        creation_date: 2024-07-28 01:02:03+00:00
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        success: true
+        message: message
       properties:
-        creation_date:
-          description: Universe creation date
-          example: 2024-07-28 01:02:03+00:00
-          format: date-time
-          type: string
-        name:
-          type: string
-        uuid:
-          format: uuid
-          type: string
-      required:
-      - name
-      - uuid
-      type: object
-    YBPCreateSuccess:
-      example:
-        resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        resourceUUID:
-          description: UUID of the successfully created resource
-          format: uuid
+        message:
+          description: API response message.
           readOnly: true
           type: string
+        success:
+          description: API operation status. A value of true indicates the operation was successful.
+          readOnly: true
+          type: boolean
       type: object
     ResponseRelease:
       example:
@@ -411,107 +336,7 @@ components:
       - version
       - yb_type
       type: object
-    YBPSuccess:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-      type: object
-    Artifact_2:
-      example:
-        package_url: package_url
-        sha256: sha256
-        package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        platform: LINUX
-        architecture: x86_64
-      properties:
-        architecture:
-          enum:
-          - x86_64
-          - aarch64
-          type: string
-          example: x86_64
-        package_file_id:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        package_url:
-          type: string
-          example: https://example.com
-        platform:
-          enum:
-          - LINUX
-          - KUBERNETES
-          type: string
-          example: LINUX
-        sha256:
-          type: string
-          example: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-      required:
-      - architecture
-      - package_file_id
-      - package_url
-      - platform
-      - sha256
-      type: object
-    UpdateRelease_2:
-      description: Release metadata required to create a new release
-      example:
-        release_notes: release_notes
-        release_date: 0
-        state: state
-        release_tag: release_tag
-        artifacts:
-        - package_url: package_url
-          sha256: sha256
-          package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          platform: LINUX
-          architecture: x86_64
-        - package_url: package_url
-          sha256: sha256
-          package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          platform: LINUX
-          architecture: x86_64
-      properties:
-        artifacts:
-          items:
-            $ref: '#/components/schemas/Artifact_2'
-          type: array
-          example:
-          - package_url: package_url
-            sha256: sha256
-            package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            platform: LINUX
-            architecture: x86_64
-        release_date:
-          format: int64
-          type: integer
-          example: 1000
-        release_notes:
-          type: string
-          example: example-release_notes
-        release_tag:
-          type: string
-          example: example-tag
-        state:
-          type: string
-          example: ACTIVE
-      required:
-      - artifacts
-      - release_date
-      - release_notes
-      - release_tag
-      - state
-      type: object
-    CreateRelease_2:
+    CreateRelease:
       description: Release metadata required to create a new release
       example:
         release_notes: release_notes
@@ -535,37 +360,24 @@ components:
       properties:
         artifacts:
           items:
-            $ref: '#/components/schemas/Artifact_2'
+            $ref: '#/components/schemas/Artifact'
           type: array
-          example:
-          - package_url: package_url
-            sha256: sha256
-            package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            platform: LINUX
-            architecture: x86_64
         release_date_msecs:
           format: int64
           type: integer
-          example: 1000
         release_notes:
           type: string
-          example: example-release_notes
         release_tag:
           type: string
-          example: example-tag
         release_type:
           type: string
-          example: DEFAULT
         release_uuid:
           format: uuid
           type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         version:
           type: string
-          example: 2.20.0.0
         yb_type:
           type: string
-          example: DEFAULT
       required:
       - artifacts
       - release_date_msecs
@@ -576,7 +388,17 @@ components:
       - version
       - yb_type
       type: object
-    Universe_2:
+    YBPCreateSuccess:
+      example:
+        resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        resourceUUID:
+          description: UUID of the successfully created resource
+          format: uuid
+          readOnly: true
+          type: string
+      type: object
+    Universe:
       example:
         name: name
         creation_date: 2024-07-28 01:02:03+00:00
@@ -589,411 +411,12 @@ components:
           type: string
         name:
           type: string
-          example: example-name
         uuid:
           format: uuid
           type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       required:
       - name
       - uuid
-      type: object
-    YBPCreateSuccess_2:
-      example:
-        resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        resourceUUID:
-          description: UUID of the successfully created resource
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      type: object
-    ResponseRelease_2:
-      example:
-        release_notes: release_notes
-        release_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        universes:
-        - name: name
-          creation_date: 2024-07-28 01:02:03+00:00
-          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - name: name
-          creation_date: 2024-07-28 01:02:03+00:00
-          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        release_type: release_type
-        release_date_msecs: 0
-        state: state
-        version: version
-        release_tag: release_tag
-        yb_type: yb_type
-        artifacts:
-        - package_url: package_url
-          sha256: sha256
-          package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          platform: LINUX
-          architecture: x86_64
-        - package_url: package_url
-          sha256: sha256
-          package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          platform: LINUX
-          architecture: x86_64
-      properties:
-        artifacts:
-          items:
-            $ref: '#/components/schemas/Artifact_2'
-          type: array
-          example:
-          - package_url: package_url
-            sha256: sha256
-            package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            platform: LINUX
-            architecture: x86_64
-        release_date_msecs:
-          format: int64
-          type: integer
-          example: 1000
-        release_notes:
-          type: string
-          example: example-release_notes
-        release_tag:
-          type: string
-          example: example-tag
-        release_type:
-          type: string
-          example: DEFAULT
-        release_uuid:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        state:
-          type: string
-          example: ACTIVE
-        universes:
-          items:
-            $ref: '#/components/schemas/Universe_2'
-          type: array
-          example:
-          - name: name
-            creation_date: '2024-07-28T01:02:03+00:00'
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        version:
-          type: string
-          example: 2.20.0.0
-        yb_type:
-          type: string
-          example: DEFAULT
-      required:
-      - artifacts
-      - release_date_msecs
-      - release_notes
-      - release_tag
-      - release_type
-      - release_uuid
-      - state
-      - universes
-      - version
-      - yb_type
-      type: object
-    YBPSuccess_2:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-          example: Example message
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-          example: true
-      type: object
-    Artifact_3:
-      example:
-        package_url: package_url
-        sha256: sha256
-        package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        platform: LINUX
-        architecture: x86_64
-      properties:
-        architecture:
-          enum:
-          - x86_64
-          - aarch64
-          type: string
-          example: x86_64
-        package_file_id:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        package_url:
-          type: string
-          example: https://example.com
-        platform:
-          enum:
-          - LINUX
-          - KUBERNETES
-          type: string
-          example: LINUX
-        sha256:
-          type: string
-          example: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-      required:
-      - architecture
-      - package_file_id
-      - package_url
-      - platform
-      - sha256
-      type: object
-    UpdateRelease_3:
-      description: Release metadata required to create a new release
-      example:
-        release_notes: release_notes
-        release_date: 0
-        state: state
-        release_tag: release_tag
-        artifacts:
-        - package_url: package_url
-          sha256: sha256
-          package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          platform: LINUX
-          architecture: x86_64
-        - package_url: package_url
-          sha256: sha256
-          package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          platform: LINUX
-          architecture: x86_64
-      properties:
-        artifacts:
-          items:
-            $ref: '#/components/schemas/Artifact_3'
-          type: array
-          example:
-          - package_url: package_url
-            sha256: sha256
-            package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            platform: LINUX
-            architecture: x86_64
-        release_date:
-          format: int64
-          type: integer
-          example: 1000
-        release_notes:
-          type: string
-          example: example-release_notes
-        release_tag:
-          type: string
-          example: example-tag
-        state:
-          type: string
-          example: ACTIVE
-      required:
-      - artifacts
-      - release_date
-      - release_notes
-      - release_tag
-      - state
-      type: object
-    CreateRelease_3:
-      description: Release metadata required to create a new release
-      example:
-        release_notes: release_notes
-        release_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        release_type: release_type
-        release_date_msecs: 0
-        version: version
-        release_tag: release_tag
-        yb_type: yb_type
-        artifacts:
-        - package_url: package_url
-          sha256: sha256
-          package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          platform: LINUX
-          architecture: x86_64
-        - package_url: package_url
-          sha256: sha256
-          package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          platform: LINUX
-          architecture: x86_64
-      properties:
-        artifacts:
-          items:
-            $ref: '#/components/schemas/Artifact_3'
-          type: array
-          example:
-          - package_url: package_url
-            sha256: sha256
-            package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            platform: LINUX
-            architecture: x86_64
-        release_date_msecs:
-          format: int64
-          type: integer
-          example: 1000
-        release_notes:
-          type: string
-          example: example-release_notes
-        release_tag:
-          type: string
-          example: example-tag
-        release_type:
-          type: string
-          example: DEFAULT
-        release_uuid:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        version:
-          type: string
-          example: 2.20.0.0
-        yb_type:
-          type: string
-          example: DEFAULT
-      required:
-      - artifacts
-      - release_date_msecs
-      - release_notes
-      - release_tag
-      - release_type
-      - release_uuid
-      - version
-      - yb_type
-      type: object
-    Universe_3:
-      example:
-        name: name
-        creation_date: 2024-07-28 01:02:03+00:00
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        creation_date:
-          description: Universe creation date
-          example: 2024-07-28 01:02:03+00:00
-          format: date-time
-          type: string
-        name:
-          type: string
-          example: example-name
-        uuid:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      required:
-      - name
-      - uuid
-      type: object
-    YBPCreateSuccess_3:
-      example:
-        resourceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        resourceUUID:
-          description: UUID of the successfully created resource
-          format: uuid
-          readOnly: true
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      type: object
-    ResponseRelease_3:
-      example:
-        release_notes: release_notes
-        release_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        universes:
-        - name: name
-          creation_date: 2024-07-28 01:02:03+00:00
-          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - name: name
-          creation_date: 2024-07-28 01:02:03+00:00
-          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        release_type: release_type
-        release_date_msecs: 0
-        state: state
-        version: version
-        release_tag: release_tag
-        yb_type: yb_type
-        artifacts:
-        - package_url: package_url
-          sha256: sha256
-          package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          platform: LINUX
-          architecture: x86_64
-        - package_url: package_url
-          sha256: sha256
-          package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          platform: LINUX
-          architecture: x86_64
-      properties:
-        artifacts:
-          items:
-            $ref: '#/components/schemas/Artifact_3'
-          type: array
-          example:
-          - package_url: package_url
-            sha256: sha256
-            package_file_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            platform: LINUX
-            architecture: x86_64
-        release_date_msecs:
-          format: int64
-          type: integer
-          example: 1000
-        release_notes:
-          type: string
-          example: example-release_notes
-        release_tag:
-          type: string
-          example: example-tag
-        release_type:
-          type: string
-          example: DEFAULT
-        release_uuid:
-          format: uuid
-          type: string
-          example: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        state:
-          type: string
-          example: ACTIVE
-        universes:
-          items:
-            $ref: '#/components/schemas/Universe_3'
-          type: array
-          example:
-          - name: name
-            creation_date: '2024-07-28T01:02:03+00:00'
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        version:
-          type: string
-          example: 2.20.0.0
-        yb_type:
-          type: string
-          example: DEFAULT
-      required:
-      - artifacts
-      - release_date_msecs
-      - release_notes
-      - release_tag
-      - release_type
-      - release_uuid
-      - state
-      - universes
-      - version
-      - yb_type
-      type: object
-    YBPSuccess_3:
-      example:
-        success: true
-        message: message
-      properties:
-        message:
-          description: API response message.
-          readOnly: true
-          type: string
-          example: Example message
-        success:
-          description: API operation status. A value of true indicates the operation was successful.
-          readOnly: true
-          type: boolean
-          example: true
       type: object
   securitySchemes:
     apiKeyAuth:
@@ -1004,7 +427,4 @@ components:
 externalDocs:
   description: About YugabyteDB Anywhere
   url: https://docs.yugabyte.com/latest/yugabyte-platform/
-x-refined-from:
-- openapi_2.yaml
-- yugabytedb-anywhere-v1-full.yaml
-- yugabytedb-anywhere-v1-releases-maintenance.yaml
+x-original-swagger-version: '2.0'
